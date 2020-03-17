@@ -24,7 +24,7 @@
       {
         "start": "2020-03-17",
         "inbound": {
-          "whitelist": ["Norway", "Denmark", "Iceland", "Sweden", "Finland"]
+          "whitelist": ["Norway", "Denmark", "Iceland", "Sweden", "Finland"],
         },
         "source": 
         { "url": "https://www.helsedirektoratet.no/nyheter/helsedirektoratet-har-vedtatt-omfattende-tiltak-for-a-hindre-spredning-av-covid-19",

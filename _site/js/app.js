@@ -26,7 +26,7 @@
     while (s.length < (size || 2)) { s = "0" + s; }
     return s;
   }
-  var activeLockdowns = 0;
+
   var labelLayer = L.layerGroup();
   var themeLayer;
 
@@ -95,9 +95,7 @@
         $(e.properties.data.lockdowns).each(function (i, lockdown) {
           //Is a lockdown currently in effect?
           if (moment(lockdown.start) < moment() && moment(lockdown.end ? lockdown.end : moment().add(365,'day')) > moment()) {
-            value = "red";
-            ++activeLockdowns;
-            $('#active-lockdowns').html(activeLockdowns);
+            value = "red"
           }
         });
       }
