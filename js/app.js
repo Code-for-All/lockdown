@@ -14,6 +14,7 @@
     var map = setMap();
     mapboxMap(map);
     addTheme(map);
+    init();
   });
 
   Number.prototype.pad = function (size) {
@@ -24,7 +25,7 @@
 
   var labelLayer = L.layerGroup();
   var themeLayer;
-  var themeField = "COVID 13-03";
+
   /**
    * Initialize the map
    */
@@ -38,18 +39,6 @@
     });
   }
 
-
-  // get color depending on population density value
-  function getColor(d) {
-    return d > 4096 ? '#800026' :
-      d > 1024 ? '#BD0026' :
-        d > 256 ? '#E31A1C' :
-          d > 64 ? '#FC4E2A' :
-            d > 16 ? '#FD8D3C' :
-              d > 4 ? '#FEB24C' :
-                d > 1 ? '#FED976' :
-                  'transparent';
-  }
   /**
    * Load Mapbox base layer
    * @param {*} map
@@ -62,12 +51,6 @@
       zoomOffset: -1,
       attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-  }
-
-  function formatDate() {
-    var temp = new Date("2020-03-13");
-    var mydate = temp.getDate().pad(2).toString() + '-' + (temp.getMonth() + 1).pad(2).toString() + '-' + temp.getFullYear().toString()
-    return mydate;
   }
 
   function addTheme(map) {
@@ -103,23 +86,37 @@
     }
 
     function worldStyle(e) {
-      console.log(e);
-      var value = 0;
-      var data = {
+      var value;
+      if (e.properties.data && e.properties.data.lockdowns) {
+        $(e.properties.data.lockdowns).each(function (i, lockdown) {
+          //Is a lockdown currently in effect?
+          if (moment(lockdown.start) < moment() && moment(lockdown.end) > moment()) {
+            value = "red"
+          }
+        });
+      }
+      var style = {
         weight: 1,
         opacity: 0.1,
         color: '#555',
         fillOpacity: 0
       };
       if (value) {
-        data.fillColor = getColor(value);
-        data.fillOpacity = 0.5;
+        style.fillColor = value;
+        style.fillOpacity = 0.5;
       }
-      return data;
+      return style;
     };
 
     $.getJSON('./data/worldmap.geojson', function (mapdata) {
       $.getJSON('./data/datafile.json', function (themedata) {
+        var lockdown = []; // indexed map for quick lookup
+        $(mapdata.features).each(function (i, feature) {
+          if (themedata[feature.properties.NAME]) {
+            feature.properties.data = themedata[feature.properties.NAME];
+          }
+        });
+
         themeLayer = L.geoJSON(mapdata, {
           style: worldStyle,
           onEachFeature: onEachFeature
@@ -130,16 +127,28 @@
 
   }
   var init = function () {
-
+    var values = [
+      "today",
+      moment().add(1, 'd').format('YYYY-MM-DD'),
+      moment().add(2, 'd').format('YYYY-MM-DD'),
+      moment().add(3, 'd').format('YYYY-MM-DD'),
+      moment().add(4, 'd').format('YYYY-MM-DD'),
+      moment().add(5, 'd').format('YYYY-MM-DD'),
+      moment().add(6, 'd').format('YYYY-MM-DD'),
+      moment().add(1, 'w').format('YYYY-MM-DD'),
+      moment().add(2, 'w').format('YYYY-MM-DD'),
+      moment().add(3, 'w').format('YYYY-MM-DD'),
+      moment().add(1, 'M').format('YYYY-MM-DD'),
+      moment().add(2, 'M').format('YYYY-MM-DD')
+    ]
     var slider = new rSlider({
       target: '#slider',
-      values: ["today", "tomorrow", "2 days", "1 week", "2 weeks", "1 month", "in a quarter", "half a year"],
+      values: values,
       range: true,
-      set: ["tomorrow", "1 month"],
+      set: [values[1], values[3]],
       onChange: function (vals) {
         console.log(vals);
       }
     });
   };
-  window.onload = init;
 })();
