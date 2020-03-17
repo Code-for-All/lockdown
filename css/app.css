@@ -1,0 +1,25 @@
+#map {
+    width:auto;
+    height:100%;
+    background-color: rgba(83, 154, 221, 0.527);
+}
+html, body, #container{
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+}
+
+.slider-container {
+  width: 90%; /* Width of the outside container */
+  position: absolute;
+  bottom: 10px;
+  z-index: 1000;
+  background-color: #fff;
+  height: 40px;
+  padding: 1em 2em;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto;
+}
