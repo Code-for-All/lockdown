@@ -11,6 +11,10 @@
 (function () {
   'use strict';
   $(document).ready(function () {
+    $(".navbar-burger").click(function () {
+      $(".navbar-burger").toggleClass("is-active");
+      $(".navbar-menu").toggleClass("is-active");
+    });
     var map = setMap();
     mapboxMap(map);
     addTheme(map);
