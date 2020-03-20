@@ -1,0 +1,13 @@
+.sliderContainer {
+  width: 90%; /* Width of the outside container */
+  box-sizing: content-box;
+  position: fixed;
+  bottom: 24px;
+  z-index: 1008;
+  height: 64px;
+  padding: 1em 2em;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
