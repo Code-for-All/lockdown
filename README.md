@@ -1,16 +1,2 @@
-# Lockdown
+# lockdown
 A webapplication that will show various lockdown states for countries across the world helping people to find out if they can travel and at what restrictions.
-
-```bash
-# install dependencies
-npm install
-
-# start for local development
-npm run start
-
-# build for production with minification
-npm run build
-
-# test the production build locally
-npm run start:build
-```
