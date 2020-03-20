@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "start": "preact watch --template index.html",
-    "build": "preact build",
-    "start:build": "preact build && sirv build --cors --single",
+    "build": "preact build --no-prerender",
+    "start:build": "sirv build --cors --single",
     "format": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --write"
   },
   "devDependencies": {
