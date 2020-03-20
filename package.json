@@ -1,0 +1,22 @@
+{
+  "name": "lockdown",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "preact watch --template index.html",
+    "build": "preact build",
+    "start:build": "preact build && sirv build --cors --single",
+    "format": "prettier --single-quote \"src/**/*.{js,jsx,css,md}\" \"package.json\" --write"
+  },
+  "devDependencies": {
+    "preact-cli": "^3.0.0-rc.6",
+    "sirv-cli": "^0.4.5",
+    "prettier": "^1.19.1"
+  },
+  "dependencies": {
+    "bulma": "^0.8.0",
+    "leaflet": "^1.6.0",
+    "preact": "^10.3.2",
+    "preact-render-to-string": "^5.1.4",
+    "preact-router": "^3.2.1"
+  }
+}
