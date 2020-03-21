@@ -56,17 +56,22 @@ class WorldMap extends Component {
     }).addTo(map);
 
     function worldStyle(e) {
-      let value;
+      // lockdown unknown
+      let value = 'orange';
+
       if (e.properties.data && e.properties.data.lockdowns) {
         if (e.properties.data.lockdowns.length === 0) {
+          // no known lockdowns
           value = 'green';
         }
 
         for (const lockdown of e.properties.data.lockdowns) {
           // TODO: start and end are exclusive or inclusive?
           if (new Date(lockdown.start) >= today && lockdown.end ? new Date(lockdown.end) < today : true) {
+            // in lockdown
             value = 'red';
           } else {
+            // lockdown expired
             value = 'green';
           }
         }
