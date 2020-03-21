@@ -39,3 +39,34 @@
   right: 0;
   margin: 0 32px;
 }
+
+.ld-country-info {
+  position: fixed;
+  z-index: 1100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ld-country-info--dialog {
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.ld-country-info--dialog h1 {
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.ld-country-info--data-value {
+  color: grey;
+}
