@@ -1,0 +1,41 @@
+.ld-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  /* needs to be higher than the map */
+  z-index: 1008;
+  display: flex;
+  align-items: center;
+  height: 56px;
+}
+
+.ld-header > h1 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 24px;
+}
+
+.ld-slider {
+  width: 90%; /* Width of the outside container */
+  box-sizing: content-box;
+  position: fixed;
+  bottom: 24px;
+  z-index: 1008;
+  height: 64px;
+  padding: 24px 24px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+}
+
+.ld-totals {
+  z-index: 1003;
+  position: absolute;
+  top: 64px;
+  right: 0;
+  margin: 0 32px;
+}

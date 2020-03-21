@@ -1,8 +1,9 @@
-import { h, Component } from 'preact';
-import { Map, Browser, geoJSON, layerGroup, tileLayer } from 'leaflet';
-import Slider from '../slider';
-import mapData from '../../../data/worldmap.json';
-import themeData from '../../../data/datafile.json';
+import { Component } from 'preact';
+import { html } from 'htm/preact';
+import { Map, Browser, geoJSON, layerGroup, tileLayer } from 'leaflet/dist/leaflet-src.esm.js';
+import Slider from './x.js';
+import mapData from '../../data/worldmap.js';
+import themeData from '../../data/datafile.js';
 
 const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
 const today = new Date();
@@ -112,18 +113,16 @@ class WorldMap extends Component {
   }
 
   render() {
-    return (
-      <>
-        <div
-          style="height: 100%"
-          ref={ref => {
-            this.ref = ref;
-          }}
-        ></div>
+    return html`
+      <div
+        style="height: 100%"
+        ref=${ref => {
+          this.ref = ref;
+        }}
+      ></div>
 
-        <Slider />
-      </>
-    );
+      <${Slider} />
+    `;
   }
 }
 
