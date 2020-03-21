@@ -1,7 +1,7 @@
 import { Component } from 'preact';
 import { html } from 'htm/preact';
 import { Map, Browser, geoJSON, layerGroup, tileLayer } from 'leaflet/dist/leaflet-src.esm.js';
-import Slider from './x.js';
+import Slider from './Slider.js';
 
 const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
 const today = new Date();
@@ -10,7 +10,7 @@ class WorldMap extends Component {
   async componentDidMount() {
     const mapData = await (await fetch(new URL('../../data/worldmap.json', import.meta.url))).json();
     const themeData = await (await fetch(new URL('../../data/datafile.json', import.meta.url))).json();
-    console.log(mapData);
+
     const map = new Map(this.ref, {
       center: [0, 0],
       zoom: 3,
