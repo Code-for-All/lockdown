@@ -16,6 +16,7 @@ export class MainPage extends Component {
   async componentDidMount() {
     const countriesData = await (await fetch(new URL('../../data/datafile.json', import.meta.url))).json();
     this.setState({ countriesData });
+    this.__onPathChanged();
   }
 
   componentWillMount() {
