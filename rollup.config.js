@@ -23,6 +23,7 @@ export default {
     }),
     terser({ output: { comments: false } }),
     copy({
+      hook: 'buildStart',
       targets: [
         { src: 'src/assets/**/*', dest: 'build/src' },
         { src: 'src/style/**/*', dest: 'build/src' }
@@ -30,6 +31,7 @@ export default {
       flatten: false
     }),
     copy({
+      hook: 'buildStart',
       targets: [{ src: 'data/**/*', dest: 'build/data' }],
       flatten: false
     })
