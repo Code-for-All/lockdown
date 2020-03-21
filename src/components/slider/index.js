@@ -35,9 +35,11 @@ class Slider extends Component {
 
   render() {
     return (
-      <div class={style.sliderContainer + ' card'}>
-        <div class="card-content">
-          <input type="text" id="slider" class="slider" />
+      <div class={style.sliderContainer}>
+        <div class="card">
+          <div class="card-content">
+            <input type="text" id="slider" class="slider" />
+          </div>
         </div>
       </div>
     );

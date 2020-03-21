@@ -4,14 +4,15 @@
   "scripts": {
     "start": "preact watch --template index.html",
     "build": "preact build --no-prerender",
-    "start:build": "sirv build --cors --single",
+    "start:build": "es-dev-server --root-dir build --compatibility none --base-path /lockdown/ --open",
     "lint": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --check",
     "format": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --write"
   },
   "devDependencies": {
+    "es-dev-server": "^1.45.2",
     "preact-cli": "^3.0.0-rc.6",
-    "sirv-cli": "^0.4.5",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "sirv-cli": "^0.4.5"
   },
   "dependencies": {
     "bulma": "^0.8.0",
