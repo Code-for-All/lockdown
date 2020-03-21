@@ -28,6 +28,10 @@ export default {
         { src: 'src/style/**/*', dest: 'build/src' }
       ],
       flatten: false
+    }),
+    copy({
+      targets: [{ src: 'data/**/*', dest: 'build/data' }],
+      flatten: false
     })
   ]
 };
