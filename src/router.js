@@ -5,13 +5,13 @@ class Router extends EventTargetShim {
     super();
 
     window.addEventListener('click', this.__onClick.bind(this), true);
+    window.addEventListener('popstate', this.__onPathChanged.bind(this));
     this.url = new URL(location);
   }
 
   setPath(path) {
     window.history.pushState(null, '', path);
-    this.url = new URL(location);
-    this.dispatchEvent(new Event('path-changed'));
+    this.__onPathChanged();
   }
 
   setSearchParam(key, value) {
@@ -24,6 +24,11 @@ class Router extends EventTargetShim {
     const paramsString = params.toString();
 
     this.setPath(`${location.pathname}${paramsString ? `?${paramsString}` : ''}`);
+  }
+
+  __onPathChanged() {
+    this.url = new URL(location);
+    this.dispatchEvent(new Event('path-changed'));
   }
 
   __onClick(e) {
