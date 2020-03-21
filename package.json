@@ -4,7 +4,7 @@
   "scripts": {
     "start": "preact watch --template index.html",
     "build": "preact build --no-prerender",
-    "start:build": "es-dev-server --root-dir build --compatibility none --base-path /lockdown/ --open",
+    "start:build": "npm run build && es-dev-server --root-dir build --compatibility none --base-path /lockdown/ --open",
     "lint": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --check",
     "format": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --write"
   },
