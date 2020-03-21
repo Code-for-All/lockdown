@@ -2,7 +2,7 @@ import { html } from 'htm/preact';
 
 const logo = new URL('../assets/images/lockdown.png', import.meta.url).href;
 
-const Header = () => html`
+export const Header = () => html`
   <header class="ld-header">
     <a href="/lockdown/">
       <img src="${logo}" width="112" height="28" />
@@ -10,5 +10,3 @@ const Header = () => html`
     <h1>COVID-19 WORLD LOCKDOWNS</h1>
   </header>
 `;
-
-export default Header;

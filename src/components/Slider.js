@@ -20,7 +20,7 @@ const values = [
   format(add(today, { months: 2 }), 'yyyy-mm-dd')
 ];
 
-class Slider extends Component {
+export class Slider extends Component {
   componentDidMount() {
     const slider = new rSlider({
       target: '#slider',
@@ -39,5 +39,3 @@ class Slider extends Component {
     `;
   }
 }
-
-export default Slider;

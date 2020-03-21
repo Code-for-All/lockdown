@@ -1,15 +1,16 @@
 import { Component } from 'preact';
 import { html } from 'htm/preact';
 import { Map, Browser, geoJSON, layerGroup, tileLayer } from 'leaflet/dist/leaflet-src.esm.js';
-import Slider from './Slider.js';
+import { Slider } from './Slider.js';
+import { router } from '../router.js';
 
 const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
 const today = new Date();
 
-class WorldMap extends Component {
+export class WorldMap extends Component {
   async componentDidMount() {
+    const { countriesData } = this.props;
     const mapData = await (await fetch(new URL('../../data/worldmap.json', import.meta.url))).json();
-    const themeData = await (await fetch(new URL('../../data/datafile.json', import.meta.url))).json();
 
     const map = new Map(this.ref, {
       center: [0, 0],
@@ -21,9 +22,10 @@ class WorldMap extends Component {
     let themeLayer;
     let labelLayer = layerGroup();
 
-    function zoomToFeature(e) {
+    function onFeatureClicked(e) {
       const layer = e.target;
-      map.fitBounds(layer.getBounds());
+      // map.fitBounds(layer.getBounds());
+      router.setSearchParam('country', layer.feature.properties.NAME);
     }
 
     function resetHighlight(e) {
@@ -46,7 +48,7 @@ class WorldMap extends Component {
       layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: zoomToFeature
+        click: onFeatureClicked
       });
     }
 
@@ -94,8 +96,8 @@ class WorldMap extends Component {
     }
 
     for (const feature of mapData.features) {
-      if (themeData[feature.properties.NAME]) {
-        feature.properties.data = themeData[feature.properties.NAME];
+      if (countriesData[feature.properties.NAME]) {
+        feature.properties.data = countriesData[feature.properties.NAME];
       }
     }
 
@@ -126,5 +128,3 @@ class WorldMap extends Component {
     `;
   }
 }
-
-export default WorldMap;

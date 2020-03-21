@@ -1,7 +1,7 @@
 import { Component } from 'preact';
 import { html } from 'htm/preact';
 
-export default class Totals extends Component {
+export class Totals extends Component {
   render() {
     return html`
       <div class="ld-totals">

@@ -1,14 +1,12 @@
 import { html } from 'htm/preact';
 import { render } from 'preact';
-import Header from './components/Header.js';
-import Totals from './components/Totals.js';
-import WorldMap from './components/WorldMap.js';
+import { Header } from './components/Header.js';
+import { MainPage } from './pages/MainPage.js';
 
 render(
   html`
     <${Header} />
-    <${Totals} />
-    <${WorldMap} />
+    <${MainPage} />
   `,
   document.getElementById('app')
 );
