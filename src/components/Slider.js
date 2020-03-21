@@ -1,7 +1,7 @@
-import { h, Component } from 'preact';
+import { html } from 'htm/preact';
+import { Component } from 'preact';
 import { add, format } from 'date-fns';
-import './rslider.min.js';
-import style from './style';
+import rSlider from '../libs/rslider.min.js';
 
 const today = new Date().getTime();
 
@@ -27,22 +27,16 @@ class Slider extends Component {
       values: values,
       range: true,
       set: [values[1], values[3]],
-      onChange: function(vals) {
-        console.log(vals);
-      }
+      onChange: function(vals) {}
     });
   }
 
   render() {
-    return (
-      <div class={style.sliderContainer}>
-        <div class="card">
-          <div class="card-content">
-            <input type="text" id="slider" class="slider" />
-          </div>
-        </div>
+    return html`
+      <div class="ld-slider">
+        <input type="text" id="slider" class="slider" />
       </div>
-    );
+    `;
   }
 }
 
