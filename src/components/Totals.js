@@ -4,7 +4,9 @@ import { html } from 'htm/preact';
 export class Totals extends Component {
   constructor() {
     super();
-    this.items = [];
+    this.setState({
+      items: []
+    });
   }
 
   componentWillMount() {
