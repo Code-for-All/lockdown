@@ -2,47 +2,47 @@ import { Component } from 'preact';
 import { html } from 'htm/preact';
 
 export class Totals extends Component {
+  constructor() {
+    super();
+    this.items = [];
+  }
+
+  componentWillMount() {
+    this.setState({
+      items: [
+        {
+          description: 'Countries in lockdown',
+          value: '123'
+        },
+        {
+          description: 'People affected',
+          value: '123'
+        },
+        {
+          description: 'Reported infections',
+          value: '123'
+        },
+        {
+          description: 'Reported deaths',
+          value: '123'
+        }
+      ]
+    });
+  }
+
   render() {
     return html`
       <div class="ld-totals">
-        <div class="card info-panel">
-          <div class="card-content">
-            <nav class="level">
-              <div class="level-item has-text-centered">
-                <div>
-                  <p class="heading">
-                    Countries
-                    <br />
-                    in lockdown
-                  </p>
-                  <p id="active-lockdowns" class="title">
-                    0
-                  </p>
-                </div>
-              </div>
-              <div class="level-item has-text-centered">
-                <div>
-                  <p class="heading">
-                    People
-                    <br />
-                    affected
-                  </p>
-                  <p class="title">3M</p>
-                </div>
-              </div>
-            </nav>
-            <p class="title">“Proof of concept, no real data yet”</p>
-          </div>
-
-          <footer class="card-footer">
-            <p class="card-footer-item">
-              <span> View on <a href="https://twitter.com/CodeforAll/status/1239480299467214849">Twitter</a> </span>
-            </p>
-            <p class="card-footer-item">
-              <span> Follow us on <a href="https://www.facebook.com/letscodeforall/">Facebook</a> </span>
-            </p>
-          </footer>
-        </div>
+        <ul>
+          ${this.state.items.map(
+            item => html`
+              <li>
+                <div class="ld-totals--key">${item.description}</div>
+                <div class="ld-totals--value">${item.value}</div>
+              </li>
+            `
+          )}
+        </ul>
       </div>
     `;
   }
