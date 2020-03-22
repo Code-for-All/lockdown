@@ -8,7 +8,9 @@ import { router } from '../router.js';
 export class MainPage extends Component {
   constructor() {
     super();
-
+    this.state = {
+      location: {}
+    };
     this.__onPathChanged = this.__onPathChanged.bind(this);
     this.__closeCountryInfo = this.__closeCountryInfo.bind(this);
   }
@@ -17,6 +19,10 @@ export class MainPage extends Component {
     const countriesData = await (await fetch(new URL('../../data/datafile.json', import.meta.url))).json();
     this.setState({ countriesData });
     this.__onPathChanged();
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.handleGeolocation.bind(this));
+    }
   }
 
   componentWillMount() {
@@ -27,7 +33,18 @@ export class MainPage extends Component {
     router.removeEventListener('path-changed', this.__onPathChanged);
   }
 
-  render() {
+  handleGeolocation(pos) {
+    const { latitude, longitude } = pos.coords;
+    localStorage.setItem('geolocation', `${latitude},${longitude}`);
+    this.setState({
+      location: {
+        latitude,
+        longitude
+      }
+    });
+  }
+
+  render(_, { location }) {
     if (!this.state.countriesData) {
       // Loading state here
       return html``;
@@ -35,7 +52,8 @@ export class MainPage extends Component {
 
     return html`
       <${Totals} />
-      <${WorldMap} countriesData=${this.state.countriesData} />
+      <${WorldMap} countriesData=${this.state.countriesData} location=${location} />
+
       ${this.state.selectedCountry
         ? html`
             <${CountryInfo}
