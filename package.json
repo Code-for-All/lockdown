@@ -19,6 +19,7 @@
     "@rollup/plugin-node-resolve": "^7.1.1",
     "babel-plugin-bundled-import-meta": "^0.3.2",
     "es-dev-server": "^1.45.2",
+    "husky": "^4.2.3",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.1.0",
@@ -33,5 +34,10 @@
     "preact": "^10.3.2",
     "rollup-plugin-copy": "^3.3.0",
     "rslider": "^2.16.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
   }
 }
