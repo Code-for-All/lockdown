@@ -17,21 +17,6 @@
   margin-left: 24px;
 }
 
-.ld-slider {
-  width: 90%; /* Width of the outside container */
-  box-sizing: content-box;
-  position: fixed;
-  bottom: 24px;
-  z-index: 1008;
-  height: 64px;
-  padding: 24px 24px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: white;
-}
-
 .ld-totals {
   z-index: 1003;
   position: absolute;
