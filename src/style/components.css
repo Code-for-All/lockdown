@@ -84,20 +84,74 @@
 }
 
 .ld-country-info--dialog {
+  position: relative;
   background-color: white;
-  padding: 16px;
+  padding: 16px 48px;
   border-radius: 8px;
   width: 100%;
-  max-width: 320px;
+  max-width: 400px;
 }
 
 .ld-country-info--dialog h1 {
-  font-weight: bold;
-  font-size: 20px;
+  font-size: 24px;
   text-align: center;
-  margin-bottom: 8px;
+  font-weight: 700;
+  margin: 0 auto 36px;
 }
 
-.ld-country-info--data-value {
-  color: grey;
+.ld-country-info--close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 8px;
+}
+
+.ld-country-info--close-button svg {
+  width: 30px;
+  height: 30px;
+}
+
+.ld-country-info--stats {
+  display: flex;
+  margin-bottom: 120px;
+}
+
+.ld-country-info--stats > * {
+  margin-right: 48px;
+  font-weight: 300;
+}
+
+.ld-country-info--stats-key {
+  font-size: 14px;
+}
+
+.ld-country-info--restrictions {
+  display: grid;
+  grid-template-columns: 140px 60px 60px 60px;
+  font-weight: 700;
+  font-size: 12px;
+  grid-row-gap: 15px;
+  margin-bottom: 36px;
+}
+
+.ld-country-info--restrictions > div {
+  position: relative;
+}
+
+.ld-country-info--restrictions > div:after {
+  content: '';
+  position: absolute;
+  top: -16px;
+  bottom: -16px;
+  right: 0;
+  background-color: lightgray;
+  width: 1px;
+}
+
+.ld-country-info--circle {
+  width: 16px;
+  height: 16px;
+  background-color: lightgray;
+  border-radius: 50%;
+  margin: 0 auto;
 }

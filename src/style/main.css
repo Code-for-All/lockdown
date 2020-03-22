@@ -23,3 +23,33 @@ body {
 #app {
   height: 100%;
 }
+
+.button-unstyled {
+  font: inherit;
+  font-size: inherit;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  color: inherit;
+  background-color: transparent;
+  text-align: left;
+  white-space: normal;
+  overflow: visible;
+
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button-unstyled:active {
+  background: none;
+  outline: none;
+  padding: 0;
+}
+
+.button-unstyled::-moz-focus-inner {
+  border: 0;
+}
