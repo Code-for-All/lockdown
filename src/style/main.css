@@ -22,4 +22,44 @@ body {
 
 #app {
   height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#menu {
+  width: 400px;
+  margin-top: 96px;
+  padding: 10px;
+}
+
+#desktopMenu {
+  display: block;
+}
+
+#mobileMenu {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  #app {
+    flex-direction: column-reverse;
+  }
+
+  #menu {
+    margin-top: 0;
+    width: 100%;
+  }
+
+  #desktopMenu {
+    display: none;
+  }
+
+  #mobileMenu {
+    display: flex;
+  }
+
+  #mobileMenu img {
+    flex: 1;
+    height: 40px;
+  }
 }
