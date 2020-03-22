@@ -113,18 +113,18 @@ export class WorldMap extends Component {
     this.setState({
       map
     });
-
-    if (localStorage.getItem('geolocation')) {
-      const [lat, long] = getCoords();
-      map.setView([lat, long], 5);
-    }
   }
 
   componentWillUnmount() {
     this.state.map.remove();
   }
 
-  render() {
+  render(_, { map }) {
+    if (localStorage.getItem('geolocation') && map) {
+      const [lat, long] = getCoords();
+      map.setView([lat, long], 5);
+    }
+
     return html`
       <div
         style="height: 100%"
