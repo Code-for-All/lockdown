@@ -6,10 +6,6 @@ import { router } from '../router.js';
 const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
 const today = new Date();
 
-function getCoords() {
-  return localStorage.getItem('geolocation')?.split(',');
-}
-
 export class WorldMap extends Component {
   async componentDidMount() {
     const { countriesData } = this.props;
@@ -118,12 +114,7 @@ export class WorldMap extends Component {
     this.state.map.remove();
   }
 
-  render(_, { map }) {
-    if (localStorage.getItem('geolocation') && map) {
-      const [lat, long] = getCoords();
-      map.setView([lat, long], 5);
-    }
-
+  render() {
     return html`
       <div
         style="height: 100%; width: 100%"

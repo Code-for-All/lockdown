@@ -46,15 +46,9 @@ body {
   font-size: 14px;
 }
 
-.ld-menu-nav button {
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-
-  background: transparent;
+.ld-menu-nav a, .ld-menu-nav a:visited {
   font-weight: 700;
+  color: black;
 }
 
 .ld-menu-nav img {

@@ -11,28 +11,28 @@ export const Menu = () => html`
       <nav>
         <ul>
           <li>
-            <button>
+            <a href="/settings">
               <img src="${settings}" alt="settings" />
               <p>SETTINGS</p>
-            </button>
+            </a>
           </li>
           <li>
-            <button>
+            <a href="/info">
               <img src="${info}" alt="info" />
               <p>INFO</p>
-            </button>
+            </a>
           </li>
           <li>
-            <button>
+            <a href="/contribute">
               <img src="${refresh}" alt="contribute" />
               <p>CONTRIBUTE</p>
-            </button>
+            </a>
           </li>
           <li>
-            <button>
+            <a href="/ticker">
               <img src="${add}" alt="ticker" />
               <p>TICKER</p>
-            </button>
+            </a>
           </li>
         </ul>
       </nav>
