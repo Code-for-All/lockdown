@@ -1,12 +1,15 @@
 import { html } from 'htm/preact';
+import { Totals } from './Totals.js';
 
-const logo = new URL('../assets/images/lockdown.png', import.meta.url).href;
+const logo = new URL('../assets/images/logo.png', import.meta.url).href;
 
 export const Header = () => html`
   <header class="ld-header">
-    <a href="/lockdown/">
-      <img src="${logo}" width="112" height="28" />
+    <a class="ld-header--logo" href="/lockdown/">
+      <img src="${logo}" width="240" />
+      <!-- TODO: screen reader h1 -->
     </a>
-    <h1>COVID-19 WORLD LOCKDOWNS</h1>
+
+    <${Totals} />
   </header>
 `;

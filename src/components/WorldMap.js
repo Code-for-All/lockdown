@@ -1,13 +1,34 @@
 import { Component } from 'preact';
 import { html } from 'htm/preact';
 import { Map, Browser, geoJSON, layerGroup, tileLayer } from 'leaflet/dist/leaflet-src.esm.js';
-import { Slider } from './Slider.js';
 import { router } from '../router.js';
 
 const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
 const today = new Date();
 
 export class WorldMap extends Component {
+  constructor() {
+    super();
+    this.state = {
+      location: {
+        latitude: null,
+        longitude: null
+      }
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.location.latitude !== this.state.location.latitude &&
+      prevProps.location.longitude !== this.state.location.longitude &&
+      localStorage.getItem('geolocation') &&
+      this.state.map
+    ) {
+      const [lat, long] = getCoords();
+      this.state.map.setView([lat, long], 10);
+    }
+  }
+
   async componentDidMount() {
     const { countriesData } = this.props;
     const mapData = await (await fetch(new URL('../../data/worldmap.json', import.meta.url))).json();
@@ -123,8 +144,6 @@ export class WorldMap extends Component {
           this.ref = ref;
         }}
       ></div>
-
-      <${Slider} />
     `;
   }
 }
