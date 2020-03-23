@@ -1,6 +1,7 @@
 import { html } from 'htm/preact';
 
 
+// export svg as html`` so you can style them
 const info = new URL('../assets/icons/info.svg', import.meta.url).href;
 const settings = new URL('../assets/icons/settings.svg', import.meta.url).href;
 const refresh = new URL('../assets/icons/refresh.svg', import.meta.url).href;
@@ -19,3 +20,4 @@ export const Menu = () => html`
     </div>
   </div>
 `;
+
