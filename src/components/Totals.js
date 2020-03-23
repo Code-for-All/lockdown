@@ -1,19 +1,19 @@
 import { Component } from 'preact';
 import { html } from 'htm/preact';
+import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 
 export class Totals extends Component {
   constructor() {
     super();
-    this.state = { items: [] };
 
-    const observer = matchMedia('(min-width: 900px)');
-    observer.addEventListener('change', () => {
-      this.setState({ desktop: observer.matches });
-    });
-    this.state = { desktop: observer.matches };
+    this.state = { items: [] };
   }
 
   componentWillMount() {
+    installMediaQueryWatcher(`(min-width: 900px)`, matches => {
+      this.setState({ desktop: matches });
+    });
+
     this.setState({
       items: [
         {
@@ -36,12 +36,11 @@ export class Totals extends Component {
     });
   }
 
-  render() {
-    const items = this.state.desktop ? this.state.items : this.state.items.slice(0, 2);
+  render(_, { items, desktop }) {
     return html`
       <div class="ld-totals">
         <ul>
-          ${items.map(
+          ${(desktop ? items : items.slice(0, 2)).map(
             item => html`
               <li>
                 <div class="ld-totals--key">${item.description}</div>
