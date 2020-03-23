@@ -7,7 +7,7 @@ const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZ
 const today = new Date();
 
 function getCoords() {
-  return localStorage.getItem('geolocation') ?.split(',');
+  return localStorage.getItem('geolocation')?.split(',');
 }
 
 export class WorldMap extends Component {
@@ -128,8 +128,8 @@ export class WorldMap extends Component {
       <div
         style="height: 100%; width: 100%"
         ref=${ref => {
-        this.ref = ref;
-      }}
+          this.ref = ref;
+        }}
       ></div>
     `;
   }

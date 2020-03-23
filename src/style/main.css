@@ -33,11 +33,7 @@ body {
   padding: 10px;
 }
 
-.ld-desktop-menu {
-  display: block;
-}
-
-.ld-desktop-menu ul {
+.ld-menu-nav ul {
   list-style: none;
   margin: 0;
   display: flex;
@@ -46,15 +42,26 @@ body {
   padding: 0px 20px 0px 20px;
 }
 
-.ld-desktop-menu li a:visited {
-  color: black;
+.ld-menu-nav p {
+  font-size: 14px;
 }
 
-.ld-mobile-menu {
+.ld-menu-nav button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+
+  background: transparent;
+  font-weight: 700;
+}
+
+.ld-menu-nav img {
   display: none;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 960px) {
   #app {
     flex-direction: column-reverse;
   }
@@ -62,34 +69,40 @@ body {
   .ld-menu {
     margin-top: 0;
     width: 100%;
-    z-index: 999;
-    box-shadow: 0px -8px 8px 0px rgba(0,0,0,0.24);
+    box-shadow: 0px -8px 8px 0px rgba(0, 0, 0, 0.24);
+    flex-shrink: 0;
+    height: 60px;
+    padding: 0;
   }
 
-  .ld-desktop-menu {
+  .ld-menu-nav p {
     display: none;
   }
 
-  .ld-mobile-menu {
+  .ld-menu-nav {
     display: flex;
+    height: 100%;
+    width: 100%;
   }
 
-  .ld-mobile-menu a {
+  .ld-menu-nav ul {
+    padding: 0;
+    justify-content: space-around;
+  }
+
+  .ld-menu-nav nav {
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+  }
+
+  .ld-menu-nav button {
     flex: 1;
     display: flex;
     position: relative;
   }
 
-  .ld-mobile-menu a:not(:last-child)::after {
-    position: absolute;
-    right: 0;
-    width: 0.1px;
-    background-color: lightgrey;
-    height: 100%;
-    content: '';
-  }
-
-  .ld-mobile-menu img {
+  .ld-menu-nav img {
+    display: block;
     flex: 1;
     height: 40px;
   }
