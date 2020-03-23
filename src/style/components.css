@@ -97,6 +97,7 @@
   border-radius: 8px;
   width: 100%;
   max-width: 320px;
+  margin-left: 400px;
 }
 
 .ld-country-info--dialog h1 {
@@ -110,7 +111,13 @@
   color: grey;
 }
 
-@media only screen and (max-width: 900px) {
+@media (max-width: 960px) {
+  .ld-country-info--dialog {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 900px) {
   .ld-totals {
     display: none;
   }
