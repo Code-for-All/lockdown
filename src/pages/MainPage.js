@@ -46,7 +46,9 @@ export class MainPage extends Component {
   render(_, { location }) {
     if (!this.state.countriesData) {
       // Loading state here
-      return html``;
+      return html`
+        <div></div>
+      `;
     }
 
     return html`
