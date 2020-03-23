@@ -12,6 +12,12 @@
   height: 60px;
 }
 
+.ld-header--logo img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .ld-header::after {
   position: absolute;
   bottom: 0;
@@ -25,12 +31,13 @@
 .ld-header--logo {
   display: block;
   flex-shrink: 0;
+  width: 400px;
 }
 
 .ld-header--totals {
   height: 100%;
   margin-left: auto;
-  margin-right: 30%;
+  margin-right: auto;
 }
 
 .ld-main-page--totals {
@@ -48,10 +55,6 @@
 @media (min-width: 900px) {
   .ld-main-page--totals {
     display: none;
-  }
-
-  .ld-header--logo {
-    margin-left: 48px;
   }
 }
 
