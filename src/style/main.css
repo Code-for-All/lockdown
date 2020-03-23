@@ -46,6 +46,10 @@ body {
   font-size: 14px;
 }
 
+.ld-menu--content {
+  padding: 20px;
+}
+
 .ld-menu-nav a,
 .ld-menu-nav a:visited {
   font-weight: 700;

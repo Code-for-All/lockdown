@@ -40,9 +40,8 @@ export const Menu = () => html`
     </div>
 
     <div class="ld-menu--content">
-      <${Expandable} toggle=${'foo'} detail=${html`<h2>bar</h2>`}/>
-      <${Expandable} toggle=${'foo'} detail=${html`<h2>bar</h2>`}/>
-      <${Expandable} toggle=${'foo'} detail=${html`<h2>bar</h2>`}/>
+      <${Expandable} toggle=${'Sources'} detail=${html`<p>bar</p>`}/>
+      <${Expandable} toggle=${'Credits'} detail=${html`<p>bar</p>`}/>
     </div>
   </div>
 `;
