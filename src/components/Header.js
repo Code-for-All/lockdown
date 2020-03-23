@@ -30,6 +30,7 @@ const styles = css`
   }
 
   a {
+    width: 400px;
     display: block;
     flex-shrink: 0;
   }
@@ -40,10 +41,10 @@ const styles = css`
     display: block;
   }
 
-  @media (min-width: 900px) {
-    img {
-      margin-left: 48px;
-    }
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   @media (max-width: 899px) {
