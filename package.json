@@ -32,6 +32,7 @@
     "htm": "^3.0.3",
     "leaflet": "^1.6.0",
     "preact": "^10.3.2",
+    "pwa-helpers": "^0.9.1",
     "rollup-plugin-copy": "^3.3.0",
     "rslider": "^2.16.3"
   },

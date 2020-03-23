@@ -23,7 +23,7 @@ body {
 #app {
   height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
 }
 
 .ld-menu {
@@ -46,23 +46,57 @@ body {
   font-size: 14px;
 }
 
-.ld-menu--content {
-  padding: 20px;
-}
-
-.ld-menu-nav a,
-.ld-menu-nav a:visited {
+.ld-menu-nav button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
   font-weight: 700;
-  color: black;
 }
 
 .ld-menu-nav img {
   display: none;
 }
 
+.ld-menu--content {
+  padding: 0px 20px 0px 20px;
+}
+
+.ld-menu--content-x {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  margin-top: 5px;
+  margin-left: auto;
+}
+
+.ld-menu--header {
+  display: flex;
+}
+
+.ld-menu--header h1 {
+  padding-left: 10px;
+  margin-top: 20px;
+  flex: 1;
+  text-align: center;
+}
+
+.ld-menu--header button {
+  margin-right: 5px;
+}
+
+.mb-only {
+  display: none;
+}
+
 @media (max-width: 960px) {
   #app {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   .ld-menu {
@@ -104,5 +138,24 @@ body {
     display: block;
     flex: 1;
     height: 40px;
+  }
+
+  .ld-menu--content {
+    position: fixed;
+    width: 90%;
+    max-width: 400px;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
+    z-index: 9999;
+    background-color: white;
+    border-radius: 5px;
+    height: 70%;
+  }
+
+  .mb-only {
+    display: block;
   }
 }
