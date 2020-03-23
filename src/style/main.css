@@ -1,0 +1,25 @@
+:root {
+  --ld-dark-gray: #2a2b2f;
+  --ld-dark-blue: #0000ff;
+  --ld-light-blue: #add8e6;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--ld-dark-gray);
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}
