@@ -8,15 +8,46 @@ const refresh = new URL('../assets/icons/refresh.svg', import.meta.url).href;
 const add = new URL('../assets/icons/circle-plus.svg', import.meta.url).href;
 
 export const Menu = () => html`
-  <div id="menu">
-    <div id="desktopMenu">
-      i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu i am the menu 
+  <div class="ld-menu">
+    <div class="ld-desktop-menu">
+      <nav>
+        <ul>
+          <li>
+            <a href="?country=United+States+of+America">
+              SETTINGS
+            </a>
+          </li>
+          <li>
+            <a href="?country=United+States+of+America">
+              INFO
+            </a>
+          </li>
+          <li>
+            <a href="?country=United+States+of+America">
+              CONTRIBUTE
+            </a>
+          </li>
+          <li>
+            <a href="?country=United+States+of+America">
+              TICKER
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <div id="mobileMenu">
-      <img src="${info}" alt="info"/>
-      <img src="${settings}" alt="info"/>
-      <img src="${refresh}" alt="info"/>
-      <img src="${add}" alt="info"/>
+    <div class="ld-mobile-menu">
+      <a href="/?country=United+States+of+America">
+        <img src="${info}" alt="info"/>
+      </a>
+      <a href="/?country=United+States+of+America">
+        <img src="${settings}" alt="info"/>
+      </a>
+      <a href="/?country=United+States+of+America">
+        <img src="${refresh}" alt="info"/>
+      </a>
+      <a href="/?country=United+States+of+America">
+        <img src="${add}" alt="info"/>
+      </a>
     </div>
   </div>
 `;
