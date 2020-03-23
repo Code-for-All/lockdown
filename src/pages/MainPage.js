@@ -32,7 +32,9 @@ export class MainPage extends Component {
   render() {
     if (!this.state.countriesData) {
       // Loading state here
-      return html``;
+      return html`
+        <div></div>
+      `;
     }
 
     return html`
