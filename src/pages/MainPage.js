@@ -1,6 +1,5 @@
 import { html } from 'htm/preact';
 import { Component } from 'preact';
-import { Totals } from '../components/Totals.js';
 import { WorldMap } from '../components/WorldMap.js';
 import { CountryInfo } from '../components/CountryInfo.js';
 import { router } from '../router.js';
@@ -51,7 +50,6 @@ export class MainPage extends Component {
     }
 
     return html`
-      <${Totals} />
       <${WorldMap} countriesData=${this.state.countriesData} location=${location} />
 
       ${this.state.selectedCountry

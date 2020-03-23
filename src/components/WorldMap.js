@@ -1,7 +1,6 @@
 import { Component } from 'preact';
 import { html } from 'htm/preact';
 import { Map, Browser, geoJSON, layerGroup, tileLayer } from 'leaflet/dist/leaflet-src.esm.js';
-import { Slider } from './Slider.js';
 import { router } from '../router.js';
 
 const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
@@ -149,8 +148,6 @@ export class WorldMap extends Component {
           this.ref = ref;
         }}
       ></div>
-
-      <${Slider} />
     `;
   }
 }
