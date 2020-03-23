@@ -5,6 +5,12 @@ export class Totals extends Component {
   constructor() {
     super();
     this.state = { items: [] };
+
+    const observer = matchMedia('(min-width: 900px)');
+    observer.addEventListener('change', () => {
+      this.setState({ desktop: observer.matches });
+    });
+    this.state = { desktop: observer.matches };
   }
 
   componentWillMount() {
@@ -31,10 +37,11 @@ export class Totals extends Component {
   }
 
   render() {
+    const items = this.state.desktop ? this.state.items : this.state.items.slice(0, 2);
     return html`
       <div class="ld-totals">
         <ul>
-          ${this.state.items.map(
+          ${items.map(
             item => html`
               <li>
                 <div class="ld-totals--key">${item.description}</div>

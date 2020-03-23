@@ -10,6 +10,8 @@ export const Header = () => html`
       <!-- TODO: screen reader h1 -->
     </a>
 
-    <${Totals} />
+    <div class="ld-header--totals">
+      <${Totals} />
+    </div>
   </header>
 `;

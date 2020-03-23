@@ -2,6 +2,7 @@ import { html } from 'htm/preact';
 import { Component } from 'preact';
 import { WorldMap } from '../components/WorldMap.js';
 import { CountryInfo } from '../components/CountryInfo.js';
+import { Totals } from '../components/Totals.js';
 import { router } from '../router.js';
 import { Menu } from '../components/Menu.js';
 
@@ -38,7 +39,12 @@ export class MainPage extends Component {
     }
 
     return html`
+      <div class="ld-main-page--totals">
+        <${Totals} />
+      </div>
+
       <${Menu} />
+
       <${WorldMap} countriesData=${this.state.countriesData} />
 
       ${this.state.selectedCountry
