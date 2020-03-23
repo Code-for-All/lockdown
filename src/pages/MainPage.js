@@ -3,6 +3,7 @@ import { Component } from 'preact';
 import { WorldMap } from '../components/WorldMap.js';
 import { CountryInfo } from '../components/CountryInfo.js';
 import { router } from '../router.js';
+import { Menu } from '../components/Menu.js';
 
 export class MainPage extends Component {
   constructor() {
@@ -37,7 +38,7 @@ export class MainPage extends Component {
     }
 
     return html`
-      <${Totals} />
+      <${Menu} />
       <${WorldMap} countriesData=${this.state.countriesData} />
 
       ${this.state.selectedCountry
