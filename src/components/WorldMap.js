@@ -12,6 +12,28 @@ function getCoords() {
 }
 
 export class WorldMap extends Component {
+  constructor() {
+    super();
+    this.state = {
+      location: {
+        latitude: null,
+        longitude: null
+      }
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.location.latitude !== this.state.location.latitude &&
+      prevProps.location.longitude !== this.state.location.longitude &&
+      localStorage.getItem('geolocation') &&
+      this.state.map
+    ) {
+      const [lat, long] = getCoords();
+      this.state.map.setView([lat, long], 10);
+    }
+  }
+
   async componentDidMount() {
     const { countriesData } = this.props;
     const mapData = await (await fetch(new URL('../../data/worldmap.json', import.meta.url))).json();
@@ -119,12 +141,7 @@ export class WorldMap extends Component {
     this.state.map.remove();
   }
 
-  render(_, { map }) {
-    if (localStorage.getItem('geolocation') && map) {
-      const [lat, long] = getCoords();
-      map.setView([lat, long], 5);
-    }
-
+  render() {
     return html`
       <div
         style="height: 100%"
