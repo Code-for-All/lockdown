@@ -111,6 +111,42 @@
   color: grey;
 }
 
+.ld-expandable {
+  width: 100%;
+  border: solid black 1px;
+  height: 60px;
+}
+
+.ld-expandable--icon {
+
+}
+
+.ld-expandable--toggle-content {
+  flex: 1;
+}
+
+.ld-expandable button {
+  text-align: left;
+  width: 100%;
+  display: flex;
+}
+
+.ld-expandable--toggle {
+
+}
+
+.ld-expandable--detail {
+
+}
+
+.ld-expandable--expanded {
+  display: block;
+}
+
+.ld-expandable--closed {
+  display: none;
+}
+
 @media (max-width: 960px) {
   .ld-country-info--dialog {
     margin-left: 0;

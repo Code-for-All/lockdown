@@ -1,4 +1,5 @@
 import { html } from 'htm/preact';
+import {Expandable} from './Expandable.js';
 
 const info = new URL('../assets/icons/info.svg', import.meta.url).href;
 const settings = new URL('../assets/icons/settings.svg', import.meta.url).href;
@@ -38,6 +39,10 @@ export const Menu = () => html`
       </nav>
     </div>
 
-    <div class="ld-menu--content"></div>
+    <div class="ld-menu--content">
+      <${Expandable} toggle=${'foo'} detail=${html`<h2>bar</h2>`}/>
+      <${Expandable} toggle=${'foo'} detail=${html`<h2>bar</h2>`}/>
+      <${Expandable} toggle=${'foo'} detail=${html`<h2>bar</h2>`}/>
+    </div>
   </div>
 `;
