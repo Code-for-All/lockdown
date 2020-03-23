@@ -38,8 +38,8 @@ export class MainPage extends Component {
     }
 
     return html`
-      <${Menu} />
       <${WorldMap} countriesData=${this.state.countriesData} />
+      <${Menu} />
 
       ${this.state.selectedCountry
         ? html`
