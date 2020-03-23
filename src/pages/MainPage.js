@@ -43,9 +43,8 @@ export class MainPage extends Component {
         <${Totals} />
       </div>
 
-      <${Menu} />
-
       <${WorldMap} countriesData=${this.state.countriesData} />
+      <${Menu} />
 
       ${this.state.selectedCountry
         ? html`
