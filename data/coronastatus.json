@@ -1,0 +1,1142 @@
+[
+  {
+    "confirmed": 81603,
+    "deaths": 3276,
+    "entered": 1584921600000,
+    "name": "China"
+  },
+  {
+    "confirmed": 8961,
+    "deaths": 111,
+    "entered": 1584921600000,
+    "name": "Republic of Korea"
+  },
+  {
+    "confirmed": 1709,
+    "deaths": 7,
+    "entered": 1584921600000,
+    "name": "Australia"
+  },
+  {
+    "confirmed": 1306,
+    "deaths": 11,
+    "entered": 1584921600000,
+    "name": "Malaysia"
+  },
+  {
+    "confirmed": 1089,
+    "deaths": 41,
+    "entered": 1584921600000,
+    "name": "Japan"
+  },
+  {
+    "confirmed": 455,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Singapore"
+  },
+  {
+    "confirmed": 396,
+    "deaths": 33,
+    "entered": 1584921600000,
+    "name": "Philippines"
+  },
+  {
+    "confirmed": 118,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Viet Nam"
+  },
+  {
+    "confirmed": 102,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "New Zealand"
+  },
+  {
+    "confirmed": 88,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Brunei Darussalam"
+  },
+  {
+    "confirmed": 86,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Cambodia"
+  },
+  {
+    "confirmed": 27,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Guam"
+  },
+  {
+    "confirmed": 18,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "French Polynesia"
+  },
+  {
+    "confirmed": 10,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Mongolia"
+  },
+  {
+    "confirmed": 7,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "New Caledonia"
+  },
+  {
+    "confirmed": 3,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Fiji"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Papua New Guinea"
+  },
+  {
+    "confirmed": 59138,
+    "deaths": 5476,
+    "entered": 1584921600000,
+    "name": "Italy"
+  },
+  {
+    "confirmed": 28572,
+    "deaths": 1720,
+    "entered": 1584921600000,
+    "name": "Spain"
+  },
+  {
+    "confirmed": 24774,
+    "deaths": 94,
+    "entered": 1584921600000,
+    "name": "Germany"
+  },
+  {
+    "confirmed": 15821,
+    "deaths": 674,
+    "entered": 1584921600000,
+    "name": "France"
+  },
+  {
+    "confirmed": 6971,
+    "deaths": 60,
+    "entered": 1584921600000,
+    "name": "Switzerland"
+  },
+  {
+    "confirmed": 5687,
+    "deaths": 281,
+    "entered": 1584921600000,
+    "name": "The United Kingdom"
+  },
+  {
+    "confirmed": 4204,
+    "deaths": 179,
+    "entered": 1584921600000,
+    "name": "Netherlands"
+  },
+  {
+    "confirmed": 3631,
+    "deaths": 16,
+    "entered": 1584921600000,
+    "name": "Austria"
+  },
+  {
+    "confirmed": 3401,
+    "deaths": 75,
+    "entered": 1584921600000,
+    "name": "Belgium"
+  },
+  {
+    "confirmed": 2132,
+    "deaths": 7,
+    "entered": 1584921600000,
+    "name": "Norway"
+  },
+  {
+    "confirmed": 1906,
+    "deaths": 21,
+    "entered": 1584921600000,
+    "name": "Sweden"
+  },
+  {
+    "confirmed": 1600,
+    "deaths": 14,
+    "entered": 1584921600000,
+    "name": "Portugal"
+  },
+  {
+    "confirmed": 1395,
+    "deaths": 13,
+    "entered": 1584921600000,
+    "name": "Denmark"
+  },
+  {
+    "confirmed": 1236,
+    "deaths": 30,
+    "entered": 1584921600000,
+    "name": "Turkey"
+  },
+  {
+    "confirmed": 1165,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Czechia"
+  },
+  {
+    "confirmed": 1071,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Israel"
+  },
+  {
+    "confirmed": 906,
+    "deaths": 4,
+    "entered": 1584921600000,
+    "name": "Ireland"
+  },
+  {
+    "confirmed": 798,
+    "deaths": 8,
+    "entered": 1584921600000,
+    "name": "Luxembourg"
+  },
+  {
+    "confirmed": 634,
+    "deaths": 7,
+    "entered": 1584921600000,
+    "name": "Poland"
+  },
+  {
+    "confirmed": 626,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Finland"
+  },
+  {
+    "confirmed": 624,
+    "deaths": 15,
+    "entered": 1584921600000,
+    "name": "Greece"
+  },
+  {
+    "confirmed": 568,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Iceland"
+  },
+  {
+    "confirmed": 438,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Russian Federation"
+  },
+  {
+    "confirmed": 433,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Romania"
+  },
+  {
+    "confirmed": 414,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Slovenia"
+  },
+  {
+    "confirmed": 326,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Estonia"
+  },
+  {
+    "confirmed": 235,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Croatia"
+  },
+  {
+    "confirmed": 219,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Serbia"
+  },
+  {
+    "confirmed": 190,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Armenia"
+  },
+  {
+    "confirmed": 185,
+    "deaths": 3,
+    "entered": 1584921600000,
+    "name": "Bulgaria"
+  },
+  {
+    "confirmed": 185,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Slovakia"
+  },
+  {
+    "confirmed": 167,
+    "deaths": 7,
+    "entered": 1584921600000,
+    "name": "Hungary"
+  },
+  {
+    "confirmed": 151,
+    "deaths": 20,
+    "entered": 1584921600000,
+    "name": "San Marino"
+  },
+  {
+    "confirmed": 143,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Lithuania"
+  },
+  {
+    "confirmed": 139,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Latvia"
+  },
+  {
+    "confirmed": 125,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Bosnia and Herzegovina"
+  },
+  {
+    "confirmed": 115,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Faroe Islands"
+  },
+  {
+    "confirmed": 114,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "North Macedonia"
+  },
+  {
+    "confirmed": 113,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Andorra"
+  },
+  {
+    "confirmed": 95,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Cyprus"
+  },
+  {
+    "confirmed": 94,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Republic of Moldova"
+  },
+  {
+    "confirmed": 90,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Malta"
+  },
+  {
+    "confirmed": 89,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Albania"
+  },
+  {
+    "confirmed": 76,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Belarus"
+  },
+  {
+    "confirmed": 65,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Azerbaijan"
+  },
+  {
+    "confirmed": 60,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Kazakhstan"
+  },
+  {
+    "confirmed": 54,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Georgia"
+  },
+  {
+    "confirmed": 47,
+    "deaths": 3,
+    "entered": 1584921600000,
+    "name": "Ukraine"
+  },
+  {
+    "confirmed": 46,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Liechtenstein"
+  },
+  {
+    "confirmed": 46,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Uzbekistan"
+  },
+  {
+    "confirmed": 23,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Monaco"
+  },
+  {
+    "confirmed": 21,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Montenegro"
+  },
+  {
+    "confirmed": 17,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Guernsey"
+  },
+  {
+    "confirmed": 15,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Gibraltar"
+  },
+  {
+    "confirmed": 15,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Jersey"
+  },
+  {
+    "confirmed": 14,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Kyrgyzstan"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Greenland"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Isle of Man"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Holy See"
+  },
+  {
+    "confirmed": 721,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Thailand"
+  },
+  {
+    "confirmed": 579,
+    "deaths": 49,
+    "entered": 1584921600000,
+    "name": "Indonesia"
+  },
+  {
+    "confirmed": 434,
+    "deaths": 9,
+    "entered": 1584921600000,
+    "name": "India"
+  },
+  {
+    "confirmed": 94,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Sri Lanka"
+  },
+  {
+    "confirmed": 27,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Bangladesh"
+  },
+  {
+    "confirmed": 13,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Maldives"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Bhutan"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Nepal"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Timor-Leste"
+  },
+  {
+    "confirmed": 23049,
+    "deaths": 1812,
+    "entered": 1584921600000,
+    "name": "Iran (Islamic Republic of)"
+  },
+  {
+    "confirmed": 784,
+    "deaths": 5,
+    "entered": 1584921600000,
+    "name": "Pakistan"
+  },
+  {
+    "confirmed": 562,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Saudi Arabia"
+  },
+  {
+    "confirmed": 494,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Qatar"
+  },
+  {
+    "confirmed": 339,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Bahrain"
+  },
+  {
+    "confirmed": 327,
+    "deaths": 14,
+    "entered": 1584921600000,
+    "name": "Egypt"
+  },
+  {
+    "confirmed": 267,
+    "deaths": 4,
+    "entered": 1584921600000,
+    "name": "Lebanon"
+  },
+  {
+    "confirmed": 266,
+    "deaths": 23,
+    "entered": 1584921600000,
+    "name": "Iraq"
+  },
+  {
+    "confirmed": 198,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "United Arab Emirates"
+  },
+  {
+    "confirmed": 189,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Kuwait"
+  },
+  {
+    "confirmed": 134,
+    "deaths": 4,
+    "entered": 1584921600000,
+    "name": "Morocco"
+  },
+  {
+    "confirmed": 112,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Jordan"
+  },
+  {
+    "confirmed": 89,
+    "deaths": 3,
+    "entered": 1584921600000,
+    "name": "Tunisia"
+  },
+  {
+    "confirmed": 66,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Oman"
+  },
+  {
+    "confirmed": 59,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "occupied Palestinian territory"
+  },
+  {
+    "confirmed": 40,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Afghanistan"
+  },
+  {
+    "confirmed": 3,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Djibouti"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Sudan"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Somalia"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Syrian Arab Republic"
+  },
+  {
+    "confirmed": 31573,
+    "deaths": 402,
+    "entered": 1584921600000,
+    "name": "United States of America"
+  },
+  {
+    "confirmed": 1384,
+    "deaths": 19,
+    "entered": 1584921600000,
+    "name": "Canada"
+  },
+  {
+    "confirmed": 904,
+    "deaths": 11,
+    "entered": 1584921600000,
+    "name": "Brazil"
+  },
+  {
+    "confirmed": 632,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Chile"
+  },
+  {
+    "confirmed": 532,
+    "deaths": 7,
+    "entered": 1584921600000,
+    "name": "Ecuador"
+  },
+  {
+    "confirmed": 318,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Peru"
+  },
+  {
+    "confirmed": 251,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Mexico"
+  },
+  {
+    "confirmed": 245,
+    "deaths": 3,
+    "entered": 1584921600000,
+    "name": "Panama"
+  },
+  {
+    "confirmed": 225,
+    "deaths": 4,
+    "entered": 1584921600000,
+    "name": "Argentina"
+  },
+  {
+    "confirmed": 196,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Colombia"
+  },
+  {
+    "confirmed": 135,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Uruguay"
+  },
+  {
+    "confirmed": 117,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Costa Rica"
+  },
+  {
+    "confirmed": 72,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Dominican Republic"
+  },
+  {
+    "confirmed": 70,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Venezuela (Bolivarian Republic of)"
+  },
+  {
+    "confirmed": 56,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Guadeloupe"
+  },
+  {
+    "confirmed": 50,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Trinidad and Tobago"
+  },
+  {
+    "confirmed": 37,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Martinique"
+  },
+  {
+    "confirmed": 26,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Honduras"
+  },
+  {
+    "confirmed": 24,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Bolivia (Plurinational State of)"
+  },
+  {
+    "confirmed": 23,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Puerto Rico"
+  },
+  {
+    "confirmed": 22,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Paraguay"
+  },
+  {
+    "confirmed": 19,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Jamaica"
+  },
+  {
+    "confirmed": 18,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "French Guiana"
+  },
+  {
+    "confirmed": 18,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Guatemala"
+  },
+  {
+    "confirmed": 16,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Cuba"
+  },
+  {
+    "confirmed": 8,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Aruba"
+  },
+  {
+    "confirmed": 6,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "United States Virgin Islands"
+  },
+  {
+    "confirmed": 5,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Barbados"
+  },
+  {
+    "confirmed": 5,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Guyana"
+  },
+  {
+    "confirmed": 5,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Saint Martin"
+  },
+  {
+    "confirmed": 4,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Bahamas"
+  },
+  {
+    "confirmed": 3,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Cayman Islands"
+  },
+  {
+    "confirmed": 3,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Curacao"
+  },
+  {
+    "confirmed": 3,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Saint Barthelemy"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Bermuda"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Haiti"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Nicaragua"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Saint Lucia"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Suriname"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Antigua and Barbuda"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "El Salvador"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Grenada"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Montserrat"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Saint Vincent and the Grenadines"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Sint Maarten"
+  },
+  {
+    "confirmed": 274,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "South Africa"
+  },
+  {
+    "confirmed": 201,
+    "deaths": 17,
+    "entered": 1584921600000,
+    "name": "Algeria"
+  },
+  {
+    "confirmed": 75,
+    "deaths": 3,
+    "entered": 1584921600000,
+    "name": "Burkina Faso"
+  },
+  {
+    "confirmed": 67,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Senegal"
+  },
+  {
+    "confirmed": 64,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "R\u00e9union"
+  },
+  {
+    "confirmed": 40,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Cameroon"
+  },
+  {
+    "confirmed": 30,
+    "deaths": 2,
+    "entered": 1584921600000,
+    "name": "Democratic Republic of the Congo"
+  },
+  {
+    "confirmed": 25,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Cote d\u2019Ivoire"
+  },
+  {
+    "confirmed": 24,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Ghana"
+  },
+  {
+    "confirmed": 22,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Nigeria"
+  },
+  {
+    "confirmed": 17,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Rwanda"
+  },
+  {
+    "confirmed": 16,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Togo"
+  },
+  {
+    "confirmed": 15,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Kenya"
+  },
+  {
+    "confirmed": 14,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Mayotte"
+  },
+  {
+    "confirmed": 12,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Madagascar"
+  },
+  {
+    "confirmed": 12,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Mauritius"
+  },
+  {
+    "confirmed": 12,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "United Republic of Tanzania"
+  },
+  {
+    "confirmed": 11,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Ethiopia"
+  },
+  {
+    "confirmed": 7,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Seychelles"
+  },
+  {
+    "confirmed": 6,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Equatorial Guinea"
+  },
+  {
+    "confirmed": 6,
+    "deaths": 1,
+    "entered": 1584921600000,
+    "name": "Gabon"
+  },
+  {
+    "confirmed": 4,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Central African Republic"
+  },
+  {
+    "confirmed": 4,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Congo"
+  },
+  {
+    "confirmed": 4,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Eswatini"
+  },
+  {
+    "confirmed": 3,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Cabo Verde"
+  },
+  {
+    "confirmed": 3,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Liberia"
+  },
+  {
+    "confirmed": 3,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Namibia"
+  },
+  {
+    "confirmed": 3,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Zambia"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Angola"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Benin"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Guinea"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Mauritania"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Niger"
+  },
+  {
+    "confirmed": 2,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Zimbabwe"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Chad"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Eritrea"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Gambia"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Mozambique"
+  },
+  {
+    "confirmed": 1,
+    "deaths": 0,
+    "entered": 1584921600000,
+    "name": "Uganda"
+  },
+  {
+    "confirmed": 712,
+    "deaths": 7,
+    "entered": 1584921600000,
+    "name": "International conveyance (Diamond Princess)"
+  }
+]
