@@ -8,6 +8,7 @@ import { router } from '../router.js';
 import { Menu } from '../components/Menu.js';
 
 const KEYCODE_ESC = 27;
+const close = new URL('../assets/icons/x.svg', import.meta.url).href;
 
 const totalsStyles = css`
   & {
@@ -46,6 +47,26 @@ const dialogStyles = css`
   }
 
   .ld-dialog--header {
+    display: flex;
+    text-align: center;
+  }
+
+  .ld-dialog--header h1 {
+    margin-top: 0;
+    margin-left: 24px;
+    flex: 1;
+  }
+
+  .ld-dialog--close-cont {
+  }
+
+  .ld-dialog--close-cont button {
+    width: 24px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    background: transparent;
   }
 
   .ld-dialog--close {
@@ -72,7 +93,8 @@ export class MainPage extends Component {
     this.state = {
       dialog: {
         opened: false,
-        template: {}
+        template: {},
+        title: ''
       }
     };
 
@@ -110,8 +132,12 @@ export class MainPage extends Component {
         ? html`
             <div class="${dialogStyles}">
               <div class="ld-dialog--header">
-                <button onClick=${this.__closeDialog} class="ld-dialog--close">X</button>
-                <h1>hello</h1>
+                <h1>${this.state.dialog.title}</h1>
+                <div class="ld-dialog--close-cont">
+                  <button onClick=${this.__closeDialog} class="ld-dialog--close">
+                    <img src=${close} alt="close" />
+                  </button>
+                </div>
               </div>
               <div class="ld-dialog--content">
                 ${this.state.dialog.template}
@@ -131,7 +157,8 @@ export class MainPage extends Component {
           opened: true,
           template: html`
             <${CountryInfo} country=${country} />
-          `
+          `,
+          title: country
         }
       });
     }
@@ -143,11 +170,12 @@ export class MainPage extends Component {
     }
   }
 
-  __change(template) {
+  __change({ template, title }) {
     this.setState({
       dialog: {
         opened: true,
-        template
+        template,
+        title
       }
     });
   }
@@ -160,7 +188,8 @@ export class MainPage extends Component {
     this.setState({
       dialog: {
         opened: false,
-        template: ''
+        template: '',
+        title: ''
       }
     });
     this.__closeCountryInfo();

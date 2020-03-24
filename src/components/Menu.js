@@ -10,17 +10,23 @@ const refresh = new URL('../assets/icons/refresh.svg', import.meta.url).href;
 const add = new URL('../assets/icons/circle-plus.svg', import.meta.url).href;
 
 const renderMenu = menuItem => {
+  const output = {};
   switch (menuItem) {
     case 'info':
-      return html`
+      output.title = 'info';
+      output.template = html`
         info
       `;
+      break;
     case 'settings':
-      return html`
+      output.title = 'settings';
+      output.template = html`
         settings
       `;
+      break;
     case 'contribute':
-      return html`
+      output.title = 'contribute';
+      output.template = html`
         <${Expandable}
           toggle=${'Sources'}
           detail=${html`
@@ -47,13 +53,18 @@ const renderMenu = menuItem => {
           `}
         />
       `;
+      break;
     case 'ticker':
-      return html`
+      output.title = 'ticker';
+      output.template = html`
         ticker
       `;
+      break;
     default:
-      return html``;
+      output.title = '';
+      output.template = html``;
   }
+  return output;
 };
 
 export class Menu extends Component {
@@ -131,7 +142,7 @@ export class Menu extends Component {
               <h1>${activeItem}</h1>
             </div>
           </div>
-          ${renderMenu(activeItem)}
+          ${renderMenu(activeItem).template}
         </div>
       </div>
     `;
