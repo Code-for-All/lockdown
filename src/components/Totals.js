@@ -42,7 +42,7 @@ const styles = css`
     bottom: 0;
     right: 0;
     width: 1px;
-    background-color: var(--ld-dark-gray);
+    background-color: lightgrey;
   }
 `;
 
