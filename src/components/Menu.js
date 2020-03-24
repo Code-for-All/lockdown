@@ -1,6 +1,7 @@
 import { html } from 'htm/preact';
 import { Component } from 'preact';
 import { Expandable } from './Expandable.js';
+import { Ticker } from './Ticker.js';
 
 const info = new URL('../assets/icons/info.svg', import.meta.url).href;
 const settings = new URL('../assets/icons/settings.svg', import.meta.url).href;
@@ -59,7 +60,7 @@ const renderMenu = menuItem => {
       return {
         title: 'ticker',
         template: html`
-          ticker
+          <${Ticker} />
         `
       };
     default:
