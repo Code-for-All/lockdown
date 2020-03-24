@@ -144,7 +144,7 @@ body {
     position: fixed;
     width: 90%;
     max-width: 400px;
-
+    overflow: auto;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
