@@ -1,6 +1,5 @@
 import { Component } from 'preact';
 import { html } from 'htm/preact';
-import { Map, Browser, geoJSON, layerGroup, tileLayer } from 'leaflet/dist/leaflet-src.esm.js';
 import { router } from '../router.js';
 import { lockdownsService } from '../services/locksdownsService.js';
 
@@ -9,8 +8,13 @@ const today = new Date();
 
 export class WorldMap extends Component {
   async componentDidMount() {
-    const lockdowns = await lockdownsService.getLockdowns();
-    const mapData = await (await fetch(new URL('../../data/worldmap.json', import.meta.url))).json();
+    // the world map needs a large data source, lazily fetch them in parallel
+    const [lockdowns, mapData, leaflet] = await Promise.all([
+      lockdownsService.getLockdowns(),
+      fetch(new URL('../../data/worldmap.json', import.meta.url)).then(r => r.json()),
+      import('leaflet/dist/leaflet-src.esm.js')
+    ]);
+    const { Map, Browser, geoJSON, layerGroup, tileLayer } = leaflet;
 
     const map = new Map(this.ref, {
       center: [0, 0],
