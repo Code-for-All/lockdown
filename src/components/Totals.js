@@ -79,7 +79,6 @@ export class Totals extends Component {
 
     this.setState({
       items: items
-
     });
   }
 
