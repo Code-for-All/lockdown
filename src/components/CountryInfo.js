@@ -1,6 +1,7 @@
 import { html } from 'htm/preact';
 import css from 'csz';
 import { Component } from 'preact';
+import { lockdownsService } from '../services/locksdownsService.js';
 
 const KEYCODE_ESC = 27;
 
@@ -52,15 +53,22 @@ export class CountryInfo extends Component {
     this.__onKeyDown = this.__onKeyDown.bind(this);
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     window.addEventListener('keydown', this.__onKeyDown, true);
+    this.setState({
+      lockdowns: await lockdownsService.getLockdowns()
+    });
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.__onKeyDown, true);
   }
 
-  render() {
+  render(_, { lockdowns }) {
+    if (!lockdowns) {
+      return;
+    }
+
     return html`
       <div class=${styles} onClick=${this.__onClick}>
         <div class="dialog" ref=${ref => (this.dialogRef = ref)}>
