@@ -8,7 +8,7 @@ export function Expandable(props) {
 
   useEffect(() => {
     if (expanded) {
-      detail.current.focus();
+      detail.current.focus({ preventScroll: true });
     }
   }, [expanded]);
 

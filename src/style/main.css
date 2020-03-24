@@ -27,10 +27,12 @@ body {
 }
 
 .ld-menu {
+  z-index: 1100;
   flex-shrink: 0;
   width: 400px;
   margin-top: 76px;
   padding: 10px;
+  touch-action: manipulation;
 }
 
 .ld-menu-nav ul {
@@ -65,6 +67,11 @@ body {
   overflow: auto;
   height: calc(100% - 44px);
   padding: 0px 20px 0px 20px;
+}
+
+.ld-menu--active {
+  color: blue;
+  text-decoration: underline;
 }
 
 .ld-menu--content-x {

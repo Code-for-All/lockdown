@@ -153,7 +153,7 @@ export class MainPage extends Component {
       </div>
 
       <${WorldMap} />
-      <${Menu} changeRoute=${this.__changeRoute} close=${this.__closeDialog} />
+      <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__changeRoute} close=${this.__closeDialog} />
 
       ${this.state.dialog.opened
         ? html`
@@ -210,13 +210,6 @@ export class MainPage extends Component {
 
   __onKeyDown(e) {
     if (e.keyCode === KEYCODE_ESC) {
-      this.__closeDialog();
-    }
-  }
-
-  __onClick(e) {
-    const clickedOutside = !e.path.includes(this.dialogRef);
-    if (clickedOutside) {
       this.__closeDialog();
     }
   }
