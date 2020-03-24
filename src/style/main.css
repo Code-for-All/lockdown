@@ -27,6 +27,7 @@ body {
 }
 
 .ld-menu {
+  z-index: 1100;
   flex-shrink: 0;
   width: 400px;
   margin-top: 76px;
