@@ -61,6 +61,8 @@ body {
 }
 
 .ld-menu--content {
+  overflow: auto;
+  height: calc(100% - 44px);
   padding: 0px 20px 0px 20px;
 }
 
@@ -144,7 +146,6 @@ body {
     position: fixed;
     width: 90%;
     max-width: 400px;
-    overflow: auto;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
