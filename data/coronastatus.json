@@ -1,0 +1,1142 @@
+[
+  {
+    "confirmed": 81603,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 3276,
+    "name": "China"
+  },
+  {
+    "confirmed": 8961,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 111,
+    "name": "Republic of Korea"
+  },
+  {
+    "confirmed": 1709,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 7,
+    "name": "Australia"
+  },
+  {
+    "confirmed": 1306,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 11,
+    "name": "Malaysia"
+  },
+  {
+    "confirmed": 1089,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 41,
+    "name": "Japan"
+  },
+  {
+    "confirmed": 455,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Singapore"
+  },
+  {
+    "confirmed": 396,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 33,
+    "name": "Philippines"
+  },
+  {
+    "confirmed": 118,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Viet Nam"
+  },
+  {
+    "confirmed": 102,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "New Zealand"
+  },
+  {
+    "confirmed": 88,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Brunei Darussalam"
+  },
+  {
+    "confirmed": 86,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Cambodia"
+  },
+  {
+    "confirmed": 27,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Guam"
+  },
+  {
+    "confirmed": 18,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "French Polynesia"
+  },
+  {
+    "confirmed": 10,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Mongolia"
+  },
+  {
+    "confirmed": 7,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "New Caledonia"
+  },
+  {
+    "confirmed": 3,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Fiji"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Papua New Guinea"
+  },
+  {
+    "confirmed": 59138,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 5476,
+    "name": "Italy"
+  },
+  {
+    "confirmed": 28572,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1720,
+    "name": "Spain"
+  },
+  {
+    "confirmed": 24774,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 94,
+    "name": "Germany"
+  },
+  {
+    "confirmed": 15821,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 674,
+    "name": "France"
+  },
+  {
+    "confirmed": 6971,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 60,
+    "name": "Switzerland"
+  },
+  {
+    "confirmed": 5687,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 281,
+    "name": "The United Kingdom"
+  },
+  {
+    "confirmed": 4204,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 179,
+    "name": "Netherlands"
+  },
+  {
+    "confirmed": 3631,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 16,
+    "name": "Austria"
+  },
+  {
+    "confirmed": 3401,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 75,
+    "name": "Belgium"
+  },
+  {
+    "confirmed": 2132,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 7,
+    "name": "Norway"
+  },
+  {
+    "confirmed": 1906,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 21,
+    "name": "Sweden"
+  },
+  {
+    "confirmed": 1600,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 14,
+    "name": "Portugal"
+  },
+  {
+    "confirmed": 1395,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 13,
+    "name": "Denmark"
+  },
+  {
+    "confirmed": 1236,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 30,
+    "name": "Turkey"
+  },
+  {
+    "confirmed": 1165,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Czechia"
+  },
+  {
+    "confirmed": 1071,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Israel"
+  },
+  {
+    "confirmed": 906,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 4,
+    "name": "Ireland"
+  },
+  {
+    "confirmed": 798,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 8,
+    "name": "Luxembourg"
+  },
+  {
+    "confirmed": 634,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 7,
+    "name": "Poland"
+  },
+  {
+    "confirmed": 626,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Finland"
+  },
+  {
+    "confirmed": 624,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 15,
+    "name": "Greece"
+  },
+  {
+    "confirmed": 568,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Iceland"
+  },
+  {
+    "confirmed": 438,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Russian Federation"
+  },
+  {
+    "confirmed": 433,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Romania"
+  },
+  {
+    "confirmed": 414,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Slovenia"
+  },
+  {
+    "confirmed": 326,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Estonia"
+  },
+  {
+    "confirmed": 235,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Croatia"
+  },
+  {
+    "confirmed": 219,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Serbia"
+  },
+  {
+    "confirmed": 190,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Armenia"
+  },
+  {
+    "confirmed": 185,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 3,
+    "name": "Bulgaria"
+  },
+  {
+    "confirmed": 185,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Slovakia"
+  },
+  {
+    "confirmed": 167,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 7,
+    "name": "Hungary"
+  },
+  {
+    "confirmed": 151,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 20,
+    "name": "San Marino"
+  },
+  {
+    "confirmed": 143,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Lithuania"
+  },
+  {
+    "confirmed": 139,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Latvia"
+  },
+  {
+    "confirmed": 125,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Bosnia and Herzegovina"
+  },
+  {
+    "confirmed": 115,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Faroe Islands"
+  },
+  {
+    "confirmed": 114,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "North Macedonia"
+  },
+  {
+    "confirmed": 113,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Andorra"
+  },
+  {
+    "confirmed": 95,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Cyprus"
+  },
+  {
+    "confirmed": 94,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Republic of Moldova"
+  },
+  {
+    "confirmed": 90,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Malta"
+  },
+  {
+    "confirmed": 89,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Albania"
+  },
+  {
+    "confirmed": 76,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Belarus"
+  },
+  {
+    "confirmed": 65,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Azerbaijan"
+  },
+  {
+    "confirmed": 60,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Kazakhstan"
+  },
+  {
+    "confirmed": 54,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Georgia"
+  },
+  {
+    "confirmed": 47,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 3,
+    "name": "Ukraine"
+  },
+  {
+    "confirmed": 46,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Liechtenstein"
+  },
+  {
+    "confirmed": 46,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Uzbekistan"
+  },
+  {
+    "confirmed": 23,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Monaco"
+  },
+  {
+    "confirmed": 21,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Montenegro"
+  },
+  {
+    "confirmed": 17,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Guernsey"
+  },
+  {
+    "confirmed": 15,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Gibraltar"
+  },
+  {
+    "confirmed": 15,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Jersey"
+  },
+  {
+    "confirmed": 14,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Kyrgyzstan"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Greenland"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Isle of Man"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Holy See"
+  },
+  {
+    "confirmed": 721,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Thailand"
+  },
+  {
+    "confirmed": 579,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 49,
+    "name": "Indonesia"
+  },
+  {
+    "confirmed": 434,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 9,
+    "name": "India"
+  },
+  {
+    "confirmed": 94,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Sri Lanka"
+  },
+  {
+    "confirmed": 27,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Bangladesh"
+  },
+  {
+    "confirmed": 13,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Maldives"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Bhutan"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Nepal"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Timor-Leste"
+  },
+  {
+    "confirmed": 23049,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1812,
+    "name": "Iran (Islamic Republic of)"
+  },
+  {
+    "confirmed": 784,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 5,
+    "name": "Pakistan"
+  },
+  {
+    "confirmed": 562,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Saudi Arabia"
+  },
+  {
+    "confirmed": 494,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Qatar"
+  },
+  {
+    "confirmed": 339,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Bahrain"
+  },
+  {
+    "confirmed": 327,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 14,
+    "name": "Egypt"
+  },
+  {
+    "confirmed": 267,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 4,
+    "name": "Lebanon"
+  },
+  {
+    "confirmed": 266,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 23,
+    "name": "Iraq"
+  },
+  {
+    "confirmed": 198,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "United Arab Emirates"
+  },
+  {
+    "confirmed": 189,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Kuwait"
+  },
+  {
+    "confirmed": 134,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 4,
+    "name": "Morocco"
+  },
+  {
+    "confirmed": 112,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Jordan"
+  },
+  {
+    "confirmed": 89,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 3,
+    "name": "Tunisia"
+  },
+  {
+    "confirmed": 66,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Oman"
+  },
+  {
+    "confirmed": 59,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "occupied Palestinian territory"
+  },
+  {
+    "confirmed": 40,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Afghanistan"
+  },
+  {
+    "confirmed": 3,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Djibouti"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Sudan"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Somalia"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Syrian Arab Republic"
+  },
+  {
+    "confirmed": 31573,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 402,
+    "name": "United States of America"
+  },
+  {
+    "confirmed": 1384,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 19,
+    "name": "Canada"
+  },
+  {
+    "confirmed": 904,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 11,
+    "name": "Brazil"
+  },
+  {
+    "confirmed": 632,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Chile"
+  },
+  {
+    "confirmed": 532,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 7,
+    "name": "Ecuador"
+  },
+  {
+    "confirmed": 318,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Peru"
+  },
+  {
+    "confirmed": 251,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Mexico"
+  },
+  {
+    "confirmed": 245,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 3,
+    "name": "Panama"
+  },
+  {
+    "confirmed": 225,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 4,
+    "name": "Argentina"
+  },
+  {
+    "confirmed": 196,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Colombia"
+  },
+  {
+    "confirmed": 135,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Uruguay"
+  },
+  {
+    "confirmed": 117,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Costa Rica"
+  },
+  {
+    "confirmed": 72,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Dominican Republic"
+  },
+  {
+    "confirmed": 70,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Venezuela (Bolivarian Republic of)"
+  },
+  {
+    "confirmed": 56,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Guadeloupe"
+  },
+  {
+    "confirmed": 50,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Trinidad and Tobago"
+  },
+  {
+    "confirmed": 37,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Martinique"
+  },
+  {
+    "confirmed": 26,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Honduras"
+  },
+  {
+    "confirmed": 24,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Bolivia (Plurinational State of)"
+  },
+  {
+    "confirmed": 23,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Puerto Rico"
+  },
+  {
+    "confirmed": 22,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Paraguay"
+  },
+  {
+    "confirmed": 19,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Jamaica"
+  },
+  {
+    "confirmed": 18,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "French Guiana"
+  },
+  {
+    "confirmed": 18,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Guatemala"
+  },
+  {
+    "confirmed": 16,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Cuba"
+  },
+  {
+    "confirmed": 8,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Aruba"
+  },
+  {
+    "confirmed": 6,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "United States Virgin Islands"
+  },
+  {
+    "confirmed": 5,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Barbados"
+  },
+  {
+    "confirmed": 5,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Guyana"
+  },
+  {
+    "confirmed": 5,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Saint Martin"
+  },
+  {
+    "confirmed": 4,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Bahamas"
+  },
+  {
+    "confirmed": 3,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Cayman Islands"
+  },
+  {
+    "confirmed": 3,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Curacao"
+  },
+  {
+    "confirmed": 3,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Saint Barthelemy"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Bermuda"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Haiti"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Nicaragua"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Saint Lucia"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Suriname"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Antigua and Barbuda"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "El Salvador"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Grenada"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Montserrat"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Saint Vincent and the Grenadines"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Sint Maarten"
+  },
+  {
+    "confirmed": 274,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "South Africa"
+  },
+  {
+    "confirmed": 201,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 17,
+    "name": "Algeria"
+  },
+  {
+    "confirmed": 75,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 3,
+    "name": "Burkina Faso"
+  },
+  {
+    "confirmed": 67,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Senegal"
+  },
+  {
+    "confirmed": 64,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "R\u00e9union"
+  },
+  {
+    "confirmed": 40,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Cameroon"
+  },
+  {
+    "confirmed": 30,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 2,
+    "name": "Democratic Republic of the Congo"
+  },
+  {
+    "confirmed": 25,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Cote d\u2019Ivoire"
+  },
+  {
+    "confirmed": 24,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Ghana"
+  },
+  {
+    "confirmed": 22,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Nigeria"
+  },
+  {
+    "confirmed": 17,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Rwanda"
+  },
+  {
+    "confirmed": 16,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Togo"
+  },
+  {
+    "confirmed": 15,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Kenya"
+  },
+  {
+    "confirmed": 14,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Mayotte"
+  },
+  {
+    "confirmed": 12,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Madagascar"
+  },
+  {
+    "confirmed": 12,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Mauritius"
+  },
+  {
+    "confirmed": 12,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "United Republic of Tanzania"
+  },
+  {
+    "confirmed": 11,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Ethiopia"
+  },
+  {
+    "confirmed": 7,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Seychelles"
+  },
+  {
+    "confirmed": 6,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Equatorial Guinea"
+  },
+  {
+    "confirmed": 6,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 1,
+    "name": "Gabon"
+  },
+  {
+    "confirmed": 4,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Central African Republic"
+  },
+  {
+    "confirmed": 4,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Congo"
+  },
+  {
+    "confirmed": 4,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Eswatini"
+  },
+  {
+    "confirmed": 3,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Cabo Verde"
+  },
+  {
+    "confirmed": 3,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Liberia"
+  },
+  {
+    "confirmed": 3,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Namibia"
+  },
+  {
+    "confirmed": 3,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Zambia"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Angola"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Benin"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Guinea"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Mauritania"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Niger"
+  },
+  {
+    "confirmed": 2,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Zimbabwe"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Chad"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Eritrea"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Gambia"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Mozambique"
+  },
+  {
+    "confirmed": 1,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 0,
+    "name": "Uganda"
+  },
+  {
+    "confirmed": 712,
+    "date": "2020-03-23T01:00:00.0Z",
+    "deaths": 7,
+    "name": "International conveyance (Diamond Princess)"
+  }
+]

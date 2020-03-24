@@ -84,8 +84,6 @@ export class MainPage extends Component {
   }
 
   async componentDidMount() {
-    const countriesData = await (await fetch(new URL('../../data/datafile.json', import.meta.url))).json();
-    this.setState({ countriesData });
     this.__onPathChanged();
   }
 
@@ -100,19 +98,12 @@ export class MainPage extends Component {
   }
 
   render() {
-    if (!this.state.countriesData) {
-      // Loading state here
-      return html`
-        <div></div>
-      `;
-    }
-
     return html`
       <div class=${totalsStyles}>
         <${Totals} />
       </div>
 
-      <${WorldMap} countriesData=${this.state.countriesData} />
+      <${WorldMap} />
       <${Menu} change=${this.__change} close=${this.__closeDialog} />
 
       ${this.state.dialog.opened
@@ -132,15 +123,14 @@ export class MainPage extends Component {
   }
 
   __onPathChanged() {
-    if (router.url.searchParams.get('country')) {
+    const country = router.url.searchParams.get('country');
+
+    if (country) {
       this.setState({
         dialog: {
           opened: true,
           template: html`
-            <${CountryInfo}
-              country=${router.url.searchParams.get('country')}
-              countryData=${this.state.countriesData[this.state.selectedCountry]}
-            />
+            <${CountryInfo} country=${country} />
           `
         }
       });

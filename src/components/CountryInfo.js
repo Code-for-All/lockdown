@@ -1,6 +1,7 @@
 import { html } from 'htm/preact';
 import css from 'csz';
 import { Component } from 'preact';
+import { lockdownsService } from '../services/locksdownsService.js';
 
 const styles = css`
   & {
@@ -35,7 +36,17 @@ const styles = css`
 `;
 
 export class CountryInfo extends Component {
-  render() {
+  async componentWillMount() {
+    this.setState({
+      lockdowns: await lockdownsService.getLockdowns()
+    });
+  }
+
+  render(_, { lockdowns }) {
+    if (!lockdowns) {
+      return;
+    }
+
     return html`
       <div class=${styles}>
         <div class="dialog">
