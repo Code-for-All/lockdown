@@ -25,7 +25,7 @@ npm run start:build
  https://reactjs.org/
 
  Familiar with ECMAS6 Syntax:
- 1.http://www.ecma-international.org/ecma-262/6.0/
+ 1. http://www.ecma-international.org/ecma-262/6.0/
 
 
 # Node.js
