@@ -68,6 +68,11 @@ body {
   padding: 0px 20px 0px 20px;
 }
 
+.ld-menu--active {
+  color: blue;
+  text-decoration: underline;
+}
+
 .ld-menu--content-x {
   border: none;
   margin: 0;
