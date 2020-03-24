@@ -32,6 +32,7 @@ body {
   width: 400px;
   margin-top: 76px;
   padding: 10px;
+  touch-action: manipulation;
 }
 
 .ld-menu-nav ul {
