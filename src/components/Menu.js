@@ -1,7 +1,5 @@
 import { html } from 'htm/preact';
 import { Component } from 'preact';
-import { router } from '../router.js';
-import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import { Expandable } from './Expandable.js';
 
 const info = new URL('../assets/icons/info.svg', import.meta.url).href;
@@ -81,27 +79,8 @@ export class Menu extends Component {
     };
   }
 
-  componentDidMount() {
-    installMediaQueryWatcher(`(min-width: 960px)`, matches => {
-      this.setState({
-        isMobile: !matches
-      });
-    });
-  }
-
   switchContent(val) {
-    const country = router.url.searchParams.get('country');
-
-    if (country) {
-      router.setPath(`${val}?country=${country}`);
-    } else {
-      router.setPath(val);
-    }
-
-    if (this.state.isMobile) {
-      router.setSearchParam('country', null);
-      this.props.change(renderMenu(val));
-    }
+    this.props.changeRoute(renderMenu(val));
 
     this.setState({
       activeItem: val

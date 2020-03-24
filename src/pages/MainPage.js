@@ -6,6 +6,7 @@ import { CountryInfo } from '../components/CountryInfo.js';
 import { Totals } from '../components/Totals.js';
 import { router } from '../router.js';
 import { Menu } from '../components/Menu.js';
+import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 
 const KEYCODE_ESC = 27;
 const close = new URL('../assets/icons/x.svg', import.meta.url).href;
@@ -103,10 +104,17 @@ export class MainPage extends Component {
     this.__closeDialog = this.__closeDialog.bind(this);
     this.__change = this.__change.bind(this);
     this.__onKeyDown = this.__onKeyDown.bind(this);
+    this.__onClick = this.__onClick.bind(this);
+    this.__changeRoute = this.__changeRoute.bind(this);
   }
 
   async componentDidMount() {
     this.__onPathChanged();
+    installMediaQueryWatcher(`(min-width: 960px)`, matches => {
+      this.setState({
+        isMobile: !matches
+      });
+    });
   }
 
   componentWillMount() {
@@ -126,7 +134,7 @@ export class MainPage extends Component {
       </div>
 
       <${WorldMap} />
-      <${Menu} change=${this.__change} close=${this.__closeDialog} />
+      <${Menu} changeRoute=${this.__changeRoute} close=${this.__closeDialog} />
 
       ${this.state.dialog.opened
         ? html`
@@ -146,6 +154,21 @@ export class MainPage extends Component {
           `
         : ''}
     `;
+  }
+
+  __changeRoute({ template, title }) {
+    const country = router.url.searchParams.get('country');
+
+    if (country) {
+      router.setPath(`${title}?country=${country}`);
+    } else {
+      router.setPath(title);
+    }
+
+    if (this.state.isMobile) {
+      router.setSearchParam('country', null);
+      this.__change({ template, title });
+    }
   }
 
   __onPathChanged() {
@@ -178,6 +201,13 @@ export class MainPage extends Component {
         title
       }
     });
+  }
+
+  __onClick(e) {
+    const clickedOutside = !e.path.includes(this.dialogRef);
+    if (clickedOutside) {
+      this.__closeDialog();
+    }
   }
 
   __closeCountryInfo() {
