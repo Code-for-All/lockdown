@@ -1,5 +1,6 @@
 import requests
 import json
+import datetime
 
 url = 'https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/COVID_19_CasesByCountry(pt)_VIEW/FeatureServer/0/query'
 
@@ -36,10 +37,9 @@ features = data['features']
 result = []
 for feature in features:
     # if 'ADMO_NAME' in feature['attributes'].keys():
-    
     temp = {
         'name': feature['attributes']['ADM0_NAME'],
-        'entered': feature['attributes']['DateOfDataEntry'],
+        'entered': datetime.datetime.fromtimestamp(feature['attributes']['DateOfDataEntry']/1000).strftime('%Y-%m-%dT%H:%M:00.0Z'),
         'confirmed': feature['attributes']['cum_conf'],
         'deaths': feature['attributes']['cum_death']
     }
