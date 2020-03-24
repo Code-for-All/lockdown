@@ -42,6 +42,7 @@ const dialogStyles = css`
   }
 
   .ld-dialog--container {
+    overflow: auto;
     position: fixed;
     width: 90%;
     padding: 20px;
