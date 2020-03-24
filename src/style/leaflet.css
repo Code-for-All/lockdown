@@ -21,7 +21,7 @@
 
 @media (max-width: 960px) {
   .leaflet-container {
-    height: calc(100% - 105px);
+    height: calc(100% - 60px);
   }
 }
 .leaflet-tile,
