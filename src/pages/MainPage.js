@@ -32,6 +32,7 @@ const totalsStyles = css`
 const dialogStyles = css`
   & {
     width: 90%;
+    padding: 20px;
     max-width: 400px;
     left: calc(50% + 200px);
     top: 50%;
