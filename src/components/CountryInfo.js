@@ -75,8 +75,8 @@ export class CountryInfo extends Component {
           <h1>${this.props.country}</h1>
 
           <div class="data-entry">Population: <span class="data-value">Unknown</span></div>
-          <div class="data-entry">Reported cases: <span class="data-value">Unknown</span></div>
-          <div class="data-entry">Reported deaths: <span class="data-value">Unknown</span></div>
+          <div class="data-entry">Confirmed cases: <span class="data-value">Unknown</span></div>
+          <div class="data-entry">Confirmed deaths: <span class="data-value">Unknown</span></div>
           <div class="data-entry">Lockdown start: <span class="data-value">Unknown</span></div>
           <div class="data-entry">Lockdown end: <span class="data-value">Unknown</span></div>
         </div>
