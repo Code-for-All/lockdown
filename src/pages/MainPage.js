@@ -225,7 +225,7 @@ export class MainPage extends Component {
   }
 
   __onClick(e) {
-    const clickedOutside = !e.path.includes(this.dialogRef);
+    const clickedOutside = !e.composedPath().includes(this.dialogRef);
     if (clickedOutside) {
       this.__closeDialog();
     }
