@@ -1,8 +1,8 @@
 # Lockdown
 
-A web application that shows various lockdown states for countries across the world helping people to find out if they can travel and at what restrictions.
+A web application that shows various lockdown states for countries across the world helping people to find out if they can travel and at what restrictions. It uses preact, a dependency similar to react. 
 
-Required Components: Node Version 10.0, preact v10
+Required Components: Node Version 10.0
 
 ```bash
 # install dependencies
@@ -26,7 +26,7 @@ npm run start:build
 
  Familiar with ECMAS6 Syntax:
  1.http://www.ecma-international.org/ecma-262/6.0/
- 2. https://nodejs.org/en/docs/
+
 
 # Node.js
  Download Node.js if not on 
