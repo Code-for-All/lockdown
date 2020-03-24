@@ -58,7 +58,7 @@ export class Totals extends Component {
       this.setState({ desktop: matches });
     });
     const totals = await totalsService.getTotals();
-    let items = [
+    const items = [
       {
         description: 'Countries in lockdown',
         value: '0'
