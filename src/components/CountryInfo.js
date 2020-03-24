@@ -50,8 +50,6 @@ export class CountryInfo extends Component {
     return html`
       <div class=${styles}>
         <div class="dialog">
-          <h1>${this.props.country}</h1>
-
           <div class="data-entry">Population: <span class="data-value">Unknown</span></div>
           <div class="data-entry">Confirmed cases: <span class="data-value">Unknown</span></div>
           <div class="data-entry">Confirmed deaths: <span class="data-value">Unknown</span></div>
