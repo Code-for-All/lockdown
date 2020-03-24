@@ -15,20 +15,6 @@ const renderMenu = menuItem => {
       return {
         title: 'info',
         template: html`
-          info
-        `
-      };
-    case 'settings':
-      return {
-        title: 'settings',
-        template: html`
-          settings
-        `
-      };
-    case 'contribute':
-      return {
-        title: 'contribute',
-        template: html`
           <${Expandable}
             toggle=${'Sources'}
             detail=${html`
@@ -55,6 +41,20 @@ const renderMenu = menuItem => {
               </p>
             `}
           />
+        `
+      };
+    case 'settings':
+      return {
+        title: 'settings',
+        template: html`
+          settings
+        `
+      };
+    case 'contribute':
+      return {
+        title: 'contribute',
+        template: html`
+          contribute
         `
       };
     case 'ticker':
@@ -127,15 +127,15 @@ export class Menu extends Component {
                 </button>
               </li>
               <li>
-                <button onClick=${() => this.switchContent('contribute')}>
-                  <img src="${refresh}" alt="contribute" />
-                  <p class="${activeItem === 'contribute' ? 'ld-menu--active' : ''}">CONTRIBUTE</p>
+                <button onClick=${() => this.switchContent('ticker')}>
+                  <img src="${refresh}" alt="ticker" />
+                  <p class="${activeItem === 'ticker' ? 'ld-menu--active' : ''}">TICKER</p>
                 </button>
               </li>
               <li>
-                <button onClick=${() => this.switchContent('ticker')}>
-                  <img src="${add}" alt="ticker" />
-                  <p class="${activeItem === 'ticker' ? 'ld-menu--active' : ''}">TICKER</p>
+                <button onClick=${() => this.switchContent('contribute')}>
+                  <img src="${add}" alt="contribute" />
+                  <p class="${activeItem === 'contribute' ? 'ld-menu--active' : ''}">CONTRIBUTE</p>
                 </button>
               </li>
             </ul>
