@@ -2,13 +2,14 @@ import { Component } from 'preact';
 import { html } from 'htm/preact';
 import { Map, Browser, geoJSON, layerGroup, tileLayer } from 'leaflet/dist/leaflet-src.esm.js';
 import { router } from '../router.js';
+import { lockdownsService } from '../services/locksdownsService.js';
 
 const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
 const today = new Date();
 
 export class WorldMap extends Component {
   async componentDidMount() {
-    const { countriesData } = this.props;
+    const lockdowns = await lockdownsService.getLockdowns();
     const mapData = await (await fetch(new URL('../../data/worldmap.json', import.meta.url))).json();
 
     const map = new Map(this.ref, {
@@ -95,8 +96,8 @@ export class WorldMap extends Component {
     }
 
     for (const feature of mapData.features) {
-      if (countriesData[feature.properties.NAME]) {
-        feature.properties.data = countriesData[feature.properties.NAME];
+      if (lockdowns[feature.properties.NAME]) {
+        feature.properties.data = lockdowns[feature.properties.NAME];
       }
     }
 
