@@ -16,7 +16,13 @@
 }
 .leaflet-container {
   overflow: hidden;
-  height: calc(100% - 60px);
+  height: 100%;
+}
+
+@media (max-width: 960px) {
+  .leaflet-container {
+    height: calc(100% - 105px);
+  }
 }
 .leaflet-tile,
 .leaflet-marker-icon,
