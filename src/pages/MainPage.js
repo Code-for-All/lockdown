@@ -66,9 +66,6 @@ const dialogStyles = css`
     flex: 1;
   }
 
-  .ld-dialog--close-cont {
-  }
-
   .ld-dialog--close-cont button {
     width: 24px;
     border: none;
@@ -76,12 +73,6 @@ const dialogStyles = css`
     padding: 0;
     overflow: visible;
     background: transparent;
-  }
-
-  .ld-dialog--close {
-  }
-
-  .ld-dialog--content {
   }
 
   @media (max-width: 960px) {
