@@ -7,3 +7,4 @@ size-plugin.json
 **/venv/
 script/token.pickle
 script/credentials.json
+.idea/
