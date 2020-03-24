@@ -2,6 +2,7 @@ import { html } from 'htm/preact';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import css from 'csz';
 import { Component } from 'preact';
+import { totalsService } from '../services/totalsService.js';
 
 const styles = css`
   .key {
@@ -52,30 +53,32 @@ export class Totals extends Component {
     this.state = { items: [] };
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     installMediaQueryWatcher(`(min-width: 900px)`, matches => {
       this.setState({ desktop: matches });
     });
+    const totals = await totalsService.getTotals();
+    let items = [
+      {
+        description: 'Countries in lockdown',
+        value: '0'
+      },
+      {
+        description: 'People affected',
+        value: '0'
+      },
+      {
+        description: 'Confirmed cases',
+        value: totals.confirmed
+      },
+      {
+        description: 'Confirmed deaths',
+        value: totals.deaths
+      }
+    ];
 
     this.setState({
-      items: [
-        {
-          description: 'Countries in lockdown',
-          value: '123'
-        },
-        {
-          description: 'People affected',
-          value: '123'
-        },
-        {
-          description: 'Confirmed cases',
-          value: '123'
-        },
-        {
-          description: 'Confirmed deaths',
-          value: '123'
-        }
-      ]
+      items: items
     });
   }
 
