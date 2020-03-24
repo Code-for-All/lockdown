@@ -31,6 +31,16 @@ const totalsStyles = css`
 
 const dialogStyles = css`
   & {
+    position: fixed;
+    margin-left: 400px;
+    margin-top: 60px;
+    width: 100%;
+    height: 100%;
+    z-index: 1100;
+  }
+
+  .ld-dialog--container {
+    position: fixed;
     width: 90%;
     padding: 20px;
     max-width: 400px;
@@ -38,8 +48,6 @@ const dialogStyles = css`
     top: 50%;
     transform: translate(-50%, -50%);
     height: 70%;
-    position: fixed;
-    z-index: 1100;
     background-color: white;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
     border-radius: 5px;
@@ -56,6 +64,16 @@ const dialogStyles = css`
 
   @media (max-width: 960px) {
     & {
+      margin-bottom: 60px;
+      margin-top: 60px;
+      position: fixed;
+      width: 100%;
+      height: calc(100% - 120px);
+      z-index: 1100;
+      margin-left: 0;
+    }
+
+    .ld-dialog--container {
       width: 90%;
       max-width: 400px;
       left: 50%;
@@ -81,6 +99,7 @@ export class MainPage extends Component {
     this.__closeDialog = this.__closeDialog.bind(this);
     this.__change = this.__change.bind(this);
     this.__onKeyDown = this.__onKeyDown.bind(this);
+    this.__onClick = this.__onClick.bind(this);
   }
 
   async componentDidMount() {
@@ -108,13 +127,15 @@ export class MainPage extends Component {
 
       ${this.state.dialog.opened
         ? html`
-            <div class="${dialogStyles}">
-              <div class="ld-dialog--header">
-                <button onClick=${this.__closeDialog} class="ld-dialog--close">X</button>
-                <h1>hello</h1>
-              </div>
-              <div class="ld-dialog--content">
-                ${this.state.dialog.template}
+            <div class="${dialogStyles}" onClick=${this.__onClick}>
+              <div ref=${ref => (this.dialogRef = ref)} class="ld-dialog--container">
+                <div class="ld-dialog--header">
+                  <button onClick=${this.__closeDialog} class="ld-dialog--close">X</button>
+                  <h1>hello</h1>
+                </div>
+                <div class="ld-dialog--content">
+                  ${this.state.dialog.template}
+                </div>
               </div>
             </div>
           `
@@ -139,6 +160,13 @@ export class MainPage extends Component {
 
   __onKeyDown(e) {
     if (e.keyCode === KEYCODE_ESC) {
+      this.__closeDialog();
+    }
+  }
+
+  __onClick(e) {
+    const clickedOutside = !e.path.includes(this.dialogRef);
+    if (clickedOutside) {
       this.__closeDialog();
     }
   }
