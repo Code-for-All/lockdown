@@ -68,11 +68,11 @@ export class Totals extends Component {
           value: '123'
         },
         {
-          description: 'Reported infections',
+          description: 'Confirmed cases',
           value: '123'
         },
         {
-          description: 'Reported deaths',
+          description: 'Confirmed deaths',
           value: '123'
         }
       ]
