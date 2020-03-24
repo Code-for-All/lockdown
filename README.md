@@ -15,3 +15,7 @@ npm run build
 # test the production build locally
 npm run start:build
 ```
+
+# For guides on preact 
+# Look at the guide
+# https://preactjs.com/guide/v10/components 
