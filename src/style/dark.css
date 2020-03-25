@@ -1,0 +1,10 @@
+:root {
+  --ld-dark-gray: #2a2b2f;
+  --ld-dark-blue: #0000ff;
+  --ld-light-blue: #add8e6;
+  --ld-text: white;
+  --ld-bg: rgb(48, 49, 54);
+  --ld-hover: rgb(44, 45, 50);
+  --ld-active: rgb(131, 251, 195);
+  --ld-icon-stroke-width: 1.2;
+}

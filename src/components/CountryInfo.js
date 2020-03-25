@@ -11,7 +11,8 @@ const styles = css`
   }
 
   .dialog {
-    background-color: white;
+    background-color: var(--ld-bg);
+    color: var(--ld-text);
     padding: 16px;
     border-radius: 8px;
     width: 100%;

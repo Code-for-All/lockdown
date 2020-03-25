@@ -1,8 +1,7 @@
 import { html } from 'htm/preact';
 import css from 'csz';
 import { Totals } from './Totals.js';
-
-const logo = new URL('../assets/lockdown-logo.svg', import.meta.url).href;
+import { logo } from '../assets/icons/icons.js';
 
 const styles = css`
   & {
@@ -10,7 +9,8 @@ const styles = css`
     top: 0;
     left: 0;
     right: 0;
-    background-color: white;
+    background-color: var(--ld-bg);
+    color: var(--ld-text);
     /* needs to be higher than the map */
     z-index: 1100;
     display: flex;
@@ -57,7 +57,7 @@ const styles = css`
 export const Header = () => html`
   <header class=${styles}>
     <a href="/lockdown/">
-      <img src="${logo}" width="180" />
+      ${logo}
       <!-- TODO: screen reader h1 -->
     </a>
 

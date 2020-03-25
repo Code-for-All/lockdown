@@ -2,6 +2,11 @@
   --ld-dark-gray: #2a2b2f;
   --ld-dark-blue: #0000ff;
   --ld-light-blue: #add8e6;
+  --ld-text: black;
+  --ld-bg: white;
+  --ld-hover: rgb(247, 247, 247);
+  --ld-active: blue;
+  --ld-icon-stroke-width: 1.5;
 }
 
 html {
@@ -18,11 +23,23 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Montserrat', sans-serif;
+  background-color: var(--ld-bg);
   color: var(--ld-dark-gray);
   /* 2/2 prevent bouncy scroll on iOS */
   overflow-y: scroll;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+}
+
+.dark {
+  --ld-dark-gray: #2a2b2f;
+  --ld-dark-blue: #0000ff;
+  --ld-light-blue: #add8e6;
+  --ld-text: white;
+  --ld-bg: rgb(48, 49, 54);
+  --ld-hover: rgb(44, 45, 50);
+  --ld-active: rgb(131, 251, 195);
+  --ld-icon-stroke-width: 1.2;
 }
 
 *,
@@ -35,9 +52,13 @@ body {
   height: 100%;
   display: flex;
   flex-direction: row-reverse;
+  background-color: var(--ld-bg);
 }
 
 .ld-menu {
+  stroke-width: var(--ld-icon-stroke-width);
+  background-color: var(--ld-bg);
+  color: var(--ld-text);
   z-index: 1100;
   flex-shrink: 0;
   width: 400px;
@@ -60,6 +81,7 @@ body {
 }
 
 .ld-menu-nav button {
+  color: var(--ld-text);
   font-family: 'Montserrat', sans-serif;
   border: none;
   margin: 0;
@@ -71,6 +93,7 @@ body {
 }
 
 .ld-menu-nav svg {
+  stroke-width: var(--ld-icon-stroke-width);
   display: none;
 }
 
@@ -81,7 +104,7 @@ body {
 }
 
 .ld-menu--active {
-  color: blue;
+  color: var(--ld-active);
   text-decoration: underline;
 }
 

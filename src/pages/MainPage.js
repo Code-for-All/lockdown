@@ -7,9 +7,9 @@ import { Totals } from '../components/Totals.js';
 import { router } from '../router.js';
 import { Menu } from '../components/Menu.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
+import { close } from '../assets/icons/icons.js';
 
 const KEYCODE_ESC = 27;
-const close = new URL('../assets/icons/x.svg', import.meta.url).href;
 
 const totalsStyles = css`
   & {
@@ -18,7 +18,8 @@ const totalsStyles = css`
     top: 74px;
     left: 50%;
     margin: 0 auto;
-    background-color: white;
+    background-color: var(--ld-bg);
+    color: var(--ld-text);
     transform: translateX(-50%);
     border-radius: 12px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
@@ -51,7 +52,8 @@ const dialogStyles = css`
     top: 50%;
     transform: translate(-50%, -50%);
     height: 70%;
-    background-color: white;
+    background-color: var(--ld-bg);
+    color: var(--ld-text);
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
     border-radius: 5px;
   }
@@ -80,10 +82,11 @@ const dialogStyles = css`
     height: 30px;
     align-items: center;
     justify-content: center;
+    color: var(--ld-text);
   }
 
   .ld-dialog--close-cont button:hover {
-    background-color: rgb(247, 247, 247);
+    background-color: var(--ld-hover);
     border-radius: 50%;
   }
 
@@ -137,6 +140,28 @@ export class MainPage extends Component {
 
   async componentDidMount() {
     this.__onPathChanged();
+
+    installMediaQueryWatcher(`(prefers-color-scheme: dark)`, preference => {
+      const localStorageDarkmode = localStorage.getItem('darkmode');
+      const darkmodePreferenceExists = localStorageDarkmode !== null;
+      const darkMode = localStorageDarkmode === 'true';
+
+      // on initial pageload, decide darkmode on users system preference
+      if (!darkmodePreferenceExists) {
+        if (preference) {
+          localStorage.setItem('darkmode', 'true');
+          document.body.classList.add('dark');
+        } else {
+          localStorage.setItem('darkmode', 'false');
+        }
+      } else {
+        // on subsequent pageloads, decide darkmode on users chosen preference
+        if (darkMode) {
+          document.body.classList.add('dark');
+        }
+      }
+    });
+
     installMediaQueryWatcher(`(min-width: 960px)`, matches => {
       this.setState({
         isMobile: !matches
@@ -171,7 +196,7 @@ export class MainPage extends Component {
                   <h1>${this.state.dialog.title}</h1>
                   <div class="ld-dialog--close-cont">
                     <button onClick=${this.__closeDialog} class="ld-dialog--close">
-                      <img src=${close} alt="close" />
+                      ${close}
                     </button>
                   </div>
                 </div>
