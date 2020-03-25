@@ -71,12 +71,20 @@ const dialogStyles = css`
   }
 
   .ld-dialog--close-cont button {
-    width: 24px;
-    border: none;
-    margin: 0;
+    display: flex;
     padding: 0;
+    width: 30px;
+    border: none;
     overflow: visible;
     background: transparent;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ld-dialog--close-cont button:hover {
+    background-color: rgb(247, 247, 247);
+    border-radius: 50%;
   }
 
   .ld-dialog--close {

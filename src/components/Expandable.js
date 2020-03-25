@@ -83,6 +83,10 @@ const styles = css`
     height: 60px;
   }
 
+  .ld-expandable--toggle:hover {
+    background-color: rgb(247, 247, 247);
+  }
+
   .ld-expandable--detail {
   }
 

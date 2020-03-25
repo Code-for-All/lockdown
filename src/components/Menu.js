@@ -15,6 +15,12 @@ const renderMenu = menuItem => {
       return {
         title: 'info',
         template: html`
+          <h1>Lockdown</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+            enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+            in reprehenderit in voluptate velit esse cillum dolore eu.
+          </p>
           <${Expandable}
             toggle=${'Sources'}
             detail=${html`
@@ -76,7 +82,7 @@ export class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: 'settings'
+      activeItem: 'info'
     };
   }
 
@@ -115,15 +121,15 @@ export class Menu extends Component {
           <nav>
             <ul>
               <li>
-                <button onClick=${() => this.switchContent('settings')}>
-                  <img src="${settings}" alt="settings" />
-                  <p class="${activeItem === 'settings' ? 'ld-menu--active' : ''}">SETTINGS</p>
-                </button>
-              </li>
-              <li>
                 <button onClick=${() => this.switchContent('info')}>
                   <img src="${info}" alt="info" />
                   <p class="${activeItem === 'info' ? 'ld-menu--active' : ''}">INFO</p>
+                </button>
+              </li>
+              <li>
+                <button onClick=${() => this.switchContent('settings')}>
+                  <img src="${settings}" alt="settings" />
+                  <p class="${activeItem === 'settings' ? 'ld-menu--active' : ''}">SETTINGS</p>
                 </button>
               </li>
               <li>
