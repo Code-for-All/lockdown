@@ -1,6 +1,5 @@
 import { Component } from 'preact';
 import { html } from 'htm/preact';
-import { Map, Browser, geoJSON, layerGroup, tileLayer } from 'leaflet/dist/leaflet-src.esm.js';
 import { router } from '../router.js';
 import { lockdownsService } from '../services/locksdownsService.js';
 
@@ -8,56 +7,87 @@ const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZ
 const today = new Date();
 
 export class WorldMap extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      lng: 0,
+      lat: 0,
+      zoom: 2
+    };
+  }
+
   async componentDidMount() {
     const lockdowns = await lockdownsService.getLockdowns();
     const mapData = await (await fetch(new URL('../../data/worldmap.json', import.meta.url))).json();
 
-    const map = new Map(this.ref, {
-      center: [0, 0],
-      zoom: 3,
-      minZoom: 2,
-      maxZoom: 18,
-      zoomControl: false
+    let map = new window.mapboxgl.Map({
+      accessToken: mapbox_token,
+      container: this.ref,
+      style: 'mapbox://styles/mapbox/light-v10',
+      center: [this.state.lng, this.state.lat],
+      zoom: this.state.zoom
     });
-    let themeLayer;
-    let labelLayer = layerGroup();
 
-    function onFeatureClicked(e) {
-      const layer = e.target;
-      // map.fitBounds(layer.getBounds());
-      router.setSearchParam('country', layer.feature.properties.NAME);
-    }
-
-    function resetHighlight(e) {
-      const layer = e.target;
-      themeLayer.resetStyle(layer);
-    }
-
-    function highlightFeature(e) {
-      const layer = e.target;
-      layer.setStyle({
-        fillOpacity: 0.5,
-        name: 'test'
-      });
-      if (!Browser.ie && !Browser.opera && !Browser.edge) {
-        layer.bringToFront();
+    map.on('load', function() {
+      for (const feature of mapData.features) {
+        if (lockdowns[feature.properties.NAME]) {
+          feature.properties.data = lockdowns[feature.properties.NAME];
+        }
+        feature.properties.color = worldStyle(feature);
       }
-    }
-
-    function onEachFeature(feature, layer) {
-      layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: onFeatureClicked
+      map.addSource('countries', {
+        type: 'geojson',
+        data: mapData,
+        generateId: true
       });
-    }
 
-    tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=' + mapbox_token, {
-      tileSize: 512,
-      zoomOffset: -1,
-      attribution:
-        '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
+      map.addLayer({
+        id: 'countries',
+        type: 'fill',
+        source: 'countries',
+        layout: {},
+        paint: {
+          'fill-color': ['get', 'color'],
+          'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4]
+        },
+        filter: ['has', 'color']
+      });
+
+      let hoveredStateId = null;
+
+      map.on('mousemove', 'countries', function(e) {
+        if (e.features.length > 0) {
+          if (hoveredStateId) {
+            map.setFeatureState(
+              {
+                source: 'countries',
+                id: hoveredStateId
+              },
+              {
+                hover: false
+              }
+            );
+          }
+
+          hoveredStateId = e.features[0].id;
+
+          map.setFeatureState(
+            {
+              source: 'countries',
+              id: hoveredStateId
+            },
+            {
+              hover: true
+            }
+          );
+        }
+      });
+      map.on('click', 'countries', function(e) {
+        // map.fitBounds(layer.getBounds());
+        router.setSearchParam('country', e.features[0].properties.NAME);
+      });
+    });
 
     function worldStyle(e) {
       // lockdown unknown
@@ -81,31 +111,9 @@ export class WorldMap extends Component {
         }
       }
 
-      const style = {
-        weight: 1,
-        opacity: 0.1,
-        color: '#555',
-        fillOpacity: 0
-      };
-
-      if (value) {
-        style.fillColor = value;
-        style.fillOpacity = 0.5;
-      }
-      return style;
+      return value;
     }
 
-    for (const feature of mapData.features) {
-      if (lockdowns[feature.properties.NAME]) {
-        feature.properties.data = lockdowns[feature.properties.NAME];
-      }
-    }
-
-    themeLayer = geoJSON(mapData, {
-      style: worldStyle,
-      onEachFeature: onEachFeature
-    }).addTo(map);
-    labelLayer.addTo(map);
     this.setState({
       map
     });
@@ -118,6 +126,7 @@ export class WorldMap extends Component {
   render() {
     return html`
       <div
+        class="leaflet-container"
         style="width: 100%"
         ref=${ref => {
           this.ref = ref;

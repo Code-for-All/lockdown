@@ -1,6 +1,14 @@
 {
   "name": "lockdown",
   "version": "0.0.0",
+  "description": "A reactp web application for displaying the lockdown status of various countries",
+  "README": "https://github.com/Code-for-All/lockdown/blob/master/README.md",
+  "private": true,
+  "license": "Apache License, Version 2.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Code-for-All/lockdown.git"
+  },
   "scripts": {
     "start": "es-dev-server --app-index index.html --watch --open --node-resolve --base-path /lockdown",
     "build": "rimraf build && rollup -c rollup.config.js",
@@ -31,7 +39,6 @@
     "csz": "^1.2.0",
     "date-fns": "^2.11.0",
     "htm": "^3.0.3",
-    "leaflet": "^1.6.0",
     "preact": "^10.3.2",
     "pwa-helpers": "^0.9.1",
     "rollup-plugin-copy": "^3.3.0",
