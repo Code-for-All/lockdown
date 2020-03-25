@@ -3,11 +3,7 @@ import { Component } from 'preact';
 import { Expandable } from './Expandable.js';
 import { Ticker } from './Ticker.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
-
-const info = new URL('../assets/icons/info.svg', import.meta.url).href;
-const settings = new URL('../assets/icons/settings.svg', import.meta.url).href;
-const refresh = new URL('../assets/icons/refresh.svg', import.meta.url).href;
-const add = new URL('../assets/icons/circle-plus.svg', import.meta.url).href;
+import { info, settings, refresh, add } from '../assets/icons/icons.js';
 
 const renderMenu = menuItem => {
   switch (menuItem) {
@@ -122,25 +118,25 @@ export class Menu extends Component {
             <ul>
               <li>
                 <button onClick=${() => this.switchContent('info')}>
-                  <img src="${info}" alt="info" />
+                  ${info}
                   <p class="${activeItem === 'info' ? 'ld-menu--active' : ''}">INFO</p>
                 </button>
               </li>
               <li>
                 <button onClick=${() => this.switchContent('settings')}>
-                  <img src="${settings}" alt="settings" />
+                  ${settings}
                   <p class="${activeItem === 'settings' ? 'ld-menu--active' : ''}">SETTINGS</p>
                 </button>
               </li>
               <li>
                 <button onClick=${() => this.switchContent('ticker')}>
-                  <img src="${refresh}" alt="ticker" />
+                  ${refresh}
                   <p class="${activeItem === 'ticker' ? 'ld-menu--active' : ''}">TICKER</p>
                 </button>
               </li>
               <li>
                 <button onClick=${() => this.switchContent('contribute')}>
-                  <img src="${add}" alt="contribute" />
+                  ${add}
                   <p class="${activeItem === 'contribute' ? 'ld-menu--active' : ''}">CONTRIBUTE</p>
                 </button>
               </li>

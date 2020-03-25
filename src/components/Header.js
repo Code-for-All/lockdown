@@ -2,7 +2,7 @@ import { html } from 'htm/preact';
 import css from 'csz';
 import { Totals } from './Totals.js';
 
-const logo = new URL('../assets/images/logo.png', import.meta.url).href;
+const logo = new URL('../assets/lockdown-logo.svg', import.meta.url).href;
 
 const styles = css`
   & {

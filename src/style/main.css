@@ -70,7 +70,7 @@ body {
   font-weight: 700;
 }
 
-.ld-menu-nav img {
+.ld-menu-nav svg {
   display: none;
 }
 
@@ -155,7 +155,7 @@ body {
     position: relative;
   }
 
-  .ld-menu-nav img {
+  .ld-menu-nav svg {
     display: block;
     flex: 1;
     height: 40px;
