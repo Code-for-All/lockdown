@@ -146,6 +146,7 @@ export class Menu extends Component {
               </li>
               <li ${activeItem === 'contribute' ? 'ld-menu--active' : ''}>
                 <button onClick=${() => this.switchContent('settings')}>
+                  <div class="ld-menu--notification"></div>
                   ${settings}
                   <p class="${activeItem === 'settings' ? 'ld-menu--active' : ''}">SETTINGS</p>
                 </button>

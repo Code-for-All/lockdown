@@ -2,8 +2,8 @@ import { html } from 'htm/preact';
 import css from 'csz';
 
 const styles = css`
-  & { 
-    padding-top: 20px;  
+  & {
+    padding-top: 20px;
   }
 
   label {
@@ -19,7 +19,7 @@ const styles = css`
     display: block;
     margin-left: 10%;
     margin-right: 10%;
-    width:80%;
+    width: 80%;
     border: none;
     padding: 15px;
     overflow: visible;
@@ -32,10 +32,11 @@ const styles = css`
     margin-bottom: 20px;
     padding-left: 25px;
     padding-right: 25px;
-    box-shadow: 0 3px 5px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
   }
 
-  .ld-button:hover, .ld-button:active {
+  .ld-button:hover,
+  .ld-button:active {
     background-color: #89aff3;
   }
 `;
