@@ -9,6 +9,18 @@
   --ld-icon-stroke-width: 1.5;
 }
 
+.dark {
+  --ld-dark-gray: #2a2b2f;
+  --ld-dark-blue: #0000ff;
+  --ld-light-blue: #add8e6;
+  --ld-text: white;
+  --ld-bg: rgb(48, 49, 54);
+  --ld-hover: rgb(38, 39, 43);
+  --ld-active: rgb(131, 251, 195);
+  --ld-icon-stroke-width: 1.2;
+}
+
+
 html {
   /* 1/2 prevent bouncy scroll on iOS */
   position: fixed;
@@ -29,17 +41,6 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-}
-
-.dark {
-  --ld-dark-gray: #2a2b2f;
-  --ld-dark-blue: #0000ff;
-  --ld-light-blue: #add8e6;
-  --ld-text: white;
-  --ld-bg: rgb(48, 49, 54);
-  --ld-hover: rgb(44, 45, 50);
-  --ld-active: rgb(131, 251, 195);
-  --ld-icon-stroke-width: 1.2;
 }
 
 *,
@@ -73,7 +74,7 @@ body {
   display: flex;
   justify-content: space-between;
   font-weight: 700;
-  padding: 0px 20px 0px 20px;
+  padding: 0;
 }
 
 .ld-menu-nav p {
@@ -81,15 +82,20 @@ body {
 }
 
 .ld-menu-nav button {
+  border-radius: 5px;
   color: var(--ld-text);
   font-family: 'Montserrat', sans-serif;
   border: none;
   margin: 0;
-  padding: 0;
+  padding: 0 15px 0 15px;
   width: auto;
   overflow: visible;
   background: transparent;
   font-weight: 700;
+}
+
+.ld-menu-nav button:hover {
+  background-color: var(--ld-hover);
 }
 
 .ld-menu-nav svg {

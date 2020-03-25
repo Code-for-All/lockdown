@@ -3,7 +3,6 @@
 
  <g>
   <title>background</title>
-  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
    <rect stroke-width="0" y="0" x="0" height="100%" width="100%"/>
   </g>
  </g>

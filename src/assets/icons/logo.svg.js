@@ -11,9 +11,6 @@ export const logo = html`
   >
     <g>
       <title id="srLockdown">lockdown</title>
-      <g overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
-        <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" />
-      </g>
     </g>
     <g>
       <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
