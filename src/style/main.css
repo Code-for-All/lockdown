@@ -4,6 +4,13 @@
   --ld-light-blue: #add8e6;
 }
 
+html {
+  /* 1/2 prevent bouncy scroll on iOS */
+  position: fixed;
+  height: 100%;
+  overflow: hidden;
+}
+
 html,
 body {
   height: 100%;
@@ -12,6 +19,10 @@ body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   color: var(--ld-dark-gray);
+  /* 2/2 prevent bouncy scroll on iOS */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 *,
