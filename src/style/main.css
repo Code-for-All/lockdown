@@ -96,6 +96,18 @@ body {
   display: none;
 }
 
+.map-container {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .map-container {
+    height: calc(100% - 60px);
+  }
+}
+
 @media (max-width: 960px) {
   #app {
     flex-direction: column;

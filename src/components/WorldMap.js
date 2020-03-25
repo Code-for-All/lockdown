@@ -126,8 +126,7 @@ export class WorldMap extends Component {
   render() {
     return html`
       <div
-        class="leaflet-container"
-        style="width: 100%"
+        class="map-container"
         ref=${ref => {
           this.ref = ref;
         }}
