@@ -18,6 +18,7 @@
     "@open-wc/rollup-plugin-html": "^0.3.4",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "babel-plugin-bundled-import-meta": "^0.3.2",
+    "babel-plugin-htm": "^3.0.0",
     "es-dev-server": "^1.45.2",
     "husky": "^4.2.3",
     "prettier": "^1.19.1",

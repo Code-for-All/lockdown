@@ -20,9 +20,10 @@ export default {
       babelHelpers: 'bundled',
       presets: [require.resolve('@babel/preset-modules')],
       plugins: [
+        [require.resolve('babel-plugin-htm'), { import: 'preact' }],
         [require.resolve('babel-plugin-bundled-import-meta'), { importStyle: 'baseURI' }],
         require.resolve('@babel/plugin-proposal-optional-chaining'),
-        require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
+        require.resolve('@babel/plugin-proposal-nullish-coalescing-operator')
       ]
     }),
     terser({ output: { comments: false } }),

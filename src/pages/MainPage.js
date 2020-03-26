@@ -67,9 +67,6 @@ const dialogStyles = css`
     flex: 1;
   }
 
-  .ld-dialog--close-cont {
-  }
-
   .ld-dialog--close-cont button {
     display: flex;
     padding: 0;
@@ -85,12 +82,6 @@ const dialogStyles = css`
   .ld-dialog--close-cont button:hover {
     background-color: rgb(247, 247, 247);
     border-radius: 50%;
-  }
-
-  .ld-dialog--close {
-  }
-
-  .ld-dialog--content {
   }
 
   @media (max-width: 960px) {
