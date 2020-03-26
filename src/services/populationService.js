@@ -3,8 +3,8 @@ import { EventTargetShim } from '../utils/EventTargetShim.js';
 class PopulationService extends EventTargetShim {
   async getPopulation(forceRefresh) {
     if (forceRefresh || !this.__population) {
-      this.__population = fetch(new URL('../../data/worldpopulation.json', import.meta.url));
-      this.__population = await (await this.__population).json();
+      this.__population = fetch(new URL('../../data/worldpopulation.json', import.meta.url)).then(r => r.json());
+      await this.__population;
       this.dispatchEvent(new Event('change'));
     }
     return this.__population;
