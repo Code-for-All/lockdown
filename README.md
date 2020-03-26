@@ -1,6 +1,6 @@
 # Lockdown
 
-A web application that shows various lockdown states for countries across the world helping people to find out if they can travel and at what restrictions. It uses preact, a dependency similar to react. 
+A web application that shows various lockdown states for countries across the world helping people to find out if they can travel and at what restrictions. It uses preact, a dependency similar to react.
 
 Required Components: Node Version 10.0
 
@@ -17,9 +17,9 @@ npm run build
 # test the production build locally
 npm run start:build
 ```
-# For guides on preact 
+# For guides on preact
  Look at the guide for more info in running the app
- https://preactjs.com/guide/
+ https://preactjs.com/guide/v10/getting-started
 
  Similar to React JS syntax
  https://reactjs.org/
@@ -29,9 +29,8 @@ npm run start:build
 
 
 # Node.js
- Download Node.js if not on 
- machine. Minimum version required: v10 
+ Download Node.js if not on
+ machine. Minimum version required: v10
  https://nodejs.org/en/
  Nodejs documentation
  https://nodejs.org/en/docs/
-

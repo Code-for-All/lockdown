@@ -14,13 +14,18 @@ const renderMenu = menuItem => {
         template: html`
           <h1>Lockdown</h1>
           <p>
-            <b>Project Lockdown</b> aims to map the different lockdowns around the world, offering the public a number of relevant metrics in order to provide an overview of the restrictions applied worldwide. We hope this will help evaluate the seriousness of the COVID-19 pandemic and help journalists and Human Rights defenders in their reporting and overseeing tasks.
+            <b>Project Lockdown</b> aims to map the different lockdowns around the world, offering the public a number of relevant metrics
+            in order to provide an overview of the restrictions applied worldwide. We hope this will help evaluate the seriousness of the
+            COVID-19 pandemic and help journalists and Human Rights defenders in their reporting and overseeing tasks.
           </p>
           <${Expandable}
             toggle=${'About'}
             detail=${html`
               <p>
-                While lockdowns generally help countries to flatten the curve, and prevent COVID-19 from spreading, countries with a dictatorial nature may see this as an opportunity to increase their grasp over a country, and even potentially lead to martial law type scenarios. Governments may unnecesarily prolong lockdowns or not stick to their announced end dates for political gain. <b>Project Lockdown</b> aims to visualize these situations and keep governments in check.
+                While lockdowns generally help countries to flatten the curve, and prevent COVID-19 from spreading, countries with a
+                dictatorial nature may see this as an opportunity to increase their grasp over a country, and even potentially lead to
+                martial law type scenarios. Governments may unnecesarily prolong lockdowns or not stick to their announced end dates for
+                political gain. <b>Project Lockdown</b> aims to visualize these situations and keep governments in check.
               </p>
             `}
           />
@@ -47,8 +52,8 @@ const renderMenu = menuItem => {
             toggle=${'Credits'}
             detail=${html`
               <p>
-                <b>Project Lockdown</b> is a Civil Tech initiative from a number of organizations and individuals.
-                You can find the list of project members <a target="_blank" href="https://www.TIOF.Click/LockdownData">here</a> under the <b>Credits</b> tab.
+                <b>Project Lockdown</b> is a Civil Tech initiative from a number of organizations and individuals. You can find the list of
+                project members <a target="_blank" href="https://www.TIOF.Click/LockdownData">here</a> under the <b>Credits</b> tab.
               </p>
             `}
           />
