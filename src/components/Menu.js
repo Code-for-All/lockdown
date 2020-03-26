@@ -14,18 +14,18 @@ const renderMenu = menuItem => {
         template: html`
           <h1>Lockdown</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-            enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-            in reprehenderit in voluptate velit esse cillum dolore eu.
+            <b>Project Lockdown</b> aims to map the different lockdowns around the world, offering the public a number of relevant metrics
+            in order to provide an overview of the restrictions applied worldwide. We hope this will help evaluate the seriousness of the
+            COVID-19 pandemic and help journalists and Human Rights defenders in their reporting and overseeing tasks.
           </p>
           <${Expandable}
             toggle=${'About'}
             detail=${html`
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                While lockdowns generally help countries to flatten the curve, and prevent COVID-19 from spreading, countries with a
+                dictatorial nature may see this as an opportunity to increase their grasp over a country, and even potentially lead to
+                martial law type scenarios. Governments may unnecesarily prolong lockdowns or not stick to their announced end dates for
+                political gain. <b>Project Lockdown</b> aims to visualize these situations and keep governments in check.
               </p>
             `}
           />
@@ -33,10 +33,18 @@ const renderMenu = menuItem => {
             toggle=${'Sources'}
             detail=${html`
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <b>Project Lockdown</b> uses a variety of sources to compile all the information showcased. We make sure to only consider sources that are reliable and verifiable.
+                You can check all the sources employed <a target="_blank" href="https://www.TIOF.Click/LockdownData">here</a>: 
+                <ul>
+                  <li>
+                    For reference data see the <b>Data Sources</b> Tab.
+                  </li>
+                  <li>
+                    For country data see the <b>Find the Countries</b> Tab by it's ISO Alpha 3 code.
+                    (Quick find through Global Tab)
+                  </li>
+                </ul>
+                If you find any errors, please help us and report it <a href="https://github.com/Code-for-All/lockdown/issues">here</a>.
               </p>
             `}
           />
@@ -44,14 +52,8 @@ const renderMenu = menuItem => {
             toggle=${'Credits'}
             detail=${html`
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-                ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi
-                tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-                exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure
-                reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas
-                nulla pariatur?
+                <b>Project Lockdown</b> is a Civil Tech initiative from a number of organizations and individuals. You can find the list of
+                project members <a target="_blank" href="https://www.TIOF.Click/LockdownData">here</a> under the <b>Credits</b> tab.
               </p>
             `}
           />
@@ -59,9 +61,10 @@ const renderMenu = menuItem => {
             toggle=${'Data & Privacy'}
             detail=${html`
               <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-                ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
-                voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
+                We do not collect any information from our visitors.
+              </p>
+              <p>
+                All information from any project member shown anywhere in the application is under their prior consent.
               </p>
             `}
           />
@@ -78,12 +81,27 @@ const renderMenu = menuItem => {
       return {
         title: 'contribute',
         template: html`
-          contribute
+        <p>
+          <b>Project Lockdown</b> is made possible by the contribution on many individuals who are giving their time to make possible that everyone has access to the right information.
+        </p>
+        <p>
+          You can become part of the project by joining one of the following teams: 
+          <ul>
+            <li>Editors</li>
+            <li>Devs</li>
+            <li>UI/UX</li>
+          </ul>
+        </p>
+        <p>
+          Contact us via Telegram at:
+          <br/>
+          <a>@ProjectLockdown</a>
+        </p>
         `
       };
-    case 'ticker':
+    case 'updates':
       return {
-        title: 'ticker',
+        title: 'updates',
         template: html`
           <${Ticker} />
         `
@@ -152,9 +170,9 @@ export class Menu extends Component {
                 </button>
               </li>
               <li ${activeItem === 'contribute' ? 'ld-menu--active' : ''}>
-                <button onClick=${() => this.switchContent('ticker')}>
+                <button onClick=${() => this.switchContent('updates')}>
                   ${refresh}
-                  <p class="${activeItem === 'ticker' ? 'ld-menu--active' : ''}">TICKER</p>
+                  <p class="${activeItem === 'updates' ? 'ld-menu--active' : ''}">UPDATES</p>
                 </button>
               </li>
               <li ${activeItem === 'contribute' ? 'ld-menu--active' : ''}>
