@@ -57,7 +57,7 @@ export function Settings() {
   }
 
   function toggleGeolocation() {
-    if (navigator.geolocation) {
+    if (navigator.permissions) {
       navigator.geolocation.getCurrentPosition(() => {
         // triggers the browsers permission popup, and then the zoom gets handled in Worldmap.js
         setshowGeolocationButton(false);
@@ -66,15 +66,17 @@ export function Settings() {
   }
 
   useEffect(async () => {
-    const geolocation = await navigator.permissions.query({ name: 'geolocation' });
+    if (navigator.permissions) {
+      const geolocation = await navigator.permissions.query({ name: 'geolocation' });
 
-    if (localStorage.getItem('geolocation') === 'true') {
-      setshowGeolocationButton(false);
-      return;
-    }
+      if (localStorage.getItem('geolocation') === 'true') {
+        setshowGeolocationButton(false);
+        return;
+      }
 
-    if (navigator.permissions && geolocation.state !== 'granted') {
-      setshowGeolocationButton(true);
+      if (geolocation.state !== 'granted') {
+        setshowGeolocationButton(true);
+      }
     }
   }, []);
 
