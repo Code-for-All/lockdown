@@ -218,13 +218,14 @@ export class MainPage extends Component {
 
   __onPathChanged() {
     const country = router.url.searchParams.get('country');
+    const iso2 = router.url.searchParams.get('iso2');
 
-    if (country) {
+    if (country && iso2) {
       this.setState({
         dialog: {
           opened: true,
           template: html`
-            <${CountryInfo} country=${country} />
+            <${CountryInfo} country=${country} iso2=${iso2} />
           `,
           title: country
         }
@@ -257,6 +258,7 @@ export class MainPage extends Component {
 
   __closeCountryInfo() {
     router.setSearchParam('country', undefined);
+    router.setSearchParam('iso2', undefined);
   }
 
   __closeDialog() {

@@ -2,11 +2,12 @@ import { html } from 'htm/preact';
 import css from 'csz';
 import { Component } from 'preact';
 import { lockdownsService } from '../services/locksdownsService.js';
+import { travelAdviceService } from '../services/travelAdviceService.js';
 
 const styles = css`
   & {
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
     align-items: center;
   }
 
@@ -29,6 +30,10 @@ const styles = css`
     color: grey;
   }
 
+  .travel-advice {
+    padding: 16px;
+  }
+
   @media (max-width: 960px) {
     .dialog {
       margin-left: 0;
@@ -39,11 +44,12 @@ const styles = css`
 export class CountryInfo extends Component {
   async componentWillMount() {
     this.setState({
-      lockdowns: await lockdownsService.getLockdowns()
+      lockdowns: await lockdownsService.getLockdowns(),
+      travelAdvice: await travelAdviceService.getAdvice({iso2: this.props.iso2})
     });
   }
 
-  render(_, { lockdowns }) {
+  render(_, { lockdowns, travelAdvice }) {
     if (!lockdowns) {
       return;
     }
@@ -56,6 +62,11 @@ export class CountryInfo extends Component {
           <div class="data-entry">Confirmed deaths: <span class="data-value">Unknown</span></div>
           <div class="data-entry">Lockdown start: <span class="data-value">Unknown</span></div>
           <div class="data-entry">Lockdown end: <span class="data-value">Unknown</span></div>
+        </div>
+        <hr/>
+        <div class="travel-advice">
+          <span>Travel advice:</span><br/>
+          <span><b>${travelAdvice.score}</b><br/> ${travelAdvice.advice}</span>
         </div>
       </div>
     `;

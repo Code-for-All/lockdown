@@ -30,6 +30,7 @@ export class WorldMap extends Component {
       const layer = e.target;
       // map.fitBounds(layer.getBounds());
       router.setSearchParam('country', layer.feature.properties.NAME);
+      router.setSearchParam('iso2', layer.feature.properties.iso2);
     }
 
     function resetHighlight(e) {
