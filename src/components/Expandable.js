@@ -68,6 +68,7 @@ const styles = css`
   }
 
   .ld-expandable button {
+    color: var(--ld-text);
     text-align: left;
     width: 100%;
     display: flex;
@@ -84,7 +85,7 @@ const styles = css`
   }
 
   .ld-expandable--toggle:hover {
-    background-color: rgb(247, 247, 247);
+    background-color: var(--ld-hover);
   }
 
   .ld-expandable--detail {
