@@ -156,26 +156,26 @@ export class Menu extends Component {
         <div class="ld-menu-nav">
           <nav>
             <ul>
-              <li ${activeItem === 'contribute' ? 'ld-menu--active' : ''}>
+              <li>
                 <button onClick=${() => this.switchContent('info')}>
                   ${info}
                   <p class="${activeItem === 'info' ? 'ld-menu--active' : ''}">INFO</p>
                 </button>
               </li>
-              <li ${activeItem === 'contribute' ? 'ld-menu--active' : ''}>
+              <li>
                 <button onClick=${() => this.switchContent('settings')}>
                   <div class="ld-menu--notification"></div>
                   ${settings}
                   <p class="${activeItem === 'settings' ? 'ld-menu--active' : ''}">SETTINGS</p>
                 </button>
               </li>
-              <li ${activeItem === 'contribute' ? 'ld-menu--active' : ''}>
+              <li>
                 <button onClick=${() => this.switchContent('updates')}>
                   ${refresh}
                   <p class="${activeItem === 'updates' ? 'ld-menu--active' : ''}">UPDATES</p>
                 </button>
               </li>
-              <li ${activeItem === 'contribute' ? 'ld-menu--active' : ''}>
+              <li>
                 <button onClick=${() => this.switchContent('contribute')}>
                   ${add}
                   <p class="${activeItem === 'contribute' ? 'ld-menu--active' : ''}">CONTRIBUTE</p>
