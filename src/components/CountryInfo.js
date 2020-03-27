@@ -7,8 +7,6 @@ import { coronaTrackerService } from '../services/coronaTrackerService.js';
 
 const styles = css`
   & {
-    /* display: flex; */
-    /* justify-content: center; */
     align-items: center;
   }
 
