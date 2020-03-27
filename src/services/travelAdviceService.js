@@ -1,30 +1,39 @@
 import { EventTargetShim } from '../utils/EventTargetShim.js';
 
-const cache = {};
-
 class TravelAdviceService extends EventTargetShim {
+  constructor() {
+    super();
+    this.cache = {};
+  }
+
   async getAdvice(opts) {
-    const { iso2 } = opts;
-    if (opts.forceRefresh || cache[iso2]?.status === 'failed' || !cache[iso2]) {
+    let { iso2 } = opts;
+    iso2 = encodeURI(iso2);
+
+    if (!/^[a-zA-Z]{2}$/.test(iso2)) {
+      return;
+    }
+
+    if (opts.forceRefresh || this.cache[iso2]?.status === 'failed' || !this.cache[iso2]) {
       try {
-        cache[iso2] = {};
+        this.cache[iso2] = {};
         const res = await (await fetch(`https://www.travel-advisory.info/api?countrycode=${iso2}`)).json();
-        cache[iso2] = {
+        this.cache[iso2] = {
           status: 'success',
           advice: res.data[iso2].advisory.message,
           score: `${res.data[iso2].advisory.score}/5`
         };
 
-        return cache[iso2];
+        return this.cache[iso2];
       } catch (_) {
-        cache[iso2] = {
+        this.cache[iso2] = {
           status: 'failed'
         };
       }
       this.dispatchEvent(new Event('change'));
-      return cache[iso2];
+      return this.cache[iso2];
     }
-    return cache[iso2];
+    return this.cache[iso2];
   }
 }
 
