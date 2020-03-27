@@ -35,7 +35,14 @@ const renderMenu = menuItem => {
               <p>
                 <b>Project Lockdown</b> uses a variety of sources to compile all the information showcased. We make sure to only consider sources that are reliable and verifiable.
                 You can check all the sources employed <a target="_blank" href="https://www.TIOF.Click/LockdownData">here</a>: 
-                <ul>
+                <ul class="ld-sources">
+                  <li>
+                    <a href="https://www.travel-advisory.info/">Travel-advisory API</a>
+                  </li>
+                  <li>
+                    <a href="https://api.coronatracker.com/">Coronatracker API</a><br/>
+                    Recognized by <a href="https://www.who.int/bulletin/online_first/COVID-19/en/">WHO</a>
+                  </li>
                   <li>
                     For reference data see the <b>Data Sources</b> Tab.
                   </li>

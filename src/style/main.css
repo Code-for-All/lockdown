@@ -163,6 +163,10 @@ body {
   border-radius: 50%;
 }
 
+.ld-sources li {
+  margin: 15px 0px 0px 0px;
+}
+
 @media (max-width: 960px) {
   #app {
     flex-direction: column;
