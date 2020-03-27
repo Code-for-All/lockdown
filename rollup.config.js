@@ -57,6 +57,7 @@ export default [
         swSrc: 'build/sw.js',
         swDest: 'build/sw.js',
         globDirectory: 'build/',
+        mode: 'production'
       })
     ]
   }

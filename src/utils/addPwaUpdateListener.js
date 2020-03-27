@@ -9,7 +9,7 @@ export function addPwaUpdateListener(callback) {
     setTimeout(() => {
       console.log('callback');
       callback(true);
-    }, 500);
+    });
     return;
   }
 

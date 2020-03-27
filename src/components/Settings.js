@@ -49,11 +49,6 @@ export function Settings() {
   const [showGeolocationButton, setshowGeolocationButton] = useState(false);
   const [pwaUpdateAvailable, setPwaUpdateAvailable] = useState(false);
 
-  /* TODO: Does this need to be in useEffect? Or is it fine here? */
-  addPwaUpdateListener(updateAvailable => {
-    setPwaUpdateAvailable(updateAvailable);
-  });
-
   function toggleDarkmode() {
     if (document.body.classList.contains('dark')) {
       document.body.classList.remove('dark');
@@ -74,6 +69,10 @@ export function Settings() {
   }
 
   useEffect(async () => {
+    addPwaUpdateListener(updateAvailable => {
+      setPwaUpdateAvailable(updateAvailable);
+    });
+
     if (navigator.permissions) {
       const geolocation = await navigator.permissions.query({ name: 'geolocation' });
 
