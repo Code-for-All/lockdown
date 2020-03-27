@@ -1,4 +1,5 @@
 import { html } from 'htm/preact';
+import { useState, useEffect } from 'preact/compat';
 import css from 'csz';
 
 const styles = css`
@@ -42,6 +43,9 @@ const styles = css`
 `;
 
 export function Settings() {
+  const [showGeolocationButton, setshowGeolocationButton] = useState(false);
+  const showPwabuttons = false;
+
   function toggleDarkmode() {
     if (document.body.classList.contains('dark')) {
       document.body.classList.remove('dark');
@@ -52,12 +56,44 @@ export function Settings() {
     }
   }
 
+  function toggleGeolocation() {
+    if (navigator.permissions) {
+      navigator.geolocation.getCurrentPosition(() => {
+        // triggers the browsers permission popup, and then the zoom gets handled in Worldmap.js
+        setshowGeolocationButton(false);
+      });
+    }
+  }
+
+  useEffect(async () => {
+    if (navigator.permissions) {
+      const geolocation = await navigator.permissions.query({ name: 'geolocation' });
+
+      if (localStorage.getItem('geolocation') === 'true') {
+        setshowGeolocationButton(false);
+        return;
+      }
+
+      if (geolocation.state !== 'granted') {
+        setshowGeolocationButton(true);
+      }
+    }
+  }, []);
+
   return html`
     <div class=${styles}>
       <button onClick=${toggleDarkmode} class="ld-button">Toggle darkmode</button>
-      <button class="ld-button">Install pwa</button>
-      <button class="ld-button">Update app</button>
-      <button class="ld-button">Allow geolocation</button>
+      ${showGeolocationButton
+        ? html`
+            <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button>
+          `
+        : ''}
+      ${showPwabuttons
+        ? html`
+            <button class="ld-button">Install pwa</button>
+            <button class="ld-button">Update app</button>
+          `
+        : ''}
     </div>
   `;
 }

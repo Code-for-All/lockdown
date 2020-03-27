@@ -77,7 +77,7 @@ body {
 }
 
 .ld-menu-nav p {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .ld-menu-nav button {
@@ -106,6 +106,10 @@ body {
   overflow: auto;
   height: calc(100% - 44px);
   padding: 0px 20px 0px 20px;
+}
+
+.ld-menu--content a {
+  color: var(--ld-active);
 }
 
 .ld-menu--active {

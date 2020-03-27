@@ -114,6 +114,30 @@ export class WorldMap extends Component {
     this.setState({
       map
     });
+
+    if (navigator.permissions) {
+      const geolocation = await navigator.permissions.query({ name: 'geolocation' });
+      // on pageload, check if there is permission for geolocation
+      if (geolocation.state === 'granted') {
+        navigator.geolocation.getCurrentPosition(location => {
+          const { latitude, longitude } = location.coords;
+          this.state.map.setView([latitude, longitude]);
+        });
+      }
+
+      // handle change when user toggles geolocation permission
+      geolocation.addEventListener('change', e => {
+        if (e.target.state === 'granted') {
+          navigator.geolocation.getCurrentPosition(location => {
+            localStorage.setItem('geolocation', 'true');
+            const { latitude, longitude } = location.coords;
+            this.state.map.setView([latitude, longitude]);
+          });
+        } else {
+          localStorage.removeItem('geolocation');
+        }
+      });
+    }
   }
 
   componentWillUnmount() {

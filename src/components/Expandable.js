@@ -53,6 +53,10 @@ const styles = css`
     border-bottom: lightgrey solid 1px;
   }
 
+  .ld-expandable a {
+    color: var(--ld-active);
+  }
+
   .ld-expandable--icon {
     height: 60px;
     display: flex;
