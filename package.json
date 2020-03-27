@@ -5,7 +5,7 @@
     "start": "es-dev-server --app-index index.html --watch --open --node-resolve --base-path /lockdown",
     "build": "rimraf build && rollup -c rollup.config.js && npm run prepare-pwa-assets",
     "start:build": "npm run build && es-dev-server --root-dir build --compatibility none --base-path /lockdown/ --open",
-    "prepare-pwa-assets": "node_modules/.bin/pwa-asset-generator Assets/logo.png build --manifest manifest.json --index build/index.html --dark-mode",
+    "prepare-pwa-assets": "node_modules/.bin/pwa-asset-generator Assets/logo.png build --manifest manifest.json --index build/index.html && pwa-asset-generator Assets/logo-dark.png build --dark-mode --background '#303136' --splash-only --index build/index.html",
     "lint": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --check",
     "format": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --write"
   },
