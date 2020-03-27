@@ -56,6 +56,7 @@ body {
 }
 
 .ld-menu {
+  font-size: 14px;
   stroke-width: var(--ld-icon-stroke-width);
   background-color: var(--ld-bg);
   color: var(--ld-text);
