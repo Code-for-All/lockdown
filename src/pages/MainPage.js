@@ -104,7 +104,7 @@ const dialogStyles = css`
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      height: 70%;
+      height: calc(100% - 140px);
     }
   }
 `;
