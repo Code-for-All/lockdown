@@ -27,6 +27,27 @@ const styles = css`
     margin-bottom: 8px;
   }
 
+  h2 {
+    margin-top: 0px;
+  }
+
+  .data-entry {
+    display: flex;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  p:first-of-type {
+    flex: 1;
+  }
+
+  p:last-of-type {
+    font-weight: 700;
+    color: var(--ld-text);
+  }
+
   .data-value {
     color: grey;
   }
@@ -44,24 +65,10 @@ const styles = css`
 
 export class CountryInfo extends Component {
   async componentWillMount() {
-    let travelAdvice;
-    try {
-      travelAdvice = await travelAdviceService.getAdvice({ iso2: this.props.iso2 })
-    } catch {
-      travelAdvice = { status: 'failed' }
-    }
-    
-    let coronaData;
-    try {
-      coronaData = await coronaTrackerService.getCountry({ iso2: this.props.iso2 })
-    } catch {
-      coronaData = { status: 'failed'}
-    }
-
     this.setState({
       lockdowns: await lockdownsService.getLockdowns(),
-      travelAdvice: travelAdvice,
-      coronaData: coronaData
+      travelAdvice: await travelAdviceService.getAdvice({ iso2: this.props.iso2 }),
+      coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 })
     });
   }
 
@@ -75,20 +82,40 @@ export class CountryInfo extends Component {
     return html`
       <div class=${styles}>
         <div class="dialog">
-          <div class="data-entry">Population: <span class="data-value">Unknown</span></div>
-          <div class="data-entry">Confirmed cases: <span class="data-value">${coronaData?.totalConfirmed ?? 'Error'}</span></div>
-          <div class="data-entry">Confirmed deaths: <span class="data-value">${coronaData?.totalDeaths ?? 'Error'}</span></div>
-          <div class="data-entry">Confirmed recoveries: <span class="data-value">${coronaData?.totalRecovered ?? 'Error'}</span></div>
-          <div class="data-entry">Lockdown start: <span class="data-value">Unknown</span></div>
-          <div class="data-entry">Lockdown end: <span class="data-value">Unknown</span></div>
+          <h2>Stats</h2>
+          <div class="data-entry">
+            <p>Population:</p>
+            <p class="data-value">-</p>
+          </div>
+          <div class="data-entry">
+            <p>Confirmed cases:</p>
+            <p class="data-value">${coronaData?.totalConfirmed ?? 'Error'}</p>
+          </div>
+          <div class="data-entry">
+            <p>Confirmed deaths:</p>
+            <p class="data-value">${coronaData?.totalDeaths ?? 'Error'}</p>
+          </div>
+          <div class="data-entry">
+            <p>Confirmed recoveries:</p>
+            <p class="data-value">${coronaData?.totalRecovered ?? 'Error'}</p>
+          </div>
+          <div class="data-entry">
+            <p>Lockdown start:</p>
+            <p class="data-value">-</p>
+          </div>
+          <div class="data-entry">
+            <p>Lockdown end:</p>
+            <p class="data-value">-</p>
+          </div>
         </div>
         <hr />
-        <div class="travel-advice">
-          <span>Travel advice:</span><br />
-          ${travelAdvice.status === 'success' 
-            ? html`<span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span>`
-            : 'Error'
-          }
+        <div class="dialog">
+          <h2>Travel advice</h2>
+          ${travelAdvice.status === 'success'
+            ? html`
+                <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span>
+              `
+            : 'Error'}
         </div>
       </div>
     `;

@@ -66,7 +66,7 @@ export class WorldMap extends Component {
 
     function worldStyle(e) {
       // lockdown unknown
-      let value = 'orange';
+      let value = '';
 
       if (e.properties.data && e.properties.data.lockdowns) {
         if (e.properties.data.lockdowns.length === 0) {
