@@ -37,11 +37,11 @@ const renderMenu = menuItem => {
                 You can check all the sources employed <a target="_blank" href="https://www.TIOF.Click/LockdownData">here</a>: 
                 <ul class="ld-sources">
                   <li>
-                    <a href="https://www.travel-advisory.info/">Travel-advisory API</a>
+                    <a target="_blank" href="https://www.travel-advisory.info/">Travel-advisory API</a>
                   </li>
                   <li>
-                    <a href="https://api.coronatracker.com/">Coronatracker API</a><br/>
-                    Recognized by <a href="https://www.who.int/bulletin/online_first/COVID-19/en/">WHO</a>
+                    <a target="_blank" href="https://api.coronatracker.com/">Coronatracker API</a><br/>
+                    Recognized by <a target="_blank" href="https://www.who.int/bulletin/online_first/COVID-19/en/">WHO</a>
                   </li>
                   <li>
                     For reference data see the <b>Data Sources</b> Tab.
@@ -51,7 +51,7 @@ const renderMenu = menuItem => {
                     (Quick find through Global Tab)
                   </li>
                 </ul>
-                If you find any errors, please help us and report it <a href="https://github.com/Code-for-All/lockdown/issues">here</a>.
+                If you find any errors, please help us and report it <a target="_blank" href="https://github.com/Code-for-All/lockdown/issues">here</a>.
               </p>
             `}
           />
