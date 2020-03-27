@@ -2,14 +2,14 @@
  * Fires a callback when a PWA update is available
  * @param {(updateAvailable: Boolean) => void} callback
  */
- export function addPwaUpdateListener(callback) {
+export function addPwaUpdateListener(callback) {
   let newWorker;
   // TODO: remove, this is testing code
-  if(true) {
+  if (true) {
     setTimeout(() => {
-      console.log('callback')
+      console.log('callback');
       callback(true);
-    }, 500)
+    }, 500);
     return;
   }
 

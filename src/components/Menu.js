@@ -141,16 +141,15 @@ export class Menu extends Component {
       }
     });
 
-    addPwaUpdateListener((updateAvailable) => {
+    addPwaUpdateListener(updateAvailable => {
       this.setState({
         updateAvailable
       });
-    })
+    });
   }
 
-
   switchContent(val) {
-    if(val === 'settings') {
+    if (val === 'settings') {
       this.setState({
         updateAvailable: false
       });
@@ -186,7 +185,11 @@ export class Menu extends Component {
               </li>
               <li>
                 <button onClick=${() => this.switchContent('settings')}>
-                  ${updateAvailable ? html`<div class="ld-menu--notification"></div>` : ''}
+                  ${updateAvailable
+                    ? html`
+                        <div class="ld-menu--notification"></div>
+                      `
+                    : ''}
                   ${settings}
                   <p class="${activeItem === 'settings' ? 'ld-menu--active' : ''}">SETTINGS</p>
                 </button>
