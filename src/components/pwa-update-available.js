@@ -10,23 +10,6 @@ class PwaUpdateAvailable extends HTMLElement {
     this.addEventListener('click', this._postMessage.bind(this));
 
     if ('serviceWorker' in navigator) {
-      const reg = await navigator.serviceWorker.getRegistration();
-      if (reg) {
-        reg.addEventListener('updatefound', () => {
-          this._newWorker = reg.installing;
-          this._newWorker.addEventListener('statechange', () => {
-            if (this._newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              this.dispatchEvent(new CustomEvent('pwa-update-available', { detail: true }));
-            }
-          });
-        });
-
-        if (reg.waiting && navigator.serviceWorker.controller) {
-          this.dispatchEvent(new CustomEvent('pwa-update-available', { detail: true }));
-          this._newWorker = reg.waiting;
-        }
-      }
-
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (this._refreshing) return;
         window.location.reload();
@@ -35,9 +18,10 @@ class PwaUpdateAvailable extends HTMLElement {
     }
   }
 
-  _postMessage(e) {
+  async _postMessage(e) {
     e.preventDefault();
-    this._newWorker.postMessage({ type: 'SKIP_WAITING' });
+    const reg = await navigator.serviceWorker.getRegistration();
+    reg.waiting.postMessage({ type: 'SKIP_WAITING' });
   }
 }
 
