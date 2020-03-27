@@ -3,6 +3,7 @@ import css from 'csz';
 import { Component } from 'preact';
 import { lockdownsService } from '../services/locksdownsService.js';
 import { travelAdviceService } from '../services/travelAdviceService.js';
+import { coronaTrackerService } from '../services/coronaTrackerService.js';
 
 const styles = css`
   & {
@@ -43,30 +44,51 @@ const styles = css`
 
 export class CountryInfo extends Component {
   async componentWillMount() {
+    let travelAdvice;
+    try {
+      travelAdvice = await travelAdviceService.getAdvice({ iso2: this.props.iso2 })
+    } catch {
+      travelAdvice = { status: 'failed' }
+    }
+    
+    let coronaData;
+    try {
+      coronaData = await coronaTrackerService.getCountry({ iso2: this.props.iso2 })
+    } catch {
+      coronaData = { status: 'failed'}
+    }
+
     this.setState({
       lockdowns: await lockdownsService.getLockdowns(),
-      travelAdvice: await travelAdviceService.getAdvice({iso2: this.props.iso2})
+      travelAdvice: travelAdvice,
+      coronaData: coronaData
     });
   }
 
-  render(_, { lockdowns, travelAdvice }) {
-    if (!lockdowns) {
-      return;
+  render(_, { lockdowns, travelAdvice, coronaData }) {
+    if (!lockdowns && !travelAdvice && !coronaData) {
+      return html`
+        Loading...
+      `;
     }
 
     return html`
       <div class=${styles}>
         <div class="dialog">
           <div class="data-entry">Population: <span class="data-value">Unknown</span></div>
-          <div class="data-entry">Confirmed cases: <span class="data-value">Unknown</span></div>
-          <div class="data-entry">Confirmed deaths: <span class="data-value">Unknown</span></div>
+          <div class="data-entry">Confirmed cases: <span class="data-value">${coronaData?.totalConfirmed ?? 'Error'}</span></div>
+          <div class="data-entry">Confirmed deaths: <span class="data-value">${coronaData?.totalDeaths ?? 'Error'}</span></div>
+          <div class="data-entry">Confirmed recoveries: <span class="data-value">${coronaData?.totalRecovered ?? 'Error'}</span></div>
           <div class="data-entry">Lockdown start: <span class="data-value">Unknown</span></div>
           <div class="data-entry">Lockdown end: <span class="data-value">Unknown</span></div>
         </div>
-        <hr/>
+        <hr />
         <div class="travel-advice">
-          <span>Travel advice:</span><br/>
-          <span><b>${travelAdvice.score}</b><br/> ${travelAdvice.advice}</span>
+          <span>Travel advice:</span><br />
+          ${travelAdvice.status === 'success' 
+            ? html`<span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span>`
+            : 'Error'
+          }
         </div>
       </div>
     `;
