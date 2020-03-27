@@ -5,6 +5,7 @@ import { Ticker } from './Ticker.js';
 import { Settings } from './Settings.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import { info, settings, refresh, add } from '../assets/icons/icons.js';
+import { addPwaUpdateListener } from '../utils/addPwaUpdateListener.js';
 
 const renderMenu = menuItem => {
   switch (menuItem) {
@@ -125,6 +126,7 @@ export class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      updateAvailable: false,
       activeItem: 'info'
     };
   }
@@ -138,9 +140,22 @@ export class Menu extends Component {
         this.props.close();
       }
     });
+
+    addPwaUpdateListener((updateAvailable) => {
+      this.setState({
+        updateAvailable
+      });
+    })
   }
 
+
   switchContent(val) {
+    if(val === 'settings') {
+      this.setState({
+        updateAvailable: false
+      });
+    }
+
     if (this.state.isMobile && this.props.opened && val === this.prevVal) {
       this.props.close();
       this.setState({
@@ -157,7 +172,7 @@ export class Menu extends Component {
     });
   }
 
-  render(_, { activeItem }) {
+  render(_, { activeItem, updateAvailable }) {
     return html`
       <div class="ld-menu">
         <div class="ld-menu-nav">
@@ -171,7 +186,7 @@ export class Menu extends Component {
               </li>
               <li>
                 <button onClick=${() => this.switchContent('settings')}>
-                  <div class="ld-menu--notification"></div>
+                  ${updateAvailable ? html`<div class="ld-menu--notification"></div>` : ''}
                   ${settings}
                   <p class="${activeItem === 'settings' ? 'ld-menu--active' : ''}">SETTINGS</p>
                 </button>
