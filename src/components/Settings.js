@@ -1,6 +1,9 @@
 import { html } from 'htm/preact';
 import { useState, useEffect } from 'preact/compat';
+import { addPwaUpdateListener } from '../utils/addPwaUpdateListener.js';
 import css from 'csz';
+import './pwa-install-button';
+import './pwa-update-available';
 
 const styles = css`
   & {
@@ -44,7 +47,12 @@ const styles = css`
 
 export function Settings() {
   const [showGeolocationButton, setshowGeolocationButton] = useState(false);
-  const showPwabuttons = false;
+  const [pwaUpdateAvailable, setPwaUpdateAvailable] = useState(false);
+
+  /* TODO: Does this need to be in useEffect? Or is it fine here? */
+  addPwaUpdateListener(updateAvailable => {
+    setPwaUpdateAvailable(updateAvailable);
+  });
 
   function toggleDarkmode() {
     if (document.body.classList.contains('dark')) {
@@ -88,10 +96,16 @@ export function Settings() {
             <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button>
           `
         : ''}
-      ${showPwabuttons
+
+      <pwa-install-button>
+        <button class="ld-button">Install pwa</button>
+      </pwa-install-button>
+
+      ${pwaUpdateAvailable
         ? html`
-            <button class="ld-button">Install pwa</button>
-            <button class="ld-button">Update app</button>
+            <pwa-update-available>
+              <button class="ld-button">Update app</button>
+            </pwa-update-available>
           `
         : ''}
     </div>
