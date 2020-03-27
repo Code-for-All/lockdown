@@ -34,8 +34,15 @@ const renderMenu = menuItem => {
             detail=${html`
               <p>
                 <b>Project Lockdown</b> uses a variety of sources to compile all the information showcased. We make sure to only consider sources that are reliable and verifiable.
-                You can check all the sources employed <a target="_blank" href="https://www.TIOF.Click/LockdownData">here</a>: 
-                <ul>
+                You can check all the sources employed <a rel="noopener noreferrer" target="_blank" href="https://www.TIOF.Click/LockdownData">here</a>: 
+                <ul class="ld-sources">
+                  <li>
+                    <a rel="noopener noreferrer" target="_blank" href="https://www.travel-advisory.info/">Travel-advisory API</a>
+                  </li>
+                  <li>
+                    <a rel="noopener noreferrer" target="_blank" href="https://api.coronatracker.com/">Coronatracker API</a><br/>
+                    Recognized by <a rel="noopener noreferrer" target="_blank" href="https://www.who.int/bulletin/online_first/COVID-19/en/">WHO</a>
+                  </li>
                   <li>
                     For reference data see the <b>Data Sources</b> Tab.
                   </li>
@@ -44,7 +51,7 @@ const renderMenu = menuItem => {
                     (Quick find through Global Tab)
                   </li>
                 </ul>
-                If you find any errors, please help us and report it <a href="https://github.com/Code-for-All/lockdown/issues">here</a>.
+                If you find any errors, please help us and report it <a rel="noopener noreferrer" target="_blank" href="https://github.com/Code-for-All/lockdown/issues">here</a>.
               </p>
             `}
           />
