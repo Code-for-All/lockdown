@@ -3,6 +3,7 @@ import html from '@open-wc/rollup-plugin-html';
 import { terser } from 'rollup-plugin-terser';
 import babel from 'rollup-plugin-babel';
 import copy from 'rollup-plugin-copy';
+import { injectManifest } from 'rollup-plugin-workbox';
 
 export default {
   input: 'index.html',
@@ -39,6 +40,11 @@ export default {
       hook: 'buildStart',
       targets: [{ src: 'data/**/*', dest: 'build/data' }],
       flatten: false
+    }),
+    injectManifest({
+      swSrc: 'sw.js',
+      swDest: '/build/sw.js',
+      globDirectory: 'demo/build/',
     })
   ]
 };
