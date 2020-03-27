@@ -24,7 +24,7 @@ class CoronaTrackerService extends EventTargetShim {
         };
 
         return cache[iso2];
-      } catch (_) {
+      } catch {
         cache[iso2] = {
           status: 'failed'
         };
