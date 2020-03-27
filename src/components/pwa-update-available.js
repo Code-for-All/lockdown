@@ -9,13 +9,11 @@ class PwaUpdateAvailable extends HTMLElement {
   async connectedCallback() {
     this.addEventListener('click', this._postMessage.bind(this));
 
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (this._refreshing) return;
-        window.location.reload();
-        this._refreshing = true;
-      });
-    }
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (this._refreshing) return;
+      window.location.reload();
+      this._refreshing = true;
+    });
   }
 
   async _postMessage(e) {
