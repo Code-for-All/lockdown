@@ -1,5 +1,5 @@
 import { registerRoute, NavigationRoute } from 'workbox-routing';
-import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
+import { NetworkFirst, CacheFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { precacheAndRoute } from 'workbox-precaching';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
@@ -29,6 +29,14 @@ registerRoute(
     ],
   })
 );
+
+/* Runtime json data files with a network-first strategy, we want up to date data, but in the case of no connection, cached data */
+registerRoute(
+  new RegExp('/data/.*\.json/'),
+  new NetworkFirst()
+);
+
+
 
 /* Precache manifest */
 precacheAndRoute(self.__WB_MANIFEST);
