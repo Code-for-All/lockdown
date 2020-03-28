@@ -8,6 +8,7 @@ import { router } from '../router.js';
 import { Menu } from '../components/Menu.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import { close } from '../assets/icons/icons.js';
+import { setFavIcon } from '../utils/setFavIcon.js';
 
 const KEYCODE_ESC = 27;
 
@@ -136,7 +137,7 @@ export class MainPage extends Component {
       const localStorageDarkmode = localStorage.getItem('darkmode');
       const darkmodePreferenceExists = localStorageDarkmode !== null;
       const darkMode = localStorageDarkmode === 'true';
-
+      setFavIcon(preference);
       // on initial pageload, decide darkmode on users system preference
       if (!darkmodePreferenceExists) {
         if (preference) {
