@@ -54,6 +54,11 @@ export default [
         targets: [{ src: 'data/**/*', dest: 'build/data' }],
         flatten: false
       }),
+      copy({
+        hook: 'buildStart',
+        targets: [{ src: 'manifest.json', dest: 'build/' }],
+        flatten: false
+      }),
       injectManifest({
         swSrc: 'build/sw.js',
         swDest: 'build/sw.js',
