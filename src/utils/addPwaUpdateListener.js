@@ -7,7 +7,6 @@ export function addPwaUpdateListener(callback) {
   // TODO: remove, this is testing code
   if (true) {
     setTimeout(() => {
-      console.log('callback');
       callback(true);
     });
     return;
