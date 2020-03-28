@@ -41,7 +41,7 @@ registerRoute(
  * but in the case of no connection, return cached data 
  */
 registerRoute(
-  new RegExp('/data/.*\.json/'),
+  new RegExp('.*data/totals.json'),
   new NetworkFirst({
     cacheName: 'datafiles'
   })
@@ -53,7 +53,7 @@ registerRoute(
  * countries, so we restrict to 20 max
  */ 
 registerRoute(
-  new RegExp('/https://www.travel-advisory.info/api?.*/'),
+  new RegExp('https://www.travel-advisory.info/api?.*'),
   new NetworkFirst({
     cacheName: 'traveladvisory',
     plugins: [
@@ -70,7 +70,7 @@ registerRoute(
  * countries, so we restrict to 20 max
  */
 registerRoute(
-  new RegExp('/https://api.coronatracker.com/v3/.*/'),
+  new RegExp('https://api.coronatracker.com/v3/.*'),
   new NetworkFirst({
     cacheName: 'coronatracker',
     plugins: [
@@ -87,7 +87,7 @@ registerRoute(
  * so we restrict the max entries to 30 as not to hog the devices space
  */
 registerRoute(
-  new RegExp('/https://api.mapbox.com/styles/v1/.*/'),
+  new RegExp('https://api.mapbox.com/styles/v1/.*'),
   new CacheFirst({
     cacheName: 'mapbox-tiles-cache',
     plugins: [

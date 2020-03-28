@@ -5,6 +5,7 @@ import babel from 'rollup-plugin-babel';
 import copy from 'rollup-plugin-copy';
 import { injectManifest } from 'rollup-plugin-workbox';
 import applySwRegistration from 'rollup-plugin-apply-sw-registration';
+import replace from '@rollup/plugin-replace';
 
 export default [
   {
@@ -14,8 +15,9 @@ export default [
       dir: 'build'
     },
     plugins: [
+      replace({ 'process.env.NODE_ENV': '"production"' }),
       resolve(),
-      // terser({ output: { comments: false } }),
+      terser({ output: { comments: false } }),
     ]
   },
   {
@@ -63,7 +65,10 @@ export default [
         swSrc: 'build/sw.js',
         swDest: 'build/sw.js',
         globDirectory: 'build/',
-        // mode: 'production'
+        mode: 'production',
+        // modifyURLPrefix: {
+        //   '': '/lockdown/'
+        // }
       }),
       applySwRegistration()
     ]
