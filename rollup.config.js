@@ -66,11 +66,11 @@ export default [
         swDest: 'build/sw.js',
         globDirectory: 'build/',
         mode: 'production',
-        // modifyURLPrefix: {
-        //   '': '/lockdown/'
-        // }
+        modifyURLPrefix: {
+          '': '/lockdown/'
+        }
       }),
-      applySwRegistration()
+      applySwRegistration('index.html')
     ]
   }
 ];

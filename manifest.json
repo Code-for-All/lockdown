@@ -6,7 +6,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",
-  "start_url": "/",
+  "start_url": "/lockdown",
   "icons": [
     {
       "src": "src/assets/pwa/manifest-icon-192.png",

@@ -5,12 +5,6 @@ import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { createHandlerBoundToURL } from 'workbox-precaching';
 
-// TODO: remove, debug only
-import 'workbox-sw';
-workbox.setConfig({
-  debug: true
-});
-
 /* Cache the Google Fonts stylesheets with a stale-while-revalidate strategy. */
 registerRoute(
   /^https:\/\/fonts\.googleapis\.com/,
@@ -41,7 +35,7 @@ registerRoute(
  * but in the case of no connection, return cached data 
  */
 registerRoute(
-  new RegExp('.*data/totals.json'),
+  new RegExp('.*data/.*.json'),
   new NetworkFirst({
     cacheName: 'datafiles'
   })
@@ -59,6 +53,7 @@ registerRoute(
     plugins: [
       new ExpirationPlugin({
         maxEntries: 20,
+        purgeOnQuotaError: true
       }),
     ],
   })
@@ -76,6 +71,7 @@ registerRoute(
     plugins: [
       new ExpirationPlugin({
         maxEntries: 20,
+        purgeOnQuotaError: true
       }),
     ],
   })
@@ -86,22 +82,23 @@ registerRoute(
  * This cache can fill up quickly if users zoom in/out and move around on the mapp
  * so we restrict the max entries to 30 as not to hog the devices space
  */
-registerRoute(
-  new RegExp('https://api.mapbox.com/styles/v1/.*'),
-  new CacheFirst({
-    cacheName: 'mapbox-tiles-cache',
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 30,
-      }),
-    ],
-  })
-);
+// registerRoute(
+//   new RegExp('https://api.mapbox.com/.*'),
+//   new CacheFirst({
+//     cacheName: 'mapbox-tiles-cache',
+//     plugins: [
+//       new ExpirationPlugin({
+//         maxEntries: 30,
+//         purgeOnQuotaError: true
+//       }),
+//     ],
+//   })
+// );
 
 /* Precache manifest */
 precacheAndRoute(self.__WB_MANIFEST);
 
 /* Return index.html on navigations */
-const handler = createHandlerBoundToURL('/index.html');
+const handler = createHandlerBoundToURL('/lockdown/index.html');
 const navigationRoute = new NavigationRoute(handler, {});
 registerRoute(navigationRoute);
