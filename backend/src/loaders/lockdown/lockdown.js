@@ -88,7 +88,7 @@ async function getLockdownData() {
 
 export default async function loadData() {
   const lockdowns = await getLockdownData();
-  await writeJSON('datafile2', lockdowns);
+  await writeJSON('datafile', lockdowns);
 }
 
 
