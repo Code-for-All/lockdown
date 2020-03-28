@@ -4,6 +4,7 @@ import { terser } from 'rollup-plugin-terser';
 import babel from 'rollup-plugin-babel';
 import copy from 'rollup-plugin-copy';
 import { injectManifest } from 'rollup-plugin-workbox';
+import applySwRegistration from 'rollup-plugin-apply-sw-registration';
 
 export default [
   {
@@ -58,7 +59,8 @@ export default [
         swDest: 'build/sw.js',
         globDirectory: 'build/',
         mode: 'production'
-      })
+      }),
+      applySwRegistration()
     ]
   }
 ];
