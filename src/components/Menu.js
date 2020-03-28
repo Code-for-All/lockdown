@@ -149,7 +149,7 @@ export class Menu extends Component {
   }
 
   switchContent(val) {
-    if (val === 'settings') {
+    if (val === 'settings' && this.state.updateAvailable) {
       this.setState({
         updateAvailable: false
       });
