@@ -80,6 +80,17 @@ export class CountryInfo extends Component {
     return html`
       <div class=${styles}>
         <div class="dialog">
+          <a
+            class="ld-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfDWe2qlzUnd3e-YYspMzT9adUswDEYIdJMb7jz7ule34-yiA/viewform"
+          >
+            Improve this data
+          </a>
+        </div>
+        <hr />
+        <div class="dialog">
           <h2>Stats</h2>
           <div class="data-entry">
             <p>Population:</p>

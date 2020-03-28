@@ -25,7 +25,7 @@ const renderMenu = menuItem => {
                 While lockdowns generally help countries to flatten the curve, and prevent COVID-19 from spreading, countries with a
                 dictatorial nature may see this as an opportunity to increase their grasp over a country, and even potentially lead to
                 martial law type scenarios. Governments may unnecesarily prolong lockdowns or not stick to their announced end dates for
-                political gain. <b>Project Lockdown</b> aims to visualize these situations and keep governments in check.
+                political gain. <b>Project Lockdown</b> aims to visualize these situations.
               </p>
             `}
           />
@@ -89,10 +89,16 @@ const renderMenu = menuItem => {
         title: 'contribute',
         template: html`
         <p>
-          <b>Project Lockdown</b> is made possible by the contribution on many individuals who are giving their time to make possible that everyone has access to the right information.
+          <b>Project Lockdown</b> is made possible by the contribution of many individuals who are giving their time to make possible that everyone has access to the right information.
         </p>
         <p>
-          You can become part of the project by joining one of the following teams: 
+          Do you have any information you want to contribute? Please follow this link:
+        </p>
+        <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSfDWe2qlzUnd3e-YYspMzT9adUswDEYIdJMb7jz7ule34-yiA/viewform">
+          Submit data
+        </a>
+        <p>
+          Additionally, you can become part of the project by joining one of the following teams: 
           <ul>
             <li>Editors</li>
             <li>Devs</li>
@@ -102,7 +108,7 @@ const renderMenu = menuItem => {
         <p>
           Contact us via Telegram at:
           <br/>
-          <a>@ProjectLockdown</a>
+          <a class="ld-link">@ProjectLockdown</a>
         </p>
         `
       };
