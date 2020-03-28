@@ -15,23 +15,6 @@ export function transposeSheetRows(headers, rows) {
 
 /**
  * Parses sheet columns into associative arrays
- * Example:
- * 
- * [ 
- *   [ 'The act of killing coronavirus' ],
- *   [ 'https://www.google.com' ],
- *   [ 'State of Emergency' ],
- *   [ '1 March 2020' ] 
- * ]
- * 
- * Into
- * 
- * { 
- *   name: 'The act of killing coronavirus',
- *   url: 'https://www.google.com',
- *   title: 'State of Emergency',
- *   date: '1 March 2020'
- * }
  * @param {array} headers 
  * @param {array} columns
  * @param {boolean?} isFirstColumnOnly
