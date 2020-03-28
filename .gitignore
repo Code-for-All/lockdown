@@ -8,7 +8,6 @@ size-plugin.json
 script/token.pickle
 script/credentials.json
 .idea/
-
 backend/node_modules
 backend/credentials.json
 backend/package-lock.json
