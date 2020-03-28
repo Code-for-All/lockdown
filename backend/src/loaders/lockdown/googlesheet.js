@@ -1,27 +1,36 @@
-// import { GoogleSpreadsheet } from 'google-spreadsheet';
-// import { lockdownSheetId, googleServiceCredentials } from '../../config';
+import { GoogleSpreadsheet } from 'google-spreadsheet';
+import GoogleSpreadsheetWorksheet from 'google-spreadsheet/lib/GoogleSpreadsheetWorksheet';
+import { lockdownSheetId, googleServiceCredentials } from '../../config';
 
-// const doc = new GoogleSpreadsheet(lockdownSheetId);
+const doc = new GoogleSpreadsheet(lockdownSheetId);
+var initialized = false;
 
-// /**
-//  * Initialize google spreadsheet object
-//  */
-// export async function init() {
-//   await doc.useServiceAccountAuth(googleServiceCredentials);
-//   await doc.loadInfo(); // loads document properties and worksheets
-// }
+/**
+ * Initialize google spreadsheet object with cache
+ */
+async function init() {
+  if (initialized) return;
+  await doc.useServiceAccountAuth(googleServiceCredentials);
+  await doc.loadInfo(); // loads document properties and worksheets
+  initialized = true;
+}
 
-// /**
-//  * Populate data from 'Territories' sheet
-//  */
-// export async function asm() {
-//   const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id]
-//   // TODO: figure out structure
-//   return {
-//   };
-// }
+/**
+ * Gets a single worksheet by its title.
+ * If duplicate, will return first found
+ * @param {string} title
+ * @returns {GoogleSpreadsheetWorksheet}
+ */
+export async function getWorksheetByTitle(title) {
+  await init();
+  return doc.sheetsByIndex.find(sheet => sheet['_rawProperties']['title'] == title);
+}
 
-// export default async function load() {
-//   await init();
-//   // await asm();
-// }
+/**
+ * Returns document
+ * @returns {GoogleSpreadsheet}
+ */
+export default async function getDocument() {
+  await init();
+  return doc;
+}

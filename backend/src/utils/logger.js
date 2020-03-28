@@ -1,3 +1,4 @@
+// TODO: detect environment and set logging appropriately
 class logger {
   static log(string) {
     console.log(string);
