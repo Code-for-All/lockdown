@@ -56,6 +56,7 @@ body {
 }
 
 .ld-menu {
+  font-size: 14px;
   stroke-width: var(--ld-icon-stroke-width);
   background-color: var(--ld-bg);
   color: var(--ld-text);
@@ -161,6 +162,14 @@ body {
   top: 10px;
   right: 10px;
   border-radius: 50%;
+}
+
+.ld-sources li {
+  margin: 15px 0px 0px 0px;
+}
+
+.ld-link {
+  color: var(--ld-active);
 }
 
 @media (max-width: 960px) {

@@ -8,6 +8,7 @@ import { router } from '../router.js';
 import { Menu } from '../components/Menu.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import { close } from '../assets/icons/icons.js';
+import { setFavIcon } from '../utils/setFavIcon.js';
 
 const KEYCODE_ESC = 27;
 
@@ -104,7 +105,7 @@ const dialogStyles = css`
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      height: 70%;
+      height: calc(100% - 140px);
     }
   }
 `;
@@ -136,7 +137,7 @@ export class MainPage extends Component {
       const localStorageDarkmode = localStorage.getItem('darkmode');
       const darkmodePreferenceExists = localStorageDarkmode !== null;
       const darkMode = localStorageDarkmode === 'true';
-
+      setFavIcon(preference);
       // on initial pageload, decide darkmode on users system preference
       if (!darkmodePreferenceExists) {
         if (preference) {
@@ -218,13 +219,14 @@ export class MainPage extends Component {
 
   __onPathChanged() {
     const country = router.url.searchParams.get('country');
+    const iso2 = router.url.searchParams.get('iso2');
 
-    if (country) {
+    if (country && iso2) {
       this.setState({
         dialog: {
           opened: true,
           template: html`
-            <${CountryInfo} country=${country} />
+            <${CountryInfo} country=${country} iso2=${iso2} />
           `,
           title: country
         }
@@ -257,6 +259,7 @@ export class MainPage extends Component {
 
   __closeCountryInfo() {
     router.setSearchParam('country', undefined);
+    router.setSearchParam('iso2', undefined);
   }
 
   __closeDialog() {

@@ -30,6 +30,7 @@ export class WorldMap extends Component {
       const layer = e.target;
       // map.fitBounds(layer.getBounds());
       router.setSearchParam('country', layer.feature.properties.NAME);
+      router.setSearchParam('iso2', layer.feature.properties.iso2);
     }
 
     function resetHighlight(e) {
@@ -65,7 +66,7 @@ export class WorldMap extends Component {
 
     function worldStyle(e) {
       // lockdown unknown
-      let value = 'orange';
+      let value = '';
 
       if (e.properties.data && e.properties.data.lockdowns) {
         if (e.properties.data.lockdowns.length === 0) {
