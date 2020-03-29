@@ -77,27 +77,47 @@ async function getDemoData() {
   ]);
 
   // In & out section
-  const landBordersCrossing = parseEntryStructure(getCachedCellsRange(sheet, 'H32:J38'), [
-      'local', // Local destinations?
-      'nationals_inbound', // Nationals inbound?
-      'nationals_outbound', // Nationals outbound?
-      'foreigners_inbound', // Foreigners inbound?
-      'foreigners_outbound', // Foreigners outbound?
-      'cross_border_workers', // Cross border workers?
-      'commerce', // Commerce?
+  const land = parseEntryStructure(getCachedCellsRange(sheet, 'H32:J38'), [
+    'local', // Local destinations?
+    'nationals_inbound', // Nationals inbound?
+    'nationals_outbound', // Nationals outbound?
+    'foreigners_inbound', // Foreigners inbound?
+    'foreigners_outbound', // Foreigners outbound?
+    'cross_border_workers', // Cross border workers?
+    'commerce', // Commerce?
   ]);
 
-  // TODO: the rest of in & out
-  
+  const flight = parseEntryStructure(getCachedCellsRange(sheet, 'H42:J48'), [
+    'local', // Local destinations?
+    'nationals_inbound', // Nationals inbound?
+    'nationals_outbound', // Nationals outbound?
+    'foreigners_inbound', // Foreigners inbound?
+    'foreigners_outbound', // Foreigners outbound?
+    'cross_border_workers', // Stopovers?
+    'commerce', // Commerce?
+  ]);
+
+  const sea = parseEntryStructure(getCachedCellsRange(sheet, 'H52:J58'), [
+    'local', // Local destinations?
+    'nationals_inbound', // Nationals inbound?
+    'nationals_outbound', // Nationals outbound?
+    'foreigners_inbound', // Foreigners inbound?
+    'foreigners_outbound', // Foreigners outbound?
+    'cross_border_workers', // Cross border workers?
+    'commerce', // Commerce?
+  ]);
+
   return {
     entries: [
       {
         ...entryMetaData,
         ...entryInfoData,
         measures: measures,
-        in_and_out: [
-          ...landBordersCrossing,
-        ]
+        travel: {
+          land,
+          flight,
+          sea,
+        }
       }
     ]
   };
