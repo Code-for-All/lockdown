@@ -4,13 +4,6 @@
  */
 export function addPwaUpdateListener(callback) {
   let newWorker;
-  // TODO: remove, this is testing code
-  if (true) {
-    setTimeout(() => {
-      callback(true);
-    });
-    return;
-  }
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistration().then(reg => {

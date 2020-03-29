@@ -58,7 +58,7 @@ export default [
       }),
       copy({
         hook: 'buildStart',
-        targets: [{ src: 'manifest.json', dest: 'build/' }],
+        targets: [{ src: 'manifest.json', dest: 'build/' }, { src: 'manifest-dark.json', dest: 'build/' }],
         flatten: false
       }),
       injectManifest({
@@ -66,11 +66,14 @@ export default [
         swDest: 'build/sw.js',
         globDirectory: 'build/',
         mode: 'production',
-        modifyURLPrefix: {
-          '': '/lockdown/'
-        }
+        // modifyURLPrefix: {
+        //   '': '/lockdown/'
+        // }
       }),
-      applySwRegistration('index.html')
+      applySwRegistration({
+        htmlFileName: 'index.html',
+        // base: 'lockdown/'
+      })
     ]
   }
 ];

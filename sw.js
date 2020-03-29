@@ -5,6 +5,13 @@ import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { createHandlerBoundToURL } from 'workbox-precaching';
 
+/* Install new SW when user clicks 'Update app' */
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
 /* Cache the Google Fonts stylesheets with a stale-while-revalidate strategy. */
 registerRoute(
   /^https:\/\/fonts\.googleapis\.com/,
@@ -99,6 +106,6 @@ registerRoute(
 precacheAndRoute(self.__WB_MANIFEST);
 
 /* Return index.html on navigations */
-const handler = createHandlerBoundToURL('/lockdown/index.html');
+const handler = createHandlerBoundToURL('/index.html');
 const navigationRoute = new NavigationRoute(handler, {});
 registerRoute(navigationRoute);
