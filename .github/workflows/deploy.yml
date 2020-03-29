@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [master]
+    branches: [feat/PWAify]
 
 jobs:
   build-and-deploy:
