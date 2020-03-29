@@ -1,0 +1,29 @@
+name: Update data
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  generate-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Update data
+        run: |
+          echo "TODO"
+
+      - name: Commit changes
+        run: |
+          git config user.email "lockdown-bot@non-existing.com"
+          git config user.name "lockdown-bot"
+          git add data
+          git commit -m "Update data"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
