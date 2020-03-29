@@ -17,9 +17,9 @@ const entryColumnLength = 5;
  *    [ 'Albania', 'AL', 'ALB' ],
  *    [ 'Algeria', 'DZ', 'DZA' ],
  * ...
- * @returns {object}
+ * @returns {array}
  */
-async function getGlobalData() {
+export async function getGlobalData() {
   logger.log('[Lockdown:Global] start');
   const sheet = await getWorksheetByTitle('Global');
   const rows = await sheet.getCellsInRange('D5:F253');
@@ -128,7 +128,7 @@ function getEntry(sheet, entryIndex) {
     'nationals_outbound', // Nationals outbound?
     'foreigners_inbound', // Foreigners inbound?
     'foreigners_outbound', // Foreigners outbound?
-    'cross_border_workers', // Stopovers?
+    'stopovers', // Stopovers?
     'commerce', // Commerce?
   ]);
 
@@ -157,7 +157,7 @@ function getEntry(sheet, entryIndex) {
 /**
  * Gets sheet data
  */
-async function getTerritoryEntryData(isoCode) {
+export async function getTerritoryEntryData(isoCode) {
   // const sheet = await getWorksheetByTitle(isoCode);
   const sheet = await getWorksheetByTitle('DEMO');
   const entriesToGrab = 10;
@@ -183,22 +183,36 @@ async function getTerritoryEntryData(isoCode) {
 
 /**
  * Gets lockdown data for all territories
+ * @returns {array}
  */
-async function getLockdownData() {
+export async function getTerritoriesLockdownData() {
   const territories = await getGlobalData();
-  const lockdowns = {};
-
+  const result = [];
   for (var [index, territory] of territories.entries()) {
     let isoCode = territory['iso2'];
     logger.log(`[Lockdown:WorkSheet] ${territory['territory']}`);
-    lockdowns[isoCode] = {};
-    lockdowns[isoCode]['lockdowns'] = await getTerritoryEntryData(isoCode);
+    result.push({
+      isoCode,
+      lockdown: await getTerritoryEntryData(isoCode)
+    });
   }
 
-  return lockdowns;
+  return result;
 }
 
 export default async function loadData() {
-  const lockdowns = await getLockdownData();
-  await writeJSON('datafile', lockdowns);
+  const territories = await getTerritoriesLockdownData();
+
+  // Loads separate json files per territory iso code
+  territories.forEach((territory) => {
+    writeJSON(`territories/${territory['isoCode']}`, territory['lockdown']);
+  });
+
+  // Load summarized datafile
+  const summarizedTerritories = {};
+  territories.map((territory) => {
+    summarizedTerritories[territory['isoCode']] = territory['lockdown']['entries'];
+  });
+
+  writeJSON('territories', summarizedTerritories);
 }
