@@ -3,7 +3,6 @@ import { writeJSON } from '../../utils/file.js';
 
 export function parseData(territory) {
   return {
-    contribute_url: `${lockdownSheetUrl}/edit#gid=${territory['googlesheet_tab_id']}`,
   }
 }
 
