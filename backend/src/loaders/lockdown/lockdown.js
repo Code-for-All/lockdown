@@ -75,7 +75,7 @@ function getEntryCellRange(rowRange, entryIndex = 0, initialColumnLetter = 'H') 
  * @param {GoogleSpreadsheetWorksheet} sheet 
  * @param {integer} entryIndex 
  */
-async function getEntry(sheet, entryIndex) {
+function getEntry(sheet, entryIndex) {
   let entryMetaRange = getEntryCellRange('2:6', entryIndex, 'I');
   let entryInfoRange = getEntryCellRange('9:12', entryIndex);
   let entryMeasureRange = getEntryCellRange('14:60', entryIndex);
@@ -155,9 +155,10 @@ async function getEntry(sheet, entryIndex) {
 }
 
 /**
- * Gets sheet
+ * Gets sheet data
  */
-async function getDemoData() {
+async function getTerritoryEntryData(isoCode) {
+  // const sheet = await getWorksheetByTitle(isoCode);
   const sheet = await getWorksheetByTitle('DEMO');
   const entriesToGrab = 10;
   const endCacheColumn = columnToLetter(letterToColumn('H') + (entriesToGrab * entryColumnLength));
@@ -171,7 +172,7 @@ async function getDemoData() {
     // Cell ranges
     let entryData = getEntry(sheet, entryIndex);
     if (entryData) {
-      entries.push();
+      entries.push(entryData);
     }
   }
 
@@ -188,9 +189,10 @@ async function getLockdownData() {
   const lockdowns = {};
 
   for (var [index, territory] of territories.entries()) {
+    let isoCode = territory['iso2'];
     logger.log(`[Lockdown:WorkSheet] ${territory['territory']}`);
-    lockdowns[territory['iso2']] = {};
-    lockdowns[territory['iso2']]['lockdowns'] = await getDemoData();
+    lockdowns[isoCode] = {};
+    lockdowns[isoCode]['lockdowns'] = await getTerritoryEntryData(isoCode);
   }
 
   return lockdowns;
