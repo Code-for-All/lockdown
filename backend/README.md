@@ -4,10 +4,13 @@
 Minimum node version: 8.5
 
 #### Installation:
+For google sheet access, you will need either:
+- A credentials.json generated from the google developer for sheets api v4 in the base folder
+- Set `GOOGLE_SERVICE_ACCOUNT_EMAIL` and `GOOGLE_PRIVATE_KEY` environment variable
 ```
 npm install
 ```
-You will need a credentials.json generated from the google developer for sheets api v4 in the base folder
+
 
 #### Build & run:
 ```
