@@ -1,6 +1,6 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import GoogleSpreadsheetWorksheet from 'google-spreadsheet/lib/GoogleSpreadsheetWorksheet';
-import { lockdownSheetId, googleServiceCredentials } from '../../config';
+import { lockdownSheetId, googleServiceCredentialsJson } from '../../config';
 
 const doc = new GoogleSpreadsheet(lockdownSheetId);
 var initialized = false;
@@ -10,7 +10,13 @@ var initialized = false;
  */
 async function init() {
   if (initialized) return;
-  await doc.useServiceAccountAuth(googleServiceCredentials);
+
+  if (googleServiceCredentialsJson) {
+    await doc.useServiceAccountAuth(googleServiceCredentialsJson);
+  } else {
+    throw Exception('No API key / service account credentials defined!');
+  }
+
   await doc.loadInfo(); // loads document properties and worksheets
   initialized = true;
 }
