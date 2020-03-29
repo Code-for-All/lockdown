@@ -4,7 +4,7 @@ const isoCodes = ["af", "ao", "al", "ae", "ar", "am", "aq", "tf", "au", "at", "a
 
 test('territories structure', async () => {
   const territories = await getData();
-  const territoryFields = ['contribute_url'];
+  const territoryFields = [];
   expect(Object.keys(territories)).toEqual(expect.arrayContaining(isoCodes));
   isoCodes.forEach((iso) => {
     expect(Object.keys(territories[iso])).toEqual(expect.arrayContaining(territoryFields));
