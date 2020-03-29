@@ -14,8 +14,9 @@ import { writeJSON } from '../../utils/file';
  * @returns {object}
  */
 async function getGlobalData() {
+  logger.log('[Lockdown:Global] start');
   const sheet = await getWorksheetByTitle('Global');
-  const rows = await sheet.getCellsInRange('C5:E253');
+  const rows = await sheet.getCellsInRange('D5:F253');
   const headers = ['territory', 'iso2', 'iso3'];
   return transposeSheetRows(headers, rows);
 }
@@ -90,5 +91,3 @@ export default async function loadData() {
   const lockdowns = await getLockdownData();
   await writeJSON('datafile', lockdowns);
 }
-
-
