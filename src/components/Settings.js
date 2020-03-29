@@ -50,11 +50,11 @@ export function Settings() {
   const [pwaUpdateAvailable, setPwaUpdateAvailable] = useState(false);
 
   function toggleDarkmode() {
-    if (document.body.classList.contains('dark')) {
-      document.body.classList.remove('dark');
+    if (document.getElementsByTagName('html')[0].classList.contains('dark')) {
+      document.getElementsByTagName('html')[0].classList.remove('dark');
       localStorage.setItem('darkmode', 'false');
     } else {
-      document.body.classList.add('dark');
+      document.getElementsByTagName('html')[0].classList.add('dark');
       localStorage.setItem('darkmode', 'true');
     }
   }
