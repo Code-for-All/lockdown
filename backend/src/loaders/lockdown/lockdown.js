@@ -5,6 +5,7 @@ import { letterToColumn, columnToLetter } from 'google-spreadsheet/lib/utils';
 import logger from '../../utils/logger';
 import { writeJSON } from '../../utils/file';
 import { getCachedCellsRange } from '../../utils/sheet';
+import find from 'lodash/find';
 
 // Constants
 const entryColumnLength = 5;
@@ -205,14 +206,22 @@ export default async function loadData() {
 
   // Loads separate json files per territory iso code
   territories.forEach((territory) => {
-    writeJSON(`territories/${territory['isoCode']}`, territory['lockdown']);
+    writeJSON(`territories/${territory['isoCode']}`, {
+      lockdown: territory['lockdown']
+    });
   });
 
   // Load summarized datafile
   const summarizedTerritories = {};
   territories.map((territory) => {
-    summarizedTerritories[territory['isoCode']] = territory['lockdown']['entries'];
+    let measures = territory['lockdown']['entries'][0]['measures'];
+    let lockdownStatus = find(measures, { 'label': 'lockdown_status' });
+    summarizedTerritories[territory['isoCode']] = {
+      lockdown: {
+        lockdown_status: lockdownStatus['value'],
+      }
+    };
   });
 
-  writeJSON('territories', summarizedTerritories);
+  writeJSON('datafile', summarizedTerritories);
 }
