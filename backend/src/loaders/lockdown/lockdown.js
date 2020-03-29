@@ -2,6 +2,7 @@ import { getWorksheetByTitle } from './googlesheet';
 import { transposeSheetRows, transposeSheetColumns } from '../../utils/dataHelper';
 import logger from '../../utils/logger';
 import { writeJSON } from '../../utils/file';
+import { getCachedCellsRange } from '../../utils/sheet';
 
 /**
  * Gets data from "Global" sheet.
@@ -24,25 +25,19 @@ async function getGlobalData() {
 // TODO: Generate entry lists and loop through all the obtained cells to save roundtrips to gsheet
 async function getDemoData() {
   const sheet = await getWorksheetByTitle('DEMO');
-  // Following is to precache cells data.
-  // Caveat is cant be used with getCellsInRange.
-  // Probably need to rework A1 range parser to obtain using cellIndex or so.
-  // await sheet.loadCells('H1:AY60');
-  // for (var i = 1; i < 10; i++) {
-  //   await await sheet.getCellByA1('H'+i);
-  //   logger.log('Loaded?');
-  // }
+  // Precache cells data for all entries
+  await sheet.loadCells('H1:AE60');
 
   // Entry meta section
-  const entryMeta1Rows = await sheet.getCellsInRange('H2:J6');
-  const entryMeta1Data = transposeSheetColumns(['editor', 'reviewed_by', 'status', 'type', 'date_of_entry'], entryMeta1Rows, true);
+  const entryMetaRows = getCachedCellsRange(sheet, 'H2:J6');
+  const entryMetaData = transposeSheetColumns(['editor', 'reviewed_by', 'status', 'type', 'date_of_entry'], entryMetaRows, true);
 
   // Entry entry section
-  const entryInfoRows = await sheet.getCellsInRange('H9:J12');
+  const entryInfoRows = getCachedCellsRange(sheet, 'H9:J12');
   const entryInfoData = transposeSheetColumns(['name', 'url', 'title', 'date'], entryInfoRows, true);
 
   // Other sections: measures, in & out, etc... 
-  const entryOtherRows = await sheet.getCellsInRange('H14:J60');
+  const entryOtherRows = getCachedCellsRange(sheet, 'H14:J60');
   const entryOtherValues = transposeSheetRows([
     'start',
     'end',
@@ -57,7 +52,7 @@ async function getDemoData() {
   ], entryOtherValues);
   
   return {
-    ...entryMeta1Data,
+    ...entryMetaData,
     entries: [
       {
         ...entryInfoData,
