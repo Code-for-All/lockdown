@@ -1,4 +1,3 @@
-import each from 'lodash/each';
 import { lockdownSheetUrl } from '../../config.js';
 import { writeJSON } from '../../utils/file.js';
 
@@ -11,15 +10,15 @@ export function parseData(territory) {
 export async function getData() {
   const territories = {};
   const territoriesMeta = require('./meta.json');
-  each(territoriesMeta, (territory, isoCode) => {
-    territories[isoCode] = parseData(territory)
-  });
+  for (const [isoCode, territory] of Object.entries(territoriesMeta)) {
+    territories[isoCode] = parseData(territory);
+  }
   return territories;
 }
 
 export default async function loadData() {
   const territories = await getData();
-  each(territories, (territory, isoCode) => {
+  for (const [isoCode, territory] of Object.entries(territories)) {
     writeJSON(`territories/${isoCode}`, territory);
-  });
+  }
 }
