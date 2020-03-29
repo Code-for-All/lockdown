@@ -1,33 +1,33 @@
-name: Update data
+# name: Update data
 
-on:
-  schedule:
-    - cron: '*/5 * * * *'
+# on:
+#   schedule:
+#     - cron: '*/5 * * * *'
 
-jobs:
-  generate-data:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          persist-credentials: false
+# jobs:
+#   generate-data:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#         with:
+#           persist-credentials: false
 
-      - name: Update data
-        run: |
-          export GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_API_EMAIL }}
-          export GOOGLE_PRIVATE_KEY="${{ secrets.GOOGLE_API_KEY }}"
-          cd backend
-          npm install
-          npm run start
+#       - name: Update data
+#         run: |
+#           export GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_API_EMAIL }}
+#           export GOOGLE_PRIVATE_KEY="${{ secrets.GOOGLE_API_KEY }}"
+#           cd backend
+#           npm install
+#           npm run start
 
-      - name: Commit changes
-        run: |
-          git config user.email "lockdown-bot@non-existing.com"
-          git config user.name "lockdown-bot"
-          git add data
-          git commit -m "Update data"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+#       - name: Commit changes
+#         run: |
+#           git config user.email "lockdown-bot@non-existing.com"
+#           git config user.name "lockdown-bot"
+#           git add data
+#           git commit -m "Update data"
+#       - name: Push changes
+#         uses: ad-m/github-push-action@master
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
