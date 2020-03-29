@@ -1,5 +1,8 @@
 ## Backend scripts to load and transform data
 
+### Requirements:
+Minimum node version: 8.5
+
 #### Installation:
 ```
 npm install
