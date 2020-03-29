@@ -1,9 +1,9 @@
 /**
- * Parses sheet rows into associative arrays
+ * Parses rows into associative arrays
  * @param {array} headers 
  * @param {array} rows 
  */
-export function transposeSheetRows(headers, rows) {
+export function transposeRows(headers, rows) {
   return rows.map((row) => {
     var obj = {};
     for (var i = 0; i < headers.length; i++) {
@@ -14,12 +14,12 @@ export function transposeSheetRows(headers, rows) {
 }
 
 /**
- * Parses sheet columns into associative arrays
+ * Parses columns into associative arrays
  * @param {array} headers 
  * @param {array} columns
  * @param {boolean?} isFirstColumnOnly
  */
-export function transposeSheetColumns(headers, columns, isFirstColumnOnly = false) {
+export function transposeColumns(headers, columns, isFirstColumnOnly = false) {
   var obj = {};
   for (var i = 0; i < headers.length; i++) {
     if (columns[i])

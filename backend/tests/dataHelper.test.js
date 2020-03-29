@@ -1,7 +1,7 @@
-import { transposeSheetRows, transposeSheetColumns } from '../src/utils/dataHelper';
+import { transposeRows, transposeColumns } from '../src/utils/dataHelper';
 
 test('should transpose rows', async () => {
-  const data = transposeSheetRows(['title','desc'], [
+  const data = transposeRows(['title','desc'], [
     ['data-title-1', 'data-desc-1'],
     ['data-title-2', 'data-desc-2'],
   ]);
@@ -18,7 +18,7 @@ test('should transpose rows', async () => {
 });
 
 test('should transpose columns with single value', async () => {
-  const data = transposeSheetColumns(
+  const data = transposeColumns(
     ['name', 'url', 'title', 'date'],
     [ 
       [ 'The act of killing coronavirus' ],
@@ -36,7 +36,7 @@ test('should transpose columns with single value', async () => {
 });
 
 test('should transpose columns with multiple values', async () => {
-  const data = transposeSheetColumns(
+  const data = transposeColumns(
     ['max_gathering',
     'lockdown_status',
     'city_movement_restriction'],

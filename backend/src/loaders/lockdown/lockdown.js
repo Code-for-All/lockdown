@@ -1,5 +1,5 @@
 import { getWorksheetByTitle } from './googlesheet';
-import { transposeSheetRows, transposeSheetColumns } from '../../utils/dataHelper';
+import { transposeRows, transposeColumns } from '../../utils/dataHelper';
 import logger from '../../utils/logger';
 import { writeJSON } from '../../utils/file';
 import { getCachedCellsRange } from '../../utils/sheet';
@@ -19,7 +19,7 @@ async function getGlobalData() {
   const sheet = await getWorksheetByTitle('Global');
   const rows = await sheet.getCellsInRange('D5:F253');
   const headers = ['territory', 'iso2', 'iso3'];
-  return transposeSheetRows(headers, rows);
+  return transposeRows(headers, rows);
 }
 
 // TODO: Generate entry lists and loop through all the obtained cells to save roundtrips to gsheet
@@ -30,21 +30,21 @@ async function getDemoData() {
 
   // Entry meta section
   const entryMetaRows = getCachedCellsRange(sheet, 'H2:J6');
-  const entryMetaData = transposeSheetColumns(['editor', 'reviewed_by', 'status', 'type', 'date_of_entry'], entryMetaRows, true);
+  const entryMetaData = transposeColumns(['editor', 'reviewed_by', 'status', 'type', 'date_of_entry'], entryMetaRows, true);
 
   // Entry entry section
   const entryInfoRows = getCachedCellsRange(sheet, 'H9:J12');
-  const entryInfoData = transposeSheetColumns(['name', 'url', 'title', 'date'], entryInfoRows, true);
+  const entryInfoData = transposeColumns(['name', 'url', 'title', 'date'], entryInfoRows, true);
 
   // Other sections: measures, in & out, etc... 
   const entryOtherRows = getCachedCellsRange(sheet, 'H14:J60');
-  const entryOtherValues = transposeSheetRows([
+  const entryOtherValues = transposeRows([
     'start',
     'end',
     'value'
   ], entryOtherRows);
 
-  const entryOtherData = transposeSheetColumns([
+  const entryOtherData = transposeColumns([
     'max_gathering',
     'lockdown_status',
     'city_movement_restriction',
