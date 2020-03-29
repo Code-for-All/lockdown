@@ -15,7 +15,11 @@ jobs:
 
       - name: Update data
         run: |
-          echo "TODO"
+          export GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_API_EMAIL }}
+          export GOOGLE_PRIVATE_KEY="${{ secrets.GOOGLE_API_KEY }}"
+          cd backend
+          npm install
+          npm run start
 
       - name: Commit changes
         run: |
