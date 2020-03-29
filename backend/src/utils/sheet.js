@@ -4,12 +4,12 @@ import GoogleSpreadsheetWorksheet from 'google-spreadsheet/lib/GoogleSpreadsheet
 /**
  * This utility only gets the precached cells, you need to
  * load the cells first using sheet.loadCells(...)
- * isStripNull to follow sheet.getCellsInRange behaviour
+ * Set isStripNull to true to follow sheet.getCellsInRange behaviour
  * @param {GoogleSpreadsheetWorksheet} sheet 
  * @param {string} range 
  * @param {boolean} isStripNull 
  */
-export function getCachedCellsRange(sheet, range, isStripNull = true) {
+export function getCachedCellsRange(sheet, range, isStripNull = false) {
   const [startCellA1, endCellA1] = range.split(':');
   const [startCellRow, startCellColumn] = getRowAndColumnIndexA1(startCellA1);
   const [endCellRow, endCellColumn] = getRowAndColumnIndexA1(endCellA1);

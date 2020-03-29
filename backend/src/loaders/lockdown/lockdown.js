@@ -29,7 +29,8 @@ export async function getGlobalData() {
 }
 
 /**
- * Parses entry structure with appended label
+ * Parses entry structure with appended label,
+ * strips null end and start
  * @param {array} rows 
  * @param {array} labels 
  */
@@ -40,7 +41,20 @@ function parseEntryStructure(rows, labels) {
     'value'
   ], rows);
 
-  const values = transposeColumns(labels, associativeRows);
+  // Strip null start & end
+  const associativeRowsStripped = [];
+  associativeRows.forEach((associativeRow) => {
+    let o = { value: associativeRow['value'] };
+    if (associativeRow['start'] !== null) {
+      o['start'] = associativeRow['start'];
+    }
+    if (associativeRow['end'] !== null) {
+      o['end'] = associativeRow['end'];
+    }
+    associativeRowsStripped.push(o);
+  });
+
+  const values = transposeColumns(labels, associativeRowsStripped);
   const array = []
   for (const [label, row] of Object.entries(values)) {
     array.push({
@@ -85,7 +99,7 @@ function getEntry(sheet, entryIndex) {
   let entrySeaRange = getEntryCellRange('52:58', entryIndex);
 
   // Entry meta section
-  const entryMetaRows = getCachedCellsRange(sheet, entryMetaRange);
+  const entryMetaRows = getCachedCellsRange(sheet, entryMetaRange, false);
   const entryMetaData = transposeColumns(['editor', 'reviewed_by', 'status', 'type', 'date_of_entry'], entryMetaRows, true);
 
   // Should skip status != 'Ready'
@@ -94,11 +108,11 @@ function getEntry(sheet, entryIndex) {
   }
 
   // Entry entry section
-  const entryInfoRows = getCachedCellsRange(sheet, entryInfoRange);
+  const entryInfoRows = getCachedCellsRange(sheet, entryInfoRange, false);
   const entryInfoData = transposeColumns(['name', 'url', 'title', 'date'], entryInfoRows, true);
 
   // Measures section
-  const measures = parseEntryStructure(getCachedCellsRange(sheet, entryMeasureRange), [
+  const measures = parseEntryStructure(getCachedCellsRange(sheet, entryMeasureRange, false), [
       'max_gathering', // Max gathering number allowed (PAX)?
       'lockdown_status', // Is there a mandate for self-isolation?
       'city_movement_restriction', // Is going on the street allowed?
@@ -113,7 +127,7 @@ function getEntry(sheet, entryIndex) {
   ]);
 
   // In & out section
-  const land = parseEntryStructure(getCachedCellsRange(sheet, entryLandRange), [
+  const land = parseEntryStructure(getCachedCellsRange(sheet, entryLandRange, false), [
     'local', // Local destinations?
     'nationals_inbound', // Nationals inbound?
     'nationals_outbound', // Nationals outbound?
@@ -123,7 +137,7 @@ function getEntry(sheet, entryIndex) {
     'commerce', // Commerce?
   ]);
 
-  const flight = parseEntryStructure(getCachedCellsRange(sheet, entryFlightRange), [
+  const flight = parseEntryStructure(getCachedCellsRange(sheet, entryFlightRange, false), [
     'local', // Local destinations?
     'nationals_inbound', // Nationals inbound?
     'nationals_outbound', // Nationals outbound?
@@ -133,7 +147,7 @@ function getEntry(sheet, entryIndex) {
     'commerce', // Commerce?
   ]);
 
-  const sea = parseEntryStructure(getCachedCellsRange(sheet, entrySeaRange), [
+  const sea = parseEntryStructure(getCachedCellsRange(sheet, entrySeaRange, false), [
     'local', // Local destinations?
     'nationals_inbound', // Nationals inbound?
     'nationals_outbound', // Nationals outbound?
