@@ -52,7 +52,7 @@ async function getDemoData() {
   await sheet.loadCells('H1:AE60');
 
   // Entry meta section
-  const entryMetaRows = getCachedCellsRange(sheet, 'H2:J6');
+  const entryMetaRows = getCachedCellsRange(sheet, 'I2:K6');
   const entryMetaData = transposeColumns(['editor', 'reviewed_by', 'status', 'type', 'date_of_entry'], entryMetaRows, true);
 
   // TODO: should skip status != 'Ready'?
@@ -92,8 +92,8 @@ async function getDemoData() {
   return {
     entries: [
       {
-        meta: entryMetaData,
-        info: entryInfoData,
+        ...entryMetaData,
+        ...entryInfoData,
         measures: measures,
         in_and_out: [
           ...landBordersCrossing,
