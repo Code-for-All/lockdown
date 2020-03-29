@@ -97,7 +97,7 @@ export function Settings() {
         : ''}
 
       <pwa-install-button>
-        <button class="ld-button">Install pwa</button>
+        <button class="ld-button">Install app</button>
       </pwa-install-button>
 
       ${pwaUpdateAvailable
