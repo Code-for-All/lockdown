@@ -35,3 +35,20 @@ npm run start:build
  Nodejs documentation
  https://nodejs.org/en/docs/
 
+# Nginx
+NginX is used on this project. 
+For utilization of NginX in this project, one familiarize themselves with the mechanics of NginX.
+http://nginx.org/en/docs/
+It is important for people to note how NginX unit tests are conducted.
+To change the configuration of the NginX, control the signals using Nginx. 
+http://nginx.org/en/docs/control.html
+To check out the unit tests for Nginx, look here.
+https://github.com/nginx
+
+# Docker
+Docker is deployed with NGINX and NGINX Plus on Docker.
+Nginx is run open source in a docker container. 
+# To launch an instance of Nginx running in a container and with the default Nginx configuration, 
+$ docker run --name myginx -p: 80:80 -d nginx 
+This is a container used for deploying the website. 
+
