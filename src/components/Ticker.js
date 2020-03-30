@@ -146,6 +146,6 @@ const styles = css`
     margin-bottom: 10px;
   }
   .ld-ticker--text {
-    font-size: 12px;
+    font-size: 14px;
   }
 `;
