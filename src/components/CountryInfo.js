@@ -72,8 +72,7 @@ export class CountryInfo extends Component {
 
   render(_, { lockdowns, travelAdvice, coronaData }) {
     /** If the user is offline, and theres no response, or the response has failed */
-    // if (!navigator.onLine) {
-    if (true) {
+    if (!navigator.onLine) {
       if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success') {
         return html`
           Looks like you're offline :(
