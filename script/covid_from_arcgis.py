@@ -63,3 +63,5 @@ with open('../data/totals.json', 'w') as f:
     json.dump(total, f, skipkeys=True, ensure_ascii=True,
               indent=2, separators=None, default=None, sort_keys=True)
 
+
+
