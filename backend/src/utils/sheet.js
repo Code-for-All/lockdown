@@ -22,13 +22,13 @@ export function getCachedCellsRange(sheet, range, isStripNull = false) {
     let columns = [];
     for (var columnIndex = startCellColumn; columnIndex <= endCellColumn; columnIndex++) {
       let cell = sheet.getCell(rowIndex, columnIndex);
-      let value = cell.formattedValue;
+      let value = cell && cell.formattedValue ? cell.formattedValue : cell;
 
       // Strips null cell values
       if (value === null && isStripNull) {
         continue;
       }
-      columns.push(cell.formattedValue);
+      columns.push(value);
     }
     rows.push(columns);
   }
