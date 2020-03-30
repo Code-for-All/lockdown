@@ -6,6 +6,9 @@ import copy from 'rollup-plugin-copy';
 import { injectManifest } from 'rollup-plugin-workbox';
 import applySwRegistration from 'rollup-plugin-apply-sw-registration';
 import replace from '@rollup/plugin-replace';
+import packageJson from './package.json';
+
+const versionModulePath = require.resolve('./src/version.js');
 
 export default [
   {
@@ -14,11 +17,7 @@ export default [
       format: 'es',
       dir: 'build'
     },
-    plugins: [
-      replace({ 'process.env.NODE_ENV': '"production"' }),
-      resolve(),
-      terser({ output: { comments: false } }),
-    ]
+    plugins: [replace({ 'process.env.NODE_ENV': '"production"' }), resolve(), terser({ output: { comments: false } })]
   },
   {
     input: 'index.html',
@@ -30,6 +29,15 @@ export default [
     },
 
     plugins: [
+      {
+        name: 'version',
+        load(id) {
+          // replace the version module with a live version from the package.json
+          if (id === versionModulePath) {
+            return `export default '${packageJson.version}'`;
+          }
+        }
+      },
       resolve(),
       html(),
       babel({
@@ -58,20 +66,23 @@ export default [
       }),
       copy({
         hook: 'buildStart',
-        targets: [{ src: 'manifest.json', dest: 'build/' }, { src: 'manifest-dark.json', dest: 'build/' }],
+        targets: [
+          { src: 'manifest.json', dest: 'build/' },
+          { src: 'manifest-dark.json', dest: 'build/' }
+        ],
         flatten: false
       }),
       injectManifest({
         swSrc: 'build/sw.js',
         swDest: 'build/sw.js',
         globDirectory: 'build/',
-        mode: 'production',
+        mode: 'production'
         // modifyURLPrefix: {
         //   '': '/lockdown/'
         // }
       }),
       applySwRegistration({
-        htmlFileName: 'index.html',
+        htmlFileName: 'index.html'
         // base: 'lockdown/'
       })
     ]
