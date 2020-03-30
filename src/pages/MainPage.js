@@ -44,10 +44,11 @@ const dialogStyles = css`
   }
 
   .ld-dialog--container {
-    overflow: auto;
+    overflow: hidden;
     position: fixed;
     width: 90%;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     max-width: 400px;
     left: calc(50% + 200px);
     top: 50%;
@@ -60,14 +61,27 @@ const dialogStyles = css`
   }
 
   .ld-dialog--header {
-    display: flex;
     text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
   .ld-dialog--header h1 {
     margin-top: 0;
     margin-left: 24px;
+    margin-bottom: 0;
     flex: 1;
+  }
+
+  .ld-dialog--content {
+    overflow: auto;
+    height: calc(100% - 40px);
+    padding: 0 20px 20px 20px;
   }
 
   .ld-dialog--close-cont button {
