@@ -142,14 +142,14 @@ export class MainPage extends Component {
       if (!darkmodePreferenceExists) {
         if (preference) {
           localStorage.setItem('darkmode', 'true');
-          document.body.classList.add('dark');
+          document.getElementsByTagName('html')[0].classList.add('dark');
         } else {
           localStorage.setItem('darkmode', 'false');
         }
       } else {
         // on subsequent pageloads, decide darkmode on users chosen preference
         if (darkMode) {
-          document.body.classList.add('dark');
+          document.getElementsByTagName('html')[0].classList.add('dark');
         }
       }
     });

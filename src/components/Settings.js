@@ -1,6 +1,9 @@
 import { html } from 'htm/preact';
 import { useState, useEffect } from 'preact/compat';
+import { addPwaUpdateListener } from '../utils/addPwaUpdateListener.js';
 import css from 'csz';
+import './pwa-install-button';
+import './pwa-update-available';
 
 const styles = css`
   & {
@@ -44,14 +47,14 @@ const styles = css`
 
 export function Settings() {
   const [showGeolocationButton, setshowGeolocationButton] = useState(false);
-  const showPwabuttons = false;
+  const [pwaUpdateAvailable, setPwaUpdateAvailable] = useState(false);
 
   function toggleDarkmode() {
-    if (document.body.classList.contains('dark')) {
-      document.body.classList.remove('dark');
+    if (document.getElementsByTagName('html')[0].classList.contains('dark')) {
+      document.getElementsByTagName('html')[0].classList.remove('dark');
       localStorage.setItem('darkmode', 'false');
     } else {
-      document.body.classList.add('dark');
+      document.getElementsByTagName('html')[0].classList.add('dark');
       localStorage.setItem('darkmode', 'true');
     }
   }
@@ -66,6 +69,10 @@ export function Settings() {
   }
 
   useEffect(async () => {
+    addPwaUpdateListener(updateAvailable => {
+      setPwaUpdateAvailable(updateAvailable);
+    });
+
     if (navigator.permissions) {
       const geolocation = await navigator.permissions.query({ name: 'geolocation' });
 
@@ -88,10 +95,16 @@ export function Settings() {
             <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button>
           `
         : ''}
-      ${showPwabuttons
+
+      <pwa-install-button>
+        <button class="ld-button">Install app</button>
+      </pwa-install-button>
+
+      ${pwaUpdateAvailable
         ? html`
-            <button class="ld-button">Install pwa</button>
-            <button class="ld-button">Update app</button>
+            <pwa-update-available>
+              <button class="ld-button">Update app</button>
+            </pwa-update-available>
           `
         : ''}
     </div>

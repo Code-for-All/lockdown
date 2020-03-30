@@ -66,7 +66,7 @@ export class WorldMap extends Component {
 
     function worldStyle(e) {
       // lockdown unknown
-      let value = '';
+      let value = 'grey';
 
       if (e.properties.data && e.properties.data.lockdowns) {
         if (e.properties.data.lockdowns.length === 0) {
@@ -86,9 +86,16 @@ export class WorldMap extends Component {
         }
       }
 
+      let lineOpacity;
+      if (!navigator.onLine) {
+        lineOpacity = 1;
+      } else {
+        lineOpacity = 0.1;
+      }
+
       const style = {
         weight: 1,
-        opacity: 0.1,
+        opacity: lineOpacity,
         color: '#555',
         fillOpacity: 0
       };
