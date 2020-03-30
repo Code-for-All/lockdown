@@ -18,12 +18,11 @@ class CoronaTrackerService extends EventTargetShim {
       try {
         this.cache[iso2] = {};
         const res = await (await fetch(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${iso2}`)).json();
-
         this.cache[iso2] = {
           status: 'success',
-          totalConfirmed: res[0].totalConfirmed,
-          totalDeaths: res[0].totalDeaths,
-          totalRecovered: res[0].totalRecovered
+          totalConfirmed: res[0]?.totalConfirmed ?? 0,
+          totalDeaths: res[0]?.totalDeaths ?? 0,
+          totalRecovered: res[0]?.totalRecovered ?? 0
         };
 
         return this.cache[iso2];
