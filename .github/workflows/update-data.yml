@@ -13,6 +13,11 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Checkout branch
+        run: |
+          git fetch
+          git checkout origin/master
+
       - name: Update data
         run: |
           export GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_API_EMAIL }}
