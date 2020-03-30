@@ -56,7 +56,7 @@ const styles = css`
 
 export const Header = () => html`
   <header class=${styles}>
-    <a href="/">
+    <a href="">
       ${logo}
       <!-- TODO: screen reader h1 -->
     </a>
