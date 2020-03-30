@@ -9,7 +9,8 @@ export const googleServiceCredentialsJson = (() => {
   if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
     return {
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY,
+      // fix escaped newlines in CI
+      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n')
     };
   }
 
