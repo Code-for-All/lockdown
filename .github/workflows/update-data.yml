@@ -5,7 +5,7 @@ on:
     - cron: '*/5 * * * *'
 
 jobs:
-  generate-data:
+  update-data:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
