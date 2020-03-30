@@ -1,8 +1,8 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet';
 import GoogleSpreadsheetWorksheet from 'google-spreadsheet/lib/GoogleSpreadsheetWorksheet';
 import { lockdownSheetId, googleServiceCredentialsJson } from '../../config';
+import { CustomGoogleSpreadsheet } from '../../utils/CustomGoogleSpreadsheet';
 
-const doc = new GoogleSpreadsheet(lockdownSheetId);
+const doc = new CustomGoogleSpreadsheet(lockdownSheetId);
 var initialized = false;
 
 /**
@@ -34,7 +34,7 @@ export async function getWorksheetByTitle(title) {
 
 /**
  * Returns document
- * @returns {GoogleSpreadsheet}
+ * @returns {CustomGoogleSpreadsheet}
  */
 export default async function getDocument() {
   await init();
