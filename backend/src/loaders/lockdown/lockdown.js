@@ -1,11 +1,12 @@
-import { getWorksheetByTitle } from './googlesheet';
+import getDocument, { getWorksheetByTitle } from './googlesheet';
 import GoogleSpreadsheetWorksheet from 'google-spreadsheet/lib/GoogleSpreadsheetWorksheet';
 import { transposeRows, transposeColumns } from '../../utils/dataHelper';
 import { letterToColumn, columnToLetter } from 'google-spreadsheet/lib/utils';
 import logger from '../../utils/logger';
 import { writeJSON } from '../../utils/file';
-import { getCachedCellsRange } from '../../utils/sheet';
+import { getCachedCellsRange, getGridRanges } from '../../utils/sheet';
 import find from 'lodash/find';
+import { SimpleGridSheet, SimpleGrid } from '../../utils/SimpleGrid';
 
 // Constants
 const entryColumnLength = 5;
@@ -44,11 +45,11 @@ function parseEntryStructure(rows, labels) {
   // Strip null start & end
   const associativeRowsStripped = [];
   associativeRows.forEach((associativeRow) => {
-    let o = { value: associativeRow['value'] };
-    if (associativeRow['start'] !== null) {
+    let o = { value: associativeRow['value'] || null };
+    if (associativeRow['start']) {
       o['start'] = associativeRow['start'];
     }
-    if (associativeRow['end'] !== null) {
+    if (associativeRow['end']) {
       o['end'] = associativeRow['end'];
     }
     associativeRowsStripped.push(o);
@@ -87,7 +88,7 @@ function getEntryCellRange(rowRange, entryIndex = 0, initialColumnLetter = 'H') 
 
 /**
  * Gets fully parsed entry data
- * @param {GoogleSpreadsheetWorksheet} sheet 
+ * @param {GoogleSpreadsheetWorksheet|SimpleGrid} sheet 
  * @param {integer} entryIndex 
  */
 function getEntry(sheet, entryIndex) {
@@ -170,30 +171,50 @@ function getEntry(sheet, entryIndex) {
 }
 
 /**
- * Gets sheet data
+ * Groups territories and request data from google API at batch size
+ * @param {array} territories 
  */
-export async function getTerritoryEntryData(isoCode) {
-  // const sheet = await getWorksheetByTitle(isoCode);
-  const sheet = await getWorksheetByTitle('DEMO');
+export async function batchGetTerritoriesEntryData(territories) {
+  const batchSize = 25;
   const entriesToGrab = 10;
   const endCacheColumn = columnToLetter(letterToColumn('H') + (entriesToGrab * entryColumnLength));
   const rangeToCache = `H1:${endCacheColumn}60`;
-  const entries = [];
+  const doc = await getDocument();
+  const result = [];
+  var batch;
+  
+  while (batch = territories.splice(0, batchSize)) {
+    if (batch.length < 1) break;
+    // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
+    // let gridRanges = batch.map(territory => `${territory['iso3']}!${rangeToCache}`);
+    let gridRanges = batch.map(territory => `DEMO!${rangeToCache}`);
+    logger.log(`[Lockdown:WorkSheet] ${batch.map(t => t['iso3']).join(' ')}`);
+    let gridData = await doc.batchGetGridRanges(gridRanges);
+    
+    for (let i = 0; i < batch.length; i++) {
+      // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
+      // let workSheet = await getWorksheetByTitle(batch[i]['iso3']);
+      let workSheet = await getWorksheetByTitle('DEMO');
+      let gridSheet = new SimpleGridSheet(rangeToCache, gridData[i], workSheet);
+      let entries = [];
+      for (let entryIndex = 0; entryIndex < entriesToGrab; entryIndex++) {
+        // Cell ranges
+        let entryData = getEntry(gridSheet, entryIndex);
+        if (entryData) {
+          entries.push(entryData);
+        }
+      }
 
-  // Precache cells data for all entries
-  await sheet.loadCells(rangeToCache);
-
-  for (var entryIndex = 0; entryIndex < entriesToGrab; entryIndex++) {
-    // Cell ranges
-    let entryData = getEntry(sheet, entryIndex);
-    if (entryData) {
-      entries.push(entryData);
+      result.push({
+        isoCode: batch[i]['iso2'],
+        lockdown: {
+          entries
+        }
+      });
     }
   }
 
-  return {
-    entries
-  };
+  return result;
 }
 
 /**
@@ -202,17 +223,7 @@ export async function getTerritoryEntryData(isoCode) {
  */
 export async function getTerritoriesLockdownData() {
   const territories = await getGlobalData();
-  const result = [];
-  for (var [index, territory] of territories.entries()) {
-    let isoCode = territory['iso2'];
-    logger.log(`[Lockdown:WorkSheet] ${territory['territory']}`);
-    result.push({
-      isoCode,
-      lockdown: await getTerritoryEntryData(isoCode)
-    });
-  }
-
-  return result;
+  return await batchGetTerritoriesEntryData(territories);
 }
 
 export default async function loadData() {

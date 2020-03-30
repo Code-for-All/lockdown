@@ -1,12 +1,9 @@
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 
-/**
- * Added capability to execute batchGet API:
- * https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchGet
- */
 export class CustomGoogleSpreadsheet extends GoogleSpreadsheet {
   /**
-   * 
+   * Added capability to execute batchGet API:
+   * https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/batchGet
    * @param {string[]} ranges 
    */
   async batchGetGridRanges(ranges) {
