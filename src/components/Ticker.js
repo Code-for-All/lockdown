@@ -100,18 +100,17 @@ const styles = css`
   }
 
   .ld-ticker--bar {
-    width: 40px;
+    width: 15px;
     display: flex;
-    /* height: 100px; */
+    margin-right: 20px;
     flex-direction: column;
   }
 
   .ld-ticker--dot-container {
     display: flex;
     justify-content: center;
-    width: 40px;
+    width: 15px;
     height: 20px;
-    /* background-color: lavenderblush; */
   }
 
   .ld-ticker--dot {
@@ -121,7 +120,7 @@ const styles = css`
   }
 
   .ld-ticker--line {
-    width: 40px;
+    width: 15px;
     height: 100%;
     position: relative;
   }
