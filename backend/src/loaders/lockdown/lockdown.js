@@ -208,7 +208,8 @@ export async function batchGetTerritoriesEntryData(territories) {
       result.push({
         isoCode: batch[i]['iso2'],
         lockdown: {
-          entries
+          // TODO: change this to support multiple entries after MVP
+          ...entries[0]
         }
       });
     }
@@ -239,7 +240,7 @@ export default async function loadData() {
   // Load summarized datafile
   const summarizedTerritories = {};
   territories.map((territory) => {
-    let measures = territory['lockdown']['entries'][0]['measures'];
+    let measures = territory['lockdown']['measures'];
     let lockdownStatus = find(measures, { 'label': 'lockdown_status' });
     summarizedTerritories[territory['isoCode']] = {
       lockdown: {
