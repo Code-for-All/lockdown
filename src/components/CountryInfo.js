@@ -4,6 +4,7 @@ import { Component } from 'preact';
 import { lockdownsService } from '../services/locksdownsService.js';
 import { travelAdviceService } from '../services/travelAdviceService.js';
 import { coronaTrackerService } from '../services/coronaTrackerService.js';
+import { offline } from '../assets/icons/icons.js';
 
 const styles = css`
   & {
@@ -61,6 +62,22 @@ const styles = css`
   }
 `;
 
+const offlineStyles = css`
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height: calc(100% - 60px);
+  }
+
+  svg {
+    width: 120px;
+    margin-bottom: 20px;
+  }
+`;
+
 export class CountryInfo extends Component {
   async componentWillMount() {
     this.setState({
@@ -75,7 +92,11 @@ export class CountryInfo extends Component {
     if (!navigator.onLine) {
       if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success') {
         return html`
-          Looks like you're offline :(
+          <div class="${offlineStyles}">
+            ${offline}
+            <b>You are not connected to the internet</b>
+            <p>Information for this country can't be displayed because you are currently offline. Please check your internet connection.</p>
+          </div>
         `;
       }
     }
