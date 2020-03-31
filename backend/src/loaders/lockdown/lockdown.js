@@ -238,8 +238,8 @@ export default async function loadData() {
 
   // Load summarized datafile
   const summarizedTerritories = {};
-  territories.map((territory) => {
-    let measures = territory['lockdown']['entries'][0]['measures'];
+  territories.forEach((territory) => {
+    let measures = territory['lockdown']['measures'];
     let lockdownStatus = find(measures, { 'label': 'lockdown_status' });
     summarizedTerritories[territory['isoCode']] = {
       lockdown: {
@@ -249,4 +249,9 @@ export default async function loadData() {
   });
 
   writeJSON('datafile', summarizedTerritories);
+
+  return {
+    lockdownTerritories: territories,
+    lockdownStatusByTerritory: summarizedTerritories
+  };
 }
