@@ -208,7 +208,8 @@ export async function batchGetTerritoriesEntryData(territories) {
       result.push({
         isoCode: batch[i]['iso2'],
         lockdown: {
-          entries
+          // TODO: change this to support multiple entries after MVP
+          ...entries[0]
         }
       });
     }
