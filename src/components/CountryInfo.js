@@ -86,14 +86,14 @@ export class CountryInfo extends Component {
       lockdowns: await lockdownsService.getLockdowns(),
       travelAdvice: await travelAdviceService.getAdvice({ iso2: this.props.iso2 }),
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
-      populationData: await populationService.getPopulation({ iso2: this.props.iso2 }),
+      populationData: await populationService.getPopulation({ iso2: this.props.iso2 })
     });
   }
 
-  render(_, { lockdowns, travelAdvice, coronaData , populationData}) {
+  render(_, { lockdowns, travelAdvice, coronaData, populationData }) {
     /** If the user is offline, and theres no response, or the response has failed */
     if (!navigator.onLine) {
-      if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success'|| populationData !== 'success') {
+      if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success' || populationData?.status !== 'success') {
         return html`
           <div class="${offlineStyles}">
             ${offline}
@@ -105,7 +105,7 @@ export class CountryInfo extends Component {
     }
 
     /** If there is no data available but the user is online, show loading state */
-    if (!lockdowns && !travelAdvice && !coronaData && !populationData && navigator.onLine ) {
+    if (!lockdowns && !travelAdvice && !coronaData && !populationData && navigator.onLine) {
       return html`
         Loading...
       `;
