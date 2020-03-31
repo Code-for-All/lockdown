@@ -4,6 +4,7 @@ import { Component } from 'preact';
 import { lockdownsService } from '../services/locksdownsService.js';
 import { travelAdviceService } from '../services/travelAdviceService.js';
 import { coronaTrackerService } from '../services/coronaTrackerService.js';
+import { offline } from '../assets/icons/icons.js';
 
 const styles = css`
   & {
@@ -70,6 +71,11 @@ const offlineStyles = css`
     flex-direction: column;
     height: calc(100% - 60px);
   }
+
+  svg {
+    width: 120px;
+    margin-bottom: 20px;
+  }
 `;
 
 export class CountryInfo extends Component {
@@ -83,17 +89,17 @@ export class CountryInfo extends Component {
 
   render(_, { lockdowns, travelAdvice, coronaData }) {
     /** If the user is offline, and theres no response, or the response has failed */
-    // if (!navigator.onLine) {
-      if(true) {
-      // if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success') {
+    if (!navigator.onLine) {
+      if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success') {
         return html`
           <div class="${offlineStyles}">
+            ${offline}
             <b>You are not connected to the internet</b>
             <p>Information for this country can't be displayed because you are currently offline. Please check your internet connection.</p>
           </div>
         `;
       }
-    // }
+    }
 
     /** If there is no data available but the user is online, show loading state */
     if (!lockdowns && !travelAdvice && !coronaData && navigator.onLine) {
