@@ -4,6 +4,8 @@ import { Component } from 'preact';
 import { lockdownsService } from '../services/locksdownsService.js';
 import { travelAdviceService } from '../services/travelAdviceService.js';
 import { coronaTrackerService } from '../services/coronaTrackerService.js';
+import { populationService } from '../services/populationService.js';
+
 import { offline } from '../assets/icons/icons.js';
 
 const styles = css`
@@ -83,14 +85,15 @@ export class CountryInfo extends Component {
     this.setState({
       lockdowns: await lockdownsService.getLockdowns(),
       travelAdvice: await travelAdviceService.getAdvice({ iso2: this.props.iso2 }),
-      coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 })
+      coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
+      populationData: await populationService.getPopulation({ iso2: this.props.iso2 }),
     });
   }
 
-  render(_, { lockdowns, travelAdvice, coronaData }) {
+  render(_, { lockdowns, travelAdvice, coronaData , populationData}) {
     /** If the user is offline, and theres no response, or the response has failed */
     if (!navigator.onLine) {
-      if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success') {
+      if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success'|| populationData !== 'success') {
         return html`
           <div class="${offlineStyles}">
             ${offline}
@@ -102,7 +105,7 @@ export class CountryInfo extends Component {
     }
 
     /** If there is no data available but the user is online, show loading state */
-    if (!lockdowns && !travelAdvice && !coronaData && navigator.onLine) {
+    if (!lockdowns && !travelAdvice && !coronaData && !populationData && navigator.onLine ) {
       return html`
         Loading...
       `;
@@ -126,7 +129,7 @@ export class CountryInfo extends Component {
           <h2>Stats</h2>
           <div class="data-entry">
             <p>Population:</p>
-            <p class="data-value">-</p>
+            <p class="data-value">${populationData?.totalPopulation ?? 'Error'}</p>
           </div>
           <div class="data-entry">
             <p>Confirmed cases:</p>
