@@ -12,7 +12,7 @@ export function appendLockdownStatus(lockdownStatusByTerritory) {
       ...feature,
       properties: {
         ...feature['properties'],
-        lockdown_status: lockdownStatusByTerritory[feature.properties.iso2]?.lockdown?.lockdown_status ?? ''
+        lockdown_status: lockdownStatusByTerritory[feature.properties.iso2]?.lockdown?.lockdown_status ?? 'Unclear'
       }
     });
   });
