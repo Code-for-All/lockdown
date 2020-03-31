@@ -249,8 +249,6 @@ export default async function loadData() {
     };
   });
 
-  writeJSON('datafile', summarizedTerritories);
-
   return {
     lockdownTerritories: territories,
     lockdownStatusByTerritory: summarizedTerritories
