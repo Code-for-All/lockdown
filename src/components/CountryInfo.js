@@ -86,14 +86,14 @@ export class CountryInfo extends Component {
       lockdowns: await lockdownsService.getLockdowns(),
       travelAdvice: await travelAdviceService.getAdvice({ iso2: this.props.iso2 }),
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
-      populationData: await populationService.getPopulation({ iso2: this.props.iso2 })
+      populationData: await populationService.getPopulation(),
     });
   }
 
   render(_, { lockdowns, travelAdvice, coronaData, populationData }) {
     /** If the user is offline, and theres no response, or the response has failed */
     if (!navigator.onLine) {
-      if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success' || populationData !== 'success') {
+      if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success' || populationData?.status !== 'success') {
         return html`
           <div class="${offlineStyles}">
             ${offline}
@@ -129,7 +129,7 @@ export class CountryInfo extends Component {
           <h2>Stats</h2>
           <div class="data-entry">
             <p>Population:</p>
-            <p class="data-value">${populationData?.totalPopulation ?? 'Error'}</p>
+            <p class="data-value">${populationData?.[this.props.iso2].Population ?? 'Error'}</p>
           </div>
           <div class="data-entry">
             <p>Confirmed cases:</p>

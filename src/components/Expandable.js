@@ -19,7 +19,6 @@ export function Expandable(props) {
       <div class="ld-expandable">
         <button
           onClick=${() => setExpanded(!expanded)}
-          id="button1"
           class="ld-expandable--toggle"
           aria-controls="expandable-id--${randomId}"
           aria-expanded="${expanded}"
