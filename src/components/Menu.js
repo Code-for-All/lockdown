@@ -61,7 +61,7 @@ const renderMenu = menuItem => {
             detail=${html`
               <p>
                 <b>Project Lockdown</b> is a Civic Tech initiative from a number of organizations and individuals. You can find the list of
-                project members <a target="_blank" href="https://www.TIOF.Click/LockdownData">here</a> under the <b>Credits</b> tab.
+                project members <a rel="noopener noreferrer" target="_blank" href="https://www.TIOF.Click/LockdownData">here</a> under the <b>Credits</b> tab.
               </p>
             `}
           />
