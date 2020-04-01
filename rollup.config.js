@@ -6,6 +6,9 @@ import copy from 'rollup-plugin-copy';
 import { injectManifest } from 'rollup-plugin-workbox';
 import applySwRegistration from 'rollup-plugin-apply-sw-registration';
 import replace from '@rollup/plugin-replace';
+import fs from 'fs';
+import path from 'path';
+import uglifycss from 'uglifycss';
 import packageJson from './package.json';
 
 const versionModulePath = require.resolve('./src/version.js');
@@ -84,7 +87,18 @@ export default [
       applySwRegistration({
         htmlFileName: 'index.html'
         // base: 'lockdown/'
-      })
+      }),
+      {
+        name: 'minify-css',
+        writeBundle() {
+          const filepath = path.resolve('./build/src/style/');
+          fs.readdirSync(filepath)
+            .map(file => path.join(filepath, file))
+            .forEach(file => {
+              fs.writeFileSync(file, uglifycss.processFiles([file]))
+            });
+        }
+      }
     ]
   }
 ];
