@@ -154,12 +154,11 @@ export class MainPage extends Component {
       // on initial pageload, decide darkmode on users system preference
       if (!darkmodePreferenceExists) {
         if (preference) {
-          localStorage.setItem('darkmode', 'true');
           document.getElementsByTagName('html')[0].classList.add('dark');
           setFavIcon(true);
         } else {
+          document.getElementsByTagName('html')[0].classList.remove('dark');
           setFavIcon(false);
-          localStorage.setItem('darkmode', 'false');
         }
       } else {
         // on subsequent pageloads, decide darkmode on users chosen preference
