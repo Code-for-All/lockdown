@@ -44,7 +44,7 @@ export class App extends Component {
 
   async componentDidMount() {
     this.__onPathChanged();
-    installMediaQueryWatcher(`(min-width: 960px)`, matches => {
+    installMediaQueryWatcher(`(min-width: 960px)`, (matches) => {
       this.setState({ isMobile: !matches });
     });
   }
@@ -69,9 +69,10 @@ export class App extends Component {
       <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
 
       ${this.state.dialog.opened
-        ? html`
-            <${Lazy} component=${() => import('../components/Dialog.js')} props=${{ ...this.state.dialog, onClose: this.__closeDialog }} />
-          `
+        ? html`<${Lazy}
+            component=${() => import('../components/Dialog.js')}
+            props=${{ ...this.state.dialog, onClose: this.__closeDialog }}
+          />`
         : ''}
     `;
   }
@@ -98,11 +99,9 @@ export class App extends Component {
       this.setState({
         dialog: {
           opened: true,
-          template: html`
-            <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2 }} />
-          `,
-          title: country
-        }
+          template: html`<${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2 }} />`,
+          title: country,
+        },
       });
     }
   }
