@@ -154,7 +154,7 @@ const loadingStyles = css`
   }
 `;
 
-export class CountryInfo extends Component {
+export default class CountryInfo extends Component {
   async componentWillMount() {
     this.setState({
       lockdowns: await lockdownsService.getLockdowns(),
