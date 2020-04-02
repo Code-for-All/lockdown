@@ -86,7 +86,7 @@ export class CountryInfo extends Component {
       lockdowns: await lockdownsService.getLockdowns(),
       travelAdvice: await travelAdviceService.getAdvice({ iso2: this.props.iso2 }),
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
-      populationData: await populationService.getPopulation(),
+      populationData: await populationService.getPopulation()
     });
   }
 

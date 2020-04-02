@@ -1,5 +1,4 @@
 {
- 
     "AF": {
       "CountryName": "Afghanistan",
       "Population": 37172386
@@ -236,22 +235,6 @@
       "CountryName": "Dominican Republic",
       "Population": 10627165
     },
-    ":::Early-demographic dividend": {
-      "CountryName": "Early-demographic dividend",
-      "Population": 3249140605
-    },
-    ":::East Asia & Pacific": {
-      "CountryName": "East Asia & Pacific",
-      "Population": 2328220870
-    },
-    ":::East Asia & Pacific (excluding high income)": {
-      "CountryName": "East Asia & Pacific (excluding high income)",
-      "Population": 2081651801
-    },
-    ":::East Asia & Pacific (IDA & IBRD countries)": {
-      "CountryName": "East Asia & Pacific (IDA & IBRD countries)",
-      "Population": 2056064424
-    },
     "EC": {
       "CountryName": "Ecuador",
       "Population": 17084357
@@ -288,22 +271,6 @@
       "CountryName": "Euro area",
       "Population": 341783171
     },
-    ":::Europe & Central Asia": {
-      "CountryName": "Europe & Central Asia",
-      "Population": 918793590
-    },
-    ":::Europe & Central Asia (excluding high income)": {
-      "CountryName": "Europe & Central Asia (excluding high income)",
-      "Population": 417797257
-    },
-    ":::Europe & Central Asia (IDA & IBRD countries)": {
-      "CountryName": "Europe & Central Asia (IDA & IBRD countries)",
-      "Population": 459865205
-    },
-    ":::European Union": {
-      "CountryName": "European Union",
-      "Population": 513213363
-    },
     "FO": {
       "CountryName": "Faroe Islands",
       "Population": 48497
@@ -315,10 +282,6 @@
     "FI": {
       "CountryName": "Finland",
       "Population": 5518050
-    },
-    ":::Fragile and conflict affected situations": {
-      "CountryName": "Fragile and conflict affected situations",
-      "Population": 515215936
     },
     "FR": {
       "CountryName": "France",
@@ -388,14 +351,7 @@
       "CountryName": "Haiti",
       "Population": 11123176
     },
-    ":::Heavily indebted poor countries (HIPC)": {
-      "CountryName": "Heavily indebted poor countries (HIPC)",
-      "Population": 780234406
-    },
-    ":::High income": {
-      "CountryName": "High income",
-      "Population": 1210312147
-    },
+  
     "HN": {
       "CountryName": "Honduras",
       "Population": 9587522
@@ -408,29 +364,10 @@
       "CountryName": "Hungary",
       "Population": 9768785
     },
-    ":::IBRD only": {
-      "CountryName": "IBRD only",
-      "Population": 4772284113
-    },
+   
     "IS": {
       "CountryName": "Iceland",
       "Population": 353574
-    },
-    ":::IDA & IBRD total": {
-      "CountryName": "IDA & IBRD total",
-      "Population": 6412522234
-    },
-    ":::IDA blend": {
-      "CountryName": "IDA blend",
-      "Population": 555830605
-    },
-    ":::IDA only": {
-      "CountryName": "IDA only",
-      "Population": 1084407516
-    },
-    ":::IDA total": {
-      "CountryName": "IDA total",
-      "Population": 1640238121
     },
     "IN": {
       "CountryName": "India",
@@ -512,30 +449,11 @@
       "CountryName": "Lao PDR",
       "Population": 7061507
     },
-    ":::Late-demographic dividend": {
-      "CountryName": "Late-demographic dividend",
-      "Population": 2288665963
-    },
-    ":::Latin America & Caribbean": {
-      "CountryName": "Latin America & Caribbean",
-      "Population": 641357515
-    },
-    ":::Latin America & Caribbean (excluding high income)": {
-      "CountryName": "Latin America & Caribbean (excluding high income)",
-      "Population": 609013934
-    },
-    ":::Latin America & the Caribbean (IDA & IBRD countries)": {
-      "CountryName": "Latin America & the Caribbean (IDA & IBRD countries)",
-      "Population": 625569713
-    },
     "LV": {
       "CountryName": "Latvia",
       "Population": 1926542
     },
-    ":::Least developed countries: UN classification": {
-      "CountryName": "Least developed countries: UN classification",
-      "Population": 1009662578
-    },
+  
     "LB": {
       "CountryName": "Lebanon",
       "Population": 6848925
@@ -559,18 +477,6 @@
     "LT": {
       "CountryName": "Lithuania",
       "Population": 2789533
-    },
-    ":::Low & middle income": {
-      "CountryName": "Low & middle income",
-      "Population": 6383958209
-    },
-    ":::Low income": {
-      "CountryName": "Low income",
-      "Population": 705417321
-    },
-    ":::Lower middle income": {
-      "CountryName": "Lower middle income",
-      "Population": 3022905169
     },
     "LU": {
       "CountryName": "Luxembourg",
@@ -623,22 +529,6 @@
     "FM": {
       "CountryName": "Micronesia, Fed. Sts.",
       "Population": 112640
-    },
-    ":::Middle East & North Africa": {
-      "CountryName": "Middle East & North Africa",
-      "Population": 448912859
-    },
-    ":::Middle East & North Africa (excluding high income)": {
-      "CountryName": "Middle East & North Africa (excluding high income)",
-      "Population": 382896715
-    },
-    ":::Middle East & North Africa (IDA & IBRD countries)": {
-      "CountryName": "Middle East & North Africa (IDA & IBRD countries)",
-      "Population": 378327628
-    },
-    ":::Middle income": {
-      "CountryName": "Middle income",
-      "Population": 5678540888
     },
     "MD": {
       "CountryName": "Moldova",
@@ -704,10 +594,6 @@
       "CountryName": "Nigeria",
       "Population": 195874740
     },
-    ":::North America": {
-      "CountryName": "North America",
-      "Population": 364290258
-    },
     "MK": {
       "CountryName": "North Macedonia",
       "Population": 2082958
@@ -720,26 +606,11 @@
       "CountryName": "Norway",
       "Population": 5314336
     },
-    ":::Not classified": {
-      "CountryName": "Not classified",
-      "Population": ""
-    },
-    ":::OECD members": {
-      "CountryName": "OECD members",
-      "Population": 1303529456
-    },
     "OM": {
       "CountryName": "Oman",
       "Population": 4829483
     },
-    ":::Other small states": {
-      "CountryName": "Other small states",
-      "Population": 30758989
-    },
-    ":::Pacific island small states": {
-      "CountryName": "Pacific island small states",
-      "Population": 2457367
-    },
+
     "PK": {
       "CountryName": "Pakistan",
       "Population": 212215030
@@ -775,14 +646,6 @@
     "PT": {
       "CountryName": "Portugal",
       "Population": 10281762
-    },
-    ":::Post-demographic dividend": {
-      "CountryName": "Post-demographic dividend",
-      "Population": 1109997273
-    },
-    ":::Pre-demographic dividend": {
-      "CountryName": "Pre-demographic dividend",
-      "Population": 919485393
     },
     "PR": {
       "CountryName": "Puerto Rico",
@@ -852,10 +715,7 @@
       "CountryName": "Slovenia",
       "Population": 2067372
     },
-    ":::Small states": {
-      "CountryName": "Small states",
-      "Population": 40575321
-    },
+  
     "SB": {
       "CountryName": "Solomon Islands",
       "Population": 652858
@@ -867,14 +727,6 @@
     "ZA": {
       "CountryName": "South Africa",
       "Population": 57779622
-    },
-    ":::South Asia": {
-      "CountryName": "South Asia",
-      "Population": 1814388744
-    },
-    ":::South Asia (IDA & IBRD)": {
-      "CountryName": "South Asia (IDA & IBRD)",
-      "Population": 1814388744
     },
     "SD": {
       "CountryName": "Sudan",
@@ -903,18 +755,6 @@
     "VC": {
       "CountryName": "St. Vincent and the Grenadines",
       "Population": 110210
-    },
-    ":::Sub-Saharan Africa": {
-      "CountryName": "Sub-Saharan Africa",
-      "Population": 1078306520
-    },
-    ":::Sub-Saharan Africa (excluding high income)": {
-      "CountryName": "Sub-Saharan Africa (excluding high income)",
-      "Population": 1078209758
-    },
-    ":::Sub-Saharan Africa (IDA & IBRD countries)": {
-      "CountryName": "Sub-Saharan Africa (IDA & IBRD countries)",
-      "Population": 1078306520
     },
     "SR": {
       "CountryName": "Suriname",
@@ -1000,10 +840,6 @@
       "CountryName": "United States",
       "Population": 327167434
     },
-    ":::Upper middle income": {
-      "CountryName": "Upper middle income",
-      "Population": 2655635719
-    },
     "UY": {
       "CountryName": "Uruguay",
       "Population": 3449299
@@ -1031,10 +867,6 @@
     "PS": {
       "CountryName": "West Bank and Gaza",
       "Population": 4569087
-    },
-    ":::World": {
-      "CountryName": "World",
-      "Population": 7594270356
     },
     "YE": {
       "CountryName": "Yemen, Rep.",

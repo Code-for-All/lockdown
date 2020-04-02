@@ -11,5 +11,4 @@ class PopulationService extends EventTargetShim {
   }
 }
 
-
 export const populationService = new PopulationService();
