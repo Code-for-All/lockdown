@@ -20,16 +20,16 @@ installMediaQueryWatcher(`(prefers-color-scheme: dark)`, preference => {
   // on initial pageload, decide darkmode on users system preference
   if (!darkmodePreferenceExists) {
     if (preference) {
-      document.getElementsByTagName('html')[0].classList.add('dark');
+      document.documentElement.classList.add('dark');
       setFavIcon(true);
     } else {
-      document.getElementsByTagName('html')[0].classList.remove('dark');
+      document.documentElement.classList.remove('dark');
       setFavIcon(false);
     }
   } else {
     // on subsequent pageloads, decide darkmode on users chosen preference
     if (darkMode) {
-      document.getElementsByTagName('html')[0].classList.add('dark');
+      document.documentElement.classList.add('dark');
       setFavIcon(true);
     }
   }
