@@ -6,7 +6,7 @@ import { CountryInfo } from '../components/CountryInfo.js';
 import { Totals } from '../components/Totals.js';
 import { router } from '../router.js';
 import { Menu } from '../components/Menu.js';
-import { Dialog } from '../components/Dialog.js';
+import { Lazy } from '../components/Lazy.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import { setFavIcon } from '../utils/setFavIcon.js';
 
@@ -34,13 +34,7 @@ const totalsStyles = css`
 export class MainPage extends Component {
   constructor() {
     super();
-    this.state = {
-      dialog: {
-        opened: false,
-        template: {},
-        title: ''
-      }
-    };
+    this.state = { dialog: { opened: false, template: {}, title: '' } };
 
     this.__onPathChanged = this.__onPathChanged.bind(this);
     this.__closeCountryInfo = this.__closeCountryInfo.bind(this);
@@ -75,9 +69,7 @@ export class MainPage extends Component {
     });
 
     installMediaQueryWatcher(`(min-width: 960px)`, matches => {
-      this.setState({
-        isMobile: !matches
-      });
+      this.setState({ isMobile: !matches });
     });
   }
 
@@ -100,7 +92,7 @@ export class MainPage extends Component {
 
       ${this.state.dialog.opened
         ? html`
-            <${Dialog} title=${this.state.dialog.title} onClose=${this.__closeDialog}>${this.state.dialog.template}<//>
+            <${Lazy} component=${() => import('../components/Dialog.js')} props=${{ ...this.state.dialog, onClose: this.__closeDialog }} />
           `
         : ''}
     `;
@@ -108,7 +100,6 @@ export class MainPage extends Component {
 
   __showDialogRoute({ template, title }) {
     const country = router.url.searchParams.get('country');
-
     if (country) {
       router.setPath(`${title}?country=${country}`);
     } else {

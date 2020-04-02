@@ -96,7 +96,7 @@ const styles = css`
   }
 `;
 
-export class Dialog extends Component {
+export default class Dialog extends Component {
   constructor() {
     super();
     this.__onClick = this.__onClick.bind(this);
@@ -125,7 +125,7 @@ export class Dialog extends Component {
             </div>
           </div>
           <div class="ld-dialog--content">
-            ${this.props.children}
+            ${this.props.template}
           </div>
         </div>
       </div>
