@@ -2,7 +2,6 @@ import { html } from 'htm/preact';
 import css from 'csz';
 import { Component } from 'preact';
 import { WorldMap } from '../components/WorldMap.js';
-import { CountryInfo } from '../components/CountryInfo.js';
 import { Totals } from '../components/Totals.js';
 import { router } from '../router.js';
 import { Menu } from '../components/Menu.js';
@@ -121,7 +120,7 @@ export class MainPage extends Component {
         dialog: {
           opened: true,
           template: html`
-            <${CountryInfo} country=${country} iso2=${iso2} />
+            <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2 }} />
           `,
           title: country
         }
