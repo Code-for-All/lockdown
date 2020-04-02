@@ -13,6 +13,18 @@ import packageJson from './package.json';
 
 const versionModulePath = require.resolve('./src/version.js');
 
+function preloadInitialImports(html, { bundle }) {
+  const initialImports = [];
+  for (const entrypoint of bundle.entrypoints) {
+    initialImports.push(...entrypoint.chunk.imports);
+  }
+  console.log('initialImports', initialImports);
+  return html.replace(
+    '</head>',
+    `${initialImports.map(i => `<link href="${i}" rel="preload" as="script" crossorigin="anonymous">`)}</head>`
+  );
+}
+
 export default [
   {
     input: 'sw.js',
@@ -42,7 +54,9 @@ export default [
         }
       },
       resolve(),
-      html(),
+      html({
+        transform: [preloadInitialImports]
+      }),
       babel({
         babelHelpers: 'bundled',
         presets: [require.resolve('@babel/preset-modules')],
@@ -95,7 +109,7 @@ export default [
           fs.readdirSync(filepath)
             .map(file => path.join(filepath, file))
             .forEach(file => {
-              fs.writeFileSync(file, uglifycss.processFiles([file]))
+              fs.writeFileSync(file, uglifycss.processFiles([file]));
             });
         }
       }
