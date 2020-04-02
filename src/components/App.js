@@ -1,15 +1,15 @@
 import { html } from 'htm/preact';
 import css from 'csz';
 import { Component } from 'preact';
-import { WorldMap } from '../components/WorldMap.js';
-import { Totals } from '../components/Totals.js';
-import { router } from '../router.js';
-import { Menu } from '../components/Menu.js';
-import { Lazy } from '../components/Lazy.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
-import { setFavIcon } from '../utils/setFavIcon.js';
+import { WorldMap } from './WorldMap.js';
+import { Header } from './Header.js';
+import { Totals } from './Totals.js';
+import { Menu } from './Menu.js';
+import { Lazy } from './Lazy.js';
+import { router } from '../router.js';
 
-const totalsStyles = css`
+const styles = css`
   & {
     position: fixed;
     z-index: 1100;
@@ -30,7 +30,7 @@ const totalsStyles = css`
   }
 `;
 
-export class MainPage extends Component {
+export class App extends Component {
   constructor() {
     super();
     this.state = { dialog: { opened: false, template: {}, title: '' } };
@@ -44,29 +44,6 @@ export class MainPage extends Component {
 
   async componentDidMount() {
     this.__onPathChanged();
-
-    installMediaQueryWatcher(`(prefers-color-scheme: dark)`, preference => {
-      const localStorageDarkmode = localStorage.getItem('darkmode');
-      const darkmodePreferenceExists = localStorageDarkmode !== null;
-      const darkMode = localStorageDarkmode === 'true';
-      // on initial pageload, decide darkmode on users system preference
-      if (!darkmodePreferenceExists) {
-        if (preference) {
-          document.getElementsByTagName('html')[0].classList.add('dark');
-          setFavIcon(true);
-        } else {
-          document.getElementsByTagName('html')[0].classList.remove('dark');
-          setFavIcon(false);
-        }
-      } else {
-        // on subsequent pageloads, decide darkmode on users chosen preference
-        if (darkMode) {
-          document.getElementsByTagName('html')[0].classList.add('dark');
-          setFavIcon(true);
-        }
-      }
-    });
-
     installMediaQueryWatcher(`(min-width: 960px)`, matches => {
       this.setState({ isMobile: !matches });
     });
@@ -82,7 +59,9 @@ export class MainPage extends Component {
 
   render() {
     return html`
-      <div class=${totalsStyles}>
+      <${Header} />
+
+      <div class=${styles}>
         <${Totals} />
       </div>
 
