@@ -5,3 +5,4 @@ export { add } from './contribute.svg.js';
 export { close } from './x.svg.js';
 export { logo } from './logo.svg.js';
 export { offline } from './offline.svg.js';
+export { loading } from './loading.svg.js';
