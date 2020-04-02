@@ -6,7 +6,7 @@ import { travelAdviceService } from '../services/travelAdviceService.js';
 import { coronaTrackerService } from '../services/coronaTrackerService.js';
 import { populationService } from '../services/populationService.js';
 
-import { offline } from '../assets/icons/icons.js';
+import { offline, loading } from '../assets/icons/icons.js';
 
 const styles = css`
   & {
@@ -80,6 +80,38 @@ const offlineStyles = css`
   }
 `;
 
+const loadingStyles = css`
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height: calc(100% - 60px);
+  }
+
+  svg {
+    width: 120px;
+    margin-bottom: 20px;
+    animation: loading-spin infinite 1.5s linear;
+  }
+
+  @keyframes loading-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    svg {
+      animation: loading-spin infinite 20s linear;
+    }
+  }
+`;
+
 export class CountryInfo extends Component {
   async componentWillMount() {
     this.setState({
@@ -107,7 +139,9 @@ export class CountryInfo extends Component {
     /** If there is no data available but the user is online, show loading state */
     if (!lockdowns && !travelAdvice && !coronaData && !populationData && navigator.onLine) {
       return html`
-        Loading...
+        <div class="${loadingStyles}">
+          ${loading}
+        </div>
       `;
     }
 
