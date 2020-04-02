@@ -20,7 +20,6 @@ const styles = css`
     position: fixed;
     width: 90%;
     padding-top: 20px;
-    padding-bottom: 20px;
     max-width: 400px;
     left: calc(50% + 200px);
     top: 50%;
@@ -52,7 +51,7 @@ const styles = css`
 
   .ld-dialog--content {
     overflow: auto;
-    height: calc(100% - 40px);
+    height: calc(100% - 60px);
     padding: 0 20px 20px 20px;
   }
 
