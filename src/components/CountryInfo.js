@@ -91,16 +91,16 @@ export class CountryInfo extends Component {
   }
 
   render(_, { lockdowns, travelAdvice, coronaData, populationData }) {
-    /** If the user is offline, and theres no response, or the response has failed */
-
-    if (!lockdowns && !travelAdvice && !coronaData && navigator.onLine) {
+    /** If there is no data available but the user is online, show loading state */
+    if (!lockdowns && !travelAdvice && !coronaData && !populationData && navigator.onLine) {
       return html`
         Loading...
       `;
     }
 
-    if (navigator.onLine) {
-      if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success' || populationData == 'failed') {
+    /** If the user is offline, and theres no response, or the response has failed */
+    if (!navigator.onLine) {
+      if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success' || populationData?.data?.status !== 'success') {
         return html`
           <div class="${offlineStyles}">
             ${offline}
@@ -109,9 +109,7 @@ export class CountryInfo extends Component {
           </div>
         `;
       }
-    } /** If there is no data available but the user is online, show loading state */
-
-    
+    }
 
     /** On error & on succes, continue to render */
     return html`
@@ -131,7 +129,7 @@ export class CountryInfo extends Component {
           <h2>Stats</h2>
           <div class="data-entry">
             <p>Population:</p>
-            <p class="data-value">${populationData?.[this.props.iso2].Population ?? 'Error'}</p>
+            <p class="data-value">${populationData?.data?.[this.props.iso2].Population ?? 'Error'}</p>
           </div>
           <div class="data-entry">
             <p>Confirmed cases:</p>

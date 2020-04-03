@@ -12,12 +12,17 @@ class PopulationService extends EventTargetShim {
         this.__population = await fetch(new URL('../../data/population.json', import.meta.url)).then(r => r.json());
         await this.__population;
       } catch {
-        this.__population = 'failed';
-        return this.__population;
+        // this.__population = 'failed';
+        return {
+          status: this.__population
+        };
       }
     }
     this.dispatchEvent(new Event('change'));
-    return this.__population;
+    return {
+      status: 'success',
+      data: this.__population
+    };
   }
 }
 
