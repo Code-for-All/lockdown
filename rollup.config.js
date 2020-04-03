@@ -72,7 +72,7 @@ export default [
         hook: 'buildStart',
         targets: [
           { src: 'src/assets/**/*', dest: 'build/src' },
-          { src: 'src/style/**/*', dest: 'build/src' }
+          { src: 'src/style/**/*.css', dest: 'build/src' }
         ],
         flatten: false
       }),
