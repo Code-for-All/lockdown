@@ -389,55 +389,64 @@ export default class CountryInfo extends Component {
           </div>
         </div>
         <hr />
-        <div class="dialog">
-          <h2>Measures</h2>
-          <ul>
-            ${countryDetails.measures.map(({ label, value }) => {
-              return html`
-                <li class="ld-measures">
-                  <span class="ld-measures-icon">${MEASUREICONS[label]}</span>
-                  <span class="ld-measures-key">${TRANSLATIONS[label]}:</span>
-                  <span class="ld-measures-value ld-measures-${MEASURES[value]}"></span>
-                </li>
-              `;
-            })}
-          </ul>
-        </div>
-        <hr />
-        <div class="dialog">
-          <h2>Travel</h2>
-          <ul>
-            <li>
-              <ul class="ld-travel">
-                <p></p>
-                <div class="ld-travel--values">
-                  <li class="ld-travel--symbol ld-travel--val-icon">${travelLand}</li>
-                  <li class="ld-travel--symbol ld-travel--val-icon">${travelFlight}</li>
-                  <li class="ld-travel--symbol ld-travel--val-icon">${travelSea}</li>
-                </div>
-              </ul>
-            </li>
-            ${Object.keys(countryDetails.travel).map(key => {
-              return html`
-                <li>
-                  <ul class="ld-travel">
-                    <p>${TRANSLATIONS[key]}</p>
-                    <div class="ld-travel--values">
-                      ${countryDetails.travel[key].map(
-                        (val, i) =>
-                          html`
-                            <li class="ld-travel--symbol ld-travel--val-${TRAVEL[val]}">
-                              <p class="sr-only">${TRAVELTYPE[i]}: ${TRAVEL[val]}</p>
-                            </li>
-                          `
-                      )}
-                    </div>
-                  </ul>
-                </li>
-              `;
-            })}
-          </ul>
-        </div>
+        ${countryDetails.status === 'success'
+          ? html`
+              <div class="dialog">
+                <h2>Measures</h2>
+                <ul>
+                  ${countryDetails.measures.map(({ label, value }) => {
+                    return html`
+                      <li class="ld-measures">
+                        <span class="ld-measures-icon">${MEASUREICONS[label]}</span>
+                        <span class="ld-measures-key">${TRANSLATIONS[label]}:</span>
+                        <span class="ld-measures-value ld-measures-${MEASURES[value]}"></span>
+                      </li>
+                    `;
+                  })}
+                </ul>
+              </div>
+              <hr />
+              <div class="dialog">
+                <h2>Travel</h2>
+                <ul>
+                  <li>
+                    <ul class="ld-travel">
+                      <p></p>
+                      <div class="ld-travel--values">
+                        <li class="ld-travel--symbol ld-travel--val-icon">${travelLand}</li>
+                        <li class="ld-travel--symbol ld-travel--val-icon">${travelFlight}</li>
+                        <li class="ld-travel--symbol ld-travel--val-icon">${travelSea}</li>
+                      </div>
+                    </ul>
+                  </li>
+                  ${Object.keys(countryDetails.travel).map(key => {
+                    return html`
+                      <li>
+                        <ul class="ld-travel">
+                          <p>${TRANSLATIONS[key]}</p>
+                          <div class="ld-travel--values">
+                            ${countryDetails?.travel[key].map(
+                              (val, i) =>
+                                html`
+                                  <li class="ld-travel--symbol ld-travel--val-${TRAVEL[val]}">
+                                    <p class="sr-only">${TRAVELTYPE[i]}: ${TRAVEL[val]}</p>
+                                  </li>
+                                `
+                            )}
+                          </div>
+                        </ul>
+                      </li>
+                    `;
+                  })}
+                </ul>
+              </div>
+            `
+          : html`
+              <div class="dialog">
+                <h2>Measures</h2>
+                Failed to get data for this country.
+              </div>
+            `}
         <hr />
         <div class="dialog">
           <h2>Travel advice</h2>
