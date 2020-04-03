@@ -11,7 +11,8 @@
   "dependencies": {
     "@babel/node": "^7.8.7",
     "axios": "^0.19.2",
-    "google-spreadsheet": "^3.0.10"
+    "google-spreadsheet": "^3.0.10",
+    "moment-timezone": "^0.5.28"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
