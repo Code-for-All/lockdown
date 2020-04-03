@@ -25,7 +25,7 @@
     "babel-plugin-htm": "^3.0.0",
     "es-dev-server": "^1.45.2",
     "husky": "^4.2.3",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.2",
     "pwa-asset-generator": "^2.3.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.1.0",

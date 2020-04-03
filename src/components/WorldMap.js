@@ -153,12 +153,7 @@ export class WorldMap extends Component {
 
   render() {
     return html`
-      <div
-        style="width: 100%; height: 100%;"
-        ref=${ref => {
-          this.ref = ref;
-        }}
-      ></div>
+      <div style="width: 100%; height: 100%;" ref=${ref => (this.ref = ref)}></div>
     `;
   }
 }

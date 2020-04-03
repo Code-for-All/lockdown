@@ -29,6 +29,7 @@ class Router extends EventTargetShim {
   __onPathChanged() {
     this.url = new URL(location);
     this.dispatchEvent(new Event('path-changed'));
+
     /**
      * Checks if a new service worker is available on SPA navigations
      * Otherwise if a user has their tab open indefinitely, they wont get updates

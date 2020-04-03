@@ -19,6 +19,7 @@ const renderMenu = menuItem => {
             in order to provide an overview of the restrictions applied worldwide. We hope this will help evaluate the seriousness of the
             COVID-19 pandemic and help journalists and Human Rights defenders in their reporting and overseeing tasks.
           </p>
+
           <${Expandable}
             toggle=${'About'}
             detail=${html`
@@ -30,6 +31,7 @@ const renderMenu = menuItem => {
               </p>
             `}
           />
+
           <${Expandable}
             toggle=${'Sources'}
             detail=${html`
@@ -56,6 +58,7 @@ const renderMenu = menuItem => {
               </p>
             `}
           />
+
           <${Expandable}
             toggle=${'Credits'}
             detail=${html`
@@ -66,6 +69,7 @@ const renderMenu = menuItem => {
               </p>
             `}
           />
+
           <${Expandable}
             toggle=${'Data & Privacy'}
             detail=${html`
@@ -114,6 +118,7 @@ const renderMenu = menuItem => {
         </p>
         `
       };
+
     case 'updates':
       return {
         title: 'updates',
@@ -121,6 +126,7 @@ const renderMenu = menuItem => {
           <${Ticker} />
         `
       };
+
     default:
       return {
         title: '',
@@ -190,6 +196,7 @@ export class Menu extends Component {
                   <p class="${activeItem === 'info' ? 'ld-menu--active' : ''}">INFO</p>
                 </button>
               </li>
+
               <li>
                 <button onClick=${() => this.switchContent('settings')}>
                   ${updateAvailable
@@ -201,12 +208,14 @@ export class Menu extends Component {
                   <p class="${activeItem === 'settings' ? 'ld-menu--active' : ''}">SETTINGS</p>
                 </button>
               </li>
+
               <li>
                 <button onClick=${() => this.switchContent('updates')}>
                   ${refresh}
                   <p class="${activeItem === 'updates' ? 'ld-menu--active' : ''}">UPDATES</p>
                 </button>
               </li>
+
               <li>
                 <button onClick=${() => this.switchContent('contribute')}>
                   ${add}
@@ -216,6 +225,7 @@ export class Menu extends Component {
             </ul>
           </nav>
         </div>
+
         <div class="ld-menu--content">
           <div class="mb-only">
             <div class="ld-menu--header">
