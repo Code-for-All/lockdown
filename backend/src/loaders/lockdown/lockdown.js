@@ -89,7 +89,7 @@ function getEntry(sheet, entryIndex) {
   
   // Entry entry section
   const entryInfoRows = getCachedCellsRange(sheet, getEntryCellRange('16:16', entryIndex), false);
-  const entryInfoData = { title_of_status: toCountryStatus(entryInfoRows[0]) };
+  const entryInfoData = { title_of_status: entryInfoRows[0][0] };
 
   // Measures section
   const entryMeasureRange = getEntryCellRange('19:29', entryIndex);
