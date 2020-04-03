@@ -6,3 +6,8 @@ export { close } from './x.svg.js';
 export { logo } from './logo.svg.js';
 export { offline } from './offline.svg.js';
 export { loading } from './loading.svg.js';
+export { travelLand } from './travel-land.svg.js';
+export { travelSea } from './travel-sea.svg.js';
+export { travelFlight } from './travel-flight.svg.js';
+
+export { lockdown, citymovement, religion, work, military, academia, shops, electricity, water, internet } from './measures.svg.js';

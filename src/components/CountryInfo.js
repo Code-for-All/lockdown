@@ -5,8 +5,75 @@ import { lockdownsService } from '../services/locksdownsService.js';
 import { travelAdviceService } from '../services/travelAdviceService.js';
 import { coronaTrackerService } from '../services/coronaTrackerService.js';
 import { populationService } from '../services/populationService.js';
+import { countryDetailService } from '../services/countryDetailService.js';
+import {
+  offline,
+  loading,
+  travelFlight,
+  travelLand,
+  travelSea,
+  lockdown,
+  citymovement,
+  religion,
+  work,
+  military,
+  academia,
+  shops,
+  electricity,
+  water,
+  internet
+} from '../assets/icons/icons.js';
 
-import { offline, loading } from '../assets/icons/icons.js';
+const TRANSLATIONS = {
+  commerce: 'Commerce',
+  foreigners_inbound: 'Foreigners (in)',
+  foreigners_outbound: 'Foreigners (out)',
+  local: 'In between cities',
+  nationals_inbound: 'Nationals (in)',
+  nationals_outbound: 'Nationals (out)',
+  stopovers: 'Stopovers',
+  cross_border_workers: 'Cross border workers',
+  lockdown_status: 'Lockdown status',
+  city_movement_restriction: 'City movement restriction',
+  attending_religious_sites: 'Religion',
+  going_to_work: 'Work',
+  military_not_deployed: 'Military not deployed',
+  academia_allowed: 'Academia allowed',
+  going_to_shops: 'Going to shops',
+  electricity_nominal: 'Electricity working',
+  water_nominal: 'Water working',
+  internet_nominal: 'Internet working'
+};
+
+const TRAVEL = {
+  '1': 'YES',
+  '2': 'PARTIALLY',
+  '3': 'NO',
+  '4': 'UNCLEAR',
+  '5': 'NA'
+};
+
+const MEASURES = {
+  '1': 'YES',
+  '2': 'PARTIAL',
+  '3': 'NO',
+  '4': 'UNCLEAR'
+};
+
+const MEASUREICONS = {
+  lockdown_status: lockdown,
+  city_movement_restriction: citymovement,
+  attending_religious_sites: religion,
+  going_to_work: work,
+  military_not_deployed: military,
+  academia_allowed: academia,
+  going_to_shops: shops,
+  electricity_nominal: electricity,
+  water_nominal: water,
+  internet_nominal: internet
+};
+
+const TRAVELTYPE = ['Land', 'Flight', 'Sea'];
 
 const styles = css`
   & {
@@ -49,12 +116,113 @@ const styles = css`
     color: var(--ld-text);
   }
 
+  ul {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 20px;
+    list-style: none;
+  }
+
+  .ld-travel {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .ld-travel p {
+    flex-basis: 30%;
+    flex-shrink: 0;
+    font-weight: 300;
+  }
+
+  .ld-travel--val-icon {
+    fill: var(--ld-text);
+  }
+
+  .ld-travel--val-YES {
+    background-color: #9fc184;
+  }
+  .ld-travel--val-PARTIALLY {
+    background-color: #769de2;
+  }
+  .ld-travel--val-NO {
+    background-color: #d36d6b;
+  }
+  .ld-travel--val-UNCLEAR {
+    background-color: #ebb577;
+  }
+  .ld-travel--val-NA {
+    background-color: #828282;
+  }
+
+  .sr-only {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+  }
+  .ld-travel--values {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .ld-travel--symbol {
+    position: relative;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+
   .data-value {
     color: grey;
   }
 
   .travel-advice {
     padding: 16px;
+  }
+
+  .ld-contribute {
+    text-align: center;
+  }
+
+  .ld-measures {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  .ld-measures-YES {
+    background-color: #9fc184;
+  }
+  .ld-measures-PARTIAL {
+    background-color: #769de2;
+  }
+  .ld-measures-NO {
+    background-color: #d36d6b;
+  }
+  .ld-measures-UNCLEAR {
+    background-color: #828282;
+  }
+
+  .ld-measures-key {
+    flex: 1;
+  }
+
+  .ld-measures-icon svg {
+    margin-right: 20px;
+    width: 20px;
+    height: 20px;
+    fill: var(--ld-text);
+  }
+
+  .ld-measures-value {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
   }
 
   @media (max-width: 960px) {
@@ -160,14 +328,20 @@ export default class CountryInfo extends Component {
       lockdowns: await lockdownsService.getLockdowns(),
       travelAdvice: await travelAdviceService.getAdvice({ iso2: this.props.iso2 }),
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
-      populationData: await populationService.getPopulation()
+      populationData: await populationService.getPopulation(),
+      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2 })
     });
   }
 
-  render(_, { lockdowns, travelAdvice, coronaData, populationData }) {
+  render(_, { lockdowns, travelAdvice, coronaData, populationData, countryDetails }) {
     /** If the user is offline, and theres no response, or the response has failed */
     if (!navigator.onLine) {
-      if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success' || populationData?.data?.status !== 'success') {
+      if (
+        travelAdvice?.status !== 'success' ||
+        coronaData?.status !== 'success' ||
+        populationData?.data?.status !== 'success' ||
+        countryDetails?.status !== 'success'
+      ) {
         return html`
           <div class="${offlineStyles}">
             ${offline}
@@ -179,7 +353,7 @@ export default class CountryInfo extends Component {
     }
 
     /** If there is no data available but the user is online, show loading state */
-    if (!lockdowns && !travelAdvice && !coronaData && !populationData && navigator.onLine) {
+    if (!lockdowns && !travelAdvice && !coronaData && !populationData && !countryDetails && navigator.onLine) {
       return html`
         <div class="${loadingStyles}">
           ${loading}
@@ -190,22 +364,12 @@ export default class CountryInfo extends Component {
     /** On error & on succes, continue to render */
     return html`
       <div class=${styles}>
-        <div class="dialog">
-          <a
-            class="ld-link"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfDWe2qlzUnd3e-YYspMzT9adUswDEYIdJMb7jz7ule34-yiA/viewform"
-          >
-            Improve this data
-          </a>
-        </div>
         <hr />
         <div class="dialog">
           <h2>Stats</h2>
           <div class="data-entry">
             <p>Population:</p>
-            <p class="data-value">${populationData?.data?.[this.props.iso2].Population ?? 'Error'}</p>
+            <p class="data-value">${populationData?.data?.[this.props.iso2]?.Population ?? 'Error'}</p>
           </div>
           <div class="data-entry">
             <p>Confirmed cases:</p>
@@ -220,13 +384,59 @@ export default class CountryInfo extends Component {
             <p class="data-value">${coronaData?.totalRecovered ?? 'Error'}</p>
           </div>
           <div class="data-entry">
-            <p>Lockdown start:</p>
-            <p class="data-value">-</p>
+            <p>Max gathering:</p>
+            <p class="data-value">${countryDetails?.max_gathering ?? 'Error'}</p>
           </div>
-          <div class="data-entry">
-            <p>Lockdown end:</p>
-            <p class="data-value">-</p>
-          </div>
+        </div>
+        <hr />
+        <div class="dialog">
+          <h2>Measures</h2>
+          <ul>
+            ${countryDetails.measures.map(({ label, value }) => {
+              return html`
+                <li class="ld-measures">
+                  <span class="ld-measures-icon">${MEASUREICONS[label]}</span>
+                  <span class="ld-measures-key">${TRANSLATIONS[label]}:</span>
+                  <span class="ld-measures-value ld-measures-${MEASURES[value]}"></span>
+                </li>
+              `;
+            })}
+          </ul>
+        </div>
+        <hr />
+        <div class="dialog">
+          <h2>Travel</h2>
+          <ul>
+            <li>
+              <ul class="ld-travel">
+                <p></p>
+                <div class="ld-travel--values">
+                  <li class="ld-travel--symbol ld-travel--val-icon">${travelLand}</li>
+                  <li class="ld-travel--symbol ld-travel--val-icon">${travelFlight}</li>
+                  <li class="ld-travel--symbol ld-travel--val-icon">${travelSea}</li>
+                </div>
+              </ul>
+            </li>
+            ${Object.keys(countryDetails.travel).map(key => {
+              return html`
+                <li>
+                  <ul class="ld-travel">
+                    <p>${TRANSLATIONS[key]}</p>
+                    <div class="ld-travel--values">
+                      ${countryDetails.travel[key].map(
+                        (val, i) =>
+                          html`
+                            <li class="ld-travel--symbol ld-travel--val-${TRAVEL[val]}">
+                              <p class="sr-only">${TRAVELTYPE[i]}: ${TRAVEL[val]}</p>
+                            </li>
+                          `
+                      )}
+                    </div>
+                  </ul>
+                </li>
+              `;
+            })}
+          </ul>
         </div>
         <hr />
         <div class="dialog">
@@ -236,6 +446,17 @@ export default class CountryInfo extends Component {
                 <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span>
               `
             : 'Error'}
+        </div>
+        <hr />
+        <div class="dialog ld-contribute">
+          <a
+            class="ld-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfDWe2qlzUnd3e-YYspMzT9adUswDEYIdJMb7jz7ule34-yiA/viewform"
+          >
+            Improve this data
+          </a>
         </div>
       </div>
     `;
