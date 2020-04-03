@@ -22,13 +22,13 @@ class CoronaTrackerService extends EventTargetShim {
           status: 'success',
           totalConfirmed: res[0]?.totalConfirmed ?? 0,
           totalDeaths: res[0]?.totalDeaths ?? 0,
-          totalRecovered: res[0]?.totalRecovered ?? 0,
+          totalRecovered: res[0]?.totalRecovered ?? 0
         };
 
         return this.cache[iso2];
       } catch {
         this.cache[iso2] = {
-          status: 'failed',
+          status: 'failed'
         };
       }
 

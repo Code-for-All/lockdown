@@ -54,31 +54,31 @@ export class Totals extends Component {
   }
 
   async componentWillMount() {
-    installMediaQueryWatcher(`(min-width: 900px)`, (matches) => {
+    installMediaQueryWatcher(`(min-width: 900px)`, matches => {
       this.setState({ desktop: matches });
     });
     const totals = await totalsService.getTotals();
     const items = [
       {
         description: 'Countries in lockdown',
-        value: '0',
+        value: '0'
       },
       {
         description: 'People affected',
-        value: '0',
+        value: '0'
       },
       {
         description: 'Confirmed cases',
-        value: totals.confirmed,
+        value: totals.confirmed
       },
       {
         description: 'Confirmed deaths',
-        value: totals.deaths,
-      },
+        value: totals.deaths
+      }
     ];
 
     this.setState({
-      items: items,
+      items: items
     });
   }
 
@@ -87,7 +87,7 @@ export class Totals extends Component {
       <div class=${styles}>
         <ul>
           ${(desktop ? items : items.slice(0, 2)).map(
-            (item) => html`
+            item => html`
               <li>
                 <div class="key">${item.description}</div>
                 <div class="value">${item.value}</div>
