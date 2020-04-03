@@ -92,7 +92,14 @@ export class CountryInfo extends Component {
 
   render(_, { lockdowns, travelAdvice, coronaData, populationData }) {
     /** If the user is offline, and theres no response, or the response has failed */
-    if (!navigator.onLine) {
+
+    if (!lockdowns && !travelAdvice && !coronaData && navigator.onLine) {
+      return html`
+        Loading...
+      `;
+    }
+
+    if (navigator.onLine) {
       if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success' || populationData == 'failed') {
         return html`
           <div class="${offlineStyles}">
@@ -104,11 +111,7 @@ export class CountryInfo extends Component {
       }
     } /** If there is no data available but the user is online, show loading state */
 
-    if (!lockdowns && !travelAdvice && !coronaData && navigator.onLine) {
-      return html`
-        Loading...
-      `;
-    }
+    
 
     /** On error & on succes, continue to render */
     return html`

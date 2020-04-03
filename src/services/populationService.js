@@ -16,8 +16,8 @@ class PopulationService extends EventTargetShim {
         return this.__population;
       }
     }
-    return this.__population;
     this.dispatchEvent(new Event('change'));
+    return this.__population;
   }
 }
 
