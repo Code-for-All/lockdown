@@ -30,15 +30,31 @@ const styles = css`
   }
 
   a {
-    width: 400px;
+    position: relative;
     display: block;
     flex-shrink: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  a p {
+    position: absolute;
+    color: var(--ld-active);
+    top: -4px;
+    right: -35px;
+    margin: 0;
+    font-size: 12px;
   }
 
   .totals {
     margin-left: auto;
     margin-right: auto;
     display: block;
+  }
+
+  .ld-logo-wrapper {
+    display: flex;
+    width: 400px;
   }
 
   img {
@@ -56,11 +72,13 @@ const styles = css`
 
 export const Header = () => html`
   <header class=${styles}>
-    <a href="">
-      ${logo}
-      <!-- TODO: screen reader h1 -->
-    </a>
-
+    <div class="ld-logo-wrapper">
+      <a href="">
+        <p>BETA</p>
+        ${logo}
+        <!-- TODO: screen reader h1 -->
+      </a>
+    </div>
     <div class="totals">
       <${Totals} />
     </div>
