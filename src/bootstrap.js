@@ -12,7 +12,7 @@ window.addEventListener('appinstalled', () => {
   window.location.reload();
 });
 
-installMediaQueryWatcher(`(prefers-color-scheme: dark)`, (preference) => {
+installMediaQueryWatcher(`(prefers-color-scheme: dark)`, preference => {
   const localStorageDarkmode = localStorage.getItem('darkmode');
   const darkmodePreferenceExists = localStorageDarkmode !== null;
   const darkMode = localStorageDarkmode === 'true';
@@ -35,4 +35,9 @@ installMediaQueryWatcher(`(prefers-color-scheme: dark)`, (preference) => {
   }
 });
 
-render(html`<${App} />`, document.getElementById('app'));
+render(
+  html`
+    <${App} />
+  `,
+  document.getElementById('app')
+);

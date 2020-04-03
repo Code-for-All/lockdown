@@ -8,29 +8,29 @@ export function Ticker() {
       type: 'New',
       date: '19-22-2020, 22:01',
       text:
-        'Some information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or something',
+        'Some information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or something'
     },
     {
       type: 'Rectification',
       date: '19-22-2020, 19:51',
-      text: 'Some information message here with a link to a source or something',
+      text: 'Some information message here with a link to a source or something'
     },
     {
       type: 'Petition',
       date: '19-22-2020, 22:01',
       text:
-        'Some information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or something',
+        'Some information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or something'
     },
     {
       type: 'Announcement',
       date: '19-22-2020, 19:51',
-      text: 'Some information message here with a link to a source or something',
+      text: 'Some information message here with a link to a source or something'
     },
     {
       type: 'Promotion',
       date: '19-22-2020, 19:51',
-      text: 'Some information message here with a link to a source or something',
-    },
+      text: 'Some information message here with a link to a source or something'
+    }
   ]);
 
   useEffect(() => {

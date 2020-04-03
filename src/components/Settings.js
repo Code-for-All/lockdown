@@ -72,7 +72,7 @@ export function Settings() {
   }
 
   useEffect(async () => {
-    addPwaUpdateListener((updateAvailable) => {
+    addPwaUpdateListener(updateAvailable => {
       setPwaUpdateAvailable(updateAvailable);
     });
 
@@ -93,7 +93,11 @@ export function Settings() {
   return html`
     <div class=${styles}>
       <button onClick=${toggleDarkmode} class="ld-button">Toggle darkmode</button>
-      ${showGeolocationButton ? html` <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button> ` : ''}
+      ${showGeolocationButton
+        ? html`
+            <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button>
+          `
+        : ''}
 
       <pwa-install-button>
         <button class="ld-button">Install app</button>

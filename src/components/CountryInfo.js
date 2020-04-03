@@ -231,7 +231,11 @@ export default class CountryInfo extends Component {
         <hr />
         <div class="dialog">
           <h2>Travel advice</h2>
-          ${travelAdvice.status === 'success' ? html` <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span> ` : 'Error'}
+          ${travelAdvice.status === 'success'
+            ? html`
+                <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span>
+              `
+            : 'Error'}
         </div>
       </div>
     `;

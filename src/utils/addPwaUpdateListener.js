@@ -6,7 +6,7 @@ export function addPwaUpdateListener(callback) {
   let newWorker;
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistration().then((reg) => {
+    navigator.serviceWorker.getRegistration().then(reg => {
       if (reg) {
         reg.addEventListener('updatefound', () => {
           newWorker = reg.installing;
