@@ -6,44 +6,8 @@ import { travelAdviceService } from '../services/travelAdviceService.js';
 import { coronaTrackerService } from '../services/coronaTrackerService.js';
 import { populationService } from '../services/populationService.js';
 import { countryDetailService } from '../services/countryDetailService.js';
-import {
-  offline,
-  loading,
-  travelFlight,
-  travelLand,
-  travelSea,
-  lockdown,
-  citymovement,
-  religion,
-  work,
-  military,
-  academia,
-  shops,
-  electricity,
-  water,
-  internet
-} from '../assets/icons/icons.js';
-
-const TRANSLATIONS = {
-  commerce: 'Commerce',
-  foreigners_inbound: 'Foreigners (in)',
-  foreigners_outbound: 'Foreigners (out)',
-  local: 'In between cities',
-  nationals_inbound: 'Nationals (in)',
-  nationals_outbound: 'Nationals (out)',
-  stopovers: 'Stopovers',
-  cross_border_workers: 'Cross border workers',
-  lockdown_status: 'Lockdown status',
-  city_movement_restriction: 'City movement restriction',
-  attending_religious_sites: 'Religion',
-  going_to_work: 'Work',
-  military_not_deployed: 'Military not deployed',
-  academia_allowed: 'Academia allowed',
-  going_to_shops: 'Going to shops',
-  electricity_nominal: 'Electricity working',
-  water_nominal: 'Water working',
-  internet_nominal: 'Internet working'
-};
+import { offline, loading, travelFlight, travelLand, travelSea } from '../assets/icons/icons.js';
+import { TRANSLATIONS } from '../assets/translations.js';
 
 const TRAVEL = {
   '1': 'YES',
@@ -58,19 +22,6 @@ const MEASURES = {
   '2': 'PARTIAL',
   '3': 'NO',
   '4': 'UNCLEAR'
-};
-
-const MEASUREICONS = {
-  lockdown_status: lockdown,
-  city_movement_restriction: citymovement,
-  attending_religious_sites: religion,
-  going_to_work: work,
-  military_not_deployed: military,
-  academia_allowed: academia,
-  going_to_shops: shops,
-  electricity_nominal: electricity,
-  water_nominal: water,
-  internet_nominal: internet
 };
 
 const TRAVELTYPE = ['Land', 'Flight', 'Sea'];
@@ -394,12 +345,14 @@ export default class CountryInfo extends Component {
               <div class="dialog">
                 <h2>Measures</h2>
                 <ul>
-                  ${countryDetails.measures.map(({ label, value }) => {
+                  ${countryDetails.measures.map(({ label, value }, i) => {
                     return html`
                       <li class="ld-measures">
-                        <span class="ld-measures-icon">${MEASUREICONS[label]}</span>
-                        <span class="ld-measures-key">${TRANSLATIONS[label]}:</span>
-                        <span class="ld-measures-value ld-measures-${MEASURES[value]}"></span>
+                        <span class="ld-measures-icon">${TRANSLATIONS[label].icon}</span>
+                        <span class="ld-measures-key">${TRANSLATIONS[label].text}:</span>
+                        <span class="ld-measures-value ld-measures-${MEASURES[value]}">
+                          <p class="sr-only">${MEASURES[value].toLowerCase()}</p>
+                        </span>
                       </li>
                     `;
                   })}
@@ -423,13 +376,13 @@ export default class CountryInfo extends Component {
                     return html`
                       <li>
                         <ul class="ld-travel">
-                          <p>${TRANSLATIONS[key]}</p>
+                          <p>${TRANSLATIONS[key].text}</p>
                           <div class="ld-travel--values">
-                            ${countryDetails?.travel[key].map(
+                            ${countryDetails.travel[key].map(
                               (val, i) =>
                                 html`
                                   <li class="ld-travel--symbol ld-travel--val-${TRAVEL[val]}">
-                                    <p class="sr-only">${TRAVELTYPE[i]}: ${TRAVEL[val]}</p>
+                                    <p class="sr-only">${TRAVELTYPE[i]}: ${TRAVEL[val].toLowerCase()}</p>
                                   </li>
                                 `
                             )}
