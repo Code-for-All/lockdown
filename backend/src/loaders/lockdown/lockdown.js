@@ -4,12 +4,11 @@ import { transposeRows, transposeColumns } from '../../utils/dataHelper';
 import { letterToColumn, columnToLetter } from 'google-spreadsheet/lib/utils';
 import logger from '../../utils/logger';
 import { writeJSON } from '../../utils/file';
-import { getCachedCellsRange, getGridRanges } from '../../utils/sheet';
+import { getCachedCellsRange } from '../../utils/sheet';
 import find from 'lodash/find';
-import { SimpleGridSheet, SimpleGrid } from '../../utils/SimpleGrid';
-
-// Constants
-const entryColumnLength = 5;
+import { SimpleGrid } from '../../utils/SimpleGrid';
+import { toMeasureType, toTravelType, toInteger, isUpdateReady, toEntryDate, toCountryStatus } from '../../utils/typeHelper';
+import moment from 'moment-timezone';
 
 /**
  * Gets data from "Global" sheet.
@@ -31,59 +30,41 @@ export async function getGlobalData() {
 
 /**
  * Parses entry structure with appended label,
- * strips null end and start
+ * transforms values
  * @param {array} rows 
- * @param {array} labels 
+ * @param {any} labelsWithTransformFn 
  */
-function parseEntryStructure(rows, labels) {
-  const associativeRows = transposeRows([
-    'start',
-    'end',
-    'value'
-  ], rows);
+function parseEntryStructure(rows, labelsWithTransformFn) {
+  const result = [];
+  for (var i = 0; i < rows.length; i++) {
+    const row = rows[i];
+    const value = row[0];
+    const labelWithTransformFn = labelsWithTransformFn[i];
+    const transformFn = labelWithTransformFn['transformFn'];
+    const transformedValue = transformFn(value);
 
-  // Strip null start & end
-  const associativeRowsStripped = [];
-  associativeRows.forEach((associativeRow) => {
-    let o = { value: associativeRow['value'] || null };
-    if (associativeRow['start']) {
-      o['start'] = associativeRow['start'];
-    }
-    if (associativeRow['end']) {
-      o['end'] = associativeRow['end'];
-    }
-    associativeRowsStripped.push(o);
-  });
-
-  const values = transposeColumns(labels, associativeRowsStripped);
-  const array = []
-  for (const [label, row] of Object.entries(values)) {
-    array.push({
-      label: label,
-      ...row
-    })
+    result.push({
+      label: labelWithTransformFn['label'],
+      value: transformedValue != undefined ? transformedValue : null,
+    });
   }
-  return array;
+  return result;
 }
 
 /**
  * Converts row range to A1 range according to entry structure
- * '2:10' will get 'H2:J10', etc.
+ * '2:10' will get 'D2:J10', etc.
  * @param {string} rowRange Row range, such as '2:10'
  * @param {number} entryIndex N-th index for entry
- * @param {string} initialColumnLetter The first entry in sheet
+ * @param {string} firstEntryColumn The first entry in sheet
  */
-function getEntryCellRange(rowRange, entryIndex = 0, initialColumnLetter = 'H') {
-  // Column length between entry start and end
-  const initialColumnIndex = letterToColumn(initialColumnLetter);
-  const offset = entryIndex * entryColumnLength;
-  const startColumnIndex = initialColumnIndex + offset;
-  const endColumnIndex = startColumnIndex + 2;
-  const startLetter = columnToLetter(startColumnIndex);
-  const endLetter = columnToLetter(endColumnIndex);
+function getEntryCellRange(rowRange, entryIndex = 0, firstEntryColumn = 'D') {
+  const firstEntryColumnIndex = letterToColumn(firstEntryColumn);
+  const columnIndex = firstEntryColumnIndex + entryIndex;
+  const letter = columnToLetter(columnIndex);
 
   const [rowStart, rowEnd] = rowRange.split(':');
-  return `${startLetter}${rowStart}:${endLetter}${rowEnd}`;
+  return `${letter}${rowStart}:${letter}${rowEnd}`;
 }
 
 /**
@@ -92,75 +73,80 @@ function getEntryCellRange(rowRange, entryIndex = 0, initialColumnLetter = 'H') 
  * @param {integer} entryIndex 
  */
 function getEntry(sheet, entryIndex) {
-  let entryMetaRange = getEntryCellRange('2:6', entryIndex, 'I');
-  let entryInfoRange = getEntryCellRange('9:12', entryIndex);
-  let entryMeasureRange = getEntryCellRange('14:60', entryIndex);
-  let entryLandRange = getEntryCellRange('32:38', entryIndex);
-  let entryFlightRange = getEntryCellRange('42:48', entryIndex);
-  let entrySeaRange = getEntryCellRange('52:58', entryIndex);
-
   // Entry meta section
-  const entryMetaRows = getCachedCellsRange(sheet, entryMetaRange, false);
-  const entryMetaData = transposeColumns(['editor', 'reviewed_by', 'status', 'type', 'date_of_entry'], entryMetaRows, true);
+  const entryMetaRows = getCachedCellsRange(sheet, getEntryCellRange('3:9', entryIndex), false);
+  const entryMetaData = transposeColumns(['editor', 'reviewed_by', 'status', 'type', 'date_of_entry', 'additional_info_1', 'additional_info_2'], entryMetaRows, true);
 
+  // TODO: Enable following when snapshot sheets are ready
   // Should skip status != 'Ready'
-  if (entryMetaData['status'] != 'Ready') {
-    return;
-  }
+  // if (!isUpdateReady(entryMetaData['status'])) {
+  //   return;
+  // }
 
+  // Entry date
+  const entryDateRows = getCachedCellsRange(sheet, getEntryCellRange('1:1', entryIndex), false);
+  const entryDateData = { entry_date: toEntryDate(entryDateRows[0]) };
+  
   // Entry entry section
-  const entryInfoRows = getCachedCellsRange(sheet, entryInfoRange, false);
-  const entryInfoData = transposeColumns(['name', 'url', 'title', 'date'], entryInfoRows, true);
+  const entryInfoRows = getCachedCellsRange(sheet, getEntryCellRange('16:16', entryIndex), false);
+  const entryInfoData = { title_of_status: toCountryStatus(entryInfoRows[0]) };
 
   // Measures section
+  const entryMeasureRange = getEntryCellRange('19:29', entryIndex);
   const measures = parseEntryStructure(getCachedCellsRange(sheet, entryMeasureRange, false), [
-      'max_gathering', // Max gathering number allowed (PAX)?
-      'lockdown_status', // Is there a mandate for self-isolation?
-      'city_movement_restriction', // Is going on the street allowed?
-      'attending_religious_sites', // Is attenting religiouns sites allowed?
-      'going_to_work', // Is going to work allowed?
-      'military_not_deployed', // Is the Military NOT deployed?
-      'academia_allowed', // Is going to academia allowed?
-      'going_to_shops', // Is going to shops allowed?
-      'electricity_nominal', // Is Electricity operating nominally?
-      'water_nominal', // Is Water operating nominally?
-      'internet_nominal', // Is Internet operating nominally?
+    { label: 'max_gathering', transformFn: toInteger }, // Max gathering number allowed (PAX)?
+    { label: 'lockdown_status', transformFn: toMeasureType }, // Are citizens allowed to leave their homes?
+    { label: 'city_movement_restriction', transformFn: toMeasureType }, // Is going on the street allowed?
+    { label: 'attending_religious_sites', transformFn: toMeasureType }, // Is attenting religiouns sites allowed?
+    { label: 'going_to_work', transformFn: toMeasureType }, // Is going to work allowed?
+    { label: 'military_not_deployed', transformFn: toMeasureType }, // Is the Military NOT deployed?
+    { label: 'academia_allowed', transformFn: toMeasureType }, // Is going to academia allowed?
+    { label: 'going_to_shops', transformFn: toMeasureType }, // Is going to shops allowed?
+    { label: 'electricity_nominal', transformFn: toMeasureType }, // Is Electricity operating nominally?
+    { label: 'water_nominal', transformFn: toMeasureType }, // Is Water operating nominally?
+    { label: 'internet_nominal', transformFn: toMeasureType }, // Is Internet operating nominally?
   ]);
 
   // In & out section
+  const entryLandRange = getEntryCellRange('37:43', entryIndex);
   const land = parseEntryStructure(getCachedCellsRange(sheet, entryLandRange, false), [
-    'local', // Local destinations?
-    'nationals_inbound', // Nationals inbound?
-    'nationals_outbound', // Nationals outbound?
-    'foreigners_inbound', // Foreigners inbound?
-    'foreigners_outbound', // Foreigners outbound?
-    'cross_border_workers', // Cross border workers?
-    'commerce', // Commerce?
+    { label: 'local', transformFn: toTravelType }, // Local destinations?
+    { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
+    { label: 'nationals_outbound', transformFn: toTravelType }, // Nationals outbound?
+    { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
+    { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
+    { label: 'cross_border_workers', transformFn: toTravelType }, // Cross border workers?
+    { label: 'commerce', transformFn: toTravelType }, // Commerce?
   ]);
 
+  const entryFlightRange = getEntryCellRange('47:53', entryIndex);
   const flight = parseEntryStructure(getCachedCellsRange(sheet, entryFlightRange, false), [
-    'local', // Local destinations?
-    'nationals_inbound', // Nationals inbound?
-    'nationals_outbound', // Nationals outbound?
-    'foreigners_inbound', // Foreigners inbound?
-    'foreigners_outbound', // Foreigners outbound?
-    'stopovers', // Stopovers?
-    'commerce', // Commerce?
+    { label: 'local', transformFn: toTravelType }, // Local destinations?
+    { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
+    { label: 'nationals_outbound', transformFn: toTravelType }, // Nationals outbound?
+    { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
+    { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
+    { label: 'stopovers', transformFn: toTravelType }, // Stopovers?
+    { label: 'commerce', transformFn: toTravelType }, // Commerce?
   ]);
 
+  const entrySeaRange = getEntryCellRange('57:63', entryIndex);
   const sea = parseEntryStructure(getCachedCellsRange(sheet, entrySeaRange, false), [
-    'local', // Local destinations?
-    'nationals_inbound', // Nationals inbound?
-    'nationals_outbound', // Nationals outbound?
-    'foreigners_inbound', // Foreigners inbound?
-    'foreigners_outbound', // Foreigners outbound?
-    'cross_border_workers', // Cross border workers?
-    'commerce', // Commerce?
+    { label: 'local', transformFn: toTravelType }, // Local destinations?
+    { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
+    { label: 'nationals_outbound', transformFn: toTravelType }, // Nationals outbound?
+    { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
+    { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
+    { label: 'cross_border_workers', transformFn: toTravelType }, // Cross border workers?
+    { label: 'commerce', transformFn: toTravelType }, // Commerce?
   ]);
+
+  // TODO: Implement optional & required validation here.
   
   return {
     ...entryMetaData,
     ...entryInfoData,
+    ...entryDateData,
     measures: measures,
     travel: {
       land,
@@ -176,28 +162,34 @@ function getEntry(sheet, entryIndex) {
  */
 export async function batchGetTerritoriesEntryData(territories) {
   const batchSize = 25;
-  const entriesToGrab = 10;
-  const endCacheColumn = columnToLetter(letterToColumn('H') + (entriesToGrab * entryColumnLength));
-  const rangeToCache = `H1:${endCacheColumn}60`;
   const doc = await getDocument();
+  // TODO: Figure out how to find total columns should take
+  const entriesToGrab = 1000;
+  const startColumnIndex = letterToColumn('D');
+  const endCacheColumn = columnToLetter(startColumnIndex + entriesToGrab);
+  const rangeToCache = `D1:${endCacheColumn}65`;
   const result = [];
   var batch;
   
   while (batch = territories.splice(0, batchSize)) {
     if (batch.length < 1) break;
     // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
-    // let gridRanges = batch.map(territory => `${territory['iso3']}!${rangeToCache}`);
-    let gridRanges = batch.map(territory => `DEMO!${rangeToCache}`);
+    // let gridRanges = batch.map(territory => `${territory['iso3']}_Fetch!${rangeToCache}`);
+    let gridRanges = batch.map(territory => `ASM_Fetch!${rangeToCache}`);
     logger.log(`[Lockdown:WorkSheet] ${batch.map(t => t['iso3']).join(' ')}`);
     let gridData = await doc.batchGetGridRanges(gridRanges);
     
     for (let i = 0; i < batch.length; i++) {
       // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
-      // let workSheet = await getWorksheetByTitle(batch[i]['iso3']);
-      let workSheet = await getWorksheetByTitle('DEMO');
-      let gridSheet = new SimpleGridSheet(rangeToCache, gridData[i], workSheet);
+      // let workSheet = await getWorksheetByTitle(`${batch[i]['iso3']}_Fetch`);
+      let workSheet = await getWorksheetByTitle('ASM_Fetch');
+      let rowCount = workSheet['gridProperties']['rowCount'];
+      let columnCount = workSheet['gridProperties']['columnCount'];
+
+      let gridSheet = new SimpleGrid(rangeToCache, gridData[i], rowCount, columnCount);
       let entries = [];
-      for (let entryIndex = 0; entryIndex < entriesToGrab; entryIndex++) {
+      let entryColumnsCount = columnCount - startColumnIndex;
+      for (let entryIndex = 0; entryIndex < entryColumnsCount; entryIndex++) {
         // Cell ranges
         let entryData = getEntry(gridSheet, entryIndex);
         if (entryData) {
@@ -205,11 +197,16 @@ export async function batchGetTerritoriesEntryData(territories) {
         }
       }
 
+      // Compares current date in the same format with entry to get latest
+      let currentDate = moment().tz('UTC').format('D MMMM Y');
+      let currentEntry = find(entries, { entry_date: currentDate });
+
       result.push({
         isoCode: batch[i]['iso2'],
         lockdown: {
           // TODO: change this to support multiple entries after MVP
-          ...entries[0]
+          // entries
+          ...currentEntry
         }
       });
     }
@@ -239,7 +236,7 @@ export default async function loadData() {
 
   // Load summarized datafile
   const summarizedTerritories = {};
-  territories.map((territory) => {
+  territories.forEach((territory) => {
     let measures = territory['lockdown']['measures'];
     let lockdownStatus = find(measures, { 'label': 'lockdown_status' });
     summarizedTerritories[territory['isoCode']] = {
@@ -249,5 +246,8 @@ export default async function loadData() {
     };
   });
 
-  writeJSON('datafile', summarizedTerritories);
+  return {
+    lockdownTerritories: territories,
+    lockdownStatusByTerritory: summarizedTerritories
+  };
 }
