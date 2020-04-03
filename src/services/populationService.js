@@ -20,7 +20,7 @@ class PopulationService extends EventTargetShim {
     this.dispatchEvent(new Event('change'));
     return {
       status: 'success',
-      data: this.__population
+      data: this.__population ?? 0
     };
   }
 }

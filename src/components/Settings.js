@@ -1,6 +1,7 @@
 import { html } from 'htm/preact';
 import { useState, useEffect } from 'preact/compat';
 import { addPwaUpdateListener } from '../utils/addPwaUpdateListener.js';
+import { setFavIcon } from '../utils/setFavIcon.js';
 import css from 'csz';
 import './pwa-install-button';
 import './pwa-update-available';
@@ -53,9 +54,11 @@ export function Settings() {
     if (document.getElementsByTagName('html')[0].classList.contains('dark')) {
       document.getElementsByTagName('html')[0].classList.remove('dark');
       localStorage.setItem('darkmode', 'false');
+      setFavIcon(false);
     } else {
       document.getElementsByTagName('html')[0].classList.add('dark');
       localStorage.setItem('darkmode', 'true');
+      setFavIcon(true);
     }
   }
 
@@ -69,7 +72,7 @@ export function Settings() {
   }
 
   useEffect(async () => {
-    addPwaUpdateListener(updateAvailable => {
+    addPwaUpdateListener((updateAvailable) => {
       setPwaUpdateAvailable(updateAvailable);
     });
 
@@ -90,11 +93,7 @@ export function Settings() {
   return html`
     <div class=${styles}>
       <button onClick=${toggleDarkmode} class="ld-button">Toggle darkmode</button>
-      ${showGeolocationButton
-        ? html`
-            <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button>
-          `
-        : ''}
+      ${showGeolocationButton ? html` <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button> ` : ''}
 
       <pwa-install-button>
         <button class="ld-button">Install app</button>

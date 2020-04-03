@@ -6,7 +6,7 @@ import { travelAdviceService } from '../services/travelAdviceService.js';
 import { coronaTrackerService } from '../services/coronaTrackerService.js';
 import { populationService } from '../services/populationService.js';
 
-import { offline } from '../assets/icons/icons.js';
+import { offline, loading } from '../assets/icons/icons.js';
 
 const styles = css`
   & {
@@ -80,7 +80,81 @@ const offlineStyles = css`
   }
 `;
 
-export class CountryInfo extends Component {
+const loadingStyles = css`
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height: calc(100% - 60px);
+  }
+
+  svg {
+    width: 120px;
+    height: 120px;
+    animation: rotate 2000ms linear infinite;
+    transform-origin: center center;
+    margin: auto;
+  }
+
+  circle {
+    stroke-dasharray: 85, 200;
+    /* 0px is requires for edge 15 and lower */
+    stroke-dashoffset: 0px;
+    animation: dash 2000ms ease-in-out infinite;
+    stroke-linecap: round;
+    stroke-width: var(--spinner-stroke-width, 4px);
+    stroke-miterlimit: 10;
+    fill: none;
+    stroke: #828282;
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 200;
+      /* 0px is requires for edge 15 and lower */
+      stroke-dashoffset: 0px;
+    }
+    50% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -35px;
+    }
+    100% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -124px;
+    }
+  }
+
+  /* Animating SVG does not work on IE11. Use a fallback animation. */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    svg {
+      animation-duration: 1500ms;
+    }
+
+    circle {
+      stroke-linecap: square;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    svg {
+      animation-duration: 20000ms;
+    }
+
+    circle {
+      animation: dash 20000ms ease-in-out infinite;
+    }
+  }
+`;
+
+export default class CountryInfo extends Component {
   async componentWillMount() {
     this.setState({
       lockdowns: await lockdownsService.getLockdowns(),
@@ -91,13 +165,6 @@ export class CountryInfo extends Component {
   }
 
   render(_, { lockdowns, travelAdvice, coronaData, populationData }) {
-    /** If there is no data available but the user is online, show loading state */
-    if (!lockdowns && !travelAdvice && !coronaData && !populationData && navigator.onLine) {
-      return html`
-        Loading...
-      `;
-    }
-
     /** If the user is offline, and theres no response, or the response has failed */
     if (!navigator.onLine) {
       if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success' || populationData?.data?.status !== 'success') {
@@ -109,6 +176,15 @@ export class CountryInfo extends Component {
           </div>
         `;
       }
+    }
+
+    /** If there is no data available but the user is online, show loading state */
+    if (!lockdowns && !travelAdvice && !coronaData && !populationData && navigator.onLine) {
+      return html`
+        <div class="${loadingStyles}">
+          ${loading}
+        </div>
+      `;
     }
 
     /** On error & on succes, continue to render */
@@ -155,11 +231,7 @@ export class CountryInfo extends Component {
         <hr />
         <div class="dialog">
           <h2>Travel advice</h2>
-          ${travelAdvice.status === 'success'
-            ? html`
-                <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span>
-              `
-            : 'Error'}
+          ${travelAdvice.status === 'success' ? html` <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span> ` : 'Error'}
         </div>
       </div>
     `;

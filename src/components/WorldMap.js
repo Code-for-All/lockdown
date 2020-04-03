@@ -11,8 +11,8 @@ export class WorldMap extends Component {
     // the world map needs a large data source, lazily fetch them in parallel
     const [lockdowns, mapData, leaflet] = await Promise.all([
       lockdownsService.getLockdowns(),
-      fetch(new URL('../../data/worldmap.json', import.meta.url)).then(r => r.json()),
-      import('leaflet/dist/leaflet-src.esm.js')
+      fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json()),
+      import('leaflet/dist/leaflet-src.esm.js'),
     ]);
     const { Map, Browser, geoJSON, layerGroup, tileLayer } = leaflet;
 
@@ -21,7 +21,7 @@ export class WorldMap extends Component {
       zoom: 3,
       minZoom: 2,
       maxZoom: 18,
-      zoomControl: false
+      zoomControl: false,
     });
     let themeLayer;
     let labelLayer = layerGroup();
@@ -42,7 +42,7 @@ export class WorldMap extends Component {
       const layer = e.target;
       layer.setStyle({
         fillOpacity: 0.5,
-        name: 'test'
+        name: 'test',
       });
       if (!Browser.ie && !Browser.opera && !Browser.edge) {
         layer.bringToFront();
@@ -53,7 +53,7 @@ export class WorldMap extends Component {
       layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: onFeatureClicked
+        click: onFeatureClicked,
       });
     }
 
@@ -61,7 +61,7 @@ export class WorldMap extends Component {
       tileSize: 512,
       zoomOffset: -1,
       attribution:
-        '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
 
     function worldStyle(e) {
@@ -97,7 +97,7 @@ export class WorldMap extends Component {
         weight: 1,
         opacity: lineOpacity,
         color: '#555',
-        fillOpacity: 0
+        fillOpacity: 0,
       };
 
       if (value) {
@@ -115,27 +115,27 @@ export class WorldMap extends Component {
 
     themeLayer = geoJSON(mapData, {
       style: worldStyle,
-      onEachFeature: onEachFeature
+      onEachFeature: onEachFeature,
     }).addTo(map);
     labelLayer.addTo(map);
     this.setState({
-      map
+      map,
     });
 
     if (navigator.permissions) {
       const geolocation = await navigator.permissions.query({ name: 'geolocation' });
       // on pageload, check if there is permission for geolocation
       if (geolocation.state === 'granted') {
-        navigator.geolocation.getCurrentPosition(location => {
+        navigator.geolocation.getCurrentPosition((location) => {
           const { latitude, longitude } = location.coords;
           this.state.map.setView([latitude, longitude]);
         });
       }
 
       // handle change when user toggles geolocation permission
-      geolocation.addEventListener('change', e => {
+      geolocation.addEventListener('change', (e) => {
         if (e.target.state === 'granted') {
-          navigator.geolocation.getCurrentPosition(location => {
+          navigator.geolocation.getCurrentPosition((location) => {
             localStorage.setItem('geolocation', 'true');
             const { latitude, longitude } = location.coords;
             this.state.map.setView([latitude, longitude]);
@@ -152,13 +152,6 @@ export class WorldMap extends Component {
   }
 
   render() {
-    return html`
-      <div
-        style="width: 100%"
-        ref=${ref => {
-          this.ref = ref;
-        }}
-      ></div>
-    `;
+    return html`<div style="width: 100%; height: 100%;" ref=${(ref) => (this.ref = ref)}></div>`;
   }
 }

@@ -6,9 +6,24 @@ import copy from 'rollup-plugin-copy';
 import { injectManifest } from 'rollup-plugin-workbox';
 import applySwRegistration from 'rollup-plugin-apply-sw-registration';
 import replace from '@rollup/plugin-replace';
+import fs from 'fs';
+import path from 'path';
+import uglifycss from 'uglifycss';
 import packageJson from './package.json';
 
 const versionModulePath = require.resolve('./src/version.js');
+
+function preloadInitialImports(html, { bundle }) {
+  const initialImports = [];
+  for (const entrypoint of bundle.entrypoints) {
+    initialImports.push(...entrypoint.chunk.imports);
+  }
+  console.log('initialImports', initialImports);
+  return html.replace(
+    '</head>',
+    `${initialImports.map(i => `<link href="${i}" rel="preload" as="script" crossorigin="anonymous">`)}</head>`
+  );
+}
 
 export default [
   {
@@ -39,7 +54,9 @@ export default [
         }
       },
       resolve(),
-      html(),
+      html({
+        transform: [preloadInitialImports]
+      }),
       babel({
         babelHelpers: 'bundled',
         presets: [require.resolve('@babel/preset-modules')],
@@ -84,7 +101,18 @@ export default [
       applySwRegistration({
         htmlFileName: 'index.html'
         // base: 'lockdown/'
-      })
+      }),
+      {
+        name: 'minify-css',
+        writeBundle() {
+          const filepath = path.resolve('./build/src/style/');
+          fs.readdirSync(filepath)
+            .map(file => path.join(filepath, file))
+            .forEach(file => {
+              fs.writeFileSync(file, uglifycss.processFiles([file]));
+            });
+        }
+      }
     ]
   }
 ];
