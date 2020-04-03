@@ -7,7 +7,7 @@ import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import { info, settings, refresh, add } from '../assets/icons/icons.js';
 import { addPwaUpdateListener } from '../utils/addPwaUpdateListener.js';
 
-const renderMenu = menuItem => {
+const renderMenu = (menuItem) => {
   switch (menuItem) {
     case 'info':
       return {
@@ -19,6 +19,7 @@ const renderMenu = menuItem => {
             in order to provide an overview of the restrictions applied worldwide. We hope this will help evaluate the seriousness of the
             COVID-19 pandemic and help journalists and Human Rights defenders in their reporting and overseeing tasks.
           </p>
+
           <${Expandable}
             toggle=${'About'}
             detail=${html`
@@ -30,6 +31,7 @@ const renderMenu = menuItem => {
               </p>
             `}
           />
+
           <${Expandable}
             toggle=${'Sources'}
             detail=${html`
@@ -56,6 +58,7 @@ const renderMenu = menuItem => {
               </p>
             `}
           />
+
           <${Expandable}
             toggle=${'Credits'}
             detail=${html`
@@ -66,6 +69,7 @@ const renderMenu = menuItem => {
               </p>
             `}
           />
+
           <${Expandable}
             toggle=${'Data & Privacy'}
             detail=${html`
@@ -77,14 +81,12 @@ const renderMenu = menuItem => {
               </p>
             `}
           />
-        `
+        `,
       };
     case 'settings':
       return {
         title: 'settings',
-        template: html`
-          <${Settings} />
-        `
+        template: html`<${Settings} />`,
       };
     case 'contribute':
       return {
@@ -112,19 +114,19 @@ const renderMenu = menuItem => {
           <br/>
           <a class="ld-link">@ProjectLockdown</a>
         </p>
-        `
+        `,
       };
+
     case 'updates':
       return {
         title: 'updates',
-        template: html`
-          <${Ticker} />
-        `
+        template: html`<${Ticker} />`,
       };
+
     default:
       return {
         title: '',
-        template: html``
+        template: html``,
       };
   }
 };
@@ -134,23 +136,23 @@ export class Menu extends Component {
     super(props);
     this.state = {
       updateAvailable: false,
-      activeItem: 'info'
+      activeItem: 'info',
     };
   }
 
   componentDidMount() {
-    installMediaQueryWatcher(`(min-width: 960px)`, matches => {
+    installMediaQueryWatcher(`(min-width: 960px)`, (matches) => {
       this.setState({
-        isMobile: !matches
+        isMobile: !matches,
       });
       if (matches) {
         this.props.close();
       }
     });
 
-    addPwaUpdateListener(updateAvailable => {
+    addPwaUpdateListener((updateAvailable) => {
       this.setState({
-        updateAvailable
+        updateAvailable,
       });
     });
   }
@@ -158,14 +160,14 @@ export class Menu extends Component {
   switchContent(val) {
     if (val === 'settings' && this.state.updateAvailable) {
       this.setState({
-        updateAvailable: false
+        updateAvailable: false,
       });
     }
 
     if (this.state.isMobile && this.props.opened && val === this.prevVal) {
       this.props.close();
       this.setState({
-        activeItem: this.prevVal
+        activeItem: this.prevVal,
       });
       this.prevVal = '';
       return;
@@ -174,7 +176,7 @@ export class Menu extends Component {
     this.props.changeRoute(renderMenu(val));
     this.prevVal = val;
     this.setState({
-      activeItem: val
+      activeItem: val,
     });
   }
 
@@ -190,23 +192,21 @@ export class Menu extends Component {
                   <p class="${activeItem === 'info' ? 'ld-menu--active' : ''}">INFO</p>
                 </button>
               </li>
+
               <li>
                 <button onClick=${() => this.switchContent('settings')}>
-                  ${updateAvailable
-                    ? html`
-                        <div class="ld-menu--notification"></div>
-                      `
-                    : ''}
-                  ${settings}
+                  ${updateAvailable ? html` <div class="ld-menu--notification"></div> ` : ''} ${settings}
                   <p class="${activeItem === 'settings' ? 'ld-menu--active' : ''}">SETTINGS</p>
                 </button>
               </li>
+
               <li>
                 <button onClick=${() => this.switchContent('updates')}>
                   ${refresh}
                   <p class="${activeItem === 'updates' ? 'ld-menu--active' : ''}">UPDATES</p>
                 </button>
               </li>
+
               <li>
                 <button onClick=${() => this.switchContent('contribute')}>
                   ${add}
@@ -216,6 +216,7 @@ export class Menu extends Component {
             </ul>
           </nav>
         </div>
+
         <div class="ld-menu--content">
           <div class="mb-only">
             <div class="ld-menu--header">

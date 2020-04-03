@@ -160,7 +160,7 @@ export default class CountryInfo extends Component {
       lockdowns: await lockdownsService.getLockdowns(),
       travelAdvice: await travelAdviceService.getAdvice({ iso2: this.props.iso2 }),
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
-      populationData: await populationService.getPopulation({ iso2: this.props.iso2 })
+      populationData: await populationService.getPopulation({ iso2: this.props.iso2 }),
     });
   }
 
@@ -231,11 +231,7 @@ export default class CountryInfo extends Component {
         <hr />
         <div class="dialog">
           <h2>Travel advice</h2>
-          ${travelAdvice.status === 'success'
-            ? html`
-                <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span>
-              `
-            : 'Error'}
+          ${travelAdvice.status === 'success' ? html` <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span> ` : 'Error'}
         </div>
       </div>
     `;
