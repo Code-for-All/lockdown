@@ -38,6 +38,23 @@ registerRoute(
 );
 
 /**  
+ * Runtime country json data files with a network-first strategy, we want up to date data, 
+ * but in the case of no connection, return cached data 
+ */
+ registerRoute(
+  new RegExp('.*data/territories/.*.json'),
+  new NetworkFirst({
+    cacheName: 'territories',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 5,
+        purgeOnQuotaError: true
+      }),
+    ],
+  })
+);
+
+/**  
  * Runtime json data files with a network-first strategy, we want up to date data, 
  * but in the case of no connection, return cached data 
  */
@@ -59,7 +76,7 @@ registerRoute(
     cacheName: 'traveladvisory',
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 20,
+        maxEntries: 5,
         purgeOnQuotaError: true
       }),
     ],
@@ -77,7 +94,7 @@ registerRoute(
     cacheName: 'coronatracker',
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 20,
+        maxEntries: 5,
         purgeOnQuotaError: true
       }),
     ],
