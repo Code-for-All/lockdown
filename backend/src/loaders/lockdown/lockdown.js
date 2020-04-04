@@ -9,6 +9,7 @@ import find from 'lodash/find';
 import { SimpleGrid } from '../../utils/SimpleGrid';
 import { toMeasureType, toTravelType, toInteger, isUpdateReady, toEntryDate, toCountryStatus } from '../../utils/typeHelper';
 import moment from 'moment-timezone';
+import { TRAVEL } from '../../../../shared/types';
 
 /**
  * Gets data from "Global" sheet.
@@ -50,6 +51,19 @@ function parseEntryStructure(rows, labelsWithTransformFn) {
     });
   }
   return result;
+}
+
+/**
+ * Converts to A1 address from entry index
+ * @param {number} rowIndex Row index
+ * @param {number} entryIndex N-th index for entry
+ * @param {string} firstEntryColumn The first entry in sheet
+ */
+function getEntryCell(rowIndex, entryIndex = 0, firstEntryColumn = 'D') {
+  const firstEntryColumnIndex = letterToColumn(firstEntryColumn);
+  const columnIndex = firstEntryColumnIndex + entryIndex;
+  const letter = columnToLetter(columnIndex);
+  return `${letter}${rowIndex}`;
 }
 
 /**
@@ -106,7 +120,7 @@ function getEntry(sheet, entryIndex) {
   ]);
 
   // In & out section
-  const entryLandRange = getEntryCellRange('37:43', entryIndex);
+  const entryLandRange = getEntryCellRange('37:42', entryIndex);
   const land = parseEntryStructure(getCachedCellsRange(sheet, entryLandRange, false), [
     { label: 'local', transformFn: toTravelType }, // Local destinations?
     { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
@@ -114,21 +128,29 @@ function getEntry(sheet, entryIndex) {
     { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
     { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
     { label: 'cross_border_workers', transformFn: toTravelType }, // Cross border workers?
-    { label: 'commerce', transformFn: toTravelType }, // Commerce?
   ]);
 
-  const entryFlightRange = getEntryCellRange('47:53', entryIndex);
+  land.push(...[
+    { label: 'stopovers', value: TRAVEL.NA },
+    { label: 'commerce', value: toTravelType(sheet.getCellByA1(getEntryCell(43, entryIndex))) }, // Commerce?
+  ]);
+
+  const entryFlightRange = getEntryCellRange('47:51', entryIndex);
   const flight = parseEntryStructure(getCachedCellsRange(sheet, entryFlightRange, false), [
     { label: 'local', transformFn: toTravelType }, // Local destinations?
     { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
     { label: 'nationals_outbound', transformFn: toTravelType }, // Nationals outbound?
     { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
     { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
-    { label: 'stopovers', transformFn: toTravelType }, // Stopovers?
-    { label: 'commerce', transformFn: toTravelType }, // Commerce?
   ]);
 
-  const entrySeaRange = getEntryCellRange('57:63', entryIndex);
+  flight.push(...[
+    { label: 'cross_border_workers', value: TRAVEL.NA },
+    { label: 'stopovers', value: toTravelType(sheet.getCellByA1(getEntryCell(52, entryIndex))) }, // Stopovers?
+    { label: 'commerce', value: toTravelType(sheet.getCellByA1(getEntryCell(53, entryIndex))) }, // Commerce?
+  ]);
+
+  const entrySeaRange = getEntryCellRange('57:62', entryIndex);
   const sea = parseEntryStructure(getCachedCellsRange(sheet, entrySeaRange, false), [
     { label: 'local', transformFn: toTravelType }, // Local destinations?
     { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
@@ -136,7 +158,11 @@ function getEntry(sheet, entryIndex) {
     { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
     { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
     { label: 'cross_border_workers', transformFn: toTravelType }, // Cross border workers?
-    { label: 'commerce', transformFn: toTravelType }, // Commerce?
+  ]);
+
+  sea.push(...[
+    { label: 'stopovers', value: TRAVEL.NA },
+    { label: 'commerce', value: toTravelType(sheet.getCellByA1(getEntryCell(63, entryIndex))) }, // Commerce?
   ]);
 
   // TODO: Implement optional & required validation here.
