@@ -146,7 +146,7 @@ function getEntry(sheet, entryIndex) {
 
   flight.push(...[
     { label: 'cross_border_workers', value: TRAVEL.NA },
-    { label: 'stopovers', value: toTravelType(sheet.getCellByA1(getEntryCell(52, entryIndex))) }, // Stopovers?
+    { label: 'stopovers', value: TRAVEL.NA }, // Stopovers?
     { label: 'commerce', value: toTravelType(sheet.getCellByA1(getEntryCell(53, entryIndex))) }, // Commerce?
   ]);
 
