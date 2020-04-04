@@ -83,6 +83,14 @@ function getEntryCellRange(rowRange, entryIndex = 0, firstEntryColumn = 'D') {
 }
 
 /**
+ * Gets travel type with default to NA
+ * @param {string} value 
+ */
+function toTravelTypeWithDefault(value) {
+  return toTravelType(value) ?? TRAVEL.NA;
+}
+
+/**
  * Gets fully parsed entry data
  * @param {GoogleSpreadsheetWorksheet|SimpleGrid} sheet 
  * @param {integer} entryIndex 
@@ -122,47 +130,47 @@ function getEntry(sheet, entryIndex) {
   // In & out section
   const entryLandRange = getEntryCellRange('37:42', entryIndex);
   const land = parseEntryStructure(getCachedCellsRange(sheet, entryLandRange, false), [
-    { label: 'local', transformFn: toTravelType }, // Local destinations?
-    { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
-    { label: 'nationals_outbound', transformFn: toTravelType }, // Nationals outbound?
-    { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
-    { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
-    { label: 'cross_border_workers', transformFn: toTravelType }, // Cross border workers?
+    { label: 'local', transformFn: toTravelTypeWithDefault }, // Local destinations?
+    { label: 'nationals_inbound', transformFn: toTravelTypeWithDefault }, // Nationals inbound?
+    { label: 'nationals_outbound', transformFn: toTravelTypeWithDefault }, // Nationals outbound?
+    { label: 'foreigners_inbound', transformFn: toTravelTypeWithDefault }, // Foreigners inbound?
+    { label: 'foreigners_outbound', transformFn: toTravelTypeWithDefault }, // Foreigners outbound?
+    { label: 'cross_border_workers', transformFn: toTravelTypeWithDefault }, // Cross border workers?
   ]);
 
   land.push(...[
     { label: 'stopovers', value: TRAVEL.NA },
-    { label: 'commerce', value: toTravelType(sheet.getCellByA1(getEntryCell(43, entryIndex))) }, // Commerce?
+    { label: 'commerce', value: toTravelTypeWithDefault(sheet.getCellByA1(getEntryCell(43, entryIndex))) }, // Commerce?
   ]);
 
   const entryFlightRange = getEntryCellRange('47:51', entryIndex);
   const flight = parseEntryStructure(getCachedCellsRange(sheet, entryFlightRange, false), [
-    { label: 'local', transformFn: toTravelType }, // Local destinations?
-    { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
-    { label: 'nationals_outbound', transformFn: toTravelType }, // Nationals outbound?
-    { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
-    { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
+    { label: 'local', transformFn: toTravelTypeWithDefault }, // Local destinations?
+    { label: 'nationals_inbound', transformFn: toTravelTypeWithDefault }, // Nationals inbound?
+    { label: 'nationals_outbound', transformFn: toTravelTypeWithDefault }, // Nationals outbound?
+    { label: 'foreigners_inbound', transformFn: toTravelTypeWithDefault }, // Foreigners inbound?
+    { label: 'foreigners_outbound', transformFn: toTravelTypeWithDefault }, // Foreigners outbound?
   ]);
 
   flight.push(...[
     { label: 'cross_border_workers', value: TRAVEL.NA },
     { label: 'stopovers', value: TRAVEL.NA }, // Stopovers?
-    { label: 'commerce', value: toTravelType(sheet.getCellByA1(getEntryCell(53, entryIndex))) }, // Commerce?
+    { label: 'commerce', value: toTravelTypeWithDefault(sheet.getCellByA1(getEntryCell(53, entryIndex))) }, // Commerce?
   ]);
 
   const entrySeaRange = getEntryCellRange('57:62', entryIndex);
   const sea = parseEntryStructure(getCachedCellsRange(sheet, entrySeaRange, false), [
-    { label: 'local', transformFn: toTravelType }, // Local destinations?
-    { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
-    { label: 'nationals_outbound', transformFn: toTravelType }, // Nationals outbound?
-    { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
-    { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
-    { label: 'cross_border_workers', transformFn: toTravelType }, // Cross border workers?
+    { label: 'local', transformFn: toTravelTypeWithDefault }, // Local destinations?
+    { label: 'nationals_inbound', transformFn: toTravelTypeWithDefault }, // Nationals inbound?
+    { label: 'nationals_outbound', transformFn: toTravelTypeWithDefault }, // Nationals outbound?
+    { label: 'foreigners_inbound', transformFn: toTravelTypeWithDefault }, // Foreigners inbound?
+    { label: 'foreigners_outbound', transformFn: toTravelTypeWithDefault }, // Foreigners outbound?
+    { label: 'cross_border_workers', transformFn: toTravelTypeWithDefault }, // Cross border workers?
   ]);
 
   sea.push(...[
     { label: 'stopovers', value: TRAVEL.NA },
-    { label: 'commerce', value: toTravelType(sheet.getCellByA1(getEntryCell(63, entryIndex))) }, // Commerce?
+    { label: 'commerce', value: toTravelTypeWithDefault(sheet.getCellByA1(getEntryCell(63, entryIndex))) }, // Commerce?
   ]);
 
   // TODO: Implement optional & required validation here.
