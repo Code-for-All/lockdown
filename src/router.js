@@ -35,7 +35,7 @@ class Router extends EventTargetShim {
      * Otherwise if a user has their tab open indefinitely, they wont get updates
      */
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.getRegistration().then(registration => {
+      navigator.serviceWorker.getRegistration().then((registration) => {
         if (registration) {
           registration.update();
         }
@@ -48,7 +48,7 @@ class Router extends EventTargetShim {
       return;
     }
 
-    const a = e.composedPath().find(el => el.tagName === 'A');
+    const a = e.composedPath().find((el) => el.tagName === 'A');
 
     if (!a || !a.href) return;
     if (a.hasAttribute('download') || a.href.includes('mailto:')) return;
