@@ -21,6 +21,7 @@ import moment from 'moment-timezone';
  * @returns {array}
  */
 export async function getGlobalData() {
+  // TODO: Implement sheet readiness from status in Global tab
   logger.log('[Lockdown:Global] start');
   const sheet = await getWorksheetByTitle('Global');
   const rows = await sheet.getCellsInRange('D5:F253');
@@ -77,12 +78,6 @@ function getEntry(sheet, entryIndex) {
   const entryMetaRows = getCachedCellsRange(sheet, getEntryCellRange('3:9', entryIndex), false);
   const entryMetaData = transposeColumns(['editor', 'reviewed_by', 'status', 'type', 'date_of_entry', 'additional_info_1', 'additional_info_2'], entryMetaRows, true);
 
-  // TODO: Enable following when snapshot sheets are ready
-  // Should skip status != 'Ready'
-  // if (!isUpdateReady(entryMetaData['status'])) {
-  //   return;
-  // }
-
   // Entry date
   const entryDateRows = getCachedCellsRange(sheet, getEntryCellRange('1:1', entryIndex), false);
   const entryDateData = { entry_date: toEntryDate(entryDateRows[0]) };
@@ -91,10 +86,13 @@ function getEntry(sheet, entryIndex) {
   const entryInfoRows = getCachedCellsRange(sheet, getEntryCellRange('16:16', entryIndex), false);
   const entryInfoData = { title_of_status: entryInfoRows[0][0] };
 
+  // Max gathering
+  const entryMaxGatheringRows = getCachedCellsRange(sheet, getEntryCellRange('19:19', entryIndex), false);
+  const entryMaxGatheringData = { max_gathering: toInteger(entryMaxGatheringRows[0][0]) }; // Max gathering number allowed (PAX)?
+
   // Measures section
-  const entryMeasureRange = getEntryCellRange('19:29', entryIndex);
+  const entryMeasureRange = getEntryCellRange('20:29', entryIndex);
   const measures = parseEntryStructure(getCachedCellsRange(sheet, entryMeasureRange, false), [
-    { label: 'max_gathering', transformFn: toInteger }, // Max gathering number allowed (PAX)?
     { label: 'lockdown_status', transformFn: toMeasureType }, // Are citizens allowed to leave their homes?
     { label: 'city_movement_restriction', transformFn: toMeasureType }, // Is going on the street allowed?
     { label: 'attending_religious_sites', transformFn: toMeasureType }, // Is attenting religiouns sites allowed?
@@ -147,6 +145,7 @@ function getEntry(sheet, entryIndex) {
     ...entryMetaData,
     ...entryInfoData,
     ...entryDateData,
+    ...entryMaxGatheringData,
     measures: measures,
     travel: {
       land,
