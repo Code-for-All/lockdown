@@ -14,6 +14,9 @@ const renderMenu = (menuItem) => {
         title: 'info',
         template: html`
           <h1>Lockdown</h1>
+          <p class="ld-alpha">
+            Project lockdown is currently in alpha. Not all data may be available yet.
+          </p>
           <p>
             <b>Project Lockdown</b> aims to map the different lockdowns around the world, offering the public a number of relevant metrics
             in order to provide an overview of the restrictions applied worldwide. We hope this will help evaluate the seriousness of the

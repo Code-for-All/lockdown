@@ -41,7 +41,7 @@ const styles = css`
     position: absolute;
     color: var(--ld-active);
     top: -4px;
-    right: -35px;
+    right: -45px;
     margin: 0;
     font-size: 12px;
   }
@@ -74,7 +74,7 @@ export const Header = () => html`
   <header class=${styles}>
     <div class="ld-logo-wrapper">
       <a href="">
-        <p>BETA</p>
+        <p>ALPHA</p>
         ${logo}
         <!-- TODO: screen reader h1 -->
       </a>

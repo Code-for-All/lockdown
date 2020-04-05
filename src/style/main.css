@@ -42,6 +42,10 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+a:visited {
+  color: var(--ld-active);
+}
+
 *,
 *:after,
 *:before {
@@ -169,6 +173,14 @@ body {
 
 .ld-link {
   color: var(--ld-active);
+}
+
+.ld-alpha {
+  border-left: solid 3px var(--ld-active);
+  padding-left: 10px;
+  color: var(--ld-active);
+  font-style: italic;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 960px) {
