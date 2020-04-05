@@ -118,7 +118,8 @@ export default class Dialog extends Component {
           <div class="ld-dialog--header">
             <h1>${this.props.title}</h1>
             <div class="ld-dialog--close-cont">
-              <button onClick=${this.__closeDialog} class="ld-dialog--close">
+              <button onClick=${this.__closeDialog} class="ld-dialog--close" aria-labelledby="button-name">
+                <span id="button-name" hidden>close</span>
                 ${close}
               </button>
             </div>
