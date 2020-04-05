@@ -44,7 +44,7 @@ export class App extends Component {
 
   async componentDidMount() {
     this.__onPathChanged();
-    installMediaQueryWatcher(`(min-width: 960px)`, matches => {
+    installMediaQueryWatcher(`(min-width: 960px)`, (matches) => {
       this.setState({ isMobile: !matches });
     });
   }
@@ -98,11 +98,9 @@ export class App extends Component {
       this.setState({
         dialog: {
           opened: true,
-          template: html`
-            <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2 }} />
-          `,
-          title: country
-        }
+          template: html` <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2 }} /> `,
+          title: country,
+        },
       });
     }
   }

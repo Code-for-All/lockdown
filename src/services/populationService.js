@@ -9,18 +9,18 @@ class PopulationService extends EventTargetShim {
   async getPopulation(forceRefresh) {
     if (forceRefresh || !this.__population) {
       try {
-        this.__population = await fetch(new URL('../../data/population.json', import.meta.url)).then(r => r.json());
+        this.__population = await fetch(new URL('../../data/population.json', import.meta.url)).then((r) => r.json());
         await this.__population;
       } catch {
         return {
-          status: 'failed'
+          status: 'failed',
         };
       }
     }
     this.dispatchEvent(new Event('change'));
     return {
       status: 'success',
-      data: this.__population ?? 0
+      data: this.__population ?? 0,
     };
   }
 }

@@ -21,13 +21,13 @@ class TravelAdviceService extends EventTargetShim {
         this.cache[iso2] = {
           status: 'success',
           advice: res.data[iso2].advisory.message,
-          score: `${res.data[iso2].advisory.score}/5`
+          score: `${res.data[iso2].advisory.score}/5`,
         };
 
         return this.cache[iso2];
       } catch (_) {
         this.cache[iso2] = {
-          status: 'failed'
+          status: 'failed',
         };
       }
       this.dispatchEvent(new Event('change'));
