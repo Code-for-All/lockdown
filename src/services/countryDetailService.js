@@ -36,12 +36,12 @@ class CountryDetailService extends EventTargetShim {
           status: 'success',
           measures: res.lockdown.measures,
           travel,
-          max_gathering: res.lockdown.max_gathering
+          max_gathering: res.lockdown.max_gathering,
         };
         return this.cache[iso2];
       } catch (_) {
         this.cache[iso2] = {
-          status: 'failed'
+          status: 'failed',
         };
       }
       this.dispatchEvent(new Event('change'));

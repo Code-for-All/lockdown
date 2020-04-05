@@ -2,67 +2,67 @@ import { lockdown, citymovement, religion, work, military, academia, shops, elec
 
 export const TRANSLATIONS = {
   commerce: {
-    text: 'Commerce'
+    text: 'Commerce',
   },
   foreigners_inbound: {
-    text: 'Foreigners (in)'
+    text: 'Foreigners (in)',
   },
   foreigners_outbound: {
-    text: 'Foreigners (out)'
+    text: 'Foreigners (out)',
   },
   local: {
-    text: 'In between cities'
+    text: 'In between cities',
   },
   nationals_inbound: {
-    text: 'Nationals (in)'
+    text: 'Nationals (in)',
   },
   nationals_outbound: {
-    text: 'Nationals (out)'
+    text: 'Nationals (out)',
   },
   stopovers: {
-    text: 'Stopovers'
+    text: 'Stopovers',
   },
   cross_border_workers: {
-    text: 'Cross border workers'
+    text: 'Cross border workers',
   },
   lockdown_status: {
     text: 'Lockdown status',
-    icon: lockdown
+    icon: lockdown,
   },
   city_movement_restriction: {
     text: 'City movement restriction',
-    icon: citymovement
+    icon: citymovement,
   },
   attending_religious_sites: {
     text: 'Religion',
-    icon: religion
+    icon: religion,
   },
   going_to_work: {
     text: 'Work',
-    icon: work
+    icon: work,
   },
   military_not_deployed: {
     text: 'Military not deployed',
-    icon: military
+    icon: military,
   },
   academia_allowed: {
     text: 'Academia allowed',
-    icon: academia
+    icon: academia,
   },
   going_to_shops: {
     text: 'Going to shops',
-    icon: shops
+    icon: shops,
   },
   electricity_nominal: {
     text: 'Electricity working',
-    icon: electricity
+    icon: electricity,
   },
   water_nominal: {
     text: 'Water working',
-    icon: water
+    icon: water,
   },
   internet_nominal: {
     text: 'Internet working',
-    icon: internet
-  }
+    icon: internet,
+  },
 };

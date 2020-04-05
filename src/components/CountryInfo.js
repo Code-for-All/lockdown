@@ -10,14 +10,14 @@ const TRAVEL = {
   '2': 'PARTIALLY',
   '3': 'NO',
   '4': 'UNCLEAR',
-  '5': 'NA'
+  '5': 'NA',
 };
 
 const MEASURES = {
   '1': 'YES',
   '2': 'PARTIAL',
   '3': 'NO',
-  '4': 'UNCLEAR'
+  '4': 'UNCLEAR',
 };
 
 const TRAVELTYPE = ['Land', 'Flight', 'Sea'];
@@ -29,7 +29,7 @@ export default class CountryInfo extends Component {
       travelAdvice: await travelAdviceService.getAdvice({ iso2: this.props.iso2 }),
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
       populationData: await populationService.getPopulation(),
-      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2 })
+      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2 }),
     });
   }
 
@@ -121,7 +121,7 @@ export default class CountryInfo extends Component {
                       </div>
                     </ul>
                   </li>
-                  ${Object.keys(countryDetails.travel).map(key => {
+                  ${Object.keys(countryDetails.travel).map((key) => {
                     return html`
                       <li>
                         <ul class="ld-travel">
@@ -152,11 +152,7 @@ export default class CountryInfo extends Component {
         <hr />
         <div class="dialog">
           <h2>Travel advice</h2>
-          ${travelAdvice.status === 'success'
-            ? html`
-                <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span>
-              `
-            : 'Error'}
+          ${travelAdvice.status === 'success' ? html` <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span> ` : 'Error'}
         </div>
         <hr />
         <div class="dialog ld-contribute">

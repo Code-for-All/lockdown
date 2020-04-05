@@ -9,7 +9,8 @@
     "prepare-pwa-assets": "./node_modules/.bin/pwa-asset-generator Assets/logo.png src/assets/pwa --manifest manifest.json --index index.html && ./node_modules/.bin/pwa-asset-generator Assets/logo-dark.png src/assets/pwa --dark-mode --background '#303136' --splash-only --index index.html && npm run format:index",
     "lint": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --check",
     "format": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --write && npm run format:index",
-    "format:index": "prettier \"index.html\" \"package.json\" --write"
+    "format:index": "prettier \"index.html\" \"package.json\" --write",
+    "minify-json": "node script/minify-json.js"
   },
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",

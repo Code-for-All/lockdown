@@ -31,7 +31,12 @@ jobs:
           git config user.email "lockdown-bot@non-existing.com"
           git config user.name "lockdown-bot"
           git add data
-          git commit -m "Update data"
+          changed_files=$(git status --porcelain --untracked-files=no | wc -l)
+
+          if [ $changed_files -gt 0 ]
+          then
+            git commit -m "Update data"
+          fi
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:

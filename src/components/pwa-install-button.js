@@ -1,7 +1,7 @@
 let deferredPrompt;
 let installable;
 
-window.addEventListener('beforeinstallprompt', e => {
+window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   installable = true;
   deferredPrompt = e;
@@ -18,7 +18,7 @@ class PwaInstallButton extends HTMLElement {
     this.setAttribute('hidden', '');
 
     this.addEventListener('click', this._handlePrompt.bind(this));
-    window.addEventListener('beforeinstallprompt', e => {
+    window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
       this.removeAttribute('hidden');

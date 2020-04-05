@@ -114,7 +114,7 @@ export default class Dialog extends Component {
   render() {
     return html`
       <div class="${styles}" onClick=${this.__onClick}>
-        <div ref=${ref => (this.dialogRef = ref)} class="ld-dialog--container">
+        <div ref=${(ref) => (this.dialogRef = ref)} class="ld-dialog--container">
           <div class="ld-dialog--header">
             <h1>${this.props.title}</h1>
             <div class="ld-dialog--close-cont">
