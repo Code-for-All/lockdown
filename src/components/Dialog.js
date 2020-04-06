@@ -109,6 +109,7 @@ export default class Dialog extends Component {
   }
 
   componentDidMount() {
+    this.dialogRef.setAttribute('tabindex', '-1');
     this.dialogRef.focus();
     this.dialogRef.removeAttribute('tabindex');
   }
@@ -126,7 +127,6 @@ export default class Dialog extends Component {
           aria-modal="true"
           ref=${(ref) => (this.dialogRef = ref)}
           class="ld-dialog--container"
-          tabindex="-1"
         >
           <focus-trap>
             <div class="ld-dialog--header">
