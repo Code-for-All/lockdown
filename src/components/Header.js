@@ -17,6 +17,7 @@ const styles = css`
     align-items: center;
     justify-content: space-around;
     height: 60px;
+    width: 100%;
   }
 
   &::after {
