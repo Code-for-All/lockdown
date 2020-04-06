@@ -57,7 +57,11 @@ class Router extends EventTargetShim {
 
     const url = new URL(a.href);
 
-    if (!url.startsWith(document.baseURI)) {
+    if (url.hash) {
+      return;
+    }
+
+    if (!url.href.startsWith(document.baseURI) || url.href.includes('#')) {
       // navigate outside app
       return;
     }
