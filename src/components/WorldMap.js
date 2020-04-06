@@ -2,12 +2,35 @@ import { Component } from 'preact';
 import { html } from 'htm/preact';
 import { router } from '../router.js';
 import { lockdownsService } from '../services/locksdownsService.js';
+import { dialogService } from '../services/dialogService.js';
+import css from 'csz';
 
 const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
 const today = new Date();
 
+const selectStyles = css`
+  & {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+  }
+`;
+
 export class WorldMap extends Component {
+  constructor() {
+    super();
+    this.__handleSelect = this.__handleSelect.bind(this);
+  }
   async componentDidMount() {
+    dialogService.addEventListener('close', () => {
+      this.selectRef.focus();
+    });
+
     // the world map needs a large data source, lazily fetch them in parallel
     const [lockdowns, mapData, leaflet] = await Promise.all([
       lockdownsService.getLockdowns(),
@@ -120,6 +143,7 @@ export class WorldMap extends Component {
     labelLayer.addTo(map);
     this.setState({
       map,
+      countries: mapData.features,
     });
 
     if (navigator.permissions) {
@@ -151,7 +175,33 @@ export class WorldMap extends Component {
     this.state.map.remove();
   }
 
+  __handleSelect(e) {
+    e.preventDefault();
+    const [iso2, country] = this.selectRef.value.split(',');
+    router.setSearchParam('country', country);
+    router.setSearchParam('iso2', iso2);
+  }
+
+  __resetFocus() {
+    this.selectRef.focus();
+  }
+
   render() {
-    return html` <div style="width: 100%; height: 100%;" ref=${(ref) => (this.ref = ref)}></div> `;
+    return html`
+      <div class="${selectStyles}">
+
+      <form onSubmit=${this.__handleSelect}>
+        <label for="countries">Choose a country:</label>
+        <select ref=${(ref) => (this.selectRef = ref)} id="countries">
+          ${this.state.countries?.map(
+            (country) => html`<option value="${country.properties.iso2},${country.properties.NAME}">${country.properties.NAME}</option>`
+          )}
+        </select>
+        <input type="submit">View country details</input>
+      </form>
+
+      </div>
+      <div style="width: 100%; height: 100%;" ref=${(ref) => (this.ref = ref)}></div> 
+    `;
   }
 }

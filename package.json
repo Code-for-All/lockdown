@@ -37,6 +37,7 @@
     "uglifycss": "0.0.29"
   },
   "dependencies": {
+    "@a11y/focus-trap": "^1.0.5",
     "bulma": "^0.8.0",
     "csz": "^1.2.0",
     "date-fns": "^2.11.0",

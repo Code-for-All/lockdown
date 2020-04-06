@@ -51,7 +51,7 @@ class Router extends EventTargetShim {
     const a = e.composedPath().find((el) => el.tagName === 'A');
 
     if (!a || !a.href) return;
-    if (a.hasAttribute('download') || a.href.includes('mailto:')) return;
+    if (a.hasAttribute('download') || a.href.includes('mailto:') || a.href.includes('#')) return;
     const target = a.getAttribute('target');
     if (target && target !== '' && target !== '_self') return;
 

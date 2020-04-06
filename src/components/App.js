@@ -8,6 +8,7 @@ import { Totals } from './Totals.js';
 import { Menu } from './Menu.js';
 import { Lazy } from './Lazy.js';
 import { router } from '../router.js';
+import { dialogService } from '../services/dialogService.js';
 
 const styles = css`
   & {
@@ -65,8 +66,8 @@ export class App extends Component {
         <${Totals} />
       </div>
 
-      <${WorldMap} />
       <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
+      <${WorldMap} />
 
       ${this.state.dialog.opened
         ? html`
@@ -117,5 +118,6 @@ export class App extends Component {
   __closeDialog() {
     this.setState({ dialog: { opened: false, template: '', title: '' } });
     this.__closeCountryInfo();
+    dialogService.close();
   }
 }

@@ -185,7 +185,7 @@ export class Menu extends Component {
 
   render(_, { activeItem, updateAvailable }) {
     return html`
-      <div class="ld-menu">
+      <main id="main" class="ld-menu">
         <div class="ld-menu-nav">
           <nav>
             <ul>
@@ -228,7 +228,7 @@ export class Menu extends Component {
           </div>
           ${renderMenu(activeItem).template}
         </div>
-      </div>
+      </main>
     `;
   }
 }
