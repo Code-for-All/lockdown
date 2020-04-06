@@ -109,7 +109,8 @@ export default class Dialog extends Component {
   }
 
   componentDidMount() {
-    this.closeBtnRef.focus();
+    this.dialogRef.focus();
+    this.dialogRef.removeAttribute('tabindex');
   }
 
   componentWillUnmount() {
@@ -125,17 +126,13 @@ export default class Dialog extends Component {
           aria-modal="true"
           ref=${(ref) => (this.dialogRef = ref)}
           class="ld-dialog--container"
+          tabindex="-1"
         >
           <focus-trap>
             <div class="ld-dialog--header">
               <h1 id="dialogtitle">${this.props.title}</h1>
               <div class="ld-dialog--close-cont">
-                <button
-                  ref=${(ref) => (this.closeBtnRef = ref)}
-                  onClick=${this.__closeDialog}
-                  class="ld-dialog--close"
-                  aria-labelledby="button-name"
-                >
+                <button onClick=${this.__closeDialog} class="ld-dialog--close" aria-labelledby="button-name">
                   <span id="button-name" hidden>close</span>
                   ${close}
                 </button>
