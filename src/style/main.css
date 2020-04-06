@@ -60,6 +60,7 @@ a:visited {
 }
 
 .skiplink {
+  color: var(--ld-active);
   background-color: var(--ld-bg);
   border: solid 3px var(--ld-active);
   border-radius: 5px;
