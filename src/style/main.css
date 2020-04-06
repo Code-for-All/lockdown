@@ -37,7 +37,7 @@ body {
   background-color: var(--ld-bg);
   color: var(--ld-dark-gray);
   /* 2/2 prevent bouncy scroll on iOS */
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }

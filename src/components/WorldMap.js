@@ -29,7 +29,9 @@ export class WorldMap extends Component {
   async componentDidMount() {
     dialogService.addEventListener('close', (e) => {
       if (e.detail.countryDialogClosed) {
-        this.selectRef.focus();
+        this.countrySelectRef.setAttribute('tabindex', '-1');
+        this.countrySelectRef.focus();
+        this.countrySelectRef.removeAttribute('tabindex');
       }
     });
 
@@ -185,23 +187,23 @@ export class WorldMap extends Component {
   }
 
   __resetFocus() {
-    this.selectRef.focus();
+    this.countrySelectRef.focus();
   }
 
   render() {
     return html`
       <div class="${selectStyles}">
-
-      <form onSubmit=${this.__handleSelect}>
-        <label for="countries">Choose a country:</label>
-        <select ref=${(ref) => (this.selectRef = ref)} id="countries">
-          ${this.state.countries?.map(
-            (country) => html`<option value="${country.properties.iso2},${country.properties.NAME}">${country.properties.NAME}</option>`
-          )}
-        </select>
-        <input type="submit">View country details</input>
-      </form>
-
+      <div ref=${(ref) => (this.countrySelectRef = ref)}>
+        <form onSubmit=${this.__handleSelect}>
+          <label for="countries">Choose a country:</label>
+          <select ref=${(ref) => (this.selectRef = ref)} id="countries">
+            ${this.state.countries?.map(
+              (country) => html`<option value="${country.properties.iso2},${country.properties.NAME}">${country.properties.NAME}</option>`
+            )}
+          </select>
+          <input type="submit">View country details</input>
+        </form>
+      </div>
       </div>
       <div style="width: 100%; height: 100%;" ref=${(ref) => (this.ref = ref)}></div> 
     `;
