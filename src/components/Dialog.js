@@ -124,7 +124,6 @@ export default class Dialog extends Component {
         <div
           role="dialog"
           aria-labelledby="dialogtitle"
-          aria-modal="true"
           ref=${(ref) => (this.dialogRef = ref)}
           class="ld-dialog--container"
         >
