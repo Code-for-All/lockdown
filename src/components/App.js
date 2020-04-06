@@ -11,13 +11,14 @@ import { router } from '../router.js';
 import { dialogService } from '../services/dialogService.js';
 import { debounce } from 'lodash-es';
 
-const debouncedCloseDialogService = debounce(
-  (params) => {
+const debouncedCloseDialog = debounce(
+  () => {
     let status = {
       menuDialogClosed: false,
       countryDialogClosed: false,
     };
 
+    const params = new URLSearchParams(location.search);
     if (params.has('country') || params.has('iso2')) {
       status.countryDialogClosed = true;
     } else {
@@ -139,8 +140,7 @@ export class App extends Component {
 
   __closeDialog() {
     this.setState({ dialog: { opened: false, template: '', title: '' } });
-    const params = new URLSearchParams(location.search);
-    debouncedCloseDialogService(params);
+    debouncedCloseDialog();
     this.__closeCountryInfo();
   }
 }
