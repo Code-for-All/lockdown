@@ -193,17 +193,17 @@ export class WorldMap extends Component {
   render() {
     return html`
       <div class="${selectStyles}">
-      <div ref=${(ref) => (this.countrySelectRef = ref)}>
-        <form onSubmit=${this.__handleSelect}>
-          <label for="countries">Choose a country:</label>
-          <select ref=${(ref) => (this.selectRef = ref)} id="countries">
-            ${this.state.countries?.map(
-              (country) => html`<option value="${country.properties.iso2},${country.properties.NAME}">${country.properties.NAME}</option>`
-            )}
-          </select>
-          <input type="submit">View country details</input>
-        </form>
-      </div>
+        <div tabindex="-1" ref=${(ref) => (this.countrySelectRef = ref)}>
+          <form onSubmit=${this.__handleSelect}>
+            <label for="countries">Choose a country:</label>
+            <select ref=${(ref) => (this.selectRef = ref)} id="countries">
+              ${this.state.countries?.map(
+                (country) => html`<option value="${country.properties.iso2},${country.properties.NAME}">${country.properties.NAME}</option>`
+              )}
+            </select>
+            <input type="submit">View country details</input>
+          </form>
+        </div>
       </div>
       <div style="width: 100%; height: 100%;" ref=${(ref) => (this.ref = ref)}></div> 
     `;

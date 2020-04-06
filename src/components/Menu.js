@@ -4,7 +4,6 @@ import { Expandable } from './Expandable.js';
 import { Ticker } from './Ticker.js';
 import { Settings } from './Settings.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
-import { info, settings, refresh, add } from '../assets/icons/icons.js';
 import Tabs from '../components/Tabs.js';
 
 const renderMenu = (menuItem) => {

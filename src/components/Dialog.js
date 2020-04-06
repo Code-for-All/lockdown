@@ -1,5 +1,6 @@
 import { html } from 'htm/preact';
 import { Component } from 'preact';
+import { router } from '../router.js';
 import css from 'csz';
 import { close } from '../assets/icons/icons.js';
 import '@a11y/focus-trap';
@@ -76,8 +77,8 @@ const styles = css`
 
   @media (max-width: 960px) {
     & {
-      margin-bottom: 60px;
-      margin-top: 60px;
+      top: 60px;
+      margin-top: 0px;
       position: fixed;
       width: 100%;
       height: calc(100% - 120px);
@@ -109,6 +110,15 @@ export default class Dialog extends Component {
   }
 
   componentDidMount() {
+    let prevRoute = location.href;
+    router.addEventListener('path-changed', () => {
+      if (prevRoute !== location.href && this.dialogRef) {
+        this.dialogRef.setAttribute('tabindex', '-1');
+        this.dialogRef.focus();
+        this.dialogRef.removeAttribute('tabindex');
+        prevRoute = location.href;
+      }
+    });
     this.dialogRef.setAttribute('tabindex', '-1');
     this.dialogRef.focus();
     this.dialogRef.removeAttribute('tabindex');
