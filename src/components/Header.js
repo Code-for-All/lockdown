@@ -71,6 +71,7 @@ const styles = css`
 `;
 
 export const Header = () => html`
+  <a class="skiplink" href="#main">Go to main content</a>
   <header class=${styles}>
     <div class="ld-logo-wrapper">
       <a href="">

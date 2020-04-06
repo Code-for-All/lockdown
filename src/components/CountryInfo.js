@@ -205,7 +205,7 @@ export default class CountryInfo extends Component {
           <h2>Stats</h2>
           <div class="data-entry">
             <p>Population:</p>
-            <p class="data-value">${populationData?.data?.[this.props.iso2].Population ?? 'Error'}</p>
+            <p class="data-value">${populationData?.data?.[this.props.iso2]?.Population ?? 'Error'}</p>
           </div>
           <div class="data-entry">
             <p>Confirmed cases:</p>

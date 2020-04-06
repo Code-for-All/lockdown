@@ -37,11 +37,13 @@
     "uglifycss": "0.0.29"
   },
   "dependencies": {
+    "@a11y/focus-trap": "^1.0.5",
     "bulma": "^0.8.0",
     "csz": "^1.2.0",
     "date-fns": "^2.11.0",
     "htm": "^3.0.3",
     "leaflet": "^1.6.0",
+    "lodash-es": "^4.17.15",
     "preact": "^10.3.2",
     "pwa-helpers": "^0.9.1",
     "rollup-plugin-copy": "^3.3.0",
