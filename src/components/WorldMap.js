@@ -27,8 +27,10 @@ export class WorldMap extends Component {
     this.__handleSelect = this.__handleSelect.bind(this);
   }
   async componentDidMount() {
-    dialogService.addEventListener('close', () => {
-      this.selectRef.focus();
+    dialogService.addEventListener('close', (e) => {
+      if (e.detail.countryDialogClosed) {
+        this.selectRef.focus();
+      }
     });
 
     // the world map needs a large data source, lazily fetch them in parallel

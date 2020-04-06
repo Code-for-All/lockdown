@@ -121,12 +121,7 @@ export default class Dialog extends Component {
   render() {
     return html`
       <div class="${styles}" onClick=${this.__onClick}>
-        <div
-          role="dialog"
-          aria-labelledby="dialogtitle"
-          ref=${(ref) => (this.dialogRef = ref)}
-          class="ld-dialog--container"
-        >
+        <div role="dialog" aria-labelledby="dialogtitle" ref=${(ref) => (this.dialogRef = ref)} class="ld-dialog--container">
           <focus-trap>
             <div class="ld-dialog--header">
               <h1 id="dialogtitle">${this.props.title}</h1>

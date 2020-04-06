@@ -1,8 +1,8 @@
 import { EventTargetShim } from '../utils/EventTargetShim.js';
 
 class DialogService extends EventTargetShim {
-  close() {
-    this.dispatchEvent(new Event('close'));
+  close(status) {
+    this.dispatchEvent(new CustomEvent('close', { detail: status }));
   }
 }
 

@@ -9,6 +9,28 @@ import { Menu } from './Menu.js';
 import { Lazy } from './Lazy.js';
 import { router } from '../router.js';
 import { dialogService } from '../services/dialogService.js';
+import { debounce } from 'lodash-es';
+
+const debouncedCloseDialogService = debounce(
+  (params) => {
+    let status = {
+      menuDialogClosed: false,
+      countryDialogClosed: false,
+    };
+
+    if (params.has('country') || params.has('iso2')) {
+      status.countryDialogClosed = true;
+    } else {
+      status.menuDialogClosed = true;
+    }
+    dialogService.close(status);
+  },
+  10,
+  {
+    leading: true,
+    trailing: false,
+  }
+);
 
 const styles = css`
   & {
@@ -117,7 +139,8 @@ export class App extends Component {
 
   __closeDialog() {
     this.setState({ dialog: { opened: false, template: '', title: '' } });
+    const params = new URLSearchParams(location.search);
+    debouncedCloseDialogService(params);
     this.__closeCountryInfo();
-    dialogService.close();
   }
 }
