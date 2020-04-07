@@ -36,8 +36,8 @@ export class WorldMap extends Component {
     });
 
     // the world map needs a large data source, lazily fetch them in parallel
-    const [lockdowns, mapData, leaflet] = await Promise.all([
-      lockdownsService.getLockdowns(),
+    const [mapData, leaflet] = await Promise.all([
+      // Service.getLockdowns(),
       fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json()),
       import('leaflet/dist/leaflet-src.esm.js'),
     ]);
@@ -92,25 +92,23 @@ export class WorldMap extends Component {
     }).addTo(map);
 
     function worldStyle(e) {
-      // lockdown unknown
-      let value = 'grey';
-
-      if (e.properties.data && e.properties.data.lockdowns) {
-        if (e.properties.data.lockdowns.length === 0) {
-          // no known lockdowns
-          value = 'green';
-        }
-
-        for (const lockdown of e.properties.data.lockdowns) {
-          // TODO: start and end are exclusive or inclusive?
-          if (new Date(lockdown.start) >= today && lockdown.end ? new Date(lockdown.end) < today : true) {
-            // in lockdown
-            value = 'red';
-          } else {
-            // lockdown expired
-            value = 'green';
-          }
-        }
+      let value;
+      switch (e.properties.lockdown_status) {
+        case '1':
+          value = '#9fc184';
+          break;
+        case '2':
+          value = '#769de2';
+          break;
+        case '3':
+          value = '#d36d6b';
+          break;
+        case '4':
+          value = '#ebb577';
+          break;
+        case '5':
+          value = '#828282';
+          break;
       }
 
       let lineOpacity;
@@ -132,12 +130,6 @@ export class WorldMap extends Component {
         style.fillOpacity = 0.5;
       }
       return style;
-    }
-
-    for (const feature of mapData.features) {
-      if (lockdowns[feature.properties.NAME]) {
-        feature.properties.data = lockdowns[feature.properties.NAME];
-      }
     }
 
     themeLayer = geoJSON(mapData, {
