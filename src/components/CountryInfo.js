@@ -215,14 +215,6 @@ export default class CountryInfo extends Component {
             <p>Confirmed recoveries:</p>
             <p class="data-value">${coronaData?.totalRecovered ?? 'Error'}</p>
           </div>
-          <div class="data-entry">
-            <p>Lockdown start:</p>
-            <p class="data-value">-</p>
-          </div>
-          <div class="data-entry">
-            <p>Lockdown end:</p>
-            <p class="data-value">-</p>
-          </div>
         </div>
         <hr />
       </div>
