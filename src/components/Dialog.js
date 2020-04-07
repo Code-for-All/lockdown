@@ -72,7 +72,7 @@ const styles = css`
 
   .ld-dialog--close-cont button:hover {
     background-color: var(--ld-hover);
-    border-radius: 50%;
+    border-radius: 5px;
   }
 
   @media (max-width: 960px) {

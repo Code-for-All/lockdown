@@ -6,7 +6,9 @@
   --ld-bg: white;
   --ld-hover: rgb(247, 247, 247);
   --ld-active: blue;
+  --ld-focus: rgba(0, 0, 255, 0.5);
   --ld-icon-stroke-width: 1.5;
+  --ld-button-text: black;
 }
 
 .dark {
@@ -17,7 +19,9 @@
   --ld-bg: rgb(48, 49, 54);
   --ld-hover: rgb(38, 39, 43);
   --ld-active: rgb(131, 251, 195);
+  --ld-focus: rgba(131, 251, 195, 1);
   --ld-icon-stroke-width: 1.2;
+  --ld-button-text: white;
 }
 
 html {
@@ -25,6 +29,13 @@ html {
   position: fixed;
   height: 100%;
   overflow: hidden;
+}
+
+*:focus {
+  outline: 0px;
+  border-radius: 5px;
+  box-shadow: 0 0 0px 3px var(--ld-focus) !important;
+  transition: box-shadow 0.1s ease-in-out;
 }
 
 html,
@@ -62,7 +73,7 @@ a:visited {
 .skiplink {
   color: var(--ld-active);
   background-color: var(--ld-bg);
-  border: solid 3px var(--ld-active);
+  border: solid 1px var(--ld-active);
   border-radius: 5px;
   padding: 10px 20px 10px 20px;
   position: absolute;

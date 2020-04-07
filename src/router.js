@@ -65,7 +65,6 @@ class Router extends EventTargetShim {
       // navigate outside app
       return;
     }
-
     // navigate within app
     e.preventDefault();
     this.setPath(url.pathname);
