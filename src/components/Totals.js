@@ -61,7 +61,7 @@ export class Totals extends Component {
     const items = [
       {
         description: 'Countries in lockdown',
-        value: '0',
+        value: totals.territories.lockdown,
       },
       {
         description: 'People affected',
@@ -69,11 +69,11 @@ export class Totals extends Component {
       },
       {
         description: 'Confirmed cases',
-        value: totals.confirmed,
+        value: totals.corona.confirmed,
       },
       {
         description: 'Confirmed deaths',
-        value: totals.deaths,
+        value: totals.corona.deaths,
       },
     ];
 
