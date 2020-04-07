@@ -35,7 +35,6 @@ export class WorldMap extends Component {
 
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, leaflet] = await Promise.all([
-      // Service.getLockdowns(),
       fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json()),
       import('leaflet/dist/leaflet-src.esm.js'),
     ]);
