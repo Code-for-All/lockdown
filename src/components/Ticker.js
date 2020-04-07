@@ -1,48 +1,50 @@
 import { html } from 'htm/preact';
 import { useState, useEffect } from 'preact/compat';
+import { updatesService } from '../services/updatesService.js';
+import { offline, loading } from '../assets/icons/icons.js';
+import { loadingStyles, offlineStyles } from './CountryInfo.js';
 import css from 'csz';
 
 export function Ticker() {
-  const [data, setData] = useState([
-    {
-      type: 'New',
-      date: '19-22-2020, 22:01',
-      text:
-        'Some information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or something',
-    },
-    {
-      type: 'Rectification',
-      date: '19-22-2020, 19:51',
-      text: 'Some information message here with a link to a source or something',
-    },
-    {
-      type: 'Petition',
-      date: '19-22-2020, 22:01',
-      text:
-        'Some information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or somethingSome information message here with a link to a source or something',
-    },
-    {
-      type: 'Announcement',
-      date: '19-22-2020, 19:51',
-      text: 'Some information message here with a link to a source or something',
-    },
-    {
-      type: 'Promotion',
-      date: '19-22-2020, 19:51',
-      text: 'Some information message here with a link to a source or something',
-    },
-  ]);
+  const [updates, setUpdates] = useState(undefined);
 
-  useEffect(() => {
-    // const result = await notificationsService();
-    // setData(result.data);
-  });
+  useEffect(async () => {
+    const response = await updatesService.getUpdates();
+    setUpdates(response);
+  }, []);
+
+  /* Offline & no cached data state */
+  if (!navigator.onLine) {
+    if (updates?.status !== 'success') {
+      return html`
+        <div class="${offlineStyles}">
+          ${offline}
+          <b>You are not connected to the internet</b>
+          <p>Information for this country can't be displayed because you are currently offline. Please check your internet connection.</p>
+        </div>
+      `;
+    }
+  }
+
+  /* Loading state */
+  if (!updates && navigator.onLine) {
+    return html`
+      <div class="${loadingStyles}">
+        ${loading}
+      </div>
+    `;
+  }
+
+  /* Error state */
+  if (updates.status === 'failed' && navigator.onLine) {
+    return html`<div style="margin-top: 14px;">An error occured while fetching updates.</div>`;
+  }
 
   return html`
     <div class="${styles}">
       <ul>
-        ${data.map(
-          ({ date, text, type }) => html`
+        ${updates?.data?.updates?.map(
+          ({ type, title, content, link, date }) => html`
             <li>
               <div class="ld-ticker--bar">
                 <div class="ld-ticker--dot-container">
@@ -51,11 +53,17 @@ export function Ticker() {
                 <div class="ld-ticker--line"></div>
               </div>
               <div class="ld-ticker--content">
+                <div class="ld-ticker--title">
+                  ${title}
+                </div>
+                <div class="ld-ticker--content">
+                  ${content}
+                </div>
+                <div class="ld-ticker--link">
+                  <a href="${link}">Source</a>
+                </div>
                 <div class="ld-ticker--date">
                   ${date}
-                </div>
-                <div class="ld-ticker--text">
-                  ${text}
                 </div>
               </div>
             </li>
@@ -137,13 +145,22 @@ const styles = css`
     transform: translate(-50%);
   }
 
+  .ld-ticker--title {
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
   .ld-ticker--content {
+    margin-bottom: 10px;
+  }
+  .ld-ticker--link {
+    margin-bottom: 10px;
+  }
+  .ld-ticker--link a {
+    color: var(--ld-active);
   }
   .ld-ticker--date {
-    font-weight: 700;
     font-size: 12px;
     letter-spacing: 1px;
-    margin-bottom: 10px;
   }
   .ld-ticker--text {
     font-size: 14px;

@@ -62,7 +62,7 @@ const styles = css`
   }
 `;
 
-const offlineStyles = css`
+export const offlineStyles = css`
   & {
     display: flex;
     align-items: center;
@@ -78,7 +78,7 @@ const offlineStyles = css`
   }
 `;
 
-const loadingStyles = css`
+export const loadingStyles = css`
   & {
     display: flex;
     align-items: center;

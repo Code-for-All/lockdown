@@ -1,0 +1,39 @@
+{
+  "updates": [
+      {
+        "type": "new",
+        "title": "New update",
+        "content": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure",
+        "link": "www.google.com",
+        "date": "19-02-2020 13:56"
+      },
+      {
+        "type": "rectification",
+        "title": "This is a rectification",
+        "content": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis",
+        "link": "www.google.com",
+        "date": "19-02-2020 13:56"
+      },
+      {
+        "type": "petition",
+        "title": "This is a petition",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi",
+        "link": "www.google.com",
+        "date": "19-02-2020 13:56"
+      },
+      {
+        "type": "announcement",
+        "title": "This is an announcemtn",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ",
+        "link": "www.google.com",
+        "date": "19-02-2020 13:56"
+      },
+      {
+        "type": "promotion",
+        "title": "This is a promotion",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore",
+        "link": "www.google.com",
+        "date": "19-02-2020 13:56"
+      }
+  ]
+}
