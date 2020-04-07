@@ -1,7 +1,6 @@
 import { html } from 'htm/preact';
 import css from 'csz';
 import { Component } from 'preact';
-import { lockdownsService } from '../services/locksdownsService.js';
 import { travelAdviceService } from '../services/travelAdviceService.js';
 import { coronaTrackerService } from '../services/coronaTrackerService.js';
 import { populationService } from '../services/populationService.js';
@@ -157,14 +156,13 @@ const loadingStyles = css`
 export default class CountryInfo extends Component {
   async componentWillMount() {
     this.setState({
-      lockdowns: await lockdownsService.getLockdowns(),
       travelAdvice: await travelAdviceService.getAdvice({ iso2: this.props.iso2 }),
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
       populationData: await populationService.getPopulation(),
     });
   }
 
-  render(_, { lockdowns, travelAdvice, coronaData, populationData }) {
+  render(_, { travelAdvice, coronaData, populationData }) {
     /** If the user is offline, and theres no response, or the response has failed */
     if (!navigator.onLine) {
       if (travelAdvice?.status !== 'success' || coronaData?.status !== 'success' || populationData?.data?.status !== 'success') {
@@ -179,7 +177,7 @@ export default class CountryInfo extends Component {
     }
 
     /** If there is no data available but the user is online, show loading state */
-    if (!lockdowns && !travelAdvice && !coronaData && !populationData && navigator.onLine) {
+    if (!travelAdvice && !coronaData && !populationData && navigator.onLine) {
       return html`
         <div class="${loadingStyles}">
           ${loading}

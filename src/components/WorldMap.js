@@ -1,12 +1,10 @@
 import { Component } from 'preact';
 import { html } from 'htm/preact';
 import { router } from '../router.js';
-import { lockdownsService } from '../services/locksdownsService.js';
 import { dialogService } from '../services/dialogService.js';
 import css from 'csz';
 
 const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
-const today = new Date();
 
 const selectStyles = css`
   & {
