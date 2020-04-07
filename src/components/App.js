@@ -8,6 +8,30 @@ import { Totals } from './Totals.js';
 import { Menu } from './Menu.js';
 import { Lazy } from './Lazy.js';
 import { router } from '../router.js';
+import { dialogService } from '../services/dialogService.js';
+import { debounce } from 'lodash-es';
+
+const debouncedCloseDialog = debounce(
+  () => {
+    let status = {
+      menuDialogClosed: false,
+      countryDialogClosed: false,
+    };
+
+    const params = new URLSearchParams(location.search);
+    if (params.has('country') || params.has('iso2')) {
+      status.countryDialogClosed = true;
+    } else {
+      status.menuDialogClosed = true;
+    }
+    dialogService.close(status);
+  },
+  10,
+  {
+    leading: true,
+    trailing: false,
+  }
+);
 
 const styles = css`
   & {
@@ -65,8 +89,8 @@ export class App extends Component {
         <${Totals} />
       </div>
 
-      <${WorldMap} />
       <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
+      <${WorldMap} />
 
       ${this.state.dialog.opened
         ? html`
@@ -116,6 +140,7 @@ export class App extends Component {
 
   __closeDialog() {
     this.setState({ dialog: { opened: false, template: '', title: '' } });
+    debouncedCloseDialog();
     this.__closeCountryInfo();
   }
 }

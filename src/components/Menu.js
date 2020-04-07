@@ -4,8 +4,7 @@ import { Expandable } from './Expandable.js';
 import { Ticker } from './Ticker.js';
 import { Settings } from './Settings.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
-import { info, settings, refresh, add } from '../assets/icons/icons.js';
-import { addPwaUpdateListener } from '../utils/addPwaUpdateListener.js';
+import Tabs from '../components/Tabs.js';
 
 const renderMenu = (menuItem) => {
   switch (menuItem) {
@@ -14,6 +13,9 @@ const renderMenu = (menuItem) => {
         title: 'info',
         template: html`
           <h1>Lockdown</h1>
+          <p class="ld-alpha">
+            Project lockdown is currently in alpha. Not all data may be available yet.
+          </p>
           <p>
             <b>Project Lockdown</b> aims to map the different lockdowns around the world, offering the public a number of relevant metrics
             in order to provide an overview of the restrictions applied worldwide. We hope this will help evaluate the seriousness of the
@@ -135,25 +137,24 @@ export class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      updateAvailable: false,
       activeItem: 'info',
     };
+
+    this.switchContent = this.switchContent.bind(this);
   }
 
   componentDidMount() {
+    let i = 0;
+
     installMediaQueryWatcher(`(min-width: 960px)`, (matches) => {
       this.setState({
         isMobile: !matches,
       });
-      if (matches) {
+      if (matches && i > 0) {
+        // This is super ugly, but this fires on pageload and causes the focus to be set on the menu :/
+        i++;
         this.props.close();
       }
-    });
-
-    addPwaUpdateListener((updateAvailable) => {
-      this.setState({
-        updateAvailable,
-      });
     });
   }
 
@@ -182,38 +183,15 @@ export class Menu extends Component {
 
   render(_, { activeItem, updateAvailable }) {
     return html`
-      <div class="ld-menu">
+      <main id="main" class="ld-menu">
         <div class="ld-menu-nav">
           <nav>
-            <ul>
-              <li>
-                <button onClick=${() => this.switchContent('info')}>
-                  ${info}
-                  <p class="${activeItem === 'info' ? 'ld-menu--active' : ''}">INFO</p>
-                </button>
-              </li>
-
-              <li>
-                <button onClick=${() => this.switchContent('settings')}>
-                  ${updateAvailable ? html` <div class="ld-menu--notification"></div> ` : ''} ${settings}
-                  <p class="${activeItem === 'settings' ? 'ld-menu--active' : ''}">SETTINGS</p>
-                </button>
-              </li>
-
-              <li>
-                <button onClick=${() => this.switchContent('updates')}>
-                  ${refresh}
-                  <p class="${activeItem === 'updates' ? 'ld-menu--active' : ''}">UPDATES</p>
-                </button>
-              </li>
-
-              <li>
-                <button onClick=${() => this.switchContent('contribute')}>
-                  ${add}
-                  <p class="${activeItem === 'contribute' ? 'ld-menu--active' : ''}">CONTRIBUTE</p>
-                </button>
-              </li>
-            </ul>
+            <${Tabs} switchContent=${this.switchContent}>
+              <button id="info">info</button>
+              <button id="settings">settings</button>
+              <button id="updates">updates</button>
+              <button id="contribute">contribute</button>
+            <//>
           </nav>
         </div>
 
@@ -225,7 +203,7 @@ export class Menu extends Component {
           </div>
           ${renderMenu(activeItem).template}
         </div>
-      </div>
+      </main>
     `;
   }
 }

@@ -6,7 +6,9 @@
   --ld-bg: white;
   --ld-hover: rgb(247, 247, 247);
   --ld-active: blue;
+  --ld-focus: rgba(0, 0, 255, 0.5);
   --ld-icon-stroke-width: 1.5;
+  --ld-button-text: black;
 }
 
 .dark {
@@ -17,7 +19,9 @@
   --ld-bg: rgb(48, 49, 54);
   --ld-hover: rgb(38, 39, 43);
   --ld-active: rgb(131, 251, 195);
+  --ld-focus: rgba(131, 251, 195, 1);
   --ld-icon-stroke-width: 1.2;
+  --ld-button-text: white;
 }
 
 html {
@@ -25,6 +29,13 @@ html {
   position: fixed;
   height: 100%;
   overflow: hidden;
+}
+
+*:focus:not(.leaflet-container) {
+  outline: 0px;
+  border-radius: 5px;
+  box-shadow: 0 0 0px 3px var(--ld-focus) !important;
+  transition: box-shadow 0.1s ease-in-out;
 }
 
 html,
@@ -37,9 +48,13 @@ body {
   background-color: var(--ld-bg);
   color: var(--ld-dark-gray);
   /* 2/2 prevent bouncy scroll on iOS */
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+}
+
+a:visited {
+  color: var(--ld-active);
 }
 
 *,
@@ -51,8 +66,30 @@ body {
 #app {
   height: 100%;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   background-color: var(--ld-bg);
+}
+
+.skiplink {
+  color: var(--ld-active);
+  background-color: var(--ld-bg);
+  border: solid 1px var(--ld-active);
+  border-radius: 5px;
+  padding: 10px 20px 10px 20px;
+  position: absolute;
+  left: -999px;
+  width: 1px;
+  height: 1px;
+  top: auto;
+}
+
+.skiplink:focus {
+  z-index: 1300;
+  top: 20px;
+  left: 40px;
+  height: auto;
+  width: auto;
+  margin: auto;
 }
 
 .ld-menu {
@@ -171,9 +208,17 @@ body {
   color: var(--ld-active);
 }
 
+.ld-alpha {
+  border-left: solid 3px var(--ld-active);
+  padding-left: 10px;
+  color: var(--ld-active);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
 @media (max-width: 960px) {
   #app {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .ld-menu {

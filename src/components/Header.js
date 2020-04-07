@@ -17,6 +17,7 @@ const styles = css`
     align-items: center;
     justify-content: space-around;
     height: 60px;
+    width: 100%;
   }
 
   &::after {
@@ -41,7 +42,7 @@ const styles = css`
     position: absolute;
     color: var(--ld-active);
     top: -4px;
-    right: -35px;
+    right: -45px;
     margin: 0;
     font-size: 12px;
   }
@@ -71,10 +72,11 @@ const styles = css`
 `;
 
 export const Header = () => html`
+  <a class="skiplink" href="#main">Go to main content</a>
   <header class=${styles}>
     <div class="ld-logo-wrapper">
       <a href="">
-        <p>BETA</p>
+        <p>ALPHA</p>
         ${logo}
         <!-- TODO: screen reader h1 -->
       </a>

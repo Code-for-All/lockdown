@@ -1,7 +1,9 @@
 import { html } from 'htm/preact';
 import { Component } from 'preact';
+import { router } from '../router.js';
 import css from 'csz';
 import { close } from '../assets/icons/icons.js';
+import '@a11y/focus-trap';
 
 const KEYCODE_ESC = 27;
 
@@ -70,13 +72,13 @@ const styles = css`
 
   .ld-dialog--close-cont button:hover {
     background-color: var(--ld-hover);
-    border-radius: 50%;
+    border-radius: 5px;
   }
 
   @media (max-width: 960px) {
     & {
-      margin-bottom: 60px;
-      margin-top: 60px;
+      top: 60px;
+      margin-top: 0px;
       position: fixed;
       width: 100%;
       height: calc(100% - 120px);
@@ -107,6 +109,21 @@ export default class Dialog extends Component {
     window.addEventListener('keydown', this.__onKeyDown, true);
   }
 
+  componentDidMount() {
+    let prevRoute = location.href;
+    router.addEventListener('path-changed', () => {
+      if (prevRoute !== location.href && this.dialogRef) {
+        this.dialogRef.setAttribute('tabindex', '-1');
+        this.dialogRef.focus();
+        this.dialogRef.removeAttribute('tabindex');
+        prevRoute = location.href;
+      }
+    });
+    this.dialogRef.setAttribute('tabindex', '-1');
+    this.dialogRef.focus();
+    this.dialogRef.removeAttribute('tabindex');
+  }
+
   componentWillUnmount() {
     window.removeEventListener('keydown', this.__onKeyDown, true);
   }
@@ -114,18 +131,21 @@ export default class Dialog extends Component {
   render() {
     return html`
       <div class="${styles}" onClick=${this.__onClick}>
-        <div ref=${(ref) => (this.dialogRef = ref)} class="ld-dialog--container">
-          <div class="ld-dialog--header">
-            <h1>${this.props.title}</h1>
-            <div class="ld-dialog--close-cont">
-              <button onClick=${this.__closeDialog} class="ld-dialog--close">
-                ${close}
-              </button>
+        <div role="dialog" aria-labelledby="dialogtitle" ref=${(ref) => (this.dialogRef = ref)} class="ld-dialog--container">
+          <focus-trap>
+            <div class="ld-dialog--header">
+              <h1 id="dialogtitle">${this.props.title}</h1>
+              <div class="ld-dialog--close-cont">
+                <button onClick=${this.__closeDialog} class="ld-dialog--close" aria-labelledby="button-name">
+                  <span id="button-name" hidden>close</span>
+                  ${close}
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="ld-dialog--content">
-            ${this.props.template}
-          </div>
+            <div class="ld-dialog--content">
+              ${this.props.template}
+            </div>
+          </focus-trap>
         </div>
       </div>
     `;

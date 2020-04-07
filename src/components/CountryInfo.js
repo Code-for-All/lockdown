@@ -1,6 +1,6 @@
 import { html } from 'htm/preact';
 import { Component } from 'preact';
-import { lockdownsService, travelAdviceService, coronaTrackerService, populationService, countryDetailService } from '../services/services';
+import { coronaTrackerService, populationService, countryDetailService } from '../services/services';
 import { TRANSLATIONS } from '../assets/translations.js';
 import { offline, loading, travelFlight, travelLand, travelSea } from '../assets/icons/icons.js';
 import { countryDetailStyles, offlineStyles, loadingStyles } from '../style/styles.js';
@@ -25,23 +25,16 @@ const TRAVELTYPE = ['Land', 'Flight', 'Sea'];
 export default class CountryInfo extends Component {
   async componentWillMount() {
     this.setState({
-      lockdowns: await lockdownsService.getLockdowns(),
-      travelAdvice: await travelAdviceService.getAdvice({ iso2: this.props.iso2 }),
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
       populationData: await populationService.getPopulation(),
       countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2 }),
     });
   }
 
-  render(_, { lockdowns, travelAdvice, coronaData, populationData, countryDetails }) {
+  render(_, { coronaData, populationData, countryDetails }) {
     /** If the user is offline, and theres no response, or the response has failed */
     if (!navigator.onLine) {
-      if (
-        travelAdvice?.status !== 'success' ||
-        coronaData?.status !== 'success' ||
-        populationData?.data?.status !== 'success' ||
-        countryDetails?.status !== 'success'
-      ) {
+      if (coronaData?.status !== 'success' || populationData?.data?.status !== 'success' || countryDetails?.status !== 'success') {
         return html`
           <div class="${offlineStyles}">
             ${offline}
@@ -53,7 +46,7 @@ export default class CountryInfo extends Component {
     }
 
     /** If there is no data available but the user is online, show loading state */
-    if (!lockdowns && !travelAdvice && !coronaData && !populationData && !countryDetails && navigator.onLine) {
+    if (!coronaData && !populationData && !countryDetails && navigator.onLine) {
       return html`
         <div class="${loadingStyles}">
           ${loading}
@@ -149,11 +142,6 @@ export default class CountryInfo extends Component {
                 Failed to get data for this country.
               </div>
             `}
-        <hr />
-        <div class="dialog">
-          <h2>Travel advice</h2>
-          ${travelAdvice.status === 'success' ? html` <span><b>${travelAdvice.score}</b><br />${travelAdvice.advice}</span> ` : 'Error'}
-        </div>
         <hr />
         <div class="dialog ld-contribute">
           <a

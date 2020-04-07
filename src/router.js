@@ -57,11 +57,14 @@ class Router extends EventTargetShim {
 
     const url = new URL(a.href);
 
-    if (!url.startsWith(document.baseURI)) {
-      // navigate outside app
+    if (url.hash) {
       return;
     }
 
+    if (!url.href.startsWith(document.baseURI)) {
+      // navigate outside app
+      return;
+    }
     // navigate within app
     e.preventDefault();
     this.setPath(url.pathname);

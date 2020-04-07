@@ -1,16 +1,40 @@
 import { Component } from 'preact';
 import { html } from 'htm/preact';
 import { router } from '../router.js';
-import { lockdownsService } from '../services/locksdownsService.js';
+import { dialogService } from '../services/dialogService.js';
+import css from 'csz';
 
 const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
-const today = new Date();
+
+const selectStyles = css`
+  & {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+  }
+`;
 
 export class WorldMap extends Component {
+  constructor() {
+    super();
+    this.__handleSelect = this.__handleSelect.bind(this);
+  }
   async componentDidMount() {
+    dialogService.addEventListener('close', (e) => {
+      if (e.detail.countryDialogClosed) {
+        this.countrySelectRef.setAttribute('tabindex', '-1');
+        this.countrySelectRef.focus();
+        this.countrySelectRef.removeAttribute('tabindex');
+      }
+    });
+
     // the world map needs a large data source, lazily fetch them in parallel
-    const [lockdowns, mapData, leaflet] = await Promise.all([
-      lockdownsService.getLockdowns(),
+    const [mapData, leaflet] = await Promise.all([
       fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json()),
       import('leaflet/dist/leaflet-src.esm.js'),
     ]);
@@ -65,25 +89,23 @@ export class WorldMap extends Component {
     }).addTo(map);
 
     function worldStyle(e) {
-      // lockdown unknown
-      let value = 'grey';
-
-      if (e.properties.data && e.properties.data.lockdowns) {
-        if (e.properties.data.lockdowns.length === 0) {
-          // no known lockdowns
-          value = 'green';
-        }
-
-        for (const lockdown of e.properties.data.lockdowns) {
-          // TODO: start and end are exclusive or inclusive?
-          if (new Date(lockdown.start) >= today && lockdown.end ? new Date(lockdown.end) < today : true) {
-            // in lockdown
-            value = 'red';
-          } else {
-            // lockdown expired
-            value = 'green';
-          }
-        }
+      let value;
+      switch (e.properties.lockdown_status) {
+        case '1':
+          value = '#9fc184';
+          break;
+        case '2':
+          value = '#769de2';
+          break;
+        case '3':
+          value = '#d36d6b';
+          break;
+        case '4':
+          value = '#ebb577';
+          break;
+        case '5':
+          value = '#828282';
+          break;
       }
 
       let lineOpacity;
@@ -107,12 +129,6 @@ export class WorldMap extends Component {
       return style;
     }
 
-    for (const feature of mapData.features) {
-      if (lockdowns[feature.properties.NAME]) {
-        feature.properties.data = lockdowns[feature.properties.NAME];
-      }
-    }
-
     themeLayer = geoJSON(mapData, {
       style: worldStyle,
       onEachFeature: onEachFeature,
@@ -120,6 +136,7 @@ export class WorldMap extends Component {
     labelLayer.addTo(map);
     this.setState({
       map,
+      countries: mapData.features,
     });
 
     if (navigator.permissions) {
@@ -151,7 +168,33 @@ export class WorldMap extends Component {
     this.state.map.remove();
   }
 
+  __handleSelect(e) {
+    e.preventDefault();
+    const [iso2, country] = this.selectRef.value.split(',');
+    router.setSearchParam('country', country);
+    router.setSearchParam('iso2', iso2);
+  }
+
+  __resetFocus() {
+    this.countrySelectRef.focus();
+  }
+
   render() {
-    return html` <div style="width: 100%; height: 100%;" ref=${(ref) => (this.ref = ref)}></div> `;
+    return html`
+      <div class="${selectStyles}">
+        <div tabindex="-1" ref=${(ref) => (this.countrySelectRef = ref)}>
+          <form onSubmit=${this.__handleSelect}>
+            <label for="countries">Choose a country:</label>
+            <select ref=${(ref) => (this.selectRef = ref)} id="countries">
+              ${this.state.countries?.map(
+                (country) => html`<option value="${country.properties.iso2},${country.properties.NAME}">${country.properties.NAME}</option>`
+              )}
+            </select>
+            <input type="submit">View country details</input>
+          </form>
+        </div>
+      </div>
+      <div style="width: 100%; height: 100%;" ref=${(ref) => (this.ref = ref)}></div> 
+    `;
   }
 }

@@ -30,7 +30,7 @@ const styles = css`
     overflow: visible;
     background: transparent;
     background-color: #769de2;
-    color: var(--ld-text);
+    color: var(--ld-button-text);
     font-size: 16px;
     border-radius: 5px;
     font-family: 'Montserrat', sans-serif;
