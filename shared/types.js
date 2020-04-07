@@ -20,12 +20,12 @@ const MEASURE = {
   UNCLEAR: '4',
 };
 
-const LOCKDOWN = {
-  NO: '1',
-  PARTIAL: '2',
-  YES: '3',
-  UNCLEAR: '4',
-}
+// const LOCKDOWN = {
+//   NO: '1',
+//   PARTIAL: '2',
+//   YES: '3',
+//   UNCLEAR: '4',
+// }
 
 const COUNTRY_STATUS = {
   UNCLEAR: '1',
@@ -73,7 +73,6 @@ module.exports = {
   DATA_ENTRY_STATUS: DATA_ENTRY_STATUS,
   DATA_ENTRY: DATA_ENTRY,
   MEASURE: MEASURE,
-  LOCKDOWN: LOCKDOWN,
   COUNTRY_STATUS: COUNTRY_STATUS,
   TRAVEL: TRAVEL,
   GLOBAL_COUNTRY_STATUS: GLOBAL_COUNTRY_STATUS,

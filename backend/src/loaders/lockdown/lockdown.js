@@ -1,14 +1,19 @@
 import getDocument, { getWorksheetByTitle } from './googlesheet';
-import GoogleSpreadsheetWorksheet from 'google-spreadsheet/lib/GoogleSpreadsheetWorksheet';
 import { transposeRows, transposeColumns } from '../../utils/dataHelper';
 import { letterToColumn, columnToLetter } from 'google-spreadsheet/lib/utils';
 import logger from '../../utils/logger';
 import { writeJSON } from '../../utils/file';
-import { getCachedCellsRange } from '../../utils/sheet';
 import find from 'lodash/find';
 import { SimpleGrid } from '../../utils/SimpleGrid';
-import { toMeasureType, toTravelType, toInteger, isUpdateReady, toEntryDate, toCountryStatus } from '../../utils/typeHelper';
 import moment from 'moment-timezone';
+import { ENTRY_COLUMN_LENGTH, parseEntry } from './parsers/lockdownParser';
+import { getSnapshots } from './snapshot/processor';
+
+// Number of territories to query through batchGet at a time
+const BATCH_SIZE = 25;
+
+// Number of entries to batchGet from google sheet
+const ENTRIES_TO_FETCH = 100;
 
 /**
  * Gets data from "Global" sheet.
@@ -21,6 +26,7 @@ import moment from 'moment-timezone';
  * @returns {array}
  */
 export async function getGlobalData() {
+  // TODO: Implement sheet readiness from status in Global tab
   logger.log('[Lockdown:Global] start');
   const sheet = await getWorksheetByTitle('Global');
   const rows = await sheet.getCellsInRange('D5:F253');
@@ -29,184 +35,61 @@ export async function getGlobalData() {
 }
 
 /**
- * Parses entry structure with appended label,
- * transforms values
- * @param {array} rows 
- * @param {any} labelsWithTransformFn 
- */
-function parseEntryStructure(rows, labelsWithTransformFn) {
-  const result = [];
-  for (var i = 0; i < rows.length; i++) {
-    const row = rows[i];
-    const value = row[0];
-    const labelWithTransformFn = labelsWithTransformFn[i];
-    const transformFn = labelWithTransformFn['transformFn'];
-    const transformedValue = transformFn(value);
-
-    result.push({
-      label: labelWithTransformFn['label'],
-      value: transformedValue != undefined ? transformedValue : null,
-    });
-  }
-  return result;
-}
-
-/**
- * Converts row range to A1 range according to entry structure
- * '2:10' will get 'D2:J10', etc.
- * @param {string} rowRange Row range, such as '2:10'
- * @param {number} entryIndex N-th index for entry
- * @param {string} firstEntryColumn The first entry in sheet
- */
-function getEntryCellRange(rowRange, entryIndex = 0, firstEntryColumn = 'D') {
-  const firstEntryColumnIndex = letterToColumn(firstEntryColumn);
-  const columnIndex = firstEntryColumnIndex + entryIndex;
-  const letter = columnToLetter(columnIndex);
-
-  const [rowStart, rowEnd] = rowRange.split(':');
-  return `${letter}${rowStart}:${letter}${rowEnd}`;
-}
-
-/**
- * Gets fully parsed entry data
- * @param {GoogleSpreadsheetWorksheet|SimpleGrid} sheet 
- * @param {integer} entryIndex 
- */
-function getEntry(sheet, entryIndex) {
-  // Entry meta section
-  const entryMetaRows = getCachedCellsRange(sheet, getEntryCellRange('3:9', entryIndex), false);
-  const entryMetaData = transposeColumns(['editor', 'reviewed_by', 'status', 'type', 'date_of_entry', 'additional_info_1', 'additional_info_2'], entryMetaRows, true);
-
-  // TODO: Enable following when snapshot sheets are ready
-  // Should skip status != 'Ready'
-  // if (!isUpdateReady(entryMetaData['status'])) {
-  //   return;
-  // }
-
-  // Entry date
-  const entryDateRows = getCachedCellsRange(sheet, getEntryCellRange('1:1', entryIndex), false);
-  const entryDateData = { entry_date: toEntryDate(entryDateRows[0]) };
-  
-  // Entry entry section
-  const entryInfoRows = getCachedCellsRange(sheet, getEntryCellRange('16:16', entryIndex), false);
-  const entryInfoData = { title_of_status: entryInfoRows[0][0] };
-
-  // Measures section
-  const entryMeasureRange = getEntryCellRange('19:29', entryIndex);
-  const measures = parseEntryStructure(getCachedCellsRange(sheet, entryMeasureRange, false), [
-    { label: 'max_gathering', transformFn: toInteger }, // Max gathering number allowed (PAX)?
-    { label: 'lockdown_status', transformFn: toMeasureType }, // Are citizens allowed to leave their homes?
-    { label: 'city_movement_restriction', transformFn: toMeasureType }, // Is going on the street allowed?
-    { label: 'attending_religious_sites', transformFn: toMeasureType }, // Is attenting religiouns sites allowed?
-    { label: 'going_to_work', transformFn: toMeasureType }, // Is going to work allowed?
-    { label: 'military_not_deployed', transformFn: toMeasureType }, // Is the Military NOT deployed?
-    { label: 'academia_allowed', transformFn: toMeasureType }, // Is going to academia allowed?
-    { label: 'going_to_shops', transformFn: toMeasureType }, // Is going to shops allowed?
-    { label: 'electricity_nominal', transformFn: toMeasureType }, // Is Electricity operating nominally?
-    { label: 'water_nominal', transformFn: toMeasureType }, // Is Water operating nominally?
-    { label: 'internet_nominal', transformFn: toMeasureType }, // Is Internet operating nominally?
-  ]);
-
-  // In & out section
-  const entryLandRange = getEntryCellRange('37:43', entryIndex);
-  const land = parseEntryStructure(getCachedCellsRange(sheet, entryLandRange, false), [
-    { label: 'local', transformFn: toTravelType }, // Local destinations?
-    { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
-    { label: 'nationals_outbound', transformFn: toTravelType }, // Nationals outbound?
-    { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
-    { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
-    { label: 'cross_border_workers', transformFn: toTravelType }, // Cross border workers?
-    { label: 'commerce', transformFn: toTravelType }, // Commerce?
-  ]);
-
-  const entryFlightRange = getEntryCellRange('47:53', entryIndex);
-  const flight = parseEntryStructure(getCachedCellsRange(sheet, entryFlightRange, false), [
-    { label: 'local', transformFn: toTravelType }, // Local destinations?
-    { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
-    { label: 'nationals_outbound', transformFn: toTravelType }, // Nationals outbound?
-    { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
-    { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
-    { label: 'stopovers', transformFn: toTravelType }, // Stopovers?
-    { label: 'commerce', transformFn: toTravelType }, // Commerce?
-  ]);
-
-  const entrySeaRange = getEntryCellRange('57:63', entryIndex);
-  const sea = parseEntryStructure(getCachedCellsRange(sheet, entrySeaRange, false), [
-    { label: 'local', transformFn: toTravelType }, // Local destinations?
-    { label: 'nationals_inbound', transformFn: toTravelType }, // Nationals inbound?
-    { label: 'nationals_outbound', transformFn: toTravelType }, // Nationals outbound?
-    { label: 'foreigners_inbound', transformFn: toTravelType }, // Foreigners inbound?
-    { label: 'foreigners_outbound', transformFn: toTravelType }, // Foreigners outbound?
-    { label: 'cross_border_workers', transformFn: toTravelType }, // Cross border workers?
-    { label: 'commerce', transformFn: toTravelType }, // Commerce?
-  ]);
-
-  // TODO: Implement optional & required validation here.
-  
-  return {
-    ...entryMetaData,
-    ...entryInfoData,
-    ...entryDateData,
-    measures: measures,
-    travel: {
-      land,
-      flight,
-      sea,
-    }
-  }
-}
-
-/**
  * Groups territories and request data from google API at batch size
  * @param {array} territories 
  */
 export async function batchGetTerritoriesEntryData(territories) {
-  const batchSize = 25;
+  
   const doc = await getDocument();
-  // TODO: Figure out how to find total columns should take
-  const entriesToGrab = 1000;
-  const startColumnIndex = letterToColumn('D');
-  const endCacheColumn = columnToLetter(startColumnIndex + entriesToGrab);
-  const rangeToCache = `D1:${endCacheColumn}65`;
+  const startCacheColumn = 'H';
+  const startCacheColumnIndex = letterToColumn(startCacheColumn);
+  const endCacheColumn = columnToLetter(startCacheColumnIndex + (ENTRIES_TO_FETCH * ENTRY_COLUMN_LENGTH));
+  const rangeToCache = `${startCacheColumn}1:${endCacheColumn}65`;
   const result = [];
   var batch;
   
-  while (batch = territories.splice(0, batchSize)) {
+  while (batch = territories.splice(0, BATCH_SIZE)) {
     if (batch.length < 1) break;
     // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
-    // let gridRanges = batch.map(territory => `${territory['iso3']}_Fetch!${rangeToCache}`);
-    let gridRanges = batch.map(territory => `ASM_Fetch!${rangeToCache}`);
+    // let gridRanges = batch.map(territory => `${territory['iso3']}!${rangeToCache}`);
+    let gridRanges = batch.map(territory => `PLAYGROUND!${rangeToCache}`);
     logger.log(`[Lockdown:WorkSheet] ${batch.map(t => t['iso3']).join(' ')}`);
     let gridData = await doc.batchGetGridRanges(gridRanges);
     
     for (let i = 0; i < batch.length; i++) {
       // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
-      // let workSheet = await getWorksheetByTitle(`${batch[i]['iso3']}_Fetch`);
-      let workSheet = await getWorksheetByTitle('ASM_Fetch');
+      // let workSheet = await getWorksheetByTitle(`${batch[i]['iso3']}`);
+      let workSheet = await getWorksheetByTitle('PLAYGROUND');
       let rowCount = workSheet['gridProperties']['rowCount'];
       let columnCount = workSheet['gridProperties']['columnCount'];
 
       let gridSheet = new SimpleGrid(rangeToCache, gridData[i], rowCount, columnCount);
       let entries = [];
-      let entryColumnsCount = columnCount - startColumnIndex;
-      for (let entryIndex = 0; entryIndex < entryColumnsCount; entryIndex++) {
+
+      // How many entries should we loop through according to columns available on sheet
+      let entryCount = Math.ceil((columnCount - startCacheColumnIndex)/ENTRY_COLUMN_LENGTH);
+      for (let entryIndex = 0; entryIndex < entryCount; entryIndex++) {
         // Cell ranges
-        let entryData = getEntry(gridSheet, entryIndex);
+        let entryData = parseEntry(gridSheet, entryIndex);
         if (entryData) {
           entries.push(entryData);
         }
       }
 
+      // TODO: change this to support multiple entries after MVP 
       // Compares current date in the same format with entry to get latest
-      let currentDate = moment().tz('UTC').format('D MMMM Y');
-      let currentEntry = find(entries, { entry_date: currentDate });
+      let currentDate = moment().tz('UTC');
+      let currentDatePlusOne = moment().tz('UTC').add(1, 'days');
+      let snapshots = getSnapshots(entries, currentDate, currentDatePlusOne);
+      let currentSnapshot = snapshots[0];
+
 
       result.push({
         isoCode: batch[i]['iso2'],
         lockdown: {
           // TODO: change this to support multiple entries after MVP
-          // entries
-          ...currentEntry
+          ...currentSnapshot
+          // ...currentEntry
         }
       });
     }
