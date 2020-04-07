@@ -28,18 +28,21 @@ You can find a live demo of the master branch [here](https://zen-joliot-eeb856.n
 ## Technologies used
 
 ### Frontend
+
 - [Preact](https://preactjs.com/)/[htm](https://github.com/developit/htm)
 - [csz](https://github.com/lukejacksonn/csz)
 - [leafletjs](https://leafletjs.com/) (/mapbox api for tiles)
 - [pwa-helper-components](https://github.com/thepassle/pwa-helpers)
 
 ### Dev
+
 - [prettier](https://prettier.io/)
 - [es-dev-server](https://open-wc.org/developing/es-dev-server.html)
 - [github actions](https://github.com/features/actions)
 - [netlify](https://www.netlify.com/)
 
 ### Build
+
 - [rollup](https://rollupjs.org/guide/en/)
 - [@rollup/plugin-node-resolve](https://www.npmjs.com/package/@rollup/plugin-node-resolve)
 - [@open-wc/rollup-plugin-html](https://github.com/open-wc/open-wc/tree/master/packages/rollup-plugin-html)
