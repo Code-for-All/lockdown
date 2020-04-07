@@ -31,7 +31,7 @@ html {
   overflow: hidden;
 }
 
-*:focus {
+*:focus:not(.leaflet-container) {
   outline: 0px;
   border-radius: 5px;
   box-shadow: 0 0 0px 3px var(--ld-focus) !important;
