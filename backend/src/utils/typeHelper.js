@@ -69,3 +69,7 @@ export function isEntryActive(value) {
 export function isUpdateReady(value) {
   return value === UPDATE_STATUS.READY;
 }
+
+export function isLockdown(value) {
+  return value === MEASURE.YES || value === MEASURE.PARTIAL;
+}
