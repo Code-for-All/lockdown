@@ -1,7 +1,7 @@
 import { performance } from 'perf_hooks';
 import lockdownLoader from './lockdown/lockdown';
 import worldmapLoader from './worldmap/worldmap';
-// import coronaStatus from './corona/status';
+import totalsLoader from './totals/totals';
 import logger from '../utils/logger';
 
 /**
@@ -13,8 +13,11 @@ async function executeLoaders() {
   logger.log('[Lockdown] start');
   const { lockdownStatusByTerritory } = await lockdownLoader();
 
-  logger.log('[WorldMap] start');
-  await worldmapLoader(lockdownStatusByTerritory);
+  logger.log('[WorldMap + Total] start');
+  await Promise.all([
+    worldmapLoader(lockdownStatusByTerritory),
+    totalsLoader(lockdownStatusByTerritory)
+  ]);
 
   const t1 = performance.now();
   logger.log(`Completed, took ${Math.round(t1 - t0)} milleseconds`);

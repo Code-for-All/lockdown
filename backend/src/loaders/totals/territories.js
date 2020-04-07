@@ -6,7 +6,7 @@ import { isLockdown } from '../../utils/typeHelper.js';
  */
 export function sumLockdown(lockdownStatusByTerritory) {
   const total = Object.values(lockdownStatusByTerritory).reduce((prev, territory) => {
-    return prev + (isLockdown(territory.lockdown.lockdown_status) ? 1 : 0);
+    return prev + isLockdown(territory.lockdown.lockdown_status) ? 1 : 0;
   }, 0);
 
   return total;
