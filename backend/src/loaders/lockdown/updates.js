@@ -15,13 +15,13 @@ export async function getUpdates() {
 
   // Filter ready & title is required
   const updatesReady = updates.filter(update => {
-  return isUpdateReady(update.status)
+    return isUpdateReady(update.status)
       && update.title != undefined;
   });
 
-  // Sort
+  // Sort by latest first
   updatesReady.sort((a, b) => {
-    return new Date(a) - new Date(b);
+    return new Date(b.timestamp) - new Date(a.timestamp);
   });
 
   // Reformat structure
