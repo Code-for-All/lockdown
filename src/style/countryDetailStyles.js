@@ -142,7 +142,7 @@ export const countryDetailStyles = css`
 
   .ld-measures {
     display: flex;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   .ld-measures-YES {
