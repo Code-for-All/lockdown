@@ -1,5 +1,5 @@
 import { MEASURE, TRAVEL, UPDATE_STATUS, COUNTRY_STATUS, DATA_ENTRY_STATUS } from '../../../shared/types';
-import moment from 'moment-timezone';
+import moment from './moment';
 
 const OPTION_MEASURE = {
   'Yes': MEASURE.YES,

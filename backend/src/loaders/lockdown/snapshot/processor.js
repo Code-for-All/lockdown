@@ -1,4 +1,4 @@
-import Moment, { MomentRange } from 'moment-timezone';
+import Moment, { MomentRange } from '../../../utils/moment';
 import { extendMoment } from 'moment-range';
 import { isEntryActive } from '../../../utils/typeHelper';
 import Entry from '../types/Entry';

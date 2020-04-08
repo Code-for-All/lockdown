@@ -5,7 +5,7 @@ import logger from '../../utils/logger';
 import { writeJSON } from '../../utils/file';
 import find from 'lodash/find';
 import { SimpleGrid } from '../../utils/SimpleGrid';
-import moment from 'moment-timezone';
+import moment from '../../utils/moment';
 import { ENTRY_COLUMN_LENGTH, parseEntry } from './parsers/lockdownParser';
 import { getSnapshots } from './snapshot/processor';
 
@@ -78,8 +78,8 @@ export async function batchGetTerritoriesEntryData(territories) {
 
       // TODO: change this to support multiple entries after MVP 
       // Compares current date in the same format with entry to get latest
-      let currentDate = moment().tz('UTC');
-      let currentDatePlusOne = moment().tz('UTC').add(1, 'days');
+      let currentDate = moment();
+      let currentDatePlusOne = moment().add(1, 'days');
       let snapshots = getSnapshots(entries, currentDate, currentDatePlusOne);
       let currentSnapshot = snapshots[0];
 
