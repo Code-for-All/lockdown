@@ -101,9 +101,8 @@ export class WorldMap extends Component {
         case '4':
           value = '#ebb577';
           break;
-        case '5':
+        default:
           value = '#828282';
-          break;
       }
 
       let lineOpacity;
