@@ -24,19 +24,30 @@ export const countryDetailStyles = css`
     margin-top: 0px;
   }
 
+  dd {
+    margin-left: 0;
+  }
+
   .data-entry {
     display: flex;
+    margin-bottom: 5px;
   }
 
-  p {
-    margin: 0;
-  }
-
-  p:first-of-type {
+  .data-entry dl {
+    margin: 0 20px 5px 0;
     flex: 1;
   }
 
-  p:last-of-type {
+  .data-entry dt {
+    margin-right: 20px;
+    flex: 1;
+  }
+
+  .data-entry:last-of-type {
+    margin: 0;
+  }
+
+  .data-entry dd {
     font-weight: 700;
     color: var(--ld-text);
   }
@@ -53,10 +64,15 @@ export const countryDetailStyles = css`
     margin-bottom: 10px;
   }
 
-  .ld-travel p {
-    flex-basis: 30%;
+  .ld-travel dt {
+    flex-basis: 60%;
     flex-shrink: 0;
     font-weight: 300;
+    margin-right: 20px;
+  }
+
+  .ld-travel dd {
+    margin-left: 0;
   }
 
   .ld-travel--val-icon {
@@ -105,6 +121,8 @@ export const countryDetailStyles = css`
 
   .data-value {
     color: grey;
+    word-break: break-all;
+    text-align: right;
   }
 
   .travel-advice {
@@ -113,6 +131,13 @@ export const countryDetailStyles = css`
 
   .ld-contribute {
     text-align: center;
+  }
+
+  .ld-measures-wrapper {
+    display: flex;
+  }
+  .ld-measures-wrapper dd {
+    margin-left: auto;
   }
 
   .ld-measures {
@@ -135,6 +160,7 @@ export const countryDetailStyles = css`
 
   .ld-measures-key {
     flex: 1;
+    margin-right: 20px;
   }
 
   .ld-measures-icon svg {
@@ -148,6 +174,7 @@ export const countryDetailStyles = css`
     width: 20px;
     height: 20px;
     border-radius: 50%;
+    flex-shrink: 0;
   }
 
   @media (max-width: 960px) {

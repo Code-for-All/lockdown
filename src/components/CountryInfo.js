@@ -60,80 +60,79 @@ export default class CountryInfo extends Component {
         <hr />
         <div class="dialog">
           <h2>Stats</h2>
-          <div class="data-entry">
-            <p>Population:</p>
-            <p class="data-value">${populationData?.data?.[this.props.iso2]?.Population ?? 'Error'}</p>
-          </div>
-          <div class="data-entry">
-            <p>Confirmed cases:</p>
-            <p class="data-value">${coronaData?.totalConfirmed ?? 'Error'}</p>
-          </div>
-          <div class="data-entry">
-            <p>Confirmed deaths:</p>
-            <p class="data-value">${coronaData?.totalDeaths ?? 'Error'}</p>
-          </div>
-          <div class="data-entry">
-            <p>Confirmed recoveries:</p>
-            <p class="data-value">${coronaData?.totalRecovered ?? 'Error'}</p>
-          </div>
-          <div class="data-entry">
-            <p>Max gathering:</p>
-            <p class="data-value">${countryDetails?.max_gathering ?? 'Error'}</p>
-          </div>
+          <dl>
+            <div class="data-entry">
+              <dt>Population:</dt>
+              <dd class="data-value">${populationData?.data?.[this.props.iso2]?.Population ?? 'Error'}</dd>
+            </div>
+            <div class="data-entry">
+              <dt>Confirmed cases:</dt>
+              <dd class="data-value">${coronaData?.totalConfirmed ?? 'Error'}</dd>
+            </div>
+            <div class="data-entry">
+              <dt>Confirmed deaths:</dt>
+              <dd class="data-value">${coronaData?.totalDeaths ?? 'Error'}</dd>
+            </div>
+            <div class="data-entry">
+              <dt>Confirmed recoveries:</dt>
+              <dd class="data-value">${coronaData?.totalRecovered ?? 'Error'}</dd>
+            </div>
+            <div class="data-entry">
+              <dt>Max gathering:</dt>
+              <dd class="data-value">${countryDetails?.max_gathering ?? 'Error'}</dd>
+            </div>
+          </dl>
         </div>
         <hr />
         ${countryDetails.status === 'success'
           ? html`
               <div class="dialog">
                 <h2>Measures</h2>
-                <ul>
-                  ${countryDetails.measures.map(({ label, value }, i) => {
+                <dl>
+                  ${countryDetails.measures.map(({ label, value }) => {
                     return html`
-                      <li class="ld-measures">
-                        <span class="ld-measures-icon">${TRANSLATIONS[label].icon}</span>
-                        <span class="ld-measures-key">${TRANSLATIONS[label].text}:</span>
-                        <span class="ld-measures-value ld-measures-${MEASURES[value]}">
-                          <p class="sr-only">${MEASURES[value].toLowerCase()}</p>
-                        </span>
-                      </li>
+                      <div class="ld-measures-wrapper">
+                        <dt class="ld-measures">
+                          <span class="ld-measures-icon">${TRANSLATIONS[label].icon}</span>
+                          <span class="ld-measures-key">${TRANSLATIONS[label].text}</span>
+                        </dt>
+                        <dd aria-label="${MEASURES[value].toLowerCase()}" class="ld-measures-value ld-measures-${MEASURES[value]}"></dd>
+                      </div>
                     `;
                   })}
-                </ul>
+                </dl>
               </div>
               <hr />
               <div class="dialog">
                 <h2>Travel</h2>
-                <ul>
-                  <li>
-                    <ul class="ld-travel">
-                      <p></p>
-                      <div class="ld-travel--values">
-                        <li class="ld-travel--symbol ld-travel--val-icon">${travelLand}</li>
-                        <li class="ld-travel--symbol ld-travel--val-icon">${travelFlight}</li>
-                        <li class="ld-travel--symbol ld-travel--val-icon">${travelSea}</li>
-                      </div>
-                    </ul>
-                  </li>
+                <dl>
+                  <div class="ld-travel">
+                    <dt></dt>
+                    <div class="ld-travel--values">
+                      <dd class="ld-travel--symbol ld-travel--val-icon">${travelLand}</dd>
+                      <dd class="ld-travel--symbol ld-travel--val-icon">${travelFlight}</dd>
+                      <dd class="ld-travel--symbol ld-travel--val-icon">${travelSea}</dd>
+                    </div>
+                  </div>
                   ${Object.keys(countryDetails.travel).map((key) => {
                     return html`
-                      <li>
-                        <ul class="ld-travel">
-                          <p>${TRANSLATIONS[key].text}</p>
-                          <div class="ld-travel--values">
-                            ${countryDetails.travel[key].map(
-                              (val, i) =>
-                                html`
-                                  <li class="ld-travel--symbol ld-travel--val-${TRAVEL[val]}">
-                                    <p class="sr-only">${TRAVELTYPE[i]}: ${TRAVEL[val].toLowerCase()}</p>
-                                  </li>
-                                `
-                            )}
-                          </div>
-                        </ul>
-                      </li>
+                      <div class="ld-travel">
+                        <dt>${TRANSLATIONS[key].text}</dt>
+                        <div class="ld-travel--values">
+                          ${countryDetails.travel[key].map(
+                            (val, i) =>
+                              html`
+                                <dd
+                                  aria-label="${TRAVELTYPE[i]}: ${TRAVEL[val].toLowerCase()}"
+                                  class="ld-travel--symbol ld-travel--val-${TRAVEL[val]}"
+                                ></dd>
+                              `
+                          )}
+                        </div>
+                      </div>
                     `;
                   })}
-                </ul>
+                </dl>
               </div>
             `
           : html`
