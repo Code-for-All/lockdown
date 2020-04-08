@@ -2,6 +2,8 @@
 
 **Project Lockdown** is a progressive web application that shows various lockdown states for countries across the world helping people to find out if they can travel and at what restrictions.
 
+https://zen-joliot-eeb856.netlify.com
+
 ## Scripts
 
 ```bash
