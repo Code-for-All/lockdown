@@ -9,79 +9,75 @@ import Tabs from '../components/Tabs.js';
 import { close, trues } from '../assets/icons/icons.js';
 
 const styles = css`
-th,  td {
-  border: 1px solid black;
-}
-th{
-  border-top: transparent;
-  padding: 15px;
-}
-th:nth-child(1)
-{
-  border-left: transparent;
-}
-td:nth-child(1){
-  border-left: transparent;
-  border-right: 1px solid grey;
-}
+  th,
+  td {
+    border: 1px solid black;
+  }
+  th {
+    border-top: transparent;
+    padding: 15px;
+  }
+  th:nth-child(1) {
+    border-left: transparent;
+  }
+  td:nth-child(1) {
+    border-left: transparent;
+    border-right: 1px solid grey;
+  }
 
-th, td:nth-child(3){
-  border-right: transparent;
-}
-td:nth-child(3) , td:nth-child(2) , td:nth-child(1)
-{
-  border-bottom: transparent;
-}
-tr {
-  font-weight: 600;
-  font-size: 14px;
-  padding: 15px;
-  border-top: transparent;
+  th,
+  td:nth-child(3) {
+    border-right: transparent;
+  }
+  td:nth-child(3),
+  td:nth-child(2),
+  td:nth-child(1) {
+    border-bottom: transparent;
+  }
+  tr {
+    font-weight: 600;
+    font-size: 14px;
+    padding: 15px;
+    border-top: transparent;
+  }
+  .note {
+    font-weight: 100;
+    font-size: 12px;
+  }
+  th:nth-child(2) {
+  }
+  tr:nth-child(n + 2) > td:nth-child(2) {
+  }
+  td {
+    text-align: center;
+    padding: 15px;
+  }
+  .circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  .default {
+    background: #bdbdbd;
+  }
+  .blue {
+    background: #6c9eeb;
+  }
+  .red {
+    background: #df6666;
+  }
+  .yellow {
+    background: #f5b26a;
+  }
+  .green {
+    background: #92c47c;
+  }
 
-}
-.note {
-  font-weight: 100;
-  font-size: 12px;
-}
-th:nth-child(2){
-
-}
-tr:nth-child(n+2) > td:nth-child(2)
-{
-
-}
-td{
-  text-align: center;
-  padding: 15px;
-}
-.circle{
-width: 30px;
-height: 30px;
-border-radius: 50%;
-}
-.default {
-  background: #bdbdbd;
-}
-.blue {
-  background: #6c9eeb;
-}
-.red {
-  background: #df6666;
-}
-.yellow {
-  background: #f5b26a;
-}
-.green {
-  background: #92c47c;
-}
-
-width: 100%;
-border-collapse: collapse; 
-
+  width: 100%;
+  border-collapse: collapse;
 `;
 
-const circle = css`
-`;
+const circle = css``;
 
 const renderMenu = (menuItem) => {
   switch (menuItem) {
@@ -116,41 +112,47 @@ const renderMenu = (menuItem) => {
             detail=${html`
               <p>The map shows two parameters for territories:</p>
               <ol>
-              <li>If the country is under any type of lockdown</li>
-              <li>If there are covid cases in the country</li>
+                <li>If the country is under any type of lockdown</li>
+                <li>If there are covid cases in the country</li>
               </ol>
-            <table class=${styles}>
-<tr>
-<th></th>
-<th>Lockdown</th>
-<th>COVID-19</th>
-</tr>
-<tr>
-<td><div class="blue circle"/></td>
-<td>${close}</td>
-<td>${close}</td>
-</tr>
-<tr>
-<td><div class="green circle"/></td>
-<td>${close}</td>
-<td>${trues}</td>
-</tr>
-<tr>
-<td><div class="yellow circle"/></td>
-<td>${trues}</td>
-<td>${close}</td>
-</tr>
-<tr>
-<td><div class="red circle"/></td>
-<td>${trues}</td>
-<td>${trues}</td>
-</tr>
-<tr>
-<td><div class="default circle"/></td>
-<td>No Data <p class="note">(please contribute)</p></td>
-<td>No Data <p class="note">(please contribute)</p></td>
-</tr>
-            </table>
+              <table class=${styles}>
+                <tr>
+                  <th></th>
+                  <th>Lockdown</th>
+                  <th>COVID-19</th>
+                </tr>
+                <tr>
+                  <td><div class="blue circle" /></td>
+                  <td>${close}</td>
+                  <td>${close}</td>
+                </tr>
+                <tr>
+                  <td><div class="green circle" /></td>
+                  <td>${close}</td>
+                  <td>${trues}</td>
+                </tr>
+                <tr>
+                  <td><div class="yellow circle" /></td>
+                  <td>${trues}</td>
+                  <td>${close}</td>
+                </tr>
+                <tr>
+                  <td><div class="red circle" /></td>
+                  <td>${trues}</td>
+                  <td>${trues}</td>
+                </tr>
+                <tr>
+                  <td><div class="default circle" /></td>
+                  <td>
+                    No Data
+                    <p class="note">(please contribute)</p>
+                  </td>
+                  <td>
+                    No Data
+                    <p class="note">(please contribute)</p>
+                  </td>
+                </tr>
+              </table>
             `}
           />
 
