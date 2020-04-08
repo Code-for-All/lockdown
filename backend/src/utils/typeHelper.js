@@ -35,6 +35,21 @@ const OPTION_DATA_ENTRY_STATUS = {
   'Standby': DATA_ENTRY_STATUS.STANDBY,
 }
 
+const OPTION_UPDATE_STATUS = {
+  'Standby': UPDATE_STATUS.STANDBY,
+  'Ready': UPDATE_STATUS.READY,
+  'Demo': UPDATE_STATUS.DEMO,
+  'Flagged': UPDATE_STATUS.FLAGGED,
+}
+
+const OPTION_UPDATE_TYPE = {
+  'New Entry': 'new_entry',
+  'Announcement': 'announcement',
+  'Rectification': 'rectification',
+  'Promoting Project': 'promoting_project',
+  'Promoting Petition': 'promoting_petition',
+}
+
 export function toMeasureType(value) {
   return OPTION_MEASURE[value] ?? null;
 }
@@ -45,6 +60,10 @@ export function toTravelType(value) {
 
 export function toCountryStatus(value) {
   return OPTION_COUNTRY_STATUS[value] ?? null;
+}
+
+export function toUpdateType(value) {
+  return OPTION_UPDATE_TYPE[value] ?? null;
 }
 
 export function toInteger(value) {
@@ -67,7 +86,8 @@ export function isEntryActive(value) {
 }
 
 export function isUpdateReady(value) {
-  return value === UPDATE_STATUS.READY;
+  const status = OPTION_COUNTRY_STATUS[value];
+  return status === OPTION_UPDATE_STATUS.READY;
 }
 
 export function isLockdown(value) {
