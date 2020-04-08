@@ -59,12 +59,11 @@ export function Ticker() {
                 <div class="ld-ticker--content">
                   ${update.content}
                 </div>
-                ${update.link 
+                ${update.link
                   ? html`<div class="ld-ticker--link">
                       <a href="${update.link}">Source</a>
                     </div>`
-                  : ''
-                }
+                  : ''}
                 <div class="ld-ticker--date">
                   ${update.date}
                 </div>
