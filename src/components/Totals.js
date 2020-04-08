@@ -15,17 +15,16 @@ const styles = css`
     font-weight: 700;
   }
 
-  ul {
-    height: 100%;
-    list-style: none;
+  dl {
     display: flex;
+    height: 100%;
     padding: 0;
     margin: 0;
     text-align: center;
     text-transform: uppercase;
   }
 
-  li {
+  dl div {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -35,7 +34,19 @@ const styles = css`
     margin: 5px 0;
   }
 
-  li:not(:last-of-type)::after {
+  dt {
+    display: block;
+    font-size: 10px;
+    font-weight: 300px;
+  }
+
+  dd {
+    margin-left: 0px;
+    display: block;
+    font-weight: 700;
+  }
+
+  div:not(:last-of-type)::after {
     content: '';
     position: absolute;
     top: 0;
@@ -85,16 +96,16 @@ export class Totals extends Component {
   render(_, { items, desktop }) {
     return html`
       <div class=${styles}>
-        <ul>
+        <dl>
           ${(desktop ? items : items.slice(0, 2)).map(
             (item) => html`
-              <li>
-                <div class="key">${item.description}</div>
-                <div class="value">${item.value}</div>
-              </li>
+              <div>
+                <dt>${item.description}</dt>
+                <dd>${item.value}</dd>
+              </div>
             `
           )}
-        </ul>
+        </dl>
       </div>
     `;
   }

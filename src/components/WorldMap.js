@@ -189,7 +189,7 @@ export class WorldMap extends Component {
                 (country) => html`<option value="${country.properties.iso2},${country.properties.NAME}">${country.properties.NAME}</option>`
               )}
             </select>
-            <input type="submit">View country details</input>
+            <input type="submit" value="View country details"></input>
           </form>
         </div>
       </div>

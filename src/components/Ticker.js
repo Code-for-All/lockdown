@@ -5,6 +5,14 @@ import { offline, loading } from '../assets/icons/icons.js';
 import { loadingStyles, offlineStyles } from './CountryInfo.js';
 import css from 'csz';
 
+const UPDATE_TYPES = {
+  new_entry: 'new entry',
+  announcement: 'announcement',
+  rectification: 'rectification',
+  promoting_project: 'project promotion',
+  promoting_petition: 'petition',
+};
+
 export function Ticker() {
   const [updates, setUpdates] = useState(undefined);
 
@@ -48,7 +56,7 @@ export function Ticker() {
             <li>
               <div class="ld-ticker--bar">
                 <div class="ld-ticker--dot-container">
-                  <div class="ld-ticker--dot ${update.type.toLowerCase()}"></div>
+                  <div aria-label=${UPDATE_TYPES[update.type.toLowerCase()]} class="ld-ticker--dot ${update.type.toLowerCase()}"></div>
                 </div>
                 <div class="ld-ticker--line"></div>
               </div>
@@ -89,16 +97,16 @@ const styles = css`
     margin-bottom: 20px;
   }
 
-  .new {
+  .new_entry {
     background-color: #769de2;
   }
-  .promotion {
+  .promoting_project {
     background-color: #ebb577;
   }
   .rectification {
     background-color: #d36d6b;
   }
-  .petition {
+  .promoting_petition {
     background-color: #ba87f0;
   }
   .announcement {

@@ -12,17 +12,10 @@ export function Expandable(props) {
     }
   }, [expanded]);
 
-  const randomId = ('' + Math.random()).substring(2, 9);
-
   return html`
     <div class="${styles}">
       <div class="ld-expandable">
-        <button
-          onClick=${() => setExpanded(!expanded)}
-          class="ld-expandable--toggle"
-          aria-controls="expandable-id--${randomId}"
-          aria-expanded="${expanded}"
-        >
+        <button onClick=${() => setExpanded(!expanded)} class="ld-expandable--toggle" aria-expanded="${expanded}">
           <div class="ld-expandable--icon">
             ${expanded ? chevronDown : chevronRight}
           </div>
@@ -33,7 +26,6 @@ export function Expandable(props) {
 
         <div
           ref=${detail}
-          id="expandable-id--${randomId}"
           class="ld-expandable--detail ${expanded ? 'ld-expandable--expanded' : 'ld-expandable--closed'}"
           role="region"
           tabindex="-1"
