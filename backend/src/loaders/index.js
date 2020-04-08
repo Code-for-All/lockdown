@@ -2,6 +2,7 @@ import { performance } from 'perf_hooks';
 import lockdownLoader from './lockdown/lockdown';
 import worldmapLoader from './worldmap/worldmap';
 import totalsLoader from './totals/totals';
+import updatesLoader from './lockdown/updates';
 import logger from '../utils/logger';
 
 /**
@@ -13,10 +14,11 @@ async function executeLoaders() {
   logger.log('[Lockdown] start');
   const { lockdownStatusByTerritory } = await lockdownLoader();
 
-  logger.log('[WorldMap + Total] start');
+  logger.log('[WorldMap + Total + Updates] start');
   await Promise.all([
     worldmapLoader(lockdownStatusByTerritory),
-    totalsLoader(lockdownStatusByTerritory)
+    totalsLoader(lockdownStatusByTerritory),
+    updatesLoader(),
   ]);
 
   const t1 = performance.now();
