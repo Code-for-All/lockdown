@@ -12,12 +12,12 @@ async function executeLoaders() {
   const t0 = performance.now();
   
   logger.log('[Lockdown] start');
-  // const { lockdownStatusByTerritory } = await lockdownLoader();
+  const { lockdownStatusByTerritory } = await lockdownLoader();
 
   logger.log('[WorldMap + Total + Updates] start');
   await Promise.all([
-    // worldmapLoader(lockdownStatusByTerritory),
-    // totalsLoader(lockdownStatusByTerritory),
+    worldmapLoader(lockdownStatusByTerritory),
+    totalsLoader(lockdownStatusByTerritory),
     updatesLoader(),
   ]);
 
