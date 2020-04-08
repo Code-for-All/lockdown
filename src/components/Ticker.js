@@ -44,26 +44,29 @@ export function Ticker() {
     <div class="${styles}">
       <ul>
         ${updates?.data?.updates?.map(
-          ({ type, title, content, link, date }) => html`
+          (update) => html`
             <li>
               <div class="ld-ticker--bar">
                 <div class="ld-ticker--dot-container">
-                  <div class="ld-ticker--dot ${type.toLowerCase()}"></div>
+                  <div class="ld-ticker--dot ${update.type.toLowerCase()}"></div>
                 </div>
                 <div class="ld-ticker--line"></div>
               </div>
               <div class="ld-ticker--content">
                 <div class="ld-ticker--title">
-                  ${title}
+                  ${update.title}
                 </div>
                 <div class="ld-ticker--content">
-                  ${content}
+                  ${update.content}
                 </div>
-                <div class="ld-ticker--link">
-                  <a href="${link}">Source</a>
-                </div>
+                ${update.link 
+                  ? html`<div class="ld-ticker--link">
+                      <a href="${update.link}">Source</a>
+                    </div>`
+                  : ''
+                }
                 <div class="ld-ticker--date">
-                  ${date}
+                  ${update.date}
                 </div>
               </div>
             </li>
