@@ -15,7 +15,7 @@ export const refresh = html`
     stroke-linecap="round"
     stroke-linejoin="round"
   >
-    <title id="srTicker">ticker</title>
+    <title id="srTicker">updates</title>
     <path stroke="none" d="M0 0h24v24H0z" />
     <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" />
     <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 5v-5h-5" />
