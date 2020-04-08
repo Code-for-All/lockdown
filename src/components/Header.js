@@ -75,7 +75,7 @@ export const Header = () => html`
   <a class="skiplink" href="#main">Go to main content</a>
   <header class=${styles}>
     <div class="ld-logo-wrapper">
-      <a href="">
+      <a href="" aria-current="page">
         <p>ALPHA</p>
         ${logo}
         <!-- TODO: screen reader h1 -->
