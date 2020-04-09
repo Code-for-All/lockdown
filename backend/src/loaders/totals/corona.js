@@ -1,5 +1,4 @@
 import axios from 'axios';
-import moment from '../../utils/moment';
 
 const params = {
   where: '1=1',
@@ -47,7 +46,6 @@ export async function sumCorona() {
   });
 
   return {
-    'date': moment().format(),
     'confirmed': total_confirmed,
     'deaths': total_death
   }
