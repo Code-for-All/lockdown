@@ -1,6 +1,8 @@
 # Project Lockdown
 
-**Project Lockdown** is a progressive web application that shows various lockdown states for countries across the world helping people to find out if they can travel and at what restrictions.
+**Project Lockdown** is a civic tech project that reflects the different lockdowns that territories worldwide are undergoing during the COVID-19 crisis by mapping them while measuring a number of other relevant metrics.
+
+The objective is to provide an overview of the state of the world to citizens and assist journalists and Human Rights defenders in their reporting and overseeing tasks.
 
 https://zen-joliot-eeb856.netlify.com
 
