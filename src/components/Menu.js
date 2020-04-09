@@ -9,20 +9,35 @@ import Tabs from '../components/Tabs.js';
 import { close, trues } from '../assets/icons/icons.js';
 
 const styles = css`
-  th,
-  td {
-    border: 1px solid black;
+  & {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-collapse: collapse;
   }
+
   th {
     border-top: transparent;
     padding: 15px;
   }
-  th:nth-child(1) {
+  th:nth-child(1),
+  th:nth-child(2) {
     border-left: transparent;
+    border-right: 1px solid var(--ld-text);
+    border-bottom: 1px solid var(--ld-text);
   }
+
+  th:nth-child(3) {
+    border-bottom: 1px solid var(--ld-text);
+  }
+
   td:nth-child(1) {
     border-left: transparent;
-    border-right: 1px solid grey;
+    border-right: 1px solid var(--ld-text);
+  }
+
+  td:nth-child(2) {
+    border-right: 1px solid var(--ld-text);
   }
 
   th,
@@ -32,7 +47,7 @@ const styles = css`
   td:nth-child(3),
   td:nth-child(2),
   td:nth-child(1) {
-    border-bottom: transparent;
+    border-bottom: 1px solid var(--ld-text);
   }
   tr {
     font-weight: 600;
@@ -40,21 +55,29 @@ const styles = css`
     padding: 15px;
     border-top: transparent;
   }
+
+  tr:last-of-type {
+    td {
+      border-bottom: transparent;
+    }
+  }
+
   .note {
     font-weight: 100;
     font-size: 12px;
   }
-  th:nth-child(2) {
-  }
-  tr:nth-child(n + 2) > td:nth-child(2) {
-  }
+
   td {
     text-align: center;
     padding: 15px;
+    svg {
+      stroke: var(--ld-text);
+    }
   }
+
   .circle {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
   }
   .default {
@@ -72,12 +95,7 @@ const styles = css`
   .green {
     background: #92c47c;
   }
-
-  width: 100%;
-  border-collapse: collapse;
 `;
-
-const circle = css``;
 
 const renderMenu = (menuItem) => {
   switch (menuItem) {
@@ -117,32 +135,32 @@ const renderMenu = (menuItem) => {
               </ol>
               <table class=${styles}>
                 <tr>
-                  <th></th>
-                  <th>Lockdown</th>
-                  <th>COVID-19</th>
+                  <th scope="col"></th>
+                  <th scope="col">Lockdown</th>
+                  <th scope="col">COVID-19</th>
                 </tr>
                 <tr>
-                  <td><div class="blue circle" /></td>
-                  <td>${close}</td>
-                  <td>${close}</td>
+                  <td scope="row"><div aria-label="blue" class="blue circle"></div></td>
+                  <td><div aria-label="no">${close}</div></td>
+                  <td><div aria-label="no">${close}</div></td>
                 </tr>
                 <tr>
-                  <td><div class="green circle" /></td>
-                  <td>${close}</td>
-                  <td>${trues}</td>
+                  <td scope="row"><div aria-label="green" class="green circle"></div></td>
+                  <td><div aria-label="no">${close}</div></td>
+                  <td><div aria-label="yes">${trues}</div></td>
                 </tr>
                 <tr>
-                  <td><div class="yellow circle" /></td>
-                  <td>${trues}</td>
-                  <td>${close}</td>
+                  <td scope="row"><div aria-label="yellow" class="yellow circle"></div></td>
+                  <td><div aria-label="yes">${trues}</div></td>
+                  <td><div aria-label="no">${close}</div></td>
                 </tr>
                 <tr>
-                  <td><div class="red circle" /></td>
-                  <td>${trues}</td>
-                  <td>${trues}</td>
+                  <td scope="row"><div aria-label="red" class="red circle"></div></td>
+                  <td><div aria-label="yes">${trues}</div></td>
+                  <td><div aria-label="yes">${trues}</div></td>
                 </tr>
                 <tr>
-                  <td><div class="default circle" /></td>
+                  <td scope="row"><div aria-label="gray" class="default circle"></div></td>
                   <td>
                     No Data
                     <p class="note">(please contribute)</p>
