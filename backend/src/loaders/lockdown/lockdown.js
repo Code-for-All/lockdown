@@ -5,9 +5,10 @@ import logger from '../../utils/logger';
 import { writeJSON } from '../../utils/file';
 import find from 'lodash/find';
 import { SimpleGrid } from '../../utils/SimpleGrid';
-import moment from 'moment-timezone';
+import moment from '../../utils/moment';
 import { ENTRY_COLUMN_LENGTH, parseEntry } from './parsers/lockdownParser';
 import { getSnapshots } from './snapshot/processor';
+import { GLOBAL_COUNTRY_STATUS } from '../../../../shared/types';
 
 // Number of territories to query through batchGet at a time
 const BATCH_SIZE = 25;
@@ -17,20 +18,12 @@ const ENTRIES_TO_FETCH = 100;
 
 /**
  * Gets data from "Global" sheet.
- * Expected structure from gsheet as such:
- * [ 
- *    [ 'Afghanistan', 'AF', 'AFG' ],
- *    [ 'Albania', 'AL', 'ALB' ],
- *    [ 'Algeria', 'DZ', 'DZA' ],
- * ...
  * @returns {array}
  */
 export async function getGlobalData() {
-  // TODO: Implement sheet readiness from status in Global tab
-  logger.log('[Lockdown:Global] start');
   const sheet = await getWorksheetByTitle('Global');
-  const rows = await sheet.getCellsInRange('D5:F253');
-  const headers = ['territory', 'iso2', 'iso3'];
+  const rows = await sheet.getCellsInRange('B5:F253');
+  const headers = ['status', 'jump', 'territory', 'iso2', 'iso3'];
   return transposeRows(headers, rows);
 }
 
@@ -51,15 +44,13 @@ export async function batchGetTerritoriesEntryData(territories) {
   while (batch = territories.splice(0, BATCH_SIZE)) {
     if (batch.length < 1) break;
     // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
-    // let gridRanges = batch.map(territory => `${territory['iso3']}!${rangeToCache}`);
-    let gridRanges = batch.map(territory => `PLAYGROUND!${rangeToCache}`);
+    let gridRanges = batch.map(territory => `${territory['iso3']}!${rangeToCache}`);
     logger.log(`[Lockdown:WorkSheet] ${batch.map(t => t['iso3']).join(' ')}`);
     let gridData = await doc.batchGetGridRanges(gridRanges);
     
     for (let i = 0; i < batch.length; i++) {
       // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
-      // let workSheet = await getWorksheetByTitle(`${batch[i]['iso3']}`);
-      let workSheet = await getWorksheetByTitle('PLAYGROUND');
+      let workSheet = await getWorksheetByTitle(`${batch[i]['iso3']}`);
       let rowCount = workSheet['gridProperties']['rowCount'];
       let columnCount = workSheet['gridProperties']['columnCount'];
 
@@ -78,8 +69,8 @@ export async function batchGetTerritoriesEntryData(territories) {
 
       // TODO: change this to support multiple entries after MVP 
       // Compares current date in the same format with entry to get latest
-      let currentDate = moment().tz('UTC');
-      let currentDatePlusOne = moment().tz('UTC').add(1, 'days');
+      let currentDate = moment();
+      let currentDatePlusOne = moment().add(1, 'days');
       let snapshots = getSnapshots(entries, currentDate, currentDatePlusOne);
       let currentSnapshot = snapshots[0];
 

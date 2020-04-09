@@ -6,7 +6,10 @@ test('total locked down territories', async () => {
   const territories = require('../data/lockdown_summary.json');
 
   const assertTotal = Object.values(territories).reduce((prev, territory) => {
-    return prev + isLockdown(territory.lockdown.lockdown_status) ? 1 : 0;
+    if (isLockdown(territory.lockdown.lockdown_status)) {
+      return prev + 1;
+    }
+    return prev;
   }, 0);
 
   expect(sumLockdown(territories)).toEqual(assertTotal);

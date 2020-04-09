@@ -1,5 +1,5 @@
 import axios from 'axios';
-import moment from 'moment-timezone';
+import moment from '../../utils/moment';
 
 const params = {
   where: '1=1',
