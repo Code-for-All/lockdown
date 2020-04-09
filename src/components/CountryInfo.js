@@ -79,7 +79,7 @@ export default class CountryInfo extends Component {
             </div>
             <div class="data-entry">
               <dt>Max gathering:</dt>
-              <dd class="data-value">${countryDetails?.max_gathering ?? 'Error'}</dd>
+              <dd class="data-value">${countryDetails?.max_gathering ?? 'Unknown'}</dd>
             </div>
           </dl>
         </div>
@@ -96,7 +96,10 @@ export default class CountryInfo extends Component {
                           <span class="ld-measures-icon">${TRANSLATIONS[label].icon}</span>
                           <span class="ld-measures-key">${TRANSLATIONS[label].text}</span>
                         </dt>
-                        <dd aria-label="${MEASURES[value].toLowerCase()}" class="ld-measures-value ld-measures-${MEASURES[value]}"></dd>
+                        <dd
+                          aria-label="${MEASURES[value]?.toLowerCase() ?? MEASURES[4]}"
+                          class="ld-measures-value ld-measures-${MEASURES[value] ?? MEASURES[4]}"
+                        ></dd>
                       </div>
                     `;
                   })}
@@ -123,8 +126,8 @@ export default class CountryInfo extends Component {
                             (val, i) =>
                               html`
                                 <dd
-                                  aria-label="${TRAVELTYPE[i]}: ${TRAVEL[val].toLowerCase()}"
-                                  class="ld-travel--symbol ld-travel--val-${TRAVEL[val]}"
+                                  aria-label="${TRAVELTYPE[i]}: ${TRAVEL[val]?.toLowerCase() ?? TRAVEL[4]}"
+                                  class="ld-travel--symbol ld-travel--val-${TRAVEL[val] ?? TRAVEL[5]}"
                                 ></dd>
                               `
                           )}
