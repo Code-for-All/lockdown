@@ -86,8 +86,8 @@ export function isEntryActive(value) {
 }
 
 export function isUpdateReady(value) {
-  const status = OPTION_COUNTRY_STATUS[value];
-  return status === OPTION_UPDATE_STATUS.READY;
+  const status = OPTION_UPDATE_STATUS[value];
+  return status === UPDATE_STATUS.READY;
 }
 
 export function isLockdown(value) {
