@@ -52,6 +52,7 @@ const GLOBAL_COUNTRY_STATUS = {
   NO_DATA: '1',
   ACTIVE: '2',
   DEMO: '3',
+  DELETE: '4',
 };
 
 const UPDATE = {

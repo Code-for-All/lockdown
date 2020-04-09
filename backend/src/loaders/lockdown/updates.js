@@ -2,7 +2,7 @@ import { getWorksheetByTitle } from './googlesheet';
 import { transposeRows } from '../../utils/dataHelper';
 import { writeJSON } from '../../utils/file';
 import { isUpdateReady, toUpdateType } from '../../utils/typeHelper';
-import moment from 'moment-timezone';
+import moment from '../../utils/moment';
 
 /**
  * Gets updates
