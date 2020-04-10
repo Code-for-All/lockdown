@@ -13,7 +13,6 @@ class TravelAdviceService extends EventTargetShim {
     if (!/^[a-zA-Z]{2}$/.test(iso2)) {
       return;
     }
-
     if (opts.forceRefresh || this.cache[iso2]?.status === 'failed' || !this.cache[iso2]) {
       try {
         this.cache[iso2] = {};

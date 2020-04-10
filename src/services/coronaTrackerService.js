@@ -14,7 +14,7 @@ class CoronaTrackerService extends EventTargetShim {
       return;
     }
 
-    if (opts.forceRefresh || this.cache[iso2]?.status === 'failed' || !this.cache[iso2]) {
+    if (opts.forceRefresh || this._shouldInvalidate() || this.cache[iso2]?.status === 'failed' || !this.cache[iso2]) {
       try {
         this.cache[iso2] = {};
         const res = await (await fetch(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${iso2}`)).json();
@@ -24,7 +24,7 @@ class CoronaTrackerService extends EventTargetShim {
           totalDeaths: res[0]?.totalDeaths ?? 0,
           totalRecovered: res[0]?.totalRecovered ?? 0,
         };
-
+        this.__lastUpdate = Date.now();
         return this.cache[iso2];
       } catch {
         this.cache[iso2] = {

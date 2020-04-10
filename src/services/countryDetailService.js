@@ -14,7 +14,7 @@ class CountryDetailService extends EventTargetShim {
       return;
     }
 
-    if (opts.forceRefresh || this.cache[iso2]?.status === 'failed' || !this.cache[iso2]) {
+    if (opts.forceRefresh || this._shouldInvalidate() || this.cache[iso2]?.status === 'failed' || !this.cache[iso2]) {
       try {
         this.cache[iso2] = {};
         const res = await (await fetch(new URL(`../../data/territories/${iso2}.json`, import.meta.url))).json();
@@ -38,6 +38,7 @@ class CountryDetailService extends EventTargetShim {
           travel,
           max_gathering: res.lockdown.max_gathering,
         };
+        this.__lastUpdate = Date.now();
         return this.cache[iso2];
       } catch (_) {
         this.cache[iso2] = {
