@@ -4,6 +4,7 @@ import { coronaTrackerService, populationService, countryDetailService } from '.
 import { TRANSLATIONS } from '../assets/translations.js';
 import { offline, loading, travelFlight, travelLand, travelSea } from '../assets/icons/icons.js';
 import { countryDetailStyles, offlineStyles, loadingStyles } from '../style/styles.js';
+import './tool-tip.js';
 
 const TRAVEL = {
   '1': 'YES',
@@ -89,7 +90,7 @@ export default class CountryInfo extends Component {
               <div class="dialog">
                 <h2>Measures</h2>
                 <dl>
-                  ${countryDetails.measures.map(({ label, value }) => {
+                  ${countryDetails.measures.map(({ label, value }, i) => {
                     return html`
                       <div class="ld-measures-wrapper">
                         <dt class="ld-measures">
@@ -97,9 +98,13 @@ export default class CountryInfo extends Component {
                           <span class="ld-measures-key">${TRANSLATIONS[label].text}</span>
                         </dt>
                         <dd
+                          aria-describedby="ld-measures-${i}-${MEASURES[value] ?? MEASURES[4]}"
                           aria-label="${MEASURES[value]?.toLowerCase() ?? MEASURES[4]}"
                           class="ld-measures-value ld-measures-${MEASURES[value] ?? MEASURES[4]}"
                         ></dd>
+                        <tool-tip class="tooltip" id="ld-measures-${i}-${MEASURES[value] ?? MEASURES[4]}"
+                          >${MEASURES[value]?.toLowerCase() ?? MEASURES[4].toLowerCase()}</tool-tip
+                        >
                       </div>
                     `;
                   })}
@@ -117,7 +122,7 @@ export default class CountryInfo extends Component {
                       <dd class="ld-travel--symbol ld-travel--val-icon">${travelSea}</dd>
                     </div>
                   </div>
-                  ${Object.keys(countryDetails.travel).map((key) => {
+                  ${Object.keys(countryDetails.travel).map((key, j) => {
                     return html`
                       <div class="ld-travel">
                         <dt>${TRANSLATIONS[key].text}</dt>
@@ -126,9 +131,15 @@ export default class CountryInfo extends Component {
                             (val, i) =>
                               html`
                                 <dd
+                                  aria-describedby="ld-travel-${i}-${j}-${TRAVEL[val]?.toLowerCase() ?? TRAVEL[4]}"
                                   aria-label="${TRAVELTYPE[i]}: ${TRAVEL[val]?.toLowerCase() ?? TRAVEL[4]}"
                                   class="ld-travel--symbol ld-travel--val-${TRAVEL[val] ?? TRAVEL[5]}"
-                                ></dd>
+                                  style="position: relative;"
+                                >
+                                  <tool-tip class="tooltip" id="ld-travel-${i}-${j}-${TRAVEL[val]?.toLowerCase() ?? TRAVEL[4]}">
+                                    ${TRAVEL[val]?.toLowerCase() ?? TRAVEL[4].toLowerCase()}
+                                  </tool-tip>
+                                </dd>
                               `
                           )}
                         </div>

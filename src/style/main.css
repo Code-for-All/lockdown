@@ -119,6 +119,16 @@ a:visited {
   font-size: 13px;
 }
 
+.tooltip {
+  top: -5px;
+  position: absolute;
+  right: 30px;
+  background: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
 .ld-menu-nav button {
   border-radius: 5px;
   color: var(--ld-text);

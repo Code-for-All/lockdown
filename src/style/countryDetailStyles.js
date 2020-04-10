@@ -107,6 +107,7 @@ export const countryDetailStyles = css`
   }
   .ld-travel--values {
     flex: 1;
+    position: relative;
     display: flex;
     justify-content: space-between;
   }
@@ -134,6 +135,7 @@ export const countryDetailStyles = css`
   }
 
   .ld-measures-wrapper {
+    position: relative;
     display: flex;
   }
   .ld-measures-wrapper dd {
