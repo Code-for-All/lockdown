@@ -101,24 +101,6 @@ registerRoute(
   })
 );
 
-/**
- * Mapbox tile styles, cache first, this data is unlikely to change very often
- * This cache can fill up quickly if users zoom in/out and move around on the mapp
- * so we restrict the max entries to 30 as not to hog the devices space
- */
-// registerRoute(
-//   new RegExp('https://api.mapbox.com/.*'),
-//   new CacheFirst({
-//     cacheName: 'mapbox-tiles-cache',
-//     plugins: [
-//       new ExpirationPlugin({
-//         maxEntries: 30,
-//         purgeOnQuotaError: true
-//       }),
-//     ],
-//   })
-// );
-
 /* Precache manifest */
 precacheAndRoute(self.__WB_MANIFEST);
 

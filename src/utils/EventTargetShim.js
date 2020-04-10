@@ -8,7 +8,7 @@ export class EventTargetShim {
   }
 
   _shouldInvalidate() {
-    const HALF_HOUR = 5 * 60 * 1000;
-    return new Date() - this.__lastUpdate > HALF_HOUR;
+    const FIVE_MIN = 5 * 60 * 1000;
+    return new Date() - this.__lastUpdate > FIVE_MIN;
   }
 }

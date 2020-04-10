@@ -129,6 +129,16 @@ a:visited {
   border-radius: 10px;
 }
 
+.tooltip:after {
+  content: '';
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid black;
+  position: absolute;
+  top: 9px;
+  right: -5px;
+}
+
 .ld-menu-nav button {
   border-radius: 5px;
   color: var(--ld-text);
