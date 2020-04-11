@@ -65,24 +65,6 @@ registerRoute(
   })
 );
 
-/**
- * Travel advisory, network first
- * This can start hogging up storage if users click on a lot of 
- * countries, so we restrict to 20 max
- */ 
-registerRoute(
-  new RegExp('https://www.travel-advisory.info/api?.*'),
-  new NetworkFirst({
-    cacheName: 'traveladvisory',
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 5,
-        purgeOnQuotaError: true
-      }),
-    ],
-  })
-);
-
 /** 
  * Corona tracker, network first 
  * This can start hogging up storage if users click on a lot of 

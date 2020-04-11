@@ -29,6 +29,7 @@ export const countryDetailStyles = css`
   }
 
   .data-entry {
+    font-variant-numeric: tabular-nums;
     display: flex;
     margin-bottom: 5px;
   }

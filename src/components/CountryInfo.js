@@ -64,19 +64,19 @@ export default class CountryInfo extends Component {
           <dl>
             <div class="data-entry">
               <dt>Population:</dt>
-              <dd class="data-value">${populationData?.data?.[this.props.iso2]?.Population ?? 'Error'}</dd>
+              <dd class="data-value">${Number(populationData?.data?.[this.props.iso2]?.Population).toLocaleString() ?? 'Error'}</dd>
             </div>
             <div class="data-entry">
-              <dt>Confirmed cases:</dt>
-              <dd class="data-value">${coronaData?.totalConfirmed ?? 'Error'}</dd>
+              <dt>Reported cases:</dt>
+              <dd class="data-value">${Number(coronaData?.totalConfirmed).toLocaleString() ?? 'Error'}</dd>
             </div>
             <div class="data-entry">
-              <dt>Confirmed deaths:</dt>
-              <dd class="data-value">${coronaData?.totalDeaths ?? 'Error'}</dd>
+              <dt>Reported deaths:</dt>
+              <dd class="data-value">${Number(coronaData?.totalDeaths).toLocaleString() ?? 'Error'}</dd>
             </div>
             <div class="data-entry">
-              <dt>Confirmed recoveries:</dt>
-              <dd class="data-value">${coronaData?.totalRecovered ?? 'Error'}</dd>
+              <dt>Reported recoveries:</dt>
+              <dd class="data-value">${Number(coronaData?.totalRecovered).toLocaleString() ?? 'Error'}</dd>
             </div>
             <div class="data-entry">
               <dt>Max gathering:</dt>

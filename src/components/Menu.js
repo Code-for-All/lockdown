@@ -182,9 +182,6 @@ const renderMenu = (menuItem) => {
                 You can check all the <a rel="noopener noreferrer" target="_blank" href="https://www.TIOF.Click/LockdownData">sources</a> employed here: 
                 <ul class="ld-sources">
                   <li>
-                    <a rel="noopener noreferrer" target="_blank" href="https://www.travel-advisory.info/">Travel-advisory API</a>
-                  </li>
-                  <li>
                     <a rel="noopener noreferrer" target="_blank" href="https://api.coronatracker.com/">Coronatracker API</a><br/>
                     Recognized by <a rel="noopener noreferrer" target="_blank" href="https://www.who.int/bulletin/online_first/COVID-19/en/">WHO</a>
                   </li>
