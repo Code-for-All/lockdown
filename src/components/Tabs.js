@@ -97,7 +97,6 @@ export default class Tabs extends Component {
                 ref=${(ref) => (this.tabRefs['tab' + i] = ref)}
                 tabindex=${index === i ? '0' : '-1'}
                 aria-selected=${index === i ? 'true' : 'false'}
-                aria-controls=${child.props.id}
                 class=${index === i ? 'ld-menu--active' : ''}
                 data-label=${child.props.id}
                 onKeyUp=${this.__onFocusMove}

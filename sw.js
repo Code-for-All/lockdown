@@ -38,6 +38,23 @@ registerRoute(
 );
 
 /**  
+ * Runtime country json data files with a network-first strategy, we want up to date data, 
+ * but in the case of no connection, return cached data 
+ */
+ registerRoute(
+  new RegExp('.*data/territories/.*.json'),
+  new NetworkFirst({
+    cacheName: 'territories',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 5,
+        purgeOnQuotaError: true
+      }),
+    ],
+  })
+);
+
+/**  
  * Runtime json data files with a network-first strategy, we want up to date data, 
  * but in the case of no connection, return cached data 
  */
@@ -45,24 +62,6 @@ registerRoute(
   new RegExp('.*data/.*.json'),
   new NetworkFirst({
     cacheName: 'datafiles'
-  })
-);
-
-/**
- * Travel advisory, network first
- * This can start hogging up storage if users click on a lot of 
- * countries, so we restrict to 20 max
- */ 
-registerRoute(
-  new RegExp('https://www.travel-advisory.info/api?.*'),
-  new NetworkFirst({
-    cacheName: 'traveladvisory',
-    plugins: [
-      new ExpirationPlugin({
-        maxEntries: 20,
-        purgeOnQuotaError: true
-      }),
-    ],
   })
 );
 
@@ -77,30 +76,12 @@ registerRoute(
     cacheName: 'coronatracker',
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 20,
+        maxEntries: 5,
         purgeOnQuotaError: true
       }),
     ],
   })
 );
-
-/**
- * Mapbox tile styles, cache first, this data is unlikely to change very often
- * This cache can fill up quickly if users zoom in/out and move around on the mapp
- * so we restrict the max entries to 30 as not to hog the devices space
- */
-// registerRoute(
-//   new RegExp('https://api.mapbox.com/.*'),
-//   new CacheFirst({
-//     cacheName: 'mapbox-tiles-cache',
-//     plugins: [
-//       new ExpirationPlugin({
-//         maxEntries: 30,
-//         purgeOnQuotaError: true
-//       }),
-//     ],
-//   })
-// );
 
 /* Precache manifest */
 precacheAndRoute(self.__WB_MANIFEST);

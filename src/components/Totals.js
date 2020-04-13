@@ -72,19 +72,19 @@ export class Totals extends Component {
     const items = [
       {
         description: 'Countries in lockdown',
-        value: totals.territories.lockdown,
+        value: Number(totals.territories.lockdown).toLocaleString(),
       },
       {
         description: 'People affected',
         value: '0',
       },
       {
-        description: 'Confirmed cases',
-        value: totals.corona.confirmed,
+        description: html`Reported <br />cases`,
+        value: Number(totals.corona.confirmed).toLocaleString(),
       },
       {
-        description: 'Confirmed deaths',
-        value: totals.corona.deaths,
+        description: 'Reported deaths',
+        value: Number(totals.corona.deaths).toLocaleString(),
       },
     ];
 

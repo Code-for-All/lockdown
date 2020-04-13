@@ -2,7 +2,7 @@ import { html } from 'htm/preact';
 import { useState, useEffect } from 'preact/compat';
 import { updatesService } from '../services/updatesService.js';
 import { offline, loading } from '../assets/icons/icons.js';
-import { loadingStyles, offlineStyles } from './CountryInfo.js';
+import { loadingStyles, offlineStyles } from '../style/styles.js';
 import css from 'csz';
 
 const UPDATE_TYPES = {
