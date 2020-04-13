@@ -16,9 +16,7 @@ export class CustomGoogleSpreadsheet extends GoogleSpreadsheet {
       params.append('ranges', range);
     });
     
-    const result = await this.axios.get('/values:batchGet', {
-      params
-    });
+    const result = await this.axios.get(`/values:batchGet?${params.toString()}`);
 
     return (result.data.valueRanges || []).map(d => d['values']);
   }
