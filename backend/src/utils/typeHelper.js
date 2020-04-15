@@ -1,4 +1,4 @@
-import { MEASURE, TRAVEL, UPDATE_STATUS, COUNTRY_STATUS, DATA_ENTRY_STATUS } from '../../../shared/types';
+import { MEASURE, LOCKDOWN, TRAVEL, UPDATE_STATUS, COUNTRY_STATUS, DATA_ENTRY_STATUS } from '../../../shared/types';
 import moment from './moment';
 
 const OPTION_MEASURE = {
@@ -91,5 +91,5 @@ export function isUpdateReady(value) {
 }
 
 export function isLockdown(value) {
-  return value === MEASURE.YES || value === MEASURE.PARTIAL;
+  return value === LOCKDOWN.YES || value === LOCKDOWN.PARTIAL;
 }
