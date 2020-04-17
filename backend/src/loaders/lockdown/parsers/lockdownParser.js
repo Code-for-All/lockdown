@@ -1,5 +1,5 @@
 import { getCachedCellsRange } from '../../../utils/sheet';
-import { toMeasureType, toTravelType, toInteger, isUpdateReady, toEntryDate, toCountryStatus } from '../../../utils/typeHelper';
+import { toMeasureType, toTravelType, toInteger, isUpdateReady, toEntryDate, toLockdownType } from '../../../utils/typeHelper';
 import { TRAVEL, MEASURE } from '../../../../../shared/types';
 import { letterToColumn, columnToLetter } from 'google-spreadsheet/lib/utils';
 import DataPoint from '../types/DataPoint';
@@ -59,7 +59,7 @@ export function parseMeasure(sheet, entryIndex) {
 
   /** @type {Measure} */
   const data = {
-    lockdown_status: parseDataPoint(entryMeasureRows[0], toMeasureType),
+    lockdown_status: parseDataPoint(entryMeasureRows[0], toLockdownType),
     city_movement_restriction: parseDataPoint(entryMeasureRows[1], toMeasureType),
     attending_religious_sites: parseDataPoint(entryMeasureRows[2], toMeasureType),
     going_to_work: parseDataPoint(entryMeasureRows[3], toMeasureType),
