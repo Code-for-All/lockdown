@@ -20,5 +20,4 @@ test('total corona', async () => {
 
   expect(typeof corona.confirmed).toEqual('number');
   expect(typeof corona.deaths).toEqual('number');
-  expect(typeof corona.date).toEqual('string');
 });
