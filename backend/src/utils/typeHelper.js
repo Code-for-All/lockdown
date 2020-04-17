@@ -1,6 +1,7 @@
-import { MEASURE, LOCKDOWN, TRAVEL, UPDATE_STATUS, COUNTRY_STATUS, DATA_ENTRY_STATUS } from '../../../shared/types';
+import { MEASURE, TRAVEL, UPDATE_STATUS, COUNTRY_STATUS, DATA_ENTRY_STATUS } from '../../../shared/types';
 import moment from './moment';
 
+// Options are the literal values set in google sheet
 const OPTION_MEASURE = {
   'Yes': MEASURE.YES,
   'No': MEASURE.NO,
@@ -66,6 +67,18 @@ export function toUpdateType(value) {
   return OPTION_UPDATE_TYPE[value] ?? null;
 }
 
+// Special note on lockdown: its label is "Are citizens allowed to leave their homes?"
+// Thus the value is actually opposite, i.e: "No" means lockdown, and vice versa
+export function toLockdownType(value) {
+  switch (value) {
+    case 'No':
+      return MEASURE.YES
+    case 'Yes':
+      return MEASURE.NO
+  }
+  return OPTION_MEASURE[value] ?? null;
+}
+
 export function toInteger(value) {
   const int = parseInt(value);
   return Number.isInteger(int) ? int : null;
@@ -91,5 +104,5 @@ export function isUpdateReady(value) {
 }
 
 export function isLockdown(value) {
-  return value === LOCKDOWN.YES || value === LOCKDOWN.PARTIAL;
+  return value === MEASURE.YES || value === MEASURE.PARTIAL;
 }
