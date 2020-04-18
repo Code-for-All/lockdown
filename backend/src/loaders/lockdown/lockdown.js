@@ -69,6 +69,7 @@ export async function batchGetTerritoriesEntryData(territories) {
 
       // TODO: change this to support multiple entries after MVP 
       // Compares current date in the same format with entry to get latest
+      // TODO: changes needed for time slider
       let currentDate = moment();
       let currentDatePlusOne = moment().add(1, 'days');
       let snapshots = getSnapshots(entries, currentDate, currentDatePlusOne);
@@ -79,6 +80,7 @@ export async function batchGetTerritoriesEntryData(territories) {
         isoCode: batch[i]['iso2'],
         lockdown: {
           // TODO: change this to support multiple entries after MVP
+          // TODO: changes needed for time slider
           ...currentSnapshot
           // ...currentEntry
         }
@@ -109,6 +111,7 @@ export default async function loadData() {
   });
 
   // Load summarized datafile
+  // TODO: changes needed for time slider
   const summarizedTerritories = {};
   territories.forEach((territory) => {
     let measures = territory['lockdown']['measures'];

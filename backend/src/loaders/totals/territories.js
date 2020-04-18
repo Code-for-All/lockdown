@@ -5,6 +5,7 @@ import { isLockdown } from '../../utils/typeHelper.js';
  * @param {array} lockdownStatusByTerritory 
  */
 export function sumLockdown(lockdownStatusByTerritory) {
+  // TODO: changes needed for time slider
   const total = Object.values(lockdownStatusByTerritory).reduce((prev, territory) => {
     if (isLockdown(territory.lockdown.lockdown_status)) {
       return prev + 1;
