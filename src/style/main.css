@@ -30,27 +30,31 @@
 
 .ld-font-front {
   font-size: 17px;
-  font-weight: bold;
+  font-weight: 700;
   color: var(--ld-text);
 }
 
 .ld-font-header {
   font-size: 16px;
+  font-weight: normal;
   color: #222222;
 }
 
 .ld-font-subheader {
   font-size: 16px;
+  font-weight: normal;
   color: #000000;
 }
 
 .ld-font-body {
   font-size: 10px;
+  font-weight: normal;
   color: #595959;
 }
 
 .ld-font-legend {
   font-size: 8px;
+  font-weight: normal;
   color: #595959;
 }
 

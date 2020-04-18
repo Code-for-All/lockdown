@@ -22,7 +22,7 @@ const styles = css`
     position: fixed;
     width: 90%;
     padding-top: 20px;
-    max-width: 400px;
+    max-width: 440px;
     left: calc(50% + 200px);
     top: 50%;
     transform: translate(-50%, -50%);
