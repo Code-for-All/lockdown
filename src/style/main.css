@@ -1,8 +1,19 @@
 :root {
-  --ld-dark-gray: #2a2b2f;
-  --ld-dark-blue: #0000ff;
-  --ld-light-blue: #add8e6;
-  --ld-text: rgb(48, 49, 54);
+  --ld-gray-1: #333333;
+  --ld-gray-2: #4f4f4f;
+  --ld-gray-3: #828282;
+  --ld-gray-4: #bdbdbd;
+  --ld-gray-5: #e0e0e0;
+  --ld-gray-6: #f2f2f2;
+
+  --ld-blue-1: #6d9eeb;
+  --ld-blue-2: #c382f6;
+
+  --ld-yellow-1: #f6b26b;
+  --ld-green-1: #93c47d;
+  --ld-red-1: #e06666;
+
+  --ld-text: #000000;
   --ld-bg: white;
   --ld-hover: rgb(247, 247, 247);
   --ld-active: blue;
@@ -11,10 +22,39 @@
   --ld-button-text: black;
 }
 
+.ld-font-light {
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--ld-text);
+}
+
+.ld-font-front {
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--ld-text);
+}
+
+.ld-font-header {
+  font-size: 16px;
+  color: #222222;
+}
+
+.ld-font-subheader {
+  font-size: 16px;
+  color: #000000;
+}
+
+.ld-font-body {
+  font-size: 10px;
+  color: #595959;
+}
+
+.ld-font-legend {
+  font-size: 8px;
+  color: #595959;
+}
+
 .dark {
-  --ld-dark-gray: #2a2b2f;
-  --ld-dark-blue: #0000ff;
-  --ld-light-blue: #add8e6;
   --ld-text: white;
   --ld-bg: rgb(48, 49, 54);
   --ld-hover: rgb(38, 39, 43);
@@ -46,7 +86,7 @@ body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   background-color: var(--ld-bg);
-  color: var(--ld-dark-gray);
+  color: var(--ld-gray-1);
   /* 2/2 prevent bouncy scroll on iOS */
   overflow-y: hidden;
   overflow-x: hidden;
