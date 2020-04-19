@@ -9,6 +9,13 @@ export const countryInfoStyles = css`
     width: 100%;
   }
 
+  dl {
+    margin-block-end: 0;
+    margin-block-start: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+
   h1 {
     font-weight: bold;
     font-size: 20px;
@@ -32,6 +39,10 @@ export const countryInfoStyles = css`
     margin-bottom: 8px;
     padding-bottom: 8px;
     border-bottom: 1px solid var(--ld-gray-5);
+  }
+
+  .data-entry dt {
+    font-weight: 700;
   }
 
   .data dd {
@@ -81,6 +92,7 @@ export const countryInfoStyles = css`
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     list-style: none;
     padding: 0;
+    margin-bottom: 0;
   }
 
   .measures > div {
