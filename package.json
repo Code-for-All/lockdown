@@ -45,7 +45,9 @@
     "leaflet": "^1.6.0",
     "lodash-es": "^4.17.15",
     "preact": "^10.3.2",
+    "preact-compat": "^3.19.0",
     "pwa-helpers": "^0.9.1",
+    "recal": "^1.0.5",
     "rollup-plugin-copy": "^3.3.0",
     "rslider": "^2.16.3"
   },

@@ -10,6 +10,7 @@ import { Lazy } from './Lazy.js';
 import { router } from '../router.js';
 import { dialogService } from '../services/dialogService.js';
 import { debounce } from 'lodash-es';
+import TimeSlider from './TimeSlide';
 
 const debouncedCloseDialog = debounce(
   () => {
@@ -91,7 +92,7 @@ export class App extends Component {
 
       <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
       <${WorldMap} />
-
+      <${TimeSlider} />
       ${this.state.dialog.opened
         ? html`
             <${Lazy} component=${() => import('../components/Dialog.js')} props=${{ ...this.state.dialog, onClose: this.__closeDialog }} />
