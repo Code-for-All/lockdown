@@ -5,7 +5,7 @@ import css from 'csz';
 import { DateRangePicker } from 'recal';
 
 // Stylesheet for calendar.
-import 'recal/lib/index.css';
+// import 'recal/lib/index.css';
 // import '@lls/react-light-calendar/dist/index.css';
 
 // import rSlider from 'rslider';
