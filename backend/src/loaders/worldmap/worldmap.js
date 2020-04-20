@@ -10,6 +10,7 @@ const defaultLockdownStatus = null;
 export function appendLockdownStatus(lockdownStatusByTerritory) {
   const baseData = require('./base.json');
   const updatedFeatures = [];
+  // TODO: changes needed for time slider
   baseData['features'].forEach(feature => {
     let lockdownStatus = lockdownStatusByTerritory[feature.properties.iso2]?.lockdown?.lockdown_status;
     updatedFeatures.push({
