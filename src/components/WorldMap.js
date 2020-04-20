@@ -19,6 +19,12 @@ const selectStyles = css`
   }
 `;
 
+const domainCoors= {
+  "asia": [21.943046, 96.240234], //Burma
+  "europe": [52.160455, 10.371094],//Germany
+  "usa":[45.089036, -100.898438]
+}
+
 export class WorldMap extends Component {
   constructor() {
     super();
@@ -136,6 +142,7 @@ export class WorldMap extends Component {
       countries: mapData.features,
     });
 
+    let locationSet='false';
     if (navigator.permissions) {
       const geolocation = await navigator.permissions.query({ name: 'geolocation' });
       // on pageload, check if there is permission for geolocation
@@ -143,6 +150,7 @@ export class WorldMap extends Component {
         navigator.geolocation.getCurrentPosition((location) => {
           const { latitude, longitude } = location.coords;
           this.state.map.setView([latitude, longitude]);
+          locationSet='true';
         });
       }
 
@@ -153,12 +161,25 @@ export class WorldMap extends Component {
             localStorage.setItem('geolocation', 'true');
             const { latitude, longitude } = location.coords;
             this.state.map.setView([latitude, longitude]);
+            locationSet='true';
           });
         } else {
           localStorage.removeItem('geolocation');
         }
       });
     }
+
+    if(locationSet='false'){
+      let url=window.location.href;
+      for (let country in domainCoors){
+        if(url.indexOf(country) != -1){
+          this.state.map.setView(domainCoors[country],4);
+          break;
+        }
+      }
+
+    }
+
   }
 
   componentWillUnmount() {
