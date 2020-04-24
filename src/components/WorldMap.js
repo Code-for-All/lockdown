@@ -37,6 +37,8 @@ function worldStyle(e) {
     default:
       value = '#828282';
   }
+
+  return value;
 }
 
 export class WorldMap extends Component {
@@ -63,14 +65,14 @@ export class WorldMap extends Component {
     window.map = map;
 
     map.on('style.load', () => {
-      console.log('add source');
+      console.log('add source')
       map.addSource('countries', {
         type: 'geojson',
         data: mapData,
         generateId: true,
       });
 
-      console.log('add layer');
+      console.log('add layer')
       map.addLayer({
         id: 'countries',
         type: 'fill',
@@ -82,6 +84,42 @@ export class WorldMap extends Component {
         },
         filter: ['has', 'color'],
       });
+
+      let hoveredStateId = null;
+
+      map.on('mousemove', 'countries', function(e) {
+        if (e.features.length > 0) {
+          if (hoveredStateId) {
+            map.setFeatureState(
+              {
+                source: 'countries',
+                id: hoveredStateId
+              },
+              {
+                hover: false
+              }
+            );
+          }
+
+          hoveredStateId = e.features[0].id;
+
+          map.setFeatureState(
+            {
+              source: 'countries',
+              id: hoveredStateId
+            },
+            {
+              hover: true
+            }
+          );
+        }
+      });
+      map.on('click', 'countries', function(e) {
+        // map.fitBounds(layer.getBounds());
+        router.setSearchParam('country', e.features[0].properties.NAME);
+        router.setSearchParam('iso2', e.features[0].properties.iso2);
+      });
+
     });
 
     map.on('load', function () {
@@ -106,37 +144,6 @@ export class WorldMap extends Component {
     }
 
     const map = this.initMap(mapData);
-
-    function onFeatureClicked(e) {
-      const layer = e.target;
-      // map.fitBounds(layer.getBounds());
-      router.setSearchParam('country', layer.feature.properties.NAME);
-      router.setSearchParam('iso2', layer.feature.properties.iso2);
-    }
-
-    function resetHighlight(e) {
-      const layer = e.target;
-      themeLayer.resetStyle(layer);
-    }
-
-    function highlightFeature(e) {
-      const layer = e.target;
-      layer.setStyle({
-        fillOpacity: 0.5,
-        name: 'test',
-      });
-      if (!Browser.ie && !Browser.opera && !Browser.edge) {
-        layer.bringToFront();
-      }
-    }
-
-    function onEachFeature(feature, layer) {
-      layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: onFeatureClicked,
-      });
-    }
 
     this.setState({
       map,
