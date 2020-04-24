@@ -53,6 +53,7 @@ export class WorldMap extends Component {
   constructor() {
     super();
     this.__handleSelect = this.__handleSelect.bind(this);
+    this.initMap = this.initMap.bind(this);
 
     this.state = {
       lng: 0,
@@ -61,7 +62,7 @@ export class WorldMap extends Component {
     };
   }
 
-  initMap = async (mapData) => {
+  async initMap(mapData) {
     if (!window.mapboxgl) {
       console.log('check the map');
       await pause();
