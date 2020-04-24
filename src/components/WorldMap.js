@@ -19,6 +19,14 @@ const selectStyles = css`
   }
 `;
 
+const pause = (time = 100) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
+};
+
 function worldStyle(e) {
   let value;
   switch (e.properties.lockdown_status) {
@@ -53,7 +61,12 @@ export class WorldMap extends Component {
     };
   }
 
-  initMap = (mapData) => {
+  initMap = async (mapData) => {
+    if (!window.mapboxgl) {
+      console.log('check the map');
+      await pause();
+      await this.initMap();
+    }
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
@@ -65,14 +78,14 @@ export class WorldMap extends Component {
     window.map = map;
 
     map.on('style.load', () => {
-      console.log('add source')
+      console.log('add source');
       map.addSource('countries', {
         type: 'geojson',
         data: mapData,
         generateId: true,
       });
 
-      console.log('add layer')
+      console.log('add layer');
       map.addLayer({
         id: 'countries',
         type: 'fill',
@@ -87,16 +100,16 @@ export class WorldMap extends Component {
 
       let hoveredStateId = null;
 
-      map.on('mousemove', 'countries', function(e) {
+      map.on('mousemove', 'countries', function (e) {
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
               {
                 source: 'countries',
-                id: hoveredStateId
+                id: hoveredStateId,
               },
               {
-                hover: false
+                hover: false,
               }
             );
           }
@@ -106,24 +119,27 @@ export class WorldMap extends Component {
           map.setFeatureState(
             {
               source: 'countries',
-              id: hoveredStateId
+              id: hoveredStateId,
             },
             {
-              hover: true
+              hover: true,
             }
           );
         }
       });
-      map.on('click', 'countries', function(e) {
+      map.on('click', 'countries', function (e) {
         // map.fitBounds(layer.getBounds());
         router.setSearchParam('country', e.features[0].properties.NAME);
         router.setSearchParam('iso2', e.features[0].properties.iso2);
       });
-
     });
 
     map.on('load', function () {
       console.log('map is loaded');
+    });
+
+    this.setState({
+      map,
     });
 
     return map;
@@ -143,12 +159,11 @@ export class WorldMap extends Component {
       feature.properties.color = worldStyle(feature);
     }
 
-    const map = this.initMap(mapData);
-
     this.setState({
-      map,
       countries: mapData.features,
     });
+
+    await this.initMap(mapData);
 
     if (navigator.permissions) {
       const geolocation = await navigator.permissions.query({ name: 'geolocation' });
@@ -156,7 +171,8 @@ export class WorldMap extends Component {
       if (geolocation.state === 'granted') {
         navigator.geolocation.getCurrentPosition((location) => {
           const { latitude, longitude } = location.coords;
-          this.state.map.setView([latitude, longitude]);
+
+          this.state.map.setCenter([longitude, latitude]);
         });
       }
 
@@ -166,7 +182,7 @@ export class WorldMap extends Component {
           navigator.geolocation.getCurrentPosition((location) => {
             localStorage.setItem('geolocation', 'true');
             const { latitude, longitude } = location.coords;
-            this.state.map.setView([latitude, longitude]);
+            this.state.map.setCenter([longitude, latitude]);
           });
         } else {
           localStorage.removeItem('geolocation');
@@ -176,7 +192,7 @@ export class WorldMap extends Component {
   }
 
   componentWillUnmount() {
-    this.state.map.remove();
+    this.state?.map.remove();
   }
 
   __handleSelect(e) {
