@@ -1,20 +1,24 @@
 import { html } from 'htm/preact';
 
-export const lockdown = html`
-  <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
-    <path d="M0 0h24v24H0z" fill="none" />
-    <path
-      d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"
-    />
+export const home = html`
+  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+    <path fill="none" d="M-1-1h26v26H-1z" />
+    <g>
+      <path stroke="null" fill="#828282" d="M9.61 22.116v-7.14h4.78v7.14h5.974v-9.521h3.584L12.001 1.885.052 12.594h3.584v9.52H9.61z" />
+    </g>
   </svg>
 `;
 
 export const citymovement = html`
-  <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
-    <path
-      d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z"
-    />
-    <path d="M0 0h24v24H0z" fill="none" />
+  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+    <path fill="none" d="M-1-1h26v26H-1z" />
+    <g>
+      <path
+        stroke="null"
+        fill="#828282"
+        d="M14.153 5.566l-4.037 5.362 3.068 4.074-1.722 1.287c-1.82-2.413-4.845-6.434-4.845-6.434L.158 18.434h23.684L14.153 5.566z"
+      />
+    </g>
   </svg>
 `;
 

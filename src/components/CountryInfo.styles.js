@@ -92,16 +92,20 @@ export const countryInfoStyles = css`
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     list-style: none;
     padding: 0;
-    margin-bottom: 0;
+    margin: 0 24px 0;
   }
 
-  .measures > div {
+  .measures > li {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     text-align: center;
+  }
+
+  .measure-wrapper {
+    position: relative;
   }
 
   .measure svg {
@@ -110,11 +114,35 @@ export const countryInfoStyles = css`
   }
 
   .measure-label {
+    position: absolute;
+    top: -36px;
+    left: 0;
+    background-color: #7ffbc6;
+    padding: 8px;
+    border-radius: 20px;
+    color: var(--ld-gray-1);
+    pointer-events: none;
     opacity: 0;
     transition: opacity 300ms ease-in-out;
+    white-space: nowrap;
   }
 
-  .measures > div:hover .measure-label {
+  .measure-label::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+
+    border-width: 6px;
+    border-style: solid;
+    border-color: #7ffbc6 transparent transparent transparent;
+    left: 16px;
+
+    bottom: -12px;
+  }
+
+  .measure:hover ~ .measure-label {
     opacity: 1;
   }
 

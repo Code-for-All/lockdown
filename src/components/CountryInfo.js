@@ -1,7 +1,7 @@
 import { html } from 'htm/preact';
 import { Component } from 'preact';
 import { coronaTrackerService, populationService, countryDetailService } from '../services/services';
-import { lockdown, citymovement, religion, work, military, academia, shops, electricity, water, internet } from '../assets/icons/icons.js';
+import { home, citymovement, religion, work, military, academia, shops, electricity, water, internet } from '../assets/icons/icons.js';
 import { offline, loading, travelFlight, travelLand, travelSea } from '../assets/icons/icons.js';
 import { offlineStyles, loadingStyles } from '../style/shared.styles.js';
 import { countryInfoStyles } from './CountryInfo.styles.js';
@@ -54,52 +54,52 @@ const TRANSLATIONS = {
 const MEASURES = [
   {
     id: 'lockdown_status',
-    label: 'Lockdown status',
-    icon: lockdown,
+    label: 'Home reclusion',
+    icon: home,
   },
   {
     id: 'city_movement_restriction',
-    label: 'City movement',
+    label: 'Outdoor activities',
     icon: citymovement,
   },
   {
     id: 'attending_religious_sites',
-    label: 'Religion',
+    label: 'Access to religious sites',
     icon: religion,
   },
   {
     id: 'going_to_work',
-    label: 'Work',
+    label: 'Access to work',
     icon: work,
   },
   {
     id: 'military_not_deployed',
-    label: 'Military not deployed',
+    label: 'Military presence',
     icon: military,
   },
   {
     id: 'academia_allowed',
-    label: 'Academia allowed',
+    label: 'Access to schools',
     icon: academia,
   },
   {
     id: 'going_to_shops',
-    label: 'Going to shops',
+    label: 'Shopping',
     icon: shops,
   },
   {
     id: 'electricity_nominal',
-    label: 'Electricity working',
+    label: 'Electricity',
     icon: electricity,
   },
   {
     id: 'water_nominal',
-    label: 'Water working',
+    label: 'Water',
     icon: water,
   },
   {
     id: 'internet_nominal',
-    label: 'Internet working',
+    label: 'Telecom',
     icon: internet,
   },
 ];
@@ -205,16 +205,18 @@ export default class CountryInfo extends Component {
                 ${createMeasures(countryDetails.measures).map(
                   (m) =>
                     html`
-                      <div>
-                        <li
-                          aria-labelledby="measure-label-${m.id}"
-                          class="measure measure-${m.value}"
-                          aria-label="${m.value.toLowerCase()}"
-                        >
-                          ${m.icon}
-                        </li>
-                        <span id="measure-label-${m.id}" class="measure-label">${m.label}</span>
-                      </div>
+                      <li>
+                        <div class="measure-wrapper">
+                          <div
+                            aria-labelledby="measure-label-${m.id}"
+                            class="measure measure-${m.value}"
+                            aria-label="${m.value.toLowerCase()}"
+                          >
+                            ${m.icon}
+                          </div>
+                          <span id="measure-label-${m.id}" class="measure-label">${m.label}</span>
+                        </div>
+                      </li>
                     `
                 )}
               </ul>
