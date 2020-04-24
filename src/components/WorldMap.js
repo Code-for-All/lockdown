@@ -23,6 +23,12 @@ export class WorldMap extends Component {
   constructor() {
     super();
     this.__handleSelect = this.__handleSelect.bind(this);
+
+    this.state = {
+      lng: 0,
+      lat: 0,
+      zoom: 2
+    };
   }
   async componentDidMount() {
     dialogService.addEventListener('close', (e) => {
@@ -31,22 +37,60 @@ export class WorldMap extends Component {
       }
     });
 
-    // the world map needs a large data source, lazily fetch them in parallel
-    const [mapData, leaflet] = await Promise.all([
-      fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json()),
-      import('leaflet/dist/leaflet-src.esm.js'),
-    ]);
-    const { Map, Browser, geoJSON, layerGroup, tileLayer } = leaflet;
+    // const lockdowns = await lockdownsService.getLockdowns();
 
-    const map = new Map(this.ref, {
-      center: [0, 0],
-      zoom: 3,
-      minZoom: 2,
-      maxZoom: 18,
-      zoomControl: false,
+    // the world map needs a large data source, lazily fetch them in parallel
+    const [mapData] = await Promise.all([
+      fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json())
+    ]);
+    // const { Map, Browser, geoJSON, layerGroup, tileLayer } = leaflet;
+
+    // const map = new Map(this.ref, {
+    //   center: [0, 0],
+    //   zoom: 3,
+    //   minZoom: 2,
+    //   maxZoom: 18,
+    //   zoomControl: false,
+    // });
+
+    let map = new window.mapboxgl.Map({
+      accessToken: mapbox_token,
+      container: this.ref,
+      style: 'mapbox://styles/mapbox/light-v10',
+      center: [this.state.lng, this.state.lat],
+      zoom: this.state.zoom
     });
-    let themeLayer;
-    let labelLayer = layerGroup();
+
+    map.on('load', function() {
+      for (const feature of mapData.features) {
+        feature.properties.color = worldStyle(feature);
+      }
+
+      map.on('style.load', () => {
+        map.addLayer({
+          id: 'countries',
+          type: 'fill',
+          source: 'countries',
+          layout: {},
+          paint: {
+            'fill-color': ['get', 'color'],
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4]
+          },
+          filter: ['has', 'color']
+        });
+      })
+
+      map.addSource('countries', {
+        type: 'geojson',
+        data: mapData,
+        generateId: true
+      });
+
+
+    });
+
+    // let themeLayer;
+    // let labelLayer = layerGroup();
 
     function onFeatureClicked(e) {
       const layer = e.target;
@@ -79,12 +123,14 @@ export class WorldMap extends Component {
       });
     }
 
-    tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=' + mapbox_token, {
-      tileSize: 512,
-      zoomOffset: -1,
-      attribution:
-        '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).addTo(map);
+    // tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=' + mapbox_token, {
+    //   tileSize: 512,
+    //   zoomOffset: -1,
+    //   attribution:
+    //     '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    // }).addTo(map);
+
+
 
     function worldStyle(e) {
       let value;
@@ -126,11 +172,11 @@ export class WorldMap extends Component {
       return style;
     }
 
-    themeLayer = geoJSON(mapData, {
-      style: worldStyle,
-      onEachFeature: onEachFeature,
-    }).addTo(map);
-    labelLayer.addTo(map);
+    // themeLayer = geoJSON(mapData, {
+    //   style: worldStyle,
+    //   onEachFeature: onEachFeature,
+    // }).addTo(map);
+    // labelLayer.addTo(map);
     this.setState({
       map,
       countries: mapData.features,
@@ -189,7 +235,7 @@ export class WorldMap extends Component {
           <input type="submit" value="View country details"></input>
         </form>
       </div>
-      <div style="width: 100%; height: 100%;" ref=${(ref) => (this.ref = ref)}></div> 
+      <div class="map-container" ref=${(ref) => (this.ref = ref)}></div> 
     `;
   }
 }

@@ -297,3 +297,15 @@ a:visited {
     display: block;
   }
 }
+
+.map-container {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .map-container {
+    height: calc(100% - 60px);
+  }
+}
