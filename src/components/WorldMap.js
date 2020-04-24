@@ -70,7 +70,7 @@ export class WorldMap extends Component {
         generateId: true,
       });
 
-      console.log('add layer')
+      console.log('add layer');
       map.addLayer({
         id: 'countries',
         type: 'fill',
@@ -85,7 +85,7 @@ export class WorldMap extends Component {
     });
 
     map.on('load', function () {
-      console.log('map is loaded')
+      console.log('map is loaded');
     });
 
     return map;
@@ -100,9 +100,6 @@ export class WorldMap extends Component {
 
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData] = await Promise.all([fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json())]);
-
-
-
 
     for (const feature of mapData.features) {
       feature.properties.color = worldStyle(feature);
