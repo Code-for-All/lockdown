@@ -144,7 +144,7 @@ export class WorldMap extends Component {
     });
 
     return map;
-  };
+  }
 
   async componentDidMount() {
     dialogService.addEventListener('close', (e) => {
