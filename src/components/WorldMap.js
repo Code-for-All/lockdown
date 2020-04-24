@@ -71,7 +71,7 @@ export class WorldMap extends Component {
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
-      style: 'mapbox://styles/mapbox/light-v10',
+      style: 'mapbox://styles/mapbox/light-v10?optimize=true',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
     });
