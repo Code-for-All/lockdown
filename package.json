@@ -4,8 +4,7 @@
   "scripts": {
     "start": "es-dev-server --app-index index.html --watch --open --node-resolve",
     "build": "rimraf build && rollup -c rollup.config.js",
-    "start:build": "npm run build && es-dev-server --root-dir build --compatibility none --open",
-    "start:build:skip": "es-dev-server --root-dir build --compatibility none --open",
+    "start:build": "es-dev-server --root-dir build --compatibility none --open",
     "prepare-pwa-assets": "./node_modules/.bin/pwa-asset-generator Assets/logo.png src/assets/pwa --manifest manifest.json --index index.html && ./node_modules/.bin/pwa-asset-generator Assets/logo-dark.png src/assets/pwa --dark-mode --background '#303136' --splash-only --index index.html && npm run format:index",
     "lint": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --check",
     "format": "prettier \"src/**/*.{js,jsx,css,md}\" \"package.json\" --write && npm run format:index",
