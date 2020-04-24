@@ -27,7 +27,7 @@ export class WorldMap extends Component {
     this.state = {
       lng: 0,
       lat: 0,
-      zoom: 2
+      zoom: 2,
     };
   }
   async componentDidMount() {
@@ -40,9 +40,7 @@ export class WorldMap extends Component {
     // const lockdowns = await lockdownsService.getLockdowns();
 
     // the world map needs a large data source, lazily fetch them in parallel
-    const [mapData] = await Promise.all([
-      fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json())
-    ]);
+    const [mapData] = await Promise.all([fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json())]);
     // const { Map, Browser, geoJSON, layerGroup, tileLayer } = leaflet;
 
     // const map = new Map(this.ref, {
@@ -58,10 +56,10 @@ export class WorldMap extends Component {
       container: this.ref,
       style: 'mapbox://styles/mapbox/light-v10',
       center: [this.state.lng, this.state.lat],
-      zoom: this.state.zoom
+      zoom: this.state.zoom,
     });
 
-    map.on('load', function() {
+    map.on('load', function () {
       for (const feature of mapData.features) {
         feature.properties.color = worldStyle(feature);
       }
@@ -74,19 +72,17 @@ export class WorldMap extends Component {
           layout: {},
           paint: {
             'fill-color': ['get', 'color'],
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4]
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
           },
-          filter: ['has', 'color']
+          filter: ['has', 'color'],
         });
-      })
+      });
 
       map.addSource('countries', {
         type: 'geojson',
         data: mapData,
-        generateId: true
+        generateId: true,
       });
-
-
     });
 
     // let themeLayer;
@@ -129,8 +125,6 @@ export class WorldMap extends Component {
     //   attribution:
     //     '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     // }).addTo(map);
-
-
 
     function worldStyle(e) {
       let value;
