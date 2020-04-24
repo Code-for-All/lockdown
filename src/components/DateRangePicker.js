@@ -175,9 +175,7 @@ class Dialog extends Component {
         let days = this.getMonthData(firstDay,month);
         let prevMonths = allMonthsDate;
         prevMonths[currentMonth] = days;
-        console.log(days);
         this.setState({days,allMonthsDate:prevMonths},this.fillAllMonths);
-        console.log(this.state.allMonthsDate.length)
     }
     getMonthData(firstDay,month){
         let totalDays = month.getDate();
@@ -228,8 +226,6 @@ class Dialog extends Component {
             prevData[this.state.lastSelection[0]][this.state.lastSelection[1]].selected = false;
         }
         dayData.selected = true;
-        console.log(dayData);
-        console.log(this.state.allMonthsDate[3])
         prevData[week][day] = dayData;
         this.props.onSelect(new Date(this.state.currentYear,this.state.currentMonth,dayData.day));
         this.setState({
