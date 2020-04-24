@@ -131,7 +131,21 @@ const styles = css`
     }
 `;
 
-
+const overlay = css`
+    &{
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        z-index: 99998;
+        top: 0px;
+        left: 0px;
+        background-color: rgba(40, 40, 40,0.8);
+        display: none;
+        &.show{
+            display: block;
+        }
+    }
+`;
 
 
 
@@ -242,6 +256,7 @@ class Dialog extends Component {
     }
     render(_) {
         return html`
+            <div class="overlay ${overlay} ${this.props.show ? 'show' : ''}" onClick=${this.props.close}></div>
             <div class="calendar ${styles} ${this.props.show ? 'show' : ''} ${this.props.customClass}">
                 <div class="calendar actions">
                     <span onClick=${()=>this.changeMonth(false)}>
