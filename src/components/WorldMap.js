@@ -19,6 +19,26 @@ const selectStyles = css`
   }
 `;
 
+function worldStyle(e) {
+  let value;
+  switch (e.properties.lockdown_status) {
+    case '1':
+      value = '#9fc184';
+      break;
+    case '2':
+      value = '#769de2';
+      break;
+    case '3':
+      value = '#d36d6b';
+      break;
+    case '4':
+      value = '#ebb577';
+      break;
+    default:
+      value = '#828282';
+  }
+}
+
 export class WorldMap extends Component {
   constructor() {
     super();
@@ -30,27 +50,8 @@ export class WorldMap extends Component {
       zoom: 2,
     };
   }
-  async componentDidMount() {
-    dialogService.addEventListener('close', (e) => {
-      if (e.detail.countryDialogClosed) {
-        form.focus();
-      }
-    });
 
-    // const lockdowns = await lockdownsService.getLockdowns();
-
-    // the world map needs a large data source, lazily fetch them in parallel
-    const [mapData] = await Promise.all([fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json())]);
-    // const { Map, Browser, geoJSON, layerGroup, tileLayer } = leaflet;
-
-    // const map = new Map(this.ref, {
-    //   center: [0, 0],
-    //   zoom: 3,
-    //   minZoom: 2,
-    //   maxZoom: 18,
-    //   zoomControl: false,
-    // });
-
+  initMap = (mapData) => {
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
@@ -59,34 +60,55 @@ export class WorldMap extends Component {
       zoom: this.state.zoom,
     });
 
-    map.on('load', function () {
-      for (const feature of mapData.features) {
-        feature.properties.color = worldStyle(feature);
-      }
+    window.map = map;
 
-      map.on('style.load', () => {
-        map.addLayer({
-          id: 'countries',
-          type: 'fill',
-          source: 'countries',
-          layout: {},
-          paint: {
-            'fill-color': ['get', 'color'],
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
-          },
-          filter: ['has', 'color'],
-        });
-      });
-
+    map.on('style.load', () => {
+      console.log('add source');
       map.addSource('countries', {
         type: 'geojson',
         data: mapData,
         generateId: true,
       });
+
+      console.log('add layer')
+      map.addLayer({
+        id: 'countries',
+        type: 'fill',
+        source: 'countries',
+        layout: {},
+        paint: {
+          'fill-color': ['get', 'color'],
+          'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
+        },
+        filter: ['has', 'color'],
+      });
     });
 
-    // let themeLayer;
-    // let labelLayer = layerGroup();
+    map.on('load', function () {
+      console.log('map is loaded')
+    });
+
+    return map;
+  };
+
+  async componentDidMount() {
+    dialogService.addEventListener('close', (e) => {
+      if (e.detail.countryDialogClosed) {
+        form.focus();
+      }
+    });
+
+    // the world map needs a large data source, lazily fetch them in parallel
+    const [mapData] = await Promise.all([fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json())]);
+
+
+
+
+    for (const feature of mapData.features) {
+      feature.properties.color = worldStyle(feature);
+    }
+
+    const map = this.initMap(mapData);
 
     function onFeatureClicked(e) {
       const layer = e.target;
@@ -119,58 +141,6 @@ export class WorldMap extends Component {
       });
     }
 
-    // tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=' + mapbox_token, {
-    //   tileSize: 512,
-    //   zoomOffset: -1,
-    //   attribution:
-    //     '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    // }).addTo(map);
-
-    function worldStyle(e) {
-      let value;
-      switch (e.properties.lockdown_status) {
-        case '1':
-          value = '#9fc184';
-          break;
-        case '2':
-          value = '#769de2';
-          break;
-        case '3':
-          value = '#d36d6b';
-          break;
-        case '4':
-          value = '#ebb577';
-          break;
-        default:
-          value = '#828282';
-      }
-
-      let lineOpacity;
-      if (!navigator.onLine) {
-        lineOpacity = 1;
-      } else {
-        lineOpacity = 0.1;
-      }
-
-      const style = {
-        weight: 1,
-        opacity: lineOpacity,
-        color: '#555',
-        fillOpacity: 0,
-      };
-
-      if (value) {
-        style.fillColor = value;
-        style.fillOpacity = 0.5;
-      }
-      return style;
-    }
-
-    // themeLayer = geoJSON(mapData, {
-    //   style: worldStyle,
-    //   onEachFeature: onEachFeature,
-    // }).addTo(map);
-    // labelLayer.addTo(map);
     this.setState({
       map,
       countries: mapData.features,
