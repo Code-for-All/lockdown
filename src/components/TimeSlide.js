@@ -286,6 +286,7 @@ const sliderSelector = css`
     width: fit-content;
     transform: translate(-24.5%, 0);
     background: #ffffff;
+    font-size: 1rem;
     & span {
       border: 2px solid #8c8c8c;
       border-radius: 7px;
