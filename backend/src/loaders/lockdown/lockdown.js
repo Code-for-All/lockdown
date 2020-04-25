@@ -9,6 +9,7 @@ import moment from '../../utils/moment';
 import { ENTRY_COLUMN_LENGTH, parseEntry } from './parsers/lockdownParser';
 import { getSnapshots } from './snapshot/processor';
 import { GLOBAL_COUNTRY_STATUS } from '../../../../shared/types';
+import { connect } from '../../repositories';
 
 // Number of territories to query through batchGet at a time
 const BATCH_SIZE = 25;
@@ -75,6 +76,8 @@ export async function batchGetTerritoriesEntryData(territories) {
       let snapshots = getSnapshots(entries, currentDate, currentDatePlusOne);
       let currentSnapshot = snapshots[0];
 
+      let database = await connect();
+      database.snapshotRepository.insert(currentSnapshot);
 
       result.push({
         isoCode: batch[i]['iso2'],
