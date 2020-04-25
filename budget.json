@@ -14,17 +14,17 @@
     "resourceSizes": [
       {
         "resourceType": "script",
-        "budget": 125
+        "budget": 230
       },
       {
         "resourceType": "total",
-        "budget": 400
+        "budget": 700
       }
     ],
     "resourceCounts": [
       {
         "resourceType": "third-party",
-        "budget": 10
+        "budget": 17
       }
     ]
   }
