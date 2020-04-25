@@ -88,7 +88,7 @@ export class WorldMap extends Component {
 
       map.addSource('admin-0', {
         type: 'vector',
-        url: 'mapbox://mapbox.boundaries-adm0-v3'
+        url: 'mapbox://mapbox.boundaries-adm0-v3',
       });
 
       map.addLayer(
@@ -97,15 +97,11 @@ export class WorldMap extends Component {
           type: 'fill',
           source: 'admin-0',
           'source-layer': 'boundaries_admin_0',
-          filter: [
-            "any",
-            ["==", "all", ["get", "worldview"]],
-            ["in", "US", ["get", "worldview"]]
-          ],
+          filter: ['any', ['==', 'all', ['get', 'worldview']], ['in', 'US', ['get', 'worldview']]],
           paint: {
             'fill-color': '#e03c3c',
             'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
-          }
+          },
         },
         // This final argument indicates that we want to add the Boundaries layer
         // before the `waterway-label` layer that is in the map from the Mapbox
@@ -131,7 +127,7 @@ export class WorldMap extends Component {
 
       map.on('mousemove', 'admin-0-fill', function (e) {
         var features = map.queryRenderedFeatures(e.point, {
-          layers: ['admin-0-fill']
+          layers: ['admin-0-fill'],
         });
 
         if (e.features.length > 0) {
@@ -139,7 +135,7 @@ export class WorldMap extends Component {
             map.setFeatureState(
               {
                 source: 'admin-0',
-                'sourceLayer': 'boundaries_admin_0',
+                sourceLayer: 'boundaries_admin_0',
                 id: hoveredStateId,
               },
               {
@@ -153,7 +149,7 @@ export class WorldMap extends Component {
           map.setFeatureState(
             {
               source: 'admin-0',
-              'sourceLayer': 'boundaries_admin_0',
+              sourceLayer: 'boundaries_admin_0',
               id: hoveredStateId,
             },
             {
@@ -163,9 +159,8 @@ export class WorldMap extends Component {
         }
       });
       map.on('click', 'admin-0-fill', function (e) {
-
         var features = map.queryRenderedFeatures(e.point, {
-          layers: ['admin-0-fill']
+          layers: ['admin-0-fill'],
         });
 
         console.log('features', features[0]);
@@ -173,9 +168,6 @@ export class WorldMap extends Component {
         // router.setSearchParam('country', e.features[0].properties.NAME);
         // router.setSearchParam('iso2', e.features[0].properties.iso2);
       });
-
-
-
     });
 
     map.on('load', function () {
