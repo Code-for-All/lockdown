@@ -78,9 +78,12 @@ export class WorldMap extends Component {
 
     window.map = map;
 
-    const localData = mapData.features.map((f) => {
-      return { ISO: f.properties.iso2, lockdown_status: f.properties.lockdown_status, name: f.properties.NAME };
-    });
+    // we dont need to remap small mapData
+    // const localData = mapData.features.map((f) => {
+    //   return { ISO: f.properties.iso2, lockdown_status: f.properties.lockdown_status, name: f.properties.NAME };
+    // });
+
+    const localData = mapData;
 
     map.on('style.load', () => {
       let hoveredStateId = null;
@@ -123,7 +126,7 @@ export class WorldMap extends Component {
           layers: ['admin-0-fill'],
         });
 
-        console.log('features', features[0]);
+        // console.log('features', features[0]);
         // map.fitBounds(layer.getBounds());
         router.setSearchParam('country', features[0].state.name);
         router.setSearchParam('iso2', features[0].properties.iso_3166_1);
@@ -251,12 +254,13 @@ export class WorldMap extends Component {
       fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
     ]);
 
-    for (const feature of mapData.features) {
-      feature.properties.color = worldStyle(feature);
-    }
+    // no need for small worldmap
+    // for (const feature of mapData.features) {
+    //   feature.properties.color = worldStyle(feature);
+    // }
 
     this.setState({
-      countries: mapData.features,
+      countries: mapData,
     });
 
     await this.initMap(mapData, lookupTable);
@@ -308,9 +312,7 @@ export class WorldMap extends Component {
         <form id="form" tabindex="-1" onSubmit=${this.__handleSelect}>
           <label for="countries">Choose a country:</label>
           <select ref=${(ref) => (this.selectRef = ref)} id="countries">
-            ${this.state.countries?.map(
-              (country) => html`<option value="${country.properties.iso2},${country.properties.NAME}">${country.properties.NAME}</option>`
-            )}
+            ${this.state.countries?.map((country) => html`<option value="${country.ISO},${country.name}">${country.name}</option>`)}
           </select>
           <input type="submit" value="View country details"></input>
         </form>
