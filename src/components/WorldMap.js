@@ -79,7 +79,7 @@ export class WorldMap extends Component {
     window.map = map;
 
     const localData = mapData.features.map((f) => {
-      return { ISO: f.properties.iso2, lockdown_status: f.properties.lockdown_status };
+      return { ISO: f.properties.iso2, lockdown_status: f.properties.lockdown_status, name: f.properties.NAME };
     });
 
     map.on('style.load', () => {
@@ -119,14 +119,14 @@ export class WorldMap extends Component {
         }
       });
       map.on('click', 'admin-0-fill', function (e) {
-        var features = map.queryRenderedFeatures(e.point, {
+        const features = map.queryRenderedFeatures(e.point, {
           layers: ['admin-0-fill'],
         });
 
         console.log('features', features[0]);
         // map.fitBounds(layer.getBounds());
-        // router.setSearchParam('country', e.features[0].properties.NAME);
-        // router.setSearchParam('iso2', e.features[0].properties.iso2);
+        router.setSearchParam('country', features[0].state.name);
+        router.setSearchParam('iso2', features[0].properties.iso_3166_1);
       });
     });
 
@@ -153,7 +153,9 @@ export class WorldMap extends Component {
             for (let feature in lookupTable[layer].data[worldview]) {
               let featureData = lookupTable[layer].data[worldview][feature];
 
-              lookupData[featureData['unit_code']] = featureData;
+              if (worldview === 'all' || worldview === 'US') {
+                lookupData[featureData['unit_code']] = featureData;
+              }
             }
         return lookupData;
       }
@@ -206,6 +208,7 @@ export class WorldMap extends Component {
             },
             {
               kind: row.lockdown_status,
+              name: row.name,
             }
           );
         });
