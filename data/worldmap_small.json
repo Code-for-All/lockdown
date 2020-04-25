@@ -1,0 +1,1262 @@
+[
+  {
+    "ISO": "AF",
+    "lockdown_status": null,
+    "name": "Afghanistan"
+  },
+  {
+    "ISO": "AO",
+    "lockdown_status": null,
+    "name": "Angola"
+  },
+  {
+    "ISO": "AL",
+    "lockdown_status": null,
+    "name": "Albania"
+  },
+  {
+    "ISO": "AE",
+    "lockdown_status": null,
+    "name": "United Arab Emirates"
+  },
+  {
+    "ISO": "AR",
+    "lockdown_status": null,
+    "name": "Argentina"
+  },
+  {
+    "ISO": "AM",
+    "lockdown_status": null,
+    "name": "Armenia"
+  },
+  {
+    "ISO": "AQ",
+    "lockdown_status": null,
+    "name": "Antarctica"
+  },
+  {
+    "ISO": "TF",
+    "lockdown_status": null,
+    "name": "Fr. S. Antarctic Lands"
+  },
+  {
+    "ISO": "AU",
+    "lockdown_status": null,
+    "name": "Australia"
+  },
+  {
+    "ISO": "AT",
+    "lockdown_status": null,
+    "name": "Austria"
+  },
+  {
+    "ISO": "AZ",
+    "lockdown_status": null,
+    "name": "Azerbaijan"
+  },
+  {
+    "ISO": "BI",
+    "lockdown_status": null,
+    "name": "Burundi"
+  },
+  {
+    "ISO": "BE",
+    "lockdown_status": null,
+    "name": "Belgium"
+  },
+  {
+    "ISO": "BJ",
+    "lockdown_status": null,
+    "name": "Benin"
+  },
+  {
+    "ISO": "BF",
+    "lockdown_status": null,
+    "name": "Burkina Faso"
+  },
+  {
+    "ISO": "BD",
+    "lockdown_status": null,
+    "name": "Bangladesh"
+  },
+  {
+    "ISO": "BG",
+    "lockdown_status": null,
+    "name": "Bulgaria"
+  },
+  {
+    "ISO": "BS",
+    "lockdown_status": null,
+    "name": "Bahamas"
+  },
+  {
+    "ISO": "BA",
+    "lockdown_status": null,
+    "name": "Bosnia and Herz."
+  },
+  {
+    "ISO": "BY",
+    "lockdown_status": null,
+    "name": "Belarus"
+  },
+  {
+    "ISO": "BZ",
+    "lockdown_status": null,
+    "name": "Belize"
+  },
+  {
+    "ISO": "BO",
+    "lockdown_status": null,
+    "name": "Bolivia"
+  },
+  {
+    "ISO": "BR",
+    "lockdown_status": null,
+    "name": "Brazil"
+  },
+  {
+    "ISO": "BN",
+    "lockdown_status": null,
+    "name": "Brunei"
+  },
+  {
+    "ISO": "BT",
+    "lockdown_status": null,
+    "name": "Bhutan"
+  },
+  {
+    "ISO": "BW",
+    "lockdown_status": null,
+    "name": "Botswana"
+  },
+  {
+    "ISO": "CF",
+    "lockdown_status": null,
+    "name": "Central African Rep."
+  },
+  {
+    "ISO": "CA",
+    "lockdown_status": null,
+    "name": "Canada"
+  },
+  {
+    "ISO": "CH",
+    "lockdown_status": null,
+    "name": "Switzerland"
+  },
+  {
+    "ISO": "CL",
+    "lockdown_status": null,
+    "name": "Chile"
+  },
+  {
+    "ISO": "CN",
+    "lockdown_status": null,
+    "name": "China"
+  },
+  {
+    "ISO": "CI",
+    "lockdown_status": null,
+    "name": "Côte d'Ivoire"
+  },
+  {
+    "ISO": "CM",
+    "lockdown_status": null,
+    "name": "Cameroon"
+  },
+  {
+    "ISO": "CD",
+    "lockdown_status": null,
+    "name": "Dem. Rep. Congo"
+  },
+  {
+    "ISO": "CG",
+    "lockdown_status": null,
+    "name": "Congo"
+  },
+  {
+    "ISO": "CO",
+    "lockdown_status": null,
+    "name": "Colombia"
+  },
+  {
+    "ISO": "CR",
+    "lockdown_status": null,
+    "name": "Costa Rica"
+  },
+  {
+    "ISO": "CU",
+    "lockdown_status": null,
+    "name": "Cuba"
+  },
+  {
+    "ISO": "CY",
+    "lockdown_status": null,
+    "name": "N. Cyprus"
+  },
+  {
+    "ISO": "CY",
+    "lockdown_status": null,
+    "name": "Cyprus"
+  },
+  {
+    "ISO": "CZ",
+    "lockdown_status": null,
+    "name": "Czechia"
+  },
+  {
+    "ISO": "DE",
+    "lockdown_status": null,
+    "name": "Germany"
+  },
+  {
+    "ISO": "DJ",
+    "lockdown_status": null,
+    "name": "Djibouti"
+  },
+  {
+    "ISO": "DK",
+    "lockdown_status": null,
+    "name": "Denmark"
+  },
+  {
+    "ISO": "DO",
+    "lockdown_status": null,
+    "name": "Dominican Rep."
+  },
+  {
+    "ISO": "DZ",
+    "lockdown_status": null,
+    "name": "Algeria"
+  },
+  {
+    "ISO": "EC",
+    "lockdown_status": null,
+    "name": "Ecuador"
+  },
+  {
+    "ISO": "EG",
+    "lockdown_status": null,
+    "name": "Egypt"
+  },
+  {
+    "ISO": "ER",
+    "lockdown_status": null,
+    "name": "Eritrea"
+  },
+  {
+    "ISO": "ES",
+    "lockdown_status": null,
+    "name": "Spain"
+  },
+  {
+    "ISO": "EE",
+    "lockdown_status": null,
+    "name": "Estonia"
+  },
+  {
+    "ISO": "ET",
+    "lockdown_status": null,
+    "name": "Ethiopia"
+  },
+  {
+    "ISO": "FI",
+    "lockdown_status": null,
+    "name": "Finland"
+  },
+  {
+    "ISO": "FJ",
+    "lockdown_status": null,
+    "name": "Fiji"
+  },
+  {
+    "ISO": "FK",
+    "lockdown_status": null,
+    "name": "Falkland Is."
+  },
+  {
+    "ISO": "FR",
+    "lockdown_status": null,
+    "name": "France"
+  },
+  {
+    "ISO": "GA",
+    "lockdown_status": null,
+    "name": "Gabon"
+  },
+  {
+    "ISO": "GB",
+    "lockdown_status": null,
+    "name": "United Kingdom"
+  },
+  {
+    "ISO": "GE",
+    "lockdown_status": null,
+    "name": "Georgia"
+  },
+  {
+    "ISO": "GH",
+    "lockdown_status": null,
+    "name": "Ghana"
+  },
+  {
+    "ISO": "GN",
+    "lockdown_status": null,
+    "name": "Guinea"
+  },
+  {
+    "ISO": "GM",
+    "lockdown_status": null,
+    "name": "Gambia"
+  },
+  {
+    "ISO": "GW",
+    "lockdown_status": null,
+    "name": "Guinea-Bissau"
+  },
+  {
+    "ISO": "GQ",
+    "lockdown_status": null,
+    "name": "Equatorial Guinea"
+  },
+  {
+    "ISO": "GR",
+    "lockdown_status": null,
+    "name": "Greece"
+  },
+  {
+    "ISO": "GL",
+    "lockdown_status": null,
+    "name": "Greenland"
+  },
+  {
+    "ISO": "GT",
+    "lockdown_status": null,
+    "name": "Guatemala"
+  },
+  {
+    "ISO": "GY",
+    "lockdown_status": null,
+    "name": "Guyana"
+  },
+  {
+    "ISO": "HN",
+    "lockdown_status": null,
+    "name": "Honduras"
+  },
+  {
+    "ISO": "HR",
+    "lockdown_status": null,
+    "name": "Croatia"
+  },
+  {
+    "ISO": "HT",
+    "lockdown_status": null,
+    "name": "Haiti"
+  },
+  {
+    "ISO": "HU",
+    "lockdown_status": null,
+    "name": "Hungary"
+  },
+  {
+    "ISO": "ID",
+    "lockdown_status": null,
+    "name": "Indonesia"
+  },
+  {
+    "ISO": "IN",
+    "lockdown_status": "1",
+    "name": "India"
+  },
+  {
+    "ISO": "IE",
+    "lockdown_status": null,
+    "name": "Ireland"
+  },
+  {
+    "ISO": "IR",
+    "lockdown_status": null,
+    "name": "Iran"
+  },
+  {
+    "ISO": "IQ",
+    "lockdown_status": null,
+    "name": "Iraq"
+  },
+  {
+    "ISO": "IS",
+    "lockdown_status": null,
+    "name": "Iceland"
+  },
+  {
+    "ISO": "IL",
+    "lockdown_status": null,
+    "name": "Israel"
+  },
+  {
+    "ISO": "IT",
+    "lockdown_status": null,
+    "name": "Italy"
+  },
+  {
+    "ISO": "JM",
+    "lockdown_status": null,
+    "name": "Jamaica"
+  },
+  {
+    "ISO": "JO",
+    "lockdown_status": null,
+    "name": "Jordan"
+  },
+  {
+    "ISO": "JP",
+    "lockdown_status": null,
+    "name": "Japan"
+  },
+  {
+    "ISO": "KZ",
+    "lockdown_status": null,
+    "name": "Kazakhstan"
+  },
+  {
+    "ISO": "KE",
+    "lockdown_status": null,
+    "name": "Kenya"
+  },
+  {
+    "ISO": "KG",
+    "lockdown_status": null,
+    "name": "Kyrgyzstan"
+  },
+  {
+    "ISO": "KH",
+    "lockdown_status": "3",
+    "name": "Cambodia"
+  },
+  {
+    "ISO": "KR",
+    "lockdown_status": null,
+    "name": "South Korea"
+  },
+  {
+    "ISO": "XK",
+    "lockdown_status": null,
+    "name": "Kosovo"
+  },
+  {
+    "ISO": "KW",
+    "lockdown_status": null,
+    "name": "Kuwait"
+  },
+  {
+    "ISO": "LA",
+    "lockdown_status": null,
+    "name": "Laos"
+  },
+  {
+    "ISO": "LB",
+    "lockdown_status": null,
+    "name": "Lebanon"
+  },
+  {
+    "ISO": "LR",
+    "lockdown_status": null,
+    "name": "Liberia"
+  },
+  {
+    "ISO": "LY",
+    "lockdown_status": null,
+    "name": "Libya"
+  },
+  {
+    "ISO": "LK",
+    "lockdown_status": null,
+    "name": "Sri Lanka"
+  },
+  {
+    "ISO": "LS",
+    "lockdown_status": null,
+    "name": "Lesotho"
+  },
+  {
+    "ISO": "LT",
+    "lockdown_status": null,
+    "name": "Lithuania"
+  },
+  {
+    "ISO": "LU",
+    "lockdown_status": "1",
+    "name": "Luxembourg"
+  },
+  {
+    "ISO": "LV",
+    "lockdown_status": null,
+    "name": "Latvia"
+  },
+  {
+    "ISO": "MA",
+    "lockdown_status": null,
+    "name": "Morocco"
+  },
+  {
+    "ISO": "MD",
+    "lockdown_status": null,
+    "name": "Moldova"
+  },
+  {
+    "ISO": "MG",
+    "lockdown_status": null,
+    "name": "Madagascar"
+  },
+  {
+    "ISO": "MX",
+    "lockdown_status": null,
+    "name": "Mexico"
+  },
+  {
+    "ISO": "MK",
+    "lockdown_status": null,
+    "name": "Macedonia"
+  },
+  {
+    "ISO": "ML",
+    "lockdown_status": null,
+    "name": "Mali"
+  },
+  {
+    "ISO": "MM",
+    "lockdown_status": null,
+    "name": "Myanmar"
+  },
+  {
+    "ISO": "ME",
+    "lockdown_status": null,
+    "name": "Montenegro"
+  },
+  {
+    "ISO": "MN",
+    "lockdown_status": null,
+    "name": "Mongolia"
+  },
+  {
+    "ISO": "MZ",
+    "lockdown_status": null,
+    "name": "Mozambique"
+  },
+  {
+    "ISO": "MR",
+    "lockdown_status": null,
+    "name": "Mauritania"
+  },
+  {
+    "ISO": "MW",
+    "lockdown_status": null,
+    "name": "Malawi"
+  },
+  {
+    "ISO": "MY",
+    "lockdown_status": null,
+    "name": "Malaysia"
+  },
+  {
+    "ISO": "NA",
+    "lockdown_status": null,
+    "name": "Namibia"
+  },
+  {
+    "ISO": "NC",
+    "lockdown_status": null,
+    "name": "New Caledonia"
+  },
+  {
+    "ISO": "NE",
+    "lockdown_status": null,
+    "name": "Niger"
+  },
+  {
+    "ISO": "NG",
+    "lockdown_status": null,
+    "name": "Nigeria"
+  },
+  {
+    "ISO": "NI",
+    "lockdown_status": null,
+    "name": "Nicaragua"
+  },
+  {
+    "ISO": "NL",
+    "lockdown_status": null,
+    "name": "Netherlands"
+  },
+  {
+    "ISO": "NO",
+    "lockdown_status": null,
+    "name": "Norway"
+  },
+  {
+    "ISO": "NP",
+    "lockdown_status": null,
+    "name": "Nepal"
+  },
+  {
+    "ISO": "NZ",
+    "lockdown_status": null,
+    "name": "New Zealand"
+  },
+  {
+    "ISO": "OM",
+    "lockdown_status": null,
+    "name": "Oman"
+  },
+  {
+    "ISO": "PK",
+    "lockdown_status": null,
+    "name": "Pakistan"
+  },
+  {
+    "ISO": "PA",
+    "lockdown_status": null,
+    "name": "Panama"
+  },
+  {
+    "ISO": "PE",
+    "lockdown_status": null,
+    "name": "Peru"
+  },
+  {
+    "ISO": "PH",
+    "lockdown_status": "1",
+    "name": "Philippines"
+  },
+  {
+    "ISO": "PG",
+    "lockdown_status": null,
+    "name": "Papua New Guinea"
+  },
+  {
+    "ISO": "PL",
+    "lockdown_status": null,
+    "name": "Poland"
+  },
+  {
+    "ISO": "PR",
+    "lockdown_status": null,
+    "name": "Puerto Rico"
+  },
+  {
+    "ISO": "KP",
+    "lockdown_status": null,
+    "name": "North Korea"
+  },
+  {
+    "ISO": "PT",
+    "lockdown_status": null,
+    "name": "Portugal"
+  },
+  {
+    "ISO": "PY",
+    "lockdown_status": null,
+    "name": "Paraguay"
+  },
+  {
+    "ISO": "PS",
+    "lockdown_status": null,
+    "name": "Palestine"
+  },
+  {
+    "ISO": "QA",
+    "lockdown_status": null,
+    "name": "Qatar"
+  },
+  {
+    "ISO": "RO",
+    "lockdown_status": null,
+    "name": "Romania"
+  },
+  {
+    "ISO": "RU",
+    "lockdown_status": null,
+    "name": "Russia"
+  },
+  {
+    "ISO": "RW",
+    "lockdown_status": null,
+    "name": "Rwanda"
+  },
+  {
+    "ISO": "EH",
+    "lockdown_status": null,
+    "name": "W. Sahara"
+  },
+  {
+    "ISO": "SA",
+    "lockdown_status": null,
+    "name": "Saudi Arabia"
+  },
+  {
+    "ISO": "SD",
+    "lockdown_status": null,
+    "name": "Sudan"
+  },
+  {
+    "ISO": "SS",
+    "lockdown_status": null,
+    "name": "S. Sudan"
+  },
+  {
+    "ISO": "SN",
+    "lockdown_status": null,
+    "name": "Senegal"
+  },
+  {
+    "ISO": "SB",
+    "lockdown_status": null,
+    "name": "Solomon Is."
+  },
+  {
+    "ISO": "SL",
+    "lockdown_status": null,
+    "name": "Sierra Leone"
+  },
+  {
+    "ISO": "SV",
+    "lockdown_status": null,
+    "name": "El Salvador"
+  },
+  {
+    "ISO": "SO",
+    "lockdown_status": null,
+    "name": "Somaliland"
+  },
+  {
+    "ISO": "SO",
+    "lockdown_status": null,
+    "name": "Somalia"
+  },
+  {
+    "ISO": "RS",
+    "lockdown_status": null,
+    "name": "Serbia"
+  },
+  {
+    "ISO": "SR",
+    "lockdown_status": null,
+    "name": "Suriname"
+  },
+  {
+    "ISO": "SK",
+    "lockdown_status": null,
+    "name": "Slovakia"
+  },
+  {
+    "ISO": "SI",
+    "lockdown_status": null,
+    "name": "Slovenia"
+  },
+  {
+    "ISO": "SE",
+    "lockdown_status": null,
+    "name": "Sweden"
+  },
+  {
+    "ISO": "SZ",
+    "lockdown_status": null,
+    "name": "Eswatini"
+  },
+  {
+    "ISO": "SY",
+    "lockdown_status": null,
+    "name": "Syria"
+  },
+  {
+    "ISO": "TD",
+    "lockdown_status": null,
+    "name": "Chad"
+  },
+  {
+    "ISO": "TG",
+    "lockdown_status": null,
+    "name": "Togo"
+  },
+  {
+    "ISO": "TH",
+    "lockdown_status": "2",
+    "name": "Thailand"
+  },
+  {
+    "ISO": "TJ",
+    "lockdown_status": null,
+    "name": "Tajikistan"
+  },
+  {
+    "ISO": "TM",
+    "lockdown_status": null,
+    "name": "Turkmenistan"
+  },
+  {
+    "ISO": "TL",
+    "lockdown_status": null,
+    "name": "Timor-Leste"
+  },
+  {
+    "ISO": "TT",
+    "lockdown_status": null,
+    "name": "Trinidad and Tobago"
+  },
+  {
+    "ISO": "TN",
+    "lockdown_status": null,
+    "name": "Tunisia"
+  },
+  {
+    "ISO": "TR",
+    "lockdown_status": null,
+    "name": "Turkey"
+  },
+  {
+    "ISO": "TW",
+    "lockdown_status": null,
+    "name": "Taiwan"
+  },
+  {
+    "ISO": "TZ",
+    "lockdown_status": null,
+    "name": "Tanzania"
+  },
+  {
+    "ISO": "UG",
+    "lockdown_status": null,
+    "name": "Uganda"
+  },
+  {
+    "ISO": "UA",
+    "lockdown_status": null,
+    "name": "Ukraine"
+  },
+  {
+    "ISO": "UY",
+    "lockdown_status": null,
+    "name": "Uruguay"
+  },
+  {
+    "ISO": "US",
+    "lockdown_status": null,
+    "name": "United States of America"
+  },
+  {
+    "ISO": "UZ",
+    "lockdown_status": null,
+    "name": "Uzbekistan"
+  },
+  {
+    "ISO": "VE",
+    "lockdown_status": null,
+    "name": "Venezuela"
+  },
+  {
+    "ISO": "VN",
+    "lockdown_status": null,
+    "name": "Vietnam"
+  },
+  {
+    "ISO": "VU",
+    "lockdown_status": null,
+    "name": "Vanuatu"
+  },
+  {
+    "ISO": "YE",
+    "lockdown_status": null,
+    "name": "Yemen"
+  },
+  {
+    "ISO": "ZA",
+    "lockdown_status": "1",
+    "name": "South Africa"
+  },
+  {
+    "ISO": "ZM",
+    "lockdown_status": null,
+    "name": "Zambia"
+  },
+  {
+    "ISO": "ZW",
+    "lockdown_status": null,
+    "name": "Zimbabwe"
+  },
+  {
+    "ISO": "MV",
+    "lockdown_status": null,
+    "name": "Maldives"
+  },
+  {
+    "ISO": "AD",
+    "lockdown_status": null,
+    "name": "Andorra"
+  },
+  {
+    "ISO": "AG",
+    "lockdown_status": null,
+    "name": "Antigua and Barbuda"
+  },
+  {
+    "ISO": "AI",
+    "lockdown_status": null,
+    "name": "Anguilla"
+  },
+  {
+    "ISO": "AW",
+    "lockdown_status": null,
+    "name": "Aruba"
+  },
+  {
+    "ISO": "BH",
+    "lockdown_status": null,
+    "name": "Bahrain"
+  },
+  {
+    "ISO": "BB",
+    "lockdown_status": null,
+    "name": "Barbados"
+  },
+  {
+    "ISO": "BM",
+    "lockdown_status": null,
+    "name": "Bermuda"
+  },
+  {
+    "ISO": "CV",
+    "lockdown_status": null,
+    "name": "Cabo Verde"
+  },
+  {
+    "ISO": "KM",
+    "lockdown_status": null,
+    "name": "Comoros"
+  },
+  {
+    "ISO": "GF",
+    "lockdown_status": null,
+    "name": "Guyane"
+  },
+  {
+    "ISO": "CW",
+    "lockdown_status": null,
+    "name": "Curaçao"
+  },
+  {
+    "ISO": "DM",
+    "lockdown_status": null,
+    "name": "Dominica"
+  },
+  {
+    "ISO": "PF",
+    "lockdown_status": null,
+    "name": "French Polynesia"
+  },
+  {
+    "ISO": "GP",
+    "lockdown_status": null,
+    "name": "Guadeloupe"
+  },
+  {
+    "ISO": "GD",
+    "lockdown_status": null,
+    "name": "Grenada"
+  },
+  {
+    "ISO": "HK",
+    "lockdown_status": null,
+    "name": "Hong Kong"
+  },
+  {
+    "ISO": "KI",
+    "lockdown_status": null,
+    "name": "Kiribati"
+  },
+  {
+    "ISO": "AS",
+    "lockdown_status": null,
+    "name": "American Samoa"
+  },
+  {
+    "ISO": "BQ",
+    "lockdown_status": null,
+    "name": "Bonaire, Sint Eusatius and Saba"
+  },
+  {
+    "ISO": "BV",
+    "lockdown_status": null,
+    "name": "Bouvet Island"
+  },
+  {
+    "ISO": "IO",
+    "lockdown_status": null,
+    "name": "British Indian Ocean Territory"
+  },
+  {
+    "ISO": "KY",
+    "lockdown_status": null,
+    "name": "Cayman Islands"
+  },
+  {
+    "ISO": "CX",
+    "lockdown_status": null,
+    "name": "Christmas Island"
+  },
+  {
+    "ISO": "CC",
+    "lockdown_status": null,
+    "name": "Cocos (Keeling) Islands"
+  },
+  {
+    "ISO": "CK",
+    "lockdown_status": null,
+    "name": "Cook Islands"
+  },
+  {
+    "ISO": "FO",
+    "lockdown_status": null,
+    "name": "Faroe Islands"
+  },
+  {
+    "ISO": "GI",
+    "lockdown_status": null,
+    "name": "Gibraltar"
+  },
+  {
+    "ISO": "MT",
+    "lockdown_status": null,
+    "name": "Malta"
+  },
+  {
+    "ISO": "MQ",
+    "lockdown_status": null,
+    "name": "Martinique"
+  },
+  {
+    "ISO": "LC",
+    "lockdown_status": null,
+    "name": "Saint Lucia"
+  },
+  {
+    "ISO": "VC",
+    "lockdown_status": null,
+    "name": "Saint Vincent and the Grenadines"
+  },
+  {
+    "ISO": "KN",
+    "lockdown_status": null,
+    "name": "Saint Kitts and Nevis"
+  },
+  {
+    "ISO": "SX",
+    "lockdown_status": null,
+    "name": "Sint Maarten"
+  },
+  {
+    "ISO": "MF",
+    "lockdown_status": null,
+    "name": "Saint Martin"
+  },
+  {
+    "ISO": "VG",
+    "lockdown_status": null,
+    "name": "British Virgin Islands"
+  },
+  {
+    "ISO": "VI",
+    "lockdown_status": null,
+    "name": "Virgin Islands"
+  },
+  {
+    "ISO": "GU",
+    "lockdown_status": null,
+    "name": "Guam"
+  },
+  {
+    "ISO": "TV",
+    "lockdown_status": null,
+    "name": "Tuvalu"
+  },
+  {
+    "ISO": "TC",
+    "lockdown_status": null,
+    "name": "Turks and Caicos Islands"
+  },
+  {
+    "ISO": "WS",
+    "lockdown_status": null,
+    "name": "Samoa"
+  },
+  {
+    "ISO": "TO",
+    "lockdown_status": null,
+    "name": "Tonga"
+  },
+  {
+    "ISO": "TK",
+    "lockdown_status": null,
+    "name": "Tokelau"
+  },
+  {
+    "ISO": "SC",
+    "lockdown_status": null,
+    "name": "Seychelles"
+  },
+  {
+    "ISO": "SG",
+    "lockdown_status": null,
+    "name": "Singapore"
+  },
+  {
+    "ISO": "MS",
+    "lockdown_status": null,
+    "name": "Montserat"
+  },
+  {
+    "ISO": "PN",
+    "lockdown_status": null,
+    "name": "Pitcairn"
+  },
+  {
+    "ISO": "GG",
+    "lockdown_status": null,
+    "name": "Guernsey"
+  },
+  {
+    "ISO": "JE",
+    "lockdown_status": null,
+    "name": "Jersey"
+  },
+  {
+    "ISO": "IM",
+    "lockdown_status": null,
+    "name": "Isle of Man"
+  },
+  {
+    "ISO": "MH",
+    "lockdown_status": null,
+    "name": "Marshall Islands"
+  },
+  {
+    "ISO": "MU",
+    "lockdown_status": null,
+    "name": "Mauritius"
+  },
+  {
+    "ISO": "RE",
+    "lockdown_status": null,
+    "name": "Réunion"
+  },
+  {
+    "ISO": "NU",
+    "lockdown_status": null,
+    "name": "Niue"
+  },
+  {
+    "ISO": "FM",
+    "lockdown_status": null,
+    "name": "Micronesia"
+  },
+  {
+    "ISO": "MO",
+    "lockdown_status": null,
+    "name": "Macao"
+  },
+  {
+    "ISO": "YT",
+    "lockdown_status": null,
+    "name": "Mayotte"
+  },
+  {
+    "ISO": "HM",
+    "lockdown_status": null,
+    "name": "Heard Island and McDonald Islands"
+  },
+  {
+    "ISO": "VA",
+    "lockdown_status": null,
+    "name": "The Holy See"
+  },
+  {
+    "ISO": "LI",
+    "lockdown_status": null,
+    "name": "Liechtenstein"
+  },
+  {
+    "ISO": "MC",
+    "lockdown_status": null,
+    "name": "Monaco"
+  },
+  {
+    "ISO": "NR",
+    "lockdown_status": null,
+    "name": "Nauru"
+  },
+  {
+    "ISO": "NF",
+    "lockdown_status": null,
+    "name": "Norfolk Island"
+  },
+  {
+    "ISO": "MP",
+    "lockdown_status": null,
+    "name": "Northern Mariana Islands"
+  },
+  {
+    "ISO": "PW",
+    "lockdown_status": "2",
+    "name": "Palau"
+  },
+  {
+    "ISO": "BL",
+    "lockdown_status": null,
+    "name": "Saint Barthélemy"
+  },
+  {
+    "ISO": "SH",
+    "lockdown_status": null,
+    "name": "Saint Helena, Ascension and Tristan da Cunha"
+  },
+  {
+    "ISO": "PM",
+    "lockdown_status": null,
+    "name": "Saint Pierre and Miquelon"
+  },
+  {
+    "ISO": "SM",
+    "lockdown_status": null,
+    "name": "San Marino"
+  },
+  {
+    "ISO": "ST",
+    "lockdown_status": null,
+    "name": "Sao Tome and Principe"
+  },
+  {
+    "ISO": "GS",
+    "lockdown_status": null,
+    "name": "South Georgia and the South Sandwich Islands"
+  },
+  {
+    "ISO": "SJ",
+    "lockdown_status": null,
+    "name": "Svalbard and Jan Mayen"
+  },
+  {
+    "ISO": "UM",
+    "lockdown_status": null,
+    "name": "Unites States Minor Outlying Islands"
+  },
+  {
+    "ISO": "WF",
+    "lockdown_status": null,
+    "name": "Wallis and Futuna"
+  },
+  {
+    "ISO": "AX",
+    "lockdown_status": null,
+    "name": "Åland Island"
+  }
+]

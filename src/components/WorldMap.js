@@ -66,7 +66,7 @@ export class WorldMap extends Component {
     if (!window.mapboxgl) {
       console.log('check the map');
       await pause();
-      await this.initMap();
+      await this.initMap(mapData, lookupTable);
     }
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
@@ -247,7 +247,7 @@ export class WorldMap extends Component {
 
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
-      fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json()),
+      fetch(new URL('../../data/worldmap_small.json', import.meta.url)).then((r) => r.json()),
       fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
     ]);
 
