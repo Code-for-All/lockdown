@@ -2,23 +2,62 @@ import { html } from 'htm/preact';
 import { Component,createRef } from 'preact';
 import css from 'csz';
 
-import { DateRangePicker } from 'recal';
-
-// Stylesheet for calendar.
-// import 'recal/lib/index.css';
-// import '@lls/react-light-calendar/dist/index.css';
-
-// import rSlider from 'rslider';
-// const {RSlider, RSliderArrowL, RSliderArrowR, RSliderItems, RSliderPagination} = rSlider;
-
-// import rSlider from "../libs/rslider.min";
-// import 'rslider/rslider.css';
-// import "../../node_modules/rslider/rslider.css"
-// const widthSpace = 8.5;
+import DatePicker from './DateRangePicker.js';
 
 const widthSpaces = [7.5,16,24.5,33,41.5,50,58.5,67,75.5,84,94];
+Date.prototype.toSliderString = function(){
+  
+  let oldDate = this.toISOString().split("T")[0];
+  let newDate = oldDate.split('-');
+  let year = newDate[0];
+  newDate[0] = newDate[2];
+  newDate[2] = year;
+  return newDate.join('/');
+}
 
 const selectStyles = css`
+    @keyframes fadeOutLeft {
+        from {
+            transform: translate3d(0, 0, 0);
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+            transform: translate3d(-100%, 0, 0);
+        }
+    }
+    @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translate3d(-100%, 0, 0);
+        }
+      
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+    @keyframes fadeOutRight {
+        from {
+          opacity: 1;
+        }
+      
+        to {
+          opacity: 0;
+          transform: translate3d(100%, 0, 0);
+        }
+      }
+    @keyframes fadeInRight {
+        from {
+          opacity: 0;
+          transform: translate3d(100%, 0, 0);
+        }
+      
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
     & {
         position: absolute;
         bottom: 80px;
@@ -50,225 +89,41 @@ const selectStyles = css`
               padding-top: 11vh;
               padding-bottom: 3%;
             }
-    }
-`;
-const secondaryPosition = css`
-    & {
-        @media (max-width: 960px) {
-            top: 65vh !important;
-            bottom: 0px !important;
+        & > .overlay{
+          height: 100vh;
+          top: calc(-100vh + 100% + 20px);
+          left: -6%;
+        }
+        & > .calendar{
+            top: 0;
+            bottom: calc(300% + 10px);
+            width: 300px;
+            height: fit-content;
+            display: none;
+            tansition: 0.3s;
+            &.left{
+                left: 0;
+                &.hide{
+                  animation: fadeOutLeft 0.3s forwards !important;
+                  animation-delay: 0.1s !important;
+                }
+                &.show{
+                    animation: fadeInLeft 0.3s;
+                }
+            }
+            &.right{
+                right: 0;
+                &.hide{
+                  animation: fadeOutRight 0.3s forwards !important;
+                  animation-delay: 0.1s !important;
+                }
+                &.show{
+                  animation: fadeInRight 0.3s;
+                }
+            }
         }
     }
 `;
-const cssStyles = css`
-.rs-container * {
-    box-sizing: border-box;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-.rs-container {
-    font-family: Arial, Helvetica, sans-serif;
-    height: 45px;
-    position: relative;
-}
-.rs-container .rs-bg, .rs-container .rs-selected {
-    background-color: #eee;
-    border: 1px solid #ededed;
-    height: 10px;
-    left: 0;
-    position: absolute;
-    top: 5px;
-    width: 100%;
-    border-radius: 3px;
-}
-.rs-container .rs-selected {
-    /*background-color: #00b3bc;
-    border: 1px solid #00969b;*/
-    transition: all 0.2s linear;
-    width: 0;
-    background-color: transparent;
-    border: 0px;
-}
-.rs-container.disabled .rs-selected {
-    /*background-color: #ccc;
-    border-color: #bbb;*/
-    background-color: transparent;
-    border: 0px;
-}
-.rs-container .rs-pointer {
-    background-color: #fff;
-    border: 1px solid #bbb;
-    /*border-radius: 4px;*/
-    cursor: pointer;
-    /*height: 20px;*/
-    height: 30px;
-    left: -10px;
-    position: absolute;
-    /*top: 0;*/
-    top: -5px
-    transition: all 0.2s linear;
-    /*width: 30px;*/
-    width: 30px;
-    border-radius: 50%;
-    -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-    -moz-box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-    box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-    /*box-shadow: inset 0 0 1px #FFF, inset 0 1px 6px #ebebeb, 1px 1px 4px rgba(0, 0, 0, 0.1);*/
-}
-.rs-container.disabled .rs-pointer {
-    border-color: #ccc;
-}
-.rs-container .rs-pointer::before,
-.rs-container .rs-pointer::after {
-    /*content: '';*/
-    position: absolute;
-    width: 1px;
-    height: 9px;
-    background-color: #ddd;
-    left: 12px;
-    top: 5px;
-}
-.rs-container .rs-pointer::after {
-    left: auto;
-    right: 12px;
-}
-.rs-container.disabled .rs-pointer {
-    cursor: default;
-}
-.rs-container.sliding .rs-selected,
-.rs-container.sliding .rs-pointer {
-    transition: none;
-}
-.rs-container .rs-scale {
-    left: 0;
-    position: absolute;
-    top: 5px;
-    white-space: nowrap;
-}
-.rs-container .rs-scale span {
-    float: left;
-    position: relative;
-}
- .rs-container .rs-scale span{
-     &:first-child{
-        &::before{
-            background-color: white;
-            content: "";
-            height: 25px;
-            left: -12.5px;
-            position: absolute;
-            top: -7px;
-            width: 25px;
-            border-radius: 50%;
-            -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-            -moz-box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-            box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-        }
-        & ins{
-            position: absolute;
-            top: -50px;
-            color: rgba(128, 128, 128, 0.637);
-        }
-    }
-     &:last-child{
-         width: 27px !important;
-        &::before{
-            background-color: white;
-            content: "";
-            height: 25px;
-            right: -16.5px;
-            position: absolute;
-            top: -7px;
-            width: 25px;
-            border-radius: 50%;
-            -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-            -moz-box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-            box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-        }
-        & ins{
-            position: absolute;
-            top: -50px;
-            right: -30px;
-            color: rgba(128, 128, 128, 0.637);
-        }
-    }
-     /*
-     &::before {
-        background-color: transparent;
-        content: "";
-        height: 8px;
-        left: 0;
-        position: absolute;
-        top: 10px;
-        width: 1px;
-    }
-     */
-}
-.rs-container.rs-noscale span::before {
-    display: none;
-}
-.rs-container.rs-noscale span:first-child::before,
-.rs-container.rs-noscale span:last-child::before {
-    display: block;
-}
-.rs-container .rs-scale span:last-child {
-    margin-left: -1px;
-    width: 0px;
-}
-.rs-container .rs-scale span ins {
-    /*color: #333;*/
-    color: transparent;
-    display: inline-block;
-    font-size: 12px;
-    margin-top: 20px;
-    text-decoration: none;
-}
-.rs-container.disabled .rs-scale span ins {
-    /*color: #999;*/
-    color: transparent;
-}
-.rs-tooltip {
-    /*color: #333;*/
-    color: rgba(128, 128, 128, 0.637);
-    width: auto;
-    min-width: 60px;
-    height: 30px;
-	position: relative;
-	background: #fff;
-    /*border: 1px solid #00969b;*/
-    border: 1.5px solid rgba(128, 128, 128, 0.637);
-    border-radius: 20px;
-    position: absolute;
-    /*transform: translate(-50%, -35px);*/
-    transform: translate(-50%, -50px);
-    left: 13px;
-    text-align: center;
-    font-size: 13px;
-    padding: 6px 10px 0;
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border: 10px solid transparent;
-        border-top-color: rgba(128, 128, 128, 0.637);
-        border-bottom: 0;
-        margin-left: -10px;
-        margin-bottom: -10px;
-    }
-}
-.rs-container.disabled .rs-tooltip {
-    border-color: #ccc;
-    color: #999;
-}
-`;
-
 const rangeStyles = css`
 input[type=range] {
     position: relative;
@@ -427,10 +282,10 @@ input[type=range] {
     &{
         position: absolute;
         top: 20%;
-        left: 50%;
+        left: 24.5%;
         z-index: 999;
         width: fit-content;
-        transform: translate(-50%, 0);
+        transform: translate(-24.5%, 0);
         background: #FFFFFF;
         & span{
             border: 2px solid #8C8C8C;
@@ -490,78 +345,116 @@ export default class CountryInfo extends Component {
     constructor() {
         super();
         this.state = {
-            currentDateValue: 5,
-            currentPosition: 50
+            currentDateValue: 2,
+            currentPosition: 24.5,
+            datePickerPosition:"left",
+            showDatePicker: false,
+            currentSelectedDay: "",
+            firstDay:"",
+            lastDay:"",
+            currentSliderRange:[]
         }
         this.dateRef = createRef();
+        this.range = createRef();
         this.onSliderChange = this.onSliderChange.bind(this);
         this.onBtnClick = this.onBtnClick.bind(this);
+        this.onChooseDate = this.onChooseDate.bind(this);
+        this.calendarWillClose = this.calendarWillClose.bind(this);
+        this.closeDatePicker = this.closeDatePicker.bind(this);
+        this.submitChanges = this.submitChanges.bind(this);
       }
-    /*
-    var mySlider = new rSlider({
-        target: '#sampleSlider',
-        values: [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015],
-        range: true,
-        tooltip: true,
-        scale: true,
-        labels: true,
-        set: [2010, 2013]
-    });
-    */
    componentDidMount() {
-    //    let navigator = window.navigator.userAgent;
-    //    let useTop = false;
-    //    alert(window.navigator.userAgent);
-    //    if(navigator.contains() (/\bAndroid 9|\bChrome|\bMobile/g)){
-    //        useTop = true;
-    //        alert("true");
-    //    }else{
-    //     alert("false");
-    //    }
-    //    this.setState({useTop: useTop},console.log(this.state));
-    // var mySlider = new rSlider({
-    //     target: '#sampleSlider',
-    //     values: ["03/10/2008", "03/10/2009", "03/10/2010", "03/10/2011", "03/10/2012", "03/10/2013", "03/10/2014", "03/10/2015","03/10/2016","03/10/2017","03/10/2018"],
-    //     range: false,
-    //     tooltip: true,
-    //     scale: true,
-    //     labels: false,
-    //     set: ["03/10/2012"]
-    // });
-    // function onSliderChange(values){
-    //     alert("hi");
-    //     console.log(values);
-    // }
-    // mySlider.onChange((values)=>alert("hi"));
-    // this.setState({slider:mySlider});
-    
+     let date = new Date();
+     let days = [];
+      let plusDays = 7;
+      for(let i = 0;i<11;i++){
+        if(i < 2){
+          days.push(this.rangePreProcces(date,i == 0?-13:-7));
+        }else if(i!== 2){
+          days.push(this.rangePreProcces(date,plusDays));
+          plusDays += 7;
+        }else{
+          days.push(date);
+        }
+      }
+     this.setState({
+      currentSliderRange: days,
+      currentSelectedDay: date.toSliderString(),
+      firstDay: days[0].toSliderString(),
+      lastDay: days[days.length-1].toSliderString()
+     })
    }
    onSliderChange(e){
-    //    debugger;
-    const {currentDateValue} = this.state;
+    const {currentDateValue,currentSliderRange} = this.state;
     const sliderDOM = this.dateRef.current;
     const newValue = Number(e.target.value);
-    console.log(`State : ${currentDateValue} -- ${newValue}`)
     let newPosition = widthSpaces[newValue];
     sliderDOM.style.left = `${newPosition}%`;
     sliderDOM.style.transform = `translate(-${newPosition}%, 0)`;
-    this.setState({currentDateValue:newValue,currentPosition:newPosition});
+    this.setState({currentDateValue:newValue,currentPosition:newPosition,currentSelectedDay:currentSliderRange[newValue].toSliderString()});
    }
    onBtnClick(range){
-    alert(range);
+    this.setState({
+        showDatePicker: true,
+        datePickerPosition:range
+    });
    }
-   onChange = (startDate, endDate) => this.setState({ startDate, endDate })
+   onChooseDate(date){
+     const sliderDOM = this.dateRef.current;
+    this.calendarWillClose();
+    let days = [];
+    let plusDays = 7;
+    for(let i = 0;i<11;i++){
+      if(i < 2){
+        days.push(this.rangePreProcces(date,i == 0?-13:-7));
+      }else if(i!== 2){
+        days.push(this.rangePreProcces(date,plusDays));
+        plusDays += 7;
+      }else{
+        days.push(date);
+      }
+    }
+    sliderDOM.style.left = `${24.5}%`;
+    sliderDOM.style.transform = `translate(-${24.5}%, 0)`;
+    this.setState({
+      currentSliderRange: days,
+      currentSelectedDay: date.toSliderString(),
+      firstDay: days[0].toSliderString(),
+      lastDay: days[days.length-1].toSliderString(),
+      currentDateValue: 2,
+      currentPosition: 24.5
+     })
+   }
+   calendarWillClose(){
+    this.setState({
+      datePickerPosition: this.state.datePickerPosition + ' hide'
+    },()=>setTimeout(()=>this.closeDatePicker(),400));
+   }
+   closeDatePicker(){
+     this.setState({
+      showDatePicker: false,
+      datePickerPosition: this.state.datePickerPosition.replace(' hide','')
+     })
+   }
+    rangePreProcces(date, days){
+        let newDate = new Date(); 
+        newDate.setDate(date.getDate() + days);
+        return newDate;
+    }
+   submitChanges(){
+     const { currentSliderRange,currentDateValue } = this.state;
+     this.props.onChange(currentSliderRange[currentDateValue],currentSliderRange[0],currentSliderRange[currentSliderRange.length-1]);
+   }
     render(_) {
         return html`
             <div class="${selectStyles} ${/*cssStyles*/rangeStyles}">
-                <!-- <input class="${selectStyles}" type="text" id="sampleSlider" /> -->
-                <div class="${sliderSelector}" ref="${this.dateRef}" ><span>17/04/2020</span></div>
-                <span class="first ${tooltipCss}">03/04/2020</span>
-                <button onClick=${(e)=>this.onBtnClick("begin")} class="first ${popBtn}"></button>
-                <input onInput=${this.onSliderChange} type="range" min="0" max="10" step="1" value=${this.state.currentDateValue}/>
-                <button onClick=${(e)=>this.onBtnClick("end")} class="last ${popBtn}"></button>
-                <span class="last ${tooltipCss}">29/04/2020</span>
-                <${DateRangePicker} startDate=${ this.state.startDate } endDate=${ this.state.endDate } onStartDateSelected=${ ()=>console.log("1") } onEndDateSelected=${ ()=>console.log('2') } />
+            <${DatePicker} close=${this.calendarWillClose} onSelect=${this.onChooseDate} show=${this.state.showDatePicker} customClass=${this.state.datePickerPosition}/>
+            <div class="${sliderSelector}" ref="${this.dateRef}" ><span>${this.state.currentSelectedDay}</span></div>
+            <span class="first ${tooltipCss}">${this.state.firstDay}</span>
+                <button onClick=${(e)=>this.onBtnClick("left")} class="first ${popBtn}"></button>
+                <input ref=${this.range} onChange=${this.submitChanges} onInput=${this.onSliderChange} type="range" min="0" max="10" step="1" value=${this.state.currentDateValue}/>
+                <button onClick=${(e)=>this.onBtnClick("right")} class="last ${popBtn}"></button>
+                <span class="last ${tooltipCss}">${this.state.lastDay}</span>
             </div>
         `;
     }
