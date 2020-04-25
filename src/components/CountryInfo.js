@@ -74,7 +74,7 @@ const MEASURES = [
   },
   {
     id: 'military_not_deployed',
-    label: 'Military presence',
+    label: 'Military',
     icon: military,
   },
   {
