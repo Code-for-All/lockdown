@@ -4,7 +4,7 @@ import { router } from '../router.js';
 import { dialogService } from '../services/dialogService.js';
 import css from 'csz';
 
-const mapbox_token = 'pk.eyJ1IjoibWlibG9uIiwiYSI6ImNrMGtvajhwaDBsdHQzbm16cGtkcHZlaXUifQ.dJTOE8FJc801TAT0yUhn3g';
+const mapbox_token = 'pk.eyJ1IjoiamZxdWVyYWx0IiwiYSI6ImNrOWZpZHF3ajBic2YzbHQwYzQ5bGRnaXgifQ.NcQInXQmMy93L47QBMCAfg';
 
 const selectStyles = css`
   & {
@@ -80,33 +80,66 @@ export class WorldMap extends Component {
 
     map.on('style.load', () => {
       console.log('add source');
-      map.addSource('countries', {
-        type: 'geojson',
-        data: mapData,
-        generateId: true,
+      // map.addSource('countries', {
+      //   type: 'geojson',
+      //   data: mapData,
+      //   generateId: true,
+      // });
+
+      map.addSource('admin-0', {
+        type: 'vector',
+        url: 'mapbox://mapbox.boundaries-adm0-v3'
       });
 
-      console.log('add layer');
-      map.addLayer({
-        id: 'countries',
-        type: 'fill',
-        source: 'countries',
-        layout: {},
-        paint: {
-          'fill-color': ['get', 'color'],
-          'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
+      map.addLayer(
+        {
+          id: 'admin-0-fill',
+          type: 'fill',
+          source: 'admin-0',
+          'source-layer': 'boundaries_admin_0',
+          filter: [
+            "any",
+            ["==", "all", ["get", "worldview"]],
+            ["in", "US", ["get", "worldview"]]
+          ],
+          paint: {
+            'fill-color': '#e03c3c',
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
+          }
         },
-        filter: ['has', 'color'],
-      });
+        // This final argument indicates that we want to add the Boundaries layer
+        // before the `waterway-label` layer that is in the map from the Mapbox
+        // Light style. This ensures the admin polygons will be rendered on top of
+        // the
+        'waterway-label'
+      );
+
+      console.log('add layer');
+      // map.addLayer({
+      //   id: 'countries',
+      //   type: 'fill',
+      //   source: 'countries',
+      //   layout: {},
+      //   paint: {
+      //     'fill-color': ['get', 'color'],
+      //     'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
+      //   },
+      //   filter: ['has', 'color'],
+      // });
 
       let hoveredStateId = null;
 
-      map.on('mousemove', 'countries', function (e) {
+      map.on('mousemove', 'admin-0-fill', function (e) {
+        var features = map.queryRenderedFeatures(e.point, {
+          layers: ['admin-0-fill']
+        });
+
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
               {
-                source: 'countries',
+                source: 'admin-0',
+                'sourceLayer': 'boundaries_admin_0',
                 id: hoveredStateId,
               },
               {
@@ -115,11 +148,12 @@ export class WorldMap extends Component {
             );
           }
 
-          hoveredStateId = e.features[0].id;
+          hoveredStateId = features[0].id;
 
           map.setFeatureState(
             {
-              source: 'countries',
+              source: 'admin-0',
+              'sourceLayer': 'boundaries_admin_0',
               id: hoveredStateId,
             },
             {
@@ -128,11 +162,20 @@ export class WorldMap extends Component {
           );
         }
       });
-      map.on('click', 'countries', function (e) {
+      map.on('click', 'admin-0-fill', function (e) {
+
+        var features = map.queryRenderedFeatures(e.point, {
+          layers: ['admin-0-fill']
+        });
+
+        console.log('features', features[0]);
         // map.fitBounds(layer.getBounds());
-        router.setSearchParam('country', e.features[0].properties.NAME);
-        router.setSearchParam('iso2', e.features[0].properties.iso2);
+        // router.setSearchParam('country', e.features[0].properties.NAME);
+        // router.setSearchParam('iso2', e.features[0].properties.iso2);
       });
+
+
+
     });
 
     map.on('load', function () {
