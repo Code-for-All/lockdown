@@ -1,9 +1,9 @@
 import { html } from 'htm/preact';
+import css from 'csz';
 import { useState, useEffect } from 'preact/compat';
 import { updatesService } from '../services/updatesService.js';
 import { offline, loading } from '../assets/icons/icons.js';
-import { loadingStyles, offlineStyles } from '../style/styles.js';
-import css from 'csz';
+import { offlineStyles, loadingStyles } from '../style/shared.styles.js';
 
 const UPDATE_TYPES = {
   new_entry: 'new entry',

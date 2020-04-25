@@ -33,6 +33,7 @@ class CountryDetailService extends EventTargetShim {
 
         this.cache[iso2] = {
           status: 'success',
+          date: res.lockdown.date,
           measures: res.lockdown.measures,
           travel,
           max_gathering: res.lockdown.max_gathering,
