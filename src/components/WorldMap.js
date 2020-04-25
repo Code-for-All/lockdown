@@ -78,9 +78,9 @@ export class WorldMap extends Component {
 
     window.map = map;
 
-    const localData = mapData.features.map(f => {
-      return {ISO: f.properties.iso2, lockdown_status: f.properties.lockdown_status}
-    })
+    const localData = mapData.features.map((f) => {
+      return { ISO: f.properties.iso2, lockdown_status: f.properties.lockdown_status };
+    });
 
     map.on('style.load', () => {
       let hoveredStateId = null;
@@ -128,11 +128,7 @@ export class WorldMap extends Component {
         // router.setSearchParam('country', e.features[0].properties.NAME);
         // router.setSearchParam('iso2', e.features[0].properties.iso2);
       });
-
-
     });
-
-
 
     map.on('load', function () {
       console.log('map is loaded');
@@ -140,7 +136,6 @@ export class WorldMap extends Component {
     });
 
     function createViz(lookupTable) {
-
       map.addSource('admin-0', {
         type: 'vector',
         url: 'mapbox://mapbox.boundaries-adm0-v3',
@@ -150,14 +145,12 @@ export class WorldMap extends Component {
 
       // Filters the lookup table to features with the 'US' country code
       // and keys the table using the `unit_code` property that will be used for the join
-      function filterLookupTable(lookupTable){
-
+      function filterLookupTable(lookupTable) {
         let lookupData = {};
 
         for (let layer in lookupTable)
           for (let worldview in lookupTable[layer].data)
-            for (let feature in lookupTable[layer].data[worldview])
-            {
+            for (let feature in lookupTable[layer].data[worldview]) {
               let featureData = lookupTable[layer].data[worldview][feature];
 
               lookupData[featureData['unit_code']] = featureData;
@@ -165,15 +158,16 @@ export class WorldMap extends Component {
         return lookupData;
       }
 
-      map.addLayer({
-        id: 'admin-0-fill',
-        type: 'fill',
-        source: 'admin-0',
-        'source-layer': 'boundaries_admin_0',
-        filter: ['any', ['==', 'all', ['get', 'worldview']], ['in', 'US', ['get', 'worldview']]],
-        paint: {
-          'fill-color':
-            ['case',
+      map.addLayer(
+        {
+          id: 'admin-0-fill',
+          type: 'fill',
+          source: 'admin-0',
+          'source-layer': 'boundaries_admin_0',
+          filter: ['any', ['==', 'all', ['get', 'worldview']], ['in', 'US', ['get', 'worldview']]],
+          paint: {
+            'fill-color': [
+              'case',
               ['!=', ['feature-state', 'kind'], null],
               // ['to-color', ['get', ['feature-state', 'color']]],
               // 'rgba(171,56,213,0.5)',
@@ -188,28 +182,32 @@ export class WorldMap extends Component {
                 worldStyle('3'),
                 '4',
                 worldStyle('4'),
-                /* other */ '#bdbdbd'
+                /* other */ '#bdbdbd',
               ],
-              '#828282'
-
+              '#828282',
             ],
-          'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
-        }
-      }, 'waterway-label');
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
+          },
+        },
+        'waterway-label'
+      );
 
       function setStates(e) {
         // console.log('setStates');
-        localData.forEach(function(row) {
+        localData.forEach(function (row) {
           // console.log('row.ISO', row.ISO);
           // console.log('lookupData[row.ISO]', lookupData[row.ISO]);
           // console.log('row.lockdown_status', row.lockdown_status);
-          map.setFeatureState({
-            source: 'admin-0',
-            sourceLayer: 'boundaries_admin_0',
-            id: lookupData[row.ISO].feature_id
-          }, {
-            kind: row.lockdown_status
-          });
+          map.setFeatureState(
+            {
+              source: 'admin-0',
+              sourceLayer: 'boundaries_admin_0',
+              id: lookupData[row.ISO].feature_id,
+            },
+            {
+              kind: row.lockdown_status,
+            }
+          );
         });
       }
 
@@ -246,10 +244,9 @@ export class WorldMap extends Component {
 
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
-      fetch(new URL('../../data/worldmap.json', import.meta.url))
-        .then((r) => r.json()),
-      fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url))
-        .then((r) => r.json())]);
+      fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json()),
+      fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
+    ]);
 
     for (const feature of mapData.features) {
       feature.properties.color = worldStyle(feature);
