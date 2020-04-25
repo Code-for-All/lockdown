@@ -7,7 +7,7 @@ import find from 'lodash/find';
 import { SimpleGrid } from '../../utils/SimpleGrid';
 import moment from '../../utils/moment';
 import { ENTRY_COLUMN_LENGTH, parseEntry } from './parsers/lockdownParser';
-import { getSnapshots } from './snapshot/processor';
+import { getSnapshots, GLOBAL_FIRST_DATE, GLOBAL_LAST_DATE } from './snapshot/processor';
 import { GLOBAL_COUNTRY_STATUS } from '../../../../shared/types';
 import { connect } from '../../repositories';
 
@@ -73,11 +73,11 @@ export async function batchGetTerritoriesEntryData(territories) {
       // TODO: changes needed for time slider
       let currentDate = moment();
       let currentDatePlusOne = moment().add(1, 'days');
-      let snapshots = getSnapshots(entries, currentDate, currentDatePlusOne);
+      let snapshots = getSnapshots(entries, GLOBAL_FIRST_DATE, GLOBAL_LAST_DATE);
       let currentSnapshot = snapshots[0];
 
       let database = await connect();
-      database.snapshotRepository.insert(currentSnapshot);
+      await database.snapshotRepository.insertAll(snapshots);
 
       result.push({
         isoCode: batch[i]['iso2'],

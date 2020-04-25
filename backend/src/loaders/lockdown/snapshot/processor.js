@@ -1,7 +1,7 @@
 import Moment, { MomentRange } from '../../../utils/moment';
 import { extendMoment } from 'moment-range';
 import { isEntryActive } from '../../../utils/typeHelper';
-import Entry from '../types/Entry';
+import Entry from '../../../types/Entry';
 import get from 'lodash/get';
 
 const moment = extendMoment(Moment);
@@ -21,7 +21,7 @@ export function getSnapshots(entries, startDate, endDate) {
   const activeEntries = entries.filter(entry => isEntryActive(entry.status));
 
   // Sort according to date of issuance (latest first)
-  activeEntries.sort((a, b) => b.source_date_of_issuance.unix() - a.source_date_of_issuance.unix())
+  activeEntries.sort((a, b) => b.source_date_of_issuance?.unix() - a.source_date_of_issuance?.unix())
 
   // Loop start until end dates
   const snapshots = [];
