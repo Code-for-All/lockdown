@@ -263,10 +263,8 @@ export class WorldMap extends Component {
       countries: mapData,
     });
 
-
-
     setTimeout(async () => {
-      const loadScript = function() {
+      const loadScript = function () {
         const script = document.createElement('script');
         script.src = 'https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js';
         document.getElementsByTagName('body')[0].appendChild(script);
@@ -303,8 +301,6 @@ export class WorldMap extends Component {
         });
       }
     }, 400);
-
-
   }
 
   componentWillUnmount() {
