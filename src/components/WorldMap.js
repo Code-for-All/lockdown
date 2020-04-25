@@ -65,7 +65,7 @@ export class WorldMap extends Component {
   async initMap(mapData, lookupTable) {
     if (!window.mapboxgl) {
       console.log('check the map');
-      await pause();
+      await pause(400);
       await this.initMap(mapData, lookupTable);
     }
     let map = new window.mapboxgl.Map({
@@ -263,32 +263,48 @@ export class WorldMap extends Component {
       countries: mapData,
     });
 
-    await this.initMap(mapData, lookupTable);
 
-    if (navigator.permissions) {
-      const geolocation = await navigator.permissions.query({ name: 'geolocation' });
-      // on pageload, check if there is permission for geolocation
-      if (geolocation.state === 'granted') {
-        navigator.geolocation.getCurrentPosition((location) => {
-          const { latitude, longitude } = location.coords;
 
-          this.state.map.setCenter([longitude, latitude]);
-        });
+    setTimeout(async () => {
+      const loadScript = function() {
+        const script = document.createElement('script');
+        script.src = 'https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js';
+        document.getElementsByTagName('body')[0].appendChild(script);
+      };
+      window.addEventListener('load', loadScript);
+      if (document.readyState === 'complete') {
+        loadScript();
       }
 
-      // handle change when user toggles geolocation permission
-      geolocation.addEventListener('change', (e) => {
-        if (e.target.state === 'granted') {
+      await this.initMap(mapData, lookupTable);
+
+      if (navigator.permissions) {
+        const geolocation = await navigator.permissions.query({ name: 'geolocation' });
+        // on pageload, check if there is permission for geolocation
+        if (geolocation.state === 'granted') {
           navigator.geolocation.getCurrentPosition((location) => {
-            localStorage.setItem('geolocation', 'true');
             const { latitude, longitude } = location.coords;
+
             this.state.map.setCenter([longitude, latitude]);
           });
-        } else {
-          localStorage.removeItem('geolocation');
         }
-      });
-    }
+
+        // handle change when user toggles geolocation permission
+        geolocation.addEventListener('change', (e) => {
+          if (e.target.state === 'granted') {
+            navigator.geolocation.getCurrentPosition((location) => {
+              localStorage.setItem('geolocation', 'true');
+              const { latitude, longitude } = location.coords;
+              this.state.map.setCenter([longitude, latitude]);
+            });
+          } else {
+            localStorage.removeItem('geolocation');
+          }
+        });
+      }
+    }, 400);
+
+
   }
 
   componentWillUnmount() {
