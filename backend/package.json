@@ -1,9 +1,9 @@
 {
   "name": "lockdown-backend",
   "version": "0.0.0",
-  "main": "index.js",
   "scripts": {
     "start": "npm run build && node dist/index.js",
+    "server:dev": "nodemon",
     "build": "babel src -d dist --copy-files",
     "dev": "babel-node src/index.js",
     "test": "jest ./tests",
@@ -12,10 +12,20 @@
   "dependencies": {
     "@babel/node": "^7.8.7",
     "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-http-context": "^1.2.3",
     "google-spreadsheet": "^3.0.10",
+    "joi-browser": "^13.4.0",
+    "lugg": "^3.0.0",
     "moment-range": "^4.0.2",
     "moment-timezone": "^0.5.28",
-    "mongodb": "^3.5.6"
+    "mongodb": "^3.5.6",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.3",
+    "pino": "^6.2.1",
+    "pino-noir": "^2.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
