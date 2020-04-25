@@ -4,9 +4,6 @@ import css from 'csz';
 
 import { arrowLeft, arrowRight } from '../assets/icons/icons.js';
 
-const Moment = () => import('moment');
-
-
 const styles = css`
     &{
         @media (max-width: 960px) {
