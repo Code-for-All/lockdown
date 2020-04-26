@@ -390,10 +390,13 @@ export default class CountryInfo extends Component {
     });
   }
   onBtnClick(range) {
+    // ? I disabled the calendar just for the hackaton period
+    /*
     this.setState({
       showDatePicker: true,
       datePickerPosition: range,
     });
+    */
   }
   onChooseDate(date) {
     const sliderDOM = this.dateRef.current;
