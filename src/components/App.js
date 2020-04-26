@@ -88,15 +88,16 @@ export class App extends Component {
   }
 
   render() {
+    let selectedDate = this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : false;
     return html`
       <${Header} />
 
       <div class=${styles}>
-        <${Totals} />
+        <${Totals} selectedDate=${selectedDate}/>
       </div>
 
       <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
-      <${WorldMap} selectedDate=${this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : false} />
+      <${WorldMap} selectedDate=${selectedDate} />
       <${TimeSlider} onChange=${this.__onSelectDate} />
       ${this.state.dialog.opened
         ? html`

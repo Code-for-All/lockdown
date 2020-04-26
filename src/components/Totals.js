@@ -55,7 +55,7 @@ export class Totals extends Component {
     installMediaQueryWatcher(`(min-width: 900px)`, (matches) => {
       this.setState({ desktop: matches });
     });
-    const totals = await totalsService.getTotals();
+    const totals = await totalsService.getTotals(false, this.props.selectedDate);
     const items = [
       {
         description: 'Countries in lockdown',

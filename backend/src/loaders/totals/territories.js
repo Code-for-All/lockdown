@@ -9,7 +9,7 @@ export function sumLockdown(lockdownStatusByTerritory) {
   var affected = 0;
   var population = require('../../../../data/population.json');
   // TODO: changes needed for time slider
-  const total = Object.values(lockdownStatusByTerritory[moment().format("YYYY-MM-DD")]).reduce((prev, territory) => {
+  const total = Object.values(lockdownStatusByTerritory).reduce((prev, territory) => {
     if (isLockdown(territory.lockdown_status)) {
       affected += population[territory.ISO].Population;
       return prev + 1;
