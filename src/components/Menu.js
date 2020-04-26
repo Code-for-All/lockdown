@@ -81,19 +81,19 @@ const styles = css`
     border-radius: 50%;
   }
   .default {
-    background: #bdbdbd;
+    background: #cccccc;
   }
   .blue {
-    background: #6c9eeb;
+    background: #7aaeff;
   }
   .red {
-    background: #df6666;
+    background: #eb5757;
   }
   .yellow {
-    background: #f5b26a;
+    background: #f2994a;
   }
   .green {
-    background: #92c47c;
+    background: #6fcf97;
   }
 `;
 

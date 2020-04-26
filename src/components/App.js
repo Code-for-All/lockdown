@@ -75,12 +75,18 @@ export class App extends Component {
   async componentDidMount() {
     this.__onPathChanged();
     installMediaQueryWatcher(`(min-width: 960px)`, (matches) => {
-      this.setState({ isMobile: !matches });
+      this.setState({
+        isMobile: !getMatchedCSSRules,
+      });
     });
   }
 
   componentWillMount() {
     router.addEventListener('path-changed', this.__onPathChanged);
+    this.setState({
+      showStatsbox: Number(router.url.searchParams.get('statsbox')) == 1,
+      showMenu: Number(router.url.searchParams.get('menu')) == 1,
+    });
   }
 
   componentWillUnmount() {
@@ -90,15 +96,26 @@ export class App extends Component {
   render() {
     const selectedDate = this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : toJsonString(new Date());
     return html`
-      <${Header} selectedDate=${selectedDate} />
+      <${Header} selectedDate=${selectedDate} showStatsbox=${this.state.showStatsbox}/>
 
+      ${this.state.showStatsbox
+        ? html`
+            <div class=${styles}>
+              <${Totals} />
+            </div>
+          `
+        : ''}
       <div class=${styles}>
         <${Totals} selectedDate=${selectedDate} />
       </div>
 
-      <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
-      <${WorldMap} selectedDate=${selectedDate} />
+      ${this.state.showMenu
+        ? html`<${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />`
+        : ''}
+
+      <${WorldMap} selectedDate=${selectedDate}/>
       <${TimeSlider} onChange=${this.__onSelectDate} />
+
       ${this.state.dialog.opened
         ? html`
             <${Lazy} component=${() => import('../components/Dialog.js')} props=${{ ...this.state.dialog, onClose: this.__closeDialog }} />

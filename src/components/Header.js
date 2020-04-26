@@ -81,8 +81,10 @@ export const Header = (_) => html`
         <!-- TODO: screen reader h1 -->
       </a>
     </div>
-    <div class="totals">
-      <${Totals} selectedDate=${_.selectedDate} />
-    </div>
+    ${_.showStatsbox
+      ? html`<div class="totals">
+          <${Totals} selectedDate=${_.selectedDate}/>
+        </div> `
+      : ''}
   </header>
 `;
