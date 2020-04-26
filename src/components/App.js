@@ -86,6 +86,7 @@ export class App extends Component {
     this.setState({
       showStatsbox: Number(router.url.searchParams.get('statsbox') || 1) == 1,
       showMenu: Number(router.url.searchParams.get('menu') || 1) == 1,
+      showSlider: Number(router.url.searchParams.get('slider') || 1) == 1,
     });
   }
 
@@ -114,7 +115,10 @@ export class App extends Component {
         : ''}
 
       <${WorldMap} selectedDate=${selectedDate} />
-      <${TimeSlider} onChange=${this.__onSelectDate} />
+
+      ${this.state.showSlider
+        ? html`<${TimeSlider} onChange=${this.__onSelectDate} />`
+        : ''}
 
       ${this.state.dialog.opened
         ? html`
