@@ -293,7 +293,9 @@ export class WorldMap extends Component {
           const { latitude, longitude } = location.coords;
 
           this.state.map.setCenter([longitude, latitude]);
-          this.state.islocationSet = true;
+          this.setState({
+            islocationSet: true,
+          })
         });
       }
 
@@ -304,7 +306,9 @@ export class WorldMap extends Component {
             localStorage.setItem('geolocation', 'true');
             const { latitude, longitude } = location.coords;
             this.state.map.setCenter([longitude, latitude]);
-            this.state.islocationSet = true;
+            this.setState({
+              islocationSet: true,
+            });
           });
         } else {
           localStorage.removeItem('geolocation');
