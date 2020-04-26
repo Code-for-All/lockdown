@@ -397,11 +397,14 @@ export default class CountryInfo extends Component {
     let newPosition = widthSpaces[newValue];
     sliderDOM.style.left = `${newPosition}%`;
     sliderDOM.style.transform = `translate(-${newPosition}%, 0)`;
-    this.setState({
-      currentDateValue: newValue,
-      currentPosition: newPosition,
-      currentSelectedDay: toSliderString(currentSliderRange[newValue]),
-    },this.submitChanges);
+    this.setState(
+      {
+        currentDateValue: newValue,
+        currentPosition: newPosition,
+        currentSelectedDay: toSliderString(currentSliderRange[newValue]),
+      },
+      this.submitChanges
+    );
   }
   onBtnClick(range) {
     // ? I disabled the calendar just for the hackaton period
