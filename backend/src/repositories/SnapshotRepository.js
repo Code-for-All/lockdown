@@ -10,9 +10,9 @@ export default class SnapshotRepository{
      * @param {Date} date 
      * @returns {Promise<Array<Entry>>}
      */
-    getByTerritoryAndDate(iso3, date){
+    getByTerritoryAndDate(iso2, date){
         return this.model.find({
-            iso3: iso3,
+            iso2: iso2,
             start_date: {$lte: date},
             end_date: {$gte: date}
         });

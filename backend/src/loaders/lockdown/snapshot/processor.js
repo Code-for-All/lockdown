@@ -3,47 +3,12 @@ import { extendMoment } from 'moment-range';
 import { isEntryActive } from '../../../utils/typeHelper';
 import Entry from '../../../types/Entry';
 import get from 'lodash/get';
+import { MEASURES } from '../../../services/SnapshotsService';
 
 const moment = extendMoment(Moment);
 
 export const GLOBAL_FIRST_DATE = moment('01-11-2019', 'DD-MM-YYYY');
 export const GLOBAL_LAST_DATE = moment('30-04-2022', 'DD-MM-YYYY');
-
-const MEASURES = [
-  'measure.lockdown_status',
-  'measure.city_movement_restriction',
-  'measure.attending_religious_sites',
-  'measure.going_to_work',
-  'measure.military_not_deployed',
-  'measure.academia_allowed',
-  'measure.going_to_shops',
-  'measure.electricity_nominal',
-  'measure.water_nominal',
-  'measure.internet_nominal',
-  'land.local',
-  'land.nationals_inbound',
-  'land.nationals_outbound',
-  'land.foreigners_inbound',
-  'land.foreigners_outbound',
-  'land.cross_border_workers',
-  'land.commerce',
-  'land.stopovers',
-  'flight.local',
-  'flight.nationals_inbound',
-  'flight.nationals_outbound',
-  'flight.foreigners_inbound',
-  'flight.foreigners_outbound',
-  'flight.cross_border_workers',
-  'flight.commerce',
-  'flight.stopovers',
-  'sea.local',
-  'sea.nationals_inbound',
-  'sea.nationals_outbound',
-  'sea.foreigners_inbound',
-  'sea.foreigners_outbound',
-  'sea.cross_border_workers',
-  'sea.commerce',
-  'sea.stopovers'];
 
 /**
  * Gets snapshots in range
@@ -71,6 +36,7 @@ function fillRanges(ranges, entry) {
   MEASURES.forEach(measureKey => {
     let dataPoint = getDataPoint(entry, measureKey);
     if (!dataPoint) {
+
       return;
     }
 
@@ -102,19 +68,17 @@ function fillRanges(ranges, entry) {
   })
 }
 
-
-
 function getDataPoint(entry, key) {
   const dataPoint = get(entry, key);
 
   // No value defined, skip this entry
   // TODO: Or should it break and let the value as undefined?
   // Current behaviour is it will search in entries beneath
-  if (dataPoint == undefined || !dataPoint?.value) {
+  if (dataPoint == undefined || (typeof dataPoint == 'object' && dataPoint.value == undefined)) {
     return;
   }
 
-  const entryStartDate = entry.source_start_date ?? GLOBAL_FIRST_DATE;
+  const entryStartDate = entry.source_start_date ?? entry.source_date_of_issuance ?? GLOBAL_FIRST_DATE;
   const entryEndDate = entry.source_end_date ?? GLOBAL_LAST_DATE;
 
   // Datapoint dates with default to entry

@@ -7,17 +7,17 @@ class CountryDetailService extends EventTargetShim {
   }
 
   async getDetails(opts) {
-    let { iso2 } = opts;
+    let { iso2, date} = opts;
     iso2 = encodeURI(iso2);
 
     if (!/^[a-zA-Z]{2}$/.test(iso2)) {
       return;
     }
-
-    if (opts.forceRefresh || this._shouldInvalidate() || this.cache[iso2]?.status === 'failed' || !this.cache[iso2]) {
+    let cacheKey = `${iso2}${date}`;
+    if (opts.forceRefresh || this._shouldInvalidate() || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
-        this.cache[iso2] = {};
-        const res = await (await fetch(new URL(`../../data/territories/${iso2}.json`, import.meta.url))).json();
+        this.cache[cacheKey] = {};
+        const res = await (await fetch(new URL(`http://localhost:3000/status/${iso2}/${date}`, import.meta.url))).json();
 
         const travel = {};
 
@@ -31,7 +31,7 @@ class CountryDetailService extends EventTargetShim {
           }
         }
 
-        this.cache[iso2] = {
+        this.cache[cacheKey] = {
           status: 'success',
           date: res.lockdown.date,
           measures: res.lockdown.measures,
@@ -39,16 +39,16 @@ class CountryDetailService extends EventTargetShim {
           max_gathering: res.lockdown.max_gathering,
         };
         this.__lastUpdate = Date.now();
-        return this.cache[iso2];
+        return this.cache[cacheKey];
       } catch (_) {
-        this.cache[iso2] = {
+        this.cache[cacheKey] = {
           status: 'failed',
         };
       }
       this.dispatchEvent(new Event('change'));
-      return this.cache[iso2];
+      return this.cache[cacheKey];
     }
-    return this.cache[iso2];
+    return this.cache[cacheKey];
   }
 }
 

@@ -250,7 +250,7 @@ export class WorldMap extends Component {
 
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
-      fetch(new URL('../../data/worldmap_small.json', import.meta.url)).then((r) => r.json()),
+      fetch(new URL('../../data/countryLockdowns/2020-05-20.json', import.meta.url)).then((r) => r.json()),
       fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
     ]);
 

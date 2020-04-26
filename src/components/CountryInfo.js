@@ -107,7 +107,7 @@ const MEASURES = [
 function createMeasures(apiMeasures) {
   return MEASURES.map((measure) => {
     const apiData = apiMeasures?.find((m) => m.label === measure.id);
-
+    
     return {
       ...measure,
       value: MEASURE_VALUES[apiData.value] ?? MEASURE_VALUES[4],
@@ -120,7 +120,7 @@ export default class CountryInfo extends Component {
     this.setState({
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
       populationData: await populationService.getPopulation(),
-      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2 }),
+      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date }),
     });
   }
 

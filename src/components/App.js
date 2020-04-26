@@ -118,12 +118,13 @@ export class App extends Component {
   __onPathChanged() {
     const country = router.url.searchParams.get('country');
     const iso2 = router.url.searchParams.get('iso2');
+    const date = router.url.searchParams.get('date') || new Date();
 
     if (country && iso2) {
       this.setState({
         dialog: {
           opened: true,
-          template: html` <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2 }} /> `,
+          template: html` <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2, date }} /> `,
           title: country,
         },
       });
