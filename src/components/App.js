@@ -10,7 +10,7 @@ import { Lazy } from './Lazy.js';
 import { router } from '../router.js';
 import { dialogService } from '../services/dialogService.js';
 import { debounce } from 'lodash-es';
-import TimeSlider from './TimeSlide';
+import TimeSlider from './TimeSlider';
 
 const debouncedCloseDialog = debounce(
   () => {

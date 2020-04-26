@@ -2,7 +2,7 @@ import { html } from 'htm/preact';
 import { Component, createRef } from 'preact';
 import css from 'csz';
 
-import DatePicker from './DateRangePicker.js';
+import DatePicker from './DatePicker.js';
 
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
 Date.prototype.toSliderString = function () {
