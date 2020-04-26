@@ -295,7 +295,7 @@ export class WorldMap extends Component {
           this.state.map.setCenter([longitude, latitude]);
           this.setState({
             islocationSet: true,
-          })
+          });
         });
       }
 
