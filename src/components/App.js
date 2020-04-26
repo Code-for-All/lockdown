@@ -78,8 +78,8 @@ export class App extends Component {
   componentWillMount() {
     router.addEventListener('path-changed', this.__onPathChanged);
     this.setState({
-      showStatsbox: Number(router.url.searchParams.get('statsbox')) == 1,
-      showMenu: Number(router.url.searchParams.get('menu')) == 1,
+      showStatsbox: Number(router.url.searchParams.get('statsbox') || 1) == 1,
+      showMenu: Number(router.url.searchParams.get('menu') || 1) == 1,
     });
   }
 
