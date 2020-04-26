@@ -91,7 +91,7 @@ export class WorldMap extends Component {
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
-      style: 'mapbox://styles/mapbox/light-v10?optimize=true',
+      style: 'mapbox://styles/dzianis-sheka/ck9hgwqoj1a891io0c5dl8y9z?optimize=true',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
     });
@@ -207,9 +207,9 @@ export class WorldMap extends Component {
                 worldStyle('3'),
                 '4',
                 worldStyle('4'),
-                /* other */ '#bdbdbd',
+                /* other */ '#CCCCCC',
               ],
-              '#828282',
+              '#CCCCCC',
             ],
             'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
           },
