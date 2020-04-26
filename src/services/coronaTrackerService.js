@@ -7,7 +7,7 @@ class CoronaTrackerService extends EventTargetShim {
   }
 
   async getCountry(opts) {
-    let { iso2 } = opts;
+    let { iso2, date } = opts;
     iso2 = encodeURI(iso2);
 
     if (!/^[a-zA-Z]{2}$/.test(iso2)) {

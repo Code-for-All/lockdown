@@ -3,6 +3,7 @@ import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import css from 'csz';
 import { Component } from 'preact';
 import { totalsService } from '../services/totalsService.js';
+import { format } from 'date-fns/esm';
 
 const styles = css`
   dl {
@@ -48,7 +49,7 @@ export class Totals extends Component {
   constructor() {
     super();
 
-    this.state = { items: [] };
+    this.state = { totals: {} };
   }
 
   async componentWillMount() {
@@ -56,31 +57,32 @@ export class Totals extends Component {
       this.setState({ desktop: matches });
     });
     const totals = await totalsService.getTotals();
-    const items = [
-      {
-        description: 'Countries in lockdown',
-        value: Number(totals.territories.lockdown).toLocaleString(),
-      },
-      {
-        description: 'People affected',
-        value: '0',
-      },
-      {
-        description: html`Reported <br />cases`,
-        value: Number(totals.corona.confirmed).toLocaleString(),
-      },
-      {
-        description: 'Reported deaths',
-        value: Number(totals.corona.deaths).toLocaleString(),
-      },
-    ];
 
     this.setState({
-      items: items,
+      totals: totals,
     });
   }
 
-  render(_, { items, desktop }) {
+  render({ selectedDate }, { totals, desktop }) {
+    const total = totals[selectedDate];
+    const items = [
+      {
+        description: 'Countries in lockdown',
+        value: Number(total?.territories.lockdown || 0).toLocaleString(),
+      },
+      {
+        description: 'People affected',
+        value: Number(total?.territories.affected || 0).toLocaleString(),
+      },
+      {
+        description: html`Reported <br />cases`,
+        value: Number(total?.corona.confirmed || 0).toLocaleString(),
+      },
+      {
+        description: 'Reported deaths',
+        value: Number(total?.corona.deaths || 0).toLocaleString(),
+      },
+    ];
     return html`
       <div class=${styles}>
         <dl>

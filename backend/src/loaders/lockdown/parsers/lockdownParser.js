@@ -2,10 +2,10 @@ import { getCachedCellsRange } from '../../../utils/sheet';
 import { toMeasureType, toTravelType, toInteger, isUpdateReady, toEntryDate, toLockdownType } from '../../../utils/typeHelper';
 import { TRAVEL, MEASURE } from '../../../../../shared/types';
 import { letterToColumn, columnToLetter } from 'google-spreadsheet/lib/utils';
-import DataPoint from '../types/DataPoint';
-import Measure from '../types/Measure';
-import Travel from '../types/Travel';
-import Entry from '../types/Entry';
+import Measure from '../../../types/Measure';
+import Travel from '../../../types/Travel';
+import Entry from '../../../types/Entry';
+import DataPoint from '../../../types/DataPoint';
 
 // Constants
 export const ENTRY_COLUMN_LENGTH = 5;
