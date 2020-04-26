@@ -123,7 +123,7 @@ export class App extends Component {
   __onPathChanged() {
     const country = router.url.searchParams.get('country');
     const iso2 = router.url.searchParams.get('iso2');
-    const date = new Date(router.url.searchParams.get('date')) || new Date();
+    const date = this.state.haveSelectedDate || new Date();
 
     if (country && iso2) {
       this.setState({
