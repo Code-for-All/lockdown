@@ -88,6 +88,7 @@ export class App extends Component {
   }
 
   render() {
+    const DEFAULT_SELECTED_DATE = '2020-04-26';
     return html`
       <${Header} />
 
@@ -96,7 +97,7 @@ export class App extends Component {
       </div>
 
       <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
-      <${WorldMap} selectedDate=${this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : false} />
+      <${WorldMap} selectedDate=${this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : DEFAULT_SELECTED_DATE} />
       <${TimeSlider} onChange=${this.__onSelectDate} />
       ${this.state.dialog.opened
         ? html`
