@@ -91,7 +91,7 @@ export class WorldMap extends Component {
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
-      style: 'mapbox://styles/dzianis-sheka/ck9hgwqoj1a891io0c5dl8y9z?optimize=true',
+      style: 'mapbox://styles/jfqueralt/ck9hi7wl616pz1iugty1cpeiv?optimize=true',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
     });
@@ -209,9 +209,9 @@ export class WorldMap extends Component {
                 worldStyle('4'),
                 /* other */ '#CCCCCC',
               ],
-              '#CCCCCC',
+              '#f2f2f2',
             ],
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.5],
           },
         },
         'waterway-label'
