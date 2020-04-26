@@ -88,7 +88,9 @@ export class App extends Component {
   }
 
   render() {
-    let selectedDate = this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : false;
+    let selectedDate = this.state.haveSelectedDate
+      ? toJsonString(this.state.haveSelectedDate)
+      : toJsonString(new Date());
     return html`
       <${Header} />
 

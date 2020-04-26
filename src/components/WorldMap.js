@@ -59,6 +59,8 @@ export class WorldMap extends Component {
       lng: 0,
       lat: 0,
       zoom: 2,
+      countries: [],
+      selectedDate: '2020-04-26',
     };
   }
 
@@ -83,7 +85,7 @@ export class WorldMap extends Component {
     //   return { ISO: f.properties.iso2, lockdown_status: f.properties.lockdown_status, name: f.properties.NAME };
     // });
 
-    const localData = mapData;
+    const localData = mapData[this.props.selectedDate];
 
     map.on('style.load', () => {
       let hoveredStateId = null;
@@ -199,7 +201,7 @@ export class WorldMap extends Component {
 
       function setStates(e) {
         // console.log('setStates');
-        localData[this.props.selectedDate].forEach(function (row) {
+        localData.forEach(function (row) {
           // console.log('row.ISO', row.ISO);
           // console.log('lookupData[row.ISO]', lookupData[row.ISO]);
           // console.log('row.lockdown_status', row.lockdown_status);
@@ -259,8 +261,11 @@ export class WorldMap extends Component {
     //   feature.properties.color = worldStyle(feature);
     // }
 
+    // we need to prepare a static country list not dynamically calculate them
+    const countries = mapData['2020-04-26'];
+
     this.setState({
-      countries: mapData,
+      countries,
     });
 
     await this.initMap(mapData, lookupTable);
