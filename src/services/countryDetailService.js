@@ -1,4 +1,5 @@
 import { EventTargetShim } from '../utils/EventTargetShim.js';
+import format from 'date-fns/format'
 
 class CountryDetailService extends EventTargetShim {
   constructor() {
@@ -35,8 +36,7 @@ class CountryDetailService extends EventTargetShim {
     }
 
     const travel = {};
-    const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(date);
-    var dateFormatted = `${date.getFullYear()}-${mo}-${date.getDate()}`;
+    var dateFormatted = format(date, "yyyy-MM-dd");
 
     var res = data[dateFormatted];
     for (const type of Object.keys(res.lockdown.travel)) {
