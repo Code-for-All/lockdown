@@ -69,12 +69,18 @@ export class App extends Component {
   async componentDidMount() {
     this.__onPathChanged();
     installMediaQueryWatcher(`(min-width: 960px)`, (matches) => {
-      this.setState({ isMobile: !matches });
+      this.setState({
+        isMobile: !getMatchedCSSRules
+      });
     });
   }
 
   componentWillMount() {
     router.addEventListener('path-changed', this.__onPathChanged);
+    this.setState({
+      showStatsbox: Number(router.url.searchParams.get('statsbox')) == 1,
+      showMenu: Number(router.url.searchParams.get('menu')) == 1,
+    })
   }
 
   componentWillUnmount() {
@@ -83,13 +89,23 @@ export class App extends Component {
 
   render() {
     return html`
-      <${Header} />
+      <${Header} showStatsbox=${this.state.showStatsbox}/>
 
+      ${this.state.showStatsbox
+        ? html`
+          <div class=${styles}>
+            <${Totals} />
+          </div>
+        `
+        : ''}
       <div class=${styles}>
         <${Totals} />
       </div>
 
-      <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
+      ${this.state.showMenu
+        ? html`<${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />`
+        : ''}
+      
       <${WorldMap} />
 
       ${this.state.dialog.opened
