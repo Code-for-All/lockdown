@@ -71,7 +71,7 @@ const styles = css`
   }
 `;
 
-export const Header = () => html`
+export const Header = (_) => html`
   <a class="skiplink" href="#main">Go to main content</a>
   <header class=${styles}>
     <div class="ld-logo-wrapper">
@@ -82,7 +82,7 @@ export const Header = () => html`
       </a>
     </div>
     <div class="totals">
-      <${Totals} />
+      <${Totals} selectedDate=${_.selectedDate}/>
     </div>
   </header>
 `;

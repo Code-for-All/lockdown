@@ -88,11 +88,11 @@ export class App extends Component {
   }
 
   render() {
-    let selectedDate = this.state.haveSelectedDate
+    const selectedDate = this.state.haveSelectedDate
       ? toJsonString(this.state.haveSelectedDate)
       : toJsonString(new Date());
     return html`
-      <${Header} />
+      <${Header} selectedDate=${selectedDate}/>
 
       <div class=${styles}>
         <${Totals} selectedDate=${selectedDate}/>
