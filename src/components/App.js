@@ -88,14 +88,12 @@ export class App extends Component {
   }
 
   render() {
-    const selectedDate = this.state.haveSelectedDate
-      ? toJsonString(this.state.haveSelectedDate)
-      : toJsonString(new Date());
+    const selectedDate = this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : toJsonString(new Date());
     return html`
-      <${Header} selectedDate=${selectedDate}/>
+      <${Header} selectedDate=${selectedDate} />
 
       <div class=${styles}>
-        <${Totals} selectedDate=${selectedDate}/>
+        <${Totals} selectedDate=${selectedDate} />
       </div>
 
       <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />

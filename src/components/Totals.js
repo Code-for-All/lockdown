@@ -49,7 +49,7 @@ export class Totals extends Component {
   constructor() {
     super();
 
-    this.state = { totals: {}};
+    this.state = { totals: {} };
   }
 
   async componentWillMount() {
@@ -63,7 +63,7 @@ export class Totals extends Component {
     });
   }
 
-  render({selectedDate}, { totals, desktop }) {
+  render({ selectedDate }, { totals, desktop }) {
     const total = totals[selectedDate];
     const items = [
       {
