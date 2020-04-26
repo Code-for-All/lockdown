@@ -5,16 +5,6 @@ import { Component } from 'preact';
 import { totalsService } from '../services/totalsService.js';
 
 const styles = css`
-  .key {
-    font-size: 10px;
-    font-weight: 300;
-  }
-
-  .value {
-    font-size: 20px;
-    font-weight: 700;
-  }
-
   dl {
     display: flex;
     height: 100%;
@@ -36,14 +26,11 @@ const styles = css`
 
   dt {
     display: block;
-    font-size: 10px;
-    font-weight: 300px;
   }
 
   dd {
     margin-left: 0px;
     display: block;
-    font-weight: 700;
   }
 
   div:not(:last-of-type)::after {
@@ -100,8 +87,8 @@ export class Totals extends Component {
           ${(desktop ? items : items.slice(0, 2)).map(
             (item) => html`
               <div>
-                <dt>${item.description}</dt>
-                <dd>${item.value}</dd>
+                <dt class="ld-font-light">${item.description}</dt>
+                <dd class="ld-font-front">${item.value}</dd>
               </div>
             `
           )}
