@@ -13,9 +13,9 @@ Date.prototype.toSliderString = function () {
   newDate[2] = year;
   return newDate.join('/');
 };
-Date.prototype.toJsonString = function(){
+Date.prototype.toJsonString = function () {
   return this.toISOString().split('T')[0];
-}
+};
 
 const selectStyles = css`
     @keyframes fadeOutLeft {

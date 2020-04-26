@@ -58,7 +58,7 @@ const styles = css`
 export class App extends Component {
   constructor() {
     super();
-    this.state = { dialog: { opened: false, template: {}, title: '' }, haveSelectedDate:false };
+    this.state = { dialog: { opened: false, template: {}, title: '' }, haveSelectedDate: false };
 
     this.__onPathChanged = this.__onPathChanged.bind(this);
     this.__closeCountryInfo = this.__closeCountryInfo.bind(this);
@@ -92,7 +92,7 @@ export class App extends Component {
       </div>
 
       <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
-      <${WorldMap} selectedDate=${this.state.haveSelectedDate?this.state.haveSelectedDate.toJsonString():false} />
+      <${WorldMap} selectedDate=${this.state.haveSelectedDate ? this.state.haveSelectedDate.toJsonString() : false} />
       <${TimeSlider} onChange=${this.__onSelectDate} />
       ${this.state.dialog.opened
         ? html`
@@ -146,7 +146,7 @@ export class App extends Component {
     debouncedCloseDialog();
     this.__closeCountryInfo();
   }
-  __onSelectDate(selectedDate){
-    this.setState({haveSelectedDate:selectedDate});
+  __onSelectDate(selectedDate) {
+    this.setState({ haveSelectedDate: selectedDate });
   }
 }
