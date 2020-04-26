@@ -31,10 +31,11 @@ export default class SnapshotsService{
         entry.flight = new Travel();
         entry.sea = new Travel();
         
-        this.mergeDatapoints(entry.measure, ranges.map(r => r.measures));
-        this.mergeDatapoints(entry.land, ranges.map(r => r.travel.land));
-        this.mergeDatapoints(entry.flight, ranges.map(r => r.travel.flight));
-        this.mergeDatapoints(entry.sea, ranges.map(r => r.travel.sea));
+        var allMeasures = ranges.map(r => r.measures);
+        this.mergeDatapoints(entry.measure, allMeasures, "measure");
+        this.mergeDatapoints(entry.land, allMeasures, "land");
+        this.mergeDatapoints(entry.flight, allMeasures, "flight");
+        this.mergeDatapoints(entry.sea, allMeasures, "sea");
 
         let result = new Snapshot();
         result.entry = entry;
@@ -47,12 +48,13 @@ export default class SnapshotsService{
      * @param {Entry} result 
      * @param {Object[]} containers 
      */
-    mergeDatapoints(result, containers){
+    mergeDatapoints(result, containers, prefix){
         containers.forEach(container => {
             if(container){
                 container.forEach(el => {
-                    if(el.value){
-                        result[el.label] = el.value
+                    let keys = el.label.split('.');
+                    if(keys[0] === prefix && el.value){
+                        result[keys[1]] = el.value
                     }
                 })
                 // Object.keys(container).forEach(key => {

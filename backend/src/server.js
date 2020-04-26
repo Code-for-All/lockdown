@@ -1,4 +1,6 @@
-require('dotenv').config();
+//require('dotenv').config();
+
+import { connect } from './repositories';
 
 const httpContext = require('express-http-context');
 const express = require('express');
@@ -171,8 +173,12 @@ function run() {
     next();
   });
 
-  routerApi.get('/days/', (req, res, next) => {
-    api.getDayList(dataStore).then(forward.bind(null, res, next)).catch(next);
+  routerApi.get('/snapshot/:iso3/:day', (req, res, next) => {
+    connect().then(database => {
+      database.snapshotRepository
+        .getByTerritoryAndDate(req.params.iso3, req.params.day)
+        .then(result =>res.json(result))
+    })
   });
 
   routerApi.get('/days/:day', validateDate, (req, res, next) => {

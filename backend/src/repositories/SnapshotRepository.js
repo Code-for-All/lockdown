@@ -20,6 +20,19 @@ export default class SnapshotRepository{
 
     /**
      * 
+     * @param {string} measureLabel 
+     * @param {Date} date 
+     */
+    getByMeasureAndDate(measureLabel, date){
+        return this.model.find({
+            "measures.label": measureLabel,
+            start_date: {$lte: date},
+            end_date: {$gte: date}
+        });
+    }
+
+    /**
+     * 
      * @param {*} snaphot 
      */
     insert(snaphot){
@@ -30,7 +43,21 @@ export default class SnapshotRepository{
      * 
      * @param {[]} snaphot 
      */
-    insertAll(snaphots){
+    insertMany(snaphots){
         return this.model.insertMany(snaphots);
+    }
+
+    insertManyOrUpdate(snapshots){
+        return snapshots.map(s => {
+            return this.model.update({
+                unique_id: s.unique_id,
+                start_date: s.start_date,
+                end_date: s.end_date
+            }, s, {upsert: true})
+        });
+    }
+
+    clear(){
+        return this.model.remove();
     }
 }
