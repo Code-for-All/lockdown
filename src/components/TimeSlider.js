@@ -54,6 +54,9 @@ const selectStyles = css`
           transform: translate3d(0, 0, 0);
         }
       }
+    .dark &{
+      background-color: rgb(48, 49, 54);
+    }
     & {
         position: absolute;
         bottom: 80px;
@@ -225,6 +228,9 @@ const rangeStyles = css`
   }
 `;
 const tooltipCss = css`
+  .dark &{
+    color: white;
+  }
   & {
     font-weight: bold;
     font-size: 14px;
@@ -249,6 +255,13 @@ const tooltipCss = css`
   }
 `;
 const sliderSelector = css`
+  .dark & span{
+    color: white;
+    background: rgb(48, 49, 54);
+    &::after {
+      background-color: rgb(48, 49, 54);
+    }
+  }
   & {
     position: absolute;
     @media (max-width: 960px) {
