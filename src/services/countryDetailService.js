@@ -13,42 +13,54 @@ class CountryDetailService extends EventTargetShim {
     if (!/^[a-zA-Z]{2}$/.test(iso2)) {
       return;
     }
-    let cacheKey = `${iso2}${date}`;
+    let cacheKey = `${iso2}`;
+
     if (opts.forceRefresh || this._shouldInvalidate() || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
         this.cache[cacheKey] = {};
-        const res = await (await fetch(new URL(`http://localhost:3000/status/${iso2}/${date}`, import.meta.url))).json();
 
-        const travel = {};
+        const res = await (await fetch(new URL(`../../data/territories/${iso2}.json`, import.meta.url))).json();
 
-        for (const type of Object.keys(res.lockdown.travel)) {
-          for (const { label, value } of res.lockdown.travel[type]) {
-            if (Array.isArray(travel[label])) {
-              travel[label].push(value);
-            } else {
-              travel[label] = [value];
-            }
-          }
-        }
+        this.cache[cacheKey] = res;
 
-        this.cache[cacheKey] = {
-          status: 'success',
-          date: res.lockdown.date,
-          measures: res.lockdown.measures,
-          travel,
-          max_gathering: res.lockdown.max_gathering,
-        };
-        this.__lastUpdate = Date.now();
-        return this.cache[cacheKey];
       } catch (_) {
         this.cache[cacheKey] = {
           status: 'failed',
         };
       }
-      this.dispatchEvent(new Event('change'));
-      return this.cache[cacheKey];
     }
-    return this.cache[cacheKey];
+      var data = this.cache[cacheKey];
+      if (data.status === "failed") {
+        this.dispatchEvent(new Event('change'));
+        return data;
+      }
+
+      const travel = {};
+      const mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(date)
+      var dateFormatted =  `${date.getFullYear()}-${mo}-${date.getDate()}`;
+
+      var res = data[dateFormatted];
+      for (const type of Object.keys(res.lockdown.travel)) {
+        for (const { label, value } of res.lockdown.travel[type]) {
+          if (Array.isArray(travel[label])) {
+            travel[label].push(value);
+          } else {
+            travel[label] = [value];
+          }
+        }
+      }
+
+      var result = {
+        status: 'success',
+        date: res.lockdown.date,
+        measures: res.lockdown.measures,
+        travel,
+        max_gathering: res.lockdown.max_gathering,
+      };
+      this.__lastUpdate = Date.now();
+      this.dispatchEvent(new Event('change'));
+      return result;
+    
   }
 }
 
