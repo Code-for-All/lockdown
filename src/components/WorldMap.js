@@ -73,8 +73,8 @@ export class WorldMap extends Component {
     }
 
     this.state = {
-      lng: coords[0],
-      lat: coords[1],
+      lng: coords[1],
+      lat: coords[0],
       zoom,
     };
   }
