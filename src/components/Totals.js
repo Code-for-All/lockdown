@@ -63,7 +63,7 @@ export class Totals extends Component {
       },
       {
         description: 'People affected',
-        value: '0',
+        value: Number(totals.territories.affected).toLocaleString(),
       },
       {
         description: html`Reported <br />cases`,

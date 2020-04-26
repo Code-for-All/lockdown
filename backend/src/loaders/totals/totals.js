@@ -17,7 +17,8 @@ export default async function loadData(lockdownStatusByTerritory) {
       deaths: corona.deaths,
     },
     territories: {
-      lockdown: totalLockdowns
+      lockdown: totalLockdowns.total,
+      affected: totalLockdowns.affected
     }
   });
 }

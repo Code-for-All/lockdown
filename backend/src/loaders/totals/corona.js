@@ -28,6 +28,7 @@ const params = {
 }
 
 export async function sumCorona() {
+  debugger;
   const url = 'https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/COVID_19_CasesByCountry(pt)_VIEW/FeatureServer/0/query';
   const response = await axios.get(url, {
     params
