@@ -22,7 +22,7 @@ const styles = css`
     position: fixed;
     width: 90%;
     padding-top: 20px;
-    max-width: 400px;
+    max-width: 440px;
     left: calc(50% + 200px);
     top: 50%;
     transform: translate(-50%, -50%);
@@ -30,7 +30,7 @@ const styles = css`
     background-color: var(--ld-bg);
     color: var(--ld-text);
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
-    border-radius: 5px;
+    border-radius: 40px;
   }
 
   .ld-dialog--header {

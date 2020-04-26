@@ -2,7 +2,7 @@ import { html } from 'htm/preact';
 import { Component, createRef } from 'preact';
 import css from 'csz';
 
-import DatePicker from './DateRangePicker.js';
+import DatePicker from './DatePicker.js';
 
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
 Date.prototype.toSliderString = function () {
@@ -67,7 +67,7 @@ const selectStyles = css`
         width: calc(80vw - 400px);
         min-height: 10vh;
         background-color: white;
-        padding: 0px 6%
+        padding: 0px 6%;
         padding-top: 6%;
         padding-bottom: 1.5%;
         border-radius: 20px;
@@ -79,7 +79,6 @@ const selectStyles = css`
         box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
         @media (max-width: 960px) {
             & {
-              /*top: 65vh;*/
               bottom: 80px;
               left:0;
               right:0;
@@ -88,10 +87,15 @@ const selectStyles = css`
               padding-top: 11vh;
               padding-bottom: 3%;
             }
+        }
         & > .overlay{
           height: 100vh;
-          top: calc(-100vh + 100% + 20px);
-          left: -6%;
+          @media (max-width: 960px) {
+            top: calc(-100vh + 100% + 20px);
+            left: -6%;
+          }
+          top: calc(-100vh + 100% + 80px);
+          left: -17%;
         }
         & > .calendar{
             top: 0;
@@ -137,14 +141,11 @@ const rangeStyles = css`
     width: 100%;
     height: 6.8px;
     cursor: pointer;
-    /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
     background: rgba(201, 201, 201, 0.733);
     border-radius: 0px;
     border: 0px solid rgba(1, 1, 1, 0);
   }
   input[type='range']::-webkit-slider-thumb {
-    /*box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;*/
-    /*border: 1.8px solid #00001e;*/
     -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     -moz-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
@@ -170,14 +171,11 @@ const rangeStyles = css`
     width: 100%;
     height: 6.8px;
     cursor: pointer;
-    /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
     background: rgba(201, 201, 201, 0.733);
     border-radius: 0px;
     border: 0px solid rgba(1, 1, 1, 0);
   }
   input[type='range']::-moz-range-thumb {
-    /*box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;*/
-    /*border: 1.8px solid #00001e;*/
     -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     -moz-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
@@ -202,17 +200,13 @@ const rangeStyles = css`
     background: #bcbcbc;
     border: 0px solid rgba(1, 1, 1, 0);
     border-radius: 0px;
-    /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
   }
   input[type='range']::-ms-fill-upper {
     background: rgba(201, 201, 201, 0.733);
     border: 0px solid rgba(1, 1, 1, 0);
     border-radius: 0px;
-    /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
   }
   input[type='range']::-ms-thumb {
-    /*box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;*/
-    /*border: 1.8px solid #00001e;*/
     -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     -moz-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
@@ -232,35 +226,6 @@ const rangeStyles = css`
   input[type='range']:focus::-ms-fill-upper {
     background: #d6d6d6;
   }
-  /*input[type=range]::before{
-      content: "";
-      position: absolute;
-      height: 38px;
-      width: 38px;
-      top: -16px;
-      border-radius: 38px;
-      background: #ffffff;
-      cursor: pointer;
-      -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-      -moz-box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-      box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-      pointer-events: none;
-  }
-  input[type=range]::after{
-    content: "";
-    position: absolute;
-    height: 38px;
-    width: 38px;
-    top: -16px;
-    right: 0px;
-    border-radius: 38px;
-    background: #ffffff;
-    cursor: pointer;
-    -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-    -moz-box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-    box-shadow: 0px 1px 5px 2.5px rgba(0,0,0,0.45);
-    pointer-events: none;
-  }*/
 `;
 const tooltipCss = css`
   & {
@@ -268,24 +233,37 @@ const tooltipCss = css`
     font-size: 14px;
     color: #8c8c8c;
     position: absolute;
-    top: 40%;
+    top: 42%;
+    @media (max-width: 960px) {
+      top: 40%;
+      &.first {
+        left: calc(12% - 15px);
+      }
+      &.last {
+        right: calc(12% - 15px);
+      }
+    }
     &.first {
-      left: calc(12% - 15px);
+      left: calc(10% - 15px);
     }
     &.last {
-      right: calc(12% - 15px);
+      right: calc(10% - 15px);
     }
   }
 `;
 const sliderSelector = css`
   & {
     position: absolute;
-    top: 20%;
+    @media (max-width: 960px) {
+      top: 20%;
+    }
+    top: 30%;
     left: 24.5%;
     z-index: 999;
     width: fit-content;
     transform: translate(-24.5%, 0);
     background: #ffffff;
+    font-size: 1rem;
     & span {
       border: 2px solid #8c8c8c;
       border-radius: 7px;
@@ -318,7 +296,6 @@ const popBtn = css`
     position: absolute;
     height: 38px;
     width: 38px;
-    bottom: calc(10% - 1px);
     outline: none;
     border: 0px;
     border-radius: 38px;
@@ -328,11 +305,30 @@ const popBtn = css`
     -moz-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     z-index: 9;
+    bottom: calc(16% - 1px);
+    @media (max-width: 960px) {
+      bottom: calc(10% - 1px);
+    }
+    @media (max-width: 960px) and (min-width: 576px) {
+      bottom: calc(17% - 1px);
+      &.first {
+        left: calc(12% + 11px) !important;
+      }
+      &.last {
+        right: calc(12% + 11px) !important;
+      }
+    }
     &.first {
-      left: calc(12% + 4px);
+      @media (max-width: 960px) {
+        left: calc(12% + 4px);
+      }
+      left: calc(6% + 38px);
     }
     &.last {
-      right: calc(12% + 4px);
+      @media (max-width: 960px) {
+        right: calc(12% + 4px);
+      }
+      right: calc(6% + 38px);
     }
     &:active {
       background-color: rgb(199, 198, 198);
@@ -453,7 +449,7 @@ export default class CountryInfo extends Component {
   }
   render(_) {
     return html`
-      <div class="${selectStyles} ${/*cssStyles*/ rangeStyles}">
+      <div class="${selectStyles} ${rangeStyles}">
         <${DatePicker}
           close=${this.calendarWillClose}
           onSelect=${this.onChooseDate}

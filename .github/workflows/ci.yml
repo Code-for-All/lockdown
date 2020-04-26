@@ -15,6 +15,10 @@ jobs:
         run: |
           npm install
 
+      - name: Format
+        run: |
+          npm run format
+
       - name: Lint
         run: |
           npm run lint
@@ -22,3 +26,11 @@ jobs:
       - name: Build
         run: |
           npm run build
+
+      - name: Lighthouse
+        uses: treosh/lighthouse-ci-action@v2
+        with:
+          configPath: './.github/workflows/lighthouse-ci.json'
+          budgetPath: ./budget.json # test performance budgets
+          uploadArtifacts: true # save results as an action artifacts
+          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
