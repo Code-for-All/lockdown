@@ -37,19 +37,19 @@ function worldStyle(lockdown_status) {
   let value;
   switch (lockdown_status) {
     case '1':
-      value = '#9fc184';
+      value = '#93C47D';
       break;
     case '2':
-      value = '#769de2';
+      value = '#6D9EEB';
       break;
     case '3':
-      value = '#d36d6b';
+      value = '#E06666';
       break;
     case '4':
-      value = '#ebb577';
+      value = '#F6B26B';
       break;
     default:
-      value = '#828282';
+      value = '#CCCCCC';
   }
 
   return value;
@@ -211,7 +211,7 @@ export class WorldMap extends Component {
               ],
               '#828282',
             ],
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
           },
         },
         'waterway-label'
