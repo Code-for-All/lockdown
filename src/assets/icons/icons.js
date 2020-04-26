@@ -10,5 +10,7 @@ export { loading } from './loading.svg.js';
 export { travelLand } from './travel-land.svg.js';
 export { travelSea } from './travel-sea.svg.js';
 export { travelFlight } from './travel-flight.svg.js';
+export { arrowLeft } from './arrow-left';
+export { arrowRight } from './arrow-right';
 
 export { home, citymovement, religion, work, military, academia, shops, electricity, water, internet } from './measures.svg.js';
