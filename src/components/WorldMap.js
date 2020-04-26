@@ -364,7 +364,6 @@ export class WorldMap extends Component {
     `;
   }
   componentDidUpdate(previousProps, previousState, snapshot) {
-    console.log('componentDidUpdate', this.props.selectedDate);
     if (this.state.isMapReady) {
       this.updateMap(this.state.mapData, this.state.lookupTable, this.props.selectedDate);
     }

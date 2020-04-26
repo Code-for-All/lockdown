@@ -136,6 +136,7 @@ const rangeStyles = css`
   }
   input[type='range']:focus {
     outline: none;
+    box-shadow: 0 0 0px 0px var(--ld-focus) !important;
   }
   input[type='range']::-webkit-slider-runnable-track {
     width: 100%;
@@ -228,7 +229,7 @@ const rangeStyles = css`
   }
 `;
 const tooltipCss = css`
-  .dark &{
+  .dark & {
     color: white;
   }
   & {
@@ -255,7 +256,7 @@ const tooltipCss = css`
   }
 `;
 const sliderSelector = css`
-  .dark & span{
+  .dark & span {
     color: white;
     background: rgb(48, 49, 54);
     &::after {
@@ -396,11 +397,14 @@ export default class CountryInfo extends Component {
     let newPosition = widthSpaces[newValue];
     sliderDOM.style.left = `${newPosition}%`;
     sliderDOM.style.transform = `translate(-${newPosition}%, 0)`;
-    this.setState({
-      currentDateValue: newValue,
-      currentPosition: newPosition,
-      currentSelectedDay: toSliderString(currentSliderRange[newValue]),
-    });
+    this.setState(
+      {
+        currentDateValue: newValue,
+        currentPosition: newPosition,
+        currentSelectedDay: toSliderString(currentSliderRange[newValue]),
+      },
+      this.submitChanges
+    );
   }
   onBtnClick(range) {
     // ? I disabled the calendar just for the hackaton period
@@ -474,7 +478,6 @@ export default class CountryInfo extends Component {
         <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
         <input
           ref=${this.range}
-          onChange=${this.submitChanges}
           onInput=${this.onSliderChange}
           type="range"
           min="0"
