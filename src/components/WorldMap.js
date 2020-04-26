@@ -33,7 +33,7 @@ export class WorldMap extends Component {
 
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, leaflet] = await Promise.all([
-      fetch(new URL('../../data/worldmap.json', import.meta.url)).then((r) => r.json()),
+      fetch(new URL('../../data/worldMap/26.04.2020.json', import.meta.url)).then((r) => r.json()),
       import('leaflet/dist/leaflet-src.esm.js'),
     ]);
     const { Map, Browser, geoJSON, layerGroup, tileLayer } = leaflet;

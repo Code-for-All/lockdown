@@ -13,6 +13,7 @@ export function appendLockdownStatus(lockdownStatusByTerritory) {
   // TODO: changes needed for time slider
   baseData['features'].forEach(feature => {
     let lockdownStatus = lockdownStatusByTerritory[feature.properties.iso2]?.lockdown?.lockdown_status;
+
     updatedFeatures.push({
       ...feature,
       properties: {
@@ -29,6 +30,9 @@ export function appendLockdownStatus(lockdownStatusByTerritory) {
 }
 
 export default async function loadData(lockdownStatusByTerritory) {
-  const finalWorldmapData = appendLockdownStatus(lockdownStatusByTerritory);
-  writeJSON('worldmap', finalWorldmapData);
+  Object.keys(lockdownStatusByTerritory).forEach(key => {
+    var lockdown = lockdownStatusByTerritory[key];
+    const statusForDate = appendLockdownStatus(lockdown);
+    writeJSON(`worldMap/${key}`, statusForDate);
+  })
 }

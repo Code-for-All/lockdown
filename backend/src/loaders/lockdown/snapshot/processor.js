@@ -102,8 +102,6 @@ function fillRanges(ranges, entry) {
   })
 }
 
-
-
 function getDataPoint(entry, key) {
   const dataPoint = get(entry, key);
 

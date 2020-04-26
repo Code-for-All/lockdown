@@ -71,9 +71,7 @@ export async function batchGetTerritoriesEntryData(territories, database) {
       // TODO: change this to support multiple entries after MVP 
       // Compares current date in the same format with entry to get latest
       // TODO: changes needed for time slider
-      let currentDate = moment();
-      let currentDatePlusOne = moment().add(1, 'days');
-      let snapshots = getSnapshots(entries, GLOBAL_FIRST_DATE, GLOBAL_LAST_DATE);
+      let snapshots = getSnapshots(entries);
       let currentSnapshot = snapshots[0];
 
       if (snapshots.length > 0) {
@@ -89,7 +87,7 @@ export async function batchGetTerritoriesEntryData(territories, database) {
         lockdown: {
           // TODO: change this to support multiple entries after MVP
           // TODO: changes needed for time slider
-          ...currentSnapshot
+          snapshots
           // ...currentEntry
         }
       });
@@ -122,19 +120,29 @@ export default async function loadData() {
 
   // Load summarized datafile
   // TODO: changes needed for time slider
+
+  var startDate = moment().add(-2, "weeks");
+  var endDate = moment().add(8, 'weeks');
+
   const summarizedTerritories = {};
+  for (let currentDate of moment.range(startDate, endDate).by('days')) {
+    let formattedDate = currentDate.format("DD.MM.YYYY");
+    let currentDateLockdown = summarizedTerritories[formattedDate] = {};
+    territories.forEach(territory => {
 
-  let snapshots = await database.snapshotRepository
-    .getByMeasureAndDate("measure.lockdown_status", moment().toDate)
-    .toArray();
+      let snapshots = territory
+        .lockdown?.snapshots?.find(s => moment(s.start_date).isBefore(currentDate) && moment(s.end_date).isAfter(currentDate)
+          && s.measures.find(m => m.label == "measure.lockdown_status"));
+      let measure = snapshots?.measures?.find(m => m.label == "measure.lockdown_status");
+      currentDateLockdown[territory.isoCode] = {
+        lockdown: {
+          lockdown_status: measure?.value || null
+        }
+      };
 
-  snapshots.forEach(s => {
-    summarizedTerritories[s.iso2] = {
-      lockdown: {
-        lockdown_status: s.measures.find(m => m.label == 'measure.lockdown_status').value
-      }
-    }
-  });
+    });
+   writeJSON(`countryLockdowns/${formattedDate}`, currentDateLockdown);
+  }
 
   // territories.forEach((territory) => {
   //   let measures = territory['lockdown']['measures'];
@@ -145,7 +153,6 @@ export default async function loadData() {
   //     }
   //   };
   // });
-
   return {
     lockdownTerritories: territories,
     lockdownStatusByTerritory: summarizedTerritories
