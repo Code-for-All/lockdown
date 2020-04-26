@@ -37,19 +37,19 @@ function worldStyle(lockdown_status) {
   let value;
   switch (lockdown_status) {
     case '1':
-      value = '#9fc184';
+      value = '#6fcf97';
       break;
     case '2':
-      value = '#769de2';
+      value = '#7aaeff';
       break;
     case '3':
-      value = '#d36d6b';
+      value = '#eb5757';
       break;
     case '4':
-      value = '#ebb577';
+      value = '#f2994a';
       break;
     default:
-      value = '#828282';
+      value = '#CCCCCC';
   }
 
   return value;
@@ -91,7 +91,7 @@ export class WorldMap extends Component {
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
-      style: 'mapbox://styles/mapbox/light-v10?optimize=true',
+      style: 'mapbox://styles/jfqueralt/ck9hi7wl616pz1iugty1cpeiv?optimize=true',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
     });
@@ -207,11 +207,11 @@ export class WorldMap extends Component {
                 worldStyle('3'),
                 '4',
                 worldStyle('4'),
-                /* other */ '#bdbdbd',
+                /* other */ '#CCCCCC',
               ],
-              '#828282',
+              ['case', ['boolean', ['feature-state', 'hover'], false], 'rgba(204,204,204,0.5)', 'rgba(204,204,204,0)'],
             ],
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
           },
         },
         'waterway-label'
