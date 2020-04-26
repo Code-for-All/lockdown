@@ -309,12 +309,12 @@ const popBtn = css`
     @media (max-width: 960px) {
       bottom: calc(10% - 1px);
     }
-    @media (max-width: 960px) and (min-width: 576px) { 
+    @media (max-width: 960px) and (min-width: 576px) {
       bottom: calc(17% - 1px);
       &.first {
         left: calc(12% + 11px) !important;
       }
-      &.last{
+      &.last {
         right: calc(12% + 11px) !important;
       }
     }
