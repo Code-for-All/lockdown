@@ -15,12 +15,12 @@ connect().then(database => {
 
     const snapshotService = new SnapshotsService(database);
     
-    app.listen(3000, function () {
-        console.log('listening on 3000')
+    app.listen(process.env.PORT || 3000, function () {
+        console.log(`listening on ${process.env.PORT || 3000}`)
     });
     
-    app.get('/status/:iso2/:date', function (req, res) {
-        let iso = req.params.iso2;
+    app.get('/status/:iso/:date', function (req, res) {
+        let iso = req.params.iso;
         let date = new Date(req.params.date);
 
         cacheService.get(`${iso}${date}`, () => {

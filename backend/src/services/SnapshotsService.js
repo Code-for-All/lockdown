@@ -57,9 +57,9 @@ export default class SnapshotsService {
      * @param {Date} date 
      * @returns {Snapshot}
      */
-    async getSnapshot(iso2, date) {
+    async getSnapshot(iso, date) {
         let ranges = await this.database.snapshotRepository
-            .getByTerritoryAndDate(iso2, date)
+            .getByTerritoryAndDate(iso, date)
             .toArray();
 
         let entry = {};

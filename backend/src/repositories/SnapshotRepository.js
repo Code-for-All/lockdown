@@ -10,12 +10,17 @@ export default class SnapshotRepository{
      * @param {Date} date 
      * @returns {Promise<Array<Entry>>}
      */
-    getByTerritoryAndDate(iso2, date){
-        return this.model.find({
-            iso2: iso2,
+    getByTerritoryAndDate(iso, date){
+        const query = {
             start_date: {$lte: date},
             end_date: {$gte: date}
-        });
+        };
+        if(iso.length == 2){
+            query.iso2 = iso;
+        }else{
+            query.iso3 = iso;
+        }
+        return this.model.find(query);
     }
 
     /**
