@@ -1,6 +1,7 @@
 import { html } from 'htm/preact';
 import css from 'csz';
 import { Component } from 'preact';
+import format from 'date-fns/format';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import { WorldMap } from './WorldMap.js';
 import { Header } from './Header.js';
@@ -55,6 +56,9 @@ const styles = css`
   }
 `;
 
+function toJsonString(date) {
+  return format(date, 'yyyy-MM-dd');
+}
 export class App extends Component {
   constructor() {
     super();
@@ -92,7 +96,7 @@ export class App extends Component {
       </div>
 
       <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
-      <${WorldMap} selectedDate=${this.state.haveSelectedDate ? this.state.haveSelectedDate.toJsonString() : false} />
+      <${WorldMap} selectedDate=${this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : false} />
       <${TimeSlider} onChange=${this.__onSelectDate} />
       ${this.state.dialog.opened
         ? html`

@@ -1,21 +1,15 @@
 import { html } from 'htm/preact';
 import { Component, createRef } from 'preact';
 import css from 'csz';
+import format from 'date-fns/format';
 
 import DatePicker from './DatePicker.js';
 
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
-Date.prototype.toSliderString = function () {
-  let oldDate = this.toISOString().split('T')[0];
-  let newDate = oldDate.split('-');
-  let year = newDate[0];
-  newDate[0] = newDate[2];
-  newDate[2] = year;
-  return newDate.join('/');
-};
-Date.prototype.toJsonString = function () {
-  return this.toISOString().split('T')[0];
-};
+
+function toSliderString(date) {
+  return format(date, 'dd/MM/yyyy');
+}
 
 const selectStyles = css`
     @keyframes fadeOutLeft {
@@ -377,9 +371,9 @@ export default class CountryInfo extends Component {
     }
     this.setState({
       currentSliderRange: days,
-      currentSelectedDay: date.toSliderString(),
-      firstDay: days[0].toSliderString(),
-      lastDay: days[days.length - 1].toSliderString(),
+      currentSelectedDay: toSliderString(date),
+      firstDay: toSliderString(days[0]),
+      lastDay: toSliderString(days[days.length - 1]),
     });
   }
   onSliderChange(e) {
@@ -392,14 +386,17 @@ export default class CountryInfo extends Component {
     this.setState({
       currentDateValue: newValue,
       currentPosition: newPosition,
-      currentSelectedDay: currentSliderRange[newValue].toSliderString(),
+      currentSelectedDay: toSliderString(currentSliderRange[newValue]),
     });
   }
   onBtnClick(range) {
+    // ? I disabled the calendar just for the hackaton period
+    /*
     this.setState({
       showDatePicker: true,
       datePickerPosition: range,
     });
+    */
   }
   onChooseDate(date) {
     const sliderDOM = this.dateRef.current;
@@ -420,9 +417,9 @@ export default class CountryInfo extends Component {
     sliderDOM.style.transform = `translate(-${24.5}%, 0)`;
     this.setState({
       currentSliderRange: days,
-      currentSelectedDay: date.toSliderString(),
-      firstDay: days[0].toSliderString(),
-      lastDay: days[days.length - 1].toSliderString(),
+      currentSelectedDay: toSliderString(date),
+      firstDay: toSliderString(days[0]),
+      lastDay: toSliderString(days[days.length - 1]),
       currentDateValue: 2,
       currentPosition: 24.5,
     });
