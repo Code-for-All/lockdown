@@ -83,7 +83,7 @@ export const Header = (_) => html`
     </div>
     ${_.showStatsbox
       ? html`<div class="totals">
-          <${Totals} selectedDate=${_.selectedDate}/>
+          <${Totals} selectedDate=${_.selectedDate} />
         </div> `
       : ''}
   </header>

@@ -96,7 +96,7 @@ export class App extends Component {
   render() {
     const selectedDate = this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : toJsonString(new Date());
     return html`
-      <${Header} selectedDate=${selectedDate} showStatsbox=${this.state.showStatsbox}/>
+      <${Header} selectedDate=${selectedDate} showStatsbox=${this.state.showStatsbox} />
 
       ${this.state.showStatsbox
         ? html`
@@ -113,7 +113,7 @@ export class App extends Component {
         ? html`<${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />`
         : ''}
 
-      <${WorldMap} selectedDate=${selectedDate}/>
+      <${WorldMap} selectedDate=${selectedDate} />
       <${TimeSlider} onChange=${this.__onSelectDate} />
 
       ${this.state.dialog.opened
