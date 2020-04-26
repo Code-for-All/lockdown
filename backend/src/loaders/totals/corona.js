@@ -28,26 +28,14 @@ const params = {
 }
 
 export async function sumCorona() {
-  debugger;
-  const url = 'https://services.arcgis.com/5T5nSi527N4F7luB/ArcGIS/rest/services/COVID_19_CasesByCountry(pt)_VIEW/FeatureServer/0/query';
+  const url = 'https://api.covid19api.com/world/total';
   const response = await axios.get(url, {
     params
   });
   const data = response.data;
-  const features = data.features;
-  
-  var total_confirmed = 0;
-  var total_death = 0;
-
-  features.forEach((feature) => {
-    total_death += feature['attributes']['cum_death'];
-    total_confirmed += feature['attributes']['cum_conf'];
-    // TODO: anything to do with time?
-    // feature['attributes']['DateOfDataEntry']
-  });
 
   return {
-    'confirmed': total_confirmed,
-    'deaths': total_death
+    'confirmed': data.TotalConfirmed,
+    'deaths': data.TotalDeaths
   }
 }
