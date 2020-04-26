@@ -209,7 +209,7 @@ export class WorldMap extends Component {
                 worldStyle('4'),
                 /* other */ '#CCCCCC',
               ],
-              '#f2f2f2',
+              ['case', ['boolean', ['feature-state', 'hover'], false], 'rgba(204,204,204,0.5)', 'rgba(204,204,204,0)'],
             ],
             'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.5],
           },
