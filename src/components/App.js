@@ -56,7 +56,7 @@ const styles = css`
   }
 `;
 
-function toJsonString(date){
+function toJsonString(date) {
   return format(date, 'yyyy-MM-dd');
 }
 export class App extends Component {
