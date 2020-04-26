@@ -199,7 +199,7 @@ export class WorldMap extends Component {
 
       function setStates(e) {
         // console.log('setStates');
-        localData.forEach(function (row) {
+        localData[this.props.selectedDate].forEach(function (row) {
           // console.log('row.ISO', row.ISO);
           // console.log('lookupData[row.ISO]', lookupData[row.ISO]);
           // console.log('row.lockdown_status', row.lockdown_status);
@@ -250,7 +250,7 @@ export class WorldMap extends Component {
 
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
-      fetch(new URL('../../data/countryLockdowns/2020-05-20.json', import.meta.url)).then((r) => r.json()),
+      fetch(new URL('../../data/lockdown.json', import.meta.url)).then((r) => r.json()),
       fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
     ]);
 
