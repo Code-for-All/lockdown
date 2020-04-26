@@ -107,7 +107,7 @@ const MEASURES = [
 function createMeasures(apiMeasures) {
   return MEASURES.map((measure) => {
     const apiData = apiMeasures?.find((m) => m.label === measure.id);
-    
+
     return {
       ...measure,
       value: MEASURE_VALUES[apiData.value] ?? MEASURE_VALUES[4],
