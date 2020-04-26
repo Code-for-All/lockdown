@@ -14,8 +14,7 @@
     "axios": "^0.19.2",
     "google-spreadsheet": "^3.0.10",
     "moment-range": "^4.0.2",
-    "moment-timezone": "^0.5.28",
-    "mongodb": "^3.5.6"
+    "moment-timezone": "^0.5.28"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

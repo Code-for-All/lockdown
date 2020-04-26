@@ -58,13 +58,14 @@ const styles = css`
 export class App extends Component {
   constructor() {
     super();
-    this.state = { dialog: { opened: false, template: {}, title: '' } };
+    this.state = { dialog: { opened: false, template: {}, title: '' }, haveSelectedDate: false };
 
     this.__onPathChanged = this.__onPathChanged.bind(this);
     this.__closeCountryInfo = this.__closeCountryInfo.bind(this);
     this.__closeDialog = this.__closeDialog.bind(this);
     this.__showDialog = this.__showDialog.bind(this);
     this.__showDialogRoute = this.__showDialogRoute.bind(this);
+    this.__onSelectDate = this.__onSelectDate.bind(this);
   }
 
   async componentDidMount() {
@@ -91,8 +92,8 @@ export class App extends Component {
       </div>
 
       <${Menu} opened=${this.state.dialog.opened} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />
-      <${WorldMap} />
-      <${TimeSlider} />
+      <${WorldMap} selectedDate=${this.state.haveSelectedDate ? this.state.haveSelectedDate.toJsonString() : false} />
+      <${TimeSlider} onChange=${this.__onSelectDate} />
       ${this.state.dialog.opened
         ? html`
             <${Lazy} component=${() => import('../components/Dialog.js')} props=${{ ...this.state.dialog, onClose: this.__closeDialog }} />
@@ -118,12 +119,13 @@ export class App extends Component {
   __onPathChanged() {
     const country = router.url.searchParams.get('country');
     const iso2 = router.url.searchParams.get('iso2');
+    const date = new Date(router.url.searchParams.get('date')) || new Date();
 
     if (country && iso2) {
       this.setState({
         dialog: {
           opened: true,
-          template: html` <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2 }} /> `,
+          template: html` <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2, date }} /> `,
           title: country,
         },
       });
@@ -143,5 +145,8 @@ export class App extends Component {
     this.setState({ dialog: { opened: false, template: '', title: '' } });
     debouncedCloseDialog();
     this.__closeCountryInfo();
+  }
+  __onSelectDate(selectedDate) {
+    this.setState({ haveSelectedDate: selectedDate });
   }
 }
