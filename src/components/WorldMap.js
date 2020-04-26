@@ -61,7 +61,7 @@ export class WorldMap extends Component {
     this.__handleSelect = this.__handleSelect.bind(this);
     this.initMap = this.initMap.bind(this);
 
-    let coords = [0,0];
+    let coords = [0, 0];
     let zoom = 2;
 
     let url = window.location.href;
@@ -309,8 +309,6 @@ export class WorldMap extends Component {
         }
       });
     }
-
-
   }
 
   componentWillUnmount() {
