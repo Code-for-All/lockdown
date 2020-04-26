@@ -65,10 +65,12 @@ export class WorldMap extends Component {
     let zoom = 2;
 
     let url = window.location.href;
+    let islocationSet = false;
     for (let country in domainCoors) {
       if (url.indexOf('lockdown.' + country) != -1) {
         coords = domainCoors[country];
         zoom = 4;
+        islocationSet = true;
       }
     }
 
@@ -76,6 +78,7 @@ export class WorldMap extends Component {
       lng: coords[1],
       lat: coords[0],
       zoom,
+      islocationSet,
     };
   }
 
@@ -282,7 +285,6 @@ export class WorldMap extends Component {
 
     await this.initMap(mapData, lookupTable);
 
-    let islocationSet = false;
     if (navigator.permissions) {
       const geolocation = await navigator.permissions.query({ name: 'geolocation' });
       // on pageload, check if there is permission for geolocation
@@ -291,7 +293,7 @@ export class WorldMap extends Component {
           const { latitude, longitude } = location.coords;
 
           this.state.map.setCenter([longitude, latitude]);
-          islocationSet = true;
+          this.state.islocationSet = true;
         });
       }
 
@@ -302,7 +304,7 @@ export class WorldMap extends Component {
             localStorage.setItem('geolocation', 'true');
             const { latitude, longitude } = location.coords;
             this.state.map.setCenter([longitude, latitude]);
-            islocationSet = true;
+            this.state.islocationSet = true;
           });
         } else {
           localStorage.removeItem('geolocation');
