@@ -116,10 +116,7 @@ export class App extends Component {
 
       <${WorldMap} selectedDate=${selectedDate} />
 
-      ${this.state.showSlider
-        ? html`<${TimeSlider} onChange=${this.__onSelectDate} />`
-        : ''}
-
+      ${this.state.showSlider ? html`<${TimeSlider} onChange=${this.__onSelectDate} />` : ''}
       ${this.state.dialog.opened
         ? html`
             <${Lazy} component=${() => import('../components/Dialog.js')} props=${{ ...this.state.dialog, onClose: this.__closeDialog }} />
