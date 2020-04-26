@@ -3,14 +3,10 @@ import { transposeRows, transposeColumns } from '../../utils/dataHelper';
 import { letterToColumn, columnToLetter } from 'google-spreadsheet/lib/utils';
 import logger from '../../utils/logger';
 import { writeJSON } from '../../utils/file';
-import find from 'lodash/find';
 import { SimpleGrid } from '../../utils/SimpleGrid';
 import moment from '../../utils/moment';
 import { ENTRY_COLUMN_LENGTH, parseEntry } from './parsers/lockdownParser';
-import { getSnapshots, GLOBAL_FIRST_DATE, GLOBAL_LAST_DATE } from './snapshot/processor';
-import { GLOBAL_COUNTRY_STATUS } from '../../../../shared/types';
-import { connect } from '../../repositories';
-import { MEASURES } from '../../services/SnapshotsService';
+import { getSnapshots, MEASURES } from './snapshot/processor';
 
 // Number of territories to query through batchGet at a time
 const BATCH_SIZE = 25;
@@ -33,7 +29,7 @@ export async function getGlobalData() {
  * Groups territories and request data from google API at batch size
  * @param {array} territories 
  */
-export async function batchGetTerritoriesEntryData(territories, database) {
+export async function batchGetTerritoriesEntryData(territories) {
 
   const doc = await getDocument();
   const startCacheColumn = 'H';
@@ -69,18 +65,7 @@ export async function batchGetTerritoriesEntryData(territories, database) {
         }
       }
 
-      // TODO: change this to support multiple entries after MVP 
-      // Compares current date in the same format with entry to get latest
-      // TODO: changes needed for time slider
       let snapshots = getSnapshots(entries);
-
-      if (snapshots.length > 0) {
-        snapshots.forEach(s => {
-          s.iso3 = batch[i]['iso3'];
-          s.iso2 = batch[i]['iso2'];
-        });
-        await database.snapshotRepository.insertManyOrUpdate(snapshots);
-      }
 
       result.push({
         iso2: batch[i]['iso2'],
@@ -103,25 +88,13 @@ export async function batchGetTerritoriesEntryData(territories, database) {
  * Gets lockdown data for all territories
  * @returns {array}
  */
-export async function getTerritoriesLockdownData(database) {
+export async function getTerritoriesLockdownData() {
   const territories = await getGlobalData();
-  return await batchGetTerritoriesEntryData(territories, database);
+  return await batchGetTerritoriesEntryData(territories);
 }
 
 export default async function loadData() {
-  let database = await connect();
-
-  const territories = await getTerritoriesLockdownData(database);
-
-  // Loads separate json files per territory iso code
-  // territories.forEach((territory) => {
-  //   writeJSON(`territories/${territory['isoCode']}`, {
-  //     lockdown: territory['lockdown']
-  //   });
-  // });
-
-  // Load summarized datafile
-  // TODO: changes needed for time slider
+  const territories = await getTerritoriesLockdownData();
 
   var startDate = moment().add(-2, "weeks");
   var endDate = moment().add(8, 'weeks');
@@ -132,6 +105,7 @@ export default async function loadData() {
   for (let currentDate of moment.range(startDate, endDate).by('days')) {
     let formattedDate = currentDate.format("YYYY-MM-DD");
     let currentDateLockdown = summarizedLockdowns[formattedDate] = [];
+    
     territories.forEach(territory => {
 
       currentDateLockdown.push(generateLockdownStatus(territory, currentDate));
@@ -142,13 +116,6 @@ export default async function loadData() {
       }
 
       territorySummary[formattedDate] = generateMeasures(territory, currentDate);
-
-      // = {
-      //   lockdown: {
-      //     lockdown_status: measure?.value || null
-      //   }
-      // };
-
     });
     writeJSON(`countryLockdowns/${formattedDate}`, currentDateLockdown);
   }

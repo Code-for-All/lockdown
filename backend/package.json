@@ -7,26 +7,20 @@
     "build": "babel src -d dist --copy-files",
     "dev": "babel-node src/index.js",
     "test": "jest ./tests",
-    "debug": "babel-node debug src/index.js",
-    "server": "nodemon --exec babel-node src/server.js"
+    "debug": "babel-node debug src/index.js"
   },
   "dependencies": {
     "@babel/node": "^7.8.7",
     "axios": "^0.19.2",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
     "google-spreadsheet": "^3.0.10",
     "moment-range": "^4.0.2",
-    "moment-timezone": "^0.5.28",
-    "mongodb": "^3.5.6",
-    "node-cache": "^5.1.0"
+    "moment-timezone": "^0.5.28"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "babel-jest": "^25.2.3",
-    "jest": "^25.2.3",
-    "nodemon": "^2.0.3"
+    "jest": "^25.2.3"
   }
 }
