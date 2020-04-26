@@ -82,10 +82,9 @@ export const Header = (_) => html`
       </a>
     </div>
     ${_.showStatsbox
-    ? html
-      `<div class="totals">
-        <${Totals} />
-      </div>
-    ` : ''}
+      ? html`<div class="totals">
+          <${Totals} />
+        </div> `
+      : ''}
   </header>
 `;
