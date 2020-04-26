@@ -19,6 +19,12 @@ const selectStyles = css`
   }
 `;
 
+const domainCoors = {
+  asia: [21.943046, 96.240234], //Burma
+  europe: [52.160455, 10.371094], //Germany
+  usa: [45.089036, -100.898438],
+};
+
 const pause = (time = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -55,10 +61,24 @@ export class WorldMap extends Component {
     this.__handleSelect = this.__handleSelect.bind(this);
     this.initMap = this.initMap.bind(this);
 
+    let coords = [0, 0];
+    let zoom = 2;
+
+    let url = window.location.href;
+    let islocationSet = false;
+    for (let country in domainCoors) {
+      if (url.indexOf('lockdown.' + country) != -1) {
+        coords = domainCoors[country];
+        zoom = 4;
+        islocationSet = true;
+      }
+    }
+
     this.state = {
-      lng: 0,
-      lat: 0,
-      zoom: 2,
+      lng: coords[1],
+      lat: coords[0],
+      zoom,
+      islocationSet,
     };
   }
 
@@ -273,6 +293,9 @@ export class WorldMap extends Component {
           const { latitude, longitude } = location.coords;
 
           this.state.map.setCenter([longitude, latitude]);
+          this.setState({
+            islocationSet: true,
+          });
         });
       }
 
@@ -283,6 +306,9 @@ export class WorldMap extends Component {
             localStorage.setItem('geolocation', 'true');
             const { latitude, longitude } = location.coords;
             this.state.map.setCenter([longitude, latitude]);
+            this.setState({
+              islocationSet: true,
+            });
           });
         } else {
           localStorage.removeItem('geolocation');
