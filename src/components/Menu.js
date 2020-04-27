@@ -72,6 +72,11 @@ const styles = css`
     padding: 15px;
     svg {
       stroke: var(--ld-text);
+      & svg{
+        .dark &{
+          stroke: white !important;
+        }
+      }
     }
   }
 
@@ -107,6 +112,9 @@ const preStyles = css`
     background-color: white;
     width: calc(100vw - 100%);
     overflow: auto;
+    .dark &{
+      background-color: #333333 !important;
+    }
   }
 }
 `;
@@ -122,6 +130,9 @@ const styles2 = css`
     top: 0px;
     background-color: #F2F2F2;
     z-index: 1100;
+    .dark &{
+      background-color: #54555A !important;
+    }
     & .ld-menu-nav{
       display: flex;
       height: 100%;
@@ -143,27 +154,40 @@ const styles2 = css`
             & li{
               margin-bottom: 29%;
               & button{
-                &:active{
-                  box-shadow: none;
-                  outline: none;
-                }
+                background-color: transparent;
               }
               & .ld-menu--active{
+                &:focus:not(.leaflet-container) {
+                  box-shadow: none !important;
+                }
                 position: relative;
-                
+                background-color: white;
+                .dark &{
+                  background-color: #333333 !important;
+                  color: white !important;
+                }
+                & svg{
+                  .dark &{
+                    fill: white !important;
+                  }
+                }
                 &::before{
                   position: absolute;
-                  left: -9px;
-                  top: -15px;
+                  left: -20%;
+                  top: -40%;
+                  height: 180%;
+                  width: 120%;
                   z-index: -1;
                   content: ' ';
-                  border-bottom: 70px solid #FFFFFF;
-                  border-left: 17.5px solid transparent;
-                  border-right: 17.5px solid transparent;
-                  height: 0;
-                  width: 70px;
-                  transform: rotate(90deg);
+                  .dark &{
+                    background-color: #333333 !important;
+                  }
+                  border-radius: 0% 100% 100% 69% / 0% 50% 51% 0% ;
+                  border:0px;
+                  /*transform: rotate(90deg);*/
+                  /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
                   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                  background-color: #FFFFFF;
                 }
               }
               & svg {
@@ -179,26 +203,28 @@ const styles2 = css`
 `;
 
 const sideBtn = css`
+  .dark &{
+    background-color: #333333;
+    color: white;
+    & svg{
+      color: white;
+    }
+  }
   &{
     position: absolute;
-    height: 0px;
+    height: 80px;
+    width: 50px;
     z-index: 2000;
     top: calc((100vh / 2) - 20px);
     right: 0px;
     position: absolute;
-    border-bottom: 50px solid #FFFFFF;
-    border-left: 12.5px solid transparent;
-    border-right: 12.5px solid transparent;
-    height: 0;
-    width: 50px;
-    box-shadow: none;
-    background-color: transparent;
-    transform: rotate(-90deg);
-    & svg{
-      margin-left: -3px;
-      margin-top: 20px;
-      transform: rotate(-90deg);
-    } 
+    border-radius: 100% 0% 0% 100% / 21% 0% 0% 21% ;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 0px;
+    background-color: white;
+    &:focus:not(.leaflet-container) {
+      box-shadow: none !important;
+    }
   }
 `;
 
@@ -271,9 +297,8 @@ const renderMenu = (menuItem) => {
                   </td>
                 </tr>
               </table>
-            `}
-          />
-
+            `}/>
+          <!--Here is the error -->
           <${Expandable}
             toggle=${'Sources'}
             detail=${html`
@@ -281,19 +306,19 @@ const renderMenu = (menuItem) => {
                 <b>Project Lockdown</b> combines multiple trusted sources to ensure that the data used is verified and accurate. You can find the full list of sources used here:
                 <ul class="ld-sources">
                   <li>
-                  <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://TIOF.Click/LockdownData" target="_blank"> Project Lockdown's Database</a></br>
+                  <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://TIOF.Click/LockdownData" target="_blank"> Project Lockdown's Database</a>
                   (Collected from a number of NPI sources)
                   </li>
                   <li>
-                   <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://covid19api.com/" target="_blank">Coronavirus COVID19 API</a></br>
-                  (Data sourced from <a href="https://systems.jhu.edu/" target="_blank">Johns Hopkins CSSE)</a></br>
+                   <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://covid19api.com/" target="_blank">Coronavirus COVID19 API</a>
+                  (Data sourced from <a href="https://systems.jhu.edu/" target="_blank">Johns Hopkins CSSE)</a>
                   </li>
                 </ul>
                 If you find any errors, please help us and report it <a rel="noopener noreferrer" target="_blank" href="https://github.com/Code-for-All/lockdown/issues">by creating an issue here</a>.
               </p>
             `}
           />
-
+          <!--Here is the error -->
           <${Expandable}
             toggle=${'Credits'}
             detail=${html`
@@ -315,7 +340,7 @@ const renderMenu = (menuItem) => {
               </p>
             `}
           />
-        `,
+        `
       };
     case 'settings':
       return {
@@ -409,22 +434,20 @@ export class Menu extends Component {
       this.prevVal = '';
       return;
     }
-    if(val === this.state.activeItem){
-
-    }else{
+    
 
       this.props.changeRoute(renderMenu(val));
-    }
+    
     this.prevVal = val;
     this.setState({
       activeItem: val,
-      showLateralMenu: val === this.state.activeItem?false: true
+      showLateralMenu: true
     });
   }
 
   render(_, { activeItem, updateAvailable }) {
     return html`
-      ${this.state.showLateralMenu ? html` <main id="main" class="ld-menu ${styles2} ${this.state.showLateralMenu ? preStyles : ''}">
+      ${this.state.showLateralMenu || this.props.isMobile === true ? html` <main id="main" class="ld-menu ${styles2} ${this.state.showLateralMenu ? preStyles : ''}">
         <div class="ld-menu-nav">
           <nav>
             <${Tabs} switchContent=${this.switchContent}>
@@ -435,7 +458,6 @@ export class Menu extends Component {
             <//>
           </nav>
         </div>
-
         <div class="ld-menu--content">
           <div class="mb-only">
             <div class="ld-menu--header">
