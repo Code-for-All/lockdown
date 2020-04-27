@@ -6,7 +6,7 @@ import css from 'csz';
 import { Settings } from './Settings.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import Tabs from '../components/Tabs.js';
-import { close, trues } from '../assets/icons/icons.js';
+import { close, trues, burger } from '../assets/icons/icons.js';
 
 const styles = css`
   & {
@@ -94,6 +94,111 @@ const styles = css`
   }
   .green {
     background: #6fcf97;
+  }
+`;
+const preStyles = css`
+@media (max-width: 960px){
+  .ld-menu--content {
+    display: block;
+    top: 0px;
+    left: calc(100% - 100vw);
+    height: 100%;
+    position: absolute;
+    background-color: white;
+    width: calc(100vw - 100%);
+    overflow: auto;
+  }
+}
+`;
+const styles2 = css`
+
+@media (max-width: 960px){
+&{
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    padding: 0;
+    right: 0px;
+    top: 0px;
+    background-color: #F2F2F2;
+    z-index: 1100;
+    & .ld-menu-nav{
+      display: flex;
+      height: 100%;
+      width: 100%;
+        & nav {
+          width: 100%;
+          padding: 10px 0px 10px 0px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          & ul {
+            padding: 0;
+            justify-content: space-around;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 50%;
+            display: flex;
+            flex-direction: column;
+            & li{
+              margin-bottom: 29%;
+              & button{
+                &:active{
+                  box-shadow: none;
+                  outline: none;
+                }
+              }
+              & .ld-menu--active{
+                position: relative;
+                
+                &::before{
+                  position: absolute;
+                  left: -9px;
+                  top: -15px;
+                  z-index: -1;
+                  content: ' ';
+                  border-bottom: 70px solid #FFFFFF;
+                  border-left: 17.5px solid transparent;
+                  border-right: 17.5px solid transparent;
+                  height: 0;
+                  width: 70px;
+                  transform: rotate(90deg);
+                  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                }
+              }
+              & svg {
+                color: #999999;
+              }
+            }
+          }
+        }
+      
+    }
+}
+}
+`;
+
+const sideBtn = css`
+  &{
+    position: absolute;
+    height: 0px;
+    z-index: 2000;
+    top: calc((100vh / 2) - 20px);
+    right: 0px;
+    position: absolute;
+    border-bottom: 50px solid #FFFFFF;
+    border-left: 12.5px solid transparent;
+    border-right: 12.5px solid transparent;
+    height: 0;
+    width: 50px;
+    box-shadow: none;
+    background-color: transparent;
+    transform: rotate(-90deg);
+    & svg{
+      margin-left: -3px;
+      margin-top: 20px;
+      transform: rotate(-90deg);
+    } 
   }
 `;
 
@@ -275,6 +380,8 @@ export class Menu extends Component {
     super(props);
     this.state = {
       activeItem: 'info',
+      showLateralMenu: false,
+      showMenu: false
     };
 
     this.switchContent = this.switchContent.bind(this);
@@ -294,7 +401,12 @@ export class Menu extends Component {
       }
     });
   }
-
+  showSideBar = () => {
+    this.setState({
+      showLateralMenu: true,
+      showMenu: true
+    })
+  }
   switchContent(val) {
     if (val === 'settings' && this.state.updateAvailable) {
       this.setState({
@@ -310,17 +422,22 @@ export class Menu extends Component {
       this.prevVal = '';
       return;
     }
+    if(val === this.state.activeItem){
 
-    this.props.changeRoute(renderMenu(val));
+    }else{
+
+      this.props.changeRoute(renderMenu(val));
+    }
     this.prevVal = val;
     this.setState({
       activeItem: val,
+      showLateralMenu: val === this.state.activeItem?false: true
     });
   }
 
   render(_, { activeItem, updateAvailable }) {
     return html`
-      <main id="main" class="ld-menu">
+      ${this.state.showLateralMenu ? html` <main id="main" class="ld-menu ${styles2} ${this.state.showLateralMenu ? preStyles : ''}">
         <div class="ld-menu-nav">
           <nav>
             <${Tabs} switchContent=${this.switchContent}>
@@ -340,7 +457,10 @@ export class Menu extends Component {
           </div>
           ${renderMenu(activeItem).template}
         </div>
-      </main>
+      </main>` :
+      html`<button onClick=${this.showSideBar} class="${sideBtn}">
+        ${burger}
+      </button>`}
     `;
   }
 }
