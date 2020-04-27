@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Lockdown API
+tags:
+  - name: Countries
+    description: Lockdown statuses operations by countries
+paths:
+  /status/{iso}/{date}:
+    get:
+      tags: 
+        - Countries
+      summary: "Retrieve status of the country with all NPIs"
+      parameters:
+        - name: iso
+          in: path
+          description: ISO2 or ISO3 country code
+          required: true
+          type: string
+          default: IND
+        - name: date
+          description: Date of status snapshot
+          in: path
+          required: true
+          default: 2020-04-27
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: "List of NPIs for date"
+        default:
+          description: Unexpected error
+  /status/{iso}/{startDate}/{endDate}:
+    get:
+      tags:
+        - Countries
+      summary: "Retrieve status of the country with all NPIs for date range"
+      parameters:
+        - name: iso
+          in: path
+          description: ISO2 or ISO3 country code
+          required: true
+          type: string
+          default: IND
+        - name: startDate
+          description: Start Date of range
+          in: path
+          required: true
+          default: 2020-04-27
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          description: End Date of range (range not more than 70 days)
+          in: path
+          required: true
+          default: 2020-05-27
+          schema:
+            type: string
+            format: date
+
