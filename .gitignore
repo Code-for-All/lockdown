@@ -12,3 +12,4 @@ backend/node_modules
 backend/credentials.json
 backend/package-lock.json
 backend/dist
+*.code-workspace
