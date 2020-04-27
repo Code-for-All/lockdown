@@ -111,7 +111,12 @@ export class App extends Component {
       </div>
 
       ${this.state.showMenu
-        ? html`<${Menu} opened=${this.state.dialog.opened} isMobile=${this.state.isMobile} changeRoute=${this.__showDialogRoute} close=${this.__closeDialog} />`
+        ? html`<${Menu}
+            opened=${this.state.dialog.opened}
+            isMobile=${this.state.isMobile}
+            changeRoute=${this.__showDialogRoute}
+            close=${this.__closeDialog}
+          />`
         : ''}
 
       <${WorldMap} selectedDate=${selectedDate} />

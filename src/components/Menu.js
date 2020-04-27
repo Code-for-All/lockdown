@@ -72,8 +72,8 @@ const styles = css`
     padding: 15px;
     svg {
       stroke: var(--ld-text);
-      & svg{
-        .dark &{
+      & svg {
+        .dark & {
           stroke: white !important;
         }
       }
@@ -102,41 +102,40 @@ const styles = css`
   }
 `;
 const preStyles = css`
-@media (max-width: 960px){
-  .ld-menu--content {
-    display: block;
-    top: 0px;
-    left: calc(100% - 100vw);
-    height: 100%;
-    position: absolute;
-    background-color: white;
-    width: calc(100vw - 100%);
-    overflow: auto;
-    .dark &{
-      background-color: #333333 !important;
+  @media (max-width: 960px) {
+    .ld-menu--content {
+      display: block;
+      top: 0px;
+      left: calc(100% - 100vw);
+      height: 100%;
+      position: absolute;
+      background-color: white;
+      width: calc(100vw - 100%);
+      overflow: auto;
+      .dark & {
+        background-color: #333333 !important;
+      }
     }
   }
-}
 `;
 const styles2 = css`
-
-@media (max-width: 960px){
-&{
-    width: 20%;
-    height: 100%;
-    position: absolute;
-    padding: 0;
-    right: 0px;
-    top: 0px;
-    background-color: #F2F2F2;
-    z-index: 1100;
-    .dark &{
-      background-color: #54555A !important;
-    }
-    & .ld-menu-nav{
-      display: flex;
+  @media (max-width: 960px) {
+    & {
+      width: 20%;
       height: 100%;
-      width: 100%;
+      position: absolute;
+      padding: 0;
+      right: 0px;
+      top: 0px;
+      background-color: #f2f2f2;
+      z-index: 1100;
+      .dark & {
+        background-color: #54555a !important;
+      }
+      & .ld-menu-nav {
+        display: flex;
+        height: 100%;
+        width: 100%;
         & nav {
           width: 100%;
           padding: 10px 0px 10px 0px;
@@ -151,27 +150,27 @@ const styles2 = css`
             min-height: 50%;
             display: flex;
             flex-direction: column;
-            & li{
+            & li {
               margin-bottom: 29%;
-              & button{
+              & button {
                 background-color: transparent;
               }
-              & .ld-menu--active{
+              & .ld-menu--active {
                 &:focus:not(.leaflet-container) {
                   box-shadow: none !important;
                 }
                 position: relative;
                 background-color: white;
-                .dark &{
+                .dark & {
                   background-color: #333333 !important;
                   color: white !important;
                 }
-                & svg{
-                  .dark &{
+                & svg {
+                  .dark & {
                     fill: white !important;
                   }
                 }
-                &::before{
+                &::before {
                   position: absolute;
                   left: -20%;
                   top: -40%;
@@ -179,15 +178,15 @@ const styles2 = css`
                   width: 120%;
                   z-index: -1;
                   content: ' ';
-                  .dark &{
+                  .dark & {
                     background-color: #333333 !important;
                   }
-                  border-radius: 0% 100% 100% 69% / 0% 50% 51% 0% ;
-                  border:0px;
+                  border-radius: 0% 100% 100% 69% / 0% 50% 51% 0%;
+                  border: 0px;
                   /*transform: rotate(90deg);*/
                   /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
                   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                  background-color: #FFFFFF;
+                  background-color: #ffffff;
                 }
               }
               & svg {
@@ -196,21 +195,20 @@ const styles2 = css`
             }
           }
         }
-      
+      }
     }
-}
-}
+  }
 `;
 
 const sideBtn = css`
-  .dark &{
+  .dark & {
     background-color: #333333;
     color: white;
-    & svg{
+    & svg {
       color: white;
     }
   }
-  &{
+  & {
     position: absolute;
     height: 80px;
     width: 50px;
@@ -218,7 +216,7 @@ const sideBtn = css`
     top: calc((100vh / 2) - 20px);
     right: 0px;
     position: absolute;
-    border-radius: 100% 0% 0% 100% / 21% 0% 0% 21% ;
+    border-radius: 100% 0% 0% 100% / 21% 0% 0% 21%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border: 0px;
     background-color: white;
@@ -255,14 +253,20 @@ const renderMenu = (menuItem) => {
             Project lockdown is currently in alpha. Not all data may be available yet.
           </p>
           <p>
-            <b>Project Lockdown</b> provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced by across the globe in response to the COVID-19 crisis to visualize the success of different pandemic response measures, monitor effects on Human and Digital Rights, and clarify evaluation metrics.
+            <b>Project Lockdown</b> provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced by across the globe
+            in response to the COVID-19 crisis to visualize the success of different pandemic response measures, monitor effects on Human
+            and Digital Rights, and clarify evaluation metrics.
           </p>
 
           <${Expandable}
             toggle=${'About'}
             detail=${html`
               <p>
-                Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and reduce the strain on medical infrastructure. <b>Project Lockdown</b> empowers citizens, journalists, and Human Rights Defenderes to easily analyze the social and political effects of these measures. Founded on the values of transparency and accountability, <b>Project Lockdown</b> is committed to providing citizens of the world with the tools they need to stay safe and informed. 
+                Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and
+                reduce the strain on medical infrastructure. <b>Project Lockdown</b> empowers citizens, journalists, and Human Rights
+                Defenderes to easily analyze the social and political effects of these measures. Founded on the values of transparency and
+                accountability, <b>Project Lockdown</b> is committed to providing citizens of the world with the tools they need to stay
+                safe and informed.
               </p>
             `}
           />
@@ -313,7 +317,8 @@ const renderMenu = (menuItem) => {
                   </td>
                 </tr>
               </table>
-            `}/>
+            `}
+          />
           <!--Here is the error -->
           <${Expandable}
             toggle=${'Sources'}
@@ -340,7 +345,12 @@ const renderMenu = (menuItem) => {
             detail=${html`
               <p>
                 <b>Project Lockdown</b> is a Civic Tech initiative made possible by a number of dedicated individuals and organizations.
-                View the list of contributors <a href="https://docs.google.com/spreadsheets/d/1mVyQxxLxAF3E1dw870WHXTOLgYzmumojvzIekpgvLV0/edit?ts=5e74ac83#gid=634415797" target="_blank">here</a>.
+                View the list of contributors
+                <a
+                  href="https://docs.google.com/spreadsheets/d/1mVyQxxLxAF3E1dw870WHXTOLgYzmumojvzIekpgvLV0/edit?ts=5e74ac83#gid=634415797"
+                  target="_blank"
+                  >here</a
+                >.
               </p>
             `}
           />
@@ -356,7 +366,7 @@ const renderMenu = (menuItem) => {
               </p>
             `}
           />
-        `
+        `,
       };
     case 'settings':
       return {
@@ -409,7 +419,7 @@ export class Menu extends Component {
     this.state = {
       activeItem: 'info',
       showLateralMenu: false,
-      showMenu: false
+      showMenu: false,
     };
 
     this.switchContent = this.switchContent.bind(this);
@@ -432,9 +442,9 @@ export class Menu extends Component {
   showSideBar = () => {
     this.setState({
       showLateralMenu: true,
-      showMenu: true
-    })
-  }
+      showMenu: true,
+    });
+  };
   switchContent(val) {
     if (val === 'settings' && this.state.updateAvailable) {
       this.setState({
@@ -450,50 +460,50 @@ export class Menu extends Component {
       this.prevVal = '';
       return;
     }
-    
 
-      this.props.changeRoute(renderMenu(val));
-    
+    this.props.changeRoute(renderMenu(val));
+
     this.prevVal = val;
     this.setState({
       activeItem: val,
-      showLateralMenu: val === this.state.activeItem ? false : true
+      showLateralMenu: val === this.state.activeItem ? false : true,
     });
   }
 
-  closeNavbar =() =>{
+  closeNavbar = () => {
     this.setState({
       showLateralMenu: false,
-      showSideBar: false
+      showSideBar: false,
     });
-  }
+  };
 
   render(_, { activeItem, updateAvailable }) {
     return html`
-      ${this.state.showLateralMenu || this.props.isMobile === true ? html` <main id="main" class="ld-menu ${styles2} ${this.state.showLateralMenu ? preStyles : ''}">
-        <div class="ld-menu-nav">
-          <button class="${closeBtn}" onClick=${this.closeNavbar} >X</button>
-          <nav>
-            <${Tabs} switchContent=${this.switchContent}>
-              <button id="info">info</button>
-              <button id="settings">settings</button>
-              <button id="updates">updates</button>
-              <button id="contribute">contribute</button>
-            <//>
-          </nav>
-        </div>
-        <div class="ld-menu--content">
-          <div class="mb-only">
-            <div class="ld-menu--header">
-              <h1>${activeItem}</h1>
+      ${this.state.showLateralMenu || this.props.isMobile === true
+        ? html` <main id="main" class="ld-menu ${styles2} ${this.state.showLateralMenu ? preStyles : ''}">
+            <div class="ld-menu-nav">
+              <button class="${closeBtn}" onClick=${this.closeNavbar}>X</button>
+              <nav>
+                <${Tabs} switchContent=${this.switchContent}>
+                  <button id="info">info</button>
+                  <button id="settings">settings</button>
+                  <button id="updates">updates</button>
+                  <button id="contribute">contribute</button>
+                <//>
+              </nav>
             </div>
-          </div>
-          ${renderMenu(activeItem).template}
-        </div>
-      </main>` :
-      html`<button onClick=${this.showSideBar} class="${sideBtn}">
-        ${burger}
-      </button>`}
+            <div class="ld-menu--content">
+              <div class="mb-only">
+                <div class="ld-menu--header">
+                  <h1>${activeItem}</h1>
+                </div>
+              </div>
+              ${renderMenu(activeItem).template}
+            </div>
+          </main>`
+        : html`<button onClick=${this.showSideBar} class="${sideBtn}">
+            ${burger}
+          </button>`}
     `;
   }
 }
