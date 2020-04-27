@@ -76,7 +76,7 @@ export const Header = (_) => html`
   <header class=${styles}>
     <div class="ld-logo-wrapper">
       <a href="" aria-current="page">
-        <p>ALPHA</p>
+        <p>BETA</p>
         ${logo}
         <!-- TODO: screen reader h1 -->
       </a>
