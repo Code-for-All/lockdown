@@ -81,7 +81,7 @@ export default class SnapshotsService {
         var snapshots = {};
         for (let currentDate of moment.range(startDate, endDate).by('days')) {
             var filteredRanges = ranges
-                .filter(r => currentDate.isAfter(r.start_date && currentDate.isBefore(r.end_date)));
+                .filter(r => currentDate.isAfter(r.start_date) && currentDate.isBefore(r.end_date));
             snapshots[currentDate.format("YYYY-MM-DD")] = this.buildSnapshot(iso, filteredRanges);
         }
         return snapshots;

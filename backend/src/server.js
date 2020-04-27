@@ -3,10 +3,12 @@ import { connect } from './repositories';
 import SnapshotsService from './services/SnapshotsService';
 import CacheService from './services/CacheService';
 import cors from 'cors';
+import compression from 'compression';
 
 const app = express();
 
 app.use(cors())
+app.use(compression());
 
 const ttl = 60 * 60 * 1;
 const cacheService = new CacheService(ttl);
@@ -29,7 +31,7 @@ connect().then(database => {
             res.json(result);
         }).catch(next);
     });
-    
+
     app.get('/status/:iso/:startDate/:endDate', function (req, res, next) {
         let iso = req.params.iso;
         let startDate = new Date(req.params.startDate);
