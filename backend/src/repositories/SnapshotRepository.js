@@ -15,11 +15,26 @@ export default class SnapshotRepository{
             start_date: {$lte: date},
             end_date: {$gte: date}
         };
-        if(iso.length == 2){
+        this.applyIsoFilter(iso, query);
+        return this.model.find(query);
+    }
+
+    /** @private */
+    applyIsoFilter(iso, query) {
+        if (iso.length == 2) {
             query.iso2 = iso;
-        }else{
+        }
+        else {
             query.iso3 = iso;
         }
+    }
+
+    getByTerritoryAndDateRange(iso, startDate, endDate){
+        const query = {
+            start_date: {$lte: endDate},
+            end_date: {$gte: startDate}
+        };
+        this.applyIsoFilter(iso, query);
         return this.model.find(query);
     }
 

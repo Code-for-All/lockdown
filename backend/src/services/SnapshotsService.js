@@ -4,6 +4,12 @@ import Entry from "../types/Entry";
 import Measure from "../types/Measure";
 import Snapshot from "../types/Snapshot";
 import Travel from "../types/Travel";
+import Moment, { MomentRange } from 'moment-timezone';
+import { extendMoment } from 'moment-range';
+
+const moment = extendMoment(Moment);
+
+const MAXIMUM_RANGE_IN_DAYS = 70;
 
 export const MEASURES = [
     'max_gathering',
@@ -54,30 +60,61 @@ export default class SnapshotsService {
 
     /**
      * @async
+     * @param {string} iso 
+     * @param {Date} startDate 
+     * @param {Date} endDate 
+     * @returns {Snapshot[]}
+     */
+    async getSnapshots(iso, startDate, endDate) {
+        if (moment(startDate).isAfter(endDate)) {
+            throw 'Start date should be less than end date';
+        }
+
+        if (moment(endDate).diff(startDate, 'days') > MAXIMUM_RANGE_IN_DAYS) {
+            throw `Maximum date range is ${MAXIMUM_RANGE_IN_DAYS} days`;
+        }
+
+        let ranges = await this.database.snapshotRepository
+            .getByTerritoryAndDateRange(iso, startDate, endDate)
+            .toArray();
+
+        var snapshots = {};
+        for (let currentDate of moment.range(startDate, endDate).by('days')) {
+            var filteredRanges = ranges
+                .filter(r => currentDate.isAfter(r.start_date && currentDate.isBefore(r.end_date)));
+            snapshots[currentDate.format("YYYY-MM-DD")] = this.buildSnapshot(iso, filteredRanges);
+        }
+        return snapshots;
+    }
+
+    /**
+     * @async
      * @param {string} iso3 
      * @param {Date} date 
-     * @returns {Snapshot}
+     * @returns {Snapshot[]}
      */
     async getSnapshot(iso, date) {
         let ranges = await this.database.snapshotRepository
             .getByTerritoryAndDate(iso, date)
             .toArray();
 
-        let entry = {iso: iso};
-        entry.measures = [];
+        return this.buildSnapshot(iso, ranges);
+    }
 
+    /** @private */
+    buildSnapshot(iso, ranges) {
+        let entry = { iso: iso };
+        entry.measures = [];
         var allMeasures = ranges.map(r => {
-            return {measures: r.measures, range: r};
+            return { measures: r.measures, range: r };
         });
         entry.max_gathering = this.buildResult(this.getValueFromContainers(allMeasures, "max_gathering"), "max_gathering");
         this.mergeDatapoints(entry.measures, allMeasures, "measure");
         this.mergeDatapoints(entry.measures, allMeasures, "land");
         this.mergeDatapoints(entry.measures, allMeasures, "flight");
         this.mergeDatapoints(entry.measures, allMeasures, "sea");
-
         let result = {};
         result.lockdown = entry;
-
         return result;
     }
 
@@ -94,13 +131,14 @@ export default class SnapshotsService {
         });
     }
 
-    buildResult(measureValue, measureKey){
+    /** @private */
+    buildResult(measureValue, measureKey) {
         let keys = measureKey.split('.');
-        return { 
-            label: keys[1] || measureKey, 
-            value: measureValue.value,  
+        return {
+            label: keys[1] || measureKey,
+            value: measureValue.value,
             name: measureKey,
-            [`#npi+num+${measureKey.replace('.', "+").replace('_','+')}`]: measureValue.value,
+            [`#npi+num+${measureKey.replace('.', "+").replace('_', '+')}`]: measureValue.value,
             '#date+start': measureValue.range?.start_date,
             '#date+end': measureValue.range?.end_date,
             '#meta+url': measureValue.range?.source_url,
@@ -108,12 +146,13 @@ export default class SnapshotsService {
         }
     }
 
-    getValueFromContainers(containers, key){
-        let result = {value: null, range: null};
+    /** @private */
+    getValueFromContainers(containers, key) {
+        let result = { value: null, range: null };
         containers.forEach(container => {
             let element = container.measures.find(el => el.label == key);
-            if(element){
-                result = {range: container.range, value: element.value};
+            if (element) {
+                result = { range: container.range, value: element.value };
                 return;
             }
         });
