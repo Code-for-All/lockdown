@@ -12,7 +12,7 @@ const styles = css`
     background-color: var(--ld-bg);
     color: var(--ld-text);
     /* needs to be higher than the map */
-    z-index: 1100;
+    z-index: 1200;
     display: flex;
     align-items: center;
     justify-content: space-around;
