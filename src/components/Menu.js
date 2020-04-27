@@ -227,7 +227,23 @@ const sideBtn = css`
     }
   }
 `;
-
+const closeBtn = css`
+@media (max-width: 960px){
+  &{
+    display: block;
+    position: absolute !important;
+    top 10%;
+    right: 19px;
+    background: transparent;
+    color: gray;
+    font-size: 2rem;
+    border: 0px;
+  }
+}
+&{
+  display: none;
+}
+`;
 const renderMenu = (menuItem) => {
   switch (menuItem) {
     case 'info':
@@ -441,7 +457,14 @@ export class Menu extends Component {
     this.prevVal = val;
     this.setState({
       activeItem: val,
-      showLateralMenu: true
+      showLateralMenu: val === this.state.activeItem ? false : true
+    });
+  }
+
+  closeNavbar =() =>{
+    this.setState({
+      showLateralMenu: false,
+      showSideBar: false
     });
   }
 
@@ -449,6 +472,7 @@ export class Menu extends Component {
     return html`
       ${this.state.showLateralMenu || this.props.isMobile === true ? html` <main id="main" class="ld-menu ${styles2} ${this.state.showLateralMenu ? preStyles : ''}">
         <div class="ld-menu-nav">
+          <button class="${closeBtn}" onClick=${this.closeNavbar} >X</button>
           <nav>
             <${Tabs} switchContent=${this.switchContent}>
               <button id="info">info</button>
