@@ -29,6 +29,12 @@ export default class SnapshotRepository{
         }
     }
 
+    /**
+     * 
+     * @param {string} iso 
+     * @param {Date} startDate 
+     * @param {Date} endDate 
+     */
     getByTerritoryAndDateRange(iso, startDate, endDate){
         const query = {
             start_date: {$lte: endDate},
@@ -36,6 +42,17 @@ export default class SnapshotRepository{
         };
         this.applyIsoFilter(iso, query);
         return this.model.find(query);
+    }
+
+    /**
+     * 
+     * @param {Date} date 
+     */
+    getByDate(date){
+        return this.model.find({
+            start_date: {$lte: date},
+            end_date: {$gte: date}
+        });
     }
 
     /**

@@ -118,8 +118,22 @@ export default class SnapshotsService {
         return result;
     }
 
+    async getWorldSnaphots(date){
+        let ranges = await this.database.snapshotRepository
+            .getByDate(date)
+            .toArray();
+
+        let result = [];
+        ranges.map(r => {
+            result.push(); 
+            //TODO: SNaphots for whole world
+            //...
+            //...
+        });
+    }
+
     /**
-     * 
+     * @private
      * @param {Entry} result 
      * @param {Object[]} containers 
      */

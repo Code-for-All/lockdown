@@ -33,7 +33,7 @@ paths:
           description: Unexpected error
   /status/{iso}/{startDate}/{endDate}:
     get:
-      tags:
+      tags: 
         - Countries
       summary: "Retrieve status of the country with all NPIs for date range"
       parameters:
@@ -59,4 +59,8 @@ paths:
           schema:
             type: string
             format: date
-
+      responses:
+        "200":
+          description: "List of NPIs for by date"
+        default:
+          description: Unexpected error
