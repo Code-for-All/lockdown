@@ -108,19 +108,14 @@ const renderMenu = (menuItem) => {
             Project lockdown is currently in alpha. Not all data may be available yet.
           </p>
           <p>
-            <b>Project Lockdown</b> aims to map the different lockdowns around the world, offering the public a number of relevant metrics
-            in order to provide an overview of the restrictions applied worldwide. We hope this will help evaluate the seriousness of the
-            COVID-19 pandemic and help journalists and Human Rights defenders in their reporting and overseeing tasks.
+            <b>Project Lockdown</b> provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced by across the globe in response to the COVID-19 crisis to visualize the success of different pandemic response measures, monitor effects on Human and Digital Rights, and clarify evaluation metrics.
           </p>
 
           <${Expandable}
             toggle=${'About'}
             detail=${html`
               <p>
-                While lockdowns generally help countries to flatten the curve, and prevent COVID-19 from spreading, countries with a
-                dictatorial nature may see this as an opportunity to increase their grasp over a country, and even potentially lead to
-                martial law type scenarios. Governments may unnecesarily prolong lockdowns or not stick to their announced end dates for
-                political gain. <b>Project Lockdown</b> aims to visualize these situations.
+                Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and reduce the strain on medical infrastructure. <b>Project Lockdown</b> empowers citizens, journalists, and Human Rights Defenderes to easily analyze the social and political effects of these measures. Founded on the values of transparency and accountability, <b>Project Lockdown</b> is committed to providing citizens of the world with the tools they need to stay safe and informed. 
               </p>
             `}
           />
@@ -178,19 +173,15 @@ const renderMenu = (menuItem) => {
             toggle=${'Sources'}
             detail=${html`
               <p>
-                <b>Project Lockdown</b> uses a variety of sources to compile all the information showcased. We make sure to only consider sources that are reliable and verifiable.
-                You can check all the <a rel="noopener noreferrer" target="_blank" href="https://www.TIOF.Click/LockdownData">sources</a> employed here: 
+                <b>Project Lockdown</b> combines multiple trusted sources to ensure that the data used is verified and accurate. You can find the full list of sources used here:
                 <ul class="ld-sources">
                   <li>
-                    <a rel="noopener noreferrer" target="_blank" href="https://api.coronatracker.com/">Coronatracker API</a><br/>
-                    Recognized by <a rel="noopener noreferrer" target="_blank" href="https://www.who.int/bulletin/online_first/COVID-19/en/">WHO</a>
+                  <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://TIOF.Click/LockdownData" target="_blank"> Project Lockdown's Database</a></br>
+                  (Collected from a number of NPI sources)
                   </li>
                   <li>
-                    For reference data see the <b>Data Sources</b> Tab.
-                  </li>
-                  <li>
-                    For country data see the <b>Find the Countries</b> Tab by it's ISO Alpha 3 code.
-                    (Quick find through Global Tab)
+                   <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://covid19api.com/" target="_blank">Coronavirus COVID19 API</a></br>
+                  (Data sourced from <a href="https://systems.jhu.edu/" target="_blank">Johns Hopkins CSSE)</a></br>
                   </li>
                 </ul>
                 If you find any errors, please help us and report it <a rel="noopener noreferrer" target="_blank" href="https://github.com/Code-for-All/lockdown/issues">by creating an issue here</a>.
@@ -202,9 +193,8 @@ const renderMenu = (menuItem) => {
             toggle=${'Credits'}
             detail=${html`
               <p>
-                <b>Project Lockdown</b> is a Civic Tech initiative from a number of organizations and individuals. You can find the
-                <a rel="noopener noreferrer" target="_blank" href="https://www.TIOF.Click/LockdownData">list of project members</a> here
-                under the <b>Credits</b> tab.
+                <b>Project Lockdown</b> is a Civic Tech initiative made possible by a number of dedicated individuals and organizations.
+                View the list of contributors <a href="https://docs.google.com/spreadsheets/d/1mVyQxxLxAF3E1dw870WHXTOLgYzmumojvzIekpgvLV0/edit?ts=5e74ac83#gid=634415797" target="_blank">here</a>.
               </p>
             `}
           />
@@ -213,10 +203,10 @@ const renderMenu = (menuItem) => {
             toggle=${'Data & Privacy'}
             detail=${html`
               <p>
-                We do not collect any information from our visitors.
+                We do not collect any personal information from our visitors.
               </p>
               <p>
-                All information from any project member shown anywhere in the application is under their prior consent.
+                All information on project members is provided with their consent.
               </p>
             `}
           />
@@ -232,10 +222,7 @@ const renderMenu = (menuItem) => {
         title: 'contribute',
         template: html`
         <p>
-          <b>Project Lockdown</b> is made possible by the contribution of many individuals who are giving their time to make possible that everyone has access to the right information.
-        </p>
-        <p>
-          Do you have any information you want to contribute? Please follow this link:
+          Do you have any NPI source you would want to share with us? Please follow this link:
         </p>
         <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSfDWe2qlzUnd3e-YYspMzT9adUswDEYIdJMb7jz7ule34-yiA/viewform">
           Submit data
@@ -251,7 +238,7 @@ const renderMenu = (menuItem) => {
         <p>
           Contact us via Telegram at:
           <br/>
-          <a class="ld-link">@ProjectLockdown</a>
+          <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://t.me/ProjectLockdown"> @ProjectLockdown</a>
         </p>
         `,
       };
