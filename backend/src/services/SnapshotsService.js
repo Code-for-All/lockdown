@@ -6,6 +6,7 @@ import Snapshot from "../types/Snapshot";
 import Travel from "../types/Travel";
 
 export const MEASURES = [
+    'max_gathering',
     'measure.lockdown_status',
     'measure.city_movement_restriction',
     'measure.attending_religious_sites',
@@ -62,19 +63,17 @@ export default class SnapshotsService {
             .getByTerritoryAndDate(iso, date)
             .toArray();
 
-        let entry = {};
-        entry.travel = {
-            land: [],
-            flight: [],
-            sea: []
-        }
+        let entry = {iso: iso};
         entry.measures = [];
 
-        var allMeasures = ranges.map(r => r.measures);
+        var allMeasures = ranges.map(r => {
+            return {measures: r.measures, range: r};
+        });
+        entry.max_gathering = this.buildResult(this.getValueFromContainers(allMeasures, "max_gathering"), "max_gathering");
         this.mergeDatapoints(entry.measures, allMeasures, "measure");
-        this.mergeDatapoints(entry.travel.land, allMeasures, "land");
-        this.mergeDatapoints(entry.travel.flight, allMeasures, "flight");
-        this.mergeDatapoints(entry.travel.sea, allMeasures, "sea");
+        this.mergeDatapoints(entry.measures, allMeasures, "land");
+        this.mergeDatapoints(entry.measures, allMeasures, "flight");
+        this.mergeDatapoints(entry.measures, allMeasures, "sea");
 
         let result = {};
         result.lockdown = entry;
@@ -89,19 +88,35 @@ export default class SnapshotsService {
      */
     mergeDatapoints(result, containers, prefix) {
         MEASURES.filter(m => m.startsWith(prefix)).forEach(measureKey => {
-            
-            let measureValue = null;
-            containers.forEach(container => {
-                let element = container.find(el => el.label == measureKey);
-                if(element){
-                    measureValue = element.value;
-                    return;
-                }
-            });
+            let measureValue = this.getValueFromContainers(containers, measureKey);
 
-            let keys = measureKey.split('.');
-
-            result.push({ label: keys[1], value: measureValue });
+            result.push(this.buildResult(measureValue, measureKey));
         });
+    }
+
+    buildResult(measureValue, measureKey){
+        let keys = measureKey.split('.');
+        return { 
+            label: keys[1] || measureKey, 
+            value: measureValue.value,  
+            name: measureKey,
+            [`#npi+num+${measureKey.replace('.', "+").replace('_','+')}`]: measureValue.value,
+            '#date+start': measureValue.range?.start_date,
+            '#date+end': measureValue.range?.end_date,
+            '#meta+url': measureValue.range?.source_url,
+            '#country+code+iso3': measureValue.range?.iso3
+        }
+    }
+
+    getValueFromContainers(containers, key){
+        let result = {value: null, range: null};
+        containers.forEach(container => {
+            let element = container.measures.find(el => el.label == key);
+            if(element){
+                result = {range: container.range, value: element.value};
+                return;
+            }
+        });
+        return result;
     }
 }
