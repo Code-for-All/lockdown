@@ -421,7 +421,8 @@ export class Menu extends Component {
       showLateralMenu: false,
       showMenu: false,
     };
-
+    this.showSideBar = this.showSideBar.bind(this);
+    this.closeNavbar = this.closeNavbar.bind(this);
     this.switchContent = this.switchContent.bind(this);
   }
 
@@ -439,12 +440,12 @@ export class Menu extends Component {
       }
     });
   }
-  showSideBar = () => {
+  showSideBar() {
     this.setState({
       showLateralMenu: true,
       showMenu: true,
     });
-  };
+  }
   switchContent(val) {
     if (val === 'settings' && this.state.updateAvailable) {
       this.setState({
@@ -470,12 +471,12 @@ export class Menu extends Component {
     });
   }
 
-  closeNavbar = () => {
+  closeNavbar() {
     this.setState({
       showLateralMenu: false,
       showSideBar: false,
     });
-  };
+  }
 
   render(_, { activeItem, updateAvailable }) {
     return html`
