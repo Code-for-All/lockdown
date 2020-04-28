@@ -3,16 +3,18 @@ info:
   version: 1.0.0
   title: Lockdown API
 tags:
-  - name: ByCountries
-    description: Lockdown statuses operations by countries
+  - name: By Countries
+    description: All NPIs by country
   - name: World
-    description: Lockdown statuses operations for whole world
+    description: Only lockdown statuses for whole world
+  - name: By Measures
+    description: Specific NPIs for country
 paths:
   /status/world/{date}:
     get:
       tags:
         - World
-      summary: Retrieve status of all countries with all NPIs
+      summary: Retrieve lockdown status of all countries for date
       parameters:
         - name: date
           description: Date of status snapshot
@@ -40,7 +42,7 @@ paths:
     get:
       tags:
         - World
-      summary: Retrieve status of all countries with all NPIs for date range
+      summary: Retrieve lockdown status of all countries for date range. Maximum date range is 70 days
       parameters:
         - name: startDate
           description: Date of status snapshot
@@ -75,8 +77,8 @@ paths:
   /status/{iso}/{date}:
     get:
       tags:
-        - Countries
-      summary: "Retrieve status of the country with all NPIs"
+        - By Countries
+      summary: "Retrieve all NPIs for country by date"
       parameters:
         - name: iso
           in: path
@@ -108,8 +110,8 @@ paths:
   /status/{iso}/{startDate}/{endDate}:
     get:
       tags:
-        - Countries
-      summary: "Retrieve status of the country with all NPIs for date range"
+        - By Countries
+      summary: "Retrieve all NPIs for country by date range. Maximum date range is 70 days."
       parameters:
         - name: iso
           in: path
@@ -151,15 +153,12 @@ components:
   schemas:
     Measure:
       type: object
-      required:
-        - label
-        - value
-        - name
-        - '#npi+num+max+gathering'
       properties:
         label:
           type: string
         name:
+          type: string
+        value:
           type: string
         '#date+start':
           type: string
