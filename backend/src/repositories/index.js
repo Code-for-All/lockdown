@@ -1,5 +1,7 @@
 import SnapshotRepository from './SnapshotRepository';
 
+require('dotenv').config();
+
 if (!process.env.MONGO_DB_USER || !process.env.MONGO_DB_PASSWORD || !process.env.MONGO_DB){
     throw "Please set MONGO_DB_USER and MONGO_DB_PASSWORD and MONGO_DB in env.variables";
 }
