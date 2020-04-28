@@ -27,6 +27,16 @@ connect().then(database => {
         console.log(`listening on ${process.env.PORT || 3000}`)
     });
 
+    app.get('/status/world/:date/', function (req, res, next) {
+        let date = new Date(req.params.date);
+
+        cacheService.get(`status_world_${date}}`, () => {
+            return snapshotService.getWorldSnaphots(date);
+        }).then(result => {
+            res.json(result);
+        }).catch(next);
+    });
+
     app.get('/status/:iso/:date', function (req, res, next) {
         let iso = req.params.iso;
         let date = new Date(req.params.date);
@@ -45,16 +55,6 @@ connect().then(database => {
 
         cacheService.get(`${iso}${startDate}${endDate}`, () => {
             return snapshotService.getSnapshots(iso, startDate, endDate);
-        }).then(result => {
-            res.json(result);
-        }).catch(next);
-    });
-
-    app.get('/status/world/:date/', function (req, res, next) {
-        let date = new Date(req.params.date);
-
-        cacheService.get(`status_world_${date}}`, () => {
-            return snapshotService.getWorldSnapshots(date);
         }).then(result => {
             res.json(result);
         }).catch(next);

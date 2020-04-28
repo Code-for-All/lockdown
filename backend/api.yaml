@@ -3,12 +3,33 @@ info:
   version: 1.0.0
   title: Lockdown API
 tags:
-  - name: Countries
+  - name: ByCountries
     description: Lockdown statuses operations by countries
+  - name: World
+    description: Lockdown statuses operations for whole world
 paths:
+  /status/world/{date}:
+    get:
+      tags:
+        - World
+      summary: Retrieve status of all countries with all NPIs
+      parameters:
+        - name: date
+          description: Date of status snapshot
+          in: path
+          required: true
+          default: 2020-04-27
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: "List of NPIs for date"
+        default:
+          description: Unexpected error
   /status/{iso}/{date}:
     get:
-      tags: 
+      tags:
         - Countries
       summary: "Retrieve status of the country with all NPIs"
       parameters:
@@ -33,7 +54,7 @@ paths:
           description: Unexpected error
   /status/{iso}/{startDate}/{endDate}:
     get:
-      tags: 
+      tags:
         - Countries
       summary: "Retrieve status of the country with all NPIs for date range"
       parameters:
