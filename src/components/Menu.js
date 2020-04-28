@@ -144,9 +144,8 @@ const styles2 = css`
           justify-content: center;
           & ul {
             padding: 0;
-            justify-content: space-around;
             justify-content: flex-start;
-            align-items: center;
+            align-items: left;
             min-height: 50%;
             display: flex;
             flex-direction: column;
