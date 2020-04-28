@@ -43,16 +43,40 @@ export default class SnapshotRepository {
     return this.model.find(query);
   }
 
+
+
   /**
    *
    * @param {Date} date
    */
-  getByDate(date) {
+  getByDateGroupByCountries(date) {
     return this.model.aggregate([
       {
         $match: {
           start_date: { $lte: date },
           end_date: { $gte: date },
+        },
+      },
+      {
+        $group: {
+          _id: '$iso3',
+          ranges: { $push: '$$ROOT' },
+        },
+      },
+    ]);
+  }
+
+  /**
+   * 
+   * @param {Date} startDate 
+   * @param {Date} endDate 
+   */
+  getByDateRangeGroupByCountries(startDate, endDate) {
+    return this.model.aggregate([
+      {
+        $match: {
+          start_date: { $lte: endDate },
+          end_date: { $gte: startDate },
         },
       },
       {

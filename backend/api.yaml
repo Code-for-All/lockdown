@@ -24,7 +24,52 @@ paths:
             format: date
       responses:
         "200":
-          description: "List of NPIs for date"
+          description: "List of NPIs for date. Additional property is lockdown date."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    lockdown:
+                      $ref: '#/components/schemas/Lockdown'
+        default:
+          description: Unexpected error
+  /status/world/{startDate}/{endDate}:
+    get:
+      tags:
+        - World
+      summary: Retrieve status of all countries with all NPIs for date range
+      parameters:
+        - name: startDate
+          description: Date of status snapshot
+          in: path
+          required: true
+          default: 2020-04-27
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          description: Date of status snapshot. Date range not more than 70 days
+          in: path
+          required: true
+          default: 2020-06-27
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: "List of NPIs for date. Additional property is lockdown date."
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    lockdown:
+                      $ref: '#/components/schemas/Lockdown'
         default:
           description: Unexpected error
   /status/{iso}/{date}:
@@ -50,6 +95,14 @@ paths:
       responses:
         "200":
           description: "List of NPIs for date"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lockdown:
+                    $ref: '#/components/schemas/Lockdown'
+
         default:
           description: Unexpected error
   /status/{iso}/{startDate}/{endDate}:
@@ -83,5 +136,48 @@ paths:
       responses:
         "200":
           description: "List of NPIs for by date"
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    lockdown:
+                      $ref: '#/components/schemas/Lockdown'
         default:
           description: Unexpected error
+components:
+  schemas:
+    Measure:
+      type: object
+      required:
+        - label
+        - value
+        - name
+        - '#npi+num+max+gathering'
+      properties:
+        label:
+          type: string
+        name:
+          type: string
+        '#date+start':
+          type: string
+          format: date
+        '#date+end':
+          type: string
+          format: date
+        '#meta+url':
+          type: string
+        '#country+code+iso3':
+          type: string
+    Lockdown:
+      type: object
+      required: iso
+      properties:
+        iso:
+          type: string
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'

@@ -91,7 +91,9 @@ export default class SnapshotsService {
    * @returns {Snapshot[]}
    */
   async getSnapshot(iso, date) {
-    let ranges = await this.database.snapshotRepository.getByTerritoryAndDate(iso, date).toArray();
+    let ranges = await this.database.snapshotRepository
+      .getByTerritoryAndDate(iso, date)
+      .toArray();
 
     return this.buildSnapshot(iso, ranges);
   }
@@ -120,8 +122,14 @@ export default class SnapshotsService {
     return { lockdown: entry };
   }
 
-  async getWorldSnaphots(date) {
-    let rangesByCountry = await this.database.snapshotRepository.getByDate(date).toArray();
+  /**
+   * 
+   * @param {Date} date 
+   */
+  async getWorldLockdownSnaphots(date) {
+    let rangesByCountry = await this.database.snapshotRepository
+      .getByDateGroupByCountries(date)
+      .toArray();
 
     return rangesByCountry.map(
       (countryRange) => this.buildSnapshotByMeasures(
@@ -129,6 +137,44 @@ export default class SnapshotsService {
         countryRange.ranges,
         ['measure.lockdown_status'])
     );
+  }
+
+  /**
+   * 
+   * @param {Date} date 
+   */
+  async getWorldLockdownSnaphotsByRange(startDate, endDate) {
+    if (moment(startDate).isAfter(endDate)) {
+      throw 'Start date should be less than end date';
+    }
+
+    if (moment(endDate).diff(startDate, 'days') > MAXIMUM_RANGE_IN_DAYS) {
+      throw `Maximum date range is ${MAXIMUM_RANGE_IN_DAYS} days`;
+    }
+
+    var rangesByCountry = await this.database.snapshotRepository
+      .getByDateRangeGroupByCountries(startDate, endDate)
+      .toArray();
+
+    var snapshots = {};
+    for (let currentDate of moment.range(startDate, endDate).by('days')) {
+
+      let rangesByCountryByDate = rangesByCountry.map(r => {
+        return {
+          _id: r._id,
+          ranges: r.ranges
+            .filter((r) => currentDate.isAfter(r.start_date) && currentDate.isBefore(r.end_date))
+        }
+      });
+
+      snapshots[currentDate.format("YYYY-MM-DD")] = rangesByCountryByDate.map(
+        (countryRange) => this.buildSnapshotByMeasures(
+          countryRange._id,
+          countryRange.ranges,
+          ['measure.lockdown_status'])
+      );
+    }
+    return snapshots;
   }
 
   /**
