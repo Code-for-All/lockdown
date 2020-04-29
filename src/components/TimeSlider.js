@@ -59,18 +59,15 @@ const selectStyles = css`
     }
     & {
         position: absolute;
-        bottom: 40px;
-        left: 0;
-        right: 0;
+        bottom: 45px;
+        left: calc(((100vw - (80vw - 400px))/2) + 200px);
         margin-left:auto;
         margin-right:auto;
         z-index: 1000;
         width: calc(80vw - 400px);
-        min-height: 10vh;
+        height: 120px;
         background-color: white;
         padding: 0px 6%;
-        padding-top: 4%;
-        padding-bottom: 1.5%;
         border-radius: 20px;
         display:flex
         justify-content: center
@@ -80,13 +77,11 @@ const selectStyles = css`
         box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
         @media (max-width: 960px) {
             & {
-              bottom: 10px;
+              bottom: 45px;
               left:0;
               right:0;
               width: 90vw;
               padding: 0px 12%;
-              padding-top: 11vh;
-              padding-bottom: 3%;
             }
         }
         & > .overlay{
@@ -132,8 +127,9 @@ const rangeStyles = css`
   input[type='range'] {
     position: relative;
     -webkit-appearance: none;
-    width: 100%;
+    width: 99%;
     margin: 15.6px 0;
+    bottom:-28px;
   }
   input[type='range']:focus {
     outline: none;
@@ -238,9 +234,9 @@ const tooltipCss = css`
     font-size: 14px;
     color: #8c8c8c;
     position: absolute;
-    top: 42%;
+    top: 55px;
     @media (max-width: 960px) {
-      top: 40%;
+      top: 55px;
       &.first {
         left: calc(12% - 15px);
       }
@@ -267,9 +263,9 @@ const sliderSelector = css`
   & {
     position: absolute;
     @media (max-width: 960px) {
-      top: 20%;
+      top: 20px;
     }
-    top: 18%;
+    top: 20px;
     left: 24.5%;
     z-index: 999;
     width: fit-content;
@@ -306,20 +302,20 @@ const popBtn = css`
   & {
     content: '';
     position: absolute;
-    height: 38px;
-    width: 38px;
+    height: 25px;
+    width: 25px;
     outline: none;
     border: 0px;
-    border-radius: 38px;
+    border-radius: 25px;
     background: #ffffff;
     cursor: pointer;
     -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     -moz-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     z-index: 9;
-    bottom: calc(16% - 1px);
+    bottom: 18px;
     @media (max-width: 960px) {
-      bottom: calc(10% - 1px);
+      bottom: 18px;
     }
     @media (max-width: 960px) and (min-width: 576px) {
       bottom: calc(17% - 1px);
