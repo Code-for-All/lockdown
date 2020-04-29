@@ -79,7 +79,7 @@ export default class SnapshotsService {
     var snapshots = {};
     for (let currentDate of moment.range(startDate, endDate).by('days')) {
       var filteredRanges = ranges.filter((r) => currentDate.isAfter(r.start_date) && currentDate.isBefore(r.end_date));
-      snapshots[currentDate.format('YYYY-MM-DD')] = this.buildSnapshot(iso, filteredRanges);
+      snapshots[currentDate.format('YYYY-MM-DD')] = this._buildSnapshot(iso, filteredRanges);
     }
     return snapshots;
   }
@@ -95,31 +95,7 @@ export default class SnapshotsService {
       .getByTerritoryAndDate(iso, date)
       .toArray();
 
-    return this.buildSnapshot(iso, ranges);
-  }
-
-  /** @private */
-  buildSnapshot(iso, ranges) {
-    let result = this.buildSnapshotByMeasures(
-      iso,
-      ranges,
-      ['max_gathering', 'measure', 'land', 'flight', 'sea']
-    );
-
-    return result;
-  }
-
-  /** @private */
-  buildSnapshotByMeasures(iso, ranges, measures) {
-    let entry = { iso: iso };
-    entry.measures = [];
-    var allMeasures = ranges.map((r) => {
-      return { measures: r.measures, range: r };
-    });
-    measures.forEach(measure => {
-      this.mergeDatapoints(entry.measures, allMeasures, measure);
-    });
-    return { lockdown: entry };
+    return this._buildSnapshot(iso, ranges);
   }
 
   /**
@@ -132,7 +108,7 @@ export default class SnapshotsService {
       .toArray();
 
     return rangesByCountry.map(
-      (countryRange) => this.buildSnapshotByMeasures(
+      (countryRange) => this._buildSnapshotByMeasures(
         countryRange._id,
         countryRange.ranges,
         ['measure.lockdown_status'])
@@ -168,7 +144,7 @@ export default class SnapshotsService {
       });
 
       snapshots[currentDate.format("YYYY-MM-DD")] = rangesByCountryByDate.map(
-        (countryRange) => this.buildSnapshotByMeasures(
+        (countryRange) => this._buildSnapshotByMeasures(
           countryRange._id,
           countryRange.ranges,
           ['measure.lockdown_status'])
@@ -177,21 +153,79 @@ export default class SnapshotsService {
     return snapshots;
   }
 
+  async getSnapshotsByMeasures(iso, startDate, endDate, measures) {
+    if (!Array.isArray(measures)) {
+      measures = [measures];
+    }
+
+    if (moment(startDate).isAfter(endDate)) {
+      throw 'Start date should be less than end date';
+    }
+
+    if (moment(endDate).diff(startDate, 'days') > MAXIMUM_RANGE_IN_DAYS) {
+      throw `Maximum date range is ${MAXIMUM_RANGE_IN_DAYS} days`;
+    }
+
+    var snapshots = await this.database.snapshotRepository
+      .getByMeasureAndDateRange(iso, startDate, endDate, measures)
+      .toArray();
+
+    var result = [];
+     snapshots.forEach(s => {
+      result = result.concat(s.measures.map(m => {
+          var keys = m.label.split('.');
+          return {
+            [`#npi+num+${m.label.replace('.', '+').replace('_', '+')}`]: m.value,
+            label: keys[1],
+            value: m.value,
+            name: m.label,
+            '#date+start': s.start_date,
+            '#date+end': s.end_date,
+            '#meta+url': s.source_url,
+            '#country+code+iso3': s.iso3,
+          };
+        }));
+    });
+    return {iso: iso, measures:result};
+  }
+
   /**
    * @private
-   * @param {Entry} result
-   * @param {Object[]} containers
    */
-  mergeDatapoints(result, containers, prefix) {
+  _mergeDatapoints(result, containers, prefix) {
     MEASURES.filter((m) => m.startsWith(prefix)).forEach((measureKey) => {
-      let measureValue = this.getValueFromContainers(containers, measureKey);
+      let measureValue = this._getValueFromContainers(containers, measureKey);
 
-      result.push(this.buildResult(measureValue, measureKey));
+      result.push(this._buildResult(measureValue, measureKey));
     });
   }
 
   /** @private */
-  buildResult(measureValue, measureKey) {
+  _buildSnapshot(iso, ranges) {
+    let result = this._buildSnapshotByMeasures(
+      iso,
+      ranges,
+      ['max_gathering', 'measure', 'land', 'flight', 'sea']
+    );
+
+    return result;
+  }
+
+  /** @private */
+  _buildSnapshotByMeasures(iso, ranges, measures) {
+    let entry = { iso: iso };
+    entry.measures = [];
+    var allMeasures = ranges.map((r) => {
+      return { measures: r.measures, range: r };
+    });
+    measures.forEach(measure => {
+      this._mergeDatapoints(entry.measures, allMeasures, measure);
+    });
+    return { lockdown: entry };
+  }
+
+  /** @private */
+  _buildResult(measureValue, measureKey) {
     let keys = measureKey.split('.');
     return {
       label: keys[1] || measureKey,
@@ -206,7 +240,7 @@ export default class SnapshotsService {
   }
 
   /** @private */
-  getValueFromContainers(containers, key) {
+  _getValueFromContainers(containers, key) {
     let result = { value: null, range: null };
     containers.forEach((container) => {
       let element = container.measures.find((el) => el.label == key);

@@ -149,6 +149,49 @@ paths:
                       $ref: '#/components/schemas/Lockdown'
         default:
           description: Unexpected error
+  /measures/{iso}/{startDate}/{endDate}:
+    get:
+      tags:
+        - By Measures
+      summary: "Retrieve specific NPIs for country by date range. Maximum date range is 70 days."
+      parameters:
+        - name: iso
+          in: path
+          description: ISO2 or ISO3 country code
+          required: true
+          type: string
+          default: IND
+        - name: startDate
+          description: Start Date of range
+          in: path
+          required: true
+          default: 2020-02-02
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          description: End Date of range (range not more than 70 days)
+          in: path
+          required: true
+          default: 2020-04-02
+          schema:
+            type: string
+            format: date
+        - name: measures
+          description: Measures for retrieving
+          in: query
+          default: ["measure.city_movement_restriction", "measure.lockdown_status"]
+          schemas:
+            type: array
+      responses:
+        "200":
+          description: "List of NPIs"
+          content:
+            application/json:
+              schema:
+                '#/components/schemas/Lockdown'
+        default:
+          description: Unexpected error
 components:
   schemas:
     Measure:

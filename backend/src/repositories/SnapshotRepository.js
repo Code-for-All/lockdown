@@ -26,6 +26,7 @@ export default class SnapshotRepository {
     } else {
       query.iso3 = iso;
     }
+    return query;
   }
 
   /**
@@ -42,8 +43,6 @@ export default class SnapshotRepository {
     this.applyIsoFilter(iso, query);
     return this.model.find(query);
   }
-
-
 
   /**
    *
@@ -99,6 +98,47 @@ export default class SnapshotRepository {
       start_date: { $lte: date },
       end_date: { $gte: date },
     });
+  }
+
+  getByMeasureAndDateRange(iso, startDate, endDate, measures) {
+    var isoFilter = this.applyIsoFilter(iso, {})
+    var query = [
+      {
+        '$match': {
+          ...isoFilter,
+          'start_date': {
+            '$lte': endDate
+          },
+          'end_date': {
+            '$gte': startDate
+          },
+          'measures.label': {
+            '$in': measures
+          }
+        }
+      }, {
+        '$project': {
+          'source_name': 1,
+          'source_url': 1,
+          'start_date': 1,
+          'end_date': 1,
+          'iso2': 1,
+          'iso3': 1,
+          'measures': {
+            '$filter': {
+              'input': '$measures',
+              'as': 'm',
+              'cond': {
+                '$in': [
+                  '$$m.label', measures
+                ]
+              }
+            }
+          }
+        }
+      }
+    ];
+    return this.model.aggregate(query);
   }
 
   /**

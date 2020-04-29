@@ -70,5 +70,18 @@ connect().then(database => {
         }).catch(next);
     });
 
+    app.get('/measures/:iso/:startDate/:endDate', function (req, res, next) {
+        let iso = req.params.iso;
+        let startDate = new Date(req.params.startDate);
+        let endDate = new Date(req.params.endDate);
+        let measures = req.query.measures;
+
+        cacheService.get(`${iso}${startDate}${endDate}${measures}`, () => {
+            return snapshotService.getSnapshotsByMeasures(iso, startDate, endDate, measures);
+        }).then(result => {
+            res.json(result);
+        }).catch(next);
+    });
+
     app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 });
