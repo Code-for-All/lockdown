@@ -371,9 +371,3 @@ a:visited {
   height: 100%;
   width: 100%;
 }
-
-@media (max-width: 960px) {
-  .map-container {
-    height: calc(100% - 60px);
-  }
-}
