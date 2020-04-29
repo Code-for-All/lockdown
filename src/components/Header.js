@@ -36,6 +36,7 @@ const styles = css`
     flex-shrink: 0;
     margin-left: auto;
     margin-right: auto;
+    max-width: 65%;
   }
 
   a p {
@@ -81,10 +82,8 @@ export const Header = (_) => html`
         <!-- TODO: screen reader h1 -->
       </a>
     </div>
-    ${_.showStatsbox
-      ? html`<div class="totals">
-          <${Totals} selectedDate=${_.selectedDate} />
-        </div> `
-      : ''}
+    <div class="totals">
+      <${Totals} selectedDate=${_.selectedDate} />
+    </div>
   </header>
 `;
