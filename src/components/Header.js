@@ -12,7 +12,7 @@ const styles = css`
     background-color: var(--ld-bg);
     color: var(--ld-text);
     /* needs to be higher than the map */
-    z-index: 1100;
+    z-index: 1200;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -76,15 +76,13 @@ export const Header = (_) => html`
   <header class=${styles}>
     <div class="ld-logo-wrapper">
       <a href="" aria-current="page">
-        <p>ALPHA</p>
+        <p>BETA</p>
         ${logo}
         <!-- TODO: screen reader h1 -->
       </a>
     </div>
-    ${_.showStatsbox
-      ? html`<div class="totals">
-          <${Totals} />
-        </div> `
-      : ''}
+    <div class="totals">
+      <${Totals} selectedDate=${_.selectedDate} />
+    </div>
   </header>
 `;

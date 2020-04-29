@@ -3,12 +3,10 @@ import { transposeRows, transposeColumns } from '../../utils/dataHelper';
 import { letterToColumn, columnToLetter } from 'google-spreadsheet/lib/utils';
 import logger from '../../utils/logger';
 import { writeJSON } from '../../utils/file';
-import find from 'lodash/find';
 import { SimpleGrid } from '../../utils/SimpleGrid';
 import moment from '../../utils/moment';
 import { ENTRY_COLUMN_LENGTH, parseEntry } from './parsers/lockdownParser';
-import { getSnapshots } from './snapshot/processor';
-import { GLOBAL_COUNTRY_STATUS } from '../../../../shared/types';
+import { getSnapshots, MEASURES } from './snapshot/processor';
 
 // Number of territories to query through batchGet at a time
 const BATCH_SIZE = 25;
@@ -32,7 +30,7 @@ export async function getGlobalData() {
  * @param {array} territories 
  */
 export async function batchGetTerritoriesEntryData(territories) {
-  
+
   const doc = await getDocument();
   const startCacheColumn = 'H';
   const startCacheColumnIndex = letterToColumn(startCacheColumn);
@@ -40,14 +38,14 @@ export async function batchGetTerritoriesEntryData(territories) {
   const rangeToCache = `${startCacheColumn}1:${endCacheColumn}65`;
   const result = [];
   var batch;
-  
+
   while (batch = territories.splice(0, BATCH_SIZE)) {
     if (batch.length < 1) break;
     // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
     let gridRanges = batch.map(territory => `${territory['iso3']}!${rangeToCache}`);
     logger.log(`[Lockdown:WorkSheet] ${batch.map(t => t['iso3']).join(' ')}`);
     let gridData = await doc.batchGetGridRanges(gridRanges);
-    
+
     for (let i = 0; i < batch.length; i++) {
       // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
       let workSheet = await getWorksheetByTitle(`${batch[i]['iso3']}`);
@@ -58,7 +56,7 @@ export async function batchGetTerritoriesEntryData(territories) {
       let entries = [];
 
       // How many entries should we loop through according to columns available on sheet
-      let entryCount = Math.ceil((columnCount - startCacheColumnIndex)/ENTRY_COLUMN_LENGTH);
+      let entryCount = Math.ceil((columnCount - startCacheColumnIndex) / ENTRY_COLUMN_LENGTH);
       for (let entryIndex = 0; entryIndex < entryCount; entryIndex++) {
         // Cell ranges
         let entryData = parseEntry(gridSheet, entryIndex);
@@ -67,19 +65,16 @@ export async function batchGetTerritoriesEntryData(territories) {
         }
       }
 
-      // TODO: change this to support multiple entries after MVP 
-      // Compares current date in the same format with entry to get latest
-      let currentDate = moment();
-      let currentDatePlusOne = moment().add(1, 'days');
-      let snapshots = getSnapshots(entries, currentDate, currentDatePlusOne);
-      let currentSnapshot = snapshots[0];
-
+      let snapshots = getSnapshots(entries);
 
       result.push({
-        isoCode: batch[i]['iso2'],
+        iso2: batch[i]['iso2'],
+        iso3: batch[i]['iso3'],
+        name: batch[i]['territory'],
         lockdown: {
           // TODO: change this to support multiple entries after MVP
-          ...currentSnapshot
+          // TODO: changes needed for time slider
+          snapshots
           // ...currentEntry
         }
       });
@@ -101,27 +96,91 @@ export async function getTerritoriesLockdownData() {
 export default async function loadData() {
   const territories = await getTerritoriesLockdownData();
 
-  // Loads separate json files per territory iso code
-  territories.forEach((territory) => {
-    writeJSON(`territories/${territory['isoCode']}`, {
-      lockdown: territory['lockdown']
-    });
-  });
+  var startDate = moment().add(-2, "weeks");
+  var endDate = moment().add(8, 'weeks');
 
-  // Load summarized datafile
-  const summarizedTerritories = {};
-  territories.forEach((territory) => {
-    let measures = territory['lockdown']['measures'];
-    let lockdownStatus = find(measures, { 'label': 'lockdown_status' });
-    summarizedTerritories[territory['isoCode']] = {
-      lockdown: {
-        lockdown_status: lockdownStatus['value'],
+  const summarizedLockdowns = {};
+  const territoriesSummary = {};
+
+  for (let currentDate of moment.range(startDate, endDate).by('days')) {
+    let formattedDate = currentDate.format("YYYY-MM-DD");
+    let currentDateLockdown = summarizedLockdowns[formattedDate] = [];
+    
+    territories.forEach(territory => {
+
+      currentDateLockdown.push(generateLockdownStatus(territory, currentDate));
+
+      let territorySummary = territoriesSummary[territory.iso2];
+      if (!territorySummary) {
+        territorySummary = territoriesSummary[territory.iso2] = {};
       }
-    };
+
+      territorySummary[formattedDate] = generateMeasures(territory, currentDate);
+    });
+    writeJSON(`countryLockdowns/${formattedDate}`, currentDateLockdown);
+  }
+  writeJSON('lockdown', summarizedLockdowns);
+
+  Object.keys(territoriesSummary).forEach(key => {
+    writeJSON(`territories/${key}`, territoriesSummary[key]);
   });
 
   return {
     lockdownTerritories: territories,
-    lockdownStatusByTerritory: summarizedTerritories
+    lockdownStatusByTerritory: summarizedLockdowns
   };
+}
+
+function generateLockdownStatus(territory, currentDate) {
+  let snapshots = territory
+    .lockdown?.snapshots?.find(s => moment(s.start_date).isBefore(currentDate) && moment(s.end_date).isAfter(currentDate)
+      && s.measures.find(m => m.label == "measure.lockdown_status"));
+  let measure = snapshots?.measures?.find(m => m.label == "measure.lockdown_status");
+  return {
+    ISO: territory.iso2,
+    lockdown_status: measure?.value || null,
+    name: territory.name
+  };
+}
+
+function generateMeasures(territory, currentDate){
+  let snapshots = territory
+    .lockdown?.snapshots?.filter(s => moment(s.start_date).isBefore(currentDate) && moment(s.end_date).isAfter(currentDate));
+
+    let entry = {};
+    entry.travel = {
+        land: [],
+        flight: [],
+        sea: []
+    }
+    entry.measures = [];
+
+    var allMeasures = snapshots.map(r => r.measures);
+    mergeDatapoints(entry.measures, allMeasures, "measure");
+    mergeDatapoints(entry.travel.land, allMeasures, "land");
+    mergeDatapoints(entry.travel.flight, allMeasures, "flight");
+    mergeDatapoints(entry.travel.sea, allMeasures, "sea");
+
+    let result = {};
+    result.lockdown = entry;
+
+    return result;
+}
+
+function mergeDatapoints(result, containers, prefix) {
+  MEASURES.filter(m => m.startsWith(prefix)).forEach(measureKey => {
+      
+      let measureValue = null;
+      containers.forEach(container => {
+          let element = container.find(el => el.label == measureKey);
+          if(element){
+              measureValue = element.value;
+              return;
+          }
+      });
+
+      let keys = measureKey.split('.');
+
+      result.push({ label: keys[1], value: measureValue });
+  });
 }
