@@ -29,20 +29,27 @@ const styles = css`
     padding: 15px;
     overflow: visible;
     background: transparent;
-    background-color: #769de2;
+    background-color: #E0E0E0;
     color: var(--ld-button-text);
     font-size: 16px;
-    border-radius: 5px;
+    border-radius:  25px;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 20px;
     padding-left: 25px;
     padding-right: 25px;
     box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+    .dark &{
+      background-color: #4F4F4F;
+    }
   }
 
   .ld-button:hover,
   .ld-button:active {
-    background-color: #89aff3;
+    background-color: rgb(204, 204, 204);
+    cursor: pointer;
+    .dark &{
+      background-color: rgb(63, 63, 63);
+    } 
   }
 `;
 
