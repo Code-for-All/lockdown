@@ -59,8 +59,9 @@ const selectStyles = css`
     }
     & {
         position: absolute;
-        bottom: 80px;
-        left: calc(((100vw - (80vw - 400px))/2) + 200px);
+        bottom: 40px;
+        left: 0;
+        right: 0;
         margin-left:auto;
         margin-right:auto;
         z-index: 1000;
@@ -68,7 +69,7 @@ const selectStyles = css`
         min-height: 10vh;
         background-color: white;
         padding: 0px 6%;
-        padding-top: 6%;
+        padding-top: 4%;
         padding-bottom: 1.5%;
         border-radius: 20px;
         display:flex
@@ -79,7 +80,7 @@ const selectStyles = css`
         box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
         @media (max-width: 960px) {
             & {
-              bottom: 80px;
+              bottom: 10px;
               left:0;
               right:0;
               width: 90vw;
@@ -268,7 +269,7 @@ const sliderSelector = css`
     @media (max-width: 960px) {
       top: 20%;
     }
-    top: 30%;
+    top: 18%;
     left: 24.5%;
     z-index: 999;
     width: fit-content;
