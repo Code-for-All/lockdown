@@ -121,16 +121,19 @@ export class App extends Component {
 
       <${WorldMap} selectedDate=${selectedDate} />
 
-      ${this.state.showSlider ? html`<${TimeSlider} onChange=${this.__onSelectDate} />` : ''}
-      ${this.state.dialog.opened
+      ${this.state.showSlider ? html`<${TimeSlider} onChange=${this.__onSelectDate} >${
+        this.state.dialog.opened? html` <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country:this.state.dialog.title, iso2:this.state.dialog.iso2, date:this.state.dialog.date }} /> `:''
+      }<//>` : ''}
+      <!--${this.state.dialog.opened
         ? html`
             <${Lazy} component=${() => import('../components/Dialog.js')} props=${{ ...this.state.dialog, onClose: this.__closeDialog }} />
           `
-        : ''}
+        : ''}-->
     `;
   }
 
   __showDialogRoute({ template, title }) {
+    alert("hi");
     const country = router.url.searchParams.get('country');
     if (country) {
       router.setPath(`${title}?country=${country}`);
@@ -145,6 +148,7 @@ export class App extends Component {
   }
 
   __onPathChanged() {
+    alert("bye");
     const country = router.url.searchParams.get('country');
     const iso2 = router.url.searchParams.get('iso2');
     const date = this.state.haveSelectedDate || new Date();
@@ -155,8 +159,10 @@ export class App extends Component {
           opened: true,
           template: html` <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2, date }} /> `,
           title: country,
+          iso2: iso2,
+          date: date
         },
-      });
+      },()=>console.log(this.state));
     }
   }
 

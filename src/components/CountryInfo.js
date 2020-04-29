@@ -117,6 +117,7 @@ function createMeasures(apiMeasures) {
 
 export default class CountryInfo extends Component {
   async componentWillMount() {
+    console.log(this.props);
     this.setState({
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
       populationData: await populationService.getPopulation(),
@@ -149,7 +150,7 @@ export default class CountryInfo extends Component {
 
     /** On error & on succes, continue to render */
     return html`
-      <div class=${countryInfoStyles}>
+      <div class="countryInfo ${countryInfoStyles}">
         <dl class="data">
           <div class="data-entry">
             <dt>Date</dt>

@@ -11,6 +11,37 @@ function toSliderString(date) {
   return format(date, 'dd/MM/yyyy');
 }
 
+const sliderWrapper = css`
+  &{
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin-left:auto;
+    margin-right:auto;
+    width: calc(80vw - 400px);
+    z-index: 1110;
+    height: fit-content;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    /*padding: 0px 6%;*/
+    @media (max-width: 960px) {
+      bottom: 10px;
+      left:0;
+      right:0;
+      width: 90vw;
+    }
+    & > div.countryInfo{
+      transition: 0.5s;
+      height: 72vh !important;
+    }
+  }
+  .dark &{
+    background-color: rgb(48, 49, 54);
+  }
+`;
+
 const selectStyles = css`
     @keyframes fadeOutLeft {
         from {
@@ -54,25 +85,15 @@ const selectStyles = css`
           transform: translate3d(0, 0, 0);
         }
       }
-    .dark &{
-      background-color: rgb(48, 49, 54);
-    }
     & {
-        position: absolute;
-        bottom: 40px;
-        left: 0;
-        right: 0;
-        margin-left:auto;
-        margin-right:auto;
-        z-index: 1000;
-        width: calc(80vw - 400px);
         min-height: 10vh;
-        background-color: white;
-        padding: 0px 6%;
+        padding: 0px 9.5%;
         padding-top: 4%;
         padding-bottom: 1.5%;
         border-radius: 20px;
         display:flex
+        width: 100%;
+        position: relative;
         justify-content: center
         align-items: center
         -webkit-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
@@ -80,11 +101,7 @@ const selectStyles = css`
         box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
         @media (max-width: 960px) {
             & {
-              bottom: 10px;
-              left:0;
-              right:0;
-              width: 90vw;
-              padding: 0px 12%;
+              padding: 0px 13%;
               padding-top: 11vh;
               padding-bottom: 3%;
             }
@@ -371,6 +388,7 @@ export default class CountryInfo extends Component {
     this.submitChanges = this.submitChanges.bind(this);
   }
   componentDidMount() {
+    console.log(this.props.children);
     let date = new Date();
     let days = [];
     let plusDays = 7;
@@ -467,6 +485,8 @@ export default class CountryInfo extends Component {
   }
   render(_) {
     return html`
+      <div class="sliderWrapper ${sliderWrapper}" >
+      ${this.props.children}
       <div class="${selectStyles} ${rangeStyles}">
         <${DatePicker}
           close=${this.calendarWillClose}
@@ -488,6 +508,7 @@ export default class CountryInfo extends Component {
         />
         <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
         <span class="last ${tooltipCss}">${this.state.lastDay}</span>
+      </div>
       </div>
     `;
   }
