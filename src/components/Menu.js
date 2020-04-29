@@ -102,27 +102,27 @@ const styles = css`
   }
 `;
 const preStyles = css`
-    .ld-menu--content {
-      display: block;
-      top: 0px;
-      left: calc(500% - 100vw);
-      height: 100%;
-      position: absolute;
-      background-color: white;
-      width: calc(100vw - 500%);
-      border-radius: 20px 0px 0px 20px;
-      -moz-border-radius: 20px 0px 0px 20px;
-      -webkit-border-radius: 20px 0px 0px 20px;
-      overflow: auto;
-      @media (max-width: 960px) {
-        border-radius: 0px;
-        width: calc(100vw - 100%);
-        left: calc(100% - 100vw);
-      }
-      .dark & {
-        background-color: #333333 !important;
-      }
+  .ld-menu--content {
+    display: block;
+    top: 0px;
+    left: calc(500% - 100vw);
+    height: 100%;
+    position: absolute;
+    background-color: white;
+    width: calc(100vw - 500%);
+    border-radius: 20px 0px 0px 20px;
+    -moz-border-radius: 20px 0px 0px 20px;
+    -webkit-border-radius: 20px 0px 0px 20px;
+    overflow: auto;
+    @media (max-width: 960px) {
+      border-radius: 0px;
+      width: calc(100vw - 100%);
+      left: calc(100% - 100vw);
     }
+    .dark & {
+      background-color: #333333 !important;
+    }
+  }
 `;
 const styles2 = css`
     @keyframes fadeInRight {
@@ -246,7 +246,7 @@ const sideBtn = css`
     & svg {
       color: white;
     }
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
@@ -268,61 +268,60 @@ const sideBtn = css`
     & svg {
       color: #333333;
     }
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
 `;
 const closeBtn = css`
-& {
-  position: absolute !important;
-  color: white;
-  background-color: var(--ld-hover);
-  padding: 0px !important;
-  top: 10%;
-  width: 39px !important;
-  height: 39px !important;
-  right: 0;
-  left: 0;
-  margin-right: auto !important;
-  margin-left: auto !important;
-  border-radius: 50% !important;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-  &:hover{
-    cursor: pointer;
+  & {
+    position: absolute !important;
+    color: white;
+    background-color: var(--ld-hover);
+    padding: 0px !important;
+    top: 10%;
+    width: 39px !important;
+    height: 39px !important;
+    right: 0;
+    left: 0;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    border-radius: 50% !important;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    &:hover {
+      cursor: pointer;
+    }
+    @media (max-width: 960px) {
+      background: transparent !important;
+      box-shadow: none;
+      border-radius: 0px;
+    }
   }
-  @media (max-width: 960px){
-    background: transparent !important;
-    box-shadow: none;
-    border-radius: 0px;
+  .dark & {
+    position: absolute !important;
+    color: white;
+    background-color: var(--ld-hover);
+    padding: 0px;
+    top: 10%;
+    width: 39px;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 50%;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    &:hover {
+      cursor: pointer;
+    }
+    @media (max-width: 960px) {
+      background: transparent !important;
+      box-shadow: none;
+      border-radius: 0px;
+    }
   }
-}
-.dark &{
-  position: absolute !important;
-  color: white;
-  background-color: var(--ld-hover);
-  padding: 0px;
-  top: 10%;
-  width: 39px;
-  right: 0;
-  left: 0;
-  margin-right: auto;
-  margin-left: auto;
-  border-radius: 50%;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-  &:hover{
-    cursor: pointer;
-  }
-  @media (max-width: 960px){
-    background: transparent !important;
-    box-shadow: none;
-    border-radius: 0px;
-  }
-}
-
 `;
 const overlay = css`
-  &{
+  & {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -330,8 +329,8 @@ const overlay = css`
     background-color: rgba(40, 40, 40, 0.8);
     width: 100%;
     height: 100%;
-    @media (max-width: 960px){
-      display:none;
+    @media (max-width: 960px) {
+      display: none;
     }
   }
 `;
@@ -574,27 +573,28 @@ export class Menu extends Component {
   render(_, { activeItem, updateAvailable }) {
     return html`
       ${this.state.showLateralMenu || this.props.isMobile === true
-        ? html`<div class="menu-overlay ${overlay}"></div><main id="main" class="ld-menu ${styles2} ${this.state.showLateralMenu ? preStyles : ''}">
-            <div class="ld-menu-nav">
-              <button class="${closeBtn}" onClick=${this.closeNavbar}>${closeIcon}</button>
-              <nav>
-                <${Tabs} switchContent=${this.switchContent}>
-                  <button id="info">info</button>
-                  <button id="settings">settings</button>
-                  <button id="updates">updates</button>
-                  <button id="contribute">contribute</button>
-                <//>
-              </nav>
-            </div>
-            <div class="ld-menu--content">
-              <div class="mb-only">
-                <div class="ld-menu--header">
-                  <h1>${activeItem}</h1>
-                </div>
+        ? html`<div class="menu-overlay ${overlay}"></div>
+            <main id="main" class="ld-menu ${styles2} ${this.state.showLateralMenu ? preStyles : ''}">
+              <div class="ld-menu-nav">
+                <button class="${closeBtn}" onClick=${this.closeNavbar}>${closeIcon}</button>
+                <nav>
+                  <${Tabs} switchContent=${this.switchContent}>
+                    <button id="info">info</button>
+                    <button id="settings">settings</button>
+                    <button id="updates">updates</button>
+                    <button id="contribute">contribute</button>
+                  <//>
+                </nav>
               </div>
-              ${renderMenu(activeItem).template}
-            </div>
-          </main>`
+              <div class="ld-menu--content">
+                <div class="mb-only">
+                  <div class="ld-menu--header">
+                    <h1>${activeItem}</h1>
+                  </div>
+                </div>
+                ${renderMenu(activeItem).template}
+              </div>
+            </main>`
         : html`<button onClick=${this.showSideBar} class="${sideBtn}">
             ${burger}
           </button>`}

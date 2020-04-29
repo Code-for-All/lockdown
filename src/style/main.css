@@ -174,8 +174,8 @@ a:visited {
   padding-bottom: 0px;
   touch-action: manipulation;
 }
-.dark .ld-menu{
-  --ld-text: #FFFFFF;
+.dark .ld-menu {
+  --ld-text: #ffffff;
 }
 
 .ld-menu-nav ul {
