@@ -18,7 +18,7 @@ const styles = css`
 
   th {
     border-top: transparent;
-    padding: 15px;
+    padding: 12px;
   }
   th:nth-child(1),
   th:nth-child(2) {
@@ -69,7 +69,7 @@ const styles = css`
 
   td {
     text-align: center;
-    padding: 15px;
+    padding: 5px;
     svg {
       stroke: var(--ld-text);
       & svg {
