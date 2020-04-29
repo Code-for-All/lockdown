@@ -21,7 +21,6 @@ const styles = css`
     flex-direction: column;
     justify-content: space-between;
     width: 126px;
-    padding: 0 16px;
     margin: 5px 0;
   }
 
