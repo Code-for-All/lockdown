@@ -23,7 +23,7 @@ const domainCoors = {
   asia: { lng: 95.955971, lat: 21.916222, zoom: 2.8 }, //Burma
   europe: { lng: 52.160455, lat: 10.371094, zoom: 4 }, //Germany
   usa: { lng: 45.089036, lat: -100.898438, zoom: 3 },
-  africa: { lng: 21.525828, lat: 4.214943, zoom: 3.2 } //Somewhere in Africa :)
+  africa: { lng: 21.525828, lat: 4.214943, zoom: 3.2 }, //Somewhere in Africa :)
 };
 
 const pause = (time = 100) => {
@@ -78,7 +78,7 @@ export class WorldMap extends Component {
     this.initMap = this.initMap.bind(this);
     this.updateMap = this.updateMap.bind(this);
 
-    let coords = {lng: 0, lat: 0, zoom: 2};
+    let coords = { lng: 0, lat: 0, zoom: 2 };
 
     let url = window.location.href;
     let isLocationSet = false;
@@ -96,7 +96,7 @@ export class WorldMap extends Component {
       mapData: {},
       lookupTable: {},
       isMapReady: false,
-      isLocationSet: isLocationSet
+      isLocationSet: isLocationSet,
     };
   }
 
