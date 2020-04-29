@@ -36,6 +36,7 @@ const styles = css`
     flex-shrink: 0;
     margin-left: auto;
     margin-right: auto;
+    max-width: 65%;
   }
 
   a p {
