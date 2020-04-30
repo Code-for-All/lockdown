@@ -1,4 +1,4 @@
-import SnapshotRepository from './SnapshotRepository';
+import Database from './Database';
 
 require('dotenv').config();
 
@@ -10,11 +10,11 @@ const MongoClient = require('mongodb').MongoClient;
 const uri = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@${process.env.MONGO_DB}/test?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
+/**
+ * @returns {Database}
+ */
 export async function connect() {
     let connection = await client.connect();
-    let db = connection.db("lockdown");
-    return {
-        snapshotRepository: new SnapshotRepository(db)
-    }
+    return new Database(connection);
 }
 
