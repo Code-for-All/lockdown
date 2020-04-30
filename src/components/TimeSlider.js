@@ -12,13 +12,13 @@ function toSliderString(date) {
 }
 
 const sliderWrapper = css`
-  &{
+  & {
     position: absolute;
     bottom: 40px;
     left: 0;
     right: 0;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
     width: calc(80vw - 400px);
     z-index: 1000;
     height: fit-content;
@@ -27,18 +27,17 @@ const sliderWrapper = css`
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
       bottom: 10px;
-      left:0;
-      right:0;
+      left: 0;
+      right: 0;
       width: 90vw;
     }
-    & > div.countryInfo{
+    & > div.countryInfo {
       z-index: 10;
       transition: 0.5s;
-      height: calc(70vh - (60px + 34px) );
+      height: calc(70vh - (60px + 34px));
       max-height: 70vh;
     }
   }
-  
 `;
 
 const selectStyles = css`
@@ -493,30 +492,30 @@ export default class CountryInfo extends Component {
   }
   render(_) {
     return html`
-      <div class="sliderWrapper ${sliderWrapper}" >
-      ${this.props.children}
-      <div class="${selectStyles} ${rangeStyles} ${this.props.children!==''?'open':''}">
-        <${DatePicker}
-          close=${this.calendarWillClose}
-          onSelect=${this.onChooseDate}
-          show=${this.state.showDatePicker}
-          customClass=${this.state.datePickerPosition}
-        />
-        <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
-        <span class="first ${tooltipCss}">${this.state.firstDay}</span>
-        <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
-        <input
-          ref=${this.range}
-          onInput=${this.onSliderChange}
-          type="range"
-          min="0"
-          max="10"
-          step="1"
-          value=${this.state.currentDateValue}
-        />
-        <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
-        <span class="last ${tooltipCss}">${this.state.lastDay}</span>
-      </div>
+      <div class="sliderWrapper ${sliderWrapper}">
+        ${this.props.children}
+        <div class="${selectStyles} ${rangeStyles} ${this.props.children !== '' ? 'open' : ''}">
+          <${DatePicker}
+            close=${this.calendarWillClose}
+            onSelect=${this.onChooseDate}
+            show=${this.state.showDatePicker}
+            customClass=${this.state.datePickerPosition}
+          />
+          <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
+          <span class="first ${tooltipCss}">${this.state.firstDay}</span>
+          <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
+          <input
+            ref=${this.range}
+            onInput=${this.onSliderChange}
+            type="range"
+            min="0"
+            max="10"
+            step="1"
+            value=${this.state.currentDateValue}
+          />
+          <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
+          <span class="last ${tooltipCss}">${this.state.lastDay}</span>
+        </div>
       </div>
     `;
   }

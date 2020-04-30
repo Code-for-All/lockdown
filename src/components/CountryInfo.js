@@ -2,10 +2,22 @@ import { html } from 'htm/preact';
 import { Component } from 'preact';
 import format from 'date-fns/format';
 import { coronaTrackerService, populationService, countryDetailService } from '../services/services';
-import { home, citymovement, religion, work, military, academia, shops, electricity, water, internet, close as closeIcon } from '../assets/icons/icons.js';
+import {
+  home,
+  citymovement,
+  religion,
+  work,
+  military,
+  academia,
+  shops,
+  electricity,
+  water,
+  internet,
+  close as closeIcon,
+} from '../assets/icons/icons.js';
 import { offline, loading, travelFlight, travelLand, travelSea } from '../assets/icons/icons.js';
 import { offlineStyles, loadingStyles } from '../style/shared.styles.js';
-import { countryInfoStyles,tabStyles,reports } from './CountryInfo.styles.js';
+import { countryInfoStyles, tabStyles, reports } from './CountryInfo.styles.js';
 import './tool-tip.js';
 
 const TRAVEL = {
@@ -107,19 +119,18 @@ const MEASURES = [
 
 const tabs = [
   {
-    id:1,
-    name: "Detail 1",
+    id: 1,
+    name: 'Detail 1',
   },
   {
-    id:2,
-    name:"2"
+    id: 2,
+    name: '2',
   },
   {
-    id:3,
-    name: "Reports",
-  }
+    id: 3,
+    name: 'Reports',
+  },
 ];
-
 
 function createMeasures(apiMeasures) {
   return MEASURES.map((measure) => {
@@ -133,15 +144,15 @@ function createMeasures(apiMeasures) {
 }
 
 export default class CountryInfo extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.changeTab = this.changeTab.bind(this);
-    this.state={
-      currentTab: 1
-    }
+    this.state = {
+      currentTab: 1,
+    };
   }
-  async componentDidUpdate(prevProps){
-    if(this.props.date !== prevProps.date){
+  async componentDidUpdate(prevProps) {
+    if (this.props.date !== prevProps.date) {
       this.setState({
         countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date }),
       });
@@ -155,10 +166,10 @@ export default class CountryInfo extends Component {
     });
   }
 
-  changeTab(newTab){
+  changeTab(newTab) {
     this.setState({
-      currentTab: newTab
-    })
+      currentTab: newTab,
+    });
   }
 
   render(_, { coronaData, populationData, countryDetails }) {
@@ -186,18 +197,28 @@ export default class CountryInfo extends Component {
 
     /** On error & on succes, continue to render */
     return html`
-    <div class=${tabStyles}>
-      ${tabs.map(tab=>html`<div onClick=${()=>this.changeTab(tab.id)} class="tab ${this.state.currentTab === tab.id ? 'active' : ''}">${tab.name}</div>`)}
-      <button onClick=${this.props.onClose}>${closeIcon}</button>
-    </div>
-    <div class="countryInfo ${countryInfoStyles}">
-      ${this.state.currentTab === 1
-        ? html`<${CountryDetails} date=${this.props.date} country=${this.props.country} coronaData=${coronaData}, populationData=${populationData}, countryDetails=${countryDetails} />`
-        : this.state.currentTab === 2
-        ? html`<${TransportDetails} countryDetails=${countryDetails} />`
-        : html`<${Reports}/>`
-      }
-    </div>
+      <div class=${tabStyles}>
+        ${tabs.map(
+          (tab) =>
+            html`<div onClick=${() => this.changeTab(tab.id)} class="tab ${this.state.currentTab === tab.id ? 'active' : ''}">
+              ${tab.name}
+            </div>`
+        )}
+        <button onClick=${this.props.onClose}>${closeIcon}</button>
+      </div>
+      <div class="countryInfo ${countryInfoStyles}">
+        ${this.state.currentTab === 1
+          ? html`<${CountryDetails}
+              date=${this.props.date}
+              country=${this.props.country}
+              coronaData=${coronaData}
+              populationData=${populationData?.data[this.props.iso2]}
+              countryDetails=${countryDetails}
+            />`
+          : this.state.currentTab === 2
+          ? html`<${TransportDetails} countryDetails=${countryDetails} />`
+          : html`<${Reports} />`}
+      </div>
     `;
   }
 }
@@ -205,11 +226,11 @@ export default class CountryInfo extends Component {
 class CountryDetails extends Component {
   render(_) {
     let { coronaData, populationData, countryDetails, country, date } = this.props;
-    return html`<h2 class="ld-font-subheader"><span>${country}</span> <span>${format(date,"dd/mm/yyyy")}</span></h2>
-    <dl class="data">
+    return html`<h2 class="ld-font-subheader"><span>${country}</span> <span>${format(date, 'dd/mm/yyyy')}</span></h2>
+      <dl class="data">
         <div class="data-entry is-half">
           <dt>Population</dt>
-          <dd class="data-value">${Number(populationData?.data?.[this.props.iso2]?.Population).toLocaleString() ?? 'Error'}</dd>
+          <dd class="data-value">${Number(populationData?.Population).toLocaleString() ?? 'Error'}</dd>
         </div>
         <div class="data-entry is-half">
           <dt>Max assembly</dt>
@@ -229,7 +250,7 @@ class CountryDetails extends Component {
         </div>
       </dl>
 
-      <${Legends}/>
+      <${Legends} />
 
       ${countryDetails.status === 'success'
         ? html`
@@ -268,9 +289,9 @@ class TransportDetails extends Component {
     let { countryDetails } = this.props;
     return html`${countryDetails.status === 'success'
       ? html`
-          <br/>
-          <br/>
-          <${Legends}/>
+          <br />
+          <br />
+          <${Legends} />
           <h2 class="ld-font-subheader last">Transport (restrictions)</h2>
           <dl>
             <div class="ld-travel">
@@ -309,33 +330,33 @@ class TransportDetails extends Component {
   }
 }
 
-class Legends extends Component{
-  render(_){
+class Legends extends Component {
+  render(_) {
     return html`<div class="legend ld-font-legend">
-    <dl>
-      <div class="legend-item">
-        <dt class="legend-green" aria-label="green"></dt>
-        <dd>None</dd>
-      </div>
-      <div class="legend-item">
-        <dt class="legend-yellow" aria-label="yellow"></dt>
-        <dd>Partial</dd>
-      </div>
-      <div class="legend-item">
-        <dt class="legend-red" aria-label="red"></dt>
-        <dd>Total</dd>
-      </div>
-      <div class="legend-item">
-        <dt class="legend-gray" aria-label="gray"></dt>
-        <dd>Unclear</dd>
-      </div>
-    </dl>
-  </div>`;
+      <dl>
+        <div class="legend-item">
+          <dt class="legend-green" aria-label="green"></dt>
+          <dd>None</dd>
+        </div>
+        <div class="legend-item">
+          <dt class="legend-yellow" aria-label="yellow"></dt>
+          <dd>Partial</dd>
+        </div>
+        <div class="legend-item">
+          <dt class="legend-red" aria-label="red"></dt>
+          <dd>Total</dd>
+        </div>
+        <div class="legend-item">
+          <dt class="legend-gray" aria-label="gray"></dt>
+          <dd>Unclear</dd>
+        </div>
+      </dl>
+    </div>`;
   }
 }
 
-class Reports extends Component{
-  render(_){
+class Reports extends Component {
+  render(_) {
     return html`<div class="${reports}"><h3>Coming Soon..</h3></div>`;
   }
 }
