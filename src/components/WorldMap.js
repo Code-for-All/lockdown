@@ -38,16 +38,16 @@ function worldStyle(lockdown_status) {
   let value;
   switch (lockdown_status) {
     case '1':
-      value = '#6fcf97';
+      value = '#eb5757'; //yes
       break;
     case '2':
-      value = '#7aaeff';
+      value = '#f2994a'; //partial
       break;
     case '3':
-      value = '#eb5757';
+      value = '#6fcf97'; //no
       break;
     case '4':
-      value = '#f2994a';
+      value = '#7aaeff'; //unclear
       break;
     default:
       value = '#CCCCCC';
