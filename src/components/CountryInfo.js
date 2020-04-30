@@ -287,6 +287,11 @@ class CountryDetails extends Component {
 class TransportDetails extends Component {
   render(_) {
     let { countryDetails } = this.props;
+
+    const renderTravelSection = (measures) => {
+      
+    }
+
     return html`${countryDetails.status === 'success'
       ? html`
           <br />

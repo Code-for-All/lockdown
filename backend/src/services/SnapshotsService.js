@@ -195,8 +195,11 @@ export default class SnapshotsService {
   _mergeDatapoints(result, containers, prefix) {
     MEASURES.filter((m) => m.startsWith(prefix)).forEach((measureKey) => {
       let measureValue = this._getValueFromContainers(containers, measureKey);
-
-      result.push(this._buildResult(measureValue, measureKey));
+      let keys = measureKey.split('.');
+      if(!result[keys[0]]){
+        result[keys[0]] = [];
+      }
+      result[keys[0]].push(this._buildResult(measureValue, measureKey));
     });
   }
 
@@ -214,12 +217,11 @@ export default class SnapshotsService {
   /** @private */
   _buildSnapshotByMeasures(iso, ranges, measures) {
     let entry = { iso: iso };
-    entry.measures = [];
     var allMeasures = ranges.map((r) => {
       return { measures: r.measures, range: r };
     });
     measures.forEach(measure => {
-      this._mergeDatapoints(entry.measures, allMeasures, measure);
+      this._mergeDatapoints(entry, allMeasures, measure);
     });
     return { lockdown: entry };
   }
