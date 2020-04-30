@@ -18,9 +18,9 @@ class CountryDetailService extends EventTargetShim {
     if (!/^[a-zA-Z]{2}$/.test(iso2)) {
       return;
     }
-    
+
     let cacheKey = `${iso2}${startDate}${endDate}`;
-    
+
     if (opts.forceRefresh || this._shouldInvalidate() || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
         this.cache[cacheKey] = {};
