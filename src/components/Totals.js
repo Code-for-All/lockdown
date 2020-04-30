@@ -20,7 +20,7 @@ const styles = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 126px;
+    width: 140px;
     padding: 0 16px;
     margin: 5px 0;
   }

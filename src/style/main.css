@@ -174,8 +174,8 @@ a:visited {
   padding-bottom: 0px;
   touch-action: manipulation;
 }
-.dark .ld-menu {
-  --ld-text: #ffffff;
+.dark .ld-menu{
+  --ld-text: #FFFFFF;
 }
 
 .ld-menu-nav ul {
@@ -375,10 +375,4 @@ a:visited {
   overflow: hidden;
   height: 100%;
   width: 100%;
-}
-
-@media (max-width: 960px) {
-  .map-container {
-    height: calc(100% - 60px);
-  }
 }
