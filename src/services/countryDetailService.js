@@ -54,7 +54,7 @@ class CountryDetailService extends EventTargetShim {
       date: res.lockdown.date,
       measures: res.lockdown.measures,
       travel,
-      max_gathering: res.lockdown.max_gathering,
+      max_gathering: res.lockdown.measures.find((m) => m.label == 'max_gathering')?.value,
     };
     this.__lastUpdate = Date.now();
     this.dispatchEvent(new Event('change'));

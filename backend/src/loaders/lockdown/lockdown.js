@@ -156,6 +156,7 @@ function generateMeasures(territory, currentDate){
     entry.measures = [];
 
     var allMeasures = snapshots.map(r => r.measures);
+    mergeDatapoints(entry.measures, allMeasures, "max_gathering");
     mergeDatapoints(entry.measures, allMeasures, "measure");
     mergeDatapoints(entry.travel.land, allMeasures, "land");
     mergeDatapoints(entry.travel.flight, allMeasures, "flight");
@@ -181,6 +182,6 @@ function mergeDatapoints(result, containers, prefix) {
 
       let keys = measureKey.split('.');
 
-      result.push({ label: keys[1], value: measureValue });
+      result.push({ label: keys[1] || measureKey, value: measureValue });
   });
 }
