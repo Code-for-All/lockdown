@@ -20,9 +20,8 @@ const sliderWrapper = css`
     margin-left:auto;
     margin-right:auto;
     width: calc(80vw - 400px);
-    z-index: 1110;
+    z-index: 1000;
     height: fit-content;
-    background-color: white;
     display: flex;
     flex-direction: column;
     /*padding: 0px 6%;*/
@@ -33,13 +32,13 @@ const sliderWrapper = css`
       width: 90vw;
     }
     & > div.countryInfo{
+      z-index: 10;
       transition: 0.5s;
-      height: 72vh !important;
+      height: calc(70vh - (60px + 34px) );
+      max-height: 70vh;
     }
   }
-  .dark &{
-    background-color: rgb(48, 49, 54);
-  }
+  
 `;
 
 const selectStyles = css`
@@ -85,12 +84,16 @@ const selectStyles = css`
           transform: translate3d(0, 0, 0);
         }
       }
+    .dark &{
+      background-color: rgb(48, 49, 54);
+    }
     & {
         min-height: 10vh;
         padding: 0px 9.5%;
         padding-top: 4%;
         padding-bottom: 1.5%;
         border-radius: 20px;
+        background-color: white;
         display:flex
         width: 100%;
         position: relative;
@@ -99,6 +102,11 @@ const selectStyles = css`
         -webkit-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
         -moz-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
         box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
+        &.open{
+          border-top: 0px;
+          border-top-left-radius: 0px;
+          border-top-right-radius: 0px;
+        }
         @media (max-width: 960px) {
             & {
               padding: 0px 13%;
@@ -487,7 +495,7 @@ export default class CountryInfo extends Component {
     return html`
       <div class="sliderWrapper ${sliderWrapper}" >
       ${this.props.children}
-      <div class="${selectStyles} ${rangeStyles}">
+      <div class="${selectStyles} ${rangeStyles} ${this.props.children!==''?'open':''}">
         <${DatePicker}
           close=${this.calendarWillClose}
           onSelect=${this.onChooseDate}
