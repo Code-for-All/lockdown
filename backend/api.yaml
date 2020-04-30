@@ -219,7 +219,23 @@ components:
       properties:
         iso:
           type: string
-        measures:
+        max_gathering: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+        measure:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+        land:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+        sea:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+        flight:
           type: array
           items:
             $ref: '#/components/schemas/Measure'
