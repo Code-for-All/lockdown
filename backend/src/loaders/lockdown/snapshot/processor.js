@@ -3,7 +3,44 @@ import { extendMoment } from 'moment-range';
 import { isEntryActive } from '../../../utils/typeHelper';
 import Entry from '../../../types/Entry';
 import get from 'lodash/get';
-import { MEASURES } from '../../../services/SnapshotsService';
+
+export const MEASURES = [
+  'max_gathering',
+  'measure.lockdown_status',
+  'measure.city_movement_restriction',
+  'measure.attending_religious_sites',
+  'measure.going_to_work',
+  'measure.military_not_deployed',
+  'measure.academia_allowed',
+  'measure.going_to_shops',
+  'measure.electricity_nominal',
+  'measure.water_nominal',
+  'measure.internet_nominal',
+  'land.local',
+  'land.nationals_inbound',
+  'land.nationals_outbound',
+  'land.foreigners_inbound',
+  'land.foreigners_outbound',
+  'land.cross_border_workers',
+  'land.commerce',
+  'land.stopovers',
+  'flight.local',
+  'flight.nationals_inbound',
+  'flight.nationals_outbound',
+  'flight.foreigners_inbound',
+  'flight.foreigners_outbound',
+  'flight.cross_border_workers',
+  'flight.commerce',
+  'flight.stopovers',
+  'sea.local',
+  'sea.nationals_inbound',
+  'sea.nationals_outbound',
+  'sea.foreigners_inbound',
+  'sea.foreigners_outbound',
+  'sea.cross_border_workers',
+  'sea.commerce',
+  'sea.stopovers'
+];
 
 const moment = extendMoment(Moment);
 

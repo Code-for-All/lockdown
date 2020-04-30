@@ -17,7 +17,7 @@ async function executeLoaders() {
   logger.log('[WorldMap + Total + Updates] start');
   await Promise.all([
     worldmapLoader(lockdownStatusByTerritory),
-    //totalsLoader(lockdownStatusByTerritory),
+    totalsLoader(lockdownStatusByTerritory),
     updatesLoader(),
   ]);
 

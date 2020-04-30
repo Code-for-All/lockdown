@@ -12,7 +12,7 @@ const styles = css`
     background-color: var(--ld-bg);
     color: var(--ld-text);
     /* needs to be higher than the map */
-    z-index: 1100;
+    z-index: 1200;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -36,6 +36,7 @@ const styles = css`
     flex-shrink: 0;
     margin-left: auto;
     margin-right: auto;
+    max-width: 65%;
   }
 
   a p {
@@ -71,18 +72,18 @@ const styles = css`
   }
 `;
 
-export const Header = () => html`
+export const Header = (_) => html`
   <a class="skiplink" href="#main">Go to main content</a>
   <header class=${styles}>
     <div class="ld-logo-wrapper">
       <a href="" aria-current="page">
-        <p>ALPHA</p>
+        <p>BETA</p>
         ${logo}
         <!-- TODO: screen reader h1 -->
       </a>
     </div>
     <div class="totals">
-      <${Totals} />
+      <${Totals} selectedDate=${_.selectedDate} />
     </div>
   </header>
 `;

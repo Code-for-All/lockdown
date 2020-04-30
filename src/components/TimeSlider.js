@@ -1,18 +1,44 @@
 import { html } from 'htm/preact';
 import { Component, createRef } from 'preact';
 import css from 'csz';
+import format from 'date-fns/format';
 
 import DatePicker from './DatePicker.js';
 
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
-Date.prototype.toSliderString = function () {
-  let oldDate = this.toISOString().split('T')[0];
-  let newDate = oldDate.split('-');
-  let year = newDate[0];
-  newDate[0] = newDate[2];
-  newDate[2] = year;
-  return newDate.join('/');
-};
+
+function toSliderString(date) {
+  return format(date, 'dd/MM/yyyy');
+}
+
+const sliderWrapper = css`
+  & {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(80vw - 400px);
+    z-index: 1000;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    /*padding: 0px 6%;*/
+    @media (max-width: 960px) {
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      width: 90vw;
+    }
+    & > div.countryInfo {
+      z-index: 10;
+      transition: 0.5s;
+      height: calc(70vh - (60px + 34px));
+      max-height: 70vh;
+    }
+  }
+`;
 
 const selectStyles = css`
     @keyframes fadeOutLeft {
@@ -57,33 +83,32 @@ const selectStyles = css`
           transform: translate3d(0, 0, 0);
         }
       }
+    .dark &{
+      background-color: rgb(48, 49, 54);
+    }
     & {
-        position: absolute;
-        bottom: 80px;
-        left: calc(((100vw - (80vw - 400px))/2) + 200px);
-        margin-left:auto;
-        margin-right:auto;
-        z-index: 1000;
-        width: calc(80vw - 400px);
         min-height: 10vh;
-        background-color: white;
-        padding: 0px 6%;
-        padding-top: 6%;
+        padding: 0px 9.5%;
+        padding-top: 4%;
         padding-bottom: 1.5%;
         border-radius: 20px;
+        background-color: white;
         display:flex
+        width: 100%;
+        position: relative;
         justify-content: center
         align-items: center
         -webkit-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
         -moz-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
         box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
+        &.open{
+          border-top: 0px;
+          border-top-left-radius: 0px;
+          border-top-right-radius: 0px;
+        }
         @media (max-width: 960px) {
             & {
-              bottom: 80px;
-              left:0;
-              right:0;
-              width: 90vw;
-              padding: 0px 12%;
+              padding: 0px 13%;
               padding-top: 11vh;
               padding-bottom: 3%;
             }
@@ -136,6 +161,7 @@ const rangeStyles = css`
   }
   input[type='range']:focus {
     outline: none;
+    box-shadow: 0 0 0px 0px var(--ld-focus) !important;
   }
   input[type='range']::-webkit-slider-runnable-track {
     width: 100%;
@@ -228,6 +254,9 @@ const rangeStyles = css`
   }
 `;
 const tooltipCss = css`
+  .dark & {
+    color: white;
+  }
   & {
     font-weight: bold;
     font-size: 14px;
@@ -252,12 +281,19 @@ const tooltipCss = css`
   }
 `;
 const sliderSelector = css`
+  .dark & span {
+    color: white;
+    background: rgb(48, 49, 54);
+    &::after {
+      background-color: rgb(48, 49, 54);
+    }
+  }
   & {
     position: absolute;
     @media (max-width: 960px) {
       top: 20%;
     }
-    top: 30%;
+    top: 18%;
     left: 24.5%;
     z-index: 999;
     width: fit-content;
@@ -359,6 +395,7 @@ export default class CountryInfo extends Component {
     this.submitChanges = this.submitChanges.bind(this);
   }
   componentDidMount() {
+    console.log(this.props.children);
     let date = new Date();
     let days = [];
     let plusDays = 7;
@@ -374,9 +411,9 @@ export default class CountryInfo extends Component {
     }
     this.setState({
       currentSliderRange: days,
-      currentSelectedDay: date.toSliderString(),
-      firstDay: days[0].toSliderString(),
-      lastDay: days[days.length - 1].toSliderString(),
+      currentSelectedDay: toSliderString(date),
+      firstDay: toSliderString(days[0]),
+      lastDay: toSliderString(days[days.length - 1]),
     });
   }
   onSliderChange(e) {
@@ -386,17 +423,23 @@ export default class CountryInfo extends Component {
     let newPosition = widthSpaces[newValue];
     sliderDOM.style.left = `${newPosition}%`;
     sliderDOM.style.transform = `translate(-${newPosition}%, 0)`;
-    this.setState({
-      currentDateValue: newValue,
-      currentPosition: newPosition,
-      currentSelectedDay: currentSliderRange[newValue].toSliderString(),
-    });
+    this.setState(
+      {
+        currentDateValue: newValue,
+        currentPosition: newPosition,
+        currentSelectedDay: toSliderString(currentSliderRange[newValue]),
+      },
+      this.submitChanges
+    );
   }
   onBtnClick(range) {
+    // ? I disabled the calendar just for the hackaton period
+    /*
     this.setState({
       showDatePicker: true,
       datePickerPosition: range,
     });
+    */
   }
   onChooseDate(date) {
     const sliderDOM = this.dateRef.current;
@@ -417,9 +460,9 @@ export default class CountryInfo extends Component {
     sliderDOM.style.transform = `translate(-${24.5}%, 0)`;
     this.setState({
       currentSliderRange: days,
-      currentSelectedDay: date.toSliderString(),
-      firstDay: days[0].toSliderString(),
-      lastDay: days[days.length - 1].toSliderString(),
+      currentSelectedDay: toSliderString(date),
+      firstDay: toSliderString(days[0]),
+      lastDay: toSliderString(days[days.length - 1]),
       currentDateValue: 2,
       currentPosition: 24.5,
     });
@@ -449,28 +492,30 @@ export default class CountryInfo extends Component {
   }
   render(_) {
     return html`
-      <div class="${selectStyles} ${rangeStyles}">
-        <${DatePicker}
-          close=${this.calendarWillClose}
-          onSelect=${this.onChooseDate}
-          show=${this.state.showDatePicker}
-          customClass=${this.state.datePickerPosition}
-        />
-        <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
-        <span class="first ${tooltipCss}">${this.state.firstDay}</span>
-        <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
-        <input
-          ref=${this.range}
-          onChange=${this.submitChanges}
-          onInput=${this.onSliderChange}
-          type="range"
-          min="0"
-          max="10"
-          step="1"
-          value=${this.state.currentDateValue}
-        />
-        <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
-        <span class="last ${tooltipCss}">${this.state.lastDay}</span>
+      <div class="sliderWrapper ${sliderWrapper}">
+        ${this.props.children}
+        <div class="${selectStyles} ${rangeStyles} ${this.props.children !== '' ? 'open' : ''}">
+          <${DatePicker}
+            close=${this.calendarWillClose}
+            onSelect=${this.onChooseDate}
+            show=${this.state.showDatePicker}
+            customClass=${this.state.datePickerPosition}
+          />
+          <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
+          <span class="first ${tooltipCss}">${this.state.firstDay}</span>
+          <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
+          <input
+            ref=${this.range}
+            onInput=${this.onSliderChange}
+            type="range"
+            min="0"
+            max="10"
+            step="1"
+            value=${this.state.currentDateValue}
+          />
+          <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
+          <span class="last ${tooltipCss}">${this.state.lastDay}</span>
+        </div>
       </div>
     `;
   }

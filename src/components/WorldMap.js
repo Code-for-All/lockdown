@@ -19,6 +19,13 @@ const selectStyles = css`
   }
 `;
 
+const domainCoors = {
+  asia: { lng: 95.955971, lat: 21.916222, zoom: 2.8 }, //Burma
+  europe: { lng: 52.160455, lat: 10.371094, zoom: 4 }, //Germany
+  usa: { lng: 45.089036, lat: -100.898438, zoom: 3 },
+  africa: { lng: 21.525828, lat: 4.214943, zoom: 3.2 }, //Somewhere in Africa :)
+};
+
 const pause = (time = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -31,22 +38,37 @@ function worldStyle(lockdown_status) {
   let value;
   switch (lockdown_status) {
     case '1':
-      value = '#9fc184';
+      value = '#eb5757'; //yes
       break;
     case '2':
-      value = '#769de2';
+      value = '#f2994a'; //partial
       break;
     case '3':
-      value = '#d36d6b';
+      value = '#6fcf97'; //no
       break;
     case '4':
-      value = '#ebb577';
+      value = '#7aaeff'; //unclear
       break;
     default:
-      value = '#828282';
+      value = '#CCCCCC';
   }
 
   return value;
+}
+
+function filterLookupTable(lookupTable) {
+  let lookupData = {};
+
+  for (let layer in lookupTable)
+    for (let worldview in lookupTable[layer].data)
+      for (let feature in lookupTable[layer].data[worldview]) {
+        let featureData = lookupTable[layer].data[worldview][feature];
+
+        if (worldview === 'all' || worldview === 'US') {
+          lookupData[featureData['unit_code']] = featureData;
+        }
+      }
+  return lookupData;
 }
 
 export class WorldMap extends Component {
@@ -54,12 +76,47 @@ export class WorldMap extends Component {
     super();
     this.__handleSelect = this.__handleSelect.bind(this);
     this.initMap = this.initMap.bind(this);
+    this.updateMap = this.updateMap.bind(this);
 
+    let coords = { lng: 0, lat: 0, zoom: 2 };
+
+    let url = window.location.href;
+    let isLocationSet = false;
+    for (let country in domainCoors) {
+      if (url.indexOf('lockdown.' + country) != -1) {
+        coords = domainCoors[country];
+        isLocationSet = true;
+      }
+    }
     this.state = {
-      lng: 0,
-      lat: 0,
-      zoom: 2,
+      lng: coords.lng,
+      lat: coords.lat,
+      zoom: coords.zoom,
+      countries: [],
+      mapData: {},
+      lookupTable: {},
+      isMapReady: false,
+      isLocationSet: isLocationSet,
     };
+  }
+
+  setMapState(map, localData = [], lookupData) {
+    localData.forEach(function (row) {
+      // console.log('row.ISO', row.ISO);
+      // console.log('lookupData[row.ISO]', lookupData[row.ISO]);
+      // console.log('row.lockdown_status', row.lockdown_status);
+      map.setFeatureState(
+        {
+          source: 'admin-0',
+          sourceLayer: 'boundaries_admin_0',
+          id: lookupData[row.ISO].feature_id,
+        },
+        {
+          kind: row.lockdown_status,
+          name: row.name,
+        }
+      );
+    });
   }
 
   async initMap(mapData, lookupTable) {
@@ -71,7 +128,7 @@ export class WorldMap extends Component {
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
-      style: 'mapbox://styles/mapbox/light-v10?optimize=true',
+      style: 'mapbox://styles/jfqueralt/ck9hi7wl616pz1iugty1cpeiv?optimize=true',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
     });
@@ -83,7 +140,7 @@ export class WorldMap extends Component {
     //   return { ISO: f.properties.iso2, lockdown_status: f.properties.lockdown_status, name: f.properties.NAME };
     // });
 
-    const localData = mapData;
+    const localData = mapData[this.props.selectedDate];
 
     map.on('style.load', () => {
       let hoveredStateId = null;
@@ -131,6 +188,8 @@ export class WorldMap extends Component {
         router.setSearchParam('country', features[0].state.name);
         router.setSearchParam('iso2', features[0].properties.iso_3166_1);
       });
+
+      console.log('the style is loaded');
     });
 
     map.on('load', function () {
@@ -138,7 +197,7 @@ export class WorldMap extends Component {
       createViz(lookupTable);
     });
 
-    function createViz(lookupTable) {
+    const createViz = (lookupTable) => {
       map.addSource('admin-0', {
         type: 'vector',
         url: 'mapbox://mapbox.boundaries-adm0-v3',
@@ -148,20 +207,6 @@ export class WorldMap extends Component {
 
       // Filters the lookup table to features with the 'US' country code
       // and keys the table using the `unit_code` property that will be used for the join
-      function filterLookupTable(lookupTable) {
-        let lookupData = {};
-
-        for (let layer in lookupTable)
-          for (let worldview in lookupTable[layer].data)
-            for (let feature in lookupTable[layer].data[worldview]) {
-              let featureData = lookupTable[layer].data[worldview][feature];
-
-              if (worldview === 'all' || worldview === 'US') {
-                lookupData[featureData['unit_code']] = featureData;
-              }
-            }
-        return lookupData;
-      }
 
       map.addLayer(
         {
@@ -187,17 +232,17 @@ export class WorldMap extends Component {
                 worldStyle('3'),
                 '4',
                 worldStyle('4'),
-                /* other */ '#bdbdbd',
+                /* other */ '#CCCCCC',
               ],
-              '#828282',
+              ['case', ['boolean', ['feature-state', 'hover'], false], 'rgba(204,204,204,0.5)', 'rgba(204,204,204,0)'],
             ],
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.8, 0.4],
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
           },
         },
         'waterway-label'
       );
 
-      function setStates(e) {
+      const setStates = (e) => {
         // console.log('setStates');
         localData.forEach(function (row) {
           // console.log('row.ISO', row.ISO);
@@ -215,7 +260,11 @@ export class WorldMap extends Component {
             }
           );
         });
-      }
+
+        this.setState({
+          isMapReady: true,
+        });
+      };
 
       // Check if `statesData` source is loaded.
       function setAfterLoad(e) {
@@ -232,13 +281,20 @@ export class WorldMap extends Component {
       } else {
         map.on('sourcedata', setAfterLoad);
       }
-    }
+    };
 
     this.setState({
       map,
     });
 
     return map;
+  }
+
+  updateMap(mapData, lookupTable, selectedDate) {
+    const lookupData = filterLookupTable(lookupTable);
+    const localData = mapData[selectedDate];
+
+    this.setMapState(this.state.map, localData, lookupData);
   }
 
   async componentDidMount() {
@@ -250,7 +306,7 @@ export class WorldMap extends Component {
 
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
-      fetch(new URL('../../data/countryLockdowns/2020-05-20.json', import.meta.url)).then((r) => r.json()),
+      fetch(new URL('../../data/lockdown.json', import.meta.url)).then((r) => r.json()),
       fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
     ]);
 
@@ -259,8 +315,13 @@ export class WorldMap extends Component {
     //   feature.properties.color = worldStyle(feature);
     // }
 
+    // we need to prepare a static country list not dynamically calculate them
+    const countries = mapData['2020-04-26'];
+
     this.setState({
-      countries: mapData,
+      countries,
+      mapData,
+      lookupTable,
     });
 
     await this.initMap(mapData, lookupTable);
@@ -268,21 +329,27 @@ export class WorldMap extends Component {
     if (navigator.permissions) {
       const geolocation = await navigator.permissions.query({ name: 'geolocation' });
       // on pageload, check if there is permission for geolocation
-      if (geolocation.state === 'granted') {
+      if (geolocation.state === 'granted' && !this.state.isLocationSet) {
         navigator.geolocation.getCurrentPosition((location) => {
           const { latitude, longitude } = location.coords;
 
           this.state.map.setCenter([longitude, latitude]);
+          this.setState({
+            isLocationSet: true,
+          });
         });
       }
 
       // handle change when user toggles geolocation permission
       geolocation.addEventListener('change', (e) => {
-        if (e.target.state === 'granted') {
+        if (e.target.state === 'granted' && !this.state.isLocationSet) {
           navigator.geolocation.getCurrentPosition((location) => {
             localStorage.setItem('geolocation', 'true');
             const { latitude, longitude } = location.coords;
             this.state.map.setCenter([longitude, latitude]);
+            this.setState({
+              isLocationSet: true,
+            });
           });
         } else {
           localStorage.removeItem('geolocation');
@@ -319,5 +386,10 @@ export class WorldMap extends Component {
       </div>
       <div class="map-container" ref=${(ref) => (this.ref = ref)}></div> 
     `;
+  }
+  componentDidUpdate(previousProps, previousState, snapshot) {
+    if (this.state.isMapReady) {
+      this.updateMap(this.state.mapData, this.state.lookupTable, this.props.selectedDate);
+    }
   }
 }

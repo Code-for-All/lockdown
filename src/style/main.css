@@ -102,7 +102,7 @@ html {
 *:focus:not(.leaflet-container) {
   outline: 0px;
   border-radius: 5px;
-  box-shadow: 0 0 0px 3px var(--ld-focus) !important;
+  /*box-shadow: 0 0 0px 3px var(--ld-focus) !important;*/
   transition: box-shadow 0.1s ease-in-out;
 }
 
@@ -164,6 +164,7 @@ a:visited {
   font-size: 14px;
   stroke-width: var(--ld-icon-stroke-width);
   background-color: var(--ld-bg);
+  --ld-text: #333333;
   color: var(--ld-text);
   z-index: 1100;
   flex-shrink: 0;
@@ -172,6 +173,9 @@ a:visited {
   padding: 10px;
   padding-bottom: 0px;
   touch-action: manipulation;
+}
+.dark .ld-menu {
+  --ld-text: #ffffff;
 }
 
 .ld-menu-nav ul {
@@ -185,6 +189,7 @@ a:visited {
 
 .ld-menu-nav p {
   font-size: 13px;
+  display: none;
 }
 
 .tooltip {
@@ -226,7 +231,7 @@ a:visited {
 
 .ld-menu-nav svg {
   stroke-width: var(--ld-icon-stroke-width);
-  display: none;
+  /*display: none;*/
 }
 
 .ld-menu--content {
@@ -370,10 +375,4 @@ a:visited {
   overflow: hidden;
   height: 100%;
   width: 100%;
-}
-
-@media (max-width: 960px) {
-  .map-container {
-    height: calc(100% - 60px);
-  }
 }
