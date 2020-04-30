@@ -5,6 +5,7 @@ import Entry from '../../../types/Entry';
 import get from 'lodash/get';
 
 export const MEASURES = [
+  'max_gathering',
   'measure.lockdown_status',
   'measure.city_movement_restriction',
   'measure.attending_religious_sites',
