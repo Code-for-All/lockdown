@@ -77,7 +77,7 @@ export const tabStyles = css`
   }
 `;
 export const reports = css`
-  &{
+  & {
     display: flex;
     height: 100%;
     width: 100%;
@@ -86,9 +86,9 @@ export const reports = css`
   }
 `;
 export const countryInfoStyles = css`
-  .countryInfo.loader{
+  .countryInfo.loader {
     background-color: white !important;
-    .dark &{
+    .dark & {
       background-color: var(--ld-bg) !important;
     }
   }
@@ -97,14 +97,14 @@ export const countryInfoStyles = css`
     color: var(--ld-text);
     padding: 0 16px 16px 16px;
     width: 100%;
-    & .ld-font-subheader{
+    & .ld-font-subheader {
       display: flex;
       justify-content: space-between;
       font-weight: 500;
       font-size: 16px;
       line-height: 20px;
       letter-spacing: 0.02em;
-      & span:first-child{
+      & span:first-child {
         font-weight: bold;
         font-size: 18px;
         line-height: 22px;
@@ -131,7 +131,7 @@ export const countryInfoStyles = css`
     margin-top: 16px;
     padding-bottom: 4px;
     border-bottom: 1px solid var(--ld-gray-5);
-    &.last{
+    &.last {
       padding: 0px;
       padding-top: 4px;
       border-top: 1px solid var(--ld-gray-5);
@@ -150,10 +150,10 @@ export const countryInfoStyles = css`
     padding-bottom: 8px;
     border-bottom: 1px solid var(--ld-gray-5);
     width: 100%;
-    &.is-half{
+    &.is-half {
       width: 50%;
     }
-    &.is-third{
+    &.is-third {
       width: 33.33%;
     }
   }
@@ -194,7 +194,7 @@ export const countryInfoStyles = css`
     font-size: 12px;
     letter-spacing: 0.02em;
     margin-inline-start: 0;
-    .dark &{
+    .dark & {
       color: var(--ld-text);
     }
   }
@@ -251,11 +251,10 @@ export const countryInfoStyles = css`
     pointer-events: none;
     transition: opacity 300ms ease-in-out;
     font-size: 12px;
-    .dark &{
+    .dark & {
       color: var(--ld-text);
     }
   }
-
 
   .measure:hover ~ .measure-label {
     opacity: 1;
@@ -290,7 +289,7 @@ export const countryInfoStyles = css`
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
-    .dark &{
+    .dark & {
       color: var(--ld-text);
     }
   }
