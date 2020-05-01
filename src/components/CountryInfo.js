@@ -120,11 +120,11 @@ const MEASURES = [
 const tabs = [
   {
     id: 1,
-    name: 'Detail 1',
+    name: 'Common Details',
   },
   {
     id: 2,
-    name: '2',
+    name: 'Travel Details',
   },
   {
     id: 3,
@@ -211,8 +211,8 @@ export default class CountryInfo extends Component {
           ? html`<${CountryDetails}
               date=${this.props.date}
               country=${this.props.country}
-              coronaData="${coronaData},"
-              populationData="${populationData},"
+              coronaData=${coronaData}
+              populationData=${populationData?.data[this.props.iso2]}
               countryDetails=${countryDetails}
             />`
           : this.state.currentTab === 2
@@ -230,7 +230,7 @@ class CountryDetails extends Component {
       <dl class="data">
         <div class="data-entry is-half">
           <dt>Population</dt>
-          <dd class="data-value">${Number(populationData?.data?.[this.props.iso2]?.Population).toLocaleString() ?? 'Error'}</dd>
+          <dd class="data-value">${Number(populationData?.Population).toLocaleString() ?? 'Error'}</dd>
         </div>
         <div class="data-entry is-half">
           <dt>Max assembly</dt>

@@ -11,10 +11,11 @@ function toSliderString(date) {
   return format(date, 'dd/MM/yyyy');
 }
 
+
 const sliderWrapper = css`
   & {
     position: absolute;
-    bottom: 40px;
+    bottom: 32px;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -24,6 +25,10 @@ const sliderWrapper = css`
     height: fit-content;
     display: flex;
     flex-direction: column;
+    -webkit-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
+    -moz-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
+    box-shadow: 0px 4px 11px 3px rgba(0,0,0,0.39);
+    border-radius: 20px;
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
       bottom: 10px;
@@ -87,10 +92,8 @@ const selectStyles = css`
       background-color: rgb(48, 49, 54);
     }
     & {
-        min-height: 10vh;
+        height: 120px;
         padding: 0px 9.5%;
-        padding-top: 4%;
-        padding-bottom: 1.5%;
         border-radius: 20px;
         background-color: white;
         display:flex
@@ -98,9 +101,6 @@ const selectStyles = css`
         position: relative;
         justify-content: center
         align-items: center
-        -webkit-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
-        -moz-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
-        box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
         &.open{
           border-top: 0px;
           border-top-left-radius: 0px;
@@ -109,8 +109,6 @@ const selectStyles = css`
         @media (max-width: 960px) {
             & {
               padding: 0px 13%;
-              padding-top: 11vh;
-              padding-bottom: 3%;
             }
         }
         & > .overlay{
@@ -158,6 +156,7 @@ const rangeStyles = css`
     -webkit-appearance: none;
     width: 100%;
     margin: 15.6px 0;
+    bottom:-28px
   }
   input[type='range']:focus {
     outline: none;
@@ -262,9 +261,9 @@ const tooltipCss = css`
     font-size: 14px;
     color: #8c8c8c;
     position: absolute;
-    top: 42%;
+    top: 55px;
     @media (max-width: 960px) {
-      top: 40%;
+      top: 55px;
       &.first {
         left: calc(12% - 15px);
       }
@@ -291,9 +290,9 @@ const sliderSelector = css`
   & {
     position: absolute;
     @media (max-width: 960px) {
-      top: 20%;
+      top: 20px;
     }
-    top: 18%;
+    top: 20px;
     left: 24.5%;
     z-index: 999;
     width: fit-content;
@@ -330,23 +329,23 @@ const popBtn = css`
   & {
     content: '';
     position: absolute;
-    height: 38px;
-    width: 38px;
+    height: 25px;
+    width: 25px;
     outline: none;
     border: 0px;
-    border-radius: 38px;
+    border-radius: 25px;
     background: #ffffff;
     cursor: pointer;
     -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     -moz-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     z-index: 9;
-    bottom: calc(16% - 1px);
+    bottom: 18px;
     @media (max-width: 960px) {
-      bottom: calc(10% - 1px);
+      bottom: 18px;
     }
     @media (max-width: 960px) and (min-width: 576px) {
-      bottom: calc(17% - 1px);
+      bottom: 18px);
       &.first {
         left: calc(12% + 11px) !important;
       }
@@ -358,13 +357,13 @@ const popBtn = css`
       @media (max-width: 960px) {
         left: calc(12% + 4px);
       }
-      left: calc(6% + 38px);
+      left: calc(0% + 38px);
     }
     &.last {
       @media (max-width: 960px) {
         right: calc(12% + 4px);
       }
-      right: calc(6% + 38px);
+      right: calc(0% + 38px);
     }
     &:active {
       background-color: rgb(199, 198, 198);
