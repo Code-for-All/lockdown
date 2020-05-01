@@ -39,19 +39,25 @@ export const tabStyles = css`
       }
     }
     & .tab{
-      width: 40%;
+      width: 35%;
       background-color: #E5E5E5;
       font-family: Montserrat;
       font-style: normal;
       font-weight: 500;
-      font-size: 18px;
-      line-height: 22px;
+      font-size: 15px;
+      line-height: 20px;
       text-align: center;
-      padding: 10px 0px;
+      padding: 5px;
       color: #7C7C7C;
       border: 1px solid #999999;
       border-top: 0px;
       transition: 0.5s;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+}
       &.active{
         border-bottom: 0px;
         background-color: #FFF 
@@ -69,9 +75,10 @@ export const tabStyles = css`
       }
       &:nth-child(3){
         border-top-right-radius: 19px;
+        padding-right: 18px;
       }
       &:nth-child(2){
-        width: 20%;
+        width: 30%;
       }
     }
   }
@@ -100,18 +107,21 @@ export const countryInfoStyles = css`
     & .ld-font-subheader {
       display: flex;
       justify-content: space-between;
-      font-weight: 500;
-      font-size: 16px;
+      font-weight: 600;
+      font-size: 14px;
       line-height: 20px;
+      color:#7c7c7c;
       letter-spacing: 0.02em;
       & span:first-child {
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 22px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
         letter-spacing: 0.05em;
       }
     }
   }
+
+  .countryInfo dl {margin-top:-27px}
 
   dl {
     margin-block-end: 0;
@@ -128,9 +138,9 @@ export const countryInfoStyles = css`
   }
 
   h2 {
-    margin-top: 16px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--ld-gray-5);
+    margin-top: 11px;
+    padding-bottom: 5px;
+    border-bottom: 7px;
     &.last {
       padding: 0px;
       padding-top: 4px;
@@ -146,8 +156,8 @@ export const countryInfoStyles = css`
 
   .data-entry {
     font-variant-numeric: tabular-nums;
-    margin-bottom: 8px;
-    padding-bottom: 8px;
+    margin-bottom: 7px;
+    padding-bottom: 7px;
     border-bottom: 1px solid var(--ld-gray-5);
     width: 100%;
     &.is-half {
@@ -159,16 +169,17 @@ export const countryInfoStyles = css`
   }
 
   .data-entry dt {
-    color: #949494;
+    color: #7c7c7c;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .data dd {
     margin-left: 0;
-    color: #949494;
+    color: #7c7c7c;
     font-size: 16px;
     text-align: left;
+    font-weight:600;
   }
 
   .legend dl {
@@ -178,22 +189,22 @@ export const countryInfoStyles = css`
 
   .legend-item {
     display: flex;
-    align-items: center;
   }
 
   .legend-item dt {
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    margin-right: 8px;
+    margin-right: 5px;
   }
 
   .legend-item dd {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     font-size: 12px;
     letter-spacing: 0.02em;
     margin-inline-start: 0;
+color:#7c7c7c;
     .dark & {
       color: var(--ld-text);
     }
@@ -220,7 +231,7 @@ export const countryInfoStyles = css`
     grid-template-columns: 1fr 1fr;
     list-style: none;
     padding: 0;
-    margin: 0 24px 0;
+    margin: 0 0px 0;
   }
 
   .measures > li {
@@ -228,7 +239,7 @@ export const countryInfoStyles = css`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     text-align: left;
   }
 
@@ -282,12 +293,12 @@ export const countryInfoStyles = css`
   }
 
   .ld-travel dt {
-    flex-basis: 50%;
+    flex-basis: 62%;
     flex-shrink: 0;
     font-weight: 300;
     margin-right: 20px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 17px;
     .dark & {
       color: var(--ld-text);
