@@ -4,7 +4,7 @@ export const home = html`
   <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
     <path fill="none" d="M-1-1h26v26H-1z" />
     <g>
-      <path stroke="null" fill="#828282" d="M9.61 22.116v-7.14h4.78v7.14h5.974v-9.521h3.584L12.001 1.885.052 12.594h3.584v9.52H9.61z" />
+      <path stroke="null" d="M9.61 22.116v-7.14h4.78v7.14h5.974v-9.521h3.584L12.001 1.885.052 12.594h3.584v9.52H9.61z" />
     </g>
   </svg>
 `;
@@ -15,7 +15,6 @@ export const citymovement = html`
     <g>
       <path
         stroke="null"
-        fill="#828282"
         d="M14.153 5.566l-4.037 5.362 3.068 4.074-1.722 1.287c-1.82-2.413-4.845-6.434-4.845-6.434L.158 18.434h23.684L14.153 5.566z"
       />
     </g>
