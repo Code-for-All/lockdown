@@ -109,8 +109,6 @@ const selectStyles = css`
         @media (max-width: 960px) {
             & {
               padding: 0px 13%;
-              padding-top: 11vh;
-              padding-bottom: 3%;
             }
         }
         & > .overlay{
@@ -359,13 +357,13 @@ const popBtn = css`
       @media (max-width: 960px) {
         left: calc(12% + 4px);
       }
-      left: calc(6% + 38px);
+      left: calc(0% + 38px);
     }
     &.last {
       @media (max-width: 960px) {
         right: calc(12% + 4px);
       }
-      right: calc(6% + 38px);
+      right: calc(0% + 38px);
     }
     &:active {
       background-color: rgb(199, 198, 198);
