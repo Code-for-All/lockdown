@@ -11,7 +11,6 @@ function toSliderString(date) {
   return format(date, 'dd/MM/yyyy');
 }
 
-
 const sliderWrapper = css`
   & {
     position: absolute;
@@ -25,9 +24,9 @@ const sliderWrapper = css`
     height: fit-content;
     display: flex;
     flex-direction: column;
-    -webkit-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
-    -moz-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
-    box-shadow: 0px 4px 11px 3px rgba(0,0,0,0.39);
+    -webkit-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.39);
+    -moz-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.39);
+    box-shadow: 0px 4px 11px 3px rgba(0, 0, 0, 0.39);
     border-radius: 20px;
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
@@ -156,7 +155,7 @@ const rangeStyles = css`
     -webkit-appearance: none;
     width: 100%;
     margin: 15.6px 0;
-    bottom:-28px
+    bottom: -28px;
   }
   input[type='range']:focus {
     outline: none;
