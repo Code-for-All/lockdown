@@ -57,7 +57,9 @@ export const tabStyles = css`
       justify-content: center;
       align-items: center;
       min-height: 50px;
-}
+      &:hover{
+        cursor: pointer;
+      }
       &.active{
         border-bottom: 0px;
         background-color: #FFF 
@@ -110,7 +112,7 @@ export const countryInfoStyles = css`
       font-weight: 600;
       font-size: 14px;
       line-height: 20px;
-      color:#7c7c7c;
+      color: #7c7c7c;
       letter-spacing: 0.02em;
       & span:first-child {
         font-weight: 600;
@@ -121,7 +123,9 @@ export const countryInfoStyles = css`
     }
   }
 
-  .countryInfo dl {margin-top:-27px}
+  .countryInfo dl {
+    margin-top: -27px;
+  }
 
   dl {
     margin-block-end: 0;
@@ -179,7 +183,7 @@ export const countryInfoStyles = css`
     color: #7c7c7c;
     font-size: 16px;
     text-align: left;
-    font-weight:600;
+    font-weight: 600;
   }
 
   .legend dl {
@@ -204,7 +208,7 @@ export const countryInfoStyles = css`
     font-size: 12px;
     letter-spacing: 0.02em;
     margin-inline-start: 0;
-color:#7c7c7c;
+    color: #7c7c7c;
     .dark & {
       color: var(--ld-text);
     }
