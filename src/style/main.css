@@ -244,7 +244,6 @@ a:visited {
   overflow: auto;
   height: calc(100% - 44px);
   padding: 0px 20px 20px 20px;
-  
 }
 .ld-menu--content::-webkit-scrollbar {
   padding-left: 1.5%;

@@ -160,7 +160,7 @@ export const countryInfoStyles = css`
       padding-top: 4px;
       border-top: 1px solid var(--ld-gray-5);
       border-bottom: 0px;
-      &.transport{
+      &.transport {
         margin-bottom: -20px;
       }
     }
