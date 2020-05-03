@@ -292,7 +292,7 @@ class TransportDetails extends Component {
           <br />
           <br />
           <${Legends} />
-          <h2 class="ld-font-subheader last">Transport (restrictions)</h2>
+          <h2 class="ld-font-subheader last transport">Transport (restrictions)</h2>
           <dl>
             <div class="ld-travel">
               <dt></dt>
