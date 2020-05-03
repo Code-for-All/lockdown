@@ -1,4 +1,6 @@
 import { EventTargetShim } from '../utils/EventTargetShim.js';
+import format from 'date-fns/format';
+import addDays from 'date-fns/addDays';
 
 class CoronaTrackerService extends EventTargetShim {
   constructor() {
@@ -10,32 +12,37 @@ class CoronaTrackerService extends EventTargetShim {
     let { iso2, date } = opts;
     iso2 = encodeURI(iso2);
 
+    const startDate = format(addDays(new Date(), -14), 'yyyy-MM-dd');
+    const endDate = format(addDays(new Date(), 56), 'yyyy-MM-dd');
+
     if (!/^[a-zA-Z]{2}$/.test(iso2)) {
       return;
     }
 
-    if (opts.forceRefresh || this._shouldInvalidate() || this.cache[iso2]?.status === 'failed' || !this.cache[iso2]) {
+    const cackeKey = `${iso2}${startDate}${endDate}`;
+
+    if (opts.forceRefresh || this._shouldInvalidate() || this.cache[cackeKey]?.status === 'failed' || !this.cache[cackeKey]) {
       try {
-        this.cache[iso2] = {};
-        const res = await (await fetch(`https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${iso2}`)).json();
-        this.cache[iso2] = {
+        this.cache[cackeKey] = {};
+        const res = await (
+          await fetch(
+            `http://api.coronatracker.com/v3/analytics/trend/country?countryCode=${iso2}&startDate=${startDate}&endDate=${endDate}`
+          )
+        ).json();
+        this.cache[cackeKey] = {
           status: 'success',
-          totalConfirmed: res[0]?.totalConfirmed ?? 0,
-          totalDeaths: res[0]?.totalDeaths ?? 0,
-          totalRecovered: res[0]?.totalRecovered ?? 0,
+          data: res,
         };
         this.__lastUpdate = Date.now();
-        return this.cache[iso2];
       } catch {
-        this.cache[iso2] = {
+        this.cache[cackeKey] = {
           status: 'failed',
         };
       }
 
       this.dispatchEvent(new Event('change'));
-      return this.cache[iso2];
     }
-    return this.cache[iso2];
+    return this.cache[cackeKey];
   }
 }
 
