@@ -106,6 +106,16 @@ export const countryInfoStyles = css`
     color: var(--ld-text);
     padding: 0 16px 16px 16px;
     width: 100%;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      padding-left: 1.5%;
+      padding-right: 1.5%;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 7px;
+      border: 4px solid white;
+    }
     & .ld-font-subheader {
       display: flex;
       justify-content: space-between;
@@ -150,6 +160,9 @@ export const countryInfoStyles = css`
       padding-top: 4px;
       border-top: 1px solid var(--ld-gray-5);
       border-bottom: 0px;
+      &.transport {
+        margin-bottom: -20px;
+      }
     }
   }
 
