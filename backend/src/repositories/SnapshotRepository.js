@@ -80,7 +80,7 @@ export default class SnapshotRepository {
       },
       {
         $group: {
-          _id: '$iso3',
+          _id: '$iso2',
           ranges: { $push: '$$ROOT' },
         },
       },

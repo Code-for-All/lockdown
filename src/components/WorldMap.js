@@ -3,6 +3,8 @@ import { html } from 'htm/preact';
 import { router } from '../router.js';
 import { dialogService } from '../services/dialogService.js';
 import css from 'csz';
+import format from 'date-fns/format';
+import addDays from 'date-fns/addDays';
 
 const mapbox_token = 'pk.eyJ1IjoiamZxdWVyYWx0IiwiYSI6ImNrOWZpZHF3ajBic2YzbHQwYzQ5bGRnaXgifQ.NcQInXQmMy93L47QBMCAfg';
 
@@ -109,11 +111,11 @@ export class WorldMap extends Component {
         {
           source: 'admin-0',
           sourceLayer: 'boundaries_admin_0',
-          id: lookupData[row.ISO].feature_id,
+          id: lookupData[row.lockdown.iso].feature_id,
         },
         {
-          kind: row.lockdown_status,
-          name: row.name,
+          kind: row.lockdown.measure[0].value,
+          name: row.lockdown.iso,
         }
       );
     });
@@ -185,7 +187,7 @@ export class WorldMap extends Component {
 
         // console.log('features', features[0]);
         // map.fitBounds(layer.getBounds());
-        router.setSearchParam('country', features[0].state.name);
+        router.setSearchParam('country', lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
         router.setSearchParam('iso2', features[0].properties.iso_3166_1);
       });
 
@@ -252,11 +254,11 @@ export class WorldMap extends Component {
             {
               source: 'admin-0',
               sourceLayer: 'boundaries_admin_0',
-              id: lookupData[row.ISO].feature_id,
+              id: lookupData[row.lockdown.iso].feature_id,
             },
             {
-              kind: row.lockdown_status,
-              name: row.name,
+              kind: row.lockdown.measure[0].value,
+              name: row.lockdown.iso,
             }
           );
         });
@@ -304,9 +306,12 @@ export class WorldMap extends Component {
       }
     });
 
+    const startDate = format(addDays(new Date(), -14), 'yyyy-MM-dd');
+    const endDate = format(addDays(new Date(), 56), 'yyyy-MM-dd');
+
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
-      fetch(new URL('../../data/lockdown.json', import.meta.url)).then((r) => r.json()),
+      fetch(new URL(`https://lockdownsnapshots.azurewebsites.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) => r.json()),
       fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
     ]);
 
@@ -316,7 +321,7 @@ export class WorldMap extends Component {
     // }
 
     // we need to prepare a static country list not dynamically calculate them
-    const countries = mapData['2020-04-26'];
+    const countries = Object.values[lookupTable];
 
     this.setState({
       countries,
