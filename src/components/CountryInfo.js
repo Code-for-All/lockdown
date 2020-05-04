@@ -226,7 +226,7 @@ export default class CountryInfo extends Component {
 class CountryDetails extends Component {
   render(_) {
     let { coronaData, populationData, countryDetails, country, date } = this.props;
-    return html`<h2 class="ld-font-subheader"><span>${country}</span> <span>${format(date, 'dd/mm/yyyy')}</span></h2>
+    return html`<h2 class="ld-font-subheader"><span>${country}</span> <span>${format(date, 'dd/MM/yyyy')}</span></h2>
       <dl class="data">
         <div class="data-entry is-half">
           <dt>Population</dt>
@@ -293,7 +293,7 @@ class TransportDetails extends Component {
           <br />
           <br />
           <${Legends} />
-          <h2 class="ld-font-subheader last">Transport (restrictions)</h2>
+          <h2 class="ld-font-subheader last transport">Transport (restrictions)</h2>
           <dl>
             <div class="ld-travel">
               <dt></dt>
