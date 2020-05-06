@@ -431,13 +431,10 @@ export default class CountryInfo extends Component {
     );
   }
   onBtnClick(range) {
-    // ? I disabled the calendar just for the hackaton period
-    /*
     this.setState({
       showDatePicker: true,
       datePickerPosition: range,
     });
-    */
   }
   onChooseDate(date) {
     const sliderDOM = this.dateRef.current;
@@ -456,14 +453,17 @@ export default class CountryInfo extends Component {
     }
     sliderDOM.style.left = `${24.5}%`;
     sliderDOM.style.transform = `translate(-${24.5}%, 0)`;
-    this.setState({
-      currentSliderRange: days,
-      currentSelectedDay: toSliderString(date),
-      firstDay: toSliderString(days[0]),
-      lastDay: toSliderString(days[days.length - 1]),
-      currentDateValue: 2,
-      currentPosition: 24.5,
-    });
+    this.setState(
+      {
+        currentSliderRange: days,
+        currentSelectedDay: toSliderString(date),
+        firstDay: toSliderString(days[0]),
+        lastDay: toSliderString(days[days.length - 1]),
+        currentDateValue: 2,
+        currentPosition: 24.5,
+      },
+      this.submitChanges
+    );
   }
   calendarWillClose() {
     this.setState(
@@ -480,7 +480,7 @@ export default class CountryInfo extends Component {
     });
   }
   rangePreProcces(date, days) {
-    let newDate = new Date();
+    let newDate = new Date(date);
     newDate.setDate(date.getDate() + days);
     return newDate;
   }

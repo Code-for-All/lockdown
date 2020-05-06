@@ -153,16 +153,18 @@ export default class CountryInfo extends Component {
   }
   async componentDidUpdate(prevProps) {
     if (this.props.date !== prevProps.date) {
+      const { startDate, endDate } = this.props;
       this.setState({
-        countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date }),
+        countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
       });
     }
   }
   async componentWillMount() {
+    const { startDate, endDate } = this.props;
     this.setState({
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
       populationData: await populationService.getPopulation(),
-      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date }),
+      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
     });
   }
 
