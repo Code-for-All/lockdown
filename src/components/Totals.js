@@ -41,7 +41,7 @@ const styles = css`
     bottom: 0;
     right: 0;
     width: 1px;
-    background-color: lightgrey;
+    background-color: #e0e0e0;
   }
 `;
 
