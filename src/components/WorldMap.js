@@ -295,17 +295,19 @@ export class WorldMap extends Component {
   async updateMap(mapData, lookupTable, selectedDate) {
     const lookupData = filterLookupTable(lookupTable);
     let localData = mapData[selectedDate];
-    
-    if(localData === undefined){
-      const {startDate, endDate} = this.props;
-      let [newMapData] = await Promise.all([fetch(new URL(`https://lockdownsnapshots.azurewebsites.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
-        r.json()
-      )]);
+
+    if (localData === undefined) {
+      const { startDate, endDate } = this.props;
+      let [newMapData] = await Promise.all([
+        fetch(new URL(`https://lockdownsnapshots.azurewebsites.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
+          r.json()
+        ),
+      ]);
       console.log(newMapData);
       let localData = newMapData[selectedDate];
       mapData = newMapData;
-      this.setState({mapData},()=>this.setMapState(this.state.map, localData, lookupData));
-    }else{
+      this.setState({ mapData }, () => this.setMapState(this.state.map, localData, lookupData));
+    } else {
       this.setMapState(this.state.map, localData, lookupData);
     }
   }

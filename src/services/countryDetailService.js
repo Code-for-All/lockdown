@@ -9,12 +9,12 @@ class CountryDetailService extends EventTargetShim {
   }
 
   async getDetails(opts) {
-    console.log("---*****-----")
+    console.log('---*****-----');
     let { iso2, date } = opts;
     let startDate = opts.startDate;
     let endDate = opts.endDate;
     iso2 = encodeURI(iso2);
-    
+
     startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
     endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
 

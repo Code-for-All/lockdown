@@ -453,14 +453,17 @@ export default class CountryInfo extends Component {
     }
     sliderDOM.style.left = `${24.5}%`;
     sliderDOM.style.transform = `translate(-${24.5}%, 0)`;
-    this.setState({
-      currentSliderRange: days,
-      currentSelectedDay: toSliderString(date),
-      firstDay: toSliderString(days[0]),
-      lastDay: toSliderString(days[days.length - 1]),
-      currentDateValue: 2,
-      currentPosition: 24.5,
-    },this.submitChanges);
+    this.setState(
+      {
+        currentSliderRange: days,
+        currentSelectedDay: toSliderString(date),
+        firstDay: toSliderString(days[0]),
+        lastDay: toSliderString(days[days.length - 1]),
+        currentDateValue: 2,
+        currentPosition: 24.5,
+      },
+      this.submitChanges
+    );
   }
   calendarWillClose() {
     this.setState(

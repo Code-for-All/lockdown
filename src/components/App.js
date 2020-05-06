@@ -194,7 +194,7 @@ export class App extends Component {
     debouncedCloseDialog();
     this.__closeCountryInfo();
   }
-  __onSelectDate(selectedDate,startDate,endDate) {
-    this.setState({ haveSelectedDate: selectedDate,startDate,endDate });
+  __onSelectDate(selectedDate, startDate, endDate) {
+    this.setState({ haveSelectedDate: selectedDate, startDate, endDate });
   }
 }
