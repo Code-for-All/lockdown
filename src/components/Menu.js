@@ -242,7 +242,7 @@ const sideBtn = css`
   .dark & {
     background-color: transparent;
     color: white;
-    background-image: url(/src/assets/icons/menu/white.svg);
+    background-image: url(/src/assets/icons/menu/black.svg);
     & svg {
       color: white;
     }
@@ -260,7 +260,7 @@ const sideBtn = css`
     border-radius: 100% 0% 0% 100% / 21% 0% 0% 21%;
     border: 0px;
     background-color: transparent;
-    background-image: url(/src/assets/icons/menu/black.svg);
+    background-image: url(/src/assets/icons/menu/white.svg);
     &:focus:not(.leaflet-container) {
       box-shadow: none !important;
     }
