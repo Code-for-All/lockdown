@@ -11,7 +11,7 @@ export function sumLockdown(lockdownStatusByTerritory) {
   // TODO: changes needed for time slider
   const total = Object.values(lockdownStatusByTerritory).reduce((prev, territory) => {
     if (isLockdown(territory.lockdown_status)) {
-      affected += population[territory.ISO].Population;
+      affected += +population[territory.ISO].Population;
       return prev + 1;
     }
     return prev;
