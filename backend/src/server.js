@@ -83,5 +83,17 @@ connect().then(database => {
         }).catch(next);
     });
 
+
+    app.get('/totals/lockdown/:startDate/:endDate', function (req, res, next) {
+        let startDate = new Date(req.params.startDate);
+        let endDate = new Date(req.params.endDate);
+
+        cacheService.get(`totals_lockdown_${startDate}${endDate}`, () => {
+            return snapshotService.getTotalsLockdown(startDate, endDate);
+        }).then(result => {
+            res.json(result);
+        }).catch(next);
+    });
+
     app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 });

@@ -192,6 +192,44 @@ paths:
                 '#/components/schemas/Lockdown'
         default:
           description: Unexpected error
+  /totals/lockdown/{startDate}/{endDate}:
+    get:
+      tags:
+        - World
+      summary: "Retrieve count of countries in lockdown and affected people"
+      parameters:
+        - name: startDate
+          description: Start Date of range
+          in: path
+          required: true
+          default: 2020-02-02
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          description: End Date of range (range not more than 70 days)
+          in: path
+          required: true
+          default: 2020-04-02
+          schema:
+            type: string
+            format: date
+      responses:
+        "200":
+          description: "List of counters"
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    lockdown:
+                      type: number
+                    affected:
+                      type: number
+        default:
+          description: Unexpected error
 components:
   schemas:
     Measure:

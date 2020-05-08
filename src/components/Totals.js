@@ -52,11 +52,20 @@ export class Totals extends Component {
     this.state = { totals: {} };
   }
 
+  async componentDidUpdate(prevProps) {
+    if (this.props.selectedDate !== prevProps.selectedDate) {
+      const { startDate, endDate, selectedDate } = this.props;
+      this.setState({
+        totals: await totalsService.getTotals({ date: selectedDate, startDate, endDate }),
+      });
+    }
+  }
+
   async componentWillMount() {
     installMediaQueryWatcher(`(min-width: 900px)`, (matches) => {
       this.setState({ desktop: matches });
     });
-    const totals = await totalsService.getTotals();
+    const totals = await totalsService.getTotals({date: this.props.selectedDate, startDate: this.props.startDate, endDate: this.props.endDate});
 
     this.setState({
       totals: totals,
@@ -64,23 +73,22 @@ export class Totals extends Component {
   }
 
   render({ selectedDate }, { totals, desktop }) {
-    const total = totals[selectedDate];
     const items = [
       {
         description: 'Countries in lockdown',
-        value: Number(total?.territories.lockdown || 0).toLocaleString(),
+        value: Number(totals.territories?.lockdown || 0).toLocaleString(),
       },
       {
         description: 'People affected',
-        value: Number(total?.territories.affected || 0).toLocaleString(),
+        value: Number(totals.territories?.affected || 0).toLocaleString(),
       },
       {
         description: html`Reported <br />cases`,
-        value: Number(total?.corona.confirmed || 0).toLocaleString(),
+        value: Number(totals.corona?.confirmed || 0).toLocaleString(),
       },
       {
         description: 'Reported deaths',
-        value: Number(total?.corona.deaths || 0).toLocaleString(),
+        value: Number(totals.corona?.deaths || 0).toLocaleString(),
       },
     ];
     return html`

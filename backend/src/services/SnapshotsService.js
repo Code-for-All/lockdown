@@ -1,15 +1,18 @@
-import { connect } from '../repositories';
 import Database from '../repositories/Database';
-import Entry from '../types/Entry';
-import Measure from '../types/Measure';
 import Snapshot from '../types/Snapshot';
-import Travel from '../types/Travel';
 import Moment, { MomentRange } from 'moment-timezone';
 import { extendMoment } from 'moment-range';
 
 const moment = extendMoment(Moment);
 
 const MAXIMUM_RANGE_IN_DAYS = 70;
+
+const MEASURE = {
+  YES: '1',
+  PARTIAL: '2',
+  NO: '3',
+  UNCLEAR: '4',
+};
 
 export const MEASURES = [
   'max_gathering',
@@ -56,6 +59,7 @@ export default class SnapshotsService {
    */
   constructor(database) {
     this.database = database;
+    this.population = require('../../../data/population.json');
   }
 
   /**
@@ -115,6 +119,45 @@ export default class SnapshotsService {
     );
   }
 
+  async getTotalsLockdown(startDate, endDate) {
+    if (moment(startDate).isAfter(endDate)) {
+      throw 'Start date should be less than end date';
+    }
+
+    if (moment(endDate).diff(startDate, 'days') > MAXIMUM_RANGE_IN_DAYS) {
+      throw `Maximum date range is ${MAXIMUM_RANGE_IN_DAYS} days`;
+    }
+
+    var ranges = await this.database.snapshotRepository
+      .getByMeasureAndDateRange(startDate, endDate, ['measure.lockdown_status'])
+      .toArray();
+
+    var result = {};
+
+    for (let currentDate of moment.range(startDate, endDate).by('days')) {
+      result[currentDate.format("YYYY-MM-DD")] = this._sumTotalsLockdown(ranges, currentDate);
+    }
+
+    return result;
+  }
+
+  _sumTotalsLockdown(ranges, date) {
+    const countries = {};
+    var affected = 0;
+    var lockdown = ranges
+      .filter(r => date.isAfter(r.start_date) && date.isBefore(r.end_date))
+      .reduce((prev, range) => {
+        if (!countries[range.iso2] && this._isLockdown(range.measures[0].value)) {
+          countries[range.iso2] = true;
+          affected += +this.population[range.iso2].Population;
+          return prev + 1;
+        }
+        return prev;
+      }, 0)
+
+    return { lockdown, affected };
+  }
+
   /**
    * 
    * @param {Date} date 
@@ -167,26 +210,26 @@ export default class SnapshotsService {
     }
 
     var snapshots = await this.database.snapshotRepository
-      .getByMeasureAndDateRange(iso, startDate, endDate, measures)
+      .getByIsoAndMeasureAndDateRange(iso, startDate, endDate, measures)
       .toArray();
 
     var result = [];
-     snapshots.forEach(s => {
+    snapshots.forEach(s => {
       result = result.concat(s.measures.map(m => {
-          var keys = m.label.split('.');
-          return {
-            [`#npi+num+${m.label.replace('.', '+').replace('_', '+')}`]: m.value,
-            label: keys[1],
-            value: m.value,
-            name: m.label,
-            '#date+start': s.start_date,
-            '#date+end': s.end_date,
-            '#meta+url': s.source_url,
-            '#country+code+iso3': s.iso3,
-          };
-        }));
+        var keys = m.label.split('.');
+        return {
+          [`#npi+num+${m.label.replace('.', '+').replace('_', '+')}`]: m.value,
+          label: keys[1],
+          value: m.value,
+          name: m.label,
+          '#date+start': s.start_date,
+          '#date+end': s.end_date,
+          '#meta+url': s.source_url,
+          '#country+code+iso3': s.iso3,
+        };
+      }));
     });
-    return {iso: iso, measures:result};
+    return { iso: iso, measures: result };
   }
 
   /**
@@ -196,7 +239,7 @@ export default class SnapshotsService {
     MEASURES.filter((m) => m.startsWith(prefix)).forEach((measureKey) => {
       let measureValue = this._getValueFromContainers(containers, measureKey);
       let keys = measureKey.split('.');
-      if(!result[keys[0]]){
+      if (!result[keys[0]]) {
         result[keys[0]] = [];
       }
       result[keys[0]].push(this._buildResult(measureValue, measureKey));
@@ -252,5 +295,9 @@ export default class SnapshotsService {
       }
     });
     return result;
+  }
+
+  _isLockdown(value) {
+    return value === MEASURE.YES || value === MEASURE.PARTIAL;
   }
 }

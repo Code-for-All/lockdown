@@ -297,7 +297,9 @@ export class WorldMap extends Component {
     let localData = mapData[selectedDate];
 
     if (localData === undefined) {
-      const { startDate, endDate } = this.props;
+      let { startDate, endDate } = this.props;
+      startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
+      endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
       let [newMapData] = await Promise.all([
         fetch(new URL(`https://lockdownsnapshots.azurewebsites.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
           r.json()
@@ -319,8 +321,9 @@ export class WorldMap extends Component {
       }
     });
 
-    const startDate = format(addDays(new Date(), -14), 'yyyy-MM-dd');
-    const endDate = format(addDays(new Date(), 56), 'yyyy-MM-dd');
+    let { startDate, endDate } = this.props;
+    startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
+    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
       fetch(new URL(`https://lockdownsnapshots.azurewebsites.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>

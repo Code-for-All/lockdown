@@ -99,7 +99,7 @@ export class App extends Component {
     return html`
       ${this.state.showStatsbox
         ? html`
-            <${Header} selectedDate=${selectedDate} showStatsbox=${this.state.showStatsbox} />
+            <${Header} selectedDate=${selectedDate} showStatsbox=${this.state.showStatsbox} startDate=${this.state.startDate} endDate=${this.state.endDate} />
             ${!this.state.dialog.opened
               ? html`<div class=${styles}>
                   <${Totals} selectedDate=${selectedDate} startDate=${this.state.startDate} endDate=${this.state.endDate} />
