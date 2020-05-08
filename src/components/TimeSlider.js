@@ -88,7 +88,7 @@ const selectStyles = css`
         }
       }
     .dark &{
-      background-color: rgb(48, 49, 54);
+      background-color: #333333;
     }
     & {
         height: 120px;
@@ -163,7 +163,7 @@ const rangeStyles = css`
   }
   input[type='range']::-webkit-slider-runnable-track {
     width: 100%;
-    height: 6.8px;
+    height: 3px;
     cursor: pointer;
     background: rgba(201, 201, 201, 0.733);
     border-radius: 0px;
@@ -176,9 +176,9 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 38px;
-    width: 38px;
-    border-radius: 38px;
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
     background: #ffffff;
     cursor: pointer;
     -webkit-appearance: none;
@@ -193,7 +193,7 @@ const rangeStyles = css`
   }
   input[type='range']::-moz-range-track {
     width: 100%;
-    height: 6.8px;
+    height: 3px;
     cursor: pointer;
     background: rgba(201, 201, 201, 0.733);
     border-radius: 0px;
@@ -206,15 +206,15 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 38px;
-    width: 38px;
-    border-radius: 38px;
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
     background: #ffffff;
     cursor: pointer;
   }
   input[type='range']::-ms-track {
     width: 100%;
-    height: 6.8px;
+    height: 3px;
     cursor: pointer;
     background: transparent;
     border-color: transparent;
@@ -237,9 +237,9 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 38px;
-    width: 38px;
-    border-radius: 38px;
+    height: 25px;
+    width: 25px;
+    border-radius: 25px;
     background: #ffffff;
     cursor: pointer;
     height: 6.8px;
@@ -281,9 +281,9 @@ const tooltipCss = css`
 const sliderSelector = css`
   .dark & span {
     color: white;
-    background: rgb(48, 49, 54);
+    background: #333333;
     &::after {
-      background-color: rgb(48, 49, 54);
+      background-color: #333333;
     }
   }
   & {
@@ -296,30 +296,34 @@ const sliderSelector = css`
     z-index: 999;
     width: fit-content;
     transform: translate(-24.5%, 0);
-    background: #ffffff;
+    background: transparent;
     font-size: 1rem;
     & span {
-      border: 2px solid #8c8c8c;
-      border-radius: 7px;
+      border: 0px solid #8c8c8c;
+      border-radius: 30px;
       position: relative;
       background: #ffffff;
-      padding: 10px 5px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0px 3px 7px rgba(0,0,0,0.5);;
       &::after {
         content: '';
         display: block;
         position: absolute;
-        bottom: -9px;
+        bottom: -6px;
         left: 0;
         right: 0;
         margin-left: auto;
         margin-right: auto;
-        width: 15px;
-        height: 15px;
+        width: 12px;
+        height: 12px;
         background: #ffffff;
-        border-right: 2px solid #8c8c8c;
-        border-bottom: 2px solid #8c8c8c;
+        border-right: 0px solid #8c8c8c;
+        border-bottom: 0px solid #8c8c8c;
         -moz-transform: rotate(45deg);
         -webkit-transform: rotate(45deg);
+        box-shadow: 4px 4px 7px rgba(0,0,0,0.3)
       }
     }
   }
