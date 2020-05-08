@@ -46,7 +46,7 @@ class TotalsService extends EventTargetShim {
     return {
       status: 'success',
       corona: this.corona,
-      territories: this.cache[cacheKey][date]
+      territories: this.cache[cacheKey][date],
     };
   }
 }

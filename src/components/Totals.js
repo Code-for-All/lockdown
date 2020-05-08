@@ -65,7 +65,11 @@ export class Totals extends Component {
     installMediaQueryWatcher(`(min-width: 900px)`, (matches) => {
       this.setState({ desktop: matches });
     });
-    const totals = await totalsService.getTotals({date: this.props.selectedDate, startDate: this.props.startDate, endDate: this.props.endDate});
+    const totals = await totalsService.getTotals({
+      date: this.props.selectedDate,
+      startDate: this.props.startDate,
+      endDate: this.props.endDate,
+    });
 
     this.setState({
       totals: totals,
