@@ -59,7 +59,7 @@ export default class SnapshotsService {
    */
   constructor(database) {
     this.database = database;
-    this.population = require('../../../data/population.json');
+    this.population = require('../../data/population.json');
   }
 
   /**

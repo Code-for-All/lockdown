@@ -14,7 +14,6 @@ const app = express();
 app.use(cors())
 app.use(compression());
 
-
 const ttl = 60 * 60 * 1;
 const cacheService = new CacheService(ttl);
 
