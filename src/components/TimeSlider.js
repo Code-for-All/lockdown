@@ -185,7 +185,7 @@ const rangeStyles = css`
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -10px;
-    .dark &{
+    .dark & {
       background: #ffffff;
     }
     &::before {
