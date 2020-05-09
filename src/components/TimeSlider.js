@@ -27,7 +27,7 @@ const sliderWrapper = css`
     -webkit-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.39);
     -moz-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.39);
     box-shadow: 0px 4px 11px 3px rgba(0, 0, 0, 0.39);
-    border-radius: 20px;
+    border-radius: 25px;
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
       bottom: 10px;
@@ -91,9 +91,9 @@ const selectStyles = css`
       background-color: #333333;
     }
     & {
-        height: 120px;
-        padding: 0px 9.5%;
-        border-radius: 20px;
+        height: 50px;
+        padding: 0px 85px;
+        border-radius: 25px;
         background-color: white;
         display:flex
         width: 100%;
@@ -155,7 +155,7 @@ const rangeStyles = css`
     -webkit-appearance: none;
     width: 100%;
     margin: 15.6px 0;
-    bottom: -28px;
+    bottom: -18px;
   }
   input[type='range']:focus {
     outline: none;
@@ -256,13 +256,13 @@ const tooltipCss = css`
     color: white;
   }
   & {
-    font-weight: bold;
-    font-size: 14px;
-    color: #8c8c8c;
+    font-weight: 600;
+    font-size: 12px;
+    color: #333333;
     position: absolute;
-    top: 55px;
+    top: 17px;
     @media (max-width: 960px) {
-      top: 55px;
+      top: 17px;
       &.first {
         left: calc(12% - 15px);
       }
@@ -271,10 +271,10 @@ const tooltipCss = css`
       }
     }
     &.first {
-      left: calc(10% - 15px);
+      left: 7px;
     }
     &.last {
-      right: calc(10% - 15px);
+      right: 7px;
     }
   }
 `;
@@ -289,9 +289,9 @@ const sliderSelector = css`
   & {
     position: absolute;
     @media (max-width: 960px) {
-      top: 20px;
+      top: -27px;
     }
-    top: 20px;
+    top: -27px;
     left: 24.5%;
     z-index: 999;
     width: fit-content;
@@ -344,11 +344,12 @@ const popBtn = css`
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     z-index: 9;
     bottom: 18px;
+    display:none;
     @media (max-width: 960px) {
-      bottom: 18px;
+      bottom: 11px;
     }
     @media (max-width: 960px) and (min-width: 576px) {
-      bottom: 18px);
+      bottom: 11px);
       &.first {
         left: calc(12% + 11px) !important;
       }
