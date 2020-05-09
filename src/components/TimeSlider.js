@@ -178,14 +178,16 @@ const rangeStyles = css`
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     z-index: 9999;
     position: relative;
-
     height: 20px;
     width: 20px;
     border-radius: 20px;
-    background: #ffffff;
+    background: #333333;
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -15.6px;
+    margin-top: -10px;
+    .dark &{
+      background: #ffffff;
+    }
     &::before {
       content: 'Say Cheese';
       color: red;
