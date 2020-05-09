@@ -214,7 +214,7 @@ const rangeStyles = css`
     height: 20px;
     width: 20px;
     border-radius: 20px;
-    background: #ffffff;
+    background: #333333;
     cursor: pointer;
   }
   input[type='range']::-ms-track {
@@ -245,7 +245,7 @@ const rangeStyles = css`
     height: 20px;
     width: 20px;
     border-radius: 20px;
-    background: #ffffff;
+    background: #333333;
     cursor: pointer;
     height: 6.8px;
   }
