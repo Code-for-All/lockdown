@@ -20,7 +20,8 @@ const styles = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 126px;
+    width: 140px;
+    padding: 0 16px;
     margin: 5px 0;
   }
 
@@ -40,7 +41,7 @@ const styles = css`
     bottom: 0;
     right: 0;
     width: 1px;
-    background-color: lightgrey;
+    background-color: #e0e0e0;
   }
 `;
 

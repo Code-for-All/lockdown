@@ -20,9 +20,10 @@ const selectStyles = css`
 `;
 
 const domainCoors = {
-  asia: [21.943046, 96.240234], //Burma
-  europe: [52.160455, 10.371094], //Germany
-  usa: [45.089036, -100.898438],
+  asia: { lng: 95.955971, lat: 21.916222, zoom: 2.8 }, //Burma
+  europe: { lng: 52.160455, lat: 10.371094, zoom: 4 }, //Germany
+  usa: { lng: 45.089036, lat: -100.898438, zoom: 3 },
+  africa: { lng: 21.525828, lat: 4.214943, zoom: 3.2 }, //Somewhere in Africa :)
 };
 
 const pause = (time = 100) => {
@@ -37,16 +38,16 @@ function worldStyle(lockdown_status) {
   let value;
   switch (lockdown_status) {
     case '1':
-      value = '#6fcf97';
+      value = '#eb5757'; //yes
       break;
     case '2':
-      value = '#7aaeff';
+      value = '#f2994a'; //partial
       break;
     case '3':
-      value = '#eb5757';
+      value = '#6fcf97'; //no
       break;
     case '4':
-      value = '#f2994a';
+      value = '#7aaeff'; //unclear
       break;
     default:
       value = '#CCCCCC';
@@ -77,27 +78,25 @@ export class WorldMap extends Component {
     this.initMap = this.initMap.bind(this);
     this.updateMap = this.updateMap.bind(this);
 
-    let coords = [0, 0];
-    let zoom = 2;
+    let coords = { lng: 0, lat: 0, zoom: 2 };
 
     let url = window.location.href;
-    let islocationSet = false;
+    let isLocationSet = false;
     for (let country in domainCoors) {
       if (url.indexOf('lockdown.' + country) != -1) {
         coords = domainCoors[country];
-        zoom = 4;
-        islocationSet = true;
+        isLocationSet = true;
       }
     }
-
     this.state = {
-      lng: 0,
-      lat: 0,
-      zoom: 2,
+      lng: coords.lng,
+      lat: coords.lat,
+      zoom: coords.zoom,
       countries: [],
       mapData: {},
       lookupTable: {},
       isMapReady: false,
+      isLocationSet: isLocationSet,
     };
   }
 
@@ -330,26 +329,26 @@ export class WorldMap extends Component {
     if (navigator.permissions) {
       const geolocation = await navigator.permissions.query({ name: 'geolocation' });
       // on pageload, check if there is permission for geolocation
-      if (geolocation.state === 'granted') {
+      if (geolocation.state === 'granted' && !this.state.isLocationSet) {
         navigator.geolocation.getCurrentPosition((location) => {
           const { latitude, longitude } = location.coords;
 
           this.state.map.setCenter([longitude, latitude]);
           this.setState({
-            islocationSet: true,
+            isLocationSet: true,
           });
         });
       }
 
       // handle change when user toggles geolocation permission
       geolocation.addEventListener('change', (e) => {
-        if (e.target.state === 'granted') {
+        if (e.target.state === 'granted' && !this.state.isLocationSet) {
           navigator.geolocation.getCurrentPosition((location) => {
             localStorage.setItem('geolocation', 'true');
             const { latitude, longitude } = location.coords;
             this.state.map.setCenter([longitude, latitude]);
             this.setState({
-              islocationSet: true,
+              isLocationSet: true,
             });
           });
         } else {

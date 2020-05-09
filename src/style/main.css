@@ -13,7 +13,7 @@
   --ld-green-1: #93c47d;
   --ld-red-1: #e06666;
 
-  --ld-text: #000000;
+  --ld-text: #333333;
   --ld-bg: white;
   --ld-hover: rgb(247, 247, 247);
   --ld-active: blue;
@@ -29,7 +29,7 @@
 }
 
 .ld-font-front {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--ld-text);
 }
@@ -84,7 +84,7 @@
 
 .dark {
   --ld-text: #ffffff;
-  --ld-bg: rgb(48, 49, 54);
+  --ld-bg: #333333;
   --ld-hover: rgb(38, 39, 43);
   --ld-active: rgb(131, 251, 195);
   --ld-focus: rgba(131, 251, 195, 1);
@@ -119,6 +119,12 @@ body {
   overflow-y: hidden;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+}
+body::-webkit-scrollbar {
+  padding: 3px;
+}
+body::-webkit-scrollbar-thumb {
+  border-radius: 7px;
 }
 
 a:visited {
@@ -239,7 +245,15 @@ a:visited {
   height: calc(100% - 44px);
   padding: 0px 20px 20px 20px;
 }
-
+.ld-menu--content::-webkit-scrollbar {
+  padding-left: 1.5%;
+  padding-right: 1.5%;
+}
+.ld-menu--content::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 7px;
+  border: 4px solid white;
+}
 .ld-menu--content a {
   color: var(--ld-active);
 }
@@ -375,10 +389,4 @@ a:visited {
   overflow: hidden;
   height: 100%;
   width: 100%;
-}
-
-@media (max-width: 960px) {
-  .map-container {
-    height: calc(100% - 60px);
-  }
 }

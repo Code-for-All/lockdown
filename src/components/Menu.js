@@ -18,7 +18,7 @@ const styles = css`
 
   th {
     border-top: transparent;
-    padding: 15px;
+    padding: 12px;
   }
   th:nth-child(1),
   th:nth-child(2) {
@@ -69,7 +69,7 @@ const styles = css`
 
   td {
     text-align: center;
-    padding: 15px;
+    padding: 5px;
     svg {
       stroke: var(--ld-text);
       & svg {
@@ -240,9 +240,9 @@ const styles2 = css`
 
 const sideBtn = css`
   .dark & {
-    background-color: #333333;
-    strock: white;
+    background-color: transparent;
     color: white;
+    background-image: url(/src/assets/icons/menu/black.svg);
     & svg {
       color: white;
     }
@@ -252,16 +252,15 @@ const sideBtn = css`
   }
   & {
     position: absolute;
-    height: 80px;
+    height: 108px;
     width: 50px;
     z-index: 2000;
     top: calc((100vh / 2) - 20px);
-    right: 0px;
-    position: absolute;
+    right: -5px;
     border-radius: 100% 0% 0% 100% / 21% 0% 0% 21%;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border: 0px;
-    background-color: white;
+    background-color: transparent;
+    background-image: url(/src/assets/icons/menu/white.svg);
     &:focus:not(.leaflet-container) {
       box-shadow: none !important;
     }

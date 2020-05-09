@@ -22,9 +22,7 @@ const styles = css`
   .ld-button {
     font-weight: 700;
     display: block;
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
+    margin: 0 auto;
     border: none;
     padding: 15px;
     overflow: visible;

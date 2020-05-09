@@ -11,6 +11,39 @@ function toSliderString(date) {
   return format(date, 'dd/MM/yyyy');
 }
 
+const sliderWrapper = css`
+  & {
+    position: absolute;
+    bottom: 32px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(80vw - 400px);
+    z-index: 1000;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.39);
+    -moz-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.39);
+    box-shadow: 0px 4px 11px 3px rgba(0, 0, 0, 0.39);
+    border-radius: 25px;
+    /*padding: 0px 6%;*/
+    @media (max-width: 960px) {
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      width: 90vw;
+    }
+    & > div.countryInfo {
+      z-index: 10;
+      transition: 0.5s;
+      height: calc(70vh - (60px + 34px));
+      max-height: 70vh;
+    }
+  }
+`;
+
 const selectStyles = css`
     @keyframes fadeOutLeft {
         from {
@@ -55,38 +88,26 @@ const selectStyles = css`
         }
       }
     .dark &{
-      background-color: rgb(48, 49, 54);
+      background-color: #333333;
     }
     & {
-        position: absolute;
-        bottom: 40px;
-        left: 0;
-        right: 0;
-        margin-left:auto;
-        margin-right:auto;
-        z-index: 1000;
-        width: calc(80vw - 400px);
-        min-height: 10vh;
+        height: 50px;
+        padding: 0px 85px;
+        border-radius: 25px;
         background-color: white;
-        padding: 0px 6%;
-        padding-top: 4%;
-        padding-bottom: 1.5%;
-        border-radius: 20px;
         display:flex
+        width: 100%;
+        position: relative;
         justify-content: center
         align-items: center
-        -webkit-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
-        -moz-box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
-        box-shadow: 0px 4px 5px 2px rgba(0,0,0,0.39);
+        &.open{
+          border-top: 0px;
+          border-top-left-radius: 0px;
+          border-top-right-radius: 0px;
+        }
         @media (max-width: 960px) {
             & {
-              bottom: 10px;
-              left:0;
-              right:0;
-              width: 90vw;
-              padding: 0px 12%;
-              padding-top: 11vh;
-              padding-bottom: 3%;
+              padding: 0 85px;
             }
         }
         & > .overlay{
@@ -134,6 +155,7 @@ const rangeStyles = css`
     -webkit-appearance: none;
     width: 100%;
     margin: 15.6px 0;
+    bottom: 0;
   }
   input[type='range']:focus {
     outline: none;
@@ -141,7 +163,7 @@ const rangeStyles = css`
   }
   input[type='range']::-webkit-slider-runnable-track {
     width: 100%;
-    height: 6.8px;
+    height: 3px;
     cursor: pointer;
     background: rgba(201, 201, 201, 0.733);
     border-radius: 0px;
@@ -154,9 +176,9 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 38px;
-    width: 38px;
-    border-radius: 38px;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
     background: #ffffff;
     cursor: pointer;
     -webkit-appearance: none;
@@ -171,7 +193,7 @@ const rangeStyles = css`
   }
   input[type='range']::-moz-range-track {
     width: 100%;
-    height: 6.8px;
+    height: 3px;
     cursor: pointer;
     background: rgba(201, 201, 201, 0.733);
     border-radius: 0px;
@@ -184,15 +206,15 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 38px;
-    width: 38px;
-    border-radius: 38px;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
     background: #ffffff;
     cursor: pointer;
   }
   input[type='range']::-ms-track {
     width: 100%;
-    height: 6.8px;
+    height: 3px;
     cursor: pointer;
     background: transparent;
     border-color: transparent;
@@ -215,9 +237,9 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 38px;
-    width: 38px;
-    border-radius: 38px;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
     background: #ffffff;
     cursor: pointer;
     height: 6.8px;
@@ -234,13 +256,13 @@ const tooltipCss = css`
     color: white;
   }
   & {
-    font-weight: bold;
-    font-size: 14px;
-    color: #8c8c8c;
+    font-weight: 600;
+    font-size: 12px;
+    color: #333333;
     position: absolute;
-    top: 42%;
+    top: 17px;
     @media (max-width: 960px) {
-      top: 40%;
+      top: 17px;
       &.first {
         left: calc(12% - 15px);
       }
@@ -249,55 +271,59 @@ const tooltipCss = css`
       }
     }
     &.first {
-      left: calc(10% - 15px);
+      left: 7px;
     }
     &.last {
-      right: calc(10% - 15px);
+      right: 7px;
     }
   }
 `;
 const sliderSelector = css`
   .dark & span {
     color: white;
-    background: rgb(48, 49, 54);
+    background: #333333;
     &::after {
-      background-color: rgb(48, 49, 54);
+      background-color: #333333;
     }
   }
   & {
     position: absolute;
     @media (max-width: 960px) {
-      top: 20%;
+      top: -27px;
     }
-    top: 18%;
+    top: -27px;
     left: 24.5%;
     z-index: 999;
     width: fit-content;
     transform: translate(-24.5%, 0);
-    background: #ffffff;
+    background: transparent;
     font-size: 1rem;
     & span {
-      border: 2px solid #8c8c8c;
-      border-radius: 7px;
+      border: 0px solid #8c8c8c;
+      border-radius: 30px;
       position: relative;
       background: #ffffff;
-      padding: 10px 5px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0px 3px 7px rgba(0,0,0,0.5);;
       &::after {
         content: '';
         display: block;
         position: absolute;
-        bottom: -9px;
+        bottom: -6px;
         left: 0;
         right: 0;
         margin-left: auto;
         margin-right: auto;
-        width: 15px;
-        height: 15px;
+        width: 12px;
+        height: 12px;
         background: #ffffff;
-        border-right: 2px solid #8c8c8c;
-        border-bottom: 2px solid #8c8c8c;
+        border-right: 0px solid #8c8c8c;
+        border-bottom: 0px solid #8c8c8c;
         -moz-transform: rotate(45deg);
         -webkit-transform: rotate(45deg);
+        box-shadow: 4px 4px 7px rgba(0,0,0,0.3)
       }
     }
   }
@@ -306,23 +332,24 @@ const popBtn = css`
   & {
     content: '';
     position: absolute;
-    height: 38px;
-    width: 38px;
+    height: 25px;
+    width: 25px;
     outline: none;
     border: 0px;
-    border-radius: 38px;
+    border-radius: 25px;
     background: #ffffff;
     cursor: pointer;
     -webkit-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     -moz-box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     z-index: 9;
-    bottom: calc(16% - 1px);
+    bottom: 18px;
+    display:none;
     @media (max-width: 960px) {
-      bottom: calc(10% - 1px);
+      bottom: 11px;
     }
     @media (max-width: 960px) and (min-width: 576px) {
-      bottom: calc(17% - 1px);
+      bottom: 11px);
       &.first {
         left: calc(12% + 11px) !important;
       }
@@ -334,13 +361,13 @@ const popBtn = css`
       @media (max-width: 960px) {
         left: calc(12% + 4px);
       }
-      left: calc(6% + 38px);
+      left: calc(0% + 38px);
     }
     &.last {
       @media (max-width: 960px) {
         right: calc(12% + 4px);
       }
-      right: calc(6% + 38px);
+      right: calc(0% + 38px);
     }
     &:active {
       background-color: rgb(199, 198, 198);
@@ -371,6 +398,7 @@ export default class CountryInfo extends Component {
     this.submitChanges = this.submitChanges.bind(this);
   }
   componentDidMount() {
+    console.log(this.props.children);
     let date = new Date();
     let days = [];
     let plusDays = 7;
@@ -467,27 +495,30 @@ export default class CountryInfo extends Component {
   }
   render(_) {
     return html`
-      <div class="${selectStyles} ${rangeStyles}">
-        <${DatePicker}
-          close=${this.calendarWillClose}
-          onSelect=${this.onChooseDate}
-          show=${this.state.showDatePicker}
-          customClass=${this.state.datePickerPosition}
-        />
-        <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
-        <span class="first ${tooltipCss}">${this.state.firstDay}</span>
-        <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
-        <input
-          ref=${this.range}
-          onInput=${this.onSliderChange}
-          type="range"
-          min="0"
-          max="10"
-          step="1"
-          value=${this.state.currentDateValue}
-        />
-        <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
-        <span class="last ${tooltipCss}">${this.state.lastDay}</span>
+      <div class="sliderWrapper ${sliderWrapper}">
+        ${this.props.children}
+        <div class="${selectStyles} ${rangeStyles} ${this.props.children !== '' ? 'open' : ''}">
+          <${DatePicker}
+            close=${this.calendarWillClose}
+            onSelect=${this.onChooseDate}
+            show=${this.state.showDatePicker}
+            customClass=${this.state.datePickerPosition}
+          />
+          <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
+          <span class="first ${tooltipCss}">${this.state.firstDay}</span>
+          <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
+          <input
+            ref=${this.range}
+            onInput=${this.onSliderChange}
+            type="range"
+            min="0"
+            max="10"
+            step="1"
+            value=${this.state.currentDateValue}
+          />
+          <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
+          <span class="last ${tooltipCss}">${this.state.lastDay}</span>
+        </div>
       </div>
     `;
   }

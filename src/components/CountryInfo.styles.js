@@ -1,12 +1,140 @@
 import css from 'csz';
 
+export const tabStyles = css`
+  &{
+    width: 100%;
+    display: flex;
+    position: relative;
+    & > button{
+      & {
+        position: absolute !important;
+        color: #7C7C7C;
+        background-color: white;
+        padding: 0px !important;
+        top: -10px;
+        width: 39px !important;
+        height: 39px !important;
+        right: -12px;
+        border: 0px;
+        border-radius: 50% !important;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+        &:hover {
+          cursor: pointer;
+        }
+        
+      }
+      .dark & {
+        position: absolute !important;
+        color: white;
+        background-color: var(--ld-hover);
+        padding: 0px;
+        top: -10px;
+        width: 39px;
+        right: -12px;
+        border-radius: 50%;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+    & .tab{
+      width: 35%;
+      background-color: #E5E5E5;
+      font-family: Montserrat;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 20px;
+      text-align: center;
+      padding: 5px;
+      color: #7C7C7C;
+      border: 1px solid #999999;
+      border-top: 0px;
+      transition: 0.5s;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      &:hover{
+        cursor: pointer;
+      }
+      &.active{
+        border-bottom: 0px;
+        background-color: #FFF 
+        border: 0px;
+        .dark &{
+          background-color: var(--ld-bg);
+          color: white;
+        }
+      }
+      &:first-child{
+        border-top-left-radius: 19px;
+      }
+      &:last-child{
+        border-top-right-radius: 19px;
+      }
+      &:nth-child(3){
+        border-top-right-radius: 19px;
+        padding-right: 18px;
+      }
+      &:nth-child(2){
+        width: 30%;
+      }
+    }
+  }
+`;
+export const reports = css`
+  & {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 export const countryInfoStyles = css`
+  .countryInfo.loader {
+    background-color: white !important;
+    .dark & {
+      background-color: var(--ld-bg) !important;
+    }
+  }
   & {
     background-color: var(--ld-bg);
     color: var(--ld-text);
     padding: 0 16px 16px 16px;
-    border-radius: 8px;
     width: 100%;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      padding-left: 1.5%;
+      padding-right: 1.5%;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 7px;
+      border: 4px solid white;
+    }
+    & .ld-font-subheader {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
+      color: #7c7c7c;
+      letter-spacing: 0.02em;
+      & span:first-child {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0.05em;
+      }
+    }
+  }
+
+  .countryInfo dl {
+    margin-top: -27px;
   }
 
   dl {
@@ -24,30 +152,51 @@ export const countryInfoStyles = css`
   }
 
   h2 {
-    margin-top: 16px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--ld-gray-5);
+    margin-top: 11px;
+    padding-bottom: 5px;
+    border-bottom: 7px;
+    &.last {
+      padding: 0px;
+      padding-top: 4px;
+      border-top: 1px solid var(--ld-gray-5);
+      border-bottom: 0px;
+      &.transport {
+        margin-bottom: -20px;
+      }
+    }
   }
 
   .data {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .data-entry {
     font-variant-numeric: tabular-nums;
-    margin-bottom: 8px;
-    padding-bottom: 8px;
+    margin-bottom: 7px;
+    padding-bottom: 7px;
     border-bottom: 1px solid var(--ld-gray-5);
+    width: 100%;
+    &.is-half {
+      width: 50%;
+    }
+    &.is-third {
+      width: 33.33%;
+    }
   }
 
   .data-entry dt {
-    font-weight: 700;
+    color: #7c7c7c;
+    font-size: 14px;
+    font-weight: 500;
   }
 
   .data dd {
     margin-left: 0;
+    color: #7c7c7c;
+    font-size: 16px;
     text-align: left;
+    font-weight: 600;
   }
 
   .legend dl {
@@ -57,18 +206,25 @@ export const countryInfoStyles = css`
 
   .legend-item {
     display: flex;
-    align-items: center;
   }
 
   .legend-item dt {
-    width: 5px;
-    height: 5px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    margin-right: 8px;
+    margin-right: 5px;
   }
 
   .legend-item dd {
+    font-size: 12px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.02em;
     margin-inline-start: 0;
+    color: #7c7c7c;
+    .dark & {
+      color: var(--ld-text);
+    }
   }
 
   .legend-green {
@@ -89,23 +245,26 @@ export const countryInfoStyles = css`
 
   .measures {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     list-style: none;
     padding: 0;
-    margin: 0 24px 0;
+    margin: 0 0px 0;
   }
 
   .measures > li {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 16px;
-    text-align: center;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 0px;
+    text-align: left;
   }
 
   .measure-wrapper {
     position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .measure svg {
@@ -114,32 +273,15 @@ export const countryInfoStyles = css`
   }
 
   .measure-label {
-    position: absolute;
-    top: -36px;
-    left: 0;
-    background-color: #7ffbc6;
     padding: 8px;
     border-radius: 20px;
     color: var(--ld-gray-1);
     pointer-events: none;
-    opacity: 0;
     transition: opacity 300ms ease-in-out;
-    white-space: nowrap;
-  }
-
-  .measure-label::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 0;
-    position: absolute;
-
-    border-width: 6px;
-    border-style: solid;
-    border-color: #7ffbc6 transparent transparent transparent;
-    left: 16px;
-
-    bottom: -12px;
+    font-size: 12px;
+    .dark & {
+      color: var(--ld-text);
+    }
   }
 
   .measure:hover ~ .measure-label {
@@ -168,10 +310,16 @@ export const countryInfoStyles = css`
   }
 
   .ld-travel dt {
-    flex-basis: 50%;
+    flex-basis: 62%;
     flex-shrink: 0;
     font-weight: 300;
     margin-right: 20px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 17px;
+    .dark & {
+      color: var(--ld-text);
+    }
   }
 
   .ld-travel dd {
