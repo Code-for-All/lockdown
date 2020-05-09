@@ -7,8 +7,11 @@ import DatePicker from './DatePicker.js';
 
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
 
+function toSliderStringShort(date) {
+  return format(date, 'dd MMM');
+}
 function toSliderString(date) {
-  return format(date, 'dd/MM/yyyy');
+  return format(date, 'dd MMMM yyyy');
 }
 
 const sliderWrapper = css`
@@ -306,7 +309,7 @@ const sliderSelector = css`
       padding: 5px 10px;
       font-size: 12px;
       font-weight: 600;
-      box-shadow: 0px 3px 7px rgba(0,0,0,0.5);;
+      box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.5);
       &::after {
         content: '';
         display: block;
@@ -323,7 +326,7 @@ const sliderSelector = css`
         border-bottom: 0px solid #8c8c8c;
         -moz-transform: rotate(45deg);
         -webkit-transform: rotate(45deg);
-        box-shadow: 4px 4px 7px rgba(0,0,0,0.3)
+        box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.3);
       }
     }
   }
@@ -415,8 +418,8 @@ export default class CountryInfo extends Component {
     this.setState({
       currentSliderRange: days,
       currentSelectedDay: toSliderString(date),
-      firstDay: toSliderString(days[0]),
-      lastDay: toSliderString(days[days.length - 1]),
+      firstDay: toSliderStringShort(days[0]),
+      lastDay: toSliderStringShort(days[days.length - 1]),
     });
   }
   onSliderChange(e) {
@@ -464,8 +467,8 @@ export default class CountryInfo extends Component {
     this.setState({
       currentSliderRange: days,
       currentSelectedDay: toSliderString(date),
-      firstDay: toSliderString(days[0]),
-      lastDay: toSliderString(days[days.length - 1]),
+      firstDay: toSliderStringShort(days[0]),
+      lastDay: toSliderStringShort(days[days.length - 1]),
       currentDateValue: 2,
       currentPosition: 24.5,
     });
