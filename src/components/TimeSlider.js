@@ -107,7 +107,7 @@ const selectStyles = css`
         }
         @media (max-width: 960px) {
             & {
-              padding: 85px;
+              padding: 0 85px;
             }
         }
         & > .overlay{
