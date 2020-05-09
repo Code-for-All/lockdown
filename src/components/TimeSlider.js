@@ -110,7 +110,7 @@ const selectStyles = css`
         }
         @media (max-width: 960px) {
             & {
-              padding: 0px 13%;
+              padding: 85px;
             }
         }
         & > .overlay{
@@ -158,7 +158,7 @@ const rangeStyles = css`
     -webkit-appearance: none;
     width: 100%;
     margin: 15.6px 0;
-    bottom: -18px;
+    bottom: 0;
   }
   input[type='range']:focus {
     outline: none;
@@ -179,9 +179,9 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 25px;
-    width: 25px;
-    border-radius: 25px;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
     background: #ffffff;
     cursor: pointer;
     -webkit-appearance: none;
@@ -209,9 +209,9 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 25px;
-    width: 25px;
-    border-radius: 25px;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
     background: #ffffff;
     cursor: pointer;
   }
@@ -240,9 +240,9 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 25px;
-    width: 25px;
-    border-radius: 25px;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
     background: #ffffff;
     cursor: pointer;
     height: 6.8px;
