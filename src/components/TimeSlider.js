@@ -137,6 +137,7 @@ const selectStyles = css`
                 }
                 &.show{
                     animation: fadeInLeft 0.3s;
+                    display: table;
                 }
             }
             &.right{
