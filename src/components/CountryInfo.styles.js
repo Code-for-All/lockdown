@@ -25,13 +25,12 @@ export const tabStyles = css`
       .dark & {
         position: absolute !important;
         color: white;
-        background-color: var(--ld-hover);
+        background-color: transparent;
         padding: 0px;
-        top: -10px;
-        width: 39px;
-        right: -12px;
+        top: 10px;
+        width: 30px;
+        right: 5px;
         border-radius: 50%;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
         &:hover {
           cursor: pointer;
         }
@@ -44,10 +43,10 @@ export const tabStyles = css`
       font-style: normal;
       font-weight: 500;
       font-size: 12px;
-      line-height: 20px;
+      line-height: 16px;
       text-align: center;
       padding: 5px;
-      color: #7C7C7C;
+      color: #999999;
       border: 1px solid #999999;
       border-top: 0px;
       transition: 0.5s;
