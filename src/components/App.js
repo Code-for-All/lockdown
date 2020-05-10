@@ -12,6 +12,7 @@ import { router } from '../router.js';
 import { dialogService } from '../services/dialogService.js';
 import { debounce } from 'lodash-es';
 import TimeSlider from './TimeSlider';
+import Legend from './Legend.js';
 
 const debouncedCloseDialog = debounce(
   () => {
@@ -117,7 +118,7 @@ export class App extends Component {
         : ''}
 
       <${WorldMap} selectedDate=${selectedDate} />
-
+      <${Legend} />
       ${this.state.showSlider
         ? html`<${TimeSlider} onChange=${this.__onSelectDate}
             >${this.state.dialog.opened
