@@ -24,7 +24,7 @@ export const tabStyles = css`
       }
       .dark & {
         position: absolute !important;
-        color: white;
+        color: #7c7c7c;
         background-color: transparent;
         padding: 0px;
         top: 10px;
@@ -46,7 +46,7 @@ export const tabStyles = css`
       line-height: 16px;
       text-align: center;
       padding: 5px;
-      color: #999999;
+      color: #7c7c7c;
       border: 1px solid #999999;
       border-top: 0px;
       transition: 0.5s;
