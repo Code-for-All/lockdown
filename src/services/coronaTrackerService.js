@@ -10,10 +10,12 @@ class CoronaTrackerService extends EventTargetShim {
 
   async getCountry(opts) {
     let { iso2, date } = opts;
+    let startDate = opts.startDate;
+    let endDate = opts.endDate;
     iso2 = encodeURI(iso2);
 
-    const startDate = format(addDays(new Date(), -14), 'yyyy-MM-dd');
-    const endDate = format(addDays(new Date(), 56), 'yyyy-MM-dd');
+    startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
+    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
 
     if (!/^[a-zA-Z]{2}$/.test(iso2)) {
       return;
