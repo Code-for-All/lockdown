@@ -269,17 +269,17 @@ const tooltipCss = css`
     @media (max-width: 960px) {
       top: 17px;
       &.first {
-        left: calc(12% - 15px);
+        left: 25px;
       }
       &.last {
-        right: calc(12% - 15px);
+        right: 25px;
       }
     }
     &.first {
-      left: 7px;
+      left: 25px;
     }
     &.last {
-      right: 7px;
+      right: 25px;
     }
   }
 `;
