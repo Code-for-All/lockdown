@@ -11,7 +11,6 @@ const styles = css`
     }
     max-width: 300px;
     position: absolute;
-    top: calc(50% - 110px);
     margin-left: auto;
     margin-right: auto;
     margin-top: auto;

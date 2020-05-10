@@ -4,6 +4,7 @@ import css from 'csz';
 import format from 'date-fns/format';
 
 import DatePicker from './DatePicker.js';
+import { calendar } from '../assets/icons/icons.js';
 
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
 
@@ -120,11 +121,10 @@ const selectStyles = css`
             left: -6%;
           }
           top: calc(-100vh + 100% + 80px);
-          left: -17%;
+          left: calc((100% - 100vw)/ 2);
         }
         & > .calendar{
-            top: 0;
-            bottom: calc(300% + 10px);
+            bottom: 60px;
             width: 300px;
             height: fit-content;
             display: none;
@@ -510,7 +510,7 @@ export default class CountryInfo extends Component {
             customClass=${this.state.datePickerPosition}
           />
           <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
-          <span class="first ${tooltipCss}">${this.state.firstDay}</span>
+          <span class="first ${tooltipCss}"> <${IconBtn} onClick=${(e) => this.onBtnClick('left')} /> ${this.state.firstDay}</span>
           <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
           <input
             ref=${this.range}
@@ -522,9 +522,17 @@ export default class CountryInfo extends Component {
             value=${this.state.currentDateValue}
           />
           <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
-          <span class="last ${tooltipCss}">${this.state.lastDay}</span>
+          <span class="last ${tooltipCss}"> <${IconBtn} onClick=${(e) => this.onBtnClick('right')}/> ${this.state.lastDay}</span>
         </div>
       </div>
     `;
+  }
+}
+
+class IconBtn extends Component{
+  render(_){
+    return html`<span onClick=${this.props.onClick}>
+        ${calendar}
+      </span>`;
   }
 }
