@@ -29,13 +29,13 @@ const btnStyle = css`
       &.top {
         top: -36%;
         &::after {
-          top: 22%;
+          top: 30%;
         }
       }
       &.bottom {
         bottom: -36%;
         &::after {
-          top: 78%;
+          top: 71%;
         }
       }
       &.left {
@@ -72,10 +72,12 @@ const btnStyle = css`
         justify-content: space-between;
         align-items: center;
         padding: 9px 0px;
+        padding-bottom: 0px;
         &:nth-child(4) {
-          padding: 16.06px 0px;
+          padding-bottom: 7.06px;
         }
         &:last-child {
+          padding-bottom: 9px;
           & > span {
             &:last-child {
               margin-right: auto;
