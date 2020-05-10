@@ -26,13 +26,11 @@ class TotalsService extends EventTargetShim {
     if (opts.forceRefresh || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
         // this.cache[cacheKey] = {};
-        const res = await Promise.all(
-          [
-            (await fetch(`https://lockdownsnapshots-apim.azure-api.net/totals/lockdown/${startDate}/${endDate}`)).json(),
-            (await fetch(`http://localhost:3000/totals/covid/${startDate}/${endDate}`)).json()
-          ]
-        );  
-        this.cache[cacheKey] = {territories: res[0], corona: res[1]};
+        const res = await Promise.all([
+          (await fetch(`https://lockdownsnapshots-apim.azure-api.net/totals/lockdown/${startDate}/${endDate}`)).json(),
+          (await fetch(`http://localhost:3000/totals/covid/${startDate}/${endDate}`)).json(),
+        ]);
+        this.cache[cacheKey] = { territories: res[0], corona: res[1] };
       } catch (_) {
         this.cache[cacheKey] = {
           status: 'failed',
