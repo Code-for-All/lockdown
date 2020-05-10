@@ -27,7 +27,7 @@ class CountryDetailService extends EventTargetShim {
     if (opts.forceRefresh || this._shouldInvalidate() || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
         this.cache[cacheKey] = {};
-        const res = await (await fetch(`https://lockdownsnapshots.azurewebsites.net/status/${iso2}/${startDate}/${endDate}`)).json();
+        const res = await (await fetch(`https://lockdownsnapshots-apim.azure-api.net/status/${iso2}/${startDate}/${endDate}`)).json();
         this.cache[cacheKey] = res;
       } catch (_) {
         this.cache[cacheKey] = {
