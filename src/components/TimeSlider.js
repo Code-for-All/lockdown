@@ -405,7 +405,6 @@ export default class CountryInfo extends Component {
     this.submitChanges = this.submitChanges.bind(this);
   }
   componentDidMount() {
-    console.log(this.props.children);
     let date = new Date();
     let days = [];
     // let plusDays = 7;
@@ -421,6 +420,13 @@ export default class CountryInfo extends Component {
         days.push(this.rangePreProcces(date, plusDays));
         plusDays++;
       }
+      const sliderDOM = this.dateRef.current;
+      const rangeDOM = this.range.current;
+      const containerDOM = this.container.current;
+      let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
+      let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
+      let stepsWidth = rangeDOM.offsetWidth / 70;
+      sliderDOM.style.left = `${finalWidth + stepsWidth * (13 - 2)}px`;
       // if (i < 2) {
       //   days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
       // } else if (i !== 2) {
@@ -436,8 +442,7 @@ export default class CountryInfo extends Component {
         currentSelectedDay: toSliderString(date),
         firstDay: toSliderStringShort(days[0]),
         lastDay: toSliderStringShort(days[days.length - 1]),
-      },
-      () => console.log(this.state)
+      }
     );
   }
   onSliderChange(e) {
@@ -452,7 +457,6 @@ export default class CountryInfo extends Component {
     let newPosition = widthSpaces[newValue];
     sliderDOM.style.left = `${finalWidth + stepsWidth * newValue}px`;
     // sliderDOM.style.transform = `translate(-${finalWidth + stepsWidth * (newValue+1)}px, 0)`;
-    console.log(newValue);
     this.setState(
       {
         currentDateValue: newValue,
@@ -499,7 +503,6 @@ export default class CountryInfo extends Component {
         }
       }
     }
-    console.log(days);
     // let plusDays = 7;
     // for (let i = 0; i < 11; i++) {
     //   if (i < 2) {
