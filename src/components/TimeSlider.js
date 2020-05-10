@@ -436,14 +436,12 @@ export default class CountryInfo extends Component {
       //   days.push(date);
       // }
     }
-    this.setState(
-      {
-        currentSliderRange: days,
-        currentSelectedDay: toSliderString(date),
-        firstDay: toSliderStringShort(days[0]),
-        lastDay: toSliderStringShort(days[days.length - 1]),
-      }
-    );
+    this.setState({
+      currentSliderRange: days,
+      currentSelectedDay: toSliderString(date),
+      firstDay: toSliderStringShort(days[0]),
+      lastDay: toSliderStringShort(days[days.length - 1]),
+    });
   }
   onSliderChange(e) {
     const { currentDateValue, currentSliderRange } = this.state;
