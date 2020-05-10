@@ -384,7 +384,7 @@ export default class CountryInfo extends Component {
   constructor() {
     super();
     this.state = {
-      currentDateValue: 2,
+      currentDateValue: 13,
       currentPosition: 24.5,
       datePickerPosition: 'left',
       showDatePicker: false,
@@ -395,6 +395,7 @@ export default class CountryInfo extends Component {
     };
     this.dateRef = createRef();
     this.range = createRef();
+    this.container = createRef();
     this.onSliderChange = this.onSliderChange.bind(this);
     this.onBtnClick = this.onBtnClick.bind(this);
     this.onChooseDate = this.onChooseDate.bind(this);
@@ -406,31 +407,48 @@ export default class CountryInfo extends Component {
     console.log(this.props.children);
     let date = new Date();
     let days = [];
-    let plusDays = 7;
-    for (let i = 0; i < 11; i++) {
-      if (i < 2) {
-        days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
-      } else if (i !== 2) {
-        days.push(this.rangePreProcces(date, plusDays));
-        plusDays += 7;
-      } else {
+    // let plusDays = 7;
+    let plusDays = 1;
+    let lessDays = 14;
+    for (let i = 1; i <= 70; i++) {
+      if(i === 15){
         days.push(date);
+      }else if(i <15){
+        days.push(this.rangePreProcces(date, -1 * (lessDays)));
+        lessDays--;
+      }else{
+        days.push(this.rangePreProcces(date, plusDays));
+        plusDays++;
       }
+      // if (i < 2) {
+      //   days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
+      // } else if (i !== 2) {
+      //   days.push(this.rangePreProcces(date, plusDays));
+      //   plusDays += 7;
+      // } else {
+      //   days.push(date);
+      // }
     }
     this.setState({
       currentSliderRange: days,
       currentSelectedDay: toSliderString(date),
       firstDay: toSliderStringShort(days[0]),
       lastDay: toSliderStringShort(days[days.length - 1]),
-    });
+    },()=>console.log(this.state));
   }
   onSliderChange(e) {
     const { currentDateValue, currentSliderRange } = this.state;
     const sliderDOM = this.dateRef.current;
-    const newValue = Number(e.target.value);
+    const rangeDOM = this.range.current;
+    const containerDOM = this.container.current;
+    let newValue = e.target.value;
+    let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
+    let finalWidth = (basicWidth/2) - (sliderDOM.offsetWidth/4);
+    let stepsWidth = rangeDOM.offsetWidth/70;
     let newPosition = widthSpaces[newValue];
-    sliderDOM.style.left = `${newPosition}%`;
-    sliderDOM.style.transform = `translate(-${newPosition}%, 0)`;
+    sliderDOM.style.left = `${finalWidth + stepsWidth * (newValue)}px`;
+    // sliderDOM.style.transform = `translate(-${finalWidth + stepsWidth * (newValue+1)}px, 0)`;
+    console.log(newValue);
     this.setState(
       {
         currentDateValue: newValue,
@@ -448,28 +466,56 @@ export default class CountryInfo extends Component {
   }
   onChooseDate(date) {
     const sliderDOM = this.dateRef.current;
+    const rangeDOM = this.range.current;
+    const containerDOM = this.container.current;
+    let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
+    let finalWidth = (basicWidth/2) - (sliderDOM.offsetWidth/4);
+    let stepsWidth = rangeDOM.offsetWidth/70;
+    sliderDOM.style.left = `${finalWidth + stepsWidth * ((this.state.datePickerPosition === 'left' ? 0 : 69)+0.5)}px`;
     this.calendarWillClose();
     let days = [];
-    let plusDays = 7;
-    for (let i = 0; i < 11; i++) {
-      if (i < 2) {
-        days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
-      } else if (i !== 2) {
-        days.push(this.rangePreProcces(date, plusDays));
-        plusDays += 7;
-      } else {
-        days.push(date);
+    if(this.state.datePickerPosition === 'left'){
+      let plusDays = 1;
+      for (let i = 1; i <= 70; i++) {
+        if(i === 1){
+          days.push(date);
+        }else{
+          days.push(this.rangePreProcces(date, plusDays));
+          plusDays++;
+        }
+      }
+    }else{
+      let lessDays = 69;
+      for (let i = 1; i <= 70; i++) {
+        if(i === 70){
+          days.push(date);
+        }else{
+          days.push(this.rangePreProcces(date, -1 * (lessDays)));
+          lessDays--;
+        }
       }
     }
-    sliderDOM.style.left = `${24.5}%`;
-    sliderDOM.style.transform = `translate(-${24.5}%, 0)`;
+    console.log(days);
+    // let plusDays = 7;
+    // for (let i = 0; i < 11; i++) {
+    //   if (i < 2) {
+    //     days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
+    //   } else if (i !== 2) {
+    //     days.push(this.rangePreProcces(date, plusDays));
+    //     plusDays += 7;
+    //   } else {
+    //     days.push(date);
+    //   }
+    // }
+    // sliderDOM.style.left = `${24.5}%`;
+    // sliderDOM.style.transform = `translate(-${24.5}%, 0)`;
     this.setState(
       {
         currentSliderRange: days,
         currentSelectedDay: toSliderString(date),
-        firstDay: toSliderString(days[0]),
-        lastDay: toSliderString(days[days.length - 1]),
-        currentDateValue: 2,
+        firstDay: toSliderStringShort(days[0]),
+        lastDay: toSliderStringShort(days[days.length - 1]),
+        currentDateValue: this.state.datePickerPosition === 'left' ? 0 : 69,
         currentPosition: 24.5,
       },
       this.submitChanges
@@ -500,7 +546,7 @@ export default class CountryInfo extends Component {
   }
   render(_) {
     return html`
-      <div class="sliderWrapper ${sliderWrapper}">
+      <div class="sliderWrapper ${sliderWrapper}" ref=${this.container}>
         ${this.props.children}
         <div class="${selectStyles} ${rangeStyles} ${this.props.children !== '' ? 'open' : ''}">
           <${DatePicker}
@@ -517,7 +563,7 @@ export default class CountryInfo extends Component {
             onInput=${this.onSliderChange}
             type="range"
             min="0"
-            max="10"
+            max="69"
             step="1"
             value=${this.state.currentDateValue}
           />
