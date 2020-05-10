@@ -411,12 +411,12 @@ export default class CountryInfo extends Component {
     let plusDays = 1;
     let lessDays = 14;
     for (let i = 1; i <= 70; i++) {
-      if(i === 15){
+      if (i === 15) {
         days.push(date);
-      }else if(i <15){
-        days.push(this.rangePreProcces(date, -1 * (lessDays)));
+      } else if (i < 15) {
+        days.push(this.rangePreProcces(date, -1 * lessDays));
         lessDays--;
-      }else{
+      } else {
         days.push(this.rangePreProcces(date, plusDays));
         plusDays++;
       }
@@ -429,12 +429,15 @@ export default class CountryInfo extends Component {
       //   days.push(date);
       // }
     }
-    this.setState({
-      currentSliderRange: days,
-      currentSelectedDay: toSliderString(date),
-      firstDay: toSliderStringShort(days[0]),
-      lastDay: toSliderStringShort(days[days.length - 1]),
-    },()=>console.log(this.state));
+    this.setState(
+      {
+        currentSliderRange: days,
+        currentSelectedDay: toSliderString(date),
+        firstDay: toSliderStringShort(days[0]),
+        lastDay: toSliderStringShort(days[days.length - 1]),
+      },
+      () => console.log(this.state)
+    );
   }
   onSliderChange(e) {
     const { currentDateValue, currentSliderRange } = this.state;
@@ -443,10 +446,10 @@ export default class CountryInfo extends Component {
     const containerDOM = this.container.current;
     let newValue = e.target.value;
     let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
-    let finalWidth = (basicWidth/2) - (sliderDOM.offsetWidth/4);
-    let stepsWidth = rangeDOM.offsetWidth/70;
+    let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
+    let stepsWidth = rangeDOM.offsetWidth / 70;
     let newPosition = widthSpaces[newValue];
-    sliderDOM.style.left = `${finalWidth + stepsWidth * (newValue)}px`;
+    sliderDOM.style.left = `${finalWidth + stepsWidth * newValue}px`;
     // sliderDOM.style.transform = `translate(-${finalWidth + stepsWidth * (newValue+1)}px, 0)`;
     console.log(newValue);
     this.setState(
@@ -469,28 +472,28 @@ export default class CountryInfo extends Component {
     const rangeDOM = this.range.current;
     const containerDOM = this.container.current;
     let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
-    let finalWidth = (basicWidth/2) - (sliderDOM.offsetWidth/4);
-    let stepsWidth = rangeDOM.offsetWidth/70;
-    sliderDOM.style.left = `${finalWidth + stepsWidth * ((this.state.datePickerPosition === 'left' ? 0 : 69)+0.5)}px`;
+    let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
+    let stepsWidth = rangeDOM.offsetWidth / 70;
+    sliderDOM.style.left = `${finalWidth + stepsWidth * ((this.state.datePickerPosition === 'left' ? 0 : 69) + 0.5)}px`;
     this.calendarWillClose();
     let days = [];
-    if(this.state.datePickerPosition === 'left'){
+    if (this.state.datePickerPosition === 'left') {
       let plusDays = 1;
       for (let i = 1; i <= 70; i++) {
-        if(i === 1){
+        if (i === 1) {
           days.push(date);
-        }else{
+        } else {
           days.push(this.rangePreProcces(date, plusDays));
           plusDays++;
         }
       }
-    }else{
+    } else {
       let lessDays = 69;
       for (let i = 1; i <= 70; i++) {
-        if(i === 70){
+        if (i === 70) {
           days.push(date);
-        }else{
-          days.push(this.rangePreProcces(date, -1 * (lessDays)));
+        } else {
+          days.push(this.rangePreProcces(date, -1 * lessDays));
           lessDays--;
         }
       }
@@ -568,17 +571,17 @@ export default class CountryInfo extends Component {
             value=${this.state.currentDateValue}
           />
           <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
-          <span class="last ${tooltipCss}"> <${IconBtn} onClick=${(e) => this.onBtnClick('right')}/> ${this.state.lastDay}</span>
+          <span class="last ${tooltipCss}"> <${IconBtn} onClick=${(e) => this.onBtnClick('right')} /> ${this.state.lastDay}</span>
         </div>
       </div>
     `;
   }
 }
 
-class IconBtn extends Component{
-  render(_){
+class IconBtn extends Component {
+  render(_) {
     return html`<span onClick=${this.props.onClick}>
-        ${calendar}
-      </span>`;
+      ${calendar}
+    </span>`;
   }
 }
