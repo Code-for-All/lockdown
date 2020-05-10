@@ -1,11 +1,11 @@
 import { html } from 'htm/preact';
-import { Component,createRef } from 'preact';
+import { Component, createRef } from 'preact';
 import css from 'csz';
 
 import { list, unlock, lock, virus, viruslock } from '../assets/icons/icons.js';
 
 const btnStyle = css`
-  &{
+  & {
     position: absolute;
     top: 45vh;
     left: 10px;
@@ -17,7 +17,7 @@ const btnStyle = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    & .dialog{
+    & .dialog {
       display: none;
       transition: 0.2s;
       position: absolute;
@@ -26,40 +26,40 @@ const btnStyle = css`
       flex-direction: column;
       box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.25);
       border-radius: 15px;
-      &.top{
+      &.top {
         top: -36%;
-        &::after{
+        &::after {
           top: 22%;
         }
       }
-      &.bottom{
+      &.bottom {
         bottom: -36%;
-        &::after{
+        &::after {
           top: 78%;
         }
       }
-      &.left{
+      &.left {
         right: -150px;
-        &::after{
+        &::after {
           left: 0;
           border-right-color: #fff;
           border-left: 0;
           margin-left: -20px;
         }
       }
-      &.right{
+      &.right {
         left: -150px;
-        &::after{
+        &::after {
           right: 0;
           border-left-color: #fff;
           border-right: 0;
           margin-right: -20px;
         }
       }
-      &.show{
+      &.show {
         display: flex;
       }
-      &::after{
+      &::after {
         content: '';
         position: absolute;
         width: 0;
@@ -67,45 +67,45 @@ const btnStyle = css`
         border: 20px solid transparent;
         margin-top: -20px;
       }
-      & > div{
+      & > div {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 9px 0px;
-        &:nth-child(4){
+        &:nth-child(4) {
           padding: 16.06px 0px;
         }
-        &:last-child{
-          & > span{
-            &:last-child{
+        &:last-child {
+          & > span {
+            &:last-child {
               margin-right: auto;
             }
           }
         }
-        & > span{
+        & > span {
           margin: 0px 8px;
-          & svg{
+          & svg {
             height: 20px;
             width: 20px;
           }
-          & .color{
+          & .color {
             height: 20px;
             width: 20px;
             border-radius: 50%;
-            &.red{
-              background-color: #EB5757;
+            &.red {
+              background-color: #eb5757;
             }
-            &.orange{
-              background-color: #F2994A;
+            &.orange {
+              background-color: #f2994a;
             }
-            &.green{
-              background-color: #6FCF97;
+            &.green {
+              background-color: #6fcf97;
             }
-            &.blue{
-              background-color: #78AEFC;
+            &.blue {
+              background-color: #78aefc;
             }
-            &.gray{
-              background-color: #CCCCCC;
+            &.gray {
+              background-color: #cccccc;
             }
           }
         }
@@ -115,13 +115,13 @@ const btnStyle = css`
 `;
 
 class Legend extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.state={
+    this.state = {
       showDialog: false,
       y: 'bottom',
-      x: 'left'
-    }
+      x: 'left',
+    };
     this.btn = createRef();
     this.onClick = this.onClick.bind(this);
     // ? Add listeners
@@ -132,93 +132,93 @@ class Legend extends Component {
     // ? Desktop
     this.onDrop = this.onDrop.bind(this);
   }
-  initBtn(ref){
+  initBtn(ref) {
     this.btn = ref;
-    ref.addEventListener('touchmove',this.onTouch)
-    ref.addEventListener('touchend',this.onTouchEnd);
-    ref.addEventListener('dragend',this.onDrop);
+    ref.addEventListener('touchmove', this.onTouch);
+    ref.addEventListener('touchend', this.onTouchEnd);
+    ref.addEventListener('dragend', this.onDrop);
   }
   // Mobile
-  onTouch(e){
+  onTouch(e) {
     let touchLocation = e.targetTouches[0];
     this.btn.style.left = touchLocation.pageX + 'px';
     this.btn.style.top = touchLocation.pageY + 'px';
   }
-  onTouchEnd(e){
+  onTouchEnd(e) {
     let side = this.state.x;
     let vertical = this.state.y;
     let x = window.innerWidth || window.clientWidth;
-    let y = window.innerHeight|| window.clientHeight;
-    let currentVertical = Number(this.btn.style.top.replace("px",''));
-    let currentSide = Number(this.btn.style.left.replace("px",''));
+    let y = window.innerHeight || window.clientHeight;
+    let currentVertical = Number(this.btn.style.top.replace('px', ''));
+    let currentSide = Number(this.btn.style.left.replace('px', ''));
 
-    if(currentVertical > y/2){
-      if(currentVertical >= y-150){
-        this.btn.style.top = y-150 + 'px';
+    if (currentVertical > y / 2) {
+      if (currentVertical >= y - 150) {
+        this.btn.style.top = y - 150 + 'px';
       }
       vertical = 'bottom';
-    }else{
-      if(currentVertical <= 160){
+    } else {
+      if (currentVertical <= 160) {
         this.btn.style.top = 160 + 'px';
       }
       vertical = 'top';
     }
-    if(currentSide > x/2){
+    if (currentSide > x / 2) {
       side = 'right';
       this.btn.style.left = x - 70 + 'px';
-    }else{
+    } else {
       side = 'left';
       this.btn.style.left = '10px';
     }
     this.setState({
       x: side,
-      y: vertical
-    })
+      y: vertical,
+    });
   }
   //////////
   // Desktop
-  onDrop(e){
+  onDrop(e) {
     let side = this.state.x;
     let vertical = this.state.y;
     let xx = window.innerWidth || window.clientWidth;
-    let yy = window.innerHeight|| window.clientHeight;
+    let yy = window.innerHeight || window.clientHeight;
     let y = e.clientY;
     let x = e.clientX;
     this.btn.style.top = y + 'px';
-    if(y > yy/2){
-      if(y >= yy-150){
-        this.btn.style.top = yy-150 + 'px';
+    if (y > yy / 2) {
+      if (y >= yy - 150) {
+        this.btn.style.top = yy - 150 + 'px';
       }
       vertical = 'bottom';
-    }else{
-      if(y <= 60){
+    } else {
+      if (y <= 60) {
         this.btn.style.top = 70 + 'px';
       }
       vertical = 'top';
     }
-    if(x > xx/2){
+    if (x > xx / 2) {
       side = 'right';
       this.btn.style.left = xx - 70 + 'px';
-    }else{
+    } else {
       side = 'left';
       this.btn.style.left = '10px';
     }
     this.setState({
       x: side,
-      y: vertical
-    })
+      y: vertical,
+    });
     // this.btn.style.left = x + 'px';
   }
   /////////
-  onClick(){
+  onClick() {
     this.setState({
-      showDialog: !this.state.showDialog
-    })
+      showDialog: !this.state.showDialog,
+    });
   }
-  render(_){
+  render(_) {
     return html`<div onClick=${this.onClick} draggable="true" ref=${this.initBtn} class="${btnStyle}">
       ${list}
-      <div class="dialog ${this.state.showDialog ? 'show': ''} ${this.state.y} ${this.state.x}">
+      <div class="dialog ${this.state.showDialog ? 'show' : ''} ${this.state.y} ${this.state.x}">
         <!--Row-->
         <div>
           <span>
