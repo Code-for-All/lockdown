@@ -14,5 +14,6 @@ export { arrowLeft } from './arrow-left';
 export { arrowRight } from './arrow-right';
 export { burger } from './burger.svg.js';
 export { menuLeft, menuRight } from './menu.svg.js';
+export { calendar } from './calendar.svg.js';
 
 export { home, citymovement, religion, work, military, academia, shops, electricity, water, internet } from './measures.svg.js';
