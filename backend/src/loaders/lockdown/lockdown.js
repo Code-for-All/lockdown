@@ -7,6 +7,8 @@ import { SimpleGrid } from '../../utils/SimpleGrid';
 import moment from '../../utils/moment';
 import { ENTRY_COLUMN_LENGTH, parseEntry } from './parsers/lockdownParser';
 import { getSnapshots, MEASURES } from './snapshot/processor';
+import { connect } from '../../repositories';
+import Database from '../../repositories/Database';
 
 // Number of territories to query through batchGet at a time
 const BATCH_SIZE = 25;
@@ -28,9 +30,9 @@ export async function getGlobalData() {
 /**
  * Groups territories and request data from google API at batch size
  * @param {array} territories 
+ * @param {Database} database
  */
-export async function batchGetTerritoriesEntryData(territories) {
-
+export async function batchGetTerritoriesEntryData(territories, database) {
   const doc = await getDocument();
   const startCacheColumn = 'H';
   const startCacheColumnIndex = letterToColumn(startCacheColumn);
@@ -67,6 +69,14 @@ export async function batchGetTerritoriesEntryData(territories) {
 
       let snapshots = getSnapshots(entries);
 
+      if (snapshots.length > 0) {
+        snapshots.forEach(s => {
+          s.iso3 = batch[i]['iso3'];
+          s.iso2 = batch[i]['iso2'];
+        });
+        await database.snapshotRepository.insertManyOrUpdate(snapshots);
+      }
+
       result.push({
         iso2: batch[i]['iso2'],
         iso3: batch[i]['iso3'],
@@ -88,13 +98,15 @@ export async function batchGetTerritoriesEntryData(territories) {
  * Gets lockdown data for all territories
  * @returns {array}
  */
-export async function getTerritoriesLockdownData() {
+export async function getTerritoriesLockdownData(database) {
   const territories = await getGlobalData();
-  return await batchGetTerritoriesEntryData(territories);
+  return await batchGetTerritoriesEntryData(territories, database);
 }
 
 export default async function loadData() {
-  const territories = await getTerritoriesLockdownData();
+  var database = await connect();
+  const territories = await getTerritoriesLockdownData(database);
+  database.close()
 
   var startDate = moment().add(-2, "weeks");
   var endDate = moment().add(8, 'weeks');

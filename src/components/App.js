@@ -63,7 +63,7 @@ function toJsonString(date) {
 export class App extends Component {
   constructor() {
     super();
-    this.state = { dialog: { opened: false, template: {}, title: '' }, haveSelectedDate: false };
+    this.state = { dialog: { opened: false, template: {}, title: '' }, haveSelectedDate: false, startDate: false, endDate: false };
 
     this.__onPathChanged = this.__onPathChanged.bind(this);
     this.__closeCountryInfo = this.__closeCountryInfo.bind(this);
@@ -100,10 +100,15 @@ export class App extends Component {
     return html`
       ${this.state.showStatsbox
         ? html`
-            <${Header} selectedDate=${selectedDate} showStatsbox=${this.state.showStatsbox} />
+            <${Header}
+              selectedDate=${selectedDate}
+              showStatsbox=${this.state.showStatsbox}
+              startDate=${this.state.startDate}
+              endDate=${this.state.endDate}
+            />
             ${!this.state.dialog.opened
               ? html`<div class=${styles}>
-                  <${Totals} selectedDate=${selectedDate} />
+                  <${Totals} selectedDate=${selectedDate} startDate=${this.state.startDate} endDate=${this.state.endDate} />
                 </div>`
               : ''}
           `
@@ -117,8 +122,9 @@ export class App extends Component {
           />`
         : ''}
 
-      <${WorldMap} selectedDate=${selectedDate} />
-      <${Legend} />
+        <${WorldMap} selectedDate=${selectedDate} startDate=${this.state.startDate} endDate=${this.state.endDate} />
+        <${Legend} />
+
       ${this.state.showSlider
         ? html`<${TimeSlider} onChange=${this.__onSelectDate}
             >${this.state.dialog.opened
@@ -129,6 +135,8 @@ export class App extends Component {
                       country: this.state.dialog.title,
                       iso2: this.state.dialog.iso2,
                       date: this.state.haveSelectedDate || new Date(),
+                      startDate: this.state.startDate,
+                      endDate: this.state.endDate,
                       onClose: this.__closeDialog,
                     }}
                   />
@@ -193,7 +201,7 @@ export class App extends Component {
     debouncedCloseDialog();
     this.__closeCountryInfo();
   }
-  __onSelectDate(selectedDate) {
-    this.setState({ haveSelectedDate: selectedDate });
+  __onSelectDate(selectedDate, startDate, endDate) {
+    this.setState({ haveSelectedDate: selectedDate, startDate, endDate });
   }
 }

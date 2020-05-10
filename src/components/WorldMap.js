@@ -3,6 +3,8 @@ import { html } from 'htm/preact';
 import { router } from '../router.js';
 import { dialogService } from '../services/dialogService.js';
 import css from 'csz';
+import format from 'date-fns/format';
+import addDays from 'date-fns/addDays';
 
 const mapbox_token = 'pk.eyJ1IjoiamZxdWVyYWx0IiwiYSI6ImNrOWZpZHF3ajBic2YzbHQwYzQ5bGRnaXgifQ.NcQInXQmMy93L47QBMCAfg';
 
@@ -109,11 +111,11 @@ export class WorldMap extends Component {
         {
           source: 'admin-0',
           sourceLayer: 'boundaries_admin_0',
-          id: lookupData[row.ISO].feature_id,
+          id: lookupData[row.lockdown.iso].feature_id,
         },
         {
-          kind: row.lockdown_status,
-          name: row.name,
+          kind: row.lockdown.measure[0].value,
+          name: row.lockdown.iso,
         }
       );
     });
@@ -185,7 +187,7 @@ export class WorldMap extends Component {
 
         // console.log('features', features[0]);
         // map.fitBounds(layer.getBounds());
-        router.setSearchParam('country', features[0].state.name);
+        router.setSearchParam('country', lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
         router.setSearchParam('iso2', features[0].properties.iso_3166_1);
       });
 
@@ -252,11 +254,11 @@ export class WorldMap extends Component {
             {
               source: 'admin-0',
               sourceLayer: 'boundaries_admin_0',
-              id: lookupData[row.ISO].feature_id,
+              id: lookupData[row.lockdown.iso].feature_id,
             },
             {
-              kind: row.lockdown_status,
-              name: row.name,
+              kind: row.lockdown.measure[0].value,
+              name: row.lockdown.iso,
             }
           );
         });
@@ -290,11 +292,26 @@ export class WorldMap extends Component {
     return map;
   }
 
-  updateMap(mapData, lookupTable, selectedDate) {
+  async updateMap(mapData, lookupTable, selectedDate) {
     const lookupData = filterLookupTable(lookupTable);
-    const localData = mapData[selectedDate];
+    let localData = mapData[selectedDate];
 
-    this.setMapState(this.state.map, localData, lookupData);
+    if (localData === undefined) {
+      let { startDate, endDate } = this.props;
+      startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
+      endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
+      let [newMapData] = await Promise.all([
+        fetch(new URL(`https://lockdownsnapshots-apim.azure-api.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
+          r.json()
+        ),
+      ]);
+      console.log(newMapData);
+      let localData = newMapData[selectedDate];
+      mapData = newMapData;
+      this.setState({ mapData }, () => this.setMapState(this.state.map, localData, lookupData));
+    } else {
+      this.setMapState(this.state.map, localData, lookupData);
+    }
   }
 
   async componentDidMount() {
@@ -304,9 +321,14 @@ export class WorldMap extends Component {
       }
     });
 
+    let { startDate, endDate } = this.props;
+    startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
+    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
-      fetch(new URL('../../data/lockdown.json', import.meta.url)).then((r) => r.json()),
+      fetch(new URL(`https://lockdownsnapshots-apim.azure-api.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
+        r.json()
+      ),
       fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
     ]);
 
@@ -316,7 +338,7 @@ export class WorldMap extends Component {
     // }
 
     // we need to prepare a static country list not dynamically calculate them
-    const countries = mapData['2020-04-26'];
+    const countries = Object.values[lookupTable];
 
     this.setState({
       countries,
@@ -389,6 +411,7 @@ export class WorldMap extends Component {
   }
   componentDidUpdate(previousProps, previousState, snapshot) {
     if (this.state.isMapReady) {
+      console.log(this.props.selectedDate);
       this.updateMap(this.state.mapData, this.state.lookupTable, this.props.selectedDate);
     }
   }
