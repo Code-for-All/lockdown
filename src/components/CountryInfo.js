@@ -215,7 +215,7 @@ export default class CountryInfo extends Component {
           ? html`<${CountryDetails}
               date=${this.props.date}
               country=${this.props.country}
-              coronaData=${coronaData?.data.find((corona) => isSameDay(new Date(corona.last_updated), this.props.date))}
+              coronaData=${coronaData.data?.find((corona) => isSameDay(new Date(corona.last_updated), this.props.date))}
               populationData=${populationData?.data[this.props.iso2]}
               countryDetails=${countryDetails}
             />`

@@ -28,7 +28,7 @@ class CoronaTrackerService extends EventTargetShim {
         this.cache[cackeKey] = {};
         const res = await (
           await fetch(
-            `http://api.coronatracker.com/v3/analytics/trend/country?countryCode=${iso2}&startDate=${startDate}&endDate=${endDate}`
+            `https://api.coronatracker.com/v3/analytics/trend/country?countryCode=${iso2}&startDate=${startDate}&endDate=${endDate}`
           )
         ).json();
         this.cache[cackeKey] = {
