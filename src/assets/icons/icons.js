@@ -19,5 +19,6 @@ export { unlock } from './unlock.svg.js';
 export { lock } from './lock.svg.js';
 export { virus } from './virus.svg.js';
 export { viruslock } from './viruslock.svg.js';
+export { calendar } from './calendar.svg.js';
 
 export { home, citymovement, religion, work, military, academia, shops, electricity, water, internet } from './measures.svg.js';

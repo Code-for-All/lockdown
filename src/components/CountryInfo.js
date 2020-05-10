@@ -1,6 +1,7 @@
 import { html } from 'htm/preact';
 import { Component } from 'preact';
 import format from 'date-fns/format';
+import isSameDay from 'date-fns/isSameDay';
 import { coronaTrackerService, populationService, countryDetailService } from '../services/services';
 import {
   home,
@@ -153,16 +154,19 @@ export default class CountryInfo extends Component {
   }
   async componentDidUpdate(prevProps) {
     if (this.props.date !== prevProps.date) {
+      const { startDate, endDate } = this.props;
       this.setState({
-        countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date }),
+        coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
+        countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
       });
     }
   }
   async componentWillMount() {
+    const { startDate, endDate } = this.props;
     this.setState({
-      coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2 }),
+      coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
       populationData: await populationService.getPopulation(),
-      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date }),
+      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
     });
   }
 
@@ -211,7 +215,7 @@ export default class CountryInfo extends Component {
           ? html`<${CountryDetails}
               date=${this.props.date}
               country=${this.props.country}
-              coronaData=${coronaData}
+              coronaData=${coronaData.data?.find((corona) => isSameDay(new Date(corona.last_updated), this.props.date))}
               populationData=${populationData?.data[this.props.iso2]}
               countryDetails=${countryDetails}
             />`
@@ -238,15 +242,15 @@ class CountryDetails extends Component {
         </div>
         <div class="data-entry is-third">
           <dt>Cases</dt>
-          <dd class="data-value">${Number(coronaData?.totalConfirmed).toLocaleString() ?? 'Error'}</dd>
+          <dd class="data-value">${coronaData?.total_confirmed ? Number(coronaData?.total_confirmed).toLocaleString() : 'Not Availabe'}</dd>
         </div>
         <div class="data-entry is-third">
           <dt>Recoveries</dt>
-          <dd class="data-value">${Number(coronaData?.totalRecovered).toLocaleString() ?? 'Error'}</dd>
+          <dd class="data-value">${coronaData?.total_recovered ? Number(coronaData?.total_recovered).toLocaleString() : 'Not Availabe'}</dd>
         </div>
         <div class="data-entry is-third">
           <dt>Deaths</dt>
-          <dd class="data-value">${Number(coronaData?.totalDeaths).toLocaleString() ?? 'Error'}</dd>
+          <dd class="data-value">${coronaData?.total_deaths ? Number(coronaData?.total_deaths).toLocaleString() : 'Not Availabe'}</dd>
         </div>
       </dl>
 
@@ -287,6 +291,7 @@ class CountryDetails extends Component {
 class TransportDetails extends Component {
   render(_) {
     let { countryDetails } = this.props;
+
     return html`${countryDetails.status === 'success'
       ? html`
           <br />

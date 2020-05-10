@@ -83,7 +83,7 @@ export const Header = (_) => html`
       </a>
     </div>
     <div class="totals">
-      <${Totals} selectedDate=${_.selectedDate} />
+      <${Totals} selectedDate=${_.selectedDate} startDate=${_.startDate} endDate=${_.endDate} />
     </div>
   </header>
 `;
