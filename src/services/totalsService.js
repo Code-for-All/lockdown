@@ -15,15 +15,14 @@ class TotalsService extends EventTargetShim {
   }
 
   async getTotals(opts) {
-    let { iso2, date } = opts;
+    let { date } = opts;
     let startDate = opts.startDate;
     let endDate = opts.endDate;
-    iso2 = encodeURI(iso2);
 
     startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
     endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
     const cacheKey = `${startDate}${endDate}`;
-    this.lastCacheKey = cacheKey;
+
     if (opts.forceRefresh || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
         // this.cache[cacheKey] = {};
