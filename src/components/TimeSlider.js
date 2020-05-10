@@ -17,12 +17,12 @@ function toSliderString(date) {
 const sliderWrapper = css`
   & {
     position: absolute;
-    bottom: 32px;
+    bottom: 10px;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: calc(80vw - 400px);
+    width: 450px;
     z-index: 1000;
     height: fit-content;
     display: flex;
@@ -37,12 +37,13 @@ const sliderWrapper = css`
       left: 0;
       right: 0;
       width: 90vw;
+      max-width:450px;
     }
     & > div.countryInfo {
       z-index: 10;
       transition: 0.5s;
-      height: calc(70vh - (60px + 34px));
-      max-height: 70vh;
+      height: calc(100vh - 190px);
+      max-height: 420px;
     }
   }
 `;
