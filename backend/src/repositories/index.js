@@ -7,7 +7,7 @@ if (!process.env.MONGO_DB_USER || !process.env.MONGO_DB_PASSWORD || !process.env
 }
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@${process.env.MONGO_DB}/test?retryWrites=true&w=majority`;
+const uri = `mongodb://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASSWORD}@${process.env.MONGO_DB}`;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 /**
