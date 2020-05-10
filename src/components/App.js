@@ -122,8 +122,8 @@ export class App extends Component {
           />`
         : ''}
 
-        <${WorldMap} selectedDate=${selectedDate} startDate=${this.state.startDate} endDate=${this.state.endDate} />
-        <${Legend} />
+      <${WorldMap} selectedDate=${selectedDate} startDate=${this.state.startDate} endDate=${this.state.endDate} />
+      <${Legend} />
 
       ${this.state.showSlider
         ? html`<${TimeSlider} onChange=${this.__onSelectDate}

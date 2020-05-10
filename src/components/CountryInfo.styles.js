@@ -126,7 +126,7 @@ export const countryInfoStyles = css`
         font-size: 14px;
         line-height: 18px;
         letter-spacing: 0.05em;
-        padding-right:7px;
+        padding-right: 7px;
       }
     }
   }
@@ -153,7 +153,7 @@ export const countryInfoStyles = css`
     margin-top: 7px;
     padding-bottom: 5px;
     border-bottom: 7px;
-    margin-bottom:2px;
+    margin-bottom: 2px;
     &.last {
       padding: 0px;
       padding-top: 4px;
@@ -216,7 +216,7 @@ export const countryInfoStyles = css`
     font-weight: 500;
     letter-spacing: 0.02em;
     margin-inline-start: 0;
-    margin-right:5px;
+    margin-right: 5px;
     .dark & {
       color: var(--ld-text);
     }

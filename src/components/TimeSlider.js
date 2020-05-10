@@ -38,7 +38,7 @@ const sliderWrapper = css`
       left: 0;
       right: 0;
       width: 90vw;
-      max-width:450px;
+      max-width: 450px;
     }
     & > div.countryInfo {
       z-index: 10;
