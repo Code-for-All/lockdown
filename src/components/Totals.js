@@ -61,7 +61,7 @@ export class Totals extends Component {
     }
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     installMediaQueryWatcher(`(min-width: 900px)`, (matches) => {
       this.setState({ desktop: matches });
     });
