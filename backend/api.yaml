@@ -20,7 +20,6 @@ paths:
           description: Date of status snapshot
           in: path
           required: true
-          default: 2020-04-27
           schema:
             type: string
             format: date
@@ -48,7 +47,6 @@ paths:
           description: Date of status snapshot
           in: path
           required: true
-          default: 2020-04-27
           schema:
             type: string
             format: date
@@ -56,7 +54,6 @@ paths:
           description: Date of status snapshot. Date range not more than 70 days
           in: path
           required: true
-          default: 2020-06-27
           schema:
             type: string
             format: date
@@ -84,13 +81,12 @@ paths:
           in: path
           description: ISO2 or ISO3 country code
           required: true
-          type: string
-          default: IND
+          schema:
+            type: string
         - name: date
           description: Date of status snapshot
           in: path
           required: true
-          default: 2020-04-27
           schema:
             type: string
             format: date
@@ -117,13 +113,12 @@ paths:
           in: path
           description: ISO2 or ISO3 country code
           required: true
-          type: string
-          default: IND
+          schema:
+            type: string
         - name: startDate
           description: Start Date of range
           in: path
           required: true
-          default: 2020-04-27
           schema:
             type: string
             format: date
@@ -131,7 +126,6 @@ paths:
           description: End Date of range (range not more than 70 days)
           in: path
           required: true
-          default: 2020-05-27
           schema:
             type: string
             format: date
@@ -159,13 +153,12 @@ paths:
           in: path
           description: ISO2 or ISO3 country code
           required: true
-          type: string
-          default: IND
+          schema:
+            type: string
         - name: startDate
           description: Start Date of range
           in: path
           required: true
-          default: 2020-02-02
           schema:
             type: string
             format: date
@@ -173,23 +166,23 @@ paths:
           description: End Date of range (range not more than 70 days)
           in: path
           required: true
-          default: 2020-04-02
           schema:
             type: string
             format: date
         - name: measures
           description: Measures for retrieving
           in: query
-          default: ["measure.city_movement_restriction", "measure.lockdown_status"]
-          schemas:
+          schema:
             type: array
+            items:
+              type: string
       responses:
         "200":
           description: "List of NPIs"
           content:
             application/json:
               schema:
-                '#/components/schemas/Lockdown'
+                $ref: '#/components/schemas/Lockdown'
         default:
           description: Unexpected error
   /totals/lockdown/{startDate}/{endDate}:
@@ -202,7 +195,6 @@ paths:
           description: Start Date of range
           in: path
           required: true
-          default: 2020-02-02
           schema:
             type: string
             format: date
@@ -210,7 +202,6 @@ paths:
           description: End Date of range (range not more than 70 days)
           in: path
           required: true
-          default: 2020-04-02
           schema:
             type: string
             format: date
@@ -253,7 +244,6 @@ components:
           type: string
     Lockdown:
       type: object
-      required: iso
       properties:
         iso:
           type: string

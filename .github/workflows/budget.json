@@ -1,0 +1,10 @@
+[
+  {
+    "resourceCounts": [
+      {"resourceType": "third-party","budget": 19}
+    ],
+    "resourceSizes": [
+      {"resourceType": "script","budget": 250000}
+    ]
+  }
+]

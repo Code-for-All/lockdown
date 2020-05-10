@@ -7,8 +7,11 @@ import DatePicker from './DatePicker.js';
 
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
 
+function toSliderStringShort(date) {
+  return format(date, 'dd MMM');
+}
 function toSliderString(date) {
-  return format(date, 'dd/MM/yyyy');
+  return format(date, 'dd MMMM yyyy');
 }
 
 const sliderWrapper = css`
@@ -27,7 +30,7 @@ const sliderWrapper = css`
     -webkit-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.39);
     -moz-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.39);
     box-shadow: 0px 4px 11px 3px rgba(0, 0, 0, 0.39);
-    border-radius: 20px;
+    border-radius: 25px;
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
       bottom: 10px;
@@ -88,12 +91,12 @@ const selectStyles = css`
         }
       }
     .dark &{
-      background-color: rgb(48, 49, 54);
+      background-color: #333333;
     }
     & {
-        height: 120px;
-        padding: 0px 9.5%;
-        border-radius: 20px;
+        height: 50px;
+        padding: 0px 85px;
+        border-radius: 25px;
         background-color: white;
         display:flex
         width: 100%;
@@ -107,7 +110,7 @@ const selectStyles = css`
         }
         @media (max-width: 960px) {
             & {
-              padding: 0px 13%;
+              padding: 0 85px;
             }
         }
         & > .overlay{
@@ -155,7 +158,7 @@ const rangeStyles = css`
     -webkit-appearance: none;
     width: 100%;
     margin: 15.6px 0;
-    bottom: -28px;
+    bottom: 0;
   }
   input[type='range']:focus {
     outline: none;
@@ -163,7 +166,7 @@ const rangeStyles = css`
   }
   input[type='range']::-webkit-slider-runnable-track {
     width: 100%;
-    height: 6.8px;
+    height: 3px;
     cursor: pointer;
     background: rgba(201, 201, 201, 0.733);
     border-radius: 0px;
@@ -175,14 +178,16 @@ const rangeStyles = css`
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     z-index: 9999;
     position: relative;
-
-    height: 38px;
-    width: 38px;
-    border-radius: 38px;
-    background: #ffffff;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #333333;
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -15.6px;
+    margin-top: -10px;
+    .dark & {
+      background: #ffffff;
+    }
     &::before {
       content: 'Say Cheese';
       color: red;
@@ -193,7 +198,7 @@ const rangeStyles = css`
   }
   input[type='range']::-moz-range-track {
     width: 100%;
-    height: 6.8px;
+    height: 3px;
     cursor: pointer;
     background: rgba(201, 201, 201, 0.733);
     border-radius: 0px;
@@ -206,15 +211,15 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 38px;
-    width: 38px;
-    border-radius: 38px;
-    background: #ffffff;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #333333;
     cursor: pointer;
   }
   input[type='range']::-ms-track {
     width: 100%;
-    height: 6.8px;
+    height: 3px;
     cursor: pointer;
     background: transparent;
     border-color: transparent;
@@ -237,10 +242,10 @@ const rangeStyles = css`
     z-index: 9999;
     position: relative;
 
-    height: 38px;
-    width: 38px;
-    border-radius: 38px;
-    background: #ffffff;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    background: #333333;
     cursor: pointer;
     height: 6.8px;
   }
@@ -256,70 +261,74 @@ const tooltipCss = css`
     color: white;
   }
   & {
-    font-weight: bold;
-    font-size: 14px;
-    color: #8c8c8c;
+    font-weight: 600;
+    font-size: 12px;
+    color: #333333;
     position: absolute;
-    top: 55px;
+    top: 17px;
     @media (max-width: 960px) {
-      top: 55px;
+      top: 17px;
       &.first {
-        left: calc(12% - 15px);
+        left: 25px;
       }
       &.last {
-        right: calc(12% - 15px);
+        right: 25px;
       }
     }
     &.first {
-      left: calc(10% - 15px);
+      left: 25px;
     }
     &.last {
-      right: calc(10% - 15px);
+      right: 25px;
     }
   }
 `;
 const sliderSelector = css`
   .dark & span {
     color: white;
-    background: rgb(48, 49, 54);
+    background: #333333;
     &::after {
-      background-color: rgb(48, 49, 54);
+      background-color: #333333;
     }
   }
   & {
     position: absolute;
     @media (max-width: 960px) {
-      top: 20px;
+      top: -27px;
     }
-    top: 20px;
+    top: -27px;
     left: 24.5%;
     z-index: 999;
     width: fit-content;
     transform: translate(-24.5%, 0);
-    background: #ffffff;
+    background: transparent;
     font-size: 1rem;
     & span {
-      border: 2px solid #8c8c8c;
-      border-radius: 7px;
+      border: 0px solid #8c8c8c;
+      border-radius: 30px;
       position: relative;
       background: #ffffff;
-      padding: 10px 5px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.5);
       &::after {
         content: '';
         display: block;
         position: absolute;
-        bottom: -9px;
+        bottom: -6px;
         left: 0;
         right: 0;
         margin-left: auto;
         margin-right: auto;
-        width: 15px;
-        height: 15px;
+        width: 12px;
+        height: 12px;
         background: #ffffff;
-        border-right: 2px solid #8c8c8c;
-        border-bottom: 2px solid #8c8c8c;
+        border-right: 0px solid #8c8c8c;
+        border-bottom: 0px solid #8c8c8c;
         -moz-transform: rotate(45deg);
         -webkit-transform: rotate(45deg);
+        box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.3);
       }
     }
   }
@@ -340,11 +349,12 @@ const popBtn = css`
     box-shadow: 0px 1px 5px 2.5px rgba(0, 0, 0, 0.45);
     z-index: 9;
     bottom: 18px;
+    display:none;
     @media (max-width: 960px) {
-      bottom: 18px;
+      bottom: 11px;
     }
     @media (max-width: 960px) and (min-width: 576px) {
-      bottom: 18px);
+      bottom: 11px);
       &.first {
         left: calc(12% + 11px) !important;
       }
@@ -410,8 +420,8 @@ export default class CountryInfo extends Component {
     this.setState({
       currentSliderRange: days,
       currentSelectedDay: toSliderString(date),
-      firstDay: toSliderString(days[0]),
-      lastDay: toSliderString(days[days.length - 1]),
+      firstDay: toSliderStringShort(days[0]),
+      lastDay: toSliderStringShort(days[days.length - 1]),
     });
   }
   onSliderChange(e) {

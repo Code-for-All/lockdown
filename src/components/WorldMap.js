@@ -301,7 +301,7 @@ export class WorldMap extends Component {
       startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
       endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
       let [newMapData] = await Promise.all([
-        fetch(new URL(`https://lockdownsnapshots.azurewebsites.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
+        fetch(new URL(`https://lockdownsnapshots-apim.azure-api.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
           r.json()
         ),
       ]);
@@ -326,7 +326,7 @@ export class WorldMap extends Component {
     endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
-      fetch(new URL(`https://lockdownsnapshots.azurewebsites.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
+      fetch(new URL(`https://lockdownsnapshots-apim.azure-api.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
         r.json()
       ),
       fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
