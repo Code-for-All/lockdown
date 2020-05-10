@@ -88,11 +88,11 @@ export class Totals extends Component {
       },
       {
         description: html`Reported <br />cases`,
-        value: Number(totals.corona?.confirmed || 0).toLocaleString(),
+        value: Number(totals.corona?.total_confirmed || NaN).toLocaleString(),
       },
       {
         description: 'Reported deaths',
-        value: Number(totals.corona?.deaths || 0).toLocaleString(),
+        value: Number(totals.corona?.total_deaths || NaN).toLocaleString(),
       },
     ];
     return html`

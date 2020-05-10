@@ -6,6 +6,7 @@ import cors from 'cors';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
+import { CovidService } from './services/CovidService';
 
 const swaggerDocument = YAML.load('./api.yaml');
 
@@ -20,6 +21,7 @@ const cacheService = new CacheService(ttl);
 connect().then(database => {
 
     const snapshotService = new SnapshotsService(database);
+    const covidService = new CovidService(database);
 
     app.listen(process.env.PORT || 3000, function () {
         console.log(`listening on ${process.env.PORT || 3000}`)
@@ -89,6 +91,17 @@ connect().then(database => {
 
         cacheService.get(`totals_lockdown_${startDate}${endDate}`, () => {
             return snapshotService.getTotalsLockdown(startDate, endDate);
+        }).then(result => {
+            res.json(result);
+        }).catch(next);
+    });
+
+    app.get('/totals/covid/:startDate/:endDate', function (req, res, next) {
+        let startDate = new Date(req.params.startDate);
+        let endDate = new Date(req.params.endDate);
+
+        cacheService.get(`totals_covid_${startDate}${endDate}`, () => {
+            return covidService.getTotals(startDate, endDate);
         }).then(result => {
             res.json(result);
         }).catch(next);

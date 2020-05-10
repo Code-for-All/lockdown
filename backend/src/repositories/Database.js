@@ -1,4 +1,5 @@
 import SnapshotRepository from "./SnapshotRepository";
+import { CovidRepository } from "./CovidRepository";
 
 export default class Database {
     constructor(connection) {
@@ -8,6 +9,8 @@ export default class Database {
 
         /**@type {SnapshotRepository} */
         this.snapshotRepository = new SnapshotRepository(this._db);
+        /**@type {CovidRepository} */
+        this.covidRepository = new CovidRepository(this._db);
     }
 
     close(){

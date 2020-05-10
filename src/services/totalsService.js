@@ -26,8 +26,13 @@ class TotalsService extends EventTargetShim {
     if (opts.forceRefresh || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
         // this.cache[cacheKey] = {};
-        const res = await (await fetch(`https://lockdownsnapshots-apim.azure-api.net/totals/lockdown/${startDate}/${endDate}`)).json();
-        this.cache[cacheKey] = res;
+        const res = await Promise.all(
+          [
+            (await fetch(`https://lockdownsnapshots-apim.azure-api.net/totals/lockdown/${startDate}/${endDate}`)).json(),
+            (await fetch(`http://localhost:3000/totals/covid/${startDate}/${endDate}`)).json()
+          ]
+        );  
+        this.cache[cacheKey] = {territories: res[0], corona: res[1]};
       } catch (_) {
         this.cache[cacheKey] = {
           status: 'failed',
@@ -43,8 +48,8 @@ class TotalsService extends EventTargetShim {
 
     return {
       status: 'success',
-      corona: this.corona,
-      territories: this.cache[cacheKey][date],
+      corona: this.cache[cacheKey].corona[date],
+      territories: this.cache[cacheKey].territories[date],
     };
   }
 }

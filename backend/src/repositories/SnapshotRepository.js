@@ -1,8 +1,13 @@
 import Entry from '../types/Entry';
+import { BaseRepository } from './BaseRepository';
 
-export default class SnapshotRepository {
+export default class SnapshotRepository extends BaseRepository {
   constructor(db) {
-    this.model = db.collection('snapshots');
+    super(db);
+  }
+
+  getCollectionName() {
+    return 'snapshots';
   }
 
   /**
@@ -16,7 +21,7 @@ export default class SnapshotRepository {
       end_date: { $gte: date },
     };
     this.applyIsoFilter(iso, query);
-    return this.model.find(query);
+    return this._model.find(query);
   }
 
   /** @private */
@@ -41,7 +46,7 @@ export default class SnapshotRepository {
       end_date: { $gte: startDate },
     };
     this.applyIsoFilter(iso, query);
-    return this.model.find(query);
+    return this._model.find(query);
   }
 
   /**
@@ -49,11 +54,13 @@ export default class SnapshotRepository {
    * @param {Date} date
    */
   getByDateGroupByCountries(date) {
-    return this.model.aggregate([
+    return this._model.aggregate([
       {
         $match: {
-          start_date: { $lte: date },
-          end_date: { $gte: date },
+          $and: [
+            { start_date: { $lte: date } },
+            { end_date: { $gte: date } }
+          ]
         },
       },
       {
@@ -71,11 +78,13 @@ export default class SnapshotRepository {
    * @param {Date} endDate 
    */
   getByDateRangeGroupByCountries(startDate, endDate) {
-    return this.model.aggregate([
+    return this._model.aggregate([
       {
         $match: {
-          start_date: { $lte: endDate },
-          end_date: { $gte: startDate },
+          $and: [
+            { start_date: { $lte: endDate } },
+            { end_date: { $gte: startDate } }
+          ]
         },
       },
       {
@@ -93,7 +102,7 @@ export default class SnapshotRepository {
    * @param {Date} date
    */
   getByMeasureAndDate(measureLabel, date) {
-    return this.model.find({
+    return this._model.find({
       'measures.label': measureLabel,
       start_date: { $lte: date },
       end_date: { $gte: date },
@@ -105,16 +114,12 @@ export default class SnapshotRepository {
     var query = [
       {
         '$match': {
-          ...isoFilter,
-          'start_date': {
-            '$lte': endDate
-          },
-          'end_date': {
-            '$gte': startDate
-          },
-          'measures.label': {
-            '$in': measures
-          }
+          $and: [
+            { start_date: { $lte: endDate } },
+            { end_date: { $gte: startDate } },
+            { 'measures.label': { $in: measures } },
+            { ...isoFilter }
+          ]
         }
       }, {
         '$project': {
@@ -138,7 +143,7 @@ export default class SnapshotRepository {
         }
       }
     ];
-    return this.model.aggregate(query);
+    return this._model.aggregate(query);
   }
 
   /**
@@ -151,15 +156,11 @@ export default class SnapshotRepository {
     var query = [
       {
         '$match': {
-          'start_date': {
-            '$lte': endDate
-          },
-          'end_date': {
-            '$gte': startDate
-          },
-          'measures.label': {
-            '$in': measures
-          }
+          $and: [
+            { start_date: { $lte: endDate } },
+            { end_date: { $gte: startDate } },
+            { 'measures.label': { $in: measures } }
+          ]
         }
       }, {
         '$project': {
@@ -183,40 +184,10 @@ export default class SnapshotRepository {
         }
       }
     ];
-    return this.model.aggregate(query);
-  }
-
-  /**
-   *
-   * @param {*} snaphot
-   */
-  insert(snaphot) {
-    return this.model.insert(snaphot);
-  }
-
-  /**
-   *
-   * @param {[]} snaphot
-   */
-  insertMany(snaphots) {
-    return this.model.insertMany(snaphots);
-  }
-
-  insertManyOrUpdate(snapshots) {
-    return snapshots.map((s) => {
-      return this.model.update(
-        {
-          unique_id: s.unique_id,
-          start_date: s.start_date,
-          end_date: s.end_date,
-        },
-        s,
-        { upsert: true }
-      );
-    });
+    return this._model.aggregate(query);
   }
 
   clear() {
-    return this.model.remove();
+    return this._model.remove();
   }
 }
