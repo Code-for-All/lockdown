@@ -20,7 +20,10 @@ const styles = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 140px;
+    width: auto;
+    @media (max-width: 899px) {
+      width: 144px;
+    }
     padding: 0 16px;
     margin: 5px 0;
   }
@@ -87,7 +90,7 @@ export class Totals extends Component {
         value: Number(totals.territories?.affected || 0).toLocaleString(),
       },
       {
-        description: html`Reported <br />cases`,
+        description: 'Reported cases',
         value: Number(totals.corona?.confirmed || 0).toLocaleString(),
       },
       {
