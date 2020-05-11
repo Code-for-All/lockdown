@@ -304,6 +304,7 @@ const sliderSelector = css`
     transform: translate(-24.5%, 0);
     background: transparent;
     font-size: 1rem;
+    padding: 0 29px 0 21px;
     & span {
       border: 0px solid #8c8c8c;
       border-radius: 30px;
