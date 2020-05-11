@@ -556,7 +556,7 @@ export class Menu extends Component {
       return;
     }
 
-    this.props.changeRoute(renderMenu(val));
+    // this.props.changeRoute(renderMenu(val));
 
     this.prevVal = val;
     this.setState({
@@ -569,6 +569,7 @@ export class Menu extends Component {
     this.setState({
       showLateralMenu: false,
       showSideBar: false,
+      activeItem: 'info'
     });
   }
 
