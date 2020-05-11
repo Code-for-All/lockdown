@@ -18,10 +18,10 @@ const btnStyle = css`
     color: #333333;
     justify-content: center;
     align-items: center;
-    .dark &{
+    .dark & {
       background-color: #333333;
       color: white;
-      & .dialog{
+      & .dialog {
         background-color: #333333;
         color: white;
         &.right {
@@ -36,10 +36,10 @@ const btnStyle = css`
         }
       }
     }
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
-    &:active{
+    &:active {
       cursor: grabbing;
       cursor: -moz-grabbing;
       cursor: -webkit-grabbing;
@@ -150,7 +150,7 @@ class Legend extends Component {
     this.state = {
       showDialog: false,
       y: 'bottom',
-      x: 'left'
+      x: 'left',
     };
     this.btn = createRef();
     this.onClick = this.onClick.bind(this);
@@ -214,7 +214,7 @@ class Legend extends Component {
     let yy = window.innerHeight || window.clientHeight;
     let y = e.clientY;
     let x = e.clientX;
-    if(y === 0 && x === 0){
+    if (y === 0 && x === 0) {
       x = e.screenX;
       y = e.screenY;
     }
