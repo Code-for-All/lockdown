@@ -51,10 +51,10 @@ const styles = css`
   }
 `;
 
-export function Settings({onClose}) {
+export function Settings({ onClose }) {
   const [showGeolocationButton, setshowGeolocationButton] = useState(false);
   const [pwaUpdateAvailable, setPwaUpdateAvailable] = useState(false);
-  const [darkMode,setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   function toggleDarkmode() {
     if (document.getElementsByTagName('html')[0].classList.contains('dark')) {
@@ -104,17 +104,17 @@ export function Settings({onClose}) {
 
   return html`
     <div class=${styles}>
-      <button onClick=${toggleDarkmode} class="ld-button">Toggle ${darkMode ? 'LightMode':'DarkMode'}</button>
+      <button onClick=${toggleDarkmode} class="ld-button">Toggle ${darkMode ? 'LightMode' : 'DarkMode'}</button>
       ${showGeolocationButton ? html` <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button> ` : ''}
 
       <pwa-install-button>
-        <button onClick=${()=>onClose()} class="ld-button">Install app</button>
+        <button onClick=${() => onClose()} class="ld-button">Install app</button>
       </pwa-install-button>
 
       ${pwaUpdateAvailable
         ? html`
             <pwa-update-available>
-              <button onClick=${()=>onClose()} class="ld-button">Update app</button>
+              <button onClick=${() => onClose()} class="ld-button">Update app</button>
             </pwa-update-available>
           `
         : ''}

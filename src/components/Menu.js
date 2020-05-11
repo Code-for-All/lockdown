@@ -339,7 +339,7 @@ const overlay = css`
     }
   }
 `;
-const renderMenu = (menuItem,callback, currentDropdown, onDropDown) => {
+const renderMenu = (menuItem, callback, currentDropdown, onDropDown) => {
   switch (menuItem) {
     case 'info':
       return {
@@ -525,7 +525,7 @@ export class Menu extends Component {
       activeItem: 'info',
       showLateralMenu: false,
       showMenu: false,
-      currentDropdown:1
+      currentDropdown: 1,
     };
     this.showSideBar = this.showSideBar.bind(this);
     this.closeNavbar = this.closeNavbar.bind(this);
@@ -582,14 +582,14 @@ export class Menu extends Component {
     this.setState({
       showLateralMenu: false,
       showSideBar: false,
-      activeItem: 'info'
+      activeItem: 'info',
     });
   }
 
-  onDropDown(id){
+  onDropDown(id) {
     this.setState({
-      currentDropdown: id
-    })
+      currentDropdown: id,
+    });
   }
 
   render(_, { activeItem, updateAvailable, currentDropdown }) {
@@ -614,7 +614,7 @@ export class Menu extends Component {
                     <h1>${activeItem}</h1>
                   </div>
                 </div>
-                ${renderMenu(activeItem, this.closeNavbar,currentDropdown ,this.onDropDown).template}
+                ${renderMenu(activeItem, this.closeNavbar, currentDropdown, this.onDropDown).template}
               </div>
             </main>`
         : html`<button onClick=${this.showSideBar} class="${sideBtn}">
