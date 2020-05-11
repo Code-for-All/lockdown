@@ -362,6 +362,6 @@ class Legends extends Component {
 
 class Reports extends Component {
   render(_) {
-    return html`<div class="${reports}"><h3>Coming Soon..</h3></div>`;
+    return html`<div class="${reports}"><h3>Coming Soon</h3></div>`;
   }
 }
