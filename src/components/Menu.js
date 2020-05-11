@@ -290,6 +290,9 @@ const closeBtn = css`
     margin-left: auto !important;
     border-radius: 50% !important;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       cursor: pointer;
     }
