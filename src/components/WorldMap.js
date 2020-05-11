@@ -134,7 +134,7 @@ export class WorldMap extends Component {
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
       keyboard: false,
-      pitchWithRotate: false
+      pitchWithRotate: false,
     });
 
     window.map = map;

@@ -155,8 +155,8 @@ const selectStyles = css`
     }
 `;
 const rangeStyles = css`
-  input{
-    background: transparent; 
+  input {
+    background: transparent;
   }
   input[type='range'] {
     position: relative;
@@ -164,9 +164,9 @@ const rangeStyles = css`
     width: 100%;
     margin: 15.6px 0;
     bottom: 0;
-    color: #C9C9C9;
-    .dark &{
-      color: #4F4F4F;
+    color: #c9c9c9;
+    .dark & {
+      color: #4f4f4f;
     }
   }
   input[type='range']:focus {
@@ -177,9 +177,9 @@ const rangeStyles = css`
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: #C9C9C9;
-    .dark &{
-      background: #4F4F4F;
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
     }
     border-radius: 0px;
     border: 0px solid rgba(1, 1, 1, 0);
@@ -212,9 +212,9 @@ const rangeStyles = css`
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: #C9C9C9;
-    .dark &{
-      background: #4F4F4F;
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
     }
     border-radius: 0px;
     border: 0px solid rgba(1, 1, 1, 0);
@@ -249,9 +249,9 @@ const rangeStyles = css`
     border-radius: 0px;
   }
   input[type='range']::-ms-fill-upper {
-    background: #C9C9C9;
-    .dark &{
-      background: #4F4F4F;
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
     }
     border: 0px solid rgba(1, 1, 1, 0);
     border-radius: 0px;
@@ -274,9 +274,9 @@ const rangeStyles = css`
     height: 6.8px;
   }
   input[type='range']:focus::-ms-fill-lower {
-    background: #C9C9C9;
-    .dark &{
-      background: #4F4F4F;
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
     }
   }
   input[type='range']:focus::-ms-fill-upper {
@@ -293,7 +293,7 @@ const tooltipCss = css`
     color: #333333;
     position: absolute;
     top: 17px;
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
     @media (max-width: 960px) {
@@ -435,7 +435,7 @@ export default class CountryInfo extends Component {
     this.onPressKey = this.onPressKey.bind(this);
   }
   componentDidMount() {
-    window.addEventListener("keydown",this.onPressKey);
+    window.addEventListener('keydown', this.onPressKey);
     let date = new Date();
     let days = [];
     // let plusDays = 7;
@@ -474,24 +474,24 @@ export default class CountryInfo extends Component {
       lastDay: toSliderStringShort(days[days.length - 1]),
     });
   }
-  componentWillUnmount(){
-    window.removeEventListener("keydown",this.onPressKey);
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onPressKey);
   }
-  onPressKey(e){
+  onPressKey(e) {
     let inputRange = this.range.current;
     switch (e.code) {
       case 'ArrowLeft':
         e.preventDefault();
-        if(this.range.current.value > 0 ){
+        if (this.range.current.value > 0) {
           this.range.current.value = this.range.current.value - 1;
-          this.onSliderChange({target:{value:this.range.current.value}});
+          this.onSliderChange({ target: { value: this.range.current.value } });
         }
         break;
       case 'ArrowRight':
         e.preventDefault();
-        if(this.range.current.value < 69){
+        if (this.range.current.value < 69) {
           this.range.current.value = Number(this.range.current.value) + 1;
-          this.onSliderChange({target:{value:this.range.current.value}});
+          this.onSliderChange({ target: { value: this.range.current.value } });
         }
         break;
       default:
@@ -616,7 +616,9 @@ export default class CountryInfo extends Component {
             customClass=${this.state.datePickerPosition}
           />
           <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
-          <span title="Select Start Date" class="first ${tooltipCss}" onClick=${(e) => this.onBtnClick('left')}> <${IconBtn}  /> ${this.state.firstDay}</span>
+          <span title="Select Start Date" class="first ${tooltipCss}" onClick=${(e) => this.onBtnClick('left')}>
+            <${IconBtn} /> ${this.state.firstDay}</span
+          >
           <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
           <input
             ref=${this.range}
@@ -628,7 +630,9 @@ export default class CountryInfo extends Component {
             value=${this.state.currentDateValue}
           />
           <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
-          <span title="Select End Date" class="last ${tooltipCss}" onClick=${(e) => this.onBtnClick('right')}> <${IconBtn} /> ${this.state.lastDay}</span>
+          <span title="Select End Date" class="last ${tooltipCss}" onClick=${(e) => this.onBtnClick('right')}>
+            <${IconBtn} /> ${this.state.lastDay}</span
+          >
         </div>
       </div>
     `;
