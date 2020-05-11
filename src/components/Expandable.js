@@ -12,10 +12,16 @@ export function Expandable(props) {
     }
   }, [expanded]);
 
+  useEffect(()=> {
+    if(props.currentDropdown !== props.toggle){
+      setExpanded(false);
+    }
+  },[props.currentDropdown]);
+
   return html`
     <div class="${styles}">
       <div class="ld-expandable">
-        <button onClick=${() => setExpanded(!expanded)} class="ld-expandable--toggle" aria-expanded="${expanded}">
+        <button onClick=${() => { props.onDropDown(expanded ? false : props.toggle);setExpanded(!expanded);}} class="ld-expandable--toggle" aria-expanded="${expanded}">
           <div class="ld-expandable--icon">
             ${expanded ? chevronDown : chevronRight}
           </div>

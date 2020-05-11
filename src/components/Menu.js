@@ -339,7 +339,7 @@ const overlay = css`
     }
   }
 `;
-const renderMenu = (menuItem,callback) => {
+const renderMenu = (menuItem,callback, currentDropdown, onDropDown) => {
   switch (menuItem) {
     case 'info':
       return {
@@ -357,6 +357,8 @@ const renderMenu = (menuItem,callback) => {
 
           <${Expandable}
             toggle=${'About'}
+            currentDropdown=${currentDropdown}
+            onDropDown=${onDropDown}
             detail=${html`
               <p>
                 Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and
@@ -370,6 +372,8 @@ const renderMenu = (menuItem,callback) => {
 
           <${Expandable}
             toggle=${'Legend'}
+            currentDropdown=${currentDropdown}
+            onDropDown=${onDropDown}
             detail=${html`
               <p>The map shows two parameters for territories:</p>
               <ol>
@@ -416,9 +420,10 @@ const renderMenu = (menuItem,callback) => {
               </table>
             `}
           />
-          <!--Here is the error -->
           <${Expandable}
             toggle=${'Sources'}
+            currentDropdown=${currentDropdown}
+            onDropDown=${onDropDown}
             detail=${html`
               <p>
                 <b>Project Lockdown</b> combines multiple trusted sources to ensure that the data used is verified and accurate. You can find the full list of sources used here:
@@ -436,9 +441,10 @@ const renderMenu = (menuItem,callback) => {
               </p>
             `}
           />
-          <!--Here is the error -->
           <${Expandable}
             toggle=${'Credits'}
+            currentDropdown=${currentDropdown}
+            onDropDown=${onDropDown}
             detail=${html`
               <p>
                 <b>Project Lockdown</b> is a Civic Tech initiative made possible by a number of dedicated individuals and organizations.
@@ -454,6 +460,8 @@ const renderMenu = (menuItem,callback) => {
 
           <${Expandable}
             toggle=${'Data & Privacy'}
+            currentDropdown=${currentDropdown}
+            onDropDown=${onDropDown}
             detail=${html`
               <p>
                 We do not collect any personal information from our visitors.
@@ -517,10 +525,12 @@ export class Menu extends Component {
       activeItem: 'info',
       showLateralMenu: false,
       showMenu: false,
+      currentDropdown:1
     };
     this.showSideBar = this.showSideBar.bind(this);
     this.closeNavbar = this.closeNavbar.bind(this);
     this.switchContent = this.switchContent.bind(this);
+    this.onDropDown = this.onDropDown.bind(this);
   }
 
   componentDidMount() {
@@ -576,7 +586,13 @@ export class Menu extends Component {
     });
   }
 
-  render(_, { activeItem, updateAvailable }) {
+  onDropDown(id){
+    this.setState({
+      currentDropdown: id
+    })
+  }
+
+  render(_, { activeItem, updateAvailable, currentDropdown }) {
     return html`
       ${this.state.showLateralMenu || this.props.isMobile === true
         ? html`<div class="menu-overlay ${overlay}"></div>
@@ -598,7 +614,7 @@ export class Menu extends Component {
                     <h1>${activeItem}</h1>
                   </div>
                 </div>
-                ${renderMenu(activeItem, this.closeNavbar).template}
+                ${renderMenu(activeItem, this.closeNavbar,currentDropdown ,this.onDropDown).template}
               </div>
             </main>`
         : html`<button onClick=${this.showSideBar} class="${sideBtn}">
