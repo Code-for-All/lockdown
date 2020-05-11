@@ -121,11 +121,11 @@ const MEASURES = [
 const tabs = [
   {
     id: 1,
-    name: 'Common Details',
+    name: 'Daily Life',
   },
   {
     id: 2,
-    name: 'Travel Details',
+    name: 'Mobility',
   },
   {
     id: 3,
