@@ -244,6 +244,7 @@ export const countryInfoStyles = css`
     list-style: none;
     padding: 0;
     margin: 0 0px 0;
+    padding-left: 13%;
   }
 
   .measures > li {
