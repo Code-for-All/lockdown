@@ -105,11 +105,11 @@ const preStyles = css`
   .ld-menu--content {
     display: block;
     top: 0px;
-    left: calc(500% - 100vw);
+    right: 100%;
     height: 100%;
     position: absolute;
     background-color: white;
-    width: calc(100vw - 500%);
+    width: 30vw;
     border-radius: 20px 0px 0px 20px;
     -moz-border-radius: 20px 0px 0px 20px;
     -webkit-border-radius: 20px 0px 0px 20px;
