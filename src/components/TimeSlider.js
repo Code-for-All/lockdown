@@ -34,7 +34,7 @@ const sliderWrapper = css`
     border-radius: 25px;
     transition: max-height 0.25s ease-out;
     max-height: 70px;
-    &.open{
+    &.open {
       max-height: 90vh;
       transition: max-height 0.25s ease-in;
     }
