@@ -339,7 +339,7 @@ const overlay = css`
     }
   }
 `;
-const renderMenu = (menuItem) => {
+const renderMenu = (menuItem,callback) => {
   switch (menuItem) {
     case 'info':
       return {
@@ -468,7 +468,7 @@ const renderMenu = (menuItem) => {
     case 'settings':
       return {
         title: 'settings',
-        template: html` <${Settings} /> `,
+        template: html` <${Settings} onClose=${callback} /> `,
       };
     case 'contribute':
       return {
@@ -584,7 +584,7 @@ export class Menu extends Component {
               <div class="ld-menu-nav">
                 <button class="${closeBtn}" onClick=${this.closeNavbar}>${closeIcon}</button>
                 <nav>
-                  <${Tabs} switchContent=${this.switchContent}>
+                  <${Tabs} onClose=${this.closeNavbar} switchContent=${this.switchContent}>
                     <button id="info">info</button>
                     <button id="settings">settings</button>
                     <button id="updates">updates</button>
@@ -598,7 +598,7 @@ export class Menu extends Component {
                     <h1>${activeItem}</h1>
                   </div>
                 </div>
-                ${renderMenu(activeItem).template}
+                ${renderMenu(activeItem, this.closeNavbar).template}
               </div>
             </main>`
         : html`<button onClick=${this.showSideBar} class="${sideBtn}">
