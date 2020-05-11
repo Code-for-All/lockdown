@@ -432,8 +432,10 @@ export default class CountryInfo extends Component {
     this.calendarWillClose = this.calendarWillClose.bind(this);
     this.closeDatePicker = this.closeDatePicker.bind(this);
     this.submitChanges = this.submitChanges.bind(this);
+    this.onPressKey = this.onPressKey.bind(this);
   }
   componentDidMount() {
+    window.addEventListener("keydown",this.onPressKey);
     let date = new Date();
     let days = [];
     // let plusDays = 7;
@@ -471,6 +473,30 @@ export default class CountryInfo extends Component {
       firstDay: toSliderStringShort(days[0]),
       lastDay: toSliderStringShort(days[days.length - 1]),
     });
+  }
+  componentWillUnmount(){
+    window.removeEventListener("keydown",this.onPressKey);
+  }
+  onPressKey(e){
+    let inputRange = this.range.current;
+    switch (e.code) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        if(this.range.current.value > 0 ){
+          this.range.current.value = this.range.current.value - 1;
+          this.onSliderChange({target:{value:this.range.current.value}});
+        }
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        if(this.range.current.value < 69){
+          this.range.current.value = Number(this.range.current.value) + 1;
+          this.onSliderChange({target:{value:this.range.current.value}});
+        }
+        break;
+      default:
+        break;
+    }
   }
   onSliderChange(e) {
     const { currentDateValue, currentSliderRange } = this.state;
