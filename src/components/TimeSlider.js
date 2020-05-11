@@ -565,7 +565,7 @@ export default class CountryInfo extends Component {
             customClass=${this.state.datePickerPosition}
           />
           <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
-          <span class="first ${tooltipCss}" onClick=${(e) => this.onBtnClick('left')}> <${IconBtn}  /> ${this.state.firstDay}</span>
+          <span title="Select Start Date" class="first ${tooltipCss}" onClick=${(e) => this.onBtnClick('left')}> <${IconBtn}  /> ${this.state.firstDay}</span>
           <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
           <input
             ref=${this.range}
@@ -577,7 +577,7 @@ export default class CountryInfo extends Component {
             value=${this.state.currentDateValue}
           />
           <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
-          <span class="last ${tooltipCss}" onClick=${(e) => this.onBtnClick('right')}> <${IconBtn} /> ${this.state.lastDay}</span>
+          <span title="Select End Date" class="last ${tooltipCss}" onClick=${(e) => this.onBtnClick('right')}> <${IconBtn} /> ${this.state.lastDay}</span>
         </div>
       </div>
     `;
