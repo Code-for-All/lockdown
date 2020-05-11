@@ -155,12 +155,19 @@ const selectStyles = css`
     }
 `;
 const rangeStyles = css`
+  input {
+    background: transparent;
+  }
   input[type='range'] {
     position: relative;
     -webkit-appearance: none;
     width: 100%;
     margin: 15.6px 0;
     bottom: 0;
+    color: #c9c9c9;
+    .dark & {
+      color: #4f4f4f;
+    }
   }
   input[type='range']:focus {
     outline: none;
@@ -170,7 +177,10 @@ const rangeStyles = css`
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: rgba(201, 201, 201, 0.733);
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
+    }
     border-radius: 0px;
     border: 0px solid rgba(1, 1, 1, 0);
   }
@@ -183,10 +193,10 @@ const rangeStyles = css`
     height: 20px;
     width: 20px;
     border-radius: 20px;
-    background: #333333;
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -10px;
+    background: #333333;
     .dark & {
       background: #ffffff;
     }
@@ -202,7 +212,10 @@ const rangeStyles = css`
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: rgba(201, 201, 201, 0.733);
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
+    }
     border-radius: 0px;
     border: 0px solid rgba(1, 1, 1, 0);
   }
@@ -217,6 +230,9 @@ const rangeStyles = css`
     width: 20px;
     border-radius: 20px;
     background: #333333;
+    .dark & {
+      background: #ffffff;
+    }
     cursor: pointer;
   }
   input[type='range']::-ms-track {
@@ -233,7 +249,10 @@ const rangeStyles = css`
     border-radius: 0px;
   }
   input[type='range']::-ms-fill-upper {
-    background: rgba(201, 201, 201, 0.733);
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
+    }
     border: 0px solid rgba(1, 1, 1, 0);
     border-radius: 0px;
   }
@@ -248,11 +267,17 @@ const rangeStyles = css`
     width: 20px;
     border-radius: 20px;
     background: #333333;
+    .dark & {
+      background: #ffffff;
+    }
     cursor: pointer;
     height: 6.8px;
   }
   input[type='range']:focus::-ms-fill-lower {
-    background: rgba(201, 201, 201, 0.733);
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
+    }
   }
   input[type='range']:focus::-ms-fill-upper {
     background: #d6d6d6;
@@ -264,10 +289,13 @@ const tooltipCss = css`
   }
   & {
     font-weight: 600;
-    font-size: 12px;
+    font-size: 13px;
     color: #333333;
     position: absolute;
     top: 17px;
+    &:hover {
+      cursor: pointer;
+    }
     @media (max-width: 960px) {
       top: 17px;
       &.first {
@@ -278,7 +306,7 @@ const tooltipCss = css`
       }
     }
     &.first {
-      left: 25px;
+      left: 18px;
     }
     &.last {
       right: 25px;
@@ -404,8 +432,10 @@ export default class CountryInfo extends Component {
     this.calendarWillClose = this.calendarWillClose.bind(this);
     this.closeDatePicker = this.closeDatePicker.bind(this);
     this.submitChanges = this.submitChanges.bind(this);
+    this.onPressKey = this.onPressKey.bind(this);
   }
   componentDidMount() {
+    window.addEventListener('keydown', this.onPressKey);
     let date = new Date();
     let days = [];
     // let plusDays = 7;
@@ -443,6 +473,30 @@ export default class CountryInfo extends Component {
       firstDay: toSliderStringShort(days[0]),
       lastDay: toSliderStringShort(days[days.length - 1]),
     });
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onPressKey);
+  }
+  onPressKey(e) {
+    let inputRange = this.range.current;
+    switch (e.code) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        if (this.range.current.value > 0) {
+          this.range.current.value = this.range.current.value - 1;
+          this.onSliderChange({ target: { value: this.range.current.value } });
+        }
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        if (this.range.current.value < 69) {
+          this.range.current.value = Number(this.range.current.value) + 1;
+          this.onSliderChange({ target: { value: this.range.current.value } });
+        }
+        break;
+      default:
+        break;
+    }
   }
   onSliderChange(e) {
     const { currentDateValue, currentSliderRange } = this.state;
@@ -562,7 +616,9 @@ export default class CountryInfo extends Component {
             customClass=${this.state.datePickerPosition}
           />
           <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
-          <span class="first ${tooltipCss}"> <${IconBtn} onClick=${(e) => this.onBtnClick('left')} /> ${this.state.firstDay}</span>
+          <span title="Select Start Date" class="first ${tooltipCss}" onClick=${(e) => this.onBtnClick('left')}>
+            <${IconBtn} /> ${this.state.firstDay}</span
+          >
           <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
           <input
             ref=${this.range}
@@ -574,7 +630,9 @@ export default class CountryInfo extends Component {
             value=${this.state.currentDateValue}
           />
           <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
-          <span class="last ${tooltipCss}"> <${IconBtn} onClick=${(e) => this.onBtnClick('right')} /> ${this.state.lastDay}</span>
+          <span title="Select End Date" class="last ${tooltipCss}" onClick=${(e) => this.onBtnClick('right')}>
+            <${IconBtn} /> ${this.state.lastDay}</span
+          >
         </div>
       </div>
     `;
@@ -583,7 +641,7 @@ export default class CountryInfo extends Component {
 
 class IconBtn extends Component {
   render(_) {
-    return html`<span onClick=${this.props.onClick}>
+    return html`<span>
       ${calendar}
     </span>`;
   }

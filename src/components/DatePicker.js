@@ -170,12 +170,14 @@ class Dialog extends Component {
       allMonthsDate: new Array(12),
       enableArrows: false,
     };
+    this.onPressKey = this.onPressKey.bind(this);
     this.getMonthData = this.getMonthData.bind(this);
     this.fillAllMonths = this.fillAllMonths.bind(this);
     this.chooseDay = this.chooseDay.bind(this);
     this.changeMonth = this.changeMonth.bind(this);
   }
   componentDidMount() {
+    window.addEventListener('keydown', this.onPressKey);
     const { currentMonth, allMonthsDate } = this.state;
     let firstDay = new Date(2020, currentMonth, 1);
     let month = new Date(2020, currentMonth + 1, 0);
@@ -183,6 +185,15 @@ class Dialog extends Component {
     let prevMonths = allMonthsDate;
     prevMonths[currentMonth] = days;
     this.setState({ days, allMonthsDate: prevMonths }, this.fillAllMonths);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onPressKey);
+  }
+  onPressKey(e) {
+    console.log(e);
+    if (e.code === 'Escape' && this.props.show) {
+      this.props.close();
+    }
   }
   getMonthData(firstDay, month) {
     let totalDays = month.getDate();

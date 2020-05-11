@@ -133,6 +133,8 @@ export class WorldMap extends Component {
       style: 'mapbox://styles/jfqueralt/ck9hi7wl616pz1iugty1cpeiv?optimize=true',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
+      keyboard: false,
+      pitchWithRotate: false,
     });
 
     window.map = map;
