@@ -264,7 +264,7 @@ const tooltipCss = css`
   }
   & {
     font-weight: 600;
-    font-size: 12px;
+    font-size: 13px;
     color: #333333;
     position: absolute;
     top: 17px;
