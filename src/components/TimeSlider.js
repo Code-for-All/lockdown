@@ -164,6 +164,10 @@ const rangeStyles = css`
     width: 100%;
     margin: 15.6px 0;
     bottom: 0;
+    color: #C9C9C9;
+    .dark &{
+      color: #4F4F4F;
+    }
   }
   input[type='range']:focus {
     outline: none;
@@ -173,7 +177,10 @@ const rangeStyles = css`
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: rgba(201, 201, 201, 0.733);
+    background: #C9C9C9;
+    .dark &{
+      background: #4F4F4F;
+    }
     border-radius: 0px;
     border: 0px solid rgba(1, 1, 1, 0);
   }
@@ -205,7 +212,10 @@ const rangeStyles = css`
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: rgba(201, 201, 201, 0.733);
+    background: #C9C9C9;
+    .dark &{
+      background: #4F4F4F;
+    }
     border-radius: 0px;
     border: 0px solid rgba(1, 1, 1, 0);
   }
@@ -239,7 +249,10 @@ const rangeStyles = css`
     border-radius: 0px;
   }
   input[type='range']::-ms-fill-upper {
-    background: rgba(201, 201, 201, 0.733);
+    background: #C9C9C9;
+    .dark &{
+      background: #4F4F4F;
+    }
     border: 0px solid rgba(1, 1, 1, 0);
     border-radius: 0px;
   }
@@ -261,7 +274,10 @@ const rangeStyles = css`
     height: 6.8px;
   }
   input[type='range']:focus::-ms-fill-lower {
-    background: rgba(201, 201, 201, 0.733);
+    background: #C9C9C9;
+    .dark &{
+      background: #4F4F4F;
+    }
   }
   input[type='range']:focus::-ms-fill-upper {
     background: #d6d6d6;
