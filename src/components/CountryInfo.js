@@ -121,11 +121,11 @@ const MEASURES = [
 const tabs = [
   {
     id: 1,
-    name: 'Common Details',
+    name: 'Daily Life',
   },
   {
     id: 2,
-    name: 'Travel Details',
+    name: 'Mobility',
   },
   {
     id: 3,
@@ -362,6 +362,6 @@ class Legends extends Component {
 
 class Reports extends Component {
   render(_) {
-    return html`<div class="${reports}"><h3>Coming Soon..</h3></div>`;
+    return html`<div class="${reports}"><h3>Coming Soon</h3></div>`;
   }
 }

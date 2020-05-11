@@ -32,6 +32,12 @@ const sliderWrapper = css`
     -moz-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.39);
     box-shadow: 0px 4px 11px 3px rgba(0, 0, 0, 0.39);
     border-radius: 25px;
+    transition: max-height 0.25s ease-out;
+    max-height: 70px;
+    &.open {
+      max-height: 90vh;
+      transition: max-height 0.25s ease-in;
+    }
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
       bottom: 10px;
@@ -42,7 +48,6 @@ const sliderWrapper = css`
     }
     & > div.countryInfo {
       z-index: 10;
-      transition: 0.5s;
       height: calc(100vh - 190px);
       max-height: 420px;
     }
@@ -606,7 +611,7 @@ export default class CountryInfo extends Component {
   }
   render(_) {
     return html`
-      <div class="sliderWrapper ${sliderWrapper}" ref=${this.container}>
+      <div class="sliderWrapper ${sliderWrapper} ${this.props.children !== '' ? 'open' : ''}" ref=${this.container}>
         ${this.props.children}
         <div class="${selectStyles} ${rangeStyles} ${this.props.children !== '' ? 'open' : ''}">
           <${DatePicker}
