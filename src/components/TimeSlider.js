@@ -562,7 +562,7 @@ export default class CountryInfo extends Component {
             customClass=${this.state.datePickerPosition}
           />
           <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
-          <span class="first ${tooltipCss}"> <${IconBtn} onClick=${(e) => this.onBtnClick('left')} /> ${this.state.firstDay}</span>
+          <span class="first ${tooltipCss}" onClick=${(e) => this.onBtnClick('left')}> <${IconBtn}  /> ${this.state.firstDay}</span>
           <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
           <input
             ref=${this.range}
@@ -574,7 +574,7 @@ export default class CountryInfo extends Component {
             value=${this.state.currentDateValue}
           />
           <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
-          <span class="last ${tooltipCss}"> <${IconBtn} onClick=${(e) => this.onBtnClick('right')} /> ${this.state.lastDay}</span>
+          <span class="last ${tooltipCss}" onClick=${(e) => this.onBtnClick('right')}> <${IconBtn} /> ${this.state.lastDay}</span>
         </div>
       </div>
     `;
@@ -583,7 +583,7 @@ export default class CountryInfo extends Component {
 
 class IconBtn extends Component {
   render(_) {
-    return html`<span onClick=${this.props.onClick}>
+    return html`<span>
       ${calendar}
     </span>`;
   }
