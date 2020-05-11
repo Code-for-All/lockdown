@@ -278,7 +278,7 @@ const tooltipCss = css`
       }
     }
     &.first {
-      left: 25px;
+      left: 18px;
     }
     &.last {
       right: 25px;
