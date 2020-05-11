@@ -126,7 +126,7 @@ const selectStyles = css`
             top: calc(-100vh + 100% + 20px);
             left: -6%;
           }
-          top: calc(-100vh + 100% + 80px);
+          top: calc(-100vh + 100% + 65px);
           left: calc((100% - 100vw)/ 2);
         }
         & > .calendar{

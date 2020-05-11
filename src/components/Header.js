@@ -16,7 +16,8 @@ const styles = css`
     display: flex;
     align-items: center;
     justify-content: space-around;
-    height: 60px;
+    /*height: 60px;*/
+    height: 55px;
     width: 100%;
   }
 
