@@ -155,6 +155,9 @@ const selectStyles = css`
     }
 `;
 const rangeStyles = css`
+  input{
+    background: transparent; 
+  }
   input[type='range'] {
     position: relative;
     -webkit-appearance: none;
