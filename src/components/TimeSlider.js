@@ -268,6 +268,9 @@ const tooltipCss = css`
     color: #333333;
     position: absolute;
     top: 17px;
+    &:hover{
+      cursor: pointer;
+    }
     @media (max-width: 960px) {
       top: 17px;
       &.first {
