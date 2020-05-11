@@ -189,6 +189,9 @@ const styles2 = css`
             flex-direction: column;
             & li {
               margin-bottom: 29%;
+              &.hide{
+                display: none; /*Just for now*/
+              }
               & button {
                 background-color: transparent;
               }
