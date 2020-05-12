@@ -330,6 +330,7 @@ const sliderSelector = css`
     position: absolute;
     @media (max-width: 960px) {
       top: -27px;
+      padding: 0 40px 0 35px;
     }
     top: -27px;
     left: 24.5%;
@@ -338,6 +339,8 @@ const sliderSelector = css`
     transform: translate(-24.5%, 0);
     background: transparent;
     font-size: 1rem;
+    padding: 0 29px 0 21px;
+    width: max-content;
     & span {
       border: 0px solid #8c8c8c;
       border-radius: 30px;
