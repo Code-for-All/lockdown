@@ -91,7 +91,7 @@ export default class Tabs extends Component {
       <ul class="ld-menu--tabs" role="tablist">
         ${this.props.children.map((child, i) => {
           return html`
-            <li role="presentation" key=${i}>
+            <li role="presentation" key=${i} class="${i > 1 ? 'hide' : ''}">
               <button
                 role="tab"
                 ref=${(ref) => (this.tabRefs['tab' + i] = ref)}

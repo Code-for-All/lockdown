@@ -15,8 +15,35 @@ const btnStyle = css`
     background-color: white;
     box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.1);
     display: flex;
+    color: #333333;
     justify-content: center;
     align-items: center;
+    .dark & {
+      background-color: #333333;
+      color: white;
+      & .dialog {
+        background-color: #333333;
+        color: white;
+        &.right {
+          &::after {
+            border-left-color: #333333;
+          }
+        }
+        &.left {
+          &::after {
+            border-right-color: #333333;
+          }
+        }
+      }
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    &:active {
+      cursor: grabbing;
+      cursor: -moz-grabbing;
+      cursor: -webkit-grabbing;
+    }
     & .dialog {
       display: none;
       transition: 0.2s;
@@ -24,6 +51,7 @@ const btnStyle = css`
       padding: 5px 7px;
       background-color: #fff;
       flex-direction: column;
+      color: #333333;
       box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.25);
       border-radius: 15px;
       &.top {
@@ -186,6 +214,10 @@ class Legend extends Component {
     let yy = window.innerHeight || window.clientHeight;
     let y = e.clientY;
     let x = e.clientX;
+    if (y === 0 && x === 0) {
+      x = e.screenX;
+      y = e.screenY;
+    }
     this.btn.style.top = y + 'px';
     if (y > yy / 2) {
       if (y >= yy - 150) {

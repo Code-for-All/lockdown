@@ -105,11 +105,11 @@ const preStyles = css`
   .ld-menu--content {
     display: block;
     top: 0px;
-    left: calc(500% - 100vw);
+    right: 100%;
     height: 100%;
     position: absolute;
     background-color: white;
-    width: calc(100vw - 500%);
+    width: 30vw;
     border-radius: 20px 0px 0px 20px;
     -moz-border-radius: 20px 0px 0px 20px;
     -webkit-border-radius: 20px 0px 0px 20px;
@@ -189,6 +189,9 @@ const styles2 = css`
             flex-direction: column;
             & li {
               margin-bottom: 29%;
+              &.hide{
+                display: none; /*Just for now*/
+              }
               & button {
                 background-color: transparent;
               }
@@ -287,6 +290,9 @@ const closeBtn = css`
     margin-left: auto !important;
     border-radius: 50% !important;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       cursor: pointer;
     }
@@ -333,7 +339,7 @@ const overlay = css`
     }
   }
 `;
-const renderMenu = (menuItem) => {
+const renderMenu = (menuItem, callback, currentDropdown, onDropDown) => {
   switch (menuItem) {
     case 'info':
       return {
@@ -351,6 +357,8 @@ const renderMenu = (menuItem) => {
 
           <${Expandable}
             toggle=${'About'}
+            currentDropdown=${currentDropdown}
+            onDropDown=${onDropDown}
             detail=${html`
               <p>
                 Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and
@@ -364,6 +372,8 @@ const renderMenu = (menuItem) => {
 
           <${Expandable}
             toggle=${'Legend'}
+            currentDropdown=${currentDropdown}
+            onDropDown=${onDropDown}
             detail=${html`
               <p>The map shows two parameters for territories:</p>
               <ol>
@@ -410,9 +420,10 @@ const renderMenu = (menuItem) => {
               </table>
             `}
           />
-          <!--Here is the error -->
           <${Expandable}
             toggle=${'Sources'}
+            currentDropdown=${currentDropdown}
+            onDropDown=${onDropDown}
             detail=${html`
               <p>
                 <b>Project Lockdown</b> combines multiple trusted sources to ensure that the data used is verified and accurate. You can find the full list of sources used here:
@@ -430,9 +441,10 @@ const renderMenu = (menuItem) => {
               </p>
             `}
           />
-          <!--Here is the error -->
           <${Expandable}
             toggle=${'Credits'}
+            currentDropdown=${currentDropdown}
+            onDropDown=${onDropDown}
             detail=${html`
               <p>
                 <b>Project Lockdown</b> is a Civic Tech initiative made possible by a number of dedicated individuals and organizations.
@@ -448,6 +460,8 @@ const renderMenu = (menuItem) => {
 
           <${Expandable}
             toggle=${'Data & Privacy'}
+            currentDropdown=${currentDropdown}
+            onDropDown=${onDropDown}
             detail=${html`
               <p>
                 We do not collect any personal information from our visitors.
@@ -462,7 +476,7 @@ const renderMenu = (menuItem) => {
     case 'settings':
       return {
         title: 'settings',
-        template: html` <${Settings} /> `,
+        template: html` <${Settings} onClose=${callback} /> `,
       };
     case 'contribute':
       return {
@@ -511,10 +525,12 @@ export class Menu extends Component {
       activeItem: 'info',
       showLateralMenu: false,
       showMenu: false,
+      currentDropdown: 1,
     };
     this.showSideBar = this.showSideBar.bind(this);
     this.closeNavbar = this.closeNavbar.bind(this);
     this.switchContent = this.switchContent.bind(this);
+    this.onDropDown = this.onDropDown.bind(this);
   }
 
   componentDidMount() {
@@ -553,7 +569,7 @@ export class Menu extends Component {
       return;
     }
 
-    this.props.changeRoute(renderMenu(val));
+    // this.props.changeRoute(renderMenu(val));
 
     this.prevVal = val;
     this.setState({
@@ -566,10 +582,17 @@ export class Menu extends Component {
     this.setState({
       showLateralMenu: false,
       showSideBar: false,
+      activeItem: 'info',
     });
   }
 
-  render(_, { activeItem, updateAvailable }) {
+  onDropDown(id) {
+    this.setState({
+      currentDropdown: id,
+    });
+  }
+
+  render(_, { activeItem, updateAvailable, currentDropdown }) {
     return html`
       ${this.state.showLateralMenu || this.props.isMobile === true
         ? html`<div class="menu-overlay ${overlay}"></div>
@@ -577,7 +600,7 @@ export class Menu extends Component {
               <div class="ld-menu-nav">
                 <button class="${closeBtn}" onClick=${this.closeNavbar}>${closeIcon}</button>
                 <nav>
-                  <${Tabs} switchContent=${this.switchContent}>
+                  <${Tabs} onClose=${this.closeNavbar} switchContent=${this.switchContent}>
                     <button id="info">info</button>
                     <button id="settings">settings</button>
                     <button id="updates">updates</button>
@@ -591,7 +614,7 @@ export class Menu extends Component {
                     <h1>${activeItem}</h1>
                   </div>
                 </div>
-                ${renderMenu(activeItem).template}
+                ${renderMenu(activeItem, this.closeNavbar, currentDropdown, this.onDropDown).template}
               </div>
             </main>`
         : html`<button onClick=${this.showSideBar} class="${sideBtn}">

@@ -4,6 +4,7 @@ import css from 'csz';
 import format from 'date-fns/format';
 
 import DatePicker from './DatePicker.js';
+import { calendar } from '../assets/icons/icons.js';
 
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
 
@@ -31,17 +32,22 @@ const sliderWrapper = css`
     -moz-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, 0.39);
     box-shadow: 0px 4px 11px 3px rgba(0, 0, 0, 0.39);
     border-radius: 25px;
+    transition: max-height 0.25s ease-out;
+    max-height: 70px;
+    &.open {
+      max-height: 90vh;
+      transition: max-height 0.25s ease-in;
+    }
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
       bottom: 10px;
       left: 0;
       right: 0;
       width: 90vw;
-      max-width:450px;
+      max-width: 450px;
     }
     & > div.countryInfo {
       z-index: 10;
-      transition: 0.5s;
       height: calc(100vh - 190px);
       max-height: 420px;
     }
@@ -120,12 +126,11 @@ const selectStyles = css`
             top: calc(-100vh + 100% + 20px);
             left: -6%;
           }
-          top: calc(-100vh + 100% + 80px);
-          left: -17%;
+          top: calc(-100vh + 100% + 65px);
+          left: calc((100% - 100vw)/ 2);
         }
         & > .calendar{
-            top: 0;
-            bottom: calc(300% + 10px);
+            bottom: 60px;
             width: 300px;
             height: fit-content;
             display: none;
@@ -138,6 +143,7 @@ const selectStyles = css`
                 }
                 &.show{
                     animation: fadeInLeft 0.3s;
+                    display: table;
                 }
             }
             &.right{
@@ -154,12 +160,19 @@ const selectStyles = css`
     }
 `;
 const rangeStyles = css`
+  input {
+    background: transparent;
+  }
   input[type='range'] {
     position: relative;
     -webkit-appearance: none;
     width: 100%;
     margin: 15.6px 0;
     bottom: 0;
+    color: #c9c9c9;
+    .dark & {
+      color: #4f4f4f;
+    }
   }
   input[type='range']:focus {
     outline: none;
@@ -169,7 +182,10 @@ const rangeStyles = css`
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: rgba(201, 201, 201, 0.733);
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
+    }
     border-radius: 0px;
     border: 0px solid rgba(1, 1, 1, 0);
   }
@@ -182,10 +198,10 @@ const rangeStyles = css`
     height: 20px;
     width: 20px;
     border-radius: 20px;
-    background: #333333;
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -10px;
+    background: #333333;
     .dark & {
       background: #ffffff;
     }
@@ -201,7 +217,10 @@ const rangeStyles = css`
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: rgba(201, 201, 201, 0.733);
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
+    }
     border-radius: 0px;
     border: 0px solid rgba(1, 1, 1, 0);
   }
@@ -216,6 +235,9 @@ const rangeStyles = css`
     width: 20px;
     border-radius: 20px;
     background: #333333;
+    .dark & {
+      background: #ffffff;
+    }
     cursor: pointer;
   }
   input[type='range']::-ms-track {
@@ -232,7 +254,10 @@ const rangeStyles = css`
     border-radius: 0px;
   }
   input[type='range']::-ms-fill-upper {
-    background: rgba(201, 201, 201, 0.733);
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
+    }
     border: 0px solid rgba(1, 1, 1, 0);
     border-radius: 0px;
   }
@@ -247,11 +272,17 @@ const rangeStyles = css`
     width: 20px;
     border-radius: 20px;
     background: #333333;
+    .dark & {
+      background: #ffffff;
+    }
     cursor: pointer;
     height: 6.8px;
   }
   input[type='range']:focus::-ms-fill-lower {
-    background: rgba(201, 201, 201, 0.733);
+    background: #c9c9c9;
+    .dark & {
+      background: #4f4f4f;
+    }
   }
   input[type='range']:focus::-ms-fill-upper {
     background: #d6d6d6;
@@ -263,10 +294,13 @@ const tooltipCss = css`
   }
   & {
     font-weight: 600;
-    font-size: 12px;
+    font-size: 13px;
     color: #333333;
     position: absolute;
     top: 17px;
+    &:hover {
+      cursor: pointer;
+    }
     @media (max-width: 960px) {
       top: 17px;
       &.first {
@@ -277,7 +311,7 @@ const tooltipCss = css`
       }
     }
     &.first {
-      left: 25px;
+      left: 18px;
     }
     &.last {
       right: 25px;
@@ -388,7 +422,7 @@ export default class CountryInfo extends Component {
   constructor() {
     super();
     this.state = {
-      currentDateValue: 2,
+      currentDateValue: 13,
       currentPosition: 24.5,
       datePickerPosition: 'left',
       showDatePicker: false,
@@ -399,27 +433,47 @@ export default class CountryInfo extends Component {
     };
     this.dateRef = createRef();
     this.range = createRef();
+    this.container = createRef();
     this.onSliderChange = this.onSliderChange.bind(this);
     this.onBtnClick = this.onBtnClick.bind(this);
     this.onChooseDate = this.onChooseDate.bind(this);
     this.calendarWillClose = this.calendarWillClose.bind(this);
     this.closeDatePicker = this.closeDatePicker.bind(this);
     this.submitChanges = this.submitChanges.bind(this);
+    this.onPressKey = this.onPressKey.bind(this);
   }
   componentDidMount() {
-    console.log(this.props.children);
+    window.addEventListener('keydown', this.onPressKey);
     let date = new Date();
     let days = [];
-    let plusDays = 7;
-    for (let i = 0; i < 11; i++) {
-      if (i < 2) {
-        days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
-      } else if (i !== 2) {
-        days.push(this.rangePreProcces(date, plusDays));
-        plusDays += 7;
-      } else {
+    // let plusDays = 7;
+    let plusDays = 1;
+    let lessDays = 14;
+    for (let i = 1; i <= 70; i++) {
+      if (i === 15) {
         days.push(date);
+      } else if (i < 15) {
+        days.push(this.rangePreProcces(date, -1 * lessDays));
+        lessDays--;
+      } else {
+        days.push(this.rangePreProcces(date, plusDays));
+        plusDays++;
       }
+      const sliderDOM = this.dateRef.current;
+      const rangeDOM = this.range.current;
+      const containerDOM = this.container.current;
+      let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
+      let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
+      let stepsWidth = rangeDOM.offsetWidth / 70;
+      sliderDOM.style.left = `${finalWidth + stepsWidth * (13 - 2)}px`;
+      // if (i < 2) {
+      //   days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
+      // } else if (i !== 2) {
+      //   days.push(this.rangePreProcces(date, plusDays));
+      //   plusDays += 7;
+      // } else {
+      //   days.push(date);
+      // }
     }
     this.setState({
       currentSliderRange: days,
@@ -428,13 +482,42 @@ export default class CountryInfo extends Component {
       lastDay: toSliderStringShort(days[days.length - 1]),
     });
   }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onPressKey);
+  }
+  onPressKey(e) {
+    let inputRange = this.range.current;
+    switch (e.code) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        if (this.range.current.value > 0) {
+          this.range.current.value = this.range.current.value - 1;
+          this.onSliderChange({ target: { value: this.range.current.value } });
+        }
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        if (this.range.current.value < 69) {
+          this.range.current.value = Number(this.range.current.value) + 1;
+          this.onSliderChange({ target: { value: this.range.current.value } });
+        }
+        break;
+      default:
+        break;
+    }
+  }
   onSliderChange(e) {
     const { currentDateValue, currentSliderRange } = this.state;
     const sliderDOM = this.dateRef.current;
-    const newValue = Number(e.target.value);
+    const rangeDOM = this.range.current;
+    const containerDOM = this.container.current;
+    let newValue = e.target.value;
+    let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
+    let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
+    let stepsWidth = rangeDOM.offsetWidth / 70;
     let newPosition = widthSpaces[newValue];
-    sliderDOM.style.left = `${newPosition}%`;
-    sliderDOM.style.transform = `translate(-${newPosition}%, 0)`;
+    sliderDOM.style.left = `${finalWidth + stepsWidth * newValue}px`;
+    // sliderDOM.style.transform = `translate(-${finalWidth + stepsWidth * (newValue+1)}px, 0)`;
     this.setState(
       {
         currentDateValue: newValue,
@@ -445,39 +528,66 @@ export default class CountryInfo extends Component {
     );
   }
   onBtnClick(range) {
-    // ? I disabled the calendar just for the hackaton period
-    /*
     this.setState({
       showDatePicker: true,
       datePickerPosition: range,
     });
-    */
   }
   onChooseDate(date) {
     const sliderDOM = this.dateRef.current;
+    const rangeDOM = this.range.current;
+    const containerDOM = this.container.current;
+    let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
+    let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
+    let stepsWidth = rangeDOM.offsetWidth / 70;
+    sliderDOM.style.left = `${finalWidth + stepsWidth * ((this.state.datePickerPosition === 'left' ? 0 : 69) + 0.5)}px`;
     this.calendarWillClose();
     let days = [];
-    let plusDays = 7;
-    for (let i = 0; i < 11; i++) {
-      if (i < 2) {
-        days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
-      } else if (i !== 2) {
-        days.push(this.rangePreProcces(date, plusDays));
-        plusDays += 7;
-      } else {
-        days.push(date);
+    if (this.state.datePickerPosition === 'left') {
+      let plusDays = 1;
+      for (let i = 1; i <= 70; i++) {
+        if (i === 1) {
+          days.push(date);
+        } else {
+          days.push(this.rangePreProcces(date, plusDays));
+          plusDays++;
+        }
+      }
+    } else {
+      let lessDays = 69;
+      for (let i = 1; i <= 70; i++) {
+        if (i === 70) {
+          days.push(date);
+        } else {
+          days.push(this.rangePreProcces(date, -1 * lessDays));
+          lessDays--;
+        }
       }
     }
-    sliderDOM.style.left = `${24.5}%`;
-    sliderDOM.style.transform = `translate(-${24.5}%, 0)`;
-    this.setState({
-      currentSliderRange: days,
-      currentSelectedDay: toSliderString(date),
-      firstDay: toSliderStringShort(days[0]),
-      lastDay: toSliderStringShort(days[days.length - 1]),
-      currentDateValue: 2,
-      currentPosition: 24.5,
-    });
+    // let plusDays = 7;
+    // for (let i = 0; i < 11; i++) {
+    //   if (i < 2) {
+    //     days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
+    //   } else if (i !== 2) {
+    //     days.push(this.rangePreProcces(date, plusDays));
+    //     plusDays += 7;
+    //   } else {
+    //     days.push(date);
+    //   }
+    // }
+    // sliderDOM.style.left = `${24.5}%`;
+    // sliderDOM.style.transform = `translate(-${24.5}%, 0)`;
+    this.setState(
+      {
+        currentSliderRange: days,
+        currentSelectedDay: toSliderString(date),
+        firstDay: toSliderStringShort(days[0]),
+        lastDay: toSliderStringShort(days[days.length - 1]),
+        currentDateValue: this.state.datePickerPosition === 'left' ? 0 : 69,
+        currentPosition: 24.5,
+      },
+      this.submitChanges
+    );
   }
   calendarWillClose() {
     this.setState(
@@ -494,7 +604,7 @@ export default class CountryInfo extends Component {
     });
   }
   rangePreProcces(date, days) {
-    let newDate = new Date();
+    let newDate = new Date(date);
     newDate.setDate(date.getDate() + days);
     return newDate;
   }
@@ -504,7 +614,7 @@ export default class CountryInfo extends Component {
   }
   render(_) {
     return html`
-      <div class="sliderWrapper ${sliderWrapper}">
+      <div class="sliderWrapper ${sliderWrapper} ${this.props.children !== '' ? 'open' : ''}" ref=${this.container}>
         ${this.props.children}
         <div class="${selectStyles} ${rangeStyles} ${this.props.children !== '' ? 'open' : ''}">
           <${DatePicker}
@@ -514,21 +624,33 @@ export default class CountryInfo extends Component {
             customClass=${this.state.datePickerPosition}
           />
           <div class="${sliderSelector}" ref="${this.dateRef}"><span>${this.state.currentSelectedDay}</span></div>
-          <span class="first ${tooltipCss}">${this.state.firstDay}</span>
+          <span title="Select Start Date" class="first ${tooltipCss}" onClick=${(e) => this.onBtnClick('left')}>
+            <${IconBtn} /> ${this.state.firstDay}</span
+          >
           <button onClick=${(e) => this.onBtnClick('left')} class="first ${popBtn}"></button>
           <input
             ref=${this.range}
             onInput=${this.onSliderChange}
             type="range"
             min="0"
-            max="10"
+            max="69"
             step="1"
             value=${this.state.currentDateValue}
           />
           <button onClick=${(e) => this.onBtnClick('right')} class="last ${popBtn}"></button>
-          <span class="last ${tooltipCss}">${this.state.lastDay}</span>
+          <span title="Select End Date" class="last ${tooltipCss}" onClick=${(e) => this.onBtnClick('right')}>
+            <${IconBtn} /> ${this.state.lastDay}</span
+          >
         </div>
       </div>
     `;
+  }
+}
+
+class IconBtn extends Component {
+  render(_) {
+    return html`<span>
+      ${calendar}
+    </span>`;
   }
 }
