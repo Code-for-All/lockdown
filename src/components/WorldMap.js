@@ -240,11 +240,33 @@ export class WorldMap extends Component {
               ],
               ['case', ['boolean', ['feature-state', 'hover'], false], 'rgba(204,204,204,0.5)', 'rgba(204,204,204,0)'],
             ],
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1]
           },
         },
-        'waterway-label'
+        'admin-1-boundary-bg'
       );
+
+      //
+      // Map style adjustments
+      //
+
+      // Improve contrast of country country labels
+      map.setPaintProperty('country-label','text-color','hsl(0, 0%, 10%)');
+      map.setPaintProperty('country-label','text-halo-color','hsla(0, 0%, 100%,0.6)');
+      map.setPaintProperty('country-label','text-halo-width',1);
+
+      // Improve contrast of country state labels
+      map.setPaintProperty('state-label','text-color','hsl(0, 0%, 30%)');
+      map.setPaintProperty('state-label','text-halo-width',0);
+
+      // Improve contrast of country label lines
+      map.setPaintProperty('admin-0-boundary','line-color','hsla(0, 0%, 90%, 0.8)');
+      map.setPaintProperty('admin-0-boundary-disputed','line-color','hsla(0, 0%, 90%, 0.5)');
+      map.setPaintProperty('admin-0-boundary-bg','line-color','hsla(0, 0%, 84%, 0.3)');
+
+      // Improve contrast of country label lines
+      map.setPaintProperty('admin-1-boundary','line-color','hsla(0, 0%, 90%, 0.6)');
+
 
       const setStates = (e) => {
         // console.log('setStates');
