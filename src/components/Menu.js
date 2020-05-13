@@ -371,56 +371,6 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown) => {
           />
 
           <${Expandable}
-            toggle=${'Legend'}
-            currentDropdown=${currentDropdown}
-            onDropDown=${onDropDown}
-            detail=${html`
-              <p>The map shows two parameters for territories:</p>
-              <ol>
-                <li>If the country is under any type of lockdown</li>
-                <li>If there are covid cases in the country</li>
-              </ol>
-              <table class=${styles}>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Lockdown</th>
-                  <th scope="col">COVID-19</th>
-                </tr>
-                <tr>
-                  <td scope="row"><div aria-label="blue" class="blue circle"></div></td>
-                  <td><div aria-label="no">${close}</div></td>
-                  <td><div aria-label="no">${close}</div></td>
-                </tr>
-                <tr>
-                  <td scope="row"><div aria-label="green" class="green circle"></div></td>
-                  <td><div aria-label="no">${close}</div></td>
-                  <td><div aria-label="yes">${trues}</div></td>
-                </tr>
-                <tr>
-                  <td scope="row"><div aria-label="yellow" class="yellow circle"></div></td>
-                  <td><div aria-label="yes">${trues}</div></td>
-                  <td><div aria-label="no">${close}</div></td>
-                </tr>
-                <tr>
-                  <td scope="row"><div aria-label="red" class="red circle"></div></td>
-                  <td><div aria-label="yes">${trues}</div></td>
-                  <td><div aria-label="yes">${trues}</div></td>
-                </tr>
-                <tr>
-                  <td scope="row"><div aria-label="gray" class="default circle"></div></td>
-                  <td>
-                    No Data
-                    <p class="note">(please contribute)</p>
-                  </td>
-                  <td>
-                    No Data
-                    <p class="note">(please contribute)</p>
-                  </td>
-                </tr>
-              </table>
-            `}
-          />
-          <${Expandable}
             toggle=${'Sources'}
             currentDropdown=${currentDropdown}
             onDropDown=${onDropDown}
