@@ -27,7 +27,7 @@ jobs:
           export GOOGLE_PRIVATE_KEY="${{ secrets.GOOGLE_API_KEY }}"
           cd backend
           npm install
-          npm run start
+          npm run start:job
 
       - name: Commit changes
         run: |

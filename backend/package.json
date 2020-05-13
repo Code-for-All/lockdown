@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node dist/server.js",
+    "start:job": "npm run build && node dist/index.js",
     "build": "babel src -d dist --copy-files",
     "dev": "babel-node src/index.js",
     "test": "jest ./tests",
