@@ -28,6 +28,8 @@ const domainCoors = {
   africa: { lng: 21.525828, lat: 4.214943, zoom: 3.2 }, //Somewhere in Africa :)
 };
 
+// Use for altering boundaries of countries with disputed areas
+// Options: https://docs.mapbox.com/vector-tiles/reference/mapbox-boundaries-v3/#--polygon---worldview-text
 const selectedWorldview='US';
 
 const pause = (time = 100) => {
@@ -243,10 +245,12 @@ export class WorldMap extends Component {
                 worldStyle('4'),
                 worldStyle('0'),
               ],
+              // No data
               ['==', ['feature-state', 'kind'], null],
               worldStyle('0'),
               ['case', ['boolean', ['feature-state', 'hover'], false], 'rgba(204,204,204,0.5)', 'rgba(204,204,204,0)'],
             ],
+            // Hover style
             'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1]
           },
         },
@@ -277,8 +281,8 @@ export class WorldMap extends Component {
       // Improve contrast of city labels
       map.setPaintProperty('settlement-major-label','text-halo-width',0);
       map.setPaintProperty('settlement-minor-label','text-halo-width',0);
-      map.setPaintProperty('settlement-subdivision-label','text-halo-width',0);
 
+      // Change water color
       map.setPaintProperty('water','fill-color','white');
 
 
