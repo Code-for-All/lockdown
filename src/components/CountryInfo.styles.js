@@ -8,7 +8,7 @@ export const tabStyles = css`
     & > button{
       & {
         position: absolute !important;
-        color: #7C7C7C;
+        color: var(--ld-gray-3);
         background-color: transparent;
         padding: 0px !important;
         top: 10px;
@@ -24,7 +24,7 @@ export const tabStyles = css`
       }
       .dark & {
         position: absolute !important;
-        color: #7c7c7c;
+        color: var(--ld-gray-5);
         background-color: transparent;
         padding: 0px;
         top: 10px;
@@ -38,7 +38,7 @@ export const tabStyles = css`
     }
     & .tab{
       width: 35%;
-      background-color: #E5E5E5;
+      background-color: var(--ld-gray-6);
       font-family: Montserrat;
       font-style: normal;
       font-weight: 500;
@@ -46,8 +46,8 @@ export const tabStyles = css`
       line-height: 16px;
       text-align: center;
       padding: 5px;
-      color: #7c7c7c;
-      border: 1px solid #999999;
+      color: var(--ld-gray-3);
+      border: var(--ld-gray-5);
       border-top: 0px;
       transition: 0.5s;
       display: flex;
@@ -55,6 +55,12 @@ export const tabStyles = css`
       justify-content: center;
       align-items: center;
       min-height: 50px;
+      letter-spacing:.5px;
+      .dark & {
+        background-color: var(--ld-gray-2);
+        color: var(--ld-gray-5);
+        border: var(--ld-gray-3) 1px solid;
+      }
       &:hover{
         cursor: pointer;
       }
@@ -62,6 +68,7 @@ export const tabStyles = css`
         border-bottom: 0px;
         background-color: #FFF 
         border: 0px;
+        color: var(--ld-gray-1);
         .dark &{
           background-color: var(--ld-bg);
           color: white;
@@ -118,12 +125,12 @@ export const countryInfoStyles = css`
       display: flex;
       justify-content: space-between;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 12px;
       line-height: 18px;
       letter-spacing: 0.02em;
       & span:first-child {
         font-weight: 600;
-        font-size: 14px;
+        font-size: 12px;
         line-height: 18px;
         letter-spacing: 0.05em;
         padding-right: 7px;
@@ -150,15 +157,19 @@ export const countryInfoStyles = css`
   }
 
   h2 {
-    margin-top: 7px;
+    margin-top: 10px;
     padding-bottom: 5px;
     border-bottom: 7px;
     margin-bottom: 2px;
     &.last {
       padding: 0px;
-      padding-top: 4px;
+      padding-top: 8px;
       border-top: 1px solid var(--ld-gray-5);
       border-bottom: 0px;
+      margin-top:7px;
+      .dark &{
+        border-top: 1px solid var(--ld-gray-2);
+      }
       &.transport {
         margin-bottom: -20px;
       }
@@ -176,6 +187,9 @@ export const countryInfoStyles = css`
     padding-bottom: 7px;
     border-bottom: 1px solid var(--ld-gray-5);
     width: 100%;
+    .dark &{
+      border-bottom 1px solid var(--ld-gray-2);
+    }
     &.is-half {
       width: 50%;
     }
@@ -186,12 +200,12 @@ export const countryInfoStyles = css`
 
   .data-entry dt {
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .data dd {
     margin-left: 0;
-    font-size: 14px;
+    font-size: 12px;
     text-align: left;
     font-weight: 600;
   }
@@ -213,10 +227,10 @@ export const countryInfoStyles = css`
 
   .legend-item dd {
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 400;
     letter-spacing: 0.02em;
     margin-inline-start: 0;
-    margin-right: 5px;
+    margin-right: 8px;
     .dark & {
       color: var(--ld-text);
     }
@@ -242,9 +256,8 @@ export const countryInfoStyles = css`
     display: grid;
     grid-template-columns: 1fr 1fr;
     list-style: none;
-    padding: 0;
+    padding: 5px 0 0 3%;
     margin: 0 0px 0;
-    padding-left: 13%;
   }
 
   .measures > li {
@@ -275,6 +288,7 @@ export const countryInfoStyles = css`
     pointer-events: none;
     transition: opacity 300ms ease-in-out;
     font-size: 12px;
+    font-weight:400;
     .dark & {
       color: var(--ld-text);
     }
