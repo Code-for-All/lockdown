@@ -283,7 +283,7 @@ export class WorldMap extends Component {
       map.setPaintProperty('settlement-minor-label','text-halo-width',0);
 
       // Change water color
-      map.setPaintProperty('water','fill-color','#fff');
+      map.setPaintProperty('water','fill-color','#e0e0e0');
 
 
       const setStates = (e) => {
