@@ -23,7 +23,7 @@ const sliderWrapper = css`
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 450px;
+    width: 600px;
     z-index: 1000;
     height: fit-content;
     display: flex;
@@ -49,7 +49,7 @@ const sliderWrapper = css`
     & > div.countryInfo {
       z-index: 10;
       height: calc(100vh - 190px);
-      max-height: 420px;
+      max-height: 475px;
     }
   }
 `;
@@ -169,7 +169,7 @@ const rangeStyles = css`
     width: 100%;
     margin: 15.6px 0;
     bottom: 0;
-    color: #c9c9c9;
+    color: #e0e0e0;
     .dark & {
       color: #4f4f4f;
     }
@@ -182,7 +182,7 @@ const rangeStyles = css`
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: #c9c9c9;
+    background: #e0e0e0;
     .dark & {
       background: #4f4f4f;
     }
@@ -211,13 +211,16 @@ const rangeStyles = css`
     }
   }
   input[type='range']:focus::-webkit-slider-runnable-track {
-    background: #d6d6d6;
+    background: #bdbdbd;
+    .dark & {
+      background: #828282;
+    }
   }
   input[type='range']::-moz-range-track {
     width: 100%;
     height: 3px;
     cursor: pointer;
-    background: #c9c9c9;
+    background: #e0e0e0;
     .dark & {
       background: #4f4f4f;
     }
@@ -254,7 +257,7 @@ const rangeStyles = css`
     border-radius: 0px;
   }
   input[type='range']::-ms-fill-upper {
-    background: #c9c9c9;
+    background: #e0e0e0;
     .dark & {
       background: #4f4f4f;
     }
@@ -279,7 +282,7 @@ const rangeStyles = css`
     height: 6.8px;
   }
   input[type='range']:focus::-ms-fill-lower {
-    background: #c9c9c9;
+    background: #e0e0e0;
     .dark & {
       background: #4f4f4f;
     }
@@ -294,7 +297,7 @@ const tooltipCss = css`
   }
   & {
     font-weight: 600;
-    font-size: 13px;
+    font-size: 12px;
     color: #333333;
     position: absolute;
     top: 17px;
@@ -304,17 +307,17 @@ const tooltipCss = css`
     @media (max-width: 960px) {
       top: 17px;
       &.first {
-        left: 25px;
+        left: 17px;
       }
       &.last {
-        right: 25px;
+        right: 17px;
       }
     }
     &.first {
-      left: 18px;
+      left: 17px;
     }
     &.last {
-      right: 25px;
+      right: 17px;
     }
   }
 `;
@@ -329,17 +332,17 @@ const sliderSelector = css`
   & {
     position: absolute;
     @media (max-width: 960px) {
-      top: -27px;
-      padding: 0 40px 0 35px;
+      top: -33px;
+      padding: 0;
     }
-    top: -27px;
+    top: -33px;
     left: 24.5%;
     z-index: 999;
     width: fit-content;
     transform: translate(-24.5%, 0);
     background: transparent;
     font-size: 1rem;
-    padding: 0 29px 0 21px;
+    padding: 0;
     width: max-content;
     & span {
       border: 0px solid #8c8c8c;
