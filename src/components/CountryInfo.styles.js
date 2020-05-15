@@ -47,7 +47,7 @@ export const tabStyles = css`
       text-align: center;
       padding: 5px;
       color: var(--ld-gray-3);
-      border: var(--ld-gray-5);
+      border: var(--ld-gray-5) 1px solid;
       border-top: 0px;
       transition: 0.5s;
       display: flex;
