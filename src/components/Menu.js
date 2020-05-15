@@ -168,7 +168,7 @@ const styles2 = css`
       background-color: #f2f2f2;
       z-index: 1100;
       .dark & {
-        background-color: #54555a !important;
+        background-color: var(--ld-gray-2) !important;
       }
       & .ld-menu-nav {
         display: flex;

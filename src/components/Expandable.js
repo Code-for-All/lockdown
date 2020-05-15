@@ -55,6 +55,9 @@ const styles = css`
     width: 100%;
     height: auto;
     border-bottom: lightgrey solid 1px;
+    .dark & {
+      border-bottom: var(--ld-gray-2) solid 1px;
+    }
   }
 
   .ld-expandable a {
