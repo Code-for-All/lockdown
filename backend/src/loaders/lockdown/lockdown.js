@@ -80,7 +80,6 @@ export async function batchGetTerritoriesEntryData(territories, database) {
         if (insertResult.find(r => r.result.nUpserted == 1)) {
           shouldResetApiCache = true;
         }
-
       }
 
       result.push({
