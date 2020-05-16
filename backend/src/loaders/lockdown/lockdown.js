@@ -32,9 +32,8 @@ export async function getGlobalData() {
  * Groups territories and request data from google API at batch size
  * @param {array} territories 
  * @param {Database} database
- * @param {MessagesService} cacheMessageBus
  */
-export async function batchGetTerritoriesEntryData(territories, database, cacheMessageBus) {
+export async function batchGetTerritoriesEntryData(territories, database) {
   const doc = await getDocument();
   const startCacheColumn = 'H';
   const startCacheColumnIndex = letterToColumn(startCacheColumn);
@@ -77,9 +76,11 @@ export async function batchGetTerritoriesEntryData(territories, database, cacheM
           s.iso3 = batch[i]['iso3'];
           s.iso2 = batch[i]['iso2'];
         });
-        var insertResult = await Promise.all(database.snapshotRepository.insertManyOrUpdate(snapshots));
-        if (insertResult.find(r => r.result.nUpserted == 1)) {
-          shouldResetApiCache = true;
+        if (!shouldResetApiCache) {
+          var insertResult = await Promise.all(database.snapshotRepository.insertManyOrUpdate(snapshots));
+          if (insertResult.find(r => r.result.nUpserted == 1)) {
+            shouldResetApiCache = true;
+          }
         }
       }
 
@@ -95,6 +96,7 @@ export async function batchGetTerritoriesEntryData(territories, database, cacheM
   }
 
   if (shouldResetApiCache) {
+    const cacheMessageBus = new MessagesService(process.env.AZURE_SERVICEBUS_CONNECTION_STRING, process.env.AZURE_SERVICEBUS_CACHE_QUEUE);
     await cacheMessageBus.sendMessage(
       `Reset cache`,
       "Reset cache",
@@ -102,6 +104,7 @@ export async function batchGetTerritoriesEntryData(territories, database, cacheM
         timestamp: new Date()
       }
     );
+    await cacheMessageBus.close();
   }
 
   return result;
@@ -111,18 +114,16 @@ export async function batchGetTerritoriesEntryData(territories, database, cacheM
  * Gets lockdown data for all territories
  * @returns {array}
  */
-export async function getTerritoriesLockdownData(database, cacheMessageBus) {
+export async function getTerritoriesLockdownData(database) {
   const territories = await getGlobalData();
-  return await batchGetTerritoriesEntryData(territories, database, cacheMessageBus);
+  return await batchGetTerritoriesEntryData(territories, database);
 }
 
 export default async function loadData() {
   var database = await connect();
-  var cacheMessageBus = new MessagesService(process.env.AZURE_SERVICEBUS_CONNECTION_STRING, process.env.AZURE_SERVICEBUS_CACHE_QUEUE);
 
-  const territories = await getTerritoriesLockdownData(database, cacheMessageBus);
+  const territories = await getTerritoriesLockdownData(database);
   database.close()
-  await cacheMessageBus.close();
 
   var startDate = moment().add(-2, "weeks");
   var endDate = moment().add(8, 'weeks');
