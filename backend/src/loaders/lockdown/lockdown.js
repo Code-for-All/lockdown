@@ -9,6 +9,7 @@ import { ENTRY_COLUMN_LENGTH, parseEntry } from './parsers/lockdownParser';
 import { getSnapshots, MEASURES } from './snapshot/processor';
 import { connect } from '../../repositories';
 import Database from '../../repositories/Database';
+import { MessagesService } from '../../services/MessagesService';
 
 // Number of territories to query through batchGet at a time
 const BATCH_SIZE = 25;
@@ -31,8 +32,9 @@ export async function getGlobalData() {
  * Groups territories and request data from google API at batch size
  * @param {array} territories 
  * @param {Database} database
+ * @param {MessagesService} cacheMessageBus
  */
-export async function batchGetTerritoriesEntryData(territories, database) {
+export async function batchGetTerritoriesEntryData(territories, database, cacheMessageBus) {
   const doc = await getDocument();
   const startCacheColumn = 'H';
   const startCacheColumnIndex = letterToColumn(startCacheColumn);
@@ -40,6 +42,7 @@ export async function batchGetTerritoriesEntryData(territories, database) {
   const rangeToCache = `${startCacheColumn}1:${endCacheColumn}65`;
   const result = [];
   var batch;
+  var shouldResetApiCache = false;
 
   while (batch = territories.splice(0, BATCH_SIZE)) {
     if (batch.length < 1) break;
@@ -74,7 +77,10 @@ export async function batchGetTerritoriesEntryData(territories, database) {
           s.iso3 = batch[i]['iso3'];
           s.iso2 = batch[i]['iso2'];
         });
-        await database.snapshotRepository.insertManyOrUpdate(snapshots);
+        var insertResult = await Promise.all(database.snapshotRepository.insertManyOrUpdate(snapshots));
+        if (insertResult.find(r => r.result.nUpserted == 1)) {
+          shouldResetApiCache = true;
+        }
       }
 
       result.push({
@@ -82,13 +88,20 @@ export async function batchGetTerritoriesEntryData(territories, database) {
         iso3: batch[i]['iso3'],
         name: batch[i]['territory'],
         lockdown: {
-          // TODO: change this to support multiple entries after MVP
-          // TODO: changes needed for time slider
           snapshots
-          // ...currentEntry
         }
       });
     }
+  }
+
+  if (shouldResetApiCache) {
+    await cacheMessageBus.sendMessage(
+      `Reset cache`,
+      "Reset cache",
+      {
+        timestamp: new Date()
+      }
+    );
   }
 
   return result;
@@ -98,15 +111,18 @@ export async function batchGetTerritoriesEntryData(territories, database) {
  * Gets lockdown data for all territories
  * @returns {array}
  */
-export async function getTerritoriesLockdownData(database) {
+export async function getTerritoriesLockdownData(database, cacheMessageBus) {
   const territories = await getGlobalData();
-  return await batchGetTerritoriesEntryData(territories, database);
+  return await batchGetTerritoriesEntryData(territories, database, cacheMessageBus);
 }
 
 export default async function loadData() {
   var database = await connect();
-  const territories = await getTerritoriesLockdownData(database);
+  var cacheMessageBus = new MessagesService(process.env.AZURE_SERVICEBUS_CONNECTION_STRING, process.env.AZURE_SERVICEBUS_CACHE_QUEUE);
+
+  const territories = await getTerritoriesLockdownData(database, cacheMessageBus);
   database.close()
+  await cacheMessageBus.close();
 
   var startDate = moment().add(-2, "weeks");
   var endDate = moment().add(8, 'weeks');
@@ -117,7 +133,7 @@ export default async function loadData() {
   for (let currentDate of moment.range(startDate, endDate).by('days')) {
     let formattedDate = currentDate.format("YYYY-MM-DD");
     let currentDateLockdown = summarizedLockdowns[formattedDate] = [];
-    
+
     territories.forEach(territory => {
 
       currentDateLockdown.push(generateLockdownStatus(territory, currentDate));
@@ -155,45 +171,45 @@ function generateLockdownStatus(territory, currentDate) {
   };
 }
 
-function generateMeasures(territory, currentDate){
+function generateMeasures(territory, currentDate) {
   let snapshots = territory
     .lockdown?.snapshots?.filter(s => moment(s.start_date).isBefore(currentDate) && moment(s.end_date).isAfter(currentDate));
 
-    let entry = {};
-    entry.travel = {
-        land: [],
-        flight: [],
-        sea: []
-    }
-    entry.measures = [];
+  let entry = {};
+  entry.travel = {
+    land: [],
+    flight: [],
+    sea: []
+  }
+  entry.measures = [];
 
-    var allMeasures = snapshots.map(r => r.measures);
-    mergeDatapoints(entry.measures, allMeasures, "max_gathering");
-    mergeDatapoints(entry.measures, allMeasures, "measure");
-    mergeDatapoints(entry.travel.land, allMeasures, "land");
-    mergeDatapoints(entry.travel.flight, allMeasures, "flight");
-    mergeDatapoints(entry.travel.sea, allMeasures, "sea");
+  var allMeasures = snapshots.map(r => r.measures);
+  mergeDatapoints(entry.measures, allMeasures, "max_gathering");
+  mergeDatapoints(entry.measures, allMeasures, "measure");
+  mergeDatapoints(entry.travel.land, allMeasures, "land");
+  mergeDatapoints(entry.travel.flight, allMeasures, "flight");
+  mergeDatapoints(entry.travel.sea, allMeasures, "sea");
 
-    let result = {};
-    result.lockdown = entry;
+  let result = {};
+  result.lockdown = entry;
 
-    return result;
+  return result;
 }
 
 function mergeDatapoints(result, containers, prefix) {
   MEASURES.filter(m => m.startsWith(prefix)).forEach(measureKey => {
-      
-      let measureValue = null;
-      containers.forEach(container => {
-          let element = container.find(el => el.label == measureKey);
-          if(element){
-              measureValue = element.value;
-              return;
-          }
-      });
 
-      let keys = measureKey.split('.');
+    let measureValue = null;
+    containers.forEach(container => {
+      let element = container.find(el => el.label == measureKey);
+      if (element) {
+        measureValue = element.value;
+        return;
+      }
+    });
 
-      result.push({ label: keys[1] || measureKey, value: measureValue });
+    let keys = measureKey.split('.');
+
+    result.push({ label: keys[1] || measureKey, value: measureValue });
   });
 }
