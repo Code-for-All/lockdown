@@ -21,10 +21,12 @@ const cacheService = new CacheService(ttl);
 connect().then(database => {
 
     const snapshotService = new SnapshotsService(database);
-    var cacheMessageBus = new MessagesService(process.env.AZURE_SERVICEBUS_CONNECTION_STRING, process.env.AZURE_SERVICEBUS_CACHE_QUEUE);
-    cacheMessageBus.addReceiver(message => {
-        cacheService.flush();
-    });
+    if (process.env.AZURE_SERVICEBUS_CONNECTION_STRING && process.env.AZURE_SERVICEBUS_CACHE_QUEUE) {
+        var cacheMessageBus = new MessagesService(process.env.AZURE_SERVICEBUS_CONNECTION_STRING, process.env.AZURE_SERVICEBUS_CACHE_QUEUE);
+        cacheMessageBus.addReceiver(message => {
+            cacheService.flush();
+        });
+    }
 
     app.listen(process.env.PORT || 3000, function () {
         console.log(`listening on ${process.env.PORT || 3000}`)

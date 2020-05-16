@@ -23,6 +23,8 @@ jobs:
           export MONGO_DB_PASSWORD="${{ secrets.MONGO_DB_PASSWORD }}"
           export MONGO_DB="${{ secrets.MONGO_DB }}"
           export MONGO_DB_USER="${{ secrets.MONGO_DB_USER }}"
+          export AZURE_SERVICEBUS_CACHE_QUEUE=${{ secrets.AZURE_SERVICEBUS_CACHE_QUEUE }}
+          export AZURE_SERVICEBUS_CONNECTION_STRING="${{ secrets.AZURE_SERVICEBUS_CONNECTION_STRING }}"
           export GOOGLE_SERVICE_ACCOUNT_EMAIL=${{ secrets.GOOGLE_API_EMAIL }}
           export GOOGLE_PRIVATE_KEY="${{ secrets.GOOGLE_API_KEY }}"
           cd backend
