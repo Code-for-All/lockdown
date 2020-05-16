@@ -76,12 +76,11 @@ export async function batchGetTerritoriesEntryData(territories, database) {
           s.iso3 = batch[i]['iso3'];
           s.iso2 = batch[i]['iso2'];
         });
-        if (!shouldResetApiCache) {
-          var insertResult = await Promise.all(database.snapshotRepository.insertManyOrUpdate(snapshots));
-          if (insertResult.find(r => r.result.nUpserted == 1)) {
-            shouldResetApiCache = true;
-          }
+        var insertResult = await Promise.all(database.snapshotRepository.insertManyOrUpdate(snapshots));
+        if (insertResult.find(r => r.result.nUpserted == 1)) {
+          shouldResetApiCache = true;
         }
+
       }
 
       result.push({
