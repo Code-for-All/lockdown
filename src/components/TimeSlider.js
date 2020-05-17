@@ -2,6 +2,7 @@ import { html } from 'htm/preact';
 import { Component, createRef } from 'preact';
 import css from 'csz';
 import format from 'date-fns/format';
+import addDays from 'date-fns/addDays';
 
 import DatePicker from './DatePicker.js';
 import { calendar } from '../assets/icons/icons.js';
@@ -421,11 +422,14 @@ const popBtn = css`
     }
   }
 `;
+
+const firstDayDefaultOffset = 7 * 5;
+
 export default class CountryInfo extends Component {
   constructor() {
     super();
     this.state = {
-      currentDateValue: 13,
+      currentDateValue: firstDayDefaultOffset,
       currentPosition: 24.5,
       datePickerPosition: 'left',
       showDatePicker: false,
@@ -447,40 +451,27 @@ export default class CountryInfo extends Component {
   }
   componentDidMount() {
     window.addEventListener('keydown', this.onPressKey);
-    let date = new Date();
+
     let days = [];
-    // let plusDays = 7;
-    let plusDays = 1;
-    let lessDays = 14;
-    for (let i = 1; i <= 70; i++) {
-      if (i === 15) {
-        days.push(date);
-      } else if (i < 15) {
-        days.push(this.rangePreProcces(date, -1 * lessDays));
-        lessDays--;
-      } else {
-        days.push(this.rangePreProcces(date, plusDays));
-        plusDays++;
-      }
-      const sliderDOM = this.dateRef.current;
-      const rangeDOM = this.range.current;
-      const containerDOM = this.container.current;
-      let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
-      let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
-      let stepsWidth = rangeDOM.offsetWidth / 70;
-      sliderDOM.style.left = `${finalWidth + stepsWidth * (13 - 2)}px`;
-      // if (i < 2) {
-      //   days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
-      // } else if (i !== 2) {
-      //   days.push(this.rangePreProcces(date, plusDays));
-      //   plusDays += 7;
-      // } else {
-      //   days.push(date);
-      // }
+    let date = addDays(new Date(), -firstDayDefaultOffset);
+    let totalDays = 70;
+
+    for(let i = 1; i <= totalDays; i++){
+      days.push(date);
+      date = addDays(date, 1);
     }
+
+    const sliderDOM = this.dateRef.current;
+    const rangeDOM = this.range.current;
+    const containerDOM = this.container.current;
+    let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
+    let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
+    let stepsWidth = rangeDOM.offsetWidth / 70;
+    sliderDOM.style.left = `${finalWidth + stepsWidth * (firstDayDefaultOffset - 3)}px`;
+
     this.setState({
       currentSliderRange: days,
-      currentSelectedDay: toSliderString(date),
+      currentSelectedDay: toSliderString(new Date()),
       firstDay: toSliderStringShort(days[0]),
       lastDay: toSliderStringShort(days[days.length - 1]),
     });
