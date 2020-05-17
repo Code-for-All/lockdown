@@ -1,14 +1,11 @@
 import getDocument, { getWorksheetByTitle } from './googlesheet';
-import { transposeRows, transposeColumns } from '../../utils/dataHelper';
+import { transposeRows } from '../../utils/dataHelper';
 import { letterToColumn, columnToLetter } from 'google-spreadsheet/lib/utils';
 import logger from '../../utils/logger';
-import { writeJSON } from '../../utils/file';
 import { SimpleGrid } from '../../utils/SimpleGrid';
-import moment from '../../utils/moment';
 import { ENTRY_COLUMN_LENGTH, parseEntry } from './parsers/lockdownParser';
-import { getSnapshots, MEASURES } from './snapshot/processor';
+import { getSnapshots } from './snapshot/processor';
 import { connect } from '../../repositories';
-import Database from '../../repositories/Database';
 import { MessagesService } from '../../services/MessagesService';
 
 // Number of territories to query through batchGet at a time
@@ -31,9 +28,9 @@ export async function getGlobalData() {
 /**
  * Groups territories and request data from google API at batch size
  * @param {array} territories 
- * @param {Database} database
  */
-export async function batchGetTerritoriesEntryData(territories, database) {
+export async function batchGetTerritoriesEntryData(territories) {
+  const database = await connect();
   const doc = await getDocument();
   const startCacheColumn = 'H';
   const startCacheColumnIndex = letterToColumn(startCacheColumn);
@@ -105,110 +102,11 @@ export async function batchGetTerritoriesEntryData(territories, database) {
     await cacheMessageBus.close();
   }
 
+  database.close()
   return result;
-}
-
-/**
- * Gets lockdown data for all territories
- * @returns {array}
- */
-export async function getTerritoriesLockdownData(database) {
-  const territories = await getGlobalData();
-  return await batchGetTerritoriesEntryData(territories, database);
 }
 
 export default async function loadData() {
-  var database = await connect();
-
-  const territories = await getTerritoriesLockdownData(database);
-  database.close()
-
-  var startDate = moment().add(-2, "weeks");
-  var endDate = moment().add(8, 'weeks');
-
-  const summarizedLockdowns = {};
-  const territoriesSummary = {};
-
-  for (let currentDate of moment.range(startDate, endDate).by('days')) {
-    let formattedDate = currentDate.format("YYYY-MM-DD");
-    let currentDateLockdown = summarizedLockdowns[formattedDate] = [];
-
-    territories.forEach(territory => {
-
-      currentDateLockdown.push(generateLockdownStatus(territory, currentDate));
-
-      let territorySummary = territoriesSummary[territory.iso2];
-      if (!territorySummary) {
-        territorySummary = territoriesSummary[territory.iso2] = {};
-      }
-
-      territorySummary[formattedDate] = generateMeasures(territory, currentDate);
-    });
-    writeJSON(`countryLockdowns/${formattedDate}`, currentDateLockdown);
-  }
-  writeJSON('lockdown', summarizedLockdowns);
-
-  Object.keys(territoriesSummary).forEach(key => {
-    writeJSON(`territories/${key}`, territoriesSummary[key]);
-  });
-
-  return {
-    lockdownTerritories: territories,
-    lockdownStatusByTerritory: summarizedLockdowns
-  };
-}
-
-function generateLockdownStatus(territory, currentDate) {
-  let snapshots = territory
-    .lockdown?.snapshots?.find(s => moment(s.start_date).isBefore(currentDate) && moment(s.end_date).isAfter(currentDate)
-      && s.measures.find(m => m.label == "measure.lockdown_status"));
-  let measure = snapshots?.measures?.find(m => m.label == "measure.lockdown_status");
-  return {
-    ISO: territory.iso2,
-    lockdown_status: measure?.value || null,
-    name: territory.name
-  };
-}
-
-function generateMeasures(territory, currentDate) {
-  let snapshots = territory
-    .lockdown?.snapshots?.filter(s => moment(s.start_date).isBefore(currentDate) && moment(s.end_date).isAfter(currentDate));
-
-  let entry = {};
-  entry.travel = {
-    land: [],
-    flight: [],
-    sea: []
-  }
-  entry.measures = [];
-
-  var allMeasures = snapshots.map(r => r.measures);
-  mergeDatapoints(entry.measures, allMeasures, "max_gathering");
-  mergeDatapoints(entry.measures, allMeasures, "measure");
-  mergeDatapoints(entry.travel.land, allMeasures, "land");
-  mergeDatapoints(entry.travel.flight, allMeasures, "flight");
-  mergeDatapoints(entry.travel.sea, allMeasures, "sea");
-
-  let result = {};
-  result.lockdown = entry;
-
-  return result;
-}
-
-function mergeDatapoints(result, containers, prefix) {
-  MEASURES.filter(m => m.startsWith(prefix)).forEach(measureKey => {
-
-    let measureValue = null;
-    containers.forEach(container => {
-      let element = container.find(el => el.label == measureKey);
-      if (element) {
-        measureValue = element.value;
-        return;
-      }
-    });
-
-    let keys = measureKey.split('.');
-
-    result.push({ label: keys[1] || measureKey, value: measureValue });
-  });
+  const territories = await getGlobalData();
+  return await batchGetTerritoriesEntryData(territories);
 }
