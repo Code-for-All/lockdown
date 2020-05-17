@@ -456,7 +456,7 @@ export default class CountryInfo extends Component {
     let date = addDays(new Date(), -firstDayDefaultOffset);
     let totalDays = 70;
 
-    for(let i = 1; i <= totalDays; i++){
+    for (let i = 1; i <= totalDays; i++) {
       days.push(date);
       date = addDays(date, 1);
     }
