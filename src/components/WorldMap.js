@@ -28,6 +28,10 @@ const domainCoors = {
   africa: { lng: 21.525828, lat: 4.214943, zoom: 3.2 }, //Somewhere in Africa :)
 };
 
+// Use for altering boundaries of countries with disputed areas
+// Options: https://docs.mapbox.com/vector-tiles/reference/mapbox-boundaries-v3/#--polygon---worldview-text
+const selectedWorldview='US';
+
 const pause = (time = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -36,6 +40,7 @@ const pause = (time = 100) => {
   });
 };
 
+// Colors for different lockdown status
 function worldStyle(lockdown_status) {
   let value;
   switch (lockdown_status) {
@@ -52,7 +57,7 @@ function worldStyle(lockdown_status) {
       value = '#7aaeff'; //unclear
       break;
     default:
-      value = '#CCCCCC';
+      value = '#ccc'; //undefined or no value
   }
 
   return value;
@@ -66,7 +71,7 @@ function filterLookupTable(lookupTable) {
       for (let feature in lookupTable[layer].data[worldview]) {
         let featureData = lookupTable[layer].data[worldview][feature];
 
-        if (worldview === 'all' || worldview === 'US') {
+        if (worldview === 'all' || worldview === selectedWorldview) {
           lookupData[featureData['unit_code']] = featureData;
         }
       }
@@ -136,6 +141,7 @@ export class WorldMap extends Component {
       zoom: this.state.zoom,
       keyboard: false,
       pitchWithRotate: false,
+      hash: true
     });
 
     window.map = map;
@@ -216,7 +222,8 @@ export class WorldMap extends Component {
           type: 'fill',
           source: 'admin-0',
           'source-layer': 'boundaries_admin_0',
-          filter: ['any', ['==', 'all', ['get', 'worldview']], ['in', 'US', ['get', 'worldview']]],
+          // Show only features for the selected worldview, hide disputed polygons
+          filter: ['all',['any', ['==', 'all', ['get', 'worldview']], ['in', selectedWorldview, ['get', 'worldview']]],['!',['has','dispute']]],
           paint: {
             'fill-color': [
               'case',
@@ -234,15 +241,48 @@ export class WorldMap extends Component {
                 worldStyle('3'),
                 '4',
                 worldStyle('4'),
-                /* other */ '#CCCCCC',
+                worldStyle('0'),
               ],
+              // No data
+              ['==', ['feature-state', 'kind'], null],
+              worldStyle('0'),
               ['case', ['boolean', ['feature-state', 'hover'], false], 'rgba(204,204,204,0.5)', 'rgba(204,204,204,0)'],
             ],
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
+            // Hover style
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1]
           },
         },
-        'waterway-label'
+        'admin-1-boundary-bg'
       );
+
+      //
+      // Map style adjustments
+      //
+
+      // Improve contrast of country country labels
+      map.setPaintProperty('country-label','text-color','hsl(0, 0%, 10%)');
+      map.setPaintProperty('country-label','text-halo-color','hsla(0, 0%, 100%,0.6)');
+      map.setPaintProperty('country-label','text-halo-width',1);
+
+      // Improve contrast of country state labels
+      map.setPaintProperty('state-label','text-color','hsl(0, 0%, 30%)');
+      map.setPaintProperty('state-label','text-halo-width',0);
+
+      // Improve contrast of country lines
+      map.setPaintProperty('admin-0-boundary','line-color','hsla(0, 0%, 90%, 0.8)');
+      map.setPaintProperty('admin-0-boundary-disputed','line-color','hsla(0, 0%, 90%, 0.5)');
+      map.setPaintProperty('admin-0-boundary-bg','line-color','hsla(0, 0%, 84%, 0.3)');
+
+      // Improve contrast of state lines
+      map.setPaintProperty('admin-1-boundary','line-color','hsla(0, 0%, 90%, 0.6)');
+
+      // Improve contrast of city labels
+      map.setPaintProperty('settlement-major-label','text-halo-width',0);
+      map.setPaintProperty('settlement-minor-label','text-halo-width',0);
+
+      // Change water color
+      map.setPaintProperty('water','fill-color','#e0e0e0');
+
 
       const setStates = (e) => {
         localData.forEach(function (row) {
