@@ -103,19 +103,20 @@ export class WorldMap extends Component {
   }
 
   setMapState(map, localData = [], lookupData) {
-    localData.forEach(function (row) {
-      // console.log('row.ISO', row.ISO);
-      // console.log('lookupData[row.ISO]', lookupData[row.ISO]);
-      // console.log('row.lockdown_status', row.lockdown_status);
+    const localDataByIso = {};
+    localData.forEach((l) => (localDataByIso[l.lockdown.iso] = l));
+    Object.keys(lookupData).forEach((key) => {
+      var lookup = lookupData[key];
+      var countryInfo = localDataByIso[key];
       map.setFeatureState(
         {
           source: 'admin-0',
           sourceLayer: 'boundaries_admin_0',
-          id: lookupData[row.lockdown.iso].feature_id,
+          id: lookup.feature_id,
         },
         {
-          kind: row.lockdown.measure[0].value,
-          name: row.lockdown.iso,
+          kind: countryInfo?.lockdown?.measure[0]?.value,
+          name: key,
         }
       );
     });
@@ -186,9 +187,6 @@ export class WorldMap extends Component {
         const features = map.queryRenderedFeatures(e.point, {
           layers: ['admin-0-fill'],
         });
-
-        // console.log('features', features[0]);
-        // map.fitBounds(layer.getBounds());
         router.setSearchParam('country', lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
         router.setSearchParam('iso2', features[0].properties.iso_3166_1);
       });
@@ -247,11 +245,7 @@ export class WorldMap extends Component {
       );
 
       const setStates = (e) => {
-        // console.log('setStates');
         localData.forEach(function (row) {
-          // console.log('row.ISO', row.ISO);
-          // console.log('lookupData[row.ISO]', lookupData[row.ISO]);
-          // console.log('row.lockdown_status', row.lockdown_status);
           map.setFeatureState(
             {
               source: 'admin-0',
@@ -272,7 +266,6 @@ export class WorldMap extends Component {
 
       // Check if `statesData` source is loaded.
       function setAfterLoad(e) {
-        // console.log('setAfterLoad');
         if (e.sourceId === 'admin-0' && e.isSourceLoaded) {
           setStates();
           map.off('sourcedata', setAfterLoad);
@@ -297,7 +290,6 @@ export class WorldMap extends Component {
   async updateMap(mapData, lookupTable, selectedDate) {
     const lookupData = filterLookupTable(lookupTable);
     let localData = mapData[selectedDate];
-
     if (localData === undefined) {
       let { startDate, endDate } = this.props;
       startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
@@ -307,8 +299,7 @@ export class WorldMap extends Component {
           r.json()
         ),
       ]);
-      console.log(newMapData);
-      let localData = newMapData[selectedDate];
+      localData = newMapData[selectedDate];
       mapData = newMapData;
       this.setState({ mapData }, () => this.setMapState(this.state.map, localData, lookupData));
     } else {
@@ -386,6 +377,12 @@ export class WorldMap extends Component {
     this.state.map && this.state.map.remove();
   }
 
+  componentDidUpdate(previousProps, previousState, snapshot) {
+    if (this.state.isMapReady) {
+      this.updateMap(this.state.mapData, this.state.lookupTable, this.props.selectedDate);
+    }
+  }
+
   __handleSelect(e) {
     e.preventDefault();
     const [iso2, country] = this.selectRef.value.split(',');
@@ -410,11 +407,5 @@ export class WorldMap extends Component {
       </div>
       <div class="map-container" ref=${(ref) => (this.ref = ref)}></div> 
     `;
-  }
-  componentDidUpdate(previousProps, previousState, snapshot) {
-    if (this.state.isMapReady) {
-      console.log(this.props.selectedDate);
-      this.updateMap(this.state.mapData, this.state.lookupTable, this.props.selectedDate);
-    }
   }
 }
