@@ -24,7 +24,7 @@ const sliderWrapper = css`
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 600px;
+    width: 720px;
     z-index: 1000;
     height: fit-content;
     display: flex;
