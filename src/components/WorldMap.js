@@ -28,6 +28,10 @@ const domainCoors = {
   africa: { lng: 21.525828, lat: 4.214943, zoom: 3.2 }, //Somewhere in Africa :)
 };
 
+// Use for altering boundaries of countries with disputed areas
+// Options: https://docs.mapbox.com/vector-tiles/reference/mapbox-boundaries-v3/#--polygon---worldview-text
+const selectedWorldview='US';
+
 const pause = (time = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -36,6 +40,7 @@ const pause = (time = 100) => {
   });
 };
 
+// Colors for different lockdown status
 function worldStyle(lockdown_status) {
   let value;
   switch (lockdown_status) {
@@ -52,7 +57,7 @@ function worldStyle(lockdown_status) {
       value = '#7aaeff'; //unclear
       break;
     default:
-      value = '#CCCCCC';
+      value = '#ccc'; //undefined or no value
   }
 
   return value;
@@ -66,7 +71,7 @@ function filterLookupTable(lookupTable) {
       for (let feature in lookupTable[layer].data[worldview]) {
         let featureData = lookupTable[layer].data[worldview][feature];
 
-        if (worldview === 'all' || worldview === 'US') {
+        if (worldview === 'all' || worldview === selectedWorldview) {
           lookupData[featureData['unit_code']] = featureData;
         }
       }
@@ -103,19 +108,20 @@ export class WorldMap extends Component {
   }
 
   setMapState(map, localData = [], lookupData) {
-    localData.forEach(function (row) {
-      // console.log('row.ISO', row.ISO);
-      // console.log('lookupData[row.ISO]', lookupData[row.ISO]);
-      // console.log('row.lockdown_status', row.lockdown_status);
+    const localDataByIso = {};
+    localData.forEach((l) => (localDataByIso[l.lockdown.iso] = l));
+    Object.keys(lookupData).forEach((key) => {
+      var lookup = lookupData[key];
+      var countryInfo = localDataByIso[key];
       map.setFeatureState(
         {
           source: 'admin-0',
           sourceLayer: 'boundaries_admin_0',
-          id: lookupData[row.lockdown.iso].feature_id,
+          id: lookup.feature_id,
         },
         {
-          kind: row.lockdown.measure[0].value,
-          name: row.lockdown.iso,
+          kind: countryInfo?.lockdown?.measure[0]?.value,
+          name: key,
         }
       );
     });
@@ -135,6 +141,7 @@ export class WorldMap extends Component {
       zoom: this.state.zoom,
       keyboard: false,
       pitchWithRotate: false,
+      hash: true
     });
 
     window.map = map;
@@ -186,9 +193,6 @@ export class WorldMap extends Component {
         const features = map.queryRenderedFeatures(e.point, {
           layers: ['admin-0-fill'],
         });
-
-        // console.log('features', features[0]);
-        // map.fitBounds(layer.getBounds());
         router.setSearchParam('country', lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
         router.setSearchParam('iso2', features[0].properties.iso_3166_1);
       });
@@ -218,7 +222,8 @@ export class WorldMap extends Component {
           type: 'fill',
           source: 'admin-0',
           'source-layer': 'boundaries_admin_0',
-          filter: ['any', ['==', 'all', ['get', 'worldview']], ['in', 'US', ['get', 'worldview']]],
+          // Show only features for the selected worldview, hide disputed polygons
+          filter: ['all',['any', ['==', 'all', ['get', 'worldview']], ['in', selectedWorldview, ['get', 'worldview']]],['!',['has','dispute']]],
           paint: {
             'fill-color': [
               'case',
@@ -236,22 +241,51 @@ export class WorldMap extends Component {
                 worldStyle('3'),
                 '4',
                 worldStyle('4'),
-                /* other */ '#CCCCCC',
+                worldStyle('0'),
               ],
+              // No data
+              ['==', ['feature-state', 'kind'], null],
+              worldStyle('0'),
               ['case', ['boolean', ['feature-state', 'hover'], false], 'rgba(204,204,204,0.5)', 'rgba(204,204,204,0)'],
             ],
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
+            // Hover style
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1]
           },
         },
-        'waterway-label'
+        'admin-1-boundary-bg'
       );
 
+      //
+      // Map style adjustments
+      //
+
+      // Improve contrast of country country labels
+      map.setPaintProperty('country-label','text-color','hsl(0, 0%, 10%)');
+      map.setPaintProperty('country-label','text-halo-color','hsla(0, 0%, 100%,0.6)');
+      map.setPaintProperty('country-label','text-halo-width',1);
+
+      // Improve contrast of country state labels
+      map.setPaintProperty('state-label','text-color','hsl(0, 0%, 30%)');
+      map.setPaintProperty('state-label','text-halo-width',0);
+
+      // Improve contrast of country lines
+      map.setPaintProperty('admin-0-boundary','line-color','hsla(0, 0%, 90%, 0.8)');
+      map.setPaintProperty('admin-0-boundary-disputed','line-color','hsla(0, 0%, 90%, 0.5)');
+      map.setPaintProperty('admin-0-boundary-bg','line-color','hsla(0, 0%, 84%, 0.3)');
+
+      // Improve contrast of state lines
+      map.setPaintProperty('admin-1-boundary','line-color','hsla(0, 0%, 90%, 0.6)');
+
+      // Improve contrast of city labels
+      map.setPaintProperty('settlement-major-label','text-halo-width',0);
+      map.setPaintProperty('settlement-minor-label','text-halo-width',0);
+
+      // Change water color
+      map.setPaintProperty('water','fill-color','#e0e0e0');
+
+
       const setStates = (e) => {
-        // console.log('setStates');
         localData.forEach(function (row) {
-          // console.log('row.ISO', row.ISO);
-          // console.log('lookupData[row.ISO]', lookupData[row.ISO]);
-          // console.log('row.lockdown_status', row.lockdown_status);
           map.setFeatureState(
             {
               source: 'admin-0',
@@ -272,7 +306,6 @@ export class WorldMap extends Component {
 
       // Check if `statesData` source is loaded.
       function setAfterLoad(e) {
-        // console.log('setAfterLoad');
         if (e.sourceId === 'admin-0' && e.isSourceLoaded) {
           setStates();
           map.off('sourcedata', setAfterLoad);
@@ -297,7 +330,6 @@ export class WorldMap extends Component {
   async updateMap(mapData, lookupTable, selectedDate) {
     const lookupData = filterLookupTable(lookupTable);
     let localData = mapData[selectedDate];
-
     if (localData === undefined) {
       let { startDate, endDate } = this.props;
       startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
@@ -307,8 +339,7 @@ export class WorldMap extends Component {
           r.json()
         ),
       ]);
-      console.log(newMapData);
-      let localData = newMapData[selectedDate];
+      localData = newMapData[selectedDate];
       mapData = newMapData;
       this.setState({ mapData }, () => this.setMapState(this.state.map, localData, lookupData));
     } else {
@@ -386,6 +417,12 @@ export class WorldMap extends Component {
     this.state.map && this.state.map.remove();
   }
 
+  componentDidUpdate(previousProps, previousState, snapshot) {
+    if (this.state.isMapReady) {
+      this.updateMap(this.state.mapData, this.state.lookupTable, this.props.selectedDate);
+    }
+  }
+
   __handleSelect(e) {
     e.preventDefault();
     const [iso2, country] = this.selectRef.value.split(',');
@@ -410,11 +447,5 @@ export class WorldMap extends Component {
       </div>
       <div class="map-container" ref=${(ref) => (this.ref = ref)}></div> 
     `;
-  }
-  componentDidUpdate(previousProps, previousState, snapshot) {
-    if (this.state.isMapReady) {
-      console.log(this.props.selectedDate);
-      this.updateMap(this.state.mapData, this.state.lookupTable, this.props.selectedDate);
-    }
   }
 }
