@@ -8,8 +8,9 @@ async function connect() {
 
 function compare(currentData, snapshotData) {
     const result = {};
-
+    const currentDate = new Date();
     currentData.forEach(element => {
+        element.snapshot_date = currentDate;
         var founded = snapshotData
             .filter(e => e.unique_id == element.unique_id);
         if (founded.length == 0) {
