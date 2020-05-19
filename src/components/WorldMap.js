@@ -30,7 +30,7 @@ const domainCoors = {
 
 // Use for altering boundaries of countries with disputed areas
 // Options: https://docs.mapbox.com/vector-tiles/reference/mapbox-boundaries-v3/#--polygon---worldview-text
-const selectedWorldview='US';
+const selectedWorldview = 'US';
 
 const pause = (time = 100) => {
   return new Promise((resolve) => {
@@ -141,7 +141,7 @@ export class WorldMap extends Component {
       zoom: this.state.zoom,
       keyboard: false,
       pitchWithRotate: false,
-      hash: true
+      hash: true,
     });
 
     window.map = map;
@@ -223,7 +223,11 @@ export class WorldMap extends Component {
           source: 'admin-0',
           'source-layer': 'boundaries_admin_0',
           // Show only features for the selected worldview, hide disputed polygons
-          filter: ['all',['any', ['==', 'all', ['get', 'worldview']], ['in', selectedWorldview, ['get', 'worldview']]],['!',['has','dispute']]],
+          filter: [
+            'all',
+            ['any', ['==', 'all', ['get', 'worldview']], ['in', selectedWorldview, ['get', 'worldview']]],
+            ['!', ['has', 'dispute']],
+          ],
           paint: {
             'fill-color': [
               'case',
@@ -249,7 +253,7 @@ export class WorldMap extends Component {
               ['case', ['boolean', ['feature-state', 'hover'], false], 'rgba(204,204,204,0.5)', 'rgba(204,204,204,0)'],
             ],
             // Hover style
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1]
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
           },
         },
         'admin-1-boundary-bg'
@@ -260,29 +264,28 @@ export class WorldMap extends Component {
       //
 
       // Improve contrast of country country labels
-      map.setPaintProperty('country-label','text-color','hsl(0, 0%, 10%)');
-      map.setPaintProperty('country-label','text-halo-color','hsla(0, 0%, 100%,0.6)');
-      map.setPaintProperty('country-label','text-halo-width',1);
+      map.setPaintProperty('country-label', 'text-color', 'hsl(0, 0%, 10%)');
+      map.setPaintProperty('country-label', 'text-halo-color', 'hsla(0, 0%, 100%,0.6)');
+      map.setPaintProperty('country-label', 'text-halo-width', 1);
 
       // Improve contrast of country state labels
-      map.setPaintProperty('state-label','text-color','hsl(0, 0%, 30%)');
-      map.setPaintProperty('state-label','text-halo-width',0);
+      map.setPaintProperty('state-label', 'text-color', 'hsl(0, 0%, 30%)');
+      map.setPaintProperty('state-label', 'text-halo-width', 0);
 
       // Improve contrast of country lines
-      map.setPaintProperty('admin-0-boundary','line-color','hsla(0, 0%, 90%, 0.8)');
-      map.setPaintProperty('admin-0-boundary-disputed','line-color','hsla(0, 0%, 90%, 0.5)');
-      map.setPaintProperty('admin-0-boundary-bg','line-color','hsla(0, 0%, 84%, 0.3)');
+      map.setPaintProperty('admin-0-boundary', 'line-color', 'hsla(0, 0%, 90%, 0.8)');
+      map.setPaintProperty('admin-0-boundary-disputed', 'line-color', 'hsla(0, 0%, 90%, 0.5)');
+      map.setPaintProperty('admin-0-boundary-bg', 'line-color', 'hsla(0, 0%, 84%, 0.3)');
 
       // Improve contrast of state lines
-      map.setPaintProperty('admin-1-boundary','line-color','hsla(0, 0%, 90%, 0.6)');
+      map.setPaintProperty('admin-1-boundary', 'line-color', 'hsla(0, 0%, 90%, 0.6)');
 
       // Improve contrast of city labels
-      map.setPaintProperty('settlement-major-label','text-halo-width',0);
-      map.setPaintProperty('settlement-minor-label','text-halo-width',0);
+      map.setPaintProperty('settlement-major-label', 'text-halo-width', 0);
+      map.setPaintProperty('settlement-minor-label', 'text-halo-width', 0);
 
       // Change water color
-      map.setPaintProperty('water','fill-color','#e0e0e0');
-
+      map.setPaintProperty('water', 'fill-color', '#e0e0e0');
 
       const setStates = (e) => {
         localData.forEach(function (row) {

@@ -38,10 +38,13 @@ const sliderWrapper = css`
     &.open {
       max-height: 90vh;
       transition: max-height 0.25s ease-in;
+      @media (max-width: 960px) {
+        max-height: 100vh;
+      }
     }
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
-      bottom: 10px;
+      bottom: 30px;
       left: 0;
       right: 0;
       width: 90vw;
@@ -51,6 +54,10 @@ const sliderWrapper = css`
       z-index: 10;
       height: calc(100vh - 190px);
       max-height: 475px;
+      @media (max-width: 960px){
+        height: calc(100vh - 150px);
+        max-height: calc(100vh - 150px);
+      }
     }
   }
 `;
