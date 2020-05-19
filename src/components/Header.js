@@ -104,9 +104,9 @@ const styles = css`
   }
 `;
 
-export const Header = (_,) => html`
+export const Header = (_) => html`
   <a class="skiplink" href="#main">Go to main content</a>
-  <header class="${styles} ${_.show?'':'hide'}">
+  <header class="${styles} ${_.show ? '' : 'hide'}">
     <div class="ld-logo-wrapper">
       <a href="" aria-current="page">
         <p>BETA</p>

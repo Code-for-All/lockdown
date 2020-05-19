@@ -54,7 +54,7 @@ const sliderWrapper = css`
       z-index: 10;
       height: calc(100vh - 190px);
       max-height: 475px;
-      @media (max-width: 960px){
+      @media (max-width: 960px) {
         height: calc(100vh - 150px);
         max-height: calc(100vh - 150px);
       }
