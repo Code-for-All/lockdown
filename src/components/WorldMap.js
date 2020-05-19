@@ -85,7 +85,7 @@ export class WorldMap extends Component {
     this.initMap = this.initMap.bind(this);
     this.updateMap = this.updateMap.bind(this);
 
-    let coords = { lng: 0, lat: 0, zoom: 2 };
+    let coords = { lng: 40.7, lat: 25, zoom: 1.06 };
 
     let url = window.location.href;
     let isLocationSet = false;
