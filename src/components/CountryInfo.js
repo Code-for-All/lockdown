@@ -243,18 +243,18 @@ class CountryDetails extends Component {
         <div class="data-entry is-third">
           <dt>Cases</dt>
           <dd class="data-value">
-            ${coronaData?.total_confirmed ? Number(coronaData?.total_confirmed).toLocaleString() : 'Not Available'}
+            ${coronaData?.total_confirmed ? Number(coronaData?.total_confirmed).toLocaleString() : 'N/A'}
           </dd>
         </div>
         <div class="data-entry is-third">
           <dt>Recoveries</dt>
           <dd class="data-value">
-            ${coronaData?.total_recovered ? Number(coronaData?.total_recovered).toLocaleString() : 'Not Available'}
+            ${coronaData?.total_recovered ? Number(coronaData?.total_recovered).toLocaleString() : 'N/A'}
           </dd>
         </div>
         <div class="data-entry is-third">
           <dt>Deaths</dt>
-          <dd class="data-value">${coronaData?.total_deaths ? Number(coronaData?.total_deaths).toLocaleString() : 'Not Available'}</dd>
+          <dd class="data-value">${coronaData?.total_deaths ? Number(coronaData?.total_deaths).toLocaleString() : 'N/A'}</dd>
         </div>
       </dl>
 

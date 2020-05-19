@@ -58,6 +58,10 @@ const styles = css`
   .ld-logo-wrapper {
     display: flex;
     width: 400px;
+    & a svg{
+      width: 100%
+      height: 100%
+    }
   }
 
   img {
