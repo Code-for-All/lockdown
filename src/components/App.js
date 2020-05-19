@@ -105,6 +105,7 @@ export class App extends Component {
               showStatsbox=${this.state.showStatsbox}
               startDate=${this.state.startDate}
               endDate=${this.state.endDate}
+              show=${!this.state.dialog.opened}
             />
             ${!this.state.dialog.opened
               ? html`<div class=${styles}>

@@ -4,6 +4,27 @@ import { Totals } from './Totals.js';
 import { logo } from '../assets/icons/icons.js';
 
 const styles = css`
+  @keyframes fadeOutUp {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+    }
+  }
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
   & {
     position: fixed;
     top: 0;
@@ -19,6 +40,12 @@ const styles = css`
     /*height: 60px;*/
     height: 55px;
     width: 100%;
+    animation: 1s fadeInDown forwards;
+    @media (max-width: 899px) {
+      &.hide{
+        animation: 1s fadeOutUp forwards;
+      }
+    }
   }
 
   &::after {
@@ -77,9 +104,9 @@ const styles = css`
   }
 `;
 
-export const Header = (_) => html`
+export const Header = (_,) => html`
   <a class="skiplink" href="#main">Go to main content</a>
-  <header class=${styles}>
+  <header class="${styles} ${_.show?'':'hide'}">
     <div class="ld-logo-wrapper">
       <a href="" aria-current="page">
         <p>BETA</p>
