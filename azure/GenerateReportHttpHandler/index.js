@@ -25,7 +25,7 @@ function compare(currentData, snapshotData) {
     const snapshot = snapshotData[0] || { snapshot_date: new Date('2019-11-01') };
     var humanDuration = humanizeDuration(currentDate - snapshot.snapshot_date);
 
-    report.push(`# Changes for last: ${humanDuration}`);
+    report.push(`# Changes for the last: ${humanDuration}`);
     const StringBuilder = require("string-builder");
 
     let total = 0;
@@ -65,7 +65,7 @@ module.exports = async function (context, req) {
     if (Object.keys(result.data).length == 0) {
         const humanizeDuration = require('humanize-duration');
         var humanDuration = humanizeDuration(new Date() - snapshot.snapshot_date);
-        report = [`> No Changes for last: ${humanDuration}`];
+        report = [`> No Changes for the last: ${humanDuration}`];
     }
 
     context.res = {
