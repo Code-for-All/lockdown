@@ -39,7 +39,7 @@ const sliderWrapper = css`
       max-height: 90vh;
       transition: max-height 0.25s ease-in;
       @media (max-width: 960px) {
-        max-height: 100vh;
+        max-height: calc(100vh - 100px);
       }
     }
     /*padding: 0px 6%;*/
