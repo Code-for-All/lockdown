@@ -104,7 +104,7 @@ export function Settings({ onClose }) {
 
   return html`
     <div class=${styles}>
-      <button onClick=${toggleDarkmode} class="ld-button">Toggle ${darkMode ? 'LightMode' : 'DarkMode'}</button>
+      <button onClick=${toggleDarkmode} class="ld-button">Toggle ${darkMode ? 'Light Mode' : 'Dark Mode'}</button>
       ${showGeolocationButton ? html` <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button> ` : ''}
 
       <pwa-install-button>
