@@ -49,7 +49,7 @@ const sliderWrapper = css`
     & > div.countryInfo {
       z-index: 10;
       height: calc(100vh - 190px);
-      height: -webkit-calc(100vh - 190px);
+      height: -webkit-calc(86vh - 190px);
       height: -moz-calc(100vh - 190px);
 -webkit-calc
       max-height: 475px;
