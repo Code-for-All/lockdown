@@ -6,7 +6,7 @@ import css from 'csz';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
 
-const mapbox_token = 'pk.eyJ1IjoiamZxdWVyYWx0IiwiYSI6ImNrOWZpZHF3ajBic2YzbHQwYzQ5bGRnaXgifQ.NcQInXQmMy93L47QBMCAfg';
+const mapbox_token = 'pk.eyJ1IjoicGxhbmVtYWQiLCJhIjoiemdYSVVLRSJ9.g3lbg_eN0kztmsfIPxa9MQ';
 
 const selectStyles = css`
   & {
@@ -84,6 +84,7 @@ export class WorldMap extends Component {
     this.__handleSelect = this.__handleSelect.bind(this);
     this.initMap = this.initMap.bind(this);
     this.updateMap = this.updateMap.bind(this);
+    this.updateMapLanguage = this.updateMapLanguage.bind(this);
 
     let coords = { lng: 40.7, lat: 25, zoom: 1.06 };
 
@@ -136,16 +137,15 @@ export class WorldMap extends Component {
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
-      style: 'mapbox://styles/jfqueralt/ck9hi7wl616pz1iugty1cpeiv?optimize=true',
+      // style: 'mapbox://styles/jfqueralt/ck9hi7wl616pz1iugty1cpeiv?optimize=true',
+      style: 'mapbox://styles/planemad/ckagz019p003e1jr2z6j6qfa3?optimize=true',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
       keyboard: false,
       pitchWithRotate: false,
       hash: true,
     });
-
     window.map = map;
-
     // we dont need to remap small mapData
     // const localData = mapData.features.map((f) => {
     //   return { ISO: f.properties.iso2, lockdown_status: f.properties.lockdown_status, name: f.properties.NAME };
@@ -324,7 +324,7 @@ export class WorldMap extends Component {
     };
 
     this.setState({
-      map,
+      map
     });
 
     return map;
@@ -348,6 +348,22 @@ export class WorldMap extends Component {
     } else {
       this.setMapState(this.state.map, localData, lookupData);
     }
+  }
+
+  updateMapLanguage(language){
+    console.log(language);
+    let map = this.state.map.setLayoutProperty('country-label', 'text-field', [
+      'get',
+      'name_' + language
+      ]);
+
+    // this.state.map.getStyle().layers.forEach(function(thisLayer){
+    //   if(thisLayer.id == 'country-label' || thisLayer.id == 'state-label'){
+    //     map.setLayoutProperty(thisLayer.id, 'text-field', ['get','name_' + language])
+    //   }
+    // })
+    // let map = this.state.map.setLayoutProperty('country-label', 'text-field', ['get','name_ru']);
+    console.log(map.getLayoutProperty('country-label', 'text-field'));
   }
 
   async componentDidMount() {
@@ -423,6 +439,9 @@ export class WorldMap extends Component {
   componentDidUpdate(previousProps, previousState, snapshot) {
     if (this.state.isMapReady) {
       this.updateMap(this.state.mapData, this.state.lookupTable, this.props.selectedDate);
+      if(previousProps.currentLanguage !== this.props.currentLanguage){
+        this.updateMapLanguage(this.props.currentLanguage);
+      }
     }
   }
 

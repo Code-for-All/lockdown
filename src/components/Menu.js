@@ -339,7 +339,7 @@ const overlay = css`
     }
   }
 `;
-const renderMenu = (menuItem, callback, currentDropdown, onDropDown) => {
+const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateChange) => {
   switch (menuItem) {
     case 'info':
       return {
@@ -426,7 +426,7 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown) => {
     case 'settings':
       return {
         title: 'settings',
-        template: html` <${Settings} onClose=${callback} /> `,
+        template: html` <${Settings} onClose=${callback} onLocateChange=${onLocateChange} /> `,
       };
     case 'contribute':
       return {
@@ -564,7 +564,7 @@ export class Menu extends Component {
                     <h1>${activeItem}</h1>
                   </div>
                 </div>
-                ${renderMenu(activeItem, this.closeNavbar, currentDropdown, this.onDropDown).template}
+                ${renderMenu(activeItem, this.closeNavbar, currentDropdown, this.onDropDown, _.onLocateChange).template}
               </div>
             </main>`
         : html`<button onClick=${this.showSideBar} class="${sideBtn}">
