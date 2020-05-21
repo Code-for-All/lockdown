@@ -63,7 +63,13 @@ function toJsonString(date) {
 export class App extends Component {
   constructor() {
     super();
-    this.state = { dialog: { opened: false, template: {}, title: '' }, haveSelectedDate: false, startDate: false, endDate: false, currentLanguage: 'en' };
+    this.state = {
+      dialog: { opened: false, template: {}, title: '' },
+      haveSelectedDate: false,
+      startDate: false,
+      endDate: false,
+      currentLanguage: 'en',
+    };
 
     this.__onPathChanged = this.__onPathChanged.bind(this);
     this.__closeCountryInfo = this.__closeCountryInfo.bind(this);
@@ -125,7 +131,12 @@ export class App extends Component {
           />`
         : ''}
 
-      <${WorldMap} selectedDate=${selectedDate} startDate=${this.state.startDate} endDate=${this.state.endDate} currentLanguage=${this.state.currentLanguage} />
+      <${WorldMap}
+        selectedDate=${selectedDate}
+        startDate=${this.state.startDate}
+        endDate=${this.state.endDate}
+        currentLanguage=${this.state.currentLanguage}
+      />
       <${Legend} />
 
       ${this.state.showSlider
@@ -207,9 +218,9 @@ export class App extends Component {
   __onSelectDate(selectedDate, startDate, endDate) {
     this.setState({ haveSelectedDate: selectedDate, startDate, endDate });
   }
-  __onLocateChange(newLocal){
+  __onLocateChange(newLocal) {
     this.setState({
-      currentLanguage: newLocal
-    })
+      currentLanguage: newLocal,
+    });
   }
 }

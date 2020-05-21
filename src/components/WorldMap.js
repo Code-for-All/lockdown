@@ -324,7 +324,7 @@ export class WorldMap extends Component {
     };
 
     this.setState({
-      map
+      map,
     });
 
     return map;
@@ -350,12 +350,9 @@ export class WorldMap extends Component {
     }
   }
 
-  updateMapLanguage(language){
+  updateMapLanguage(language) {
     console.log(language);
-    let map = this.state.map.setLayoutProperty('country-label', 'text-field', [
-      'get',
-      'name_' + language
-      ]);
+    let map = this.state.map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + language]);
 
     // this.state.map.getStyle().layers.forEach(function(thisLayer){
     //   if(thisLayer.id == 'country-label' || thisLayer.id == 'state-label'){
@@ -439,7 +436,7 @@ export class WorldMap extends Component {
   componentDidUpdate(previousProps, previousState, snapshot) {
     if (this.state.isMapReady) {
       this.updateMap(this.state.mapData, this.state.lookupTable, this.props.selectedDate);
-      if(previousProps.currentLanguage !== this.props.currentLanguage){
+      if (previousProps.currentLanguage !== this.props.currentLanguage) {
         this.updateMapLanguage(this.props.currentLanguage);
       }
     }
