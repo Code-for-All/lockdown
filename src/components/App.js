@@ -63,7 +63,13 @@ function toJsonString(date) {
 export class App extends Component {
   constructor() {
     super();
-    this.state = { dialog: { opened: false, template: {}, title: '' }, haveSelectedDate: false, startDate: false, endDate: false };
+    this.state = {
+      dialog: { opened: false, template: {}, title: '' },
+      haveSelectedDate: false,
+      startDate: false,
+      endDate: false,
+      currentLanguage: 'en',
+    };
 
     this.__onPathChanged = this.__onPathChanged.bind(this);
     this.__closeCountryInfo = this.__closeCountryInfo.bind(this);
@@ -71,6 +77,7 @@ export class App extends Component {
     this.__showDialog = this.__showDialog.bind(this);
     this.__showDialogRoute = this.__showDialogRoute.bind(this);
     this.__onSelectDate = this.__onSelectDate.bind(this);
+    this.__onLocateChange = this.__onLocateChange.bind(this);
   }
 
   async componentDidMount() {
@@ -120,10 +127,16 @@ export class App extends Component {
             isMobile=${this.state.isMobile}
             changeRoute=${this.__showDialogRoute}
             close=${this.__closeDialog}
+            onLocateChange=${this.__onLocateChange}
           />`
         : ''}
 
-      <${WorldMap} selectedDate=${selectedDate} startDate=${this.state.startDate} endDate=${this.state.endDate} />
+      <${WorldMap}
+        selectedDate=${selectedDate}
+        startDate=${this.state.startDate}
+        endDate=${this.state.endDate}
+        currentLanguage=${this.state.currentLanguage}
+      />
       <${Legend} />
 
       ${this.state.showSlider
@@ -204,5 +217,10 @@ export class App extends Component {
   }
   __onSelectDate(selectedDate, startDate, endDate) {
     this.setState({ haveSelectedDate: selectedDate, startDate, endDate });
+  }
+  __onLocateChange(newLocal) {
+    this.setState({
+      currentLanguage: newLocal,
+    });
   }
 }
