@@ -40,8 +40,8 @@ const sliderWrapper = css`
       transition: max-height 0.25s ease-in;
       @media (max-width: 960px) {
         max-height: calc(100vh - 100px);
-        max-height: -websit-calc(86vh - 100px);
-        max-height: -moz-calc(100vh - 100px);
+        /*max-height: -webkit-calc(100vh - 260px);
+        max-height: -moz-calc(100vh - 100px);*/
       }
     }
     /*padding: 0px 6%;*/
@@ -58,9 +58,9 @@ const sliderWrapper = css`
       max-height: 475px;
       @media (max-width: 960px) {
         height: calc(100vh - 150px);
-        height: -webskit-calc(86vh - 150px);
+        height: -webkit-calc(86vh - 150px);
         height: -moz-calc(100vh - 150px);
-        max-height: calc(100vh - 150px);
+        max-height: 475px;
       }
     }
   }
