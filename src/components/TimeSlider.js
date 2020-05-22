@@ -40,12 +40,14 @@ const sliderWrapper = css`
       height:600px;
       transition: max-height 0.25s ease-in;
       @media (max-width: 960px) {
-        max-height: calc(100vh - 45px);
+        /*max-height: calc(100vh - 45px);*/
+        max-height: 90%;
       }
     }
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
-      bottom: 30px;
+      /*bottom: 30px;*/
+      bottom: 5%;
       left: 0;
       right: 0;
       width: 90vw;
