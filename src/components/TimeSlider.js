@@ -319,7 +319,7 @@ const tooltipCss = css`
       cursor: pointer;
     }
     @media (max-width: 960px) {
-      top: 11px;
+      top: 12px;
       &.first {
         left: 17px;
       }
