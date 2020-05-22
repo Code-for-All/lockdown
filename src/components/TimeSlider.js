@@ -36,10 +36,13 @@ const sliderWrapper = css`
     transition: max-height 0.25s ease-out;
     max-height: 70px;
     &.open {
-      max-height: 90vh;
+      /*max-height: 90vh;*/
+      max-height: 550px;
+      height:600px;
       transition: max-height 0.25s ease-in;
       @media (max-width: 960px) {
-        max-height: calc(100vh - 100px);
+        /*max-height: calc(100vh - 100px);*/
+        max-height: -webkit-calc(100vh - 46px);
       }
     }
     /*padding: 0px 6%;*/
@@ -52,13 +55,14 @@ const sliderWrapper = css`
     }
     & > div.countryInfo {
       z-index: 10;
-      height: calc(100vh - 190px);
-      max-height: 475px;
+      /*height: calc(100vh - 190px);
+      max-height: 475px;*/
+      height:100%;
       @media (max-width: 960px) {
-        height: -webkit-calc(86vh - 150px);
+        /*height: -webkit-calc(86vh - 150px);
         height: -moz-calc(100vh - 150px);
         height: calc(100vh - 150px);
-        max-height: 475px;
+        max-height: 500px;*/
       }
     }
   }
