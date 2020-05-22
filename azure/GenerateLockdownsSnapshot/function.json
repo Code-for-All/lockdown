@@ -1,0 +1,17 @@
+{
+  "bindings": [
+    {
+      "name": "myTimer",
+      "type": "timerTrigger",
+      "direction": "in",
+      "schedule": "0 0 0 * * *"
+    },
+    {
+      "type": "blob",
+      "direction": "out",
+      "name": "reportOutput",
+      "path": "lockdown/reports/{rand-guid}.txt",
+      "connection": "AzureWebJobsStorage"
+    }
+  ]
+}
