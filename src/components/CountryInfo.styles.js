@@ -109,7 +109,7 @@ export const countryInfoStyles = css`
   & {
     background-color: var(--ld-bg);
     color: var(--ld-text);
-    padding: 0 16px 42px 16px;
+    padding: 0 16px 16px 16px;
     width: 100%;
     overflow-y: auto;
     &::-webkit-scrollbar {
@@ -211,12 +211,11 @@ export const countryInfoStyles = css`
   }
 
   .legend dl {
-    /*display: flex;*/
+    display: flex;
   }
 
   .legend-item {
-    /*display: flex;*/
-    display:inline-block;
+    display: flex;
   }
 
   .legend-item dt {
@@ -224,7 +223,6 @@ export const countryInfoStyles = css`
     height: 12px;
     border-radius: 50%;
     margin-right: 5px;
-    display:inline-block;
   }
 
   .legend-item dd {
@@ -233,7 +231,6 @@ export const countryInfoStyles = css`
     letter-spacing: 0.02em;
     margin-inline-start: 0;
     margin-right: 8px;
-    display:inline-block;
     .dark & {
       color: var(--ld-text);
     }
