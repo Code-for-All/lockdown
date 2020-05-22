@@ -202,13 +202,8 @@ export function Settings({ onClose, onLocateChange }) {
         <option value="es">
           Spanish
         </option>
-        <option value="ru">
-          Russian
-        </option>
-        <option value="jp">
-          Japanese
-        </option>
       </select/>
+      ${t("welcome")}
     </div>
   `;
 }

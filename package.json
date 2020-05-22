@@ -41,11 +41,10 @@
     "csz": "^1.2.0",
     "date-fns": "^2.11.0",
     "htm": "^3.0.3",
-    "i18next": "^19.4.4",
     "lodash-es": "^4.17.15",
     "preact": "^10.3.2",
+    "preact-i18n": "^1.4.1",
     "pwa-helpers": "^0.9.1",
-    "react-i18next": "^9.0.10",
     "rollup-plugin-copy": "^3.3.0",
     "rslider": "^2.16.3"
   },

@@ -13,6 +13,7 @@ import { dialogService } from '../services/dialogService.js';
 import { debounce } from 'lodash-es';
 import TimeSlider from './TimeSlider';
 import Legend from './Legend.js';
+import { IntlPovider } from 'preact-i18n';
 
 const debouncedCloseDialog = debounce(
   () => {
@@ -105,6 +106,7 @@ export class App extends Component {
   render() {
     const selectedDate = this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : toJsonString(new Date());
     return html`
+    <${IntlProvider} definition=${definition}> 
       ${this.state.showStatsbox
         ? html`
             <${Header}
@@ -163,6 +165,7 @@ export class App extends Component {
             <${Lazy} component=${() => import('../components/Dialog.js')} props=${{ ...this.state.dialog, onClose: this.__closeDialog }} />
           `
         : ''}-->
+        <//>
     `;
   }
 
