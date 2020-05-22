@@ -53,10 +53,10 @@ const sliderWrapper = css`
     }
     & > div.countryInfo {
       z-index: 10;
-      height: calc(100vh - 190px);
+      height: 100%;
       @media (max-width: 960px) {
-        height: calc(100vh - 150px);
-        max-height: calc(100vh - 150px);
+        /*height: calc(100vh - 150px);
+        max-height: calc(100vh - 150px);*/
       }
     }
   }
@@ -113,11 +113,12 @@ const selectStyles = css`
         padding: 0px 85px;
         border-radius: 25px;
         background-color: white;
-        display:flex
+        display:flex;
         width: 100%;
         position: relative;
-        justify-content: center
-        align-items: center
+        justify-content: center;
+        align-items: center;
+        min-height: 50px;
         &.open{
           border-top: 0px;
           border-top-left-radius: 0px;
