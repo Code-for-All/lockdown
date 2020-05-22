@@ -19,7 +19,7 @@ function toSliderString(date) {
 const sliderWrapper = css`
   & {
     position: absolute;
-    bottom: 10px;
+    bottom: 30px;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -36,15 +36,18 @@ const sliderWrapper = css`
     transition: max-height 0.25s ease-out;
     max-height: 70px;
     &.open {
-      max-height: 90vh;
+      max-height: calc(100vh - 110px);
+      height:600px;
       transition: max-height 0.25s ease-in;
       @media (max-width: 960px) {
-        max-height: calc(100vh - 100px);
+        /*max-height: calc(100vh - 45px);*/
+        max-height: 90%;
       }
     }
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
-      bottom: 30px;
+      /*bottom: 30px;*/
+      bottom: 5%;
       left: 0;
       right: 0;
       width: 90vw;
@@ -52,11 +55,10 @@ const sliderWrapper = css`
     }
     & > div.countryInfo {
       z-index: 10;
-      height: calc(100vh - 190px);
-      max-height: 475px;
+      height: 100%;
       @media (max-width: 960px) {
-        height: calc(100vh - 150px);
-        max-height: calc(100vh - 150px);
+        /*height: calc(100vh - 150px);
+        max-height: calc(100vh - 150px);*/
       }
     }
   }
@@ -113,11 +115,12 @@ const selectStyles = css`
         padding: 0px 85px;
         border-radius: 25px;
         background-color: white;
-        display:flex
+        display:flex;
         width: 100%;
         position: relative;
-        justify-content: center
-        align-items: center
+        justify-content: center;
+        align-items: center;
+        min-height: 50px;
         &.open{
           border-top: 0px;
           border-top-left-radius: 0px;
