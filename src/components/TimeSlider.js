@@ -37,7 +37,7 @@ const sliderWrapper = css`
     max-height: 70px;
     &.open {
       max-height: calc(100vh - 110px);
-      height:600px;
+      height: 600px;
       transition: max-height 0.25s ease-in;
       @media (max-width: 960px) {
         /*max-height: calc(100vh - 45px);*/
@@ -65,110 +65,110 @@ const sliderWrapper = css`
 `;
 
 const selectStyles = css`
-    @keyframes fadeOutLeft {
-        from {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
-        }
-        to {
-            opacity: 0;
-            transform: translate3d(-100%, 0, 0);
-        }
+  @keyframes fadeOutLeft {
+    from {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
     }
-    @keyframes fadeInLeft {
-        from {
-          opacity: 0;
-          transform: translate3d(-100%, 0, 0);
+    to {
+      opacity: 0;
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes fadeOutRight {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .dark & {
+    background-color: #333333;
+  }
+  & {
+    height: 50px;
+    padding: 0px 85px;
+    border-radius: 25px;
+    background-color: white;
+    display: flex;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    &.open {
+      border-top: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+    }
+    @media (max-width: 960px) {
+      & {
+        padding: 0 85px;
+      }
+    }
+    & > .overlay {
+      height: 100vh;
+      @media (max-width: 960px) {
+        top: calc(-100vh + 100% + 20px);
+        left: -6%;
+      }
+      top: calc(-100vh + 100% + 65px);
+      left: calc((100% - 100vw) / 2);
+    }
+    & > .calendar {
+      bottom: 60px;
+      width: 300px;
+      height: fit-content;
+      display: none;
+      tansition: 0.3s;
+      &.left {
+        left: 0;
+        &.hide {
+          animation: fadeOutLeft 0.3s forwards !important;
+          animation-delay: 0.1s !important;
         }
-      
-        to {
-          opacity: 1;
-          transform: translate3d(0, 0, 0);
+        &.show {
+          animation: fadeInLeft 0.3s;
+          display: table;
         }
       }
-    @keyframes fadeOutRight {
-        from {
-          opacity: 1;
+      &.right {
+        right: 0;
+        &.hide {
+          animation: fadeOutRight 0.3s forwards !important;
+          animation-delay: 0.1s !important;
         }
-      
-        to {
-          opacity: 0;
-          transform: translate3d(100%, 0, 0);
-        }
-      }
-    @keyframes fadeInRight {
-        from {
-          opacity: 0;
-          transform: translate3d(100%, 0, 0);
-        }
-      
-        to {
-          opacity: 1;
-          transform: translate3d(0, 0, 0);
+        &.show {
+          animation: fadeInRight 0.3s;
         }
       }
-    .dark &{
-      background-color: #333333;
     }
-    & {
-        height: 50px;
-        padding: 0px 85px;
-        border-radius: 25px;
-        background-color: white;
-        display:flex;
-        width: 100%;
-        position: relative;
-        justify-content: center;
-        align-items: center;
-        min-height: 50px;
-        &.open{
-          border-top: 0px;
-          border-top-left-radius: 0px;
-          border-top-right-radius: 0px;
-        }
-        @media (max-width: 960px) {
-            & {
-              padding: 0 85px;
-            }
-        }
-        & > .overlay{
-          height: 100vh;
-          @media (max-width: 960px) {
-            top: calc(-100vh + 100% + 20px);
-            left: -6%;
-          }
-          top: calc(-100vh + 100% + 65px);
-          left: calc((100% - 100vw)/ 2);
-        }
-        & > .calendar{
-            bottom: 60px;
-            width: 300px;
-            height: fit-content;
-            display: none;
-            tansition: 0.3s;
-            &.left{
-                left: 0;
-                &.hide{
-                  animation: fadeOutLeft 0.3s forwards !important;
-                  animation-delay: 0.1s !important;
-                }
-                &.show{
-                    animation: fadeInLeft 0.3s;
-                    display: table;
-                }
-            }
-            &.right{
-                right: 0;
-                &.hide{
-                  animation: fadeOutRight 0.3s forwards !important;
-                  animation-delay: 0.1s !important;
-                }
-                &.show{
-                  animation: fadeInRight 0.3s;
-                }
-            }
-        }
-    }
+  }
 `;
 const rangeStyles = css`
   input {
