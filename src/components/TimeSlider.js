@@ -19,7 +19,7 @@ function toSliderString(date) {
 const sliderWrapper = css`
   & {
     position: absolute;
-    bottom: 30px;
+    bottom: 10px;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -36,13 +36,11 @@ const sliderWrapper = css`
     transition: max-height 0.25s ease-out;
     max-height: 70px;
     &.open {
-      /*max-height: 90vh;*/
-      max-height:calc(100vh - 110px);
+      max-height: calc(100vh - 120px);
       height:600px;
       transition: max-height 0.25s ease-in;
       @media (max-width: 960px) {
-        /*max-height: calc(100vh - 100px);*/
-        max-height: -webkit-calc(100vh - 120px);
+        max-height: calc(100vh - 120px);
       }
     }
     /*padding: 0px 6%;*/
@@ -311,12 +309,12 @@ const tooltipCss = css`
     font-size: 12px;
     color: #333333;
     position: absolute;
-    top: 12px;
+    top: 17px;
     &:hover {
       cursor: pointer;
     }
     @media (max-width: 960px) {
-      top: 12px;
+      top: 17px;
       &.first {
         left: 17px;
       }
