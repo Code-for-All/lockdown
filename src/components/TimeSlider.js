@@ -42,7 +42,7 @@ const sliderWrapper = css`
       transition: max-height 0.25s ease-in;
       @media (max-width: 960px) {
         /*max-height: calc(100vh - 100px);*/
-        max-height: -webkit-calc(100vh - 46px);
+        max-height: -webkit-calc(100vh - 110px);
       }
     }
     /*padding: 0px 6%;*/
@@ -314,12 +314,12 @@ const tooltipCss = css`
     font-size: 12px;
     color: #333333;
     position: absolute;
-    top: 17px;
+    top: 12px;
     &:hover {
       cursor: pointer;
     }
     @media (max-width: 960px) {
-      top: 17px;
+      top: 11px;
       &.first {
         left: 17px;
       }
