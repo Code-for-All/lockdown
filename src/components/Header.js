@@ -84,7 +84,7 @@ const styles = css`
 
   .ld-logo-wrapper {
     display: flex;
-    width: 400px;
+    width: 320px;
     & a svg{
       width: 100%
       height: 100%
