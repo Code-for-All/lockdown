@@ -42,7 +42,7 @@ const pause = (time = 100) => {
 
 // Colors for different lockdown status
 function worldStyle(lockdown_status) {
-  console.log("sadsad" + lockdown_status)
+  console.log('sadsad' + lockdown_status);
   let value;
   switch (lockdown_status) {
     case '1':
@@ -64,7 +64,7 @@ function worldStyle(lockdown_status) {
   return value;
 }
 
-function worldPattern(lockdown_status){
+function worldPattern(lockdown_status) {
   let value;
   console.log(lockdown_status);
   switch (lockdown_status) {
@@ -181,11 +181,11 @@ export class WorldMap extends Component {
       let hoveredStateId = null;
 
       map.on('mousemove', 'admin-0-fill', function (e) {
-        console.log(map.getStyle().layers)
+        console.log(map.getStyle().layers);
         var features = map.queryRenderedFeatures(e.point, {
           layers: ['admin-0-fill'],
         });
-        console.log(map.queryRenderedFeatures({ layers: ['admin-0-pattern'] }))
+        console.log(map.queryRenderedFeatures({ layers: ['admin-0-pattern'] }));
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
@@ -228,7 +228,7 @@ export class WorldMap extends Component {
       console.log('map is loaded');
       createViz(lookupTable);
     });
-    map.on('styleimagemissing', function(e) {
+    map.on('styleimagemissing', function (e) {
       var id = e.id; // id of the missing image
       console.log(e);
       let width = 64; // The image will be 64 pixels square
@@ -256,16 +256,13 @@ export class WorldMap extends Component {
 
       const lookupData = filterLookupTable(lookupTable);
 
-      map.loadImage(
-        '/Assets/mapTexture.png',
-        function(err, image) {
-          //Throw an error if something went wrong
-          if (err) throw err;
-          
-          // Declare the image
-          map.addImage('pattern', image);
-          }
-        );
+      map.loadImage('/Assets/mapTexture.png', function (err, image) {
+        //Throw an error if something went wrong
+        if (err) throw err;
+
+        // Declare the image
+        map.addImage('pattern', image);
+      });
 
       // Filters the lookup table to features with the 'US' country code
       // and keys the table using the `unit_code` property that will be used for the join
@@ -320,7 +317,7 @@ export class WorldMap extends Component {
         },
         'admin-1-boundary-bg'
       );
-      
+
       map.addLayer(
         {
           id: 'admin-0-pattern',
@@ -335,7 +332,7 @@ export class WorldMap extends Component {
           ],
           paint: {
             // 'fill-pattern': 'pattern',
-            'fill-pattern':[
+            'fill-pattern': [
               'case',
               ['!=', ['feature-state', 'kind'], null],
               [
