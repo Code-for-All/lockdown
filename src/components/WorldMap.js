@@ -42,6 +42,7 @@ const pause = (time = 100) => {
 
 // Colors for different lockdown status
 function worldStyle(lockdown_status) {
+  console.log('sadsad' + lockdown_status);
   let value;
   switch (lockdown_status) {
     case '1':
@@ -58,6 +59,29 @@ function worldStyle(lockdown_status) {
       break;
     default:
       value = '#ccc'; //undefined or no value
+  }
+
+  return value;
+}
+
+function worldPattern(lockdown_status) {
+  let value;
+  console.log(lockdown_status);
+  switch (lockdown_status) {
+    case '1':
+      value = 'thisNeedToBeAEmptyImg'; //yes
+      break;
+    case '2':
+      value = 'thisNeedToBeAEmptyImg'; //partial
+      break;
+    case '3':
+      value = 'thisNeedToBeAEmptyImg'; //no
+      break;
+    case '4':
+      value = 'pattern'; //unclear
+      break;
+    default:
+      value = 'thisNeedToBeAEmptyImgAlways'; //The layer always use this Style
   }
 
   return value;
@@ -157,10 +181,11 @@ export class WorldMap extends Component {
       let hoveredStateId = null;
 
       map.on('mousemove', 'admin-0-fill', function (e) {
+        console.log(map.getStyle().layers);
         var features = map.queryRenderedFeatures(e.point, {
           layers: ['admin-0-fill'],
         });
-
+        console.log(map.queryRenderedFeatures({ layers: ['admin-0-pattern'] }));
         if (e.features.length > 0) {
           if (hoveredStateId) {
             map.setFeatureState(
@@ -196,13 +221,31 @@ export class WorldMap extends Component {
         router.setSearchParam('country', lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
         router.setSearchParam('iso2', features[0].properties.iso_3166_1);
       });
-
       console.log('the style is loaded');
     });
 
     map.on('load', function () {
       console.log('map is loaded');
       createViz(lookupTable);
+    });
+    map.on('styleimagemissing', function (e) {
+      var id = e.id; // id of the missing image
+      console.log(e);
+      let width = 64; // The image will be 64 pixels square
+      let bytesPerPixel = 4; // Each pixel is represented by 4 bytes: red, green, blue, and alpha.
+
+      let data = new Uint8Array(width * width * bytesPerPixel);
+
+      for (var x = 0; x < width; x++) {
+        for (var y = 0; y < width; y++) {
+          var offset = (y * width + x) * bytesPerPixel;
+          data[offset + 0] = 193; // red
+          data[offset + 1] = 66; // green
+          data[offset + 2] = 66; // blue
+          data[offset + 3] = 0.0;
+        }
+      }
+      map.addImage(id, { width: width, height: width, data: data });
     });
 
     const createViz = (lookupTable) => {
@@ -212,6 +255,14 @@ export class WorldMap extends Component {
       });
 
       const lookupData = filterLookupTable(lookupTable);
+
+      map.loadImage('/Assets/mapTexture.png', function (err, image) {
+        //Throw an error if something went wrong
+        if (err) throw err;
+
+        // Declare the image
+        map.addImage('pattern', image);
+      });
 
       // Filters the lookup table to features with the 'US' country code
       // and keys the table using the `unit_code` property that will be used for the join
@@ -252,6 +303,57 @@ export class WorldMap extends Component {
               worldStyle('0'),
               ['case', ['boolean', ['feature-state', 'hover'], false], 'rgba(204,204,204,0.5)', 'rgba(204,204,204,0)'],
             ],
+            // 'fill-pattern': [
+            //     'case',
+            //     ['==',
+            //     ['feature-state', 'kind'],'4'],
+            //     'pattern',
+            //     ''
+            // ],
+            // 'pattern',
+            // Hover style
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
+          },
+        },
+        'admin-1-boundary-bg'
+      );
+
+      map.addLayer(
+        {
+          id: 'admin-0-pattern',
+          type: 'fill',
+          source: 'admin-0',
+          'source-layer': 'boundaries_admin_0',
+          // Show only features for the selected worldview, hide disputed polygons
+          filter: [
+            'all',
+            ['any', ['==', 'all', ['get', 'worldview']], ['in', selectedWorldview, ['get', 'worldview']]],
+            ['!', ['has', 'dispute']],
+          ],
+          paint: {
+            // 'fill-pattern': 'pattern',
+            'fill-pattern': [
+              'case',
+              ['!=', ['feature-state', 'kind'], null],
+              [
+                'match',
+                ['feature-state', 'kind'],
+                '1',
+                worldPattern(1),
+                '2',
+                worldPattern(2),
+                '3',
+                worldPattern(3),
+                '4',
+                worldPattern(4),
+                worldPattern(0),
+              ],
+              // No data
+              ['==', ['feature-state', 'kind'], null],
+              worldPattern(0),
+              '',
+            ],
+            // 'pattern',
             // Hover style
             'fill-opacity': ['case', ['boolean', ['feature-state', 'hover'], false], 0.7, 1],
           },
