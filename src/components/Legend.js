@@ -137,6 +137,10 @@ const btnStyle = css`
             &.gray {
               background-color: #cccccc;
             }
+            &.covidstripes {
+              background-color: #828282;
+              background-iamge: url(/src/assets/images/stripes-pattern-2.png);
+            }
           }
         }
       }
@@ -256,13 +260,10 @@ class Legend extends Component {
         <!--Row-->
         <div>
           <span>
-            <div class="color red" />
+            <div class="color green" />
           </span>
           <span>
-            ${viruslock}
-          </span>
-          <span>
-            ${lock}
+            NO LOCKDOWN
           </span>
         </div>
         <!--Row-->
@@ -271,34 +272,16 @@ class Legend extends Component {
             <div class="color orange" />
           </span>
           <span>
-            ${virus}
-          </span>
-          <span>
-            ${lock}
+            PARTIAL LOCKDOWN
           </span>
         </div>
         <!--Row-->
         <div>
           <span>
-            <div class="color green" />
+            <div class="color red" />
           </span>
           <span>
-            ${viruslock}
-          </span>
-          <span>
-            ${unlock}
-          </span>
-        </div>
-        <!--Row-->
-        <div>
-          <span>
-            <div class="color blue" />
-          </span>
-          <span>
-            ${virus}
-          </span>
-          <span>
-            ${unlock}
+            FULL LOCKDOWN
           </span>
         </div>
         <!--Row-->
@@ -308,6 +291,15 @@ class Legend extends Component {
           </span>
           <span>
             NO DATA
+          </span>
+        </div>
+        <!--Row-->
+        <div>
+          <span>
+            <div class="color covidstripes" />
+          </span>
+          <span>
+            COVID REPORTED
           </span>
         </div>
       </div>
