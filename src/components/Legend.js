@@ -67,7 +67,7 @@ const btnStyle = css`
         }
       }
       &.left {
-        right: -150px;
+        right: -205px;
         &::after {
           left: 0;
           border-right-color: #fff;
@@ -76,7 +76,7 @@ const btnStyle = css`
         }
       }
       &.right {
-        left: -150px;
+        left: -205px;
         &::after {
           right: 0;
           border-left-color: #fff;
@@ -97,7 +97,8 @@ const btnStyle = css`
       }
       & > div {
         display: flex;
-        justify-content: space-between;
+        /*justify-content: space-between;*/
+        font-weight:500;
         align-items: center;
         padding: 9px 0px;
         padding-bottom: 0px;
@@ -139,7 +140,7 @@ const btnStyle = css`
             }
             &.covidstripes {
               background-color: #828282;
-              background-iamge: url(/src/assets/images/stripes-pattern-2.png);
+              background-image: url(/src/assets/images/stripes-pattern-2.png);
             }
           }
         }
