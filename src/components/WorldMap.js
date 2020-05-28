@@ -53,9 +53,6 @@ function worldStyle(lockdown_status) {
     case '3':
       value = '#6fcf97'; //no
       break;
-    case '4':
-      value = '#7aaeff'; //unclear
-      break;
     default:
       value = '#ccc'; //undefined or no value
   }

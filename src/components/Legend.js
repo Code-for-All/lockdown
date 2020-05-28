@@ -98,7 +98,7 @@ const btnStyle = css`
       & > div {
         display: flex;
         /*justify-content: space-between;*/
-        font-weight:500;
+        font-weight: 500;
         align-items: center;
         padding: 9px 0px;
         padding-bottom: 0px;
