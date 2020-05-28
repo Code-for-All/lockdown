@@ -109,11 +109,12 @@ const preStyles = css`
     height: 100%;
     position: absolute;
     background-color: white;
-    width: 30vw;
-    border-radius: 20px 0px 0px 20px;
-    -moz-border-radius: 20px 0px 0px 20px;
-    -webkit-border-radius: 20px 0px 0px 20px;
+    width: 700px;
+    border-radius: 0px 0px 0px 0px;
+    -moz-border-radius: 0px 0px 0px 0px;
+    -webkit-border-radius: 0px 0px 0px 0px;
     overflow: auto;
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.25);
     @media (max-width: 960px) {
       border-radius: 0px;
       width: calc(100vw - 100%);
@@ -154,12 +155,12 @@ const styles2 = css`
         height: 100%;
         animation: fadeInRightM 1s;
       }
-      height: 75%;
+      height: 15%;
       @media (min-width: 960px) {
         animation: fadeInRight 1s;
       }
-      top: 5%
-      bottom: 20%;
+      top: 0;
+      bottom: 0;
       width: 5%;
       max-width: 60px;
       position: absolute;
@@ -200,38 +201,44 @@ const styles2 = css`
                   box-shadow: none !important;
                 }
                 position: relative;
-                background-color: white;
+                background-color: transparent;
                 .dark & {
-                  background-color: #333333 !important;
+                  background-color: transparent !important;
                   color: white !important;
                 }
                 & svg {
                   .dark & {
-                    stroke: white;
+                    color: #ffffff
                   }
+                  color: #bdbdbd;
                 }
                 &::before {
                   position: absolute;
-                  left: -20%;
-                  top: -40%;
-                  height: 180%;
-                  width: 120%;
+                  left: -1px;
+                  top: 7px;
+                  height: 15px;
+                  width: 10px;
                   z-index: -1;
                   content: ' ';
-                  .dark & {
-                    background-color: #333333 !important;
-                  }
                   border-radius: 0% 100% 100% 69% / 0% 50% 51% 0%;
                   border: 0px;
                   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                  background-color: #ffffff;
+                  background-color: transparent;
+                  z-index:2000;
+                  border-width: 10px 0 10px 10px;
+                  border-style: solid;
+                  border-color: transparent transparent transparent #ffffff;
+                  .dark & {
+                    background-color: transparent !important;
+                    border-color: transparent transparent transparent #333333;
+                  }
                 }
               }
               & svg {
-                color: #999999;
+                color: #828282;
                 .dark & {
-                  color: white;
-                  stroke: white;
+                  color: #bdbdbd;
+                  
                 }
               }
             }
@@ -279,9 +286,9 @@ const closeBtn = css`
   & {
     position: absolute !important;
     color: white;
-    background-color: var(--ld-hover);
+    background-color: transparent;
     padding: 0px !important;
-    top: 10%;
+    top: 90px;
     width: 39px !important;
     height: 39px !important;
     right: 0;
@@ -289,7 +296,7 @@ const closeBtn = css`
     margin-right: auto !important;
     margin-left: auto !important;
     border-radius: 50% !important;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    /*box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);*/
     display: flex;
     align-items: center;
     justify-content: center;
