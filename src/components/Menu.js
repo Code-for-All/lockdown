@@ -312,7 +312,7 @@ const closeBtn = css`
   .dark & {
     position: absolute !important;
     color: white;
-    background-color: var(--ld-hover);
+    background-color: transparent;
     padding: 0px;
     top: 10%;
     width: 39px;
@@ -321,7 +321,7 @@ const closeBtn = css`
     margin-right: auto;
     margin-left: auto;
     border-radius: 50%;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    /*box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);*/
     &:hover {
       cursor: pointer;
     }
