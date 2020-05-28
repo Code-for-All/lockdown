@@ -208,9 +208,9 @@ const styles2 = css`
                 }
                 & svg {
                   .dark & {
-                    color: #ffffff
+                    color: #f2f2f2
                   }
-                  color: #bdbdbd;
+                  color: #828282;
                 }
                 &::before {
                   position: absolute;
@@ -222,7 +222,7 @@ const styles2 = css`
                   content: ' ';
                   border-radius: 0% 100% 100% 69% / 0% 50% 51% 0%;
                   border: 0px;
-                  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                  /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
                   background-color: transparent;
                   z-index:2000;
                   border-width: 10px 0 10px 10px;
@@ -235,7 +235,7 @@ const styles2 = css`
                 }
               }
               & svg {
-                color: #828282;
+                color: #bdbdbd;
                 .dark & {
                   color: #bdbdbd;
                   
