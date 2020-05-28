@@ -150,19 +150,19 @@ const styles2 = css`
     }
     & {
       @media (max-width: 960px) {
-        width: 20%;
+        width: 56px;
         top: 0px;
         height: 100%;
         animation: fadeInRightM 1s;
       }
-      height: 15%;
+      height: 100%;
       @media (min-width: 960px) {
         animation: fadeInRight 1s;
       }
       top: 0;
       bottom: 0;
-      width: 5%;
-      max-width: 60px;
+      width: 56px;
+      max-width: 56px;
       position: absolute;
       padding: 0;
       right: 0px;
