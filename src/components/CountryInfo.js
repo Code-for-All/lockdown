@@ -234,7 +234,9 @@ class CountryDetails extends Component {
       <dl class="data">
         <div class="data-entry is-half">
           <dt>Population</dt>
-          <dd class="data-value">${Number(populationData?.Population).toLocaleString() ?? 'Error'}</dd>
+          <dd class="data-value">
+            ${!isNaN(Number(populationData?.Population)) ? Number(populationData?.Population).toLocaleString() ?? 'Error' : 'Unknown'}
+          </dd>
         </div>
         <div class="data-entry is-half">
           <dt>Max assembly</dt>
