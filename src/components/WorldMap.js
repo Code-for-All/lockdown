@@ -387,15 +387,13 @@ export class WorldMap extends Component {
       map.setPaintProperty('water', 'fill-color', '#e0e0e0');
 
       const setStates = (e) => {
-
         // Start a case expression for the pattern fill
-        let fillPatternExpression=['case'];
+        let fillPatternExpression = ['case'];
 
         localData.forEach(function (row) {
-
           // Add the condition and output value for the pattern
-          fillPatternExpression.push(['==', ['id'], lookupData[row.lockdown.iso].feature_id])
-          fillPatternExpression.push(worldPattern(row.lockdown.measure[0].value))
+          fillPatternExpression.push(['==', ['id'], lookupData[row.lockdown.iso].feature_id]);
+          fillPatternExpression.push(worldPattern(row.lockdown.measure[0].value));
 
           map.setFeatureState(
             {
@@ -411,13 +409,13 @@ export class WorldMap extends Component {
         });
 
         // Add fallback pattern
-        fillPatternExpression.push(worldPattern(0))
+        fillPatternExpression.push(worldPattern(0));
 
         // Update layer style
-        map.setPaintProperty('admin-0-pattern','fill-pattern',fillPatternExpression)
+        map.setPaintProperty('admin-0-pattern', 'fill-pattern', fillPatternExpression);
 
         // DEBUG
-        console.log(fillPatternExpression)
+        console.log(fillPatternExpression);
 
         this.setState({
           isMapReady: true,
