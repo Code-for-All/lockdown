@@ -13,7 +13,9 @@ import { dialogService } from '../services/dialogService.js';
 import { debounce } from 'lodash-es';
 import TimeSlider from './TimeSlider';
 import Legend from './Legend.js';
-import { IntlPovider } from 'preact-i18n';
+import translations from '../locale/index';
+
+const DEFAUL_LANGUAGE = 'en';
 
 const debouncedCloseDialog = debounce(
   () => {
@@ -78,6 +80,7 @@ export class App extends Component {
     this.__showDialog = this.__showDialog.bind(this);
     this.__showDialogRoute = this.__showDialogRoute.bind(this);
     this.__onSelectDate = this.__onSelectDate.bind(this);
+    this.__initi18n = this.__initi18n.bind(this);
     this.__onLocateChange = this.__onLocateChange.bind(this);
   }
 
@@ -89,9 +92,10 @@ export class App extends Component {
       });
     });
   }
-
+  
   componentWillMount() {
     router.addEventListener('path-changed', this.__onPathChanged);
+    this.__initi18n();
     this.setState({
       showStatsbox: Number(router.url.searchParams.get('statsbox') || 1) == 1,
       showMenu: Number(router.url.searchParams.get('menu') || 1) == 1,
@@ -106,7 +110,6 @@ export class App extends Component {
   render() {
     const selectedDate = this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : toJsonString(new Date());
     return html`
-    <${IntlProvider} definition=${definition}> 
       ${this.state.showStatsbox
         ? html`
             <${Header}
@@ -129,6 +132,7 @@ export class App extends Component {
             isMobile=${this.state.isMobile}
             changeRoute=${this.__showDialogRoute}
             close=${this.__closeDialog}
+            locale=${this.state.currentLanguage}
             onLocateChange=${this.__onLocateChange}
           />`
         : ''}
@@ -165,8 +169,23 @@ export class App extends Component {
             <${Lazy} component=${() => import('../components/Dialog.js')} props=${{ ...this.state.dialog, onClose: this.__closeDialog }} />
           `
         : ''}-->
-        <//>
     `;
+  }
+
+  __initi18n(){
+    console.log({i18n: window.i18n});
+    let i18n = window.i18n;
+    let languages = Object.keys(translations);
+    let i18nLanguages = {};
+     languages.forEach(language =>{
+      i18nLanguages[language] = i18n.create({
+        values: translations[language]
+      });
+    });
+    this.setState({
+      i18nLanguages,
+      currentLanguage:i18nLanguages[DEFAUL_LANGUAGE]
+    });
   }
 
   __showDialogRoute({ template, title }) {
@@ -222,8 +241,10 @@ export class App extends Component {
     this.setState({ haveSelectedDate: selectedDate, startDate, endDate });
   }
   __onLocateChange(newLocal) {
-    this.setState({
-      currentLanguage: newLocal,
-    });
+    if(this.state.i18nLanguages[newLocal]){
+      this.setState({
+        currentLanguage: this.state.i18nLanguages[newLocal],
+      });
+    }
   }
 }

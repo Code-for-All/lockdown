@@ -43,7 +43,6 @@
     "htm": "^3.0.3",
     "lodash-es": "^4.17.15",
     "preact": "^10.3.2",
-    "preact-i18n": "^1.4.1",
     "pwa-helpers": "^0.9.1",
     "rollup-plugin-copy": "^3.3.0",
     "rslider": "^2.16.3"
