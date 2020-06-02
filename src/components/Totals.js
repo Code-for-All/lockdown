@@ -82,7 +82,7 @@ export class Totals extends Component {
   render({ selectedDate }, { totals, desktop }) {
     const items = [
       {
-        description: 'Countries in lockdown',
+        description: 'Territories in lockdown',
         value: Number(totals.territories?.lockdown || 0).toLocaleString(),
       },
       {
