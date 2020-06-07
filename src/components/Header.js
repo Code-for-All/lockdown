@@ -109,13 +109,13 @@ export const Header = (_) => html`
   <header class="${styles} ${_.show ? '' : 'hide'}">
     <div class="ld-logo-wrapper">
       <a href="" aria-current="page">
-        <p>BETA</p>
+        <p>${_.i18n.t("header.version")}</p>
         ${logo}
         <!-- TODO: screen reader h1 -->
       </a>
     </div>
     <div class="totals">
-      <${Totals} selectedDate=${_.selectedDate} startDate=${_.startDate} endDate=${_.endDate} />
+      <${Totals} selectedDate=${_.selectedDate} startDate=${_.startDate} endDate=${_.endDate} i18n=${_.i18n} />
     </div>
   </header>
 `;

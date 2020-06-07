@@ -179,18 +179,18 @@ export function Settings({ onClose, onLocateChange,locale }) {
 
   return html`
     <div class=${styles}>
-      <button onClick=${toggleDarkmode} class="ld-button">Toggle ${darkMode ? 'Light Mode' : 'Dark Mode'}</button>
-      ${showGeolocationButton ? html` <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button> ` : ''}
+      <button onClick=${toggleDarkmode} class="ld-button">${locale.t("menu.userPreferenceSection.theme.action")} ${darkMode ? locale.t("menu.userPreferenceSection.theme.light") : locale.t("menu.userPreferenceSection.theme.dark")}</button>
+      ${showGeolocationButton ? html` <button onClick=${toggleGeolocation} class="ld-button">${locale.t("menu.userPreferenceSection.geolocation")}</button> ` : ''}
 
       <pwa-install-button>
-        <button onClick=${() => onClose()} class="ld-button">Install app</button>
+        <button onClick=${() => onClose()} class="ld-button">${locale.t("menu.userPreferenceSection.app.install")}</button>
       </pwa-install-button>
 
       ${
         pwaUpdateAvailable
           ? html`
               <pwa-update-available>
-                <button onClick=${() => onClose()} class="ld-button">Update app</button>
+                <button onClick=${() => onClose()} class="ld-button">${locale.t("menu.userPreferenceSection.app.update")}</button>
               </pwa-update-available>
             `
           : ''
@@ -203,7 +203,7 @@ export function Settings({ onClose, onLocateChange,locale }) {
           Spanish
         </option>
       </select/>
-      ${locale("welcome")}
+      ${locale.t("welcome")}
     </div>
   `;
 }
