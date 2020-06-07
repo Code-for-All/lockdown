@@ -215,7 +215,8 @@ export class App extends Component {
     let currentLanguage = getCurrentLanguage(userLang,languages);
     this.setState({
       i18nLanguages,
-      currentLanguage:i18nLanguages[currentLanguage]
+      currentLanguage:i18nLanguages[currentLanguage],
+      languages
     });
   }
   __getTranslation(key){
@@ -275,6 +276,7 @@ export class App extends Component {
     this.setState({ haveSelectedDate: selectedDate, startDate, endDate });
   }
   __onLocateChange(newLocal) {
+    // newLocal = getCurrentLanguage(newLocal);
     if(this.state.i18nLanguages[newLocal]){
       this.setState({
         currentLanguage: this.state.i18nLanguages[newLocal],

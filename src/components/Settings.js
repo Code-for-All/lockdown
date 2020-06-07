@@ -203,7 +203,6 @@ export function Settings({ onClose, onLocateChange,locale }) {
           Spanish
         </option>
       </select/>
-      ${locale.t("welcome")}
     </div>
   `;
 }
