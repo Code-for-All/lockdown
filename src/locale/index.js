@@ -4,34 +4,34 @@ import AvailableLanguages from './availableLanguages.js';
 // ? Translations utils
 import { encodeJsonTranslation } from './i18nUtils';
 
-const getAll = async ()=>{
-  let finalTranslationsJSON = {}
+const getAll = async () => {
+  let finalTranslationsJSON = {};
   let totals = 0;
-  for(let i = 0; i < AvailableLanguages.length; i++){
+  for (let i = 0; i < AvailableLanguages.length; i++) {
     try {
-      let idiom = await import("./translations/" + AvailableLanguages[i] + "/index.js");
+      let idiom = await import('./translations/' + AvailableLanguages[i] + '/index.js');
       idiom = idiom.default;
-      if(idiom.languageId === AvailableLanguages[i]){
-        finalTranslationsJSON[AvailableLanguages[i]] = encodeJsonTranslation(idiom)
-      }else{
-        console.warn(`The iso value of ${AvailableLanguages[i]} not match`)
+      if (idiom.languageId === AvailableLanguages[i]) {
+        finalTranslationsJSON[AvailableLanguages[i]] = encodeJsonTranslation(idiom);
+      } else {
+        console.warn(`The iso value of ${AvailableLanguages[i]} not match`);
       }
-      if(i === AvailableLanguages.length -1 ){
+      if (i === AvailableLanguages.length - 1) {
         return finalTranslationsJSON;
       }
     } catch (e) {
       console.log(e);
       totals++;
-      if(i === AvailableLanguages.length -1 ){
+      if (i === AvailableLanguages.length - 1) {
         return finalTranslationsJSON;
       }
       continue;
     }
   }
-  if(totals === AvailableLanguages - 1){
+  if (totals === AvailableLanguages - 1) {
     console.log(finalTranslationsJSON);
     return finalTranslationsJSON;
   }
 };
 
-export default getAll
+export default getAll;

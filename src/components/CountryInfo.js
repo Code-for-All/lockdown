@@ -40,28 +40,28 @@ const TRAVELTYPE = ['Land', 'Flight', 'Sea'];
 
 const TRANSLATIONS = {
   commerce: {
-    text: "commerce"
+    text: 'commerce',
   },
   foreigners_inbound: {
-    text: "foreignersInbound"
+    text: 'foreignersInbound',
   },
   foreigners_outbound: {
-    text: "foreignersOutbound"
+    text: 'foreignersOutbound',
   },
   local: {
-    text: "local"
+    text: 'local',
   },
   nationals_inbound: {
-    text: "nationalsInbound"
+    text: 'nationalsInbound',
   },
   nationals_outbound: {
-    text: "nationalsOutbound"
+    text: 'nationalsOutbound',
   },
   stopovers: {
-    text: "stopovers"
+    text: 'stopovers',
   },
   cross_border_workers: {
-    text: "crossBorderWorkers"
+    text: 'crossBorderWorkers',
   },
 };
 
@@ -69,61 +69,61 @@ const MEASURES = [
   {
     id: 'lockdown_status',
     label: 'Stay Home',
-    translationKey: "home",
+    translationKey: 'home',
     icon: home,
   },
   {
     id: 'going_to_shops',
     label: 'Shopping',
-    translationKey: "shopping",
+    translationKey: 'shopping',
     icon: shops,
   },
   {
     id: 'city_movement_restriction',
     label: 'Outdoors',
-    translationKey: "outdoors",
+    translationKey: 'outdoors',
     icon: citymovement,
   },
   {
     id: 'military_not_deployed',
     label: 'Military',
-    translationKey: "military",
+    translationKey: 'military',
     icon: military,
   },
   {
     id: 'attending_religious_sites',
     label: 'Religious Sites',
-    translationKey: "religious",
+    translationKey: 'religious',
     icon: religion,
   },
   {
     id: 'electricity_nominal',
     label: 'Electricity',
-    translationKey: "electricity",
+    translationKey: 'electricity',
     icon: electricity,
   },
   {
     id: 'going_to_work',
     label: 'Go to Work',
-    translationKey: "work",
+    translationKey: 'work',
     icon: work,
   },
   {
     id: 'water_nominal',
     label: 'Water',
-    translationKey: "water",
+    translationKey: 'water',
     icon: water,
   },
   {
     id: 'academia_allowed',
     label: 'Go to Schools',
-    translationKey: "schools",
+    translationKey: 'schools',
     icon: academia,
   },
   {
     id: 'internet_nominal',
     label: 'Telecom',
-    translationKey: "internet",
+    translationKey: 'internet',
     icon: internet,
   },
 ];
@@ -246,29 +246,29 @@ class CountryDetails extends Component {
     return html`<h2 class="ld-font-subheader"><span>${country}</span> <span>${format(date, 'dd/MM/yyyy')}</span></h2>
       <dl class="data">
         <div class="data-entry is-half">
-          <dt>${i18n.t("tdo.tabs.dailyLife.stats.population")}</dt>
+          <dt>${i18n.t('tdo.tabs.dailyLife.stats.population')}</dt>
           <dd class="data-value">
             ${!isNaN(Number(populationData?.Population)) ? Number(populationData?.Population).toLocaleString() ?? 'Error' : 'Unknown'}
           </dd>
         </div>
         <div class="data-entry is-half">
-          <dt>${i18n.t("tdo.tabs.dailyLife.stats.max_assembly")}</dt>
+          <dt>${i18n.t('tdo.tabs.dailyLife.stats.max_assembly')}</dt>
           <dd class="data-value">${countryDetails?.max_gathering ?? 'Unknown'}</dd>
         </div>
         <div class="data-entry is-third">
-          <dt>${i18n.t("tdo.tabs.dailyLife.stats.cases")}</dt>
+          <dt>${i18n.t('tdo.tabs.dailyLife.stats.cases')}</dt>
           <dd class="data-value">
             ${coronaData?.total_confirmed ? Number(coronaData?.total_confirmed).toLocaleString() : 'N/A'}
           </dd>
         </div>
         <div class="data-entry is-third">
-          <dt>${i18n.t("tdo.tabs.dailyLife.stats.recoveries")}</dt>
+          <dt>${i18n.t('tdo.tabs.dailyLife.stats.recoveries')}</dt>
           <dd class="data-value">
             ${coronaData?.total_recovered ? Number(coronaData?.total_recovered).toLocaleString() : 'N/A'}
           </dd>
         </div>
         <div class="data-entry is-third">
-          <dt>${i18n.t("tdo.tabs.dailyLife.stats.deaths")}</dt>
+          <dt>${i18n.t('tdo.tabs.dailyLife.stats.deaths')}</dt>
           <dd class="data-value">${coronaData?.total_deaths ? Number(coronaData?.total_deaths).toLocaleString() : 'N/A'}</dd>
         </div>
       </dl>
@@ -291,7 +291,9 @@ class CountryDetails extends Component {
                         >
                           ${m.icon}
                         </div>
-                        <span id="measure-label-${m.id}" class="measure-label">${i18n.t(`tdo.tabs.dailyLife.measures.${m.translationKey}`)}</span>
+                        <span id="measure-label-${m.id}" class="measure-label"
+                          >${i18n.t(`tdo.tabs.dailyLife.measures.${m.translationKey}`)}</span
+                        >
                       </div>
                     </li>
                   `
@@ -317,7 +319,7 @@ class TransportDetails extends Component {
           <br />
           <br />
           <${Legends} i18n=${i18n} tab="mobility" />
-          <h2 class="ld-font-subheader last transport">${i18n.t("tdo.tabs.mobility.subtitle")}</h2>
+          <h2 class="ld-font-subheader last transport">${i18n.t('tdo.tabs.mobility.subtitle')}</h2>
           <dl>
             <div class="ld-travel">
               <dt></dt>

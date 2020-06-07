@@ -79,22 +79,22 @@ export class Totals extends Component {
     });
   }
 
-  render({ selectedDate,i18n }, { totals, desktop }) {
+  render({ selectedDate, i18n }, { totals, desktop }) {
     const items = [
       {
-        description: i18n.t("header.totals.territoriesLockdown"),
+        description: i18n.t('header.totals.territoriesLockdown'),
         value: Number(totals.territories?.lockdown || 0).toLocaleString(),
       },
       {
-        description: i18n.t("header.totals.peopleAffected"),
+        description: i18n.t('header.totals.peopleAffected'),
         value: Number(totals.territories?.affected || 0).toLocaleString(),
       },
       {
-        description: i18n.t("header.totals.cases"),
+        description: i18n.t('header.totals.cases'),
         value: Number(totals.corona?.confirmed || 0).toLocaleString(),
       },
       {
-        description: i18n.t("header.totals.deaths"),
+        description: i18n.t('header.totals.deaths'),
         value: Number(totals.corona?.deaths || 0).toLocaleString(),
       },
     ];

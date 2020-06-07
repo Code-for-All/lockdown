@@ -65,17 +65,17 @@ function toJsonString(date) {
   return format(date, 'yyyy-MM-dd');
 }
 
-function getCurrentLanguage(browserLanguage,languagesList){
+function getCurrentLanguage(browserLanguage, languagesList) {
   let perfectMatch = languagesList.indexOf(browserLanguage);
-  if(perfectMatch >= 0){
+  if (perfectMatch >= 0) {
     return browserLanguage;
-  }else{
-    let baseLanguage = browserLanguage.split("-")[0];
+  } else {
+    let baseLanguage = browserLanguage.split('-')[0];
     let baseLanguageMatch = languagesList.indexOf(baseLanguage);
-    if(baseLanguageMatch >= 0){
+    if (baseLanguageMatch >= 0) {
       return baseLanguage;
-    }else{
-      let poorMatch = languagesList.filter(language => language.split("-")[0].contains(baseLanguage));
+    } else {
+      let poorMatch = languagesList.filter((language) => language.split('-')[0].contains(baseLanguage));
       return poorMatch.length > 0 ? poorMatch[0] : FALLBACK_LANGUAGE;
     }
   }
@@ -88,7 +88,7 @@ export class App extends Component {
       haveSelectedDate: false,
       startDate: false,
       endDate: false,
-      currentLanguage: {t:(text)=>text},
+      currentLanguage: { t: (text) => text },
     };
 
     this.__onPathChanged = this.__onPathChanged.bind(this);
@@ -110,13 +110,13 @@ export class App extends Component {
       });
     });
   }
-  
+
   componentWillMount() {
     router.addEventListener('path-changed', this.__onPathChanged);
-    if(window.i18n){
+    if (window.i18n) {
       this.__initi18n();
-    }else{
-      setTimeout(this.__initi18n,300);
+    } else {
+      setTimeout(this.__initi18n, 300);
     }
     this.setState({
       showStatsbox: Number(router.url.searchParams.get('statsbox') || 1) == 1,
@@ -144,8 +144,13 @@ export class App extends Component {
             />
             ${!this.state.dialog.opened
               ? html`<div class=${styles}>
-                  <${Totals} selectedDate=${selectedDate} startDate=${this.state.startDate} endDate=${this.state.endDate} i18n=${this.state.currentLanguage}
-                  onLocateChange=${this.__onLocateChange} />
+                  <${Totals}
+                    selectedDate=${selectedDate}
+                    startDate=${this.state.startDate}
+                    endDate=${this.state.endDate}
+                    i18n=${this.state.currentLanguage}
+                    onLocateChange=${this.__onLocateChange}
+                  />
                 </div>`
               : ''}
           `
@@ -167,7 +172,7 @@ export class App extends Component {
         endDate=${this.state.endDate}
         currentLanguage=${this.state.currentLanguage}
       />
-      <${Legend} i18n=${this.state.currentLanguage}  />
+      <${Legend} i18n=${this.state.currentLanguage} />
 
       ${this.state.showSlider
         ? html`<${TimeSlider} onChange=${this.__onSelectDate}
@@ -182,7 +187,7 @@ export class App extends Component {
                       i18n: this.state.currentLanguage,
                       startDate: this.state.startDate,
                       endDate: this.state.endDate,
-                      onClose: this.__closeDialog
+                      onClose: this.__closeDialog,
                     }}
                   />
                 `
@@ -197,30 +202,30 @@ export class App extends Component {
     `;
   }
 
-  async __initi18n(){
-    let userLang = navigator.language || navigator.userLanguage; 
+  async __initi18n() {
+    let userLang = navigator.language || navigator.userLanguage;
     let i18n = window.i18n;
     let translationsObject = await translations();
     let languages = Object.keys(translationsObject);
     let i18nLanguages = {};
-     languages.forEach(language =>{
+    languages.forEach((language) => {
       i18nLanguages[language] = {
-        "t": this.__getTranslation,
-        "i18n": i18n.create({
-          values: translationsObject[language]
+        t: this.__getTranslation,
+        i18n: i18n.create({
+          values: translationsObject[language],
         }),
-        "locale":language
+        locale: language,
       };
     });
-    let currentLanguage = getCurrentLanguage(userLang,languages);
+    let currentLanguage = getCurrentLanguage(userLang, languages);
     this.setState({
       i18nLanguages,
-      currentLanguage:i18nLanguages[currentLanguage],
-      languages
+      currentLanguage: i18nLanguages[currentLanguage],
+      languages,
     });
   }
-  __getTranslation(key){
-    let formatedKey = key.split(".").join("_");
+  __getTranslation(key) {
+    let formatedKey = key.split('.').join('_');
     return this.state.currentLanguage.i18n(formatedKey);
   }
   __showDialogRoute({ template, title }) {
@@ -277,7 +282,7 @@ export class App extends Component {
   }
   __onLocateChange(newLocal) {
     // newLocal = getCurrentLanguage(newLocal);
-    if(this.state.i18nLanguages[newLocal]){
+    if (this.state.i18nLanguages[newLocal]) {
       this.setState({
         currentLanguage: this.state.i18nLanguages[newLocal],
       });

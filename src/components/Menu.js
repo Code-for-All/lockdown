@@ -114,7 +114,7 @@ const preStyles = css`
     -moz-border-radius: 0px 0px 0px 0px;
     -webkit-border-radius: 0px 0px 0px 0px;
     overflow: auto;
-    box-shadow: 4px 4px 15px rgba(0,0,0,0.25);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
     @media (max-width: 960px) {
       border-radius: 0px;
       width: calc(100vw - 100%);
@@ -126,126 +126,125 @@ const preStyles = css`
   }
 `;
 const styles2 = css`
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        width: 0%;
-      }
-
-      to {
-        opacity: 1;
-        width: 8%;
-      }
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      width: 0%;
     }
-    @keyframes fadeInRightM {
-      from {
-        opacity: 0;
-        width: 0%;
-      }
 
-      to {
-        opacity: 1;
-        width: 23%;
-      }
+    to {
+      opacity: 1;
+      width: 8%;
     }
-    & {
-      @media (max-width: 960px) {
-        width: 56px;
-        top: 0px;
-        height: 100%;
-        animation: fadeInRightM 1s;
-      }
-      height: 100%;
-      @media (min-width: 960px) {
-        animation: fadeInRight 1s;
-      }
-      top: 0;
-      bottom: 0;
+  }
+  @keyframes fadeInRightM {
+    from {
+      opacity: 0;
+      width: 0%;
+    }
+
+    to {
+      opacity: 1;
+      width: 23%;
+    }
+  }
+  & {
+    @media (max-width: 960px) {
       width: 56px;
-      max-width: 56px;
-      position: absolute;
-      padding: 0;
-      right: 0px;
-      background-color: #f2f2f2;
-      z-index: 1100;
-      .dark & {
-        background-color: var(--ld-gray-2) !important;
-      }
-      & .ld-menu-nav {
-        display: flex;
-        height: 100%;
+      top: 0px;
+      height: 100%;
+      animation: fadeInRightM 1s;
+    }
+    height: 100%;
+    @media (min-width: 960px) {
+      animation: fadeInRight 1s;
+    }
+    top: 0;
+    bottom: 0;
+    width: 56px;
+    max-width: 56px;
+    position: absolute;
+    padding: 0;
+    right: 0px;
+    background-color: #f2f2f2;
+    z-index: 1100;
+    .dark & {
+      background-color: var(--ld-gray-2) !important;
+    }
+    & .ld-menu-nav {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      & nav {
         width: 100%;
-        & nav {
-          width: 100%;
-          padding: 10px 0px 10px 0px;
+        padding: 10px 0px 10px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        & ul {
+          padding: 0;
+          justify-content: flex-start;
+          align-items: left;
+          min-height: 50%;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          & ul {
-            padding: 0;
-            justify-content: flex-start;
-            align-items: left;
-            min-height: 50%;
-            display: flex;
-            flex-direction: column;
-            & li {
-              margin-bottom: 29%;
-              &.hide{
-                display: none; /*Just for now*/
+          & li {
+            margin-bottom: 29%;
+            &.hide {
+              display: none; /*Just for now*/
+            }
+            & button {
+              background-color: transparent;
+            }
+            & .ld-menu--active {
+              &:focus:not(.leaflet-container) {
+                box-shadow: none !important;
               }
-              & button {
-                background-color: transparent;
-              }
-              & .ld-menu--active {
-                &:focus:not(.leaflet-container) {
-                  box-shadow: none !important;
-                }
-                position: relative;
-                background-color: transparent;
-                .dark & {
-                  background-color: transparent !important;
-                  color: white !important;
-                }
-                & svg {
-                  .dark & {
-                    color: #f2f2f2
-                  }
-                  color: #828282;
-                }
-                &::before {
-                  position: absolute;
-                  left: -1px;
-                  top: 7px;
-                  height: 15px;
-                  width: 10px;
-                  z-index: -1;
-                  content: ' ';
-                  border-radius: 0% 100% 100% 69% / 0% 50% 51% 0%;
-                  border: 0px;
-                  /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
-                  background-color: transparent;
-                  z-index:2000;
-                  border-width: 10px 0 10px 10px;
-                  border-style: solid;
-                  border-color: transparent transparent transparent #ffffff;
-                  .dark & {
-                    background-color: transparent !important;
-                    border-color: transparent transparent transparent #333333;
-                  }
-                }
+              position: relative;
+              background-color: transparent;
+              .dark & {
+                background-color: transparent !important;
+                color: white !important;
               }
               & svg {
-                color: #bdbdbd;
                 .dark & {
-                  color: #bdbdbd;
-                  
+                  color: #f2f2f2;
                 }
+                color: #828282;
+              }
+              &::before {
+                position: absolute;
+                left: -1px;
+                top: 7px;
+                height: 15px;
+                width: 10px;
+                z-index: -1;
+                content: ' ';
+                border-radius: 0% 100% 100% 69% / 0% 50% 51% 0%;
+                border: 0px;
+                /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
+                background-color: transparent;
+                z-index: 2000;
+                border-width: 10px 0 10px 10px;
+                border-style: solid;
+                border-color: transparent transparent transparent #ffffff;
+                .dark & {
+                  background-color: transparent !important;
+                  border-color: transparent transparent transparent #333333;
+                }
+              }
+            }
+            & svg {
+              color: #bdbdbd;
+              .dark & {
+                color: #bdbdbd;
               }
             }
           }
         }
       }
     }
+  }
 `;
 
 const sideBtn = css`
@@ -346,7 +345,7 @@ const overlay = css`
     }
   }
 `;
-const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateChange,locale) => {
+const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateChange, locale) => {
   switch (menuItem) {
     case 'info':
       return {
@@ -354,77 +353,89 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
         template: html`
           <h1>Lockdown</h1>
           <p class="ld-alpha">
-            ${locale.t("menu.informationSection.banner")}
+            ${locale.t('menu.informationSection.banner')}
           </p>
           <p>
-            <b>${locale.t("menu.informationSection.main.name")}</b>
-            ${locale.t("menu.informationSection.main.text")}
+            <b>${locale.t('menu.informationSection.main.name')}</b>
+            ${locale.t('menu.informationSection.main.text')}
           </p>
 
           <${Expandable}
-            toggle=${locale.t("menu.informationSection.about.title")}
+            toggle=${locale.t('menu.informationSection.about.title')}
             currentDropdown=${currentDropdown}
             onDropDown=${onDropDown}
             detail=${html`
               <p>
-                ${locale.t("menu.informationSection.about.text.p1")}
-                <b>${locale.t("menu.informationSection.main.name")}</b>
-                ${locale.t("menu.informationSection.about.text.p2")}
-                <b>${locale.t("menu.informationSection.main.name")}</b>
-                ${locale.t("menu.informationSection.about.text.p3")}
+                ${locale.t('menu.informationSection.about.text.p1')}
+                <b>${locale.t('menu.informationSection.main.name')}</b>
+                ${locale.t('menu.informationSection.about.text.p2')}
+                <b>${locale.t('menu.informationSection.main.name')}</b>
+                ${locale.t('menu.informationSection.about.text.p3')}
               </p>
             `}
           />
 
           <${Expandable}
-            toggle=${locale.t("menu.informationSection.sources.title")}
+            toggle=${locale.t('menu.informationSection.sources.title')}
             currentDropdown=${currentDropdown}
             onDropDown=${onDropDown}
             detail=${html`
               <p>
-                <b>${locale.t("menu.informationSection.main.name")}</b>
-                ${locale.t("menu.informationSection.sources.subtitle")}
+                <b>${locale.t('menu.informationSection.main.name')}</b>
+                ${locale.t('menu.informationSection.sources.subtitle')}
                 <ul class="ld-sources">
                   <li>
-                    <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://TIOF.Click/LockdownData" target="_blank"> ${locale.t("menu.informationSection.sources.linksList.first.linkTitle")}</a><br/>
-                    ${locale.t("menu.informationSection.sources.linksList.first.text")}
+                    <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://TIOF.Click/LockdownData" target="_blank"> ${locale.t(
+                      'menu.informationSection.sources.linksList.first.linkTitle'
+                    )}</a><br/>
+                    ${locale.t('menu.informationSection.sources.linksList.first.text')}
                   </li>
                   <li>
-                   <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://covid19api.com/" target="_blank">${locale.t("menu.informationSection.sources.linksList.second.linkTitle")}</a><br/>
-                   ${locale.t("menu.informationSection.sources.linksList.second.text")} <a href="https://systems.jhu.edu/" target="_blank">${locale.t("menu.informationSection.sources.linksList.second.highlight")}</a><br/>
+                   <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://covid19api.com/" target="_blank">${locale.t(
+                     'menu.informationSection.sources.linksList.second.linkTitle'
+                   )}</a><br/>
+                   ${locale.t(
+                     'menu.informationSection.sources.linksList.second.text'
+                   )} <a href="https://systems.jhu.edu/" target="_blank">${locale.t(
+              'menu.informationSection.sources.linksList.second.highlight'
+            )}</a><br/>
                   </li>
                 </ul>
-                ${locale.t("menu.informationSection.sources.issues.text")} <a rel="noopener noreferrer" target="_blank" href="https://github.com/Code-for-All/lockdown/issues">${locale.t("menu.informationSection.sources.issues.highlight")}</a>.
+                ${locale.t(
+                  'menu.informationSection.sources.issues.text'
+                )} <a rel="noopener noreferrer" target="_blank" href="https://github.com/Code-for-All/lockdown/issues">${locale.t(
+              'menu.informationSection.sources.issues.highlight'
+            )}</a>.
               </p>
             `}
           />
           <${Expandable}
-            toggle=${locale.t("menu.informationSection.credits.title")}
+            toggle=${locale.t('menu.informationSection.credits.title')}
             currentDropdown=${currentDropdown}
             onDropDown=${onDropDown}
             detail=${html`
               <p>
-                <b>${locale.t("menu.informationSection.main.name")}</b>
-                ${locale.t("menu.informationSection.credits.text")}
+                <b>${locale.t('menu.informationSection.main.name')}</b>
+                ${locale.t('menu.informationSection.credits.text')}
                 <a
                   href="https://docs.google.com/spreadsheets/d/1mVyQxxLxAF3E1dw870WHXTOLgYzmumojvzIekpgvLV0/edit?ts=5e74ac83#gid=634415797"
                   target="_blank"
-                  >${locale.t("menu.informationSection.credits.highlight")}</a
+                  >${locale.t('menu.informationSection.credits.highlight')}</a
                 >.
               </p>
             `}
           />
 
           <${Expandable}
-            toggle=${locale.t("menu.informationSection.dataPrivacity.title")}
+            toggle=${locale.t('menu.informationSection.dataPrivacity.title')}
             currentDropdown=${currentDropdown}
             onDropDown=${onDropDown}
             detail=${html`
               <p>
-                ${locale.t("menu.informationSection.dataPrivacity.paragraphs.p1")}
+                ${locale.t('menu.informationSection.dataPrivacity.paragraphs.p1')}
               </p>
               <p>
-              ${locale.t("menu.informationSection.dataPrivacity.paragraphs.p2")}
+                ${locale.t('menu.informationSection.dataPrivacity.paragraphs.p2')}
               </p>
             `}
           />

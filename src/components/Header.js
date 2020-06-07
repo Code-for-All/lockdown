@@ -109,7 +109,7 @@ export const Header = (_) => html`
   <header class="${styles} ${_.show ? '' : 'hide'}">
     <div class="ld-logo-wrapper">
       <a href="" aria-current="page">
-        <p>${_.i18n.t("header.version")}</p>
+        <p>${_.i18n.t('header.version')}</p>
         ${logo}
         <!-- TODO: screen reader h1 -->
       </a>

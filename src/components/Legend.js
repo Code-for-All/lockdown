@@ -254,7 +254,7 @@ class Legend extends Component {
       showDialog: !this.state.showDialog,
     });
   }
-  render({i18n}) {
+  render({ i18n }) {
     return html`<div onClick=${this.onClick} draggable="true" ref=${this.initBtn} class="${btnStyle}">
       ${list}
       <div class="dialog ${this.state.showDialog ? 'show' : ''} ${this.state.y} ${this.state.x}">
@@ -264,7 +264,7 @@ class Legend extends Component {
             <div class="color green" />
           </span>
           <span>
-            ${i18n.t("mapLegend.no")}
+            ${i18n.t('mapLegend.no')}
           </span>
         </div>
         <!--Row-->
@@ -273,7 +273,7 @@ class Legend extends Component {
             <div class="color orange" />
           </span>
           <span>
-            ${i18n.t("mapLegend.partial")}
+            ${i18n.t('mapLegend.partial')}
           </span>
         </div>
         <!--Row-->
@@ -282,7 +282,7 @@ class Legend extends Component {
             <div class="color red" />
           </span>
           <span>
-            ${i18n.t("mapLegend.full")}
+            ${i18n.t('mapLegend.full')}
           </span>
         </div>
         <!--Row-->
@@ -291,7 +291,7 @@ class Legend extends Component {
             <div class="color gray" />
           </span>
           <span>
-            ${i18n.t("mapLegend.noData")}
+            ${i18n.t('mapLegend.noData')}
           </span>
         </div>
         <!--Row-->
@@ -300,7 +300,7 @@ class Legend extends Component {
             <div class="color covidstripes" />
           </span>
           <span>
-            ${i18n.t("mapLegend.cases")}
+            ${i18n.t('mapLegend.cases')}
           </span>
         </div>
       </div>
