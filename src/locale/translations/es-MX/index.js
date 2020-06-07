@@ -81,6 +81,7 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Vida diaria',
+        noResults: 'N/A',
         stats: {
           population: 'Población',
           max_assembly: 'Max assembly',

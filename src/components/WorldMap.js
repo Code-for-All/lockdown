@@ -153,6 +153,7 @@ export class WorldMap extends Component {
     map.on('style.load', () => {
       let hoveredStateId = null;
 
+      map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + this.props.currentLanguage.locale.split("-")[0]]);
       map.on('mousemove', 'admin-0-fill', function (e) {
         var features = map.queryRenderedFeatures(e.point, {
           layers: ['admin-0-fill'],

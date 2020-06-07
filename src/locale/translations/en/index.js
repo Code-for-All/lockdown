@@ -80,6 +80,7 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Daily Life',
+        noResults: 'N/A',
         stats: {
           population: 'Population',
           max_assembly: 'Max assembly',

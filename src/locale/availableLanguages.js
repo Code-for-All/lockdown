@@ -1,1 +1,1 @@
-export default ['en', 'en-US', 'es', 'es-MX'];
+export default ['en', 'en-US', 'es', 'es-ES', 'es-MX'];

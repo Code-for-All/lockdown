@@ -248,28 +248,28 @@ class CountryDetails extends Component {
         <div class="data-entry is-half">
           <dt>${i18n.t('tdo.tabs.dailyLife.stats.population')}</dt>
           <dd class="data-value">
-            ${!isNaN(Number(populationData?.Population)) ? Number(populationData?.Population).toLocaleString() ?? 'Error' : 'Unknown'}
+            ${!isNaN(Number(populationData?.Population)) ? Number(populationData?.Population).toLocaleString() ?? 'Error' : i18n.t('tdo.tabs.dailyLife.noResults')}
           </dd>
         </div>
         <div class="data-entry is-half">
           <dt>${i18n.t('tdo.tabs.dailyLife.stats.max_assembly')}</dt>
-          <dd class="data-value">${countryDetails?.max_gathering ?? 'Unknown'}</dd>
+          <dd class="data-value">${countryDetails?.max_gathering ?? i18n.t('tdo.tabs.dailyLife.noResults')}</dd>
         </div>
         <div class="data-entry is-third">
           <dt>${i18n.t('tdo.tabs.dailyLife.stats.cases')}</dt>
           <dd class="data-value">
-            ${coronaData?.total_confirmed ? Number(coronaData?.total_confirmed).toLocaleString() : 'N/A'}
+            ${coronaData?.total_confirmed ? Number(coronaData?.total_confirmed).toLocaleString() : i18n.t('tdo.tabs.dailyLife.noResults')}
           </dd>
         </div>
         <div class="data-entry is-third">
           <dt>${i18n.t('tdo.tabs.dailyLife.stats.recoveries')}</dt>
           <dd class="data-value">
-            ${coronaData?.total_recovered ? Number(coronaData?.total_recovered).toLocaleString() : 'N/A'}
+            ${coronaData?.total_recovered ? Number(coronaData?.total_recovered).toLocaleString() : i18n.t('tdo.tabs.dailyLife.noResults')}
           </dd>
         </div>
         <div class="data-entry is-third">
           <dt>${i18n.t('tdo.tabs.dailyLife.stats.deaths')}</dt>
-          <dd class="data-value">${coronaData?.total_deaths ? Number(coronaData?.total_deaths).toLocaleString() : 'N/A'}</dd>
+          <dd class="data-value">${coronaData?.total_deaths ? Number(coronaData?.total_deaths).toLocaleString() :i18n.t('tdo.tabs.dailyLife.noResults') }</dd>
         </div>
       </dl>
 

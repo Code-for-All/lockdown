@@ -91,6 +91,7 @@ export class App extends Component {
       endDate: false,
       currentLanguage: { t: (text) => text },
       languages: [],
+      baseLanguages: []
     };
 
     this.__onPathChanged = this.__onPathChanged.bind(this);
@@ -175,7 +176,7 @@ export class App extends Component {
         currentLanguage=${this.state.currentLanguage}
       />
       <${Legend} i18n=${this.state.currentLanguage} />
-      <${LanguageSelector} i18n=${this.state.currentLanguage} languages=${this.state.languages} onLocateChange=${this.__onLocateChange} />
+      <${LanguageSelector} i18n=${this.state.currentLanguage} languages=${this.state.baseLanguages} onLocateChange=${this.__onLocateChange} />
 
       ${this.state.showSlider
         ? html`<${TimeSlider} onChange=${this.__onSelectDate}
@@ -211,7 +212,9 @@ export class App extends Component {
     let translationsObject = await translations();
     let languages = Object.keys(translationsObject);
     let i18nLanguages = {};
+    let baseLanguages = [];
     languages.forEach((language) => {
+      if(!language.includes("-")) baseLanguages.push(language)
       i18nLanguages[language] = {
         t: this.__getTranslation,
         i18n: i18n.create({
@@ -225,6 +228,7 @@ export class App extends Component {
       i18nLanguages,
       currentLanguage: i18nLanguages[currentLanguage],
       languages,
+      baseLanguages
     });
   }
   __getTranslation(key) {

@@ -2,7 +2,7 @@ import { Component } from 'preact';
 import { html } from 'htm/preact';
 import css from 'csz';
 
-import { chevronDown, chevronUp } from '../assets/icons/icons.js';
+import { world } from '../assets/icons/icons.js';
 
 const selectedLang = css`
   & {
@@ -32,10 +32,13 @@ const selectedLang = css`
       height: 30px;
       min-width: 30px;
       border-radius: 50%;
-      color: gray;
+      color: #333333;
       display: flex;
       justify-content: center;
       align-items: center;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.05em;
       .dark & {
         background-color: #333333;
         color: #fff;
@@ -58,7 +61,7 @@ const langOptions = css`
     padding: 5px 0px;
     &.show {
       max-width: 50vw;
-      overflow-x: scroll;
+      flex-wrap: wrap;
     }
     & .langOpt {
       display: flex;
@@ -73,6 +76,12 @@ const langOptions = css`
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
       overflow: hidden;
       margin-left: 10px;
+      &.active{
+        border: 1px solid #333333;
+      }
+      .dark &.active{
+        border: 1px solid #fff;
+      }
       .dark & {
         background-color: #333333;
         color: #fff;
@@ -90,9 +99,6 @@ class LanguageSelector extends Component {
     this.toggleLangOpts = this.toggleLangOpts.bind(this);
     this.changeCurrentLanguage = this.changeCurrentLanguage.bind(this);
   }
-  componentDidUpdate() {
-    console.log(this.props);
-  }
   toggleLangOpts() {
     this.setState({
       showLangOpt: !this.state.showLangOpt,
@@ -107,12 +113,12 @@ class LanguageSelector extends Component {
       <div class="${selectedLang}" onClick=${this.toggleLangOpts}>
         ${i18n.locale?.toUpperCase()}
         <div class="circleBtn">
-          ${showLangOpt ? chevronUp : chevronDown}
+          ${world}
         </div>
       </div>
       <div class=${`${langOptions} ${showLangOpt ? 'show' : ''}`}>
         ${languages.map((language) => {
-          return html`<div class="langOpt" onClick=${() => this.changeCurrentLanguage(language)}>
+          return html`<div class="langOpt ${language === i18n.locale ? 'active' : ''}" onClick=${() => this.changeCurrentLanguage(language)}>
             ${language?.toUpperCase().replace('-', '\n')}
           </div>`;
         })}
