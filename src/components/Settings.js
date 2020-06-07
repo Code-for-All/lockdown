@@ -126,7 +126,7 @@ const styles = css`
   }
 `;
 
-export function Settings({ onClose, onLocateChange, locale }) {
+export function Settings({ onClose, locale }) {
   const [showGeolocationButton, setshowGeolocationButton] = useState(false);
   const [pwaUpdateAvailable, setPwaUpdateAvailable] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -201,14 +201,6 @@ export function Settings({ onClose, onLocateChange, locale }) {
             `
           : ''
       }
-      <select class="select-css" onChange=${(e) => onLocateChange(e.target.value)}>
-        <option value="en" >
-          English
-        </option>
-        <option value="es">
-          Spanish
-        </option>
-      </select/>
     </div>
   `;
 }

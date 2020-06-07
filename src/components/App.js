@@ -13,6 +13,7 @@ import { dialogService } from '../services/dialogService.js';
 import { debounce } from 'lodash-es';
 import TimeSlider from './TimeSlider';
 import Legend from './Legend.js';
+import LanguageSelector from './LanguageSelector.js';
 import translations from '../locale/index';
 import { encodeJsonTranslation } from '../locale/i18nUtils';
 
@@ -89,6 +90,7 @@ export class App extends Component {
       startDate: false,
       endDate: false,
       currentLanguage: { t: (text) => text },
+      languages: []
     };
 
     this.__onPathChanged = this.__onPathChanged.bind(this);
@@ -173,6 +175,7 @@ export class App extends Component {
         currentLanguage=${this.state.currentLanguage}
       />
       <${Legend} i18n=${this.state.currentLanguage} />
+      <${LanguageSelector} i18n=${this.state.currentLanguage} languages=${this.state.languages} onLocateChange=${this.__onLocateChange}  />
 
       ${this.state.showSlider
         ? html`<${TimeSlider} onChange=${this.__onSelectDate}
