@@ -67,7 +67,7 @@ const btnStyle = css`
         }
       }
       &.left {
-        right: -150px;
+        right: -205px;
         &::after {
           left: 0;
           border-right-color: #fff;
@@ -76,7 +76,7 @@ const btnStyle = css`
         }
       }
       &.right {
-        left: -150px;
+        left: -205px;
         &::after {
           right: 0;
           border-left-color: #fff;
@@ -97,7 +97,8 @@ const btnStyle = css`
       }
       & > div {
         display: flex;
-        justify-content: space-between;
+        /*justify-content: space-between;*/
+        font-weight: 500;
         align-items: center;
         padding: 9px 0px;
         padding-bottom: 0px;
@@ -136,6 +137,10 @@ const btnStyle = css`
             }
             &.gray {
               background-color: #cccccc;
+            }
+            &.covidstripes {
+              background-color: #828282;
+              background-image: url(/src/assets/images/stripes-pattern-2.png);
             }
           }
         }
@@ -256,13 +261,10 @@ class Legend extends Component {
         <!--Row-->
         <div>
           <span>
-            <div class="color red" />
+            <div class="color green" />
           </span>
           <span>
-            ${viruslock}
-          </span>
-          <span>
-            ${lock}
+            NO LOCKDOWN
           </span>
         </div>
         <!--Row-->
@@ -271,34 +273,16 @@ class Legend extends Component {
             <div class="color orange" />
           </span>
           <span>
-            ${virus}
-          </span>
-          <span>
-            ${lock}
+            PARTIAL LOCKDOWN
           </span>
         </div>
         <!--Row-->
         <div>
           <span>
-            <div class="color green" />
+            <div class="color red" />
           </span>
           <span>
-            ${viruslock}
-          </span>
-          <span>
-            ${unlock}
-          </span>
-        </div>
-        <!--Row-->
-        <div>
-          <span>
-            <div class="color blue" />
-          </span>
-          <span>
-            ${virus}
-          </span>
-          <span>
-            ${unlock}
+            FULL LOCKDOWN
           </span>
         </div>
         <!--Row-->
@@ -308,6 +292,15 @@ class Legend extends Component {
           </span>
           <span>
             NO DATA
+          </span>
+        </div>
+        <!--Row-->
+        <div>
+          <span>
+            <div class="color covidstripes" />
+          </span>
+          <span>
+            COVID REPORTED
           </span>
         </div>
       </div>

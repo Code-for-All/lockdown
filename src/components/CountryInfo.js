@@ -247,7 +247,9 @@ class CountryDetails extends Component {
       <dl class="data">
         <div class="data-entry is-half">
           <dt>${i18n.t("tdo.tabs.dailyLife.stats.population")}</dt>
-          <dd class="data-value">${Number(populationData?.Population).toLocaleString() ?? 'Error'}</dd>
+          <dd class="data-value">
+            ${!isNaN(Number(populationData?.Population)) ? Number(populationData?.Population).toLocaleString() ?? 'Error' : 'Unknown'}
+          </dd>
         </div>
         <div class="data-entry is-half">
           <dt>${i18n.t("tdo.tabs.dailyLife.stats.max_assembly")}</dt>

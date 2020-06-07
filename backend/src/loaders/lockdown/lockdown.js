@@ -40,66 +40,77 @@ export async function batchGetTerritoriesEntryData(territories) {
   var batch;
   var shouldResetApiCache = false;
 
-  while (batch = territories.splice(0, BATCH_SIZE)) {
-    if (batch.length < 1) break;
-    // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
-    let gridRanges = batch.map(territory => `${territory['iso3']}!${rangeToCache}`);
-    logger.log(`[Lockdown:WorkSheet] ${batch.map(t => t['iso3']).join(' ')}`);
-    let gridData = await doc.batchGetGridRanges(gridRanges);
-
-    for (let i = 0; i < batch.length; i++) {
+  try {
+    while (batch = territories.splice(0, BATCH_SIZE)) {
+      if (batch.length < 1) break;
       // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
-      let workSheet = await getWorksheetByTitle(`${batch[i]['iso3']}`);
-      let rowCount = workSheet['gridProperties']['rowCount'];
-      let columnCount = workSheet['gridProperties']['columnCount'];
+      let gridRanges = batch.map(territory => `${territory['iso3']}!${rangeToCache}`);
+      logger.log(`[Lockdown:WorkSheet] ${batch.map(t => t['iso3']).join(' ')}`);
+      let gridData = await doc.batchGetGridRanges(gridRanges);
 
-      let gridSheet = new SimpleGrid(rangeToCache, gridData[i], rowCount, columnCount);
-      let entries = [];
+      for (let i = 0; i < batch.length; i++) {
+        try {
+          // TODO: Uncomment the following when country tab sheets are ready with ISO3 naming
+          let workSheet = await getWorksheetByTitle(`${batch[i]['iso3']}`);
+          let rowCount = workSheet['gridProperties']['rowCount'];
+          let columnCount = workSheet['gridProperties']['columnCount'];
 
-      // How many entries should we loop through according to columns available on sheet
-      let entryCount = Math.ceil((columnCount - startCacheColumnIndex) / ENTRY_COLUMN_LENGTH);
-      for (let entryIndex = 0; entryIndex < entryCount; entryIndex++) {
-        // Cell ranges
-        let entryData = parseEntry(gridSheet, entryIndex);
-        if (entryData) {
-          entries.push(entryData);
+          let gridSheet = new SimpleGrid(rangeToCache, gridData[i], rowCount, columnCount);
+          let entries = [];
+
+          // How many entries should we loop through according to columns available on sheet
+          let entryCount = Math.ceil((columnCount - startCacheColumnIndex) / ENTRY_COLUMN_LENGTH);
+          for (let entryIndex = 0; entryIndex < entryCount; entryIndex++) {
+            // Cell ranges
+            let entryData = parseEntry(gridSheet, entryIndex);
+            if (entryData) {
+              entries.push(entryData);
+            }
+          }
+
+          let snapshots = getSnapshots(entries);
+
+          if (snapshots.length > 0) {
+            snapshots.forEach(s => {
+              s.iso3 = batch[i]['iso3'];
+              s.iso2 = batch[i]['iso2'];
+            });
+            var insertResult = await Promise.all(database.snapshotRepository.insertManyOrUpdate(snapshots));
+            if (insertResult.find(r => r.result.nModified == 0 && r.result.ok == 1)) {
+              shouldResetApiCache = true;
+            }
+          }
+
+          result.push({
+            iso2: batch[i]['iso2'],
+            iso3: batch[i]['iso3'],
+            name: batch[i]['territory'],
+            lockdown: {
+              snapshots
+            }
+          });
+        }
+        catch (error) {
+          throw new Error(`Error during processing ${batch[i]['iso3']}: ${error}`);
         }
       }
+    }
 
-      let snapshots = getSnapshots(entries);
-
-      if (snapshots.length > 0) {
-        snapshots.forEach(s => {
-          s.iso3 = batch[i]['iso3'];
-          s.iso2 = batch[i]['iso2'];
-        });
-        var insertResult = await Promise.all(database.snapshotRepository.insertManyOrUpdate(snapshots));
-        if (insertResult.find(r => r.result.nUpserted == 1)) {
-          shouldResetApiCache = true;
+    if (shouldResetApiCache) {
+      const cacheMessageBus = new MessagesService(process.env.AZURE_SERVICEBUS_CONNECTION_STRING, process.env.AZURE_SERVICEBUS_CACHE_QUEUE);
+      await cacheMessageBus.sendMessage(
+        `Reset cache`,
+        "Reset cache",
+        {
+          timestamp: new Date()
         }
-      }
-
-      result.push({
-        iso2: batch[i]['iso2'],
-        iso3: batch[i]['iso3'],
-        name: batch[i]['territory'],
-        lockdown: {
-          snapshots
-        }
-      });
+      );
+      await cacheMessageBus.close();
     }
   }
-
-  if (shouldResetApiCache) {
-    const cacheMessageBus = new MessagesService(process.env.AZURE_SERVICEBUS_CONNECTION_STRING, process.env.AZURE_SERVICEBUS_CACHE_QUEUE);
-    await cacheMessageBus.sendMessage(
-      `Reset cache`,
-      "Reset cache",
-      {
-        timestamp: new Date()
-      }
-    );
-    await cacheMessageBus.close();
+  catch (error) {
+    database.close();
+    throw error;
   }
 
   database.close()

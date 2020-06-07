@@ -38,7 +38,7 @@ export class SimpleGrid {
   getCell(rowIndex, columnIndex) {
     if (rowIndex < 0 || columnIndex < 0) throw new Error('Min coordinate is 0, 0');
     if (rowIndex >= this.rowCount || columnIndex >= this.columnCount) {
-      throw new Error(`Out of bounds, grid is ${this.rowCount} by ${this.columnCount}`);
+      throw new Error(`Out of bounds, grid is ${this.rowCount} by ${this.columnCount}, but requested ${rowIndex+1}:${columnIndex+1}`);
     }
 
     // Currently does not check if data is loaded or just empty.
