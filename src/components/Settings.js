@@ -179,28 +179,25 @@ export function Settings({ onClose, locale }) {
 
   return html`
     <div class=${styles}>
-      <button onClick=${toggleDarkmode} class="ld-button">${locale.t('menu.userPreferenceSection.theme.action')} ${
-    darkMode ? locale.t('menu.userPreferenceSection.theme.light') : locale.t('menu.userPreferenceSection.theme.dark')
-  }</button>
-      ${
-        showGeolocationButton
-          ? html` <button onClick=${toggleGeolocation} class="ld-button">${locale.t('menu.userPreferenceSection.geolocation')}</button> `
-          : ''
-      }
+      <button onClick=${toggleDarkmode} class="ld-button">
+        ${locale.t('menu.userPreferenceSection.theme.action')}
+        ${darkMode ? locale.t('menu.userPreferenceSection.theme.light') : locale.t('menu.userPreferenceSection.theme.dark')}
+      </button>
+      ${showGeolocationButton
+        ? html` <button onClick=${toggleGeolocation} class="ld-button">${locale.t('menu.userPreferenceSection.geolocation')}</button> `
+        : ''}
 
       <pwa-install-button>
         <button onClick=${() => onClose()} class="ld-button">${locale.t('menu.userPreferenceSection.app.install')}</button>
       </pwa-install-button>
 
-      ${
-        pwaUpdateAvailable
-          ? html`
-              <pwa-update-available>
-                <button onClick=${() => onClose()} class="ld-button">${locale.t('menu.userPreferenceSection.app.update')}</button>
-              </pwa-update-available>
-            `
-          : ''
-      }
+      ${pwaUpdateAvailable
+        ? html`
+            <pwa-update-available>
+              <button onClick=${() => onClose()} class="ld-button">${locale.t('menu.userPreferenceSection.app.update')}</button>
+            </pwa-update-available>
+          `
+        : ''}
     </div>
   `;
 }

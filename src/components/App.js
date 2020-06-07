@@ -90,7 +90,7 @@ export class App extends Component {
       startDate: false,
       endDate: false,
       currentLanguage: { t: (text) => text },
-      languages: []
+      languages: [],
     };
 
     this.__onPathChanged = this.__onPathChanged.bind(this);
@@ -175,7 +175,7 @@ export class App extends Component {
         currentLanguage=${this.state.currentLanguage}
       />
       <${Legend} i18n=${this.state.currentLanguage} />
-      <${LanguageSelector} i18n=${this.state.currentLanguage} languages=${this.state.languages} onLocateChange=${this.__onLocateChange}  />
+      <${LanguageSelector} i18n=${this.state.currentLanguage} languages=${this.state.languages} onLocateChange=${this.__onLocateChange} />
 
       ${this.state.showSlider
         ? html`<${TimeSlider} onChange=${this.__onSelectDate}
