@@ -1,6 +1,6 @@
 export default {
   "translationBy":"AherreDev",
-  "languageId":"es", // ? ISO 639-1:2002
+  "languageId":"es-MX", // ? ISO 639-1:2002
   // ? Para más información consultar https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes y para ver las versiones consultar https://en.wikipedia.org/wiki/Language_localisation
   "header":{
     "version":"BETA",
