@@ -9,8 +9,8 @@ const getAll = async () => {
   let totals = 0;
   for (let i = 0; i < AvailableLanguages.length; i++) {
     try {
-      let idiom = await import('./translations/' + AvailableLanguages[i] + '/index.js');
-      idiom = idiom.default;
+      let idiom = await fetch(new URL('./translations/' + AvailableLanguages[i] + '/index.json', import.meta.url)); // import('./translations/' + AvailableLanguages[i] + '/index.js');
+      idiom = await idiom.json();
       if (idiom.languageId === AvailableLanguages[i]) {
         finalTranslationsJSON[AvailableLanguages[i]] = encodeJsonTranslation(idiom);
       } else {
