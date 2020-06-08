@@ -349,7 +349,6 @@ export class WorldMap extends Component {
   }
 
   updateMapLanguage(language) {
-    console.log(language);
     let map = this.state.map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + language.locale]);
   }
 

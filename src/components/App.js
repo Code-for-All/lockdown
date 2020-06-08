@@ -179,7 +179,7 @@ export class App extends Component {
       <${LanguageSelector} i18n=${this.state.currentLanguage} languages=${this.state.baseLanguages} onLocateChange=${this.__onLocateChange} />
 
       ${this.state.showSlider
-        ? html`<${TimeSlider} onChange=${this.__onSelectDate}
+        ? html`<${TimeSlider} onChange=${this.__onSelectDate} i18n=${this.state.currentLanguage}
             >${this.state.dialog.opened
               ? html`
                   <${Lazy}

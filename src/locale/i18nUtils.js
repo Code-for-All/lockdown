@@ -46,3 +46,7 @@ function json_traverse(o, prevKey) {
     return returnObject;
   }
 }
+export const getAllFNSLanguages = async(objetiveLanguages) =>{
+  let languages = await import("date-fns/locale");
+  return {...languages};
+}
