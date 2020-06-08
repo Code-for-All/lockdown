@@ -13,11 +13,11 @@ export default {
   },
   menu: {
     informationSection: {
-      banner: 'Project lockdown is currently in beta. Not all data may be available yet.',
+      banner: 'Project Lockdown is currently in beta. Not all data may be available yet.',
       main: {
         name: 'Project Lockdown ',
         text:
-          'provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced by across the globe in response to the COVID-19 crisis to visualize the success of different pandemic response measures, monitor effects on Human and Digital Rights, and clarify evaluation metrics.',
+          'provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced across the globe in response to the COVID-19 crisis to visualize the success of different pandemic response measures, monitor effects on Human and Digital Rights, and clarify evaluation metrics.',
       },
       about: {
         title: 'About',
@@ -96,14 +96,14 @@ export default {
         },
         measures: {
           home: 'Stay Home',
-          shopping: 'Shopping',
-          outdoors: 'Outdoors',
-          military: 'Military',
-          religious: 'Religious Sites',
+          shopping: 'Go Shopping',
+          outdoors: 'Go Outdoors',
+          military: 'Military Presence',
+          religious: 'Religious Service',
           electricity: 'Electricity',
           work: 'Go to Work',
           water: 'Water',
-          schools: 'Go to Schools',
+          schools: 'Attend classes',
           internet: 'Telecom',
         },
       },
