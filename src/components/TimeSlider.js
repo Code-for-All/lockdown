@@ -3,23 +3,56 @@ import { Component, createRef } from 'preact';
 import css from 'csz';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
+import { enUS } from 'date-fns/locale';
 
 import DatePicker from './DatePicker.js';
 import { calendar } from '../assets/icons/icons.js';
 
+import { getAllFNSLanguages } from '../locale/i18nUtils';
+
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
 
-function toSliderStringShort(date) {
-  return format(date, 'dd MMM');
+let languages = false;
+
+function toSliderStringShort(date, currentLanguage) {
+  let isoLanguage = currentLanguage;
+  if (currentLanguage !== undefined) {
+    isoLanguage = currentLanguage.replace('-', '');
+    if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
+      isoLanguage = currentLanguage.split('-')[0];
+      if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
+        isoLanguage = 'enUS';
+      }
+    }
+  } else {
+    isoLanguage = 'enUS';
+  }
+  return format(date, 'dd MMM', {
+    locale: languages ? languages[isoLanguage] : enUS,
+  });
 }
-function toSliderString(date) {
-  return format(date, 'dd MMMM yyyy');
+function toSliderString(date, currentLanguage) {
+  let isoLanguage = currentLanguage;
+  if (currentLanguage) {
+    isoLanguage = currentLanguage.replace('-', '');
+    if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
+      isoLanguage = currentLanguage.split('-')[0];
+      if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
+        isoLanguage = 'enUS';
+      }
+    }
+  } else {
+    isoLanguage = 'enUS';
+  }
+  return format(date, 'dd MMMM yyyy', {
+    locale: languages ? languages[isoLanguage] : enUS,
+  });
 }
 
 const sliderWrapper = css`
   & {
     position: absolute;
-    bottom: 10px;
+    bottom: 30px;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -36,15 +69,18 @@ const sliderWrapper = css`
     transition: max-height 0.25s ease-out;
     max-height: 70px;
     &.open {
-      max-height: 90vh;
+      max-height: calc(100vh - 110px);
+      height: 600px;
       transition: max-height 0.25s ease-in;
       @media (max-width: 960px) {
-        max-height: calc(100vh - 100px);
+        /*max-height: calc(100vh - 45px);*/
+        max-height: 90%;
       }
     }
     /*padding: 0px 6%;*/
     @media (max-width: 960px) {
-      bottom: 30px;
+      /*bottom: 30px;*/
+      bottom: 5%;
       left: 0;
       right: 0;
       width: 90vw;
@@ -52,120 +88,120 @@ const sliderWrapper = css`
     }
     & > div.countryInfo {
       z-index: 10;
-      height: calc(100vh - 190px);
-      max-height: 475px;
+      height: 100%;
       @media (max-width: 960px) {
-        height: calc(100vh - 150px);
-        max-height: calc(100vh - 150px);
+        /*height: calc(100vh - 150px);
+        max-height: calc(100vh - 150px);*/
       }
     }
   }
 `;
 
 const selectStyles = css`
-    @keyframes fadeOutLeft {
-        from {
-            transform: translate3d(0, 0, 0);
-            opacity: 1;
-        }
-        to {
-            opacity: 0;
-            transform: translate3d(-100%, 0, 0);
-        }
+  @keyframes fadeOutLeft {
+    from {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
     }
-    @keyframes fadeInLeft {
-        from {
-          opacity: 0;
-          transform: translate3d(-100%, 0, 0);
+    to {
+      opacity: 0;
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @keyframes fadeOutRight {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .dark & {
+    background-color: #333333;
+  }
+  & {
+    height: 50px;
+    padding: 0px 85px;
+    border-radius: 25px;
+    background-color: white;
+    display: flex;
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    &.open {
+      border-top: 0px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+    }
+    @media (max-width: 960px) {
+      & {
+        padding: 0 85px;
+      }
+    }
+    & > .overlay {
+      height: 100vh;
+      @media (max-width: 960px) {
+        top: calc(-100vh + 100% + 20px);
+        left: -6%;
+      }
+      top: calc(-100vh + 100% + 65px);
+      left: calc((100% - 100vw) / 2);
+    }
+    & > .calendar {
+      bottom: 60px;
+      width: 300px;
+      height: fit-content;
+      display: none;
+      tansition: 0.3s;
+      &.left {
+        left: 0;
+        &.hide {
+          animation: fadeOutLeft 0.3s forwards !important;
+          animation-delay: 0.1s !important;
         }
-      
-        to {
-          opacity: 1;
-          transform: translate3d(0, 0, 0);
+        &.show {
+          animation: fadeInLeft 0.3s;
+          display: table;
         }
       }
-    @keyframes fadeOutRight {
-        from {
-          opacity: 1;
+      &.right {
+        right: 0;
+        &.hide {
+          animation: fadeOutRight 0.3s forwards !important;
+          animation-delay: 0.1s !important;
         }
-      
-        to {
-          opacity: 0;
-          transform: translate3d(100%, 0, 0);
-        }
-      }
-    @keyframes fadeInRight {
-        from {
-          opacity: 0;
-          transform: translate3d(100%, 0, 0);
-        }
-      
-        to {
-          opacity: 1;
-          transform: translate3d(0, 0, 0);
+        &.show {
+          animation: fadeInRight 0.3s;
         }
       }
-    .dark &{
-      background-color: #333333;
     }
-    & {
-        height: 50px;
-        padding: 0px 85px;
-        border-radius: 25px;
-        background-color: white;
-        display:flex
-        width: 100%;
-        position: relative;
-        justify-content: center
-        align-items: center
-        &.open{
-          border-top: 0px;
-          border-top-left-radius: 0px;
-          border-top-right-radius: 0px;
-        }
-        @media (max-width: 960px) {
-            & {
-              padding: 0 85px;
-            }
-        }
-        & > .overlay{
-          height: 100vh;
-          @media (max-width: 960px) {
-            top: calc(-100vh + 100% + 20px);
-            left: -6%;
-          }
-          top: calc(-100vh + 100% + 65px);
-          left: calc((100% - 100vw)/ 2);
-        }
-        & > .calendar{
-            bottom: 60px;
-            width: 300px;
-            height: fit-content;
-            display: none;
-            tansition: 0.3s;
-            &.left{
-                left: 0;
-                &.hide{
-                  animation: fadeOutLeft 0.3s forwards !important;
-                  animation-delay: 0.1s !important;
-                }
-                &.show{
-                    animation: fadeInLeft 0.3s;
-                    display: table;
-                }
-            }
-            &.right{
-                right: 0;
-                &.hide{
-                  animation: fadeOutRight 0.3s forwards !important;
-                  animation-delay: 0.1s !important;
-                }
-                &.show{
-                  animation: fadeInRight 0.3s;
-                }
-            }
-        }
-    }
+  }
 `;
 const rangeStyles = css`
   input {
@@ -455,10 +491,13 @@ export default class CountryInfo extends Component {
     this.closeDatePicker = this.closeDatePicker.bind(this);
     this.submitChanges = this.submitChanges.bind(this);
     this.onPressKey = this.onPressKey.bind(this);
+    this.updateDates = this.updateDates.bind(this);
+  }
+  async componentWillMount() {
+    languages = await getAllFNSLanguages();
   }
   componentDidMount() {
     window.addEventListener('keydown', this.onPressKey);
-
     let days = [];
     let date = addDays(new Date(), -firstDayDefaultOffset);
     let totalDays = 70;
@@ -478,13 +517,18 @@ export default class CountryInfo extends Component {
 
     this.setState({
       currentSliderRange: days,
-      currentSelectedDay: toSliderString(new Date()),
-      firstDay: toSliderStringShort(days[0]),
-      lastDay: toSliderStringShort(days[days.length - 1]),
+      currentSelectedDay: toSliderString(new Date(), this.props.i18n.locale),
+      firstDay: toSliderStringShort(days[0], this.props.i18n.locale),
+      lastDay: toSliderStringShort(days[days.length - 1], this.props.i18n.locale),
     });
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.onPressKey);
+  }
+  componentDidUpdate(previousProps, previousState, snapshot) {
+    if (previousProps.i18n !== this.props.i18n) {
+      this.updateDates(previousState);
+    }
   }
   onPressKey(e) {
     let inputRange = this.range.current;
@@ -523,7 +567,7 @@ export default class CountryInfo extends Component {
       {
         currentDateValue: newValue,
         currentPosition: newPosition,
-        currentSelectedDay: toSliderString(currentSliderRange[newValue]),
+        currentSelectedDay: toSliderString(currentSliderRange[newValue], this.props.i18n.locale),
       },
       this.submitChanges
     );
@@ -565,30 +609,25 @@ export default class CountryInfo extends Component {
         }
       }
     }
-    // let plusDays = 7;
-    // for (let i = 0; i < 11; i++) {
-    //   if (i < 2) {
-    //     days.push(this.rangePreProcces(date, i == 0 ? -13 : -7));
-    //   } else if (i !== 2) {
-    //     days.push(this.rangePreProcces(date, plusDays));
-    //     plusDays += 7;
-    //   } else {
-    //     days.push(date);
-    //   }
-    // }
-    // sliderDOM.style.left = `${24.5}%`;
-    // sliderDOM.style.transform = `translate(-${24.5}%, 0)`;
     this.setState(
       {
         currentSliderRange: days,
-        currentSelectedDay: toSliderString(date),
-        firstDay: toSliderStringShort(days[0]),
-        lastDay: toSliderStringShort(days[days.length - 1]),
+        currentSelectedDay: toSliderString(date, this.props.i18n.locale),
+        firstDay: toSliderStringShort(days[0], this.props.i18n.locale),
+        lastDay: toSliderStringShort(days[days.length - 1], this.props.i18n.locale),
         currentDateValue: this.state.datePickerPosition === 'left' ? 0 : 69,
         currentPosition: 24.5,
       },
       this.submitChanges
     );
+  }
+  updateDates(previousState) {
+    const { currentDateValue, currentSliderRange } = previousState;
+    this.setState({
+      currentSelectedDay: toSliderString(currentSliderRange[currentDateValue], this.props.i18n.locale),
+      firstDay: toSliderStringShort(currentSliderRange[0], this.props.i18n.locale),
+      lastDay: toSliderStringShort(currentSliderRange[currentSliderRange.length - 1], this.props.i18n.locale),
+    });
   }
   calendarWillClose() {
     this.setState(

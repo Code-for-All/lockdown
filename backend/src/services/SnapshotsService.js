@@ -149,7 +149,7 @@ export default class SnapshotsService {
       .reduce((prev, range) => {
         if (!countries[range.iso2] && this._isLockdown(range.measures[0].value)) {
           countries[range.iso2] = true;
-          affected += +this.population[range.iso2].Population;
+          affected += +this.population[range.iso2]?.Population || 0;
           return prev + 1;
         }
         return prev;

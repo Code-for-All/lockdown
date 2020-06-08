@@ -6,7 +6,7 @@ import css from 'csz';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
 
-const mapbox_token = 'pk.eyJ1IjoicGxhbmVtYWQiLCJhIjoiemdYSVVLRSJ9.g3lbg_eN0kztmsfIPxa9MQ';
+const mapbox_token = 'pk.eyJ1IjoiamZxdWVyYWx0IiwiYSI6ImNrODcwb29vajBjMDkzbWxqZHh6ZDU5aHUifQ.BjT63Mdh-P2myNvygIhSpw';
 
 const selectStyles = css`
   & {
@@ -52,9 +52,6 @@ function worldStyle(lockdown_status) {
       break;
     case '3':
       value = '#6fcf97'; //no
-      break;
-    case '4':
-      value = '#7aaeff'; //unclear
       break;
     default:
       value = '#ccc'; //undefined or no value
@@ -138,7 +135,7 @@ export class WorldMap extends Component {
       accessToken: mapbox_token,
       container: this.ref,
       // style: 'mapbox://styles/jfqueralt/ck9hi7wl616pz1iugty1cpeiv?optimize=true',
-      style: 'mapbox://styles/planemad/ckagz019p003e1jr2z6j6qfa3?optimize=true',
+      style: 'mapbox://styles/jfqueralt/ckavedmnk253z1iphmsy39s3r?optimize=true',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
       keyboard: false,
@@ -156,6 +153,7 @@ export class WorldMap extends Component {
     map.on('style.load', () => {
       let hoveredStateId = null;
 
+      map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + this.props.currentLanguage.locale.split('-')[0]]);
       map.on('mousemove', 'admin-0-fill', function (e) {
         var features = map.queryRenderedFeatures(e.point, {
           layers: ['admin-0-fill'],
@@ -351,16 +349,7 @@ export class WorldMap extends Component {
   }
 
   updateMapLanguage(language) {
-    console.log(language);
-    let map = this.state.map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + language]);
-
-    // this.state.map.getStyle().layers.forEach(function(thisLayer){
-    //   if(thisLayer.id == 'country-label' || thisLayer.id == 'state-label'){
-    //     map.setLayoutProperty(thisLayer.id, 'text-field', ['get','name_' + language])
-    //   }
-    // })
-    // let map = this.state.map.setLayoutProperty('country-label', 'text-field', ['get','name_ru']);
-    console.log(map.getLayoutProperty('country-label', 'text-field'));
+    let map = this.state.map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + language.locale]);
   }
 
   async componentDidMount() {

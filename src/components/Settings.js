@@ -126,7 +126,7 @@ const styles = css`
   }
 `;
 
-export function Settings({ onClose, onLocateChange }) {
+export function Settings({ onClose, locale }) {
   const [showGeolocationButton, setshowGeolocationButton] = useState(false);
   const [pwaUpdateAvailable, setPwaUpdateAvailable] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -179,36 +179,25 @@ export function Settings({ onClose, onLocateChange }) {
 
   return html`
     <div class=${styles}>
-      <button onClick=${toggleDarkmode} class="ld-button">Toggle ${darkMode ? 'Light Mode' : 'Dark Mode'}</button>
-      ${showGeolocationButton ? html` <button onClick=${toggleGeolocation} class="ld-button">Allow geolocation</button> ` : ''}
+      <button onClick=${toggleDarkmode} class="ld-button">
+        ${locale.t('menu.userPreferenceSection.theme.action')}
+        ${darkMode ? locale.t('menu.userPreferenceSection.theme.light') : locale.t('menu.userPreferenceSection.theme.dark')}
+      </button>
+      ${showGeolocationButton
+        ? html` <button onClick=${toggleGeolocation} class="ld-button">${locale.t('menu.userPreferenceSection.geolocation')}</button> `
+        : ''}
 
       <pwa-install-button>
-        <button onClick=${() => onClose()} class="ld-button">Install app</button>
+        <button onClick=${() => onClose()} class="ld-button">${locale.t('menu.userPreferenceSection.app.install')}</button>
       </pwa-install-button>
 
-      ${
-        pwaUpdateAvailable
-          ? html`
-              <pwa-update-available>
-                <button onClick=${() => onClose()} class="ld-button">Update app</button>
-              </pwa-update-available>
-            `
-          : ''
-      }
-      <select class="select-css" onChange=${(e) => onLocateChange(e.target.value)}>
-        <option value="en" >
-          English
-        </option>
-        <option value="es">
-          Spanish
-        </option>
-        <option value="ru">
-          Russian
-        </option>
-        <option value="jp">
-          Japanese
-        </option>
-      </select/>
+      ${pwaUpdateAvailable
+        ? html`
+            <pwa-update-available>
+              <button onClick=${() => onClose()} class="ld-button">${locale.t('menu.userPreferenceSection.app.update')}</button>
+            </pwa-update-available>
+          `
+        : ''}
     </div>
   `;
 }

@@ -67,7 +67,7 @@ const btnStyle = css`
         }
       }
       &.left {
-        right: -150px;
+        right: -205px;
         &::after {
           left: 0;
           border-right-color: #fff;
@@ -76,7 +76,7 @@ const btnStyle = css`
         }
       }
       &.right {
-        left: -150px;
+        left: -205px;
         &::after {
           right: 0;
           border-left-color: #fff;
@@ -97,7 +97,8 @@ const btnStyle = css`
       }
       & > div {
         display: flex;
-        justify-content: space-between;
+        /*justify-content: space-between;*/
+        font-weight: 500;
         align-items: center;
         padding: 9px 0px;
         padding-bottom: 0px;
@@ -136,6 +137,10 @@ const btnStyle = css`
             }
             &.gray {
               background-color: #cccccc;
+            }
+            &.covidstripes {
+              background-color: #828282;
+              background-image: url(/src/assets/images/stripes-pattern-2.png);
             }
           }
         }
@@ -249,20 +254,17 @@ class Legend extends Component {
       showDialog: !this.state.showDialog,
     });
   }
-  render(_) {
+  render({ i18n }) {
     return html`<div onClick=${this.onClick} draggable="true" ref=${this.initBtn} class="${btnStyle}">
       ${list}
       <div class="dialog ${this.state.showDialog ? 'show' : ''} ${this.state.y} ${this.state.x}">
         <!--Row-->
         <div>
           <span>
-            <div class="color red" />
+            <div class="color green" />
           </span>
           <span>
-            ${viruslock}
-          </span>
-          <span>
-            ${lock}
+            ${i18n.t('mapLegend.no')}
           </span>
         </div>
         <!--Row-->
@@ -271,34 +273,16 @@ class Legend extends Component {
             <div class="color orange" />
           </span>
           <span>
-            ${virus}
-          </span>
-          <span>
-            ${lock}
+            ${i18n.t('mapLegend.partial')}
           </span>
         </div>
         <!--Row-->
         <div>
           <span>
-            <div class="color green" />
+            <div class="color red" />
           </span>
           <span>
-            ${viruslock}
-          </span>
-          <span>
-            ${unlock}
-          </span>
-        </div>
-        <!--Row-->
-        <div>
-          <span>
-            <div class="color blue" />
-          </span>
-          <span>
-            ${virus}
-          </span>
-          <span>
-            ${unlock}
+            ${i18n.t('mapLegend.full')}
           </span>
         </div>
         <!--Row-->
@@ -307,7 +291,16 @@ class Legend extends Component {
             <div class="color gray" />
           </span>
           <span>
-            NO DATA
+            ${i18n.t('mapLegend.noData')}
+          </span>
+        </div>
+        <!--Row-->
+        <div>
+          <span>
+            <div class="color covidstripes" />
+          </span>
+          <span>
+            ${i18n.t('mapLegend.cases')}
           </span>
         </div>
       </div>

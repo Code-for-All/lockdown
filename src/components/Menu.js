@@ -109,11 +109,12 @@ const preStyles = css`
     height: 100%;
     position: absolute;
     background-color: white;
-    width: 30vw;
-    border-radius: 20px 0px 0px 20px;
-    -moz-border-radius: 20px 0px 0px 20px;
-    -webkit-border-radius: 20px 0px 0px 20px;
+    width: 700px;
+    border-radius: 0px 0px 0px 0px;
+    -moz-border-radius: 0px 0px 0px 0px;
+    -webkit-border-radius: 0px 0px 0px 0px;
     overflow: auto;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
     @media (max-width: 960px) {
       border-radius: 0px;
       width: calc(100vw - 100%);
@@ -125,120 +126,125 @@ const preStyles = css`
   }
 `;
 const styles2 = css`
-    @keyframes fadeInRight {
-      from {
-        opacity: 0;
-        width: 0%;
-      }
-
-      to {
-        opacity: 1;
-        width: 8%;
-      }
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      width: 0%;
     }
-    @keyframes fadeInRightM {
-      from {
-        opacity: 0;
-        width: 0%;
-      }
 
-      to {
-        opacity: 1;
-        width: 23%;
-      }
+    to {
+      opacity: 1;
+      width: 8%;
     }
-    & {
-      @media (max-width: 960px) {
-        width: 20%;
-        top: 0px;
-        height: 100%;
-        animation: fadeInRightM 1s;
-      }
-      height: 75%;
-      @media (min-width: 960px) {
-        animation: fadeInRight 1s;
-      }
-      top: 5%
-      bottom: 20%;
-      width: 5%;
-      max-width: 60px;
-      position: absolute;
-      padding: 0;
-      right: 0px;
-      background-color: #f2f2f2;
-      z-index: 1100;
-      .dark & {
-        background-color: var(--ld-gray-2) !important;
-      }
-      & .ld-menu-nav {
-        display: flex;
-        height: 100%;
+  }
+  @keyframes fadeInRightM {
+    from {
+      opacity: 0;
+      width: 0%;
+    }
+
+    to {
+      opacity: 1;
+      width: 23%;
+    }
+  }
+  & {
+    @media (max-width: 960px) {
+      width: 56px;
+      top: 0px;
+      height: 100%;
+      animation: fadeInRightM 1s;
+    }
+    height: 100%;
+    @media (min-width: 960px) {
+      animation: fadeInRight 1s;
+    }
+    top: 0;
+    bottom: 0;
+    width: 56px;
+    max-width: 56px;
+    position: absolute;
+    padding: 0;
+    right: 0px;
+    background-color: #f2f2f2;
+    z-index: 1100;
+    .dark & {
+      background-color: var(--ld-gray-2) !important;
+    }
+    & .ld-menu-nav {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      & nav {
         width: 100%;
-        & nav {
-          width: 100%;
-          padding: 10px 0px 10px 0px;
+        padding: 10px 0px 10px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        & ul {
+          padding: 0;
+          justify-content: flex-start;
+          align-items: left;
+          min-height: 50%;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          & ul {
-            padding: 0;
-            justify-content: flex-start;
-            align-items: left;
-            min-height: 50%;
-            display: flex;
-            flex-direction: column;
-            & li {
-              margin-bottom: 29%;
-              &.hide{
-                display: none; /*Just for now*/
+          & li {
+            margin-bottom: 29%;
+            &.hide {
+              display: none; /*Just for now*/
+            }
+            & button {
+              background-color: transparent;
+            }
+            & .ld-menu--active {
+              &:focus:not(.leaflet-container) {
+                box-shadow: none !important;
               }
-              & button {
-                background-color: transparent;
-              }
-              & .ld-menu--active {
-                &:focus:not(.leaflet-container) {
-                  box-shadow: none !important;
-                }
-                position: relative;
-                background-color: white;
-                .dark & {
-                  background-color: #333333 !important;
-                  color: white !important;
-                }
-                & svg {
-                  .dark & {
-                    stroke: white;
-                  }
-                }
-                &::before {
-                  position: absolute;
-                  left: -20%;
-                  top: -40%;
-                  height: 180%;
-                  width: 120%;
-                  z-index: -1;
-                  content: ' ';
-                  .dark & {
-                    background-color: #333333 !important;
-                  }
-                  border-radius: 0% 100% 100% 69% / 0% 50% 51% 0%;
-                  border: 0px;
-                  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                  background-color: #ffffff;
-                }
+              position: relative;
+              background-color: transparent;
+              .dark & {
+                background-color: transparent !important;
+                color: white !important;
               }
               & svg {
-                color: #999999;
                 .dark & {
-                  color: white;
-                  stroke: white;
+                  color: #f2f2f2;
                 }
+                color: #828282;
+              }
+              &::before {
+                position: absolute;
+                left: -1px;
+                top: 7px;
+                height: 15px;
+                width: 10px;
+                z-index: -1;
+                content: ' ';
+                border-radius: 0% 100% 100% 69% / 0% 50% 51% 0%;
+                border: 0px;
+                /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
+                background-color: transparent;
+                z-index: 2000;
+                border-width: 10px 0 10px 10px;
+                border-style: solid;
+                border-color: transparent transparent transparent #ffffff;
+                .dark & {
+                  background-color: transparent !important;
+                  border-color: transparent transparent transparent #333333;
+                }
+              }
+            }
+            & svg {
+              color: #bdbdbd;
+              .dark & {
+                color: #bdbdbd;
               }
             }
           }
         }
       }
     }
+  }
 `;
 
 const sideBtn = css`
@@ -279,9 +285,9 @@ const closeBtn = css`
   & {
     position: absolute !important;
     color: white;
-    background-color: var(--ld-hover);
+    background-color: transparent;
     padding: 0px !important;
-    top: 10%;
+    top: 90px;
     width: 39px !important;
     height: 39px !important;
     right: 0;
@@ -289,7 +295,7 @@ const closeBtn = css`
     margin-right: auto !important;
     margin-left: auto !important;
     border-radius: 50% !important;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    /*box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -305,7 +311,7 @@ const closeBtn = css`
   .dark & {
     position: absolute !important;
     color: white;
-    background-color: var(--ld-hover);
+    background-color: transparent;
     padding: 0px;
     top: 10%;
     width: 39px;
@@ -314,7 +320,7 @@ const closeBtn = css`
     margin-right: auto;
     margin-left: auto;
     border-radius: 50%;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    /*box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);*/
     &:hover {
       cursor: pointer;
     }
@@ -339,7 +345,7 @@ const overlay = css`
     }
   }
 `;
-const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateChange) => {
+const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateChange, locale) => {
   switch (menuItem) {
     case 'info':
       return {
@@ -347,77 +353,89 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
         template: html`
           <h1>Lockdown</h1>
           <p class="ld-alpha">
-            Project lockdown is currently in beta. Not all data may be available yet.
+            ${locale.t('menu.informationSection.banner')}
           </p>
           <p>
-            <b>Project Lockdown</b> provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced by across the globe
-            in response to the COVID-19 crisis to visualize the success of different pandemic response measures, monitor effects on Human
-            and Digital Rights, and clarify evaluation metrics.
+            <b>${locale.t('menu.informationSection.main.name')}</b>
+            ${locale.t('menu.informationSection.main.text')}
           </p>
 
           <${Expandable}
-            toggle=${'About'}
+            toggle=${locale.t('menu.informationSection.about.title')}
             currentDropdown=${currentDropdown}
             onDropDown=${onDropDown}
             detail=${html`
               <p>
-                Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and
-                reduce the strain on medical infrastructure. <b>Project Lockdown</b> empowers citizens, journalists, and Human Rights
-                Defenderes to easily analyze the social and political effects of these measures. Founded on the values of transparency and
-                accountability, <b>Project Lockdown</b> is committed to providing citizens of the world with the tools they need to stay
-                safe and informed.
+                ${locale.t('menu.informationSection.about.text.p1')}
+                <b>${locale.t('menu.informationSection.main.name')}</b>
+                ${locale.t('menu.informationSection.about.text.p2')}
+                <b>${locale.t('menu.informationSection.main.name')}</b>
+                ${locale.t('menu.informationSection.about.text.p3')}
               </p>
             `}
           />
 
           <${Expandable}
-            toggle=${'Sources'}
+            toggle=${locale.t('menu.informationSection.sources.title')}
             currentDropdown=${currentDropdown}
             onDropDown=${onDropDown}
             detail=${html`
               <p>
-                <b>Project Lockdown</b> combines multiple trusted sources to ensure that the data used is verified and accurate. You can find the full list of sources used here:
+                <b>${locale.t('menu.informationSection.main.name')}</b>
+                ${locale.t('menu.informationSection.sources.subtitle')}
                 <ul class="ld-sources">
                   <li>
-                  <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://TIOF.Click/LockdownData" target="_blank"> Project Lockdown's Database</a><br/>
-                  (Collected from a number of NPI sources)
+                    <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://TIOF.Click/LockdownData" target="_blank"> ${locale.t(
+                      'menu.informationSection.sources.linksList.first.linkTitle'
+                    )}</a><br/>
+                    ${locale.t('menu.informationSection.sources.linksList.first.text')}
                   </li>
                   <li>
-                   <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://covid19api.com/" target="_blank">Coronavirus COVID19 API</a><br/>
-                  (Data sourced from <a href="https://systems.jhu.edu/" target="_blank">Johns Hopkins CSSE)</a><br/>
+                   <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://covid19api.com/" target="_blank">${locale.t(
+                     'menu.informationSection.sources.linksList.second.linkTitle'
+                   )}</a><br/>
+                   ${locale.t(
+                     'menu.informationSection.sources.linksList.second.text'
+                   )} <a href="https://systems.jhu.edu/" target="_blank">${locale.t(
+              'menu.informationSection.sources.linksList.second.highlight'
+            )}</a><br/>
                   </li>
                 </ul>
-                If you find any errors, please help us and report it <a rel="noopener noreferrer" target="_blank" href="https://github.com/Code-for-All/lockdown/issues">by creating an issue here</a>.
+                ${locale.t(
+                  'menu.informationSection.sources.issues.text'
+                )} <a rel="noopener noreferrer" target="_blank" href="https://github.com/Code-for-All/lockdown/issues">${locale.t(
+              'menu.informationSection.sources.issues.highlight'
+            )}</a>.
               </p>
             `}
           />
           <${Expandable}
-            toggle=${'Credits'}
+            toggle=${locale.t('menu.informationSection.credits.title')}
             currentDropdown=${currentDropdown}
             onDropDown=${onDropDown}
             detail=${html`
               <p>
-                <b>Project Lockdown</b> is a Civic Tech initiative made possible by a number of dedicated individuals and organizations.
-                View the list of contributors
+                <b>${locale.t('menu.informationSection.main.name')}</b>
+                ${locale.t('menu.informationSection.credits.text')}
                 <a
                   href="https://docs.google.com/spreadsheets/d/1mVyQxxLxAF3E1dw870WHXTOLgYzmumojvzIekpgvLV0/edit?ts=5e74ac83#gid=634415797"
                   target="_blank"
-                  >here</a
+                  >${locale.t('menu.informationSection.credits.highlight')}</a
                 >.
               </p>
             `}
           />
 
           <${Expandable}
-            toggle=${'Data & Privacy'}
+            toggle=${locale.t('menu.informationSection.dataPrivacity.title')}
             currentDropdown=${currentDropdown}
             onDropDown=${onDropDown}
             detail=${html`
               <p>
-                We do not collect any personal information from our visitors.
+                ${locale.t('menu.informationSection.dataPrivacity.paragraphs.p1')}
               </p>
               <p>
-                All information on project members is provided with their consent.
+                ${locale.t('menu.informationSection.dataPrivacity.paragraphs.p2')}
               </p>
             `}
           />
@@ -426,7 +444,7 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
     case 'settings':
       return {
         title: 'settings',
-        template: html` <${Settings} onClose=${callback} onLocateChange=${onLocateChange} /> `,
+        template: html` <${Settings} onClose=${callback} onLocateChange=${onLocateChange} locale=${locale} /> `,
       };
     case 'contribute':
       return {
@@ -564,7 +582,7 @@ export class Menu extends Component {
                     <h1>${activeItem}</h1>
                   </div>
                 </div>
-                ${renderMenu(activeItem, this.closeNavbar, currentDropdown, this.onDropDown, _.onLocateChange).template}
+                ${renderMenu(activeItem, this.closeNavbar, currentDropdown, this.onDropDown, _.onLocateChange, _.locale).template}
               </div>
             </main>`
         : html`<button onClick=${this.showSideBar} class="${sideBtn}">
