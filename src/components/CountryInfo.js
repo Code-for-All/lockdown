@@ -248,7 +248,9 @@ class CountryDetails extends Component {
         <div class="data-entry is-half">
           <dt>${i18n.t('tdo.tabs.dailyLife.stats.population')}</dt>
           <dd class="data-value">
-            ${!isNaN(Number(populationData?.Population)) ? Number(populationData?.Population).toLocaleString() ?? 'Error' : i18n.t('tdo.tabs.dailyLife.noResults')}
+            ${!isNaN(Number(populationData?.Population))
+              ? Number(populationData?.Population).toLocaleString() ?? 'Error'
+              : i18n.t('tdo.tabs.dailyLife.noResults')}
           </dd>
         </div>
         <div class="data-entry is-half">
@@ -269,7 +271,9 @@ class CountryDetails extends Component {
         </div>
         <div class="data-entry is-third">
           <dt>${i18n.t('tdo.tabs.dailyLife.stats.deaths')}</dt>
-          <dd class="data-value">${coronaData?.total_deaths ? Number(coronaData?.total_deaths).toLocaleString() :i18n.t('tdo.tabs.dailyLife.noResults') }</dd>
+          <dd class="data-value">
+            ${coronaData?.total_deaths ? Number(coronaData?.total_deaths).toLocaleString() : i18n.t('tdo.tabs.dailyLife.noResults')}
+          </dd>
         </div>
       </dl>
 

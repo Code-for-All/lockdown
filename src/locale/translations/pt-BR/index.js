@@ -35,7 +35,7 @@ export default {
           'combina mútliplas fontes confiáveis para garantir que os dados utilizados são verificáveis e corretos. Você pode checar nossa lista de fontes aqui:',
         linksList: {
           first: {
-            linkTitle: "Banco de dados do Project Lockdown",
+            linkTitle: 'Banco de dados do Project Lockdown',
             text: '(Coletados de várias fontes de NPIs)',
           },
           second: {
@@ -80,7 +80,7 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Vida Diária',
-        "noResults": "N/D",
+        noResults: 'N/D',
         stats: {
           population: 'População',
           max_assembly: 'Congregação máxima',

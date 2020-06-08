@@ -8,7 +8,7 @@ import { enUS } from 'date-fns/locale';
 import DatePicker from './DatePicker.js';
 import { calendar } from '../assets/icons/icons.js';
 
-import { getAllFNSLanguages } from '../locale/i18nUtils'
+import { getAllFNSLanguages } from '../locale/i18nUtils';
 
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
 
@@ -16,36 +16,36 @@ let languages = false;
 
 function toSliderStringShort(date, currentLanguage) {
   let isoLanguage = currentLanguage;
-  if(currentLanguage !== undefined){
-    isoLanguage = currentLanguage.replace("-","");
-    if(languages[isoLanguage] === undefined || languages[isoLanguage] === null){
-      isoLanguage = currentLanguage.split("-")[0];
-      if(languages[isoLanguage] === undefined || languages[isoLanguage] === null){
-        isoLanguage = "enUS";
+  if (currentLanguage !== undefined) {
+    isoLanguage = currentLanguage.replace('-', '');
+    if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
+      isoLanguage = currentLanguage.split('-')[0];
+      if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
+        isoLanguage = 'enUS';
       }
     }
-  }else{
-    isoLanguage = "enUS";
+  } else {
+    isoLanguage = 'enUS';
   }
-  return format(date, 'dd MMM',{
-    locale: languages ? languages[isoLanguage] : enUS
+  return format(date, 'dd MMM', {
+    locale: languages ? languages[isoLanguage] : enUS,
   });
 }
 function toSliderString(date, currentLanguage) {
   let isoLanguage = currentLanguage;
-  if(currentLanguage){
-    isoLanguage = currentLanguage.replace("-","");
-    if(languages[isoLanguage] === undefined || languages[isoLanguage] === null){
-      isoLanguage = currentLanguage.split("-")[0];
-      if(languages[isoLanguage] === undefined || languages[isoLanguage] === null){
-        isoLanguage = "enUS";
+  if (currentLanguage) {
+    isoLanguage = currentLanguage.replace('-', '');
+    if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
+      isoLanguage = currentLanguage.split('-')[0];
+      if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
+        isoLanguage = 'enUS';
       }
     }
-  }else{
-    isoLanguage = "enUS";
+  } else {
+    isoLanguage = 'enUS';
   }
-  return format(date, 'dd MMMM yyyy',{
-    locale: languages ? languages[isoLanguage] : enUS
+  return format(date, 'dd MMMM yyyy', {
+    locale: languages ? languages[isoLanguage] : enUS,
   });
 }
 
@@ -493,7 +493,7 @@ export default class CountryInfo extends Component {
     this.onPressKey = this.onPressKey.bind(this);
     this.updateDates = this.updateDates.bind(this);
   }
-  async componentWillMount(){
+  async componentWillMount() {
     languages = await getAllFNSLanguages();
   }
   componentDidMount() {
@@ -527,7 +527,7 @@ export default class CountryInfo extends Component {
   }
   componentDidUpdate(previousProps, previousState, snapshot) {
     if (previousProps.i18n !== this.props.i18n) {
-      this.updateDates(previousState)
+      this.updateDates(previousState);
     }
   }
   onPressKey(e) {
@@ -567,7 +567,7 @@ export default class CountryInfo extends Component {
       {
         currentDateValue: newValue,
         currentPosition: newPosition,
-        currentSelectedDay: toSliderString(currentSliderRange[newValue],this.props.i18n.locale),
+        currentSelectedDay: toSliderString(currentSliderRange[newValue], this.props.i18n.locale),
       },
       this.submitChanges
     );
@@ -612,7 +612,7 @@ export default class CountryInfo extends Component {
     this.setState(
       {
         currentSliderRange: days,
-        currentSelectedDay: toSliderString(date,this.props.i18n.locale),
+        currentSelectedDay: toSliderString(date, this.props.i18n.locale),
         firstDay: toSliderStringShort(days[0], this.props.i18n.locale),
         lastDay: toSliderStringShort(days[days.length - 1], this.props.i18n.locale),
         currentDateValue: this.state.datePickerPosition === 'left' ? 0 : 69,
@@ -621,13 +621,13 @@ export default class CountryInfo extends Component {
       this.submitChanges
     );
   }
-  updateDates(previousState){
+  updateDates(previousState) {
     const { currentDateValue, currentSliderRange } = previousState;
     this.setState({
-      currentSelectedDay: toSliderString(currentSliderRange[currentDateValue],this.props.i18n.locale),
-      firstDay: toSliderStringShort(currentSliderRange[0],this.props.i18n.locale),
-      lastDay: toSliderStringShort(currentSliderRange[currentSliderRange.length -1],this.props.i18n.locale)
-    })
+      currentSelectedDay: toSliderString(currentSliderRange[currentDateValue], this.props.i18n.locale),
+      firstDay: toSliderStringShort(currentSliderRange[0], this.props.i18n.locale),
+      lastDay: toSliderStringShort(currentSliderRange[currentSliderRange.length - 1], this.props.i18n.locale),
+    });
   }
   calendarWillClose() {
     this.setState(

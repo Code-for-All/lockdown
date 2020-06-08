@@ -76,10 +76,10 @@ const langOptions = css`
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
       overflow: hidden;
       margin-left: 10px;
-      &.active{
+      &.active {
         border: 1px solid #333333;
       }
-      .dark &.active{
+      .dark &.active {
         border: 1px solid #fff;
       }
       .dark & {
@@ -118,7 +118,10 @@ class LanguageSelector extends Component {
       </div>
       <div class=${`${langOptions} ${showLangOpt ? 'show' : ''}`}>
         ${languages.map((language) => {
-          return html`<div class="langOpt ${language === i18n.locale ? 'active' : ''}" onClick=${() => this.changeCurrentLanguage(language)}>
+          return html`<div
+            class="langOpt ${language === i18n.locale ? 'active' : ''}"
+            onClick=${() => this.changeCurrentLanguage(language)}
+          >
             ${language?.toUpperCase().replace('-', '\n')}
           </div>`;
         })}
