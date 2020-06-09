@@ -23,7 +23,7 @@ const selectedLang = css`
     font-weight: 600;
     font-size: 12px;
     letter-spacing: 0.05em;
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
     .dark & {
@@ -80,7 +80,7 @@ const langOptions = css`
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
       overflow: hidden;
       margin-left: 10px;
-      &:hover{
+      &:hover {
         cursor: pointer;
         border: 0.3px solid rgba(51, 51, 51, 0.5);
       }

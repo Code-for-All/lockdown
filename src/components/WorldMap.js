@@ -153,13 +153,13 @@ export class WorldMap extends Component {
     map.on('style.load', () => {
       let hoveredStateId = null;
       let iso = this.props.currentLanguage.locale;
-      if(iso.includes("zh-")){
-        if(iso.includes("-CN")){
-          iso = "zh-Hans";
-        }else{
-          iso = "zh-Hant";
+      if (iso.includes('zh-')) {
+        if (iso.includes('-CN')) {
+          iso = 'zh-Hans';
+        } else {
+          iso = 'zh-Hant';
         }
-      }else{
+      } else {
         iso = iso.split('-')[0];
       }
       map.setLayoutProperty('water-line-label', 'text-field', ['get', 'name_' + iso]);
@@ -362,11 +362,11 @@ export class WorldMap extends Component {
   updateMapLanguage(language) {
     console.log(language);
     let iso = language.locale;
-    if(iso.includes("zh-")){
-      if(iso.includes("-CN")){
-        iso = "zh-Hans";
-      }else{
-        iso = "zh-Hant";
+    if (iso.includes('zh-')) {
+      if (iso.includes('-CN')) {
+        iso = 'zh-Hans';
+      } else {
+        iso = 'zh-Hant';
       }
     }
     this.state.map.setLayoutProperty('water-line-label', 'text-field', ['get', 'name_' + iso]);

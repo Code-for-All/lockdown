@@ -76,7 +76,7 @@ function getCurrentLanguage(browserLanguage, languagesList) {
     if (baseLanguageMatch >= 0) {
       return baseLanguage;
     } else {
-      if(browserLanguage.includes("-TW") || browserLanguage.includes("-tw")) return "zh-HK";
+      if (browserLanguage.includes('-TW') || browserLanguage.includes('-tw')) return 'zh-HK';
       let poorMatch = languagesList.filter((language) => language.split('-')[0].contains(baseLanguage));
       return poorMatch.length > 0 ? poorMatch[0] : FALLBACK_LANGUAGE;
     }
@@ -219,9 +219,9 @@ export class App extends Component {
     let i18nLanguages = {};
     let baseLanguages = [];
     languages.forEach((language) => {
-      if (!language.includes('-')){
+      if (!language.includes('-')) {
         baseLanguages.push(language);
-      }else{
+      } else {
         if (language.includes('zh-')) baseLanguages.push(language);
       }
       i18nLanguages[language] = {
