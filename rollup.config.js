@@ -83,6 +83,11 @@ export default [
       }),
       copy({
         hook: 'buildStart',
+        targets: [{ src: 'src/locale/translations', dest: 'build/' }],
+        flatten: true
+      }),
+      copy({
+        hook: 'buildStart',
         targets: [
           { src: 'manifest.json', dest: 'build/' },
           { src: 'manifest-dark.json', dest: 'build/' }

@@ -40,28 +40,28 @@ const TRAVELTYPE = ['Land', 'Flight', 'Sea'];
 
 const TRANSLATIONS = {
   commerce: {
-    text: 'Commerce',
+    text: 'commerce',
   },
   foreigners_inbound: {
-    text: 'Foreigners (in)',
+    text: 'foreignersInbound',
   },
   foreigners_outbound: {
-    text: 'Foreigners (out)',
+    text: 'foreignersOutbound',
   },
   local: {
-    text: 'In between cities',
+    text: 'local',
   },
   nationals_inbound: {
-    text: 'Nationals (in)',
+    text: 'nationalsInbound',
   },
   nationals_outbound: {
-    text: 'Nationals (out)',
+    text: 'nationalsOutbound',
   },
   stopovers: {
-    text: 'Stopovers',
+    text: 'stopovers',
   },
   cross_border_workers: {
-    text: 'Cross border workers',
+    text: 'crossBorderWorkers',
   },
 };
 
@@ -69,51 +69,61 @@ const MEASURES = [
   {
     id: 'lockdown_status',
     label: 'Stay Home',
+    translationKey: 'home',
     icon: home,
   },
   {
     id: 'going_to_shops',
     label: 'Shopping',
+    translationKey: 'shopping',
     icon: shops,
   },
   {
     id: 'city_movement_restriction',
     label: 'Outdoors',
+    translationKey: 'outdoors',
     icon: citymovement,
   },
   {
     id: 'military_not_deployed',
     label: 'Military',
+    translationKey: 'military',
     icon: military,
   },
   {
     id: 'attending_religious_sites',
     label: 'Religious Sites',
+    translationKey: 'religious',
     icon: religion,
   },
   {
     id: 'electricity_nominal',
     label: 'Electricity',
+    translationKey: 'electricity',
     icon: electricity,
   },
   {
     id: 'going_to_work',
     label: 'Go to Work',
+    translationKey: 'work',
     icon: work,
   },
   {
     id: 'water_nominal',
     label: 'Water',
+    translationKey: 'water',
     icon: water,
   },
   {
     id: 'academia_allowed',
     label: 'Go to Schools',
+    translationKey: 'schools',
     icon: academia,
   },
   {
     id: 'internet_nominal',
     label: 'Telecom',
+    translationKey: 'internet',
     icon: internet,
   },
 ];
@@ -121,15 +131,15 @@ const MEASURES = [
 const tabs = [
   {
     id: 1,
-    name: 'Daily Life',
+    name: 'dailyLife',
   },
   {
     id: 2,
-    name: 'Mobility',
+    name: 'mobility',
   },
   {
     id: 3,
-    name: 'Reports',
+    name: 'reports',
   },
 ];
 
@@ -177,6 +187,7 @@ export default class CountryInfo extends Component {
   }
 
   render(_, { coronaData, populationData, countryDetails }) {
+    let { i18n } = this.props;
     /** If the user is offline, and theres no response, or the response has failed */
     if (!navigator.onLine) {
       if (coronaData?.status !== 'success' || populationData?.data?.status !== 'success' || countryDetails?.status !== 'success') {
@@ -205,7 +216,7 @@ export default class CountryInfo extends Component {
         ${tabs.map(
           (tab) =>
             html`<div onClick=${() => this.changeTab(tab.id)} class="tab ${this.state.currentTab === tab.id ? 'active' : ''}">
-              ${tab.name}
+              ${_.i18n.t(`tdo.tabs.${tab.name}.name`)}
             </div>`
         )}
         <button onClick=${this.props.onClose}>${closeIcon}</button>
@@ -218,10 +229,11 @@ export default class CountryInfo extends Component {
               coronaData=${coronaData.data?.find((corona) => isSameDay(new Date(corona.last_updated), this.props.date))}
               populationData=${populationData?.data[this.props.iso2]}
               countryDetails=${countryDetails}
+              i18n=${i18n}
             />`
           : this.state.currentTab === 2
-          ? html`<${TransportDetails} countryDetails=${countryDetails} />`
-          : html`<${Reports} />`}
+          ? html`<${TransportDetails} countryDetails=${countryDetails} i18n=${i18n} />`
+          : html`<${Reports} i18n=${i18n} />`}
       </div>
     `;
   }
@@ -229,38 +241,43 @@ export default class CountryInfo extends Component {
 
 class CountryDetails extends Component {
   render(_) {
+    let { i18n } = _;
     let { coronaData, populationData, countryDetails, country, date } = this.props;
     return html`<h2 class="ld-font-subheader"><span>${country}</span> <span>${format(date, 'dd/MM/yyyy')}</span></h2>
       <dl class="data">
         <div class="data-entry is-half">
-          <dt>Population</dt>
+          <dt>${i18n.t('tdo.tabs.dailyLife.stats.population')}</dt>
           <dd class="data-value">
-            ${!isNaN(Number(populationData?.Population)) ? Number(populationData?.Population).toLocaleString() ?? 'Error' : 'Unknown'}
+            ${!isNaN(Number(populationData?.Population))
+              ? Number(populationData?.Population).toLocaleString() ?? 'Error'
+              : i18n.t('tdo.tabs.dailyLife.noResults')}
           </dd>
         </div>
         <div class="data-entry is-half">
-          <dt>Max assembly</dt>
-          <dd class="data-value">${countryDetails?.max_gathering ?? 'Unknown'}</dd>
+          <dt>${i18n.t('tdo.tabs.dailyLife.stats.max_assembly')}</dt>
+          <dd class="data-value">${countryDetails?.max_gathering ?? i18n.t('tdo.tabs.dailyLife.noResults')}</dd>
         </div>
         <div class="data-entry is-third">
-          <dt>Cases</dt>
+          <dt>${i18n.t('tdo.tabs.dailyLife.stats.cases')}</dt>
           <dd class="data-value">
-            ${coronaData?.total_confirmed ? Number(coronaData?.total_confirmed).toLocaleString() : 'N/A'}
+            ${coronaData?.total_confirmed ? Number(coronaData?.total_confirmed).toLocaleString() : i18n.t('tdo.tabs.dailyLife.noResults')}
           </dd>
         </div>
         <div class="data-entry is-third">
-          <dt>Recoveries</dt>
+          <dt>${i18n.t('tdo.tabs.dailyLife.stats.recoveries')}</dt>
           <dd class="data-value">
-            ${coronaData?.total_recovered ? Number(coronaData?.total_recovered).toLocaleString() : 'N/A'}
+            ${coronaData?.total_recovered ? Number(coronaData?.total_recovered).toLocaleString() : i18n.t('tdo.tabs.dailyLife.noResults')}
           </dd>
         </div>
         <div class="data-entry is-third">
-          <dt>Deaths</dt>
-          <dd class="data-value">${coronaData?.total_deaths ? Number(coronaData?.total_deaths).toLocaleString() : 'N/A'}</dd>
+          <dt>${i18n.t('tdo.tabs.dailyLife.stats.deaths')}</dt>
+          <dd class="data-value">
+            ${coronaData?.total_deaths ? Number(coronaData?.total_deaths).toLocaleString() : i18n.t('tdo.tabs.dailyLife.noResults')}
+          </dd>
         </div>
       </dl>
 
-      <${Legends} />
+      <${Legends} i18n=${i18n} tab="dailyLife" />
 
       ${countryDetails.status === 'success'
         ? html`
@@ -278,7 +295,9 @@ class CountryDetails extends Component {
                         >
                           ${m.icon}
                         </div>
-                        <span id="measure-label-${m.id}" class="measure-label">${m.label}</span>
+                        <span id="measure-label-${m.id}" class="measure-label"
+                          >${i18n.t(`tdo.tabs.dailyLife.measures.${m.translationKey}`)}</span
+                        >
                       </div>
                     </li>
                   `
@@ -297,13 +316,14 @@ class CountryDetails extends Component {
 class TransportDetails extends Component {
   render(_) {
     let { countryDetails } = this.props;
+    let { i18n } = _;
 
     return html`${countryDetails.status === 'success'
       ? html`
           <br />
           <br />
-          <${Legends} />
-          <h2 class="ld-font-subheader last transport">Transport (restrictions)</h2>
+          <${Legends} i18n=${i18n} tab="mobility" />
+          <h2 class="ld-font-subheader last transport">${i18n.t('tdo.tabs.mobility.subtitle')}</h2>
           <dl>
             <div class="ld-travel">
               <dt></dt>
@@ -316,7 +336,7 @@ class TransportDetails extends Component {
             ${Object.keys(countryDetails.travel).map((key, j) => {
               return html`
                 <div class="ld-travel">
-                  <dt>${TRANSLATIONS[key].text}</dt>
+                  <dt>${i18n.t(`tdo.tabs.mobility.measures.${TRANSLATIONS[key].text}`)}</dt>
                   <div class="ld-travel--values">
                     ${countryDetails.travel[key].map(
                       (val, i) =>
@@ -343,23 +363,24 @@ class TransportDetails extends Component {
 
 class Legends extends Component {
   render(_) {
+    let { i18n, tab } = _;
     return html`<div class="legend ld-font-legend">
       <dl>
         <div class="legend-item">
           <dt class="legend-green" aria-label="green"></dt>
-          <dd>None</dd>
+          <dd>${i18n.t(`tdo.tabs.${tab}.measureValues.3`)}</dd>
         </div>
         <div class="legend-item">
           <dt class="legend-yellow" aria-label="yellow"></dt>
-          <dd>Partial</dd>
+          <dd>${i18n.t(`tdo.tabs.${tab}.measureValues.2`)}</dd>
         </div>
         <div class="legend-item">
           <dt class="legend-red" aria-label="red"></dt>
-          <dd>Total</dd>
+          <dd>${i18n.t(`tdo.tabs.${tab}.measureValues.1`)}</dd>
         </div>
         <div class="legend-item">
           <dt class="legend-gray" aria-label="gray"></dt>
-          <dd>Unclear</dd>
+          <dd>${i18n.t(`tdo.tabs.${tab}.measureValues.4`)}</dd>
         </div>
       </dl>
     </div>`;
@@ -368,6 +389,7 @@ class Legends extends Component {
 
 class Reports extends Component {
   render(_) {
-    return html`<div class="${reports}"><h3>Coming Soon</h3></div>`;
+    let { i18n } = _;
+    return html`<div class="${reports}"><h3>${i18n.t(`tdo.tabs.reports.subtitle`)}</h3></div>`;
   }
 }

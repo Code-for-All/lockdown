@@ -254,7 +254,7 @@ class Legend extends Component {
       showDialog: !this.state.showDialog,
     });
   }
-  render(_) {
+  render({ i18n }) {
     return html`<div onClick=${this.onClick} draggable="true" ref=${this.initBtn} class="${btnStyle}">
       ${list}
       <div class="dialog ${this.state.showDialog ? 'show' : ''} ${this.state.y} ${this.state.x}">
@@ -264,7 +264,7 @@ class Legend extends Component {
             <div class="color green" />
           </span>
           <span>
-            NO LOCKDOWN
+            ${i18n.t('mapLegend.no')}
           </span>
         </div>
         <!--Row-->
@@ -273,7 +273,7 @@ class Legend extends Component {
             <div class="color orange" />
           </span>
           <span>
-            PARTIAL LOCKDOWN
+            ${i18n.t('mapLegend.partial')}
           </span>
         </div>
         <!--Row-->
@@ -282,7 +282,7 @@ class Legend extends Component {
             <div class="color red" />
           </span>
           <span>
-            FULL LOCKDOWN
+            ${i18n.t('mapLegend.full')}
           </span>
         </div>
         <!--Row-->
@@ -291,7 +291,7 @@ class Legend extends Component {
             <div class="color gray" />
           </span>
           <span>
-            NO DATA
+            ${i18n.t('mapLegend.noData')}
           </span>
         </div>
         <!--Row-->
@@ -300,7 +300,7 @@ class Legend extends Component {
             <div class="color covidstripes" />
           </span>
           <span>
-            COVID REPORTED
+            ${i18n.t('mapLegend.cases')}
           </span>
         </div>
       </div>

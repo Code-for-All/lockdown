@@ -212,6 +212,8 @@ export const countryInfoStyles = css`
 
   .legend dl {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .legend-item {
@@ -267,6 +269,7 @@ export const countryInfoStyles = css`
     align-items: flex-start;
     margin-bottom: 0px;
     text-align: left;
+    overflow-x: hidden;
   }
 
   .measure-wrapper {

@@ -6,7 +6,7 @@ import css from 'csz';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
 
-const mapbox_token = 'pk.eyJ1IjoiamZxdWVyYWx0IiwiYSI6ImNrOWZpZHF3ajBic2YzbHQwYzQ5bGRnaXgifQ.NcQInXQmMy93L47QBMCAfg';
+const mapbox_token = 'pk.eyJ1IjoiamZxdWVyYWx0IiwiYSI6ImNrODcwb29vajBjMDkzbWxqZHh6ZDU5aHUifQ.BjT63Mdh-P2myNvygIhSpw';
 
 const selectStyles = css`
   & {
@@ -81,6 +81,7 @@ export class WorldMap extends Component {
     this.__handleSelect = this.__handleSelect.bind(this);
     this.initMap = this.initMap.bind(this);
     this.updateMap = this.updateMap.bind(this);
+    this.updateMapLanguage = this.updateMapLanguage.bind(this);
 
     let coords = { lng: 40.7, lat: 25, zoom: 1.06 };
 
@@ -133,16 +134,15 @@ export class WorldMap extends Component {
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
-      style: 'mapbox://styles/jfqueralt/ck9hi7wl616pz1iugty1cpeiv?optimize=true',
+      // style: 'mapbox://styles/jfqueralt/ck9hi7wl616pz1iugty1cpeiv?optimize=true',
+      style: 'mapbox://styles/jfqueralt/ckavedmnk253z1iphmsy39s3r?optimize=true',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
       keyboard: false,
       pitchWithRotate: false,
       hash: true,
     });
-
     window.map = map;
-
     // we dont need to remap small mapData
     // const localData = mapData.features.map((f) => {
     //   return { ISO: f.properties.iso2, lockdown_status: f.properties.lockdown_status, name: f.properties.NAME };
@@ -152,7 +152,19 @@ export class WorldMap extends Component {
 
     map.on('style.load', () => {
       let hoveredStateId = null;
-
+      let iso = this.props.currentLanguage.locale;
+      if (iso.includes('zh-')) {
+        if (iso.includes('-CN')) {
+          iso = 'zh-Hans';
+        } else {
+          iso = 'zh-Hant';
+        }
+      } else {
+        iso = iso.split('-')[0];
+      }
+      map.setLayoutProperty('water-line-label', 'text-field', ['get', 'name_' + iso]);
+      map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + iso]);
+      map.setLayoutProperty('water-point-label', 'text-field', ['get', 'name_' + iso]);
       map.on('mousemove', 'admin-0-fill', function (e) {
         var features = map.queryRenderedFeatures(e.point, {
           layers: ['admin-0-fill'],
@@ -347,6 +359,21 @@ export class WorldMap extends Component {
     }
   }
 
+  updateMapLanguage(language) {
+    console.log(language);
+    let iso = language.locale;
+    if (iso.includes('zh-')) {
+      if (iso.includes('-CN')) {
+        iso = 'zh-Hans';
+      } else {
+        iso = 'zh-Hant';
+      }
+    }
+    this.state.map.setLayoutProperty('water-line-label', 'text-field', ['get', 'name_' + iso]);
+    this.state.map.setLayoutProperty('water-point-label', 'text-field', ['get', 'name_' + iso]);
+    let map = this.state.map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + iso]);
+  }
+
   async componentDidMount() {
     dialogService.addEventListener('close', (e) => {
       if (e.detail.countryDialogClosed) {
@@ -420,6 +447,9 @@ export class WorldMap extends Component {
   componentDidUpdate(previousProps, previousState, snapshot) {
     if (this.state.isMapReady) {
       this.updateMap(this.state.mapData, this.state.lookupTable, this.props.selectedDate);
+      if (previousProps.currentLanguage !== this.props.currentLanguage) {
+        this.updateMapLanguage(this.props.currentLanguage);
+      }
     }
   }
 
