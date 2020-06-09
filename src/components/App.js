@@ -18,6 +18,7 @@ import translations from '../locale/index';
 import { encodeJsonTranslation } from '../locale/i18nUtils';
 
 const FALLBACK_LANGUAGE = 'en';
+const USE_PERFECT_LANGUAGE_MATCH = false;
 
 const debouncedCloseDialog = debounce(
   () => {
@@ -68,7 +69,7 @@ function toJsonString(date) {
 
 function getCurrentLanguage(browserLanguage, languagesList) {
   let perfectMatch = languagesList.indexOf(browserLanguage);
-  if (perfectMatch >= 0) {
+  if (perfectMatch >= 0 && USE_PERFECT_LANGUAGE_MATCH) {
     return browserLanguage;
   } else {
     let baseLanguage = browserLanguage.split('-')[0];
