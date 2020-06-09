@@ -76,6 +76,7 @@ function getCurrentLanguage(browserLanguage, languagesList) {
     if (baseLanguageMatch >= 0) {
       return baseLanguage;
     } else {
+      if(browserLanguage.includes("-TW") || browserLanguage.includes("-tw")) return "zh-HK";
       let poorMatch = languagesList.filter((language) => language.split('-')[0].contains(baseLanguage));
       return poorMatch.length > 0 ? poorMatch[0] : FALLBACK_LANGUAGE;
     }
@@ -218,7 +219,11 @@ export class App extends Component {
     let i18nLanguages = {};
     let baseLanguages = [];
     languages.forEach((language) => {
-      if (!language.includes('-')) baseLanguages.push(language);
+      if (!language.includes('-')){
+        baseLanguages.push(language);
+      }else{
+        if (language.includes('zh-')) baseLanguages.push(language);
+      }
       i18nLanguages[language] = {
         t: this.__getTranslation,
         i18n: i18n.create({
