@@ -23,6 +23,9 @@ const selectedLang = css`
     font-weight: 600;
     font-size: 12px;
     letter-spacing: 0.05em;
+    &:hover {
+      cursor: pointer;
+    }
     .dark & {
       background-color: #333333;
       color: #fff;
@@ -59,6 +62,7 @@ const langOptions = css`
     overflow: hidden;
     transition: 0.5s;
     padding: 5px 0px;
+    flex-wrap: no-wrap;
     &.show {
       max-width: 50vw;
       flex-wrap: wrap;
@@ -76,6 +80,10 @@ const langOptions = css`
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
       overflow: hidden;
       margin-left: 10px;
+      &:hover {
+        cursor: pointer;
+        border: 0.3px solid rgba(51, 51, 51, 0.5);
+      }
       &.active {
         border: 1px solid #333333;
       }

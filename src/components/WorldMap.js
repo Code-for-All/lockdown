@@ -152,8 +152,19 @@ export class WorldMap extends Component {
 
     map.on('style.load', () => {
       let hoveredStateId = null;
-
-      map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + this.props.currentLanguage.locale.split('-')[0]]);
+      let iso = this.props.currentLanguage.locale;
+      if (iso.includes('zh-')) {
+        if (iso.includes('-CN')) {
+          iso = 'zh-Hans';
+        } else {
+          iso = 'zh-Hant';
+        }
+      } else {
+        iso = iso.split('-')[0];
+      }
+      map.setLayoutProperty('water-line-label', 'text-field', ['get', 'name_' + iso]);
+      map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + iso]);
+      map.setLayoutProperty('water-point-label', 'text-field', ['get', 'name_' + iso]);
       map.on('mousemove', 'admin-0-fill', function (e) {
         var features = map.queryRenderedFeatures(e.point, {
           layers: ['admin-0-fill'],
@@ -349,7 +360,18 @@ export class WorldMap extends Component {
   }
 
   updateMapLanguage(language) {
-    let map = this.state.map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + language.locale]);
+    console.log(language);
+    let iso = language.locale;
+    if (iso.includes('zh-')) {
+      if (iso.includes('-CN')) {
+        iso = 'zh-Hans';
+      } else {
+        iso = 'zh-Hant';
+      }
+    }
+    this.state.map.setLayoutProperty('water-line-label', 'text-field', ['get', 'name_' + iso]);
+    this.state.map.setLayoutProperty('water-point-label', 'text-field', ['get', 'name_' + iso]);
+    let map = this.state.map.setLayoutProperty('country-label', 'text-field', ['get', 'name_' + iso]);
   }
 
   async componentDidMount() {
