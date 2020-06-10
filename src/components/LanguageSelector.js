@@ -80,7 +80,7 @@ const langOptions = css`
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
       overflow: hidden;
       margin-left: 10px;
-      font-weight:500;
+      font-weight: 500;
       &:hover {
         cursor: pointer;
         border: 0px solid rgba(51, 51, 51, 0.5);
@@ -88,11 +88,11 @@ const langOptions = css`
       }
       &.active {
         border: 0px solid #333333;
-        background-color:#e0e0e0;
+        background-color: #e0e0e0;
       }
       .dark &.active {
         border: 0px solid #fff;
-        background-color:#828282;
+        background-color: #828282;
       }
       .dark & {
         background-color: #333333;
