@@ -18,6 +18,7 @@ const btnStyle = css`
     color: #333333;
     justify-content: center;
     align-items: center;
+    padding:12px;
     .dark & {
       background-color: #333333;
       color: white;
