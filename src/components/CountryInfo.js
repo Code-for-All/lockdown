@@ -392,8 +392,7 @@ class Reports extends Component {
     let { i18n } = _;
     return html`<div class="${reports}">
       <h3>${i18n.t(`tdo.tabs.reports.subtitle`)}</h3>
-      <div class="placeholder">
-      </div>
+      <div class="placeholder"></div>
     </div>`;
   }
 }

@@ -98,23 +98,23 @@ export const reports = css`
     justify-content: center;
     align-items: center;
     position: relative;
-    & > h3{
-      background-color: rgba(231,231,231,0.227);
+    & > h3 {
+      background-color: rgba(231, 231, 231, 0.227);
       padding: 0.5rem 0.4rem;
       border-radius: 7px;
     }
-    & .placeholder{
+    & .placeholder {
       @media (max-width: 350px) {
-        background: url("src/assets/images/pld-report-sm.png") no-repeat;
+        background: url('src/assets/images/pld-report-sm.png') no-repeat;
         background-size: contain;
         background-position: center;
       }
       @media (max-width: 960px) {
-        background: url("src/assets/images/pld-report-med.png") no-repeat;
+        background: url('src/assets/images/pld-report-med.png') no-repeat;
         background-size: contain;
         background-position: center;
       }
-      background: url("src/assets/images/pld-report-lrg.png");
+      background: url('src/assets/images/pld-report-lrg.png');
       height: 100%;
       width: 100%;
       position: absolute;

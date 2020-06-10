@@ -147,9 +147,9 @@ const selectStyles = css`
   & {
     height: 50px;
     padding: 0px 110px;
-      @media (max-width: 960px) {
-        padding: 0px 85px;
-      }
+    @media (max-width: 960px) {
+      padding: 0px 85px;
+    }
     border-radius: 25px;
     background-color: white;
     display: flex;
