@@ -264,7 +264,7 @@ const sideBtn = css`
     height: 108px;
     width: 50px;
     z-index: 2000;
-    top: calc((100vh / 2) - 20px);
+    bottom: 150px;
     right: -5px;
     border-radius: 100% 0% 0% 100% / 21% 0% 0% 21%;
     border: 0px;
