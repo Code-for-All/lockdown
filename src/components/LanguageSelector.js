@@ -84,7 +84,7 @@ const langOptions = css`
       &:hover {
         cursor: pointer;
         border: 0px solid rgba(51, 51, 51, 0.5);
-        background-color: #828282;
+        background-color: #e0e0e0;
       }
       &.active {
         border: 0px solid #333333;
