@@ -1,20 +1,19 @@
 import { html } from 'htm/preact';
 
 export const close = html`
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="icon icon-tabler icon-tabler-x"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    stroke-width="2"
-    stroke="currentColor"
-    fill="none"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <path stroke="none" d="M0 0h24v24H0z" />
-    <line x1="18" y1="6" x2="6" y2="18" />
-    <line x1="6" y1="6" x2="18" y2="18" />
-  </svg>
+<svg 
+	xmlns="http://www.w3.org/2000/svg" 
+	height="24" 
+	viewBox="0 0 24 24" 
+	width="24"
+>
+	<path 
+		d="M0 0h24v24H0V0z" 
+		fill="none"
+	/>
+	<path 
+		d="M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"
+                fill="currentColor"
+	/>
+</svg>
 `;

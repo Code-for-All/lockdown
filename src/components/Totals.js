@@ -20,7 +20,7 @@ const styles = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: auto;
+    width: 150px;
     @media (max-width: 899px) {
       width: 144px;
     }
