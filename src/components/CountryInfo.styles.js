@@ -109,7 +109,10 @@ export const countryInfoStyles = css`
   & {
     background-color: var(--ld-bg);
     color: var(--ld-text);
-    padding: 0 16px 16px 16px;
+    padding: 20px 30px 30px 30px;
+      @media (max-width: 960px) {
+        padding: 5px 15px 15px 15px !important;
+      }
     width: 100%;
     overflow-y: auto;
     &::-webkit-scrollbar {
@@ -130,7 +133,7 @@ export const countryInfoStyles = css`
       letter-spacing: 0.02em;
       & span:first-child {
         font-weight: 600;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 18px;
         letter-spacing: 0.05em;
         padding-right: 7px;
@@ -295,6 +298,12 @@ export const countryInfoStyles = css`
     .dark & {
       color: var(--ld-text);
     }
+  }
+  .measure {
+    margin-right:10px;
+      @media (max-width: 960px) {
+        margin-right:10px;
+      }
   }
 
   .measure:hover ~ .measure-label {
