@@ -281,7 +281,7 @@ class CountryDetails extends Component {
 
       ${countryDetails.status === 'success'
         ? html`
-            <h2 class="ld-font-subheader last">Daily life (restrictions)</h2>
+            <h2 class="ld-font-subheader last">${i18n.t('tdo.tabs.dailyLife.subtitle')}</h2>
             <ul class="measures">
               ${createMeasures(countryDetails.measures).map(
                 (m) =>
