@@ -81,7 +81,7 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Vida diaria',
-        subtitle:"Vida diaria (restricciones)",
+        subtitle: 'Vida diaria (restricciones)',
         noResults: 'N/A',
         stats: {
           population: 'Población',
