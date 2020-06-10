@@ -81,6 +81,7 @@ const langOptions = css`
       overflow: hidden;
       margin-left: 10px;
       font-weight: 500;
+      margin-bottom: 10px;
       &:hover {
         cursor: pointer;
         border: 0px solid rgba(51, 51, 51, 0.5);
