@@ -278,8 +278,14 @@ a:visited {
 .ld-menu--content {
   overflow: auto;
   height: calc(100% - 44px);
-  padding: 75px 20px 20px 20px;
+  padding: 75px 40px 40px 40px;
 }
+
+@media (max-width: 500px) {
+  .ld-menu--content {
+    padding: 75px 20px 20px 20px;
+  }
+}  
 .ld-menu--content::-webkit-scrollbar {
   padding-left: 1.5%;
   padding-right: 1.5%;
@@ -408,7 +414,7 @@ a:visited {
   .ld-menu-nav svg {
     display: block;
     flex: 1;
-    height: 40px;
+    /*height: 40px;*/
   }
 
   .ld-menu--content {

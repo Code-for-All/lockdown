@@ -146,7 +146,10 @@ const selectStyles = css`
   }
   & {
     height: 50px;
-    padding: 0px 85px;
+    padding: 0px 110px;
+    @media (max-width: 960px) {
+      padding: 0px 85px;
+    }
     border-radius: 25px;
     background-color: white;
     display: flex;
@@ -352,17 +355,17 @@ const tooltipCss = css`
     @media (max-width: 960px) {
       top: 17px;
       &.first {
-        left: 17px;
+        left: 17px !important;
       }
       &.last {
-        right: 17px;
+        right: 17px !important;
       }
     }
     &.first {
-      left: 17px;
+      left: 40px;
     }
     &.last {
-      right: 17px;
+      right: 40px;
     }
   }
 `;

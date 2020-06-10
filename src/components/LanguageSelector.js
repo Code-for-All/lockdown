@@ -13,7 +13,7 @@ const selectedLang = css`
     min-width: 30px;
     padding: 0px;
     padding-left: 10px;
-    border-radius: 12.5px;
+    border-radius: 15px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
     color: #333333;
     background-color: #fff;
@@ -80,19 +80,27 @@ const langOptions = css`
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
       overflow: hidden;
       margin-left: 10px;
+      font-weight: 500;
+      margin-bottom: 10px;
       &:hover {
         cursor: pointer;
-        border: 0.3px solid rgba(51, 51, 51, 0.5);
+        border: 0px solid rgba(51, 51, 51, 0.5);
+        background-color: #e0e0e0;
       }
       &.active {
-        border: 1px solid #333333;
+        border: 0px solid #333333;
+        background-color: #e0e0e0;
       }
       .dark &.active {
-        border: 1px solid #fff;
+        border: 0px solid #fff;
+        background-color: #828282;
       }
       .dark & {
         background-color: #333333;
         color: #fff;
+      }
+      .dark &:hover {
+        background-color: #828282;
       }
     }
   }

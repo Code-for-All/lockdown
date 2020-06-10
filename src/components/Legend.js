@@ -7,10 +7,10 @@ import { list, unlock, lock, virus, viruslock } from '../assets/icons/icons.js';
 const btnStyle = css`
   & {
     position: absolute;
-    top: 45vh;
+    bottom: 150px;
     left: 10px;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-color: white;
     box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.1);
@@ -18,6 +18,7 @@ const btnStyle = css`
     color: #333333;
     justify-content: center;
     align-items: center;
+    padding: 12px;
     .dark & {
       background-color: #333333;
       color: white;
