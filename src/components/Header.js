@@ -19,7 +19,7 @@ const styles = css`
       opacity: 0;
       transform: translate3d(0, -100%, 0);
     }
-
+  
     to {
       opacity: 1;
       transform: translate3d(0, 0, 0);
@@ -109,7 +109,7 @@ export const Header = (_) => html`
   <header class="${styles} ${_.show ? '' : 'hide'}">
     <div class="ld-logo-wrapper">
       <a href="" aria-current="page">
-        <p>BETA</p>
+        <p>${_.i18n.t('header.version')}</p>
         ${logo}
         <!-- TODO: screen reader h1 -->
       </a>
