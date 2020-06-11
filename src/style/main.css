@@ -129,37 +129,37 @@ body::-webkit-scrollbar-thumb {
 
 /* width */
 ::-webkit-scrollbar {
-	width: 20px;
+  width: 20px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-	border-radius: 10px !important;
-	margin-top: 75px;
+  border-radius: 10px !important;
+  margin-top: 75px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #e0e0e0;
-	border-radius: 10px !important;
-	border: solid 6px #fff !important;
+  background: #e0e0e0;
+  border-radius: 10px !important;
+  border: solid 6px #fff !important;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #e0e0e0;
+  background: #e0e0e0;
 }
 
 /* Handle */
 .dark ::-webkit-scrollbar-thumb {
-	background: #4f4f4f;
-	border-radius: 10px;
-	border: solid 6px #333333 !important;
+  background: #4f4f4f;
+  border-radius: 10px;
+  border: solid 6px #333333 !important;
 }
 
 .icon-tabler-x {
-    height: 30px !important;
-    color: #bdbdbd;
-    width:30px;
+  height: 30px !important;
+  color: #bdbdbd;
+  width: 30px;
 }
 
 a:visited {
@@ -278,8 +278,14 @@ a:visited {
 .ld-menu--content {
   overflow: auto;
   height: calc(100% - 44px);
-  padding: 75px 20px 20px 20px;
+  padding: 75px 40px 40px 40px;
 }
+
+@media (max-width: 500px) {
+  .ld-menu--content {
+    padding: 75px 20px 20px 20px;
+  }
+}  
 .ld-menu--content::-webkit-scrollbar {
   padding-left: 1.5%;
   padding-right: 1.5%;
@@ -408,7 +414,7 @@ a:visited {
   .ld-menu-nav svg {
     display: block;
     flex: 1;
-    height: 40px;
+    /*height: 40px;*/
   }
 
   .ld-menu--content {

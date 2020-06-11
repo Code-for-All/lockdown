@@ -7,10 +7,10 @@ import { list, unlock, lock, virus, viruslock } from '../assets/icons/icons.js';
 const btnStyle = css`
   & {
     position: absolute;
-    top: 45vh;
+    bottom: 150px;
     left: 10px;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     background-color: white;
     box-shadow: 0px 4px 17px rgba(0, 0, 0, 0.1);
@@ -18,6 +18,7 @@ const btnStyle = css`
     color: #333333;
     justify-content: center;
     align-items: center;
+    padding: 12px;
     .dark & {
       background-color: #333333;
       color: white;
@@ -254,7 +255,7 @@ class Legend extends Component {
       showDialog: !this.state.showDialog,
     });
   }
-  render(_) {
+  render({ i18n }) {
     return html`<div onClick=${this.onClick} draggable="true" ref=${this.initBtn} class="${btnStyle}">
       ${list}
       <div class="dialog ${this.state.showDialog ? 'show' : ''} ${this.state.y} ${this.state.x}">
@@ -264,7 +265,7 @@ class Legend extends Component {
             <div class="color green" />
           </span>
           <span>
-            NO LOCKDOWN
+            ${i18n.t('mapLegend.no')}
           </span>
         </div>
         <!--Row-->
@@ -273,7 +274,7 @@ class Legend extends Component {
             <div class="color orange" />
           </span>
           <span>
-            PARTIAL LOCKDOWN
+            ${i18n.t('mapLegend.partial')}
           </span>
         </div>
         <!--Row-->
@@ -282,7 +283,7 @@ class Legend extends Component {
             <div class="color red" />
           </span>
           <span>
-            FULL LOCKDOWN
+            ${i18n.t('mapLegend.full')}
           </span>
         </div>
         <!--Row-->
@@ -291,7 +292,7 @@ class Legend extends Component {
             <div class="color gray" />
           </span>
           <span>
-            NO DATA
+            ${i18n.t('mapLegend.noData')}
           </span>
         </div>
         <!--Row-->
@@ -300,7 +301,7 @@ class Legend extends Component {
             <div class="color covidstripes" />
           </span>
           <span>
-            COVID REPORTED
+            ${i18n.t('mapLegend.cases')}
           </span>
         </div>
       </div>

@@ -20,7 +20,7 @@ const styles = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: auto;
+    width: 150px;
     @media (max-width: 899px) {
       width: 144px;
     }
@@ -79,22 +79,22 @@ export class Totals extends Component {
     });
   }
 
-  render({ selectedDate }, { totals, desktop }) {
+  render({ selectedDate, i18n }, { totals, desktop }) {
     const items = [
       {
-        description: 'Territories in lockdown',
+        description: i18n.t('header.totals.territoriesLockdown'),
         value: Number(totals.territories?.lockdown || 0).toLocaleString(),
       },
       {
-        description: 'People affected',
+        description: i18n.t('header.totals.peopleAffected'),
         value: Number(totals.territories?.affected || 0).toLocaleString(),
       },
       {
-        description: 'Reported cases',
+        description: i18n.t('header.totals.cases'),
         value: Number(totals.corona?.confirmed || 0).toLocaleString(),
       },
       {
-        description: 'Reported deaths',
+        description: i18n.t('header.totals.deaths'),
         value: Number(totals.corona?.deaths || 0).toLocaleString(),
       },
     ];

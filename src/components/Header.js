@@ -19,7 +19,7 @@ const styles = css`
       opacity: 0;
       transform: translate3d(0, -100%, 0);
     }
-  
+
     to {
       opacity: 1;
       transform: translate3d(0, 0, 0);
@@ -115,7 +115,7 @@ export const Header = (_) => html`
       </a>
     </div>
     <div class="totals">
-      <${Totals} selectedDate=${_.selectedDate} startDate=${_.startDate} endDate=${_.endDate} />
+      <${Totals} selectedDate=${_.selectedDate} startDate=${_.startDate} endDate=${_.endDate} i18n=${_.i18n} />
     </div>
   </header>
 `;

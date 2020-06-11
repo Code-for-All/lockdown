@@ -97,6 +97,31 @@ export const reports = css`
     width: 100%;
     justify-content: center;
     align-items: center;
+    position: relative;
+    & > h3 {
+      background-color: rgba(231, 231, 231, 0.227);
+      padding: 0.5rem 0.4rem;
+      border-radius: 7px;
+    }
+    & .placeholder {
+      @media (max-width: 350px) {
+        background: url('src/assets/images/pld-report-sm.png') no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+      @media (max-width: 960px) {
+        background: url('src/assets/images/pld-report-med.png') no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+      background: url('src/assets/images/pld-report-lrg.png');
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background-size: cover;
+      opacity: 0.3;
+      z-index: -1;
+    }
   }
 `;
 export const countryInfoStyles = css`
@@ -109,7 +134,10 @@ export const countryInfoStyles = css`
   & {
     background-color: var(--ld-bg);
     color: var(--ld-text);
-    padding: 0 16px 16px 16px;
+    padding: 20px 30px 30px 30px;
+      @media (max-width: 960px) {
+        padding: 5px 15px 15px 15px !important;
+      }
     width: 100%;
     overflow-y: auto;
     &::-webkit-scrollbar {
@@ -130,7 +158,7 @@ export const countryInfoStyles = css`
       letter-spacing: 0.02em;
       & span:first-child {
         font-weight: 600;
-        font-size: 12px;
+        font-size: 14px;
         line-height: 18px;
         letter-spacing: 0.05em;
         padding-right: 7px;
@@ -212,6 +240,8 @@ export const countryInfoStyles = css`
 
   .legend dl {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .legend-item {
@@ -267,6 +297,7 @@ export const countryInfoStyles = css`
     align-items: flex-start;
     margin-bottom: 0px;
     text-align: left;
+    overflow-x: hidden;
   }
 
   .measure-wrapper {
@@ -292,6 +323,12 @@ export const countryInfoStyles = css`
     .dark & {
       color: var(--ld-text);
     }
+  }
+  .measure {
+    margin-right:10px;
+      @media (max-width: 960px) {
+        margin-right:10px;
+      }
   }
 
   .measure:hover ~ .measure-label {

@@ -20,5 +20,8 @@ export { lock } from './lock.svg.js';
 export { virus } from './virus.svg.js';
 export { viruslock } from './viruslock.svg.js';
 export { calendar } from './calendar.svg.js';
+export { chevronDown } from './chevron-down.js';
+export { chevronUp } from './chevron-up.js';
+export { world } from './world.js';
 
 export { home, citymovement, religion, work, military, academia, shops, electricity, water, internet } from './measures.svg.js';
