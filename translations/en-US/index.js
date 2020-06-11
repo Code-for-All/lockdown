@@ -65,9 +65,9 @@ export default {
     },
     userPreferenceSection: {
       theme: {
-        action: 'Toggle',
-        dark: 'Dark Mode',
-        light: 'Light Mode',
+        action: 'Toggle ',
+        dark: 'Dark mode',
+        light: 'Light mode',
       },
       geolocation: 'Allow geolocation',
       app: {
@@ -80,11 +80,12 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Daily Life',
-        subtitle: 'Daily life (restrictions)',
+        subtitle:"Daily life (restrictions)",
         noResults: 'N/A',
         stats: {
           population: 'Population',
-          max_assembly: 'Max assembly',
+          max_assembly: 'Maximum assembly',
+          max_assemblyShortVersion: 'Max. assembly',
           cases: 'Cases',
           recoveries: 'Recoveries',
           deaths: 'Deaths',
@@ -120,7 +121,7 @@ export default {
       },
       mobility: {
         name: 'Mobility',
-        subtitle: 'Transport (restrictions)',
+        subtitle: 'Transport restrictions',
         measureValues: {
           '1': 'TOTAL',
           '2': 'PARTIAL',
