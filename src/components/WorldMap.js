@@ -21,6 +21,7 @@ const selectStyles = css`
   }
 `;
 
+// Coordinates based on TLDs for a desktop
 const domainCoors = {
   // zoom/lat/long
   // Asia - https://projectlockdown.asia/#2.28/46.38/89.53
@@ -35,6 +36,7 @@ const domainCoors = {
   lat: { lng: -56.71, lat: -20.13, zoom: 2.76}, 
 };
 
+// Coordinates based on TLDs for a mobile
 const domainCoorsMobile = {
   // zoom/lat/long
   // Asia - #1.15/43.3/85.1
