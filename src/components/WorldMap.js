@@ -21,11 +21,34 @@ const selectStyles = css`
   }
 `;
 
+// Coordinates based on TLDs for a desktop
 const domainCoors = {
-  asia: { lng: 95.955971, lat: 21.916222, zoom: 2.8 }, //Burma
-  europe: { lng: 52.160455, lat: 10.371094, zoom: 4 }, //Germany
-  usa: { lng: 45.089036, lat: -100.898438, zoom: 3 },
-  africa: { lng: 21.525828, lat: 4.214943, zoom: 3.2 }, //Somewhere in Africa :)
+  // zoom/lat/long
+  // Asia - https://projectlockdown.asia/#2.28/46.38/89.53
+  asia: { lng: 89.53, lat: 46.38, zoom: 2.28 }, 
+  // Europe - https://projectlockdown.eu/#3.44/54.21/15.42
+  eu: { lng: 15.42, lat: 54.21, zoom: 3.44 },
+  // North Americas - https://projectlockdown.us/#2.2/59.26/-91.21
+  us: { lng: -91.21, lat: 59.26, zoom: 2.2 }, 
+  // Africa - https://projectlockdown.africa/#3.2/4.21/21.53
+  africa: { lng: 21.53, lat: 4.21, zoom: 3.2 }, 
+  // South Americas - https://projectlockdown.lat/#2.76/-20.13/-56.71 
+  lat: { lng: -56.71, lat: -20.13, zoom: 2.76}, 
+};
+
+// Coordinates based on TLDs for a mobile
+const domainCoorsMobile = {
+  // zoom/lat/long
+  // Asia - #1.15/43.3/85.1
+  asia: { lng: 85.1, lat: 43.3, zoom: 1.15 }, 
+  // Europe - #1.99/55.92/9.5
+  eu: { lng: 9.5, lat: 55.92, zoom: 1.99 },
+  // North Americas - #1.04/49.5/-100.6
+  us: { lng: -100.6, lat: 49.5, zoom: 1.04 }, 
+  // Africa - #1.83/7.31/23.39
+  africa: { lng: 23.39, lat: 7.31, zoom: 1.83 }, 
+  // South Americas - #1.98/-18.36/-61.66 
+  lat: { lng: -61.66, lat: -18.36, zoom: 1.98}, 
 };
 
 // Use for altering boundaries of countries with disputed areas
@@ -83,13 +106,20 @@ export class WorldMap extends Component {
     this.updateMap = this.updateMap.bind(this);
     this.updateMapLanguage = this.updateMapLanguage.bind(this);
 
-    let coords = { lng: 40.7, lat: 25, zoom: 1.06 };
+    let coords = { lng: 40.7, lat: 25, zoom: 1.06 }; //default coordinates
+    let deviceCoords = coords;
+
+    // If it is a mobile device get the cooridnates for mobile (domainCoorsMobile), else get the desktop coordinates (domainCoors)
+    if (screen.width <= 699)
+        deviceCoords = domainCoorsMobile;
+    else 
+        deviceCoords = domainCoors;
 
     let url = window.location.href;
     let isLocationSet = false;
     for (let country in domainCoors) {
       if (url.indexOf('lockdown.' + country) != -1) {
-        coords = domainCoors[country];
+        coords = deviceCoords[country];
         isLocationSet = true;
       }
     }
