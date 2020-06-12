@@ -48,6 +48,8 @@ const styles = css`
   }
 `;
 
+const SHOW_STATS = false;
+
 export class Totals extends Component {
   constructor() {
     super();
@@ -100,7 +102,8 @@ export class Totals extends Component {
     ];
     return html`
       <div class=${styles}>
-        <dl>
+        ${
+          SHOW_STATS ? html`<dl>
           ${(desktop ? items : items.slice(0, 2)).map(
             (item) => html`
               <div>
@@ -109,7 +112,9 @@ export class Totals extends Component {
               </div>
             `
           )}
-        </dl>
+        </dl>`: null
+        }
+        
       </div>
     `;
   }
