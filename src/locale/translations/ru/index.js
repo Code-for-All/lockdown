@@ -118,7 +118,7 @@ export default {
         },
         measures: {
           commerce: 'Торговля',
-          foreignersInbound: Въезд для иностранцев',
+          foreignersInbound: 'Въезд для иностранцев',
           foreignersOutbound: 'Выезд для иностранцев',
           local: 'Транспорт между городами',
           nationalsInbound: 'Въезд для граждан ',
