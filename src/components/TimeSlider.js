@@ -470,7 +470,7 @@ const popBtn = css`
   }
 `;
 
-const firstDayDefaultOffset = 7 * 8;
+const firstDayDefaultOffset = 10 * 8;
 
 export default class CountryInfo extends Component {
   constructor() {
