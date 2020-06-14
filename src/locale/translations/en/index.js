@@ -17,7 +17,7 @@ export default {
       main: {
         name: 'Project Lockdown ',
         text:
-          'provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced across the globe in response to the COVID-19 crisis to visualize the success of different pandemic response measures, monitor effects on Human and Digital Rights, and clarify evaluation metrics.',
+          '{Proyecto Lockdown} provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced across the globe in response to the COVID-19 crisis to visualize the success of different pandemic response measures, monitor effects on Human and Digital Rights, and clarify evaluation metrics.',
       },
       about: {
         title: 'About',
@@ -25,14 +25,14 @@ export default {
           p1:
             'Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and reduce the strain on medical infrastructure.',
           p2:
-            'empowers citizens, journalists, and Human Rights Defenderes to easily analyze the social and political effects of these measures. Founded on the values of transparency and accountability,',
-          p3: 'is committed to providing citizens of the world with the tools they need to stay safe and informed.',
+            '{Proyecto Lockdown} empowers citizens, journalists, and Human Rights Defenderes to easily analyze the social and political effects of these measures. Founded on the values of transparency and accountability,',
+          p3: '{Proyecto Lockdown} is committed to providing citizens of the world with the tools they need to stay safe and informed.',
         },
       },
       sources: {
         title: 'Sources',
         subtitle:
-          'combines multiple trusted sources to ensure that the data used is verified and accurate. You can find the full list of sources used here:',
+          '{Proyecto Lockdown} combines multiple trusted sources to ensure that the data used is verified and accurate. You can find the full list of sources used here:',
         linksList: {
           first: {
             linkTitle: "Project Lockdown's Database",
@@ -52,7 +52,7 @@ export default {
       credits: {
         title: 'Credits',
         text:
-          'is a Civic Tech initiative made possible by a number of dedicated individuals and organizations. View the list of contributors',
+          '{Proyecto Lockdown} is a Civic Tech initiative made possible by a number of dedicated individuals and organizations. View the list of contributors',
         highlight: 'here',
       },
       dataPrivacity: {
