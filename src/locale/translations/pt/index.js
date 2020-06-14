@@ -3,7 +3,6 @@ export default {
   languageId: 'pt', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
   header: {
-    version: 'BETA',
     totals: {
       territoriesLockdown: 'TERRITÓRIOS EM LOCKDOWN',
       peopleAffected: 'PESSOAS AFETADAS',
@@ -13,11 +12,11 @@ export default {
   },
   menu: {
     informationSection: {
-      banner: 'O Project Lockdown está atualmente em versão Beta. Nem todos dados estão disponíveis no momento.',
+      banner: 'O Project Lockdown está atualmente em versão Beta. Nem todos os dados estão disponíveis no momento.',
       main: {
         name: 'Project Lockdown ',
         text:
-          'fornece o mapeamento de diferentes NPIs (Intervenções Não Farmacêuticas) aplicadas pelo mundo em resposta à crise da COVID-19, com o objetivo de visualizar o sucesso de diferentes medidas de resposta à pandemia, monitorar efeitos sob Direitos Humanos e Digitas, e clarificar medidas de avaliação.',
+          'O {Project Lockdown} fornece o mapeamento de diferentes NPIs (Intervenções Não Farmacêuticas) aplicadas pelo mundo em resposta à crise da COVID-19, com o objetivo de visualizar o sucesso de diferentes medidas de resposta à pandemia, monitorar efeitos sob Direitos Humanos e Digitas, e clarificar medidas de avaliação.',
       },
       about: {
         title: 'Sobre',
@@ -25,7 +24,7 @@ export default {
           p1:
             'Lockdowns, quarentenas, e medidas de isolamento foram implementados pelo globo para reduzir o avanço da COVID-19 e reduzir seu peso na infraestrutura médica.',
           p2:
-            'empodera cidadãos, jornalistas, e defensores de direitos humanos para que facilmente analisem os efeitos sociais e políticos dessas medidas. Fundamentado em valores de transparência e accountability,',
+            'O {Project Lockdown} empodera cidadãos, jornalistas, e defensores de direitos humanos para que facilmente analisem os efeitos sociais e políticos dessas medidas. Fundamentado em valores de transparência e accountability,',
           p3: 'é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para ficarem seguros e informados.',
         },
       },
