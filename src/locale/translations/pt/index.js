@@ -16,22 +16,22 @@ export default {
       main: {
         name: 'Project Lockdown ',
         text:
-          'O {Project Lockdown} fornece o mapeamento de diferentes NPIs (Intervenções Não Farmacêuticas) aplicadas pelo mundo em resposta à crise da COVID-19, com o objetivo de visualizar o sucesso de diferentes medidas de resposta à pandemia, monitorar efeitos sob Direitos Humanos e Digitas, e clarificar medidas de avaliação.',
+          'O {Project Lockdown} fornece o mapeamento de diferentes NPIs (Intervenções Não Farmacêuticas) aplicadas por todo o mundo em resposta à crise da COVID-19, com o objetivo de visualizar o sucesso de diferentes medidas de resposta à pandemia, monitorar efeitos nos Direitos Humanos e Digitas, e clarificar métricas de avaliação.',
       },
       about: {
         title: 'Sobre',
         text: {
           p1:
-            'Lockdowns, quarentenas, e medidas de isolamento foram implementados pelo globo para reduzir o avanço da COVID-19 e reduzir seu peso na infraestrutura médica.',
+            'Lockdowns, quarentenas, e medidas de isolamento foram implementadas pelo globo para reduzir o avanço da COVID-19 e reduzir seu peso na infraestrutura médica.',
           p2:
-            'O {Project Lockdown} empodera cidadãos, jornalistas, e defensores de direitos humanos para que facilmente analisem os efeitos sociais e políticos dessas medidas. Fundamentado em valores de transparência e accountability,',
-          p3: 'é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para ficarem seguros e informados.',
+            'O {Project Lockdown} empodera cidadãos, jornalistas, e atores de direitos humanos para que possam facilmente analisar os efeitos sociais e políticos dessas medidas. Com fundamento em valores de transparência e accountability,',
+          p3: 'O {Project Lockdown} é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para se manterem seguros e informados.',
         },
       },
       sources: {
         title: 'Fontes',
         subtitle:
-          'combina mútliplas fontes confiáveis para garantir que os dados utilizados são verificáveis e corretos. Você pode checar nossa lista de fontes aqui:',
+          'O {Project Lockdown} combina mútliplas fontes confiáveis para garantir que os dados utilizados são verificáveis e corretos. Você pode checar nossa lista de fontes aqui:',
         linksList: {
           first: {
             linkTitle: 'Banco de dados do Project Lockdown',
@@ -45,13 +45,13 @@ export default {
         },
         issues: {
           text: 'Se encontrar algum erro, por favor nos ajude e reporte',
-          highlight: 'criando uma Issue aqui',
+          highlight: 'criando uma Contestação aqui',
         },
       },
       credits: {
         title: 'Créditos',
         text:
-          'é uma iniciativa de Civic Tech tornada possível por uma série de indivíduos e organizações comprometidas. Veja a lista de contribuidores',
+          'O {Project Lockdown} é uma iniciativa de Civic Tech tornada possível por uma série de indivíduos e organizações comprometidas com sua causa. Veja a lista de contribuidores',
         highlight: 'aqui',
       },
       dataPrivacity: {
@@ -64,9 +64,9 @@ export default {
     },
     userPreferenceSection: {
       theme: {
-        action: 'Trocar',
-        dark: 'Modo Escuro',
-        light: 'Modo Claro',
+        action: 'Trocar ',
+        dark: 'Modo escuro',
+        light: 'Modo claro',
       },
       geolocation: 'Permitir geolocalização',
       app: {
@@ -79,11 +79,12 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Vida Diária',
-        subtitle: 'Daily life (restrictions)',
+        subtitle: 'Vida diária (restrições)',
         noResults: 'N/D',
         stats: {
           population: 'População',
           max_assembly: 'Congregação máxima',
+          max_assemblyShortVersion: 'Congr. máxima',
           cases: 'Casos',
           recoveries: 'Recuperações',
           deaths: 'Mortes',
@@ -95,25 +96,25 @@ export default {
           '4': 'NÃO ESTÁ CLARO',
         },
         measures: {
-          home: 'Ficar em casa',
-          homeShortVersion: 'Ficar em casa',
+          home: 'Sair de casa',
+          homeShortVersion: 'Sair de casa',
+          outdoors: 'Atividades externas',
+          outdoorsShortVersion: 'Externo',
           shopping: 'Fazer compras',
           shoppingShortVersion: 'Fazer compras',
-          outdoors: 'Passear',
-          outdoorsShortVersion: 'Passear',
-          military: 'Presença militar',
-          militaryShortVersion: 'Presença militar',
-          religious: 'Culto religioso',
-          religiousShortVersion: 'Culto religioso',
-          electricity: 'Electricidade',
-          electricityShortVersion: 'Electricidade',
+          military: 'Sem adições militares',
+          militaryShortVersion: 'Militarares (Não)',
+          religious: 'Locais religiosos',
+          religiousShortVersion: 'Locais religiosos',
           work: 'Ir ao trabalho',
           workShortVersion: 'Ir ao trabalho',
-          water: 'Água',
-          waterShortVersion: 'Água',
           schools: 'Ir à escola',
           schoolsShortVersion: 'Ir à escola',
-          internet: 'Telecomunicações',
+          electricity: 'Electricidade garantida',
+          electricityShortVersion: 'Electricidade',
+          water: 'Água garantida',
+          waterShortVersion: 'Água',
+          internet: 'Telecomunicações garantidas',
           internetShortVersion: 'Telecomunicações',
         },
       },
@@ -123,7 +124,7 @@ export default {
         measureValues: {
           '1': 'TOTAL',
           '2': 'PARCIAL',
-          '3': 'NENHUM',
+          '3': 'NENHUMA',
           '4': 'NÃO ESTÁ CLARO',
         },
         measures: {
