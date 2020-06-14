@@ -114,8 +114,8 @@ export const Header = (_) => html`
         <!-- TODO: screen reader h1 -->
       </a>
     </div>
-    <div class="totals">
+    <!-- <div class="totals">
       <${Totals} selectedDate=${_.selectedDate} startDate=${_.startDate} endDate=${_.endDate} i18n=${_.i18n} />
-    </div>
+    </div> -->
   </header>
 `;
