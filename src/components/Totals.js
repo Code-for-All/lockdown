@@ -48,69 +48,69 @@ const styles = css`
   }
 `;
 
-export class Totals extends Component {
-  constructor() {
-    super();
-
-    this.state = { totals: {} };
-  }
-
-  async componentDidUpdate(prevProps) {
-    if (this.props.selectedDate !== prevProps.selectedDate) {
-      const { startDate, endDate, selectedDate } = this.props;
-      this.setState({
-        totals: await totalsService.getTotals({ date: selectedDate, startDate, endDate }),
-      });
-    }
-  }
-
-  async componentDidMount() {
-    installMediaQueryWatcher(`(min-width: 900px)`, (matches) => {
-      this.setState({ desktop: matches });
-    });
-    const totals = await totalsService.getTotals({
-      date: this.props.selectedDate,
-      startDate: this.props.startDate,
-      endDate: this.props.endDate,
-    });
-
-    this.setState({
-      totals: totals,
-    });
-  }
-
-  render({ selectedDate, i18n }, { totals, desktop }) {
-    const items = [
-      {
-        description: i18n.t('header.totals.territoriesLockdown'),
-        value: Number(totals.territories?.lockdown || 0).toLocaleString(),
-      },
-      {
-        description: i18n.t('header.totals.peopleAffected'),
-        value: Number(totals.territories?.affected || 0).toLocaleString(),
-      },
-      {
-        description: i18n.t('header.totals.cases'),
-        value: Number(totals.corona?.confirmed || 0).toLocaleString(),
-      },
-      {
-        description: i18n.t('header.totals.deaths'),
-        value: Number(totals.corona?.deaths || 0).toLocaleString(),
-      },
-    ];
-    return html`
-      <div class=${styles}>
-        <dl>
-          ${(desktop ? items : items.slice(0, 2)).map(
-            (item) => html`
-              <div>
-                <dt class="ld-font-light">${item.description}</dt>
-                <dd class="ld-font-front">${item.value}</dd>
-              </div>
-            `
-          )}
-        </dl>
-      </div>
-    `;
-  }
-}
+// export class Totals extends Component {
+//   constructor() {
+//     super();
+//
+//     this.state = { totals: {} };
+//   }
+//
+//   async componentDidUpdate(prevProps) {
+//     if (this.props.selectedDate !== prevProps.selectedDate) {
+//       const { startDate, endDate, selectedDate } = this.props;
+//       this.setState({
+//         totals: await totalsService.getTotals({ date: selectedDate, startDate, endDate }),
+//       });
+//     }
+//   }
+//
+//   async componentDidMount() {
+//     installMediaQueryWatcher(`(min-width: 900px)`, (matches) => {
+//       this.setState({ desktop: matches });
+//     });
+//     const totals = await totalsService.getTotals({
+//       date: this.props.selectedDate,
+//       startDate: this.props.startDate,
+//       endDate: this.props.endDate,
+//     });
+//
+//     this.setState({
+//       totals: totals,
+//     });
+//   }
+//
+//   render({ selectedDate, i18n }, { totals, desktop }) {
+//     const items = [
+//       {
+//         description: i18n.t('header.totals.territoriesLockdown'),
+//         value: Number(totals.territories?.lockdown || 0).toLocaleString(),
+//       },
+//       {
+//         description: i18n.t('header.totals.peopleAffected'),
+//         value: Number(totals.territories?.affected || 0).toLocaleString(),
+//       },
+//       {
+//         description: i18n.t('header.totals.cases'),
+//         value: Number(totals.corona?.confirmed || 0).toLocaleString(),
+//       },
+//       {
+//         description: i18n.t('header.totals.deaths'),
+//         value: Number(totals.corona?.deaths || 0).toLocaleString(),
+//       },
+//     ];
+//     return html`
+//       <div class=${styles}>
+//         <dl>
+//           ${(desktop ? items : items.slice(0, 2)).map(
+//             (item) => html`
+//               <div>
+//                 <dt class="ld-font-light">${item.description}</dt>
+//                 <dd class="ld-font-front">${item.value}</dd>
+//               </div>
+//             `
+//           )}
+//         </dl>
+//       </div>
+//     `;
+//   }
+// }
