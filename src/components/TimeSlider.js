@@ -477,7 +477,7 @@ export default class CountryInfo extends Component {
     super();
     this.state = {
       currentDateValue: firstDayDefaultOffset,
-      currentPosition: 24.5,
+      currentPosition: 35,
       datePickerPosition: 'left',
       showDatePicker: false,
       currentSelectedDay: '',
@@ -620,7 +620,7 @@ export default class CountryInfo extends Component {
         firstDay: toSliderStringShort(days[0], this.props.i18n.locale),
         lastDay: toSliderStringShort(days[days.length - 1], this.props.i18n.locale),
         currentDateValue: this.state.datePickerPosition === 'left' ? 0 : 69,
-        currentPosition: 24.5,
+        currentPosition: 35,
       },
       this.submitChanges
     );
