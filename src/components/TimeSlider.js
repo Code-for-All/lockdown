@@ -681,7 +681,7 @@ export default class CountryInfo extends Component {
             step="1"
             value=${this.state.currentDateValue}
           />
-          <button class="last ${popBtn}"></button>
+          <button></button>
           <span title="Select End Date" class="last ${tooltipCss}" onClick=${(e) => this.onBtnClick('right')}>
              ${this.state.lastDay}</span
           >
