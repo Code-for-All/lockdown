@@ -438,14 +438,14 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
                 ${locale.t('menu.informationSection.dataPrivacity.paragraphs.p2')}
               </p>
             `}
+
+            <button onClick=${toggleDarkmode} class="ld-button">
+              ${locale.t('menu.userPreferenceSection.theme.action')}
+              ${darkMode ? locale.t('menu.userPreferenceSection.theme.light') : locale.t('menu.userPreferenceSection.theme.dark')}
+            </button>
+
           />
         `,
-
-        <button onClick=${toggleDarkmode} class="ld-button">
-          ${locale.t('menu.userPreferenceSection.theme.action')}
-          ${darkMode ? locale.t('menu.userPreferenceSection.theme.light') : locale.t('menu.userPreferenceSection.theme.dark')}
-        </button>
-
       };
     case 'settings':
       return {
