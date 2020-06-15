@@ -79,12 +79,6 @@ export async function batchGetTerritoriesEntryData(territories) {
             if (insertResult.find(r => r.result.nModified == 0 && r.result.ok == 1)) {
               shouldResetApiCache = true;
             }
-          } else {
-            // country sheet where entries are blank - we need to delete snapshots for the country in the db
-            var clearResult = await Promise.all(database.snapshotRepository.clear());
-            if (clearResult.find(r => r.result.ok == 1)) {
-              shouldResetApiCache = true;
-            }
           }
 
           result.push({
