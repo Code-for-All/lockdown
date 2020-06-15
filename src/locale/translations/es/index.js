@@ -2,8 +2,8 @@ export default {
   translationBy: 'AherreDev',
   languageId: 'es', // ? ISO 639-1:2002
   // ? Para más información consulte https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes y para ver las versiones consulte https://en.wikipedia.org/wiki/Language_localisation
+  projectName: "Project Lockdown",
   header: {
-    version: 'BETA',
     totals: {
       territoriesLockdown: 'TERRITORIOS EN CUARENTENA',
       peopleAffected: 'PERSONAS AFECTADAS',
@@ -17,7 +17,7 @@ export default {
       main: {
         name: 'Project Lockdown ',
         text:
-          'muestra un mapeo de las distintas NPIs (del ingles Non-Pharmaceutical Interventions o Intervenciones No Farmaceuticas) aplicadas en todo el mundo en respuesta a la crisis de la COVID-19. El objetivo es visualizar las medidas adoptadas en respuesta ante la pandemia y evaluar sus efectos sobre los Derechos Humanos y Digitales.',
+          '{Proyecto Lockdown} muestra un mapeo de las distintas NPIs (del ingles Non-Pharmaceutical Interventions o Intervenciones No Farmaceuticas) aplicadas en todo el mundo en respuesta a la crisis de la COVID-19. El objetivo es visualizar las medidas adoptadas en respuesta ante la pandemia y evaluar sus efectos sobre los Derechos Humanos y Digitales.',
       },
       about: {
         title: 'Acerca de',
