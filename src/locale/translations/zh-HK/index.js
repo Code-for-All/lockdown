@@ -1,7 +1,8 @@
 export default {
-  translationBy: '抗疫封鎖監察團隊',
+  translationBy: 'DotAsia Foundation (Jennifer Chung)',
   languageId: 'zh-HK', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
+  projectName: "Project Lockdown",
   header: {
     totals: {
       territoriesLockdown: '封鎖區',
@@ -14,7 +15,6 @@ export default {
     informationSection: {
       banner: '試行階段，資料錯漏，敬請包涵。',
       main: {
-        name: 'Project Lockdown ',
         text:
           '提供針對新冠病毒（COVID-19）全球各地非藥物干預措施（NPI）的實施地圖，以展示應對措施的成效，以及造成的監控對人權和數字權利的影響，並評估衡量指標。',
       },

@@ -2,6 +2,7 @@ export default {
   translationBy: 'Asma Qadah',
   languageId: 'ar', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
+  projectName: "فريق بروجت لوكداون",
   header: {
     version: 'النسخة التجريبية',
     totals: {
@@ -15,7 +16,6 @@ export default {
     informationSection: {
       banner: 'مشروع بروجكت لوكداون لايزال في نسخته التجريبية وقد لا تكون جمع المعلومات متاحة',
       main: {
-        name: 'فريق بروجت لوكداون ',
         text:
           'يوفر خريطة لمختلف التدابير الوقائية غير الطبية المفروضة في جميع أنحاء العالم استجابة لأزمة كوفيد-19 لتصور نجاح مختلف تدابير الاستجابة للوباء، ومراقبة الآثار المترتبة على الإنسان والحقوق الرقمية، وتوضيح مقاييس التقييم.',
       },
@@ -65,7 +65,7 @@ export default {
     },
     userPreferenceSection: {
       theme: {
-        action: 'التبديل',
+        action: ' التبديل',
         dark: 'الوضع المظلم',
         light: 'الوضع المضيء',
       },

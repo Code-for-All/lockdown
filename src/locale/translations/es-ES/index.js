@@ -1,7 +1,8 @@
 export default {
   translationBy: 'AherreDev',
   languageId: 'es-ES', // ? ISO 639-1:2002
-  // ? Para más información consulte https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes y para ver las versiones consulte https://en.wikipedia.org/wiki/Language_localisation
+  // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
+  projectName: "Project Lockdown",
   header: {
     totals: {
       territoriesLockdown: 'TERRITORIOS EN CUARENTENA',
@@ -14,7 +15,6 @@ export default {
     informationSection: {
       banner: 'Project Lockdown se encuentra actualmente en fase BETA. No todos los datos se encuentran disponibles.',
       main: {
-        name: 'Project Lockdown ',
         text:
           'muestra un mapeo de las distintas NPIs (del ingles Non-Pharmaceutical Interventions o Intervenciones No Farmaceuticas) aplicadas en todo el mundo en respuesta a la crisis de la COVID-19. El objetivo es visualizar las medidas adoptadas en respuesta ante la pandemia y evaluar sus efectos sobre los Derechos Humanos y Digitales.',
       },
@@ -22,9 +22,9 @@ export default {
         title: 'Acerca de',
         text: {
           p1:
-            'En un intento de reducir la propagación de la COVID-19 y reducir la presión sobre sus infraestructuras médicas, gobiernos de todo el mundo han implementado medidas de bloqueo, cuarentena y aislamiento.',
+            'En un intento de reducir la propagación de la COVID-19 y reducir la presión sobre sus infraestructuras médicas, gobiernos de todo el mundo han implementado medidas de bloqueo, cuarentena y aislamiento. ',
           p2:
-            'empodera a los ciudadanos, periodistas y defensores de los derechos humanos para analizar fácilmente los efectos sociales y políticos de estas medidas. Fundado en los valores de transparencia y responsabilidad,',
+            'empodera a los ciudadanos, periodistas y defensores de los derechos humanos para analizar fácilmente los efectos sociales y políticos de estas medidas. Fundado en los valores de transparencia y responsabilidad, ',
           p3:
             'se compromete a proporcionar a los ciudadanos del mundo las herramientas que necesitan para mantenerse seguros e informados.',
         },
@@ -65,9 +65,9 @@ export default {
     },
     userPreferenceSection: {
       theme: {
-        action: 'Cambiar a',
-        dark: 'Modo Oscuro',
-        light: 'Modo Claro',
+        action: 'Cambiar a ',
+        dark: 'Modo oscuro',
+        light: 'Modo claro',
       },
       geolocation: 'Permitir geolocaliización',
       app: {
@@ -84,7 +84,8 @@ export default {
         noResults: 'N/A',
         stats: {
           population: 'Población',
-          max_assembly: 'Max assembly',
+          max_assembly: 'Max. assembly',
+          max_assemblyShortVersion: 'Max. assembly',
           cases: 'Casos',
           recoveries: 'Recuperados',
           deaths: 'Fallecimientos',
