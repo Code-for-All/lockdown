@@ -2,6 +2,7 @@ export default {
   translationBy: 'Mark W. Datysgeld',
   languageId: 'pt', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
+  projectName: "Project Lockdown",
   header: {
     totals: {
       territoriesLockdown: 'TERRITÓRIOS EM LOCKDOWN',
@@ -14,7 +15,6 @@ export default {
     informationSection: {
       banner: 'O Project Lockdown está atualmente em versão Beta. Nem todos os dados estão disponíveis no momento.',
       main: {
-        name: 'Project Lockdown ',
         text:
           'O {Project Lockdown} fornece o mapeamento de diferentes NPIs (Intervenções Não Farmacêuticas) aplicadas por todo o mundo em resposta à crise da COVID-19, com o objetivo de visualizar o sucesso de diferentes medidas de resposta à pandemia, monitorar efeitos nos Direitos Humanos e Digitas, e clarificar métricas de avaliação.',
       },
@@ -22,11 +22,10 @@ export default {
         title: 'Sobre',
         text: {
           p1:
-            'Lockdowns, quarentenas, e medidas de isolamento foram implementadas pelo globo para reduzir o avanço da COVID-19 e reduzir seu peso na infraestrutura médica.',
+            'Lockdowns, quarentenas, e medidas de isolamento foram implementadas pelo globo para reduzir o avanço da COVID-19 e reduzir seu peso na infraestrutura médica. ',
           p2:
-            'O {Project Lockdown} empodera cidadãos, jornalistas, e atores de direitos humanos para que possam facilmente analisar os efeitos sociais e políticos dessas medidas. Com fundamento em valores de transparência e accountability,',
-          p3:
-            'O {Project Lockdown} é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para se manterem seguros e informados.',
+            'O {Project Lockdown} empodera cidadãos, jornalistas, e atores de direitos humanos para que possam facilmente analisar os efeitos sociais e políticos dessas medidas. Com fundamento em valores de transparência e accountability, ',
+          p3: 'O {Project Lockdown} é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para se manterem seguros e informados.',
         },
       },
       sources: {
