@@ -86,7 +86,7 @@ export class Totals extends Component {
   //   description: i18n.t('header.totals.peopleAffected'),
   //   value: Number(totals.territories?.affected || 0).toLocaleString(),
   // },
-  // {
+  {
     description: i18n.t('header.totals.cases'),
     value: Number(totals.corona?.confirmed || 0).toLocaleString(),
   },
