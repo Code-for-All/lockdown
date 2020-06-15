@@ -351,10 +351,10 @@ const tooltipCss = css`
     display: flex;
     align-items: center;
     top: 12px;
-    & span:first-child{
+    & span:first-child {
       margin-right: 5px;
     }
-    & svg{
+    & svg {
       height: 18px;
     }
     &:hover {
