@@ -80,6 +80,7 @@ export default {
         stats: {
           population: '人口',
           max_assembly: '聚眾人限',
+          max_assemblyShortVersion: '聚眾人限',
           cases: '個案',
           recoveries: '復原',
           deaths: '死亡',
