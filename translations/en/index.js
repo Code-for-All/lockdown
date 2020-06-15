@@ -102,7 +102,7 @@ export default {
           outdoorsShortVersion: 'Outdoors',
           shopping: 'Go shopping',
           shoppingShortVersion: 'Go shopping',
-          military: 'Military non-deployment',
+          military: 'No military reinforcements',
           militaryShortVersion: 'Military (Not)',
           religious: 'Religious sites',
           religiousShortVersion: 'Religious sites',
