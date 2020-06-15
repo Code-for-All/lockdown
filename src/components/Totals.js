@@ -107,7 +107,7 @@ export class Totals extends Component {
         description: i18n.t('header.totals.deaths'),
         value: Number(totals.corona?.deaths || 0).toLocaleString(),
       },
-    }];
+    ];
     return html`
       <div class=${styles}>
         ${SHOW_STATS
