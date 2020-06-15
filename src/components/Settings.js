@@ -179,10 +179,6 @@ export function Settings({ onClose, locale }) {
 
   return html`
     <div class=${styles}>
-      <button onClick=${toggleDarkmode} class="ld-button">
-        ${locale.t('menu.userPreferenceSection.theme.action')}
-        ${darkMode ? locale.t('menu.userPreferenceSection.theme.light') : locale.t('menu.userPreferenceSection.theme.dark')}
-      </button>
 
       <pwa-install-button>
         <button onClick=${() => onClose()} class="ld-button">${locale.t('menu.userPreferenceSection.app.install')}</button>

@@ -440,6 +440,12 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
             `}
           />
         `,
+
+        <button onClick=${toggleDarkmode} class="ld-button">
+          ${locale.t('menu.userPreferenceSection.theme.action')}
+          ${darkMode ? locale.t('menu.userPreferenceSection.theme.light') : locale.t('menu.userPreferenceSection.theme.dark')}
+        </button>
+
       };
     case 'settings':
       return {
@@ -457,7 +463,7 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
           Submit data
         </a>
         <p>
-          Additionally, you can become part of the project by joining one of the following teams: 
+          Additionally, you can become part of the project by joining one of the following teams:
           <ul>
             <li>Editors</li>
             <li>Devs</li>
