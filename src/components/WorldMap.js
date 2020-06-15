@@ -5,6 +5,7 @@ import { dialogService } from '../services/dialogService.js';
 import css from 'csz';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
+import CountriesSearcher from './CountriesSearcher.js';
 
 const mapbox_token = 'pk.eyJ1IjoiamZxdWVyYWx0IiwiYSI6ImNrODcwb29vajBjMDkzbWxqZHh6ZDU5aHUifQ.BjT63Mdh-P2myNvygIhSpw';
 
@@ -20,26 +21,31 @@ const selectStyles = css`
     position: absolute;
   }
 `;
+const blank = css`
+  & {
+    display: none;
+  }
+`;
 
 // Coordinates based on TLDs for desktop
 const domainCoors = {
-  // zoom/lat/long  
-  asia: { lng: 105.04, lat: 20.13, zoom: 2.04 }, // Asia - https://projectlockdown.asia/#2.04/20.13/105.04  
-  eu: { lng: 26.81, lat: 55.71, zoom: 2.12 }, // Europe - https://projectlockdown.eu/#2.12/55.71/26.81  
-  us: { lng: -98.22, lat: 37.68, zoom: 2.7 }, // North Americas - https://projectlockdown.us/#2.7/37.68/-98.22 
-  africa: { lng: 14.63, lat: 2.61, zoom: 1.88 }, // Africa - https://projectlockdown.africa/#1.88/2.61/14.63  
-  lat: { lng: -36, lat: -20.2, zoom: 1.56 }, // South Americas - https://projectlockdown.lat/#1.56/-20.2/-36  
+  // zoom/lat/long
+  asia: { lng: 105.04, lat: 20.13, zoom: 2.04 }, // Asia - https://projectlockdown.asia/#2.04/20.13/105.04
+  eu: { lng: 26.81, lat: 55.71, zoom: 2.12 }, // Europe - https://projectlockdown.eu/#2.12/55.71/26.81
+  us: { lng: -98.22, lat: 37.68, zoom: 2.7 }, // North Americas - https://projectlockdown.us/#2.7/37.68/-98.22
+  africa: { lng: 14.63, lat: 2.61, zoom: 1.88 }, // Africa - https://projectlockdown.africa/#1.88/2.61/14.63
+  lat: { lng: -36, lat: -20.2, zoom: 1.56 }, // South Americas - https://projectlockdown.lat/#1.56/-20.2/-36
   me: { lng: 53.39, lat: 26.28, zoom: 3.19 }, // Middle East - https://projectlockdown.me/#3.19/26.28/53.39
 };
 
 // Coordinates based on TLDs for mobile
 const domainCoorsMobile = {
   // zoom/lat/long
-  asia: { lng: 89.9, lat: 36.2, zoom: 1.15 }, // Asia - https://projectlockdown.asia/#1.15/36.2/89.9  
-  eu: { lng: 21.5, lat: 50.4, zoom: 1.52 }, // Europe - https://projectlockdown.eu/#1.52/50.4/21.5  
-  us: { lng: -98.37, lat: 43.09, zoom: 2 }, // North Americas - https://projectlockdown.us/#2/43.09/-98.37  
-  africa: { lng: 26.4, lat: 14.4, zoom: 1.43 }, // Africa - https://projectlockdown.africa/#1.43/14.4/26.4 
-  lat: { lng: -63.6, lat: -16.4, zoom: 1.44 },  // South Americas - https://projectlockdown.lat/#1.44/-16.4/-63.6  
+  asia: { lng: 89.9, lat: 36.2, zoom: 1.15 }, // Asia - https://projectlockdown.asia/#1.15/36.2/89.9
+  eu: { lng: 21.5, lat: 50.4, zoom: 1.52 }, // Europe - https://projectlockdown.eu/#1.52/50.4/21.5
+  us: { lng: -98.37, lat: 43.09, zoom: 2 }, // North Americas - https://projectlockdown.us/#2/43.09/-98.37
+  africa: { lng: 26.4, lat: 14.4, zoom: 1.43 }, // Africa - https://projectlockdown.africa/#1.43/14.4/26.4
+  lat: { lng: -63.6, lat: -16.4, zoom: 1.44 }, // South Americas - https://projectlockdown.lat/#1.44/-16.4/-63.6
   me: { lng: 53.4, lat: 22, zoom: 1.08 }, // Middle East - https://projectlockdown.me/#1.08/22/53.4
 };
 
@@ -97,6 +103,8 @@ export class WorldMap extends Component {
     this.initMap = this.initMap.bind(this);
     this.updateMap = this.updateMap.bind(this);
     this.updateMapLanguage = this.updateMapLanguage.bind(this);
+    this.onMapClick = this.onMapClick.bind(this);
+    this.onGetResult = this.onGetResult.bind(this);
 
     let coords = { lng: 40.7, lat: 25, zoom: 1.06 }; //default coordinates
     let deviceCoords = coords;
@@ -122,6 +130,8 @@ export class WorldMap extends Component {
       lookupTable: {},
       isMapReady: false,
       isLocationSet: isLocationSet,
+      geocoder: {},
+      lastCountry: {},
     };
   }
 
@@ -162,6 +172,14 @@ export class WorldMap extends Component {
       pitchWithRotate: false,
       hash: true,
     });
+    let geocoder = new window.MapboxGeocoder({
+      accessToken: mapbox_token,
+      language: this.props.currentLanguage ? this.props.currentLanguage.locale : 'es',
+      mapboxgl: window.mapboxgl,
+      types: 'country',
+    });
+    geocoder.on('results', this.onGetResult);
+    geocoder.addTo('#mapBlank');
     window.map = map;
     // we dont need to remap small mapData
     // const localData = mapData.features.map((f) => {
@@ -218,13 +236,7 @@ export class WorldMap extends Component {
           );
         }
       });
-      map.on('click', 'admin-0-fill', function (e) {
-        const features = map.queryRenderedFeatures(e.point, {
-          layers: ['admin-0-fill'],
-        });
-        router.setSearchParam('country', lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
-        router.setSearchParam('iso2', features[0].properties.iso_3166_1);
-      });
+      map.on('click', 'admin-0-fill', this.onMapClick);
 
       console.log('the style is loaded');
     });
@@ -354,6 +366,7 @@ export class WorldMap extends Component {
 
     this.setState({
       map,
+      geocoder,
     });
 
     return map;
@@ -380,8 +393,8 @@ export class WorldMap extends Component {
   }
 
   updateMapLanguage(language) {
-    console.log(language);
     let iso = language.locale;
+    this.state.geocoder.setLanguage(iso);
     if (iso.includes('zh-')) {
       if (iso.includes('-CN')) {
         iso = 'zh-Hans';
@@ -460,6 +473,21 @@ export class WorldMap extends Component {
     }
   }
 
+  onMapClick(e) {
+    let { map, lookupTable } = this.state;
+    const features = map.queryRenderedFeatures(e.point, {
+      layers: ['admin-0-fill'],
+    });
+    console.log('click');
+    this.state.geocoder.query(lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
+    this.setState({
+      lastCountry: {
+        country: lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name,
+        iso2: features[0].properties.iso_3166_1,
+      },
+    });
+  }
+
   componentWillUnmount() {
     this.state.map && this.state.map.remove();
   }
@@ -484,7 +512,20 @@ export class WorldMap extends Component {
     this.countrySelectRef.focus();
   }
 
-  render() {
+  onGetResult(results) {
+    console.log(results);
+    let { features } = results;
+    if (features[0]) {
+      let countryName = features[0].text;
+      router.setSearchParam('country', countryName);
+      router.setSearchParam('iso2', this.state.lastCountry.iso2);
+    } else {
+      router.setSearchParam('country', this.state.lastCountry.countryName);
+      router.setSearchParam('iso2', this.state.lastCountry.iso2);
+    }
+  }
+
+  render({ currentLanguage }) {
     return html`
       <div class="${selectStyles}">
         <form id="form" tabindex="-1" onSubmit=${this.__handleSelect}>
@@ -495,7 +536,9 @@ export class WorldMap extends Component {
           <input type="submit" value="View country details"></input>
         </form>
       </div>
-      <div class="map-container" ref=${(ref) => (this.ref = ref)}></div> 
+      <${CountriesSearcher} i18n=${currentLanguage} map=${this.state.map} />
+      <div class="map-container" ref=${(ref) => (this.ref = ref)}></div>
+      <span id="mapBlank" class="${blank}"></span>
     `;
   }
 }
