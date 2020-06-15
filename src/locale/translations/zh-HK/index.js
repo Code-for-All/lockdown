@@ -21,8 +21,8 @@ export default {
       about: {
         title: '關於我們',
         text: {
-          p1: '全球各地均已實施了封鎖和隔離措施，以減少新冠病毒的傳播並減輕對醫療系統造成的壓力。',
-          p2: '為公民、記者和人權監察者，減輕分析這些措施對社會和政治造成的影響。基於透明度和問責制的價值觀',
+          p1: '全球各地均已實施了封鎖和隔離措施，以減少新冠病毒的傳播並減輕對醫療系統造成的壓力。 ',
+          p2: '為公民、記者和人權監察者，減輕分析這些措施對社會和政治造成的影響。基於透明度和問責制的價值觀' ,
           p3: '致力為公民世界提供保持安全和知情所需的工具。',
         },
       },
@@ -60,7 +60,7 @@ export default {
     },
     userPreferenceSection: {
       theme: {
-        action: '切換',
+        action: '切換 ',
         dark: '深色',
         light: '淺色',
       },
@@ -75,7 +75,7 @@ export default {
     tabs: {
       dailyLife: {
         name: '日常生活',
-        subtitle: 'Daily life (restrictions)',
+        subtitle:"日常生活",
         noResults: '沒有提供',
         stats: {
           population: '人口',

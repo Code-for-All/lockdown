@@ -79,7 +79,8 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Vita quotidiana',
-        "0 risultati": "N/A",
+        subtitle:'Vita quotidiana',
+        noResults: 'N/A',
         stats: {
           population: 'Popolazione',
           max_assembly: 'Massimo assembramento',

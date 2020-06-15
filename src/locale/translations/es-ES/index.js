@@ -80,7 +80,7 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Actividades Diarias',
-        subtitle: 'Actividades Diarias (restricciones)',
+        subtitle: 'Actividades diarias (restricciones)',
         noResults: 'N/A',
         stats: {
           population: 'Población',

@@ -79,7 +79,8 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Повседневная жизнь',
-        "noResults": "N/A",
+        subtitle:"Повседневная жизнь",
+        noResults: 'N/A',
         stats: {
           population: 'Население ',
           max_assembly: 'Макс сбор ',

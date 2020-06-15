@@ -80,7 +80,8 @@ export default {
     tabs: {
       dailyLife: {
         name: 'الحياة اليومية',
-        "noResults": "لا ينطبق عليه",
+        subtitle:"الحياة اليومية",
+        noResults: 'لا ينطبق عليه'"',
         stats: {
           population: 'التعداد السكاني',
           max_assembly: 'أقصى عدد للتجمع',
