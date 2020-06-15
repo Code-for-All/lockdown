@@ -42,7 +42,7 @@ function json_traverse(o, prevKey) {
     return results;
   } else {
     let returnObject = {};
-    returnObject[prevKey] = o.replace(/{(.*?)}/g,'');
+    returnObject[prevKey] = o.replace(/{(.*?)}/g, '');
     return returnObject;
   }
 }

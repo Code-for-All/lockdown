@@ -80,7 +80,7 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Daily Life',
-        subtitle:"Daily life (restrictions)",
+        subtitle: 'Daily life (restrictions)',
         noResults: 'N/A',
         stats: {
           population: 'Population',

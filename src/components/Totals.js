@@ -102,19 +102,18 @@ export class Totals extends Component {
     ];
     return html`
       <div class=${styles}>
-        ${
-          SHOW_STATS ? html`<dl>
-          ${(desktop ? items : items.slice(0, 2)).map(
-            (item) => html`
-              <div>
-                <dt class="ld-font-light">${item.description}</dt>
-                <dd class="ld-font-front">${item.value}</dd>
-              </div>
-            `
-          )}
-        </dl>`: null
-        }
-        
+        ${SHOW_STATS
+          ? html`<dl>
+              ${(desktop ? items : items.slice(0, 2)).map(
+                (item) => html`
+                  <div>
+                    <dt class="ld-font-light">${item.description}</dt>
+                    <dd class="ld-font-front">${item.value}</dd>
+                  </div>
+                `
+              )}
+            </dl>`
+          : null}
       </div>
     `;
   }
