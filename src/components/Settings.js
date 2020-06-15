@@ -127,7 +127,7 @@ const styles = css`
 `;
 
 export function Settings({ onClose, locale }) {
-  const [showGeolocationButton, setshowGeolocationButton] = useState(false);
+  // const [showGeolocationButton, setshowGeolocationButton] = useState(false);
   const [pwaUpdateAvailable, setPwaUpdateAvailable] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -147,14 +147,14 @@ export function Settings({ onClose, locale }) {
     }
   }
 
-  function toggleGeolocation() {
-    if (navigator.permissions) {
-      navigator.geolocation.getCurrentPosition(() => {
-        // triggers the browsers permission popup, and then the zoom gets handled in Worldmap.js
-        setshowGeolocationButton(false);
-      });
-    }
-  }
+  // function toggleGeolocation() {
+  //   if (navigator.permissions) {
+  //     navigator.geolocation.getCurrentPosition(() => {
+  //       // triggers the browsers permission popup, and then the zoom gets handled in Worldmap.js
+  //       setshowGeolocationButton(false);
+  //     });
+  //   }
+  // }
 
   useEffect(async () => {
     addPwaUpdateListener((updateAvailable) => {
@@ -163,18 +163,18 @@ export function Settings({ onClose, locale }) {
     let dark = localStorage.getItem('darkmode');
     dark = dark !== 'false' && dark !== null;
     setDarkMode(dark);
-    if (navigator.permissions) {
-      const geolocation = await navigator.permissions.query({ name: 'geolocation' });
-
-      if (localStorage.getItem('geolocation') === 'true') {
-        setshowGeolocationButton(false);
-        return;
-      }
-
-      if (geolocation.state !== 'granted') {
-        setshowGeolocationButton(true);
-      }
-    }
+    // if (navigator.permissions) {
+    //   const geolocation = await navigator.permissions.query({ name: 'geolocation' });
+    //
+    //   if (localStorage.getItem('geolocation') === 'true') {
+    //     setshowGeolocationButton(false);
+    //     return;
+    //   }
+    //
+    //   if (geolocation.state !== 'granted') {
+    //     setshowGeolocationButton(true);
+    //   }
+    // }
   }, []);
 
   return html`
@@ -183,9 +183,9 @@ export function Settings({ onClose, locale }) {
         ${locale.t('menu.userPreferenceSection.theme.action')}
         ${darkMode ? locale.t('menu.userPreferenceSection.theme.light') : locale.t('menu.userPreferenceSection.theme.dark')}
       </button>
-      ${showGeolocationButton
-        ? html` <button onClick=${toggleGeolocation} class="ld-button">${locale.t('menu.userPreferenceSection.geolocation')}</button> `
-        : ''}
+      //  ${showGeolocationButton
+      //   ? html` <button onClick=${toggleGeolocation} class="ld-button">${locale.t('menu.userPreferenceSection.geolocation')}</button> `
+      //   : ''}
 
       <pwa-install-button>
         <button onClick=${() => onClose()} class="ld-button">${locale.t('menu.userPreferenceSection.app.install')}</button>
