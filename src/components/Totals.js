@@ -48,7 +48,7 @@ const styles = css`
   }
 `;
 
-const SHOW_STATS = false;
+const SHOW_STATS = true;
 
 export class Totals extends Component {
   constructor() {
