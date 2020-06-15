@@ -22,9 +22,9 @@ export default {
         title: 'About',
         text: {
           p1:
-            'Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and reduce the strain on medical infrastructure.',
+            'Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and reduce the strain on medical infrastructure. ',
           p2:
-            '{Project Lockdown} empowers citizens, journalists, and human rights actors to easily analyze the social and political effects of these measures. Founded on the values of transparency and accountability,',
+            '{Project Lockdown} empowers citizens, journalists, and human rights actors to easily analyze the social and political effects of these measures. Founded on the values of transparency and accountability, ',
           p3: '{Project Lockdown} is committed to providing citizens of the world with the tools they need to stay safe and informed.',
         },
       },
@@ -51,7 +51,7 @@ export default {
       credits: {
         title: 'Credits',
         text:
-          '{Project Lockdown} is a Civic Tech initiative made possible by a number of dedicated individuals and organizations. View the list of contributors',
+          '{Project Lockdown} is a Civic Tech initiative made possible by a number of dedicated individuals and organizations. View the list of contributors ',
         highlight: 'here',
       },
       dataPrivacity: {
@@ -102,7 +102,7 @@ export default {
           outdoorsShortVersion: 'Outdoors',
           shopping: 'Go shopping',
           shoppingShortVersion: 'Go shopping',
-          military: 'Military non-deployment',
+          military: 'No military reinforcements',
           militaryShortVersion: 'Military (Not)',
           religious: 'Religious sites',
           religiousShortVersion: 'Religious sites',
