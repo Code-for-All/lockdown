@@ -126,7 +126,7 @@ export default {
         measures: {
           commerce: '商業旅客',
           commerceShortVersion: '商業旅客',
-          foreignersInbound: '外籍人士（出境）',
+          foreignersInbound: '外籍人士（入境）',
           foreignersInboundShortVersion: '外籍人士（出境）',
           foreignersOutbound: '外籍人士（入境）',
           foreignersOutboundShortVersion: '外籍人士（入境）',
