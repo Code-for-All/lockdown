@@ -23,7 +23,7 @@ const countriesSearcher = css`
     background: #fff;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
     transition: width 1s;
-    .dark &{
+    .dark & {
       background-color: #333333;
       color: white;
       & .icon-provider {
