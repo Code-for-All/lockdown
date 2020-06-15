@@ -78,7 +78,7 @@ export class Totals extends Component {
       totals: totals,
     });
   }
-
+{
     description: i18n.t('header.totals.territoriesLockdown'),
     value: Number(totals.territories?.lockdown || 0).toLocaleString(),
   },
