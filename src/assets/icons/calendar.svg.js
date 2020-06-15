@@ -1,6 +1,7 @@
 import { html } from 'htm/preact';
 
-export const calendar = html`<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" xml:space="preserve">
+export const calendar = html`<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#FF5C00;}
 	.st1{fill:#333333;}
@@ -16,4 +17,5 @@ export const calendar = html`<svg version="1.1" id="Layer_1" xmlns="http://www.w
 	c0,0.09,0.03,0.18,0.06,0.26H3.62C2.17,2.15,1,3.27,1,4.66v23.82C1,29.87,2.17,31,3.62,31h21.8L31,25.64V4.66
 	C31,3.27,29.83,2.15,28.38,2.15z M3.62,29.63c-0.66,0-1.19-0.51-1.19-1.15V9.24h27.14v15.82l-0.3,0.28h-2.24
 	c-1.05,0-1.9,0.82-1.9,1.83v2.16l-0.3,0.28H3.62z"/>
-</svg>`;
+</svg>
+`;
