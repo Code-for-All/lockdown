@@ -27,34 +27,26 @@ const blank = css`
   }
 `;
 
-// Coordinates based on TLDs for a desktop
+// Coordinates based on TLDs for desktop
 const domainCoors = {
-  // zoom/lat/long
-  // Asia - https://projectlockdown.asia/#2.28/46.38/89.53
-  asia: { lng: 89.53, lat: 46.38, zoom: 2.28 },
-  // Europe - https://projectlockdown.eu/#3.44/54.21/15.42
-  eu: { lng: 15.42, lat: 54.21, zoom: 3.44 },
-  // North Americas - https://projectlockdown.us/#2.2/59.26/-91.21
-  us: { lng: -91.21, lat: 59.26, zoom: 2.2 },
-  // Africa - https://projectlockdown.africa/#3.2/4.21/21.53
-  africa: { lng: 21.53, lat: 4.21, zoom: 3.2 },
-  // South Americas - https://projectlockdown.lat/#2.76/-20.13/-56.71
-  lat: { lng: -56.71, lat: -20.13, zoom: 2.76 },
+  // zoom/lat/long  
+  asia: { lng: 105.04, lat: 20.13, zoom: 2.04 }, // Asia - https://projectlockdown.asia/#2.04/20.13/105.04  
+  eu: { lng: 26.81, lat: 55.71, zoom: 2.12 }, // Europe - https://projectlockdown.eu/#2.12/55.71/26.81  
+  us: { lng: -98.22, lat: 37.68, zoom: 2.7 }, // North Americas - https://projectlockdown.us/#2.7/37.68/-98.22 
+  africa: { lng: 14.63, lat: 2.61, zoom: 1.88 }, // Africa - https://projectlockdown.africa/#1.88/2.61/14.63  
+  lat: { lng: -36, lat: -20.2, zoom: 1.56 }, // South Americas - https://projectlockdown.lat/#1.56/-20.2/-36  
+  me: { lng: 53.39, lat: 26.28, zoom: 3.19 }, // Middle East - https://projectlockdown.me/#3.19/26.28/53.39
 };
 
-// Coordinates based on TLDs for a mobile
+// Coordinates based on TLDs for mobile
 const domainCoorsMobile = {
   // zoom/lat/long
-  // Asia - #1.15/43.3/85.1
-  asia: { lng: 85.1, lat: 43.3, zoom: 1.15 },
-  // Europe - #1.99/55.92/9.5
-  eu: { lng: 9.5, lat: 55.92, zoom: 1.99 },
-  // North Americas - #1.04/49.5/-100.6
-  us: { lng: -100.6, lat: 49.5, zoom: 1.04 },
-  // Africa - #1.83/7.31/23.39
-  africa: { lng: 23.39, lat: 7.31, zoom: 1.83 },
-  // South Americas - #1.98/-18.36/-61.66
-  lat: { lng: -61.66, lat: -18.36, zoom: 1.98 },
+  asia: { lng: 89.9, lat: 36.2, zoom: 1.15 }, // Asia - https://projectlockdown.asia/#1.15/36.2/89.9  
+  eu: { lng: 21.5, lat: 50.4, zoom: 1.52 }, // Europe - https://projectlockdown.eu/#1.52/50.4/21.5  
+  us: { lng: -98.37, lat: 43.09, zoom: 2 }, // North Americas - https://projectlockdown.us/#2/43.09/-98.37  
+  africa: { lng: 26.4, lat: 14.4, zoom: 1.43 }, // Africa - https://projectlockdown.africa/#1.43/14.4/26.4 
+  lat: { lng: -63.6, lat: -16.4, zoom: 1.44 },  // South Americas - https://projectlockdown.lat/#1.44/-16.4/-63.6  
+  me: { lng: 53.4, lat: 22, zoom: 1.08 }, // Middle East - https://projectlockdown.me/#1.08/22/53.4
 };
 
 // Use for altering boundaries of countries with disputed areas
@@ -123,7 +115,7 @@ export class WorldMap extends Component {
 
     let url = window.location.href;
     let isLocationSet = false;
-    for (let country in domainCoors) {
+    for (let country in deviceCoords) {
       if (url.indexOf('lockdown.' + country) != -1) {
         coords = deviceCoords[country];
         isLocationSet = true;

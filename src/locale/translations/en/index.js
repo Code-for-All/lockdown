@@ -3,7 +3,6 @@ export default {
   languageId: 'en', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
   header: {
-    version: 'BETA',
     totals: {
       territoriesLockdown: 'TERRITORIES IN LOCKDOWN',
       peopleAffected: 'PEOPLE AFFECTED',
@@ -13,26 +12,26 @@ export default {
   },
   menu: {
     informationSection: {
-      banner: 'Project Lockdown is currently in beta. Not all data may be available yet.',
+      banner: 'Project Lockdown is currently in Beta. Not all data may be available yet.',
       main: {
-        name: 'Project Lockdown ',
+        name: 'Project Lockdown',
         text:
-          '{Proyecto Lockdown} provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced across the globe in response to the COVID-19 crisis to visualize the success of different pandemic response measures, monitor effects on Human and Digital Rights, and clarify evaluation metrics.',
+          '{Project Lockdown} provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced across the globe in response to the COVID-19 crisis, to visualize the success of different pandemic response measures, monitor effects on Human and Digital Rights, and clarify evaluation metrics.',
       },
       about: {
         title: 'About',
         text: {
           p1:
-            'Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and reduce the strain on medical infrastructure.',
+            'Lockdown, quarantine, and isolation measures have been implemented across the globe to reduce the spread of COVID-19 and reduce the strain on medical infrastructure. ',
           p2:
-            '{Proyecto Lockdown} empowers citizens, journalists, and Human Rights Defenderes to easily analyze the social and political effects of these measures. Founded on the values of transparency and accountability,',
-          p3: '{Proyecto Lockdown} is committed to providing citizens of the world with the tools they need to stay safe and informed.',
+            '{Project Lockdown} empowers citizens, journalists, and human rights actors to easily analyze the social and political effects of these measures. Founded on the values of transparency and accountability, ',
+          p3: '{Project Lockdown} is committed to providing citizens of the world with the tools they need to stay safe and informed.',
         },
       },
       sources: {
         title: 'Sources',
         subtitle:
-          '{Proyecto Lockdown} combines multiple trusted sources to ensure that the data used is verified and accurate. You can find the full list of sources used here:',
+          '{Project Lockdown} combines multiple trusted sources to ensure that the data used is verified and accurate. You can find the full list of sources used here:',
         linksList: {
           first: {
             linkTitle: "Project Lockdown's Database",
@@ -52,7 +51,7 @@ export default {
       credits: {
         title: 'Credits',
         text:
-          '{Proyecto Lockdown} is a Civic Tech initiative made possible by a number of dedicated individuals and organizations. View the list of contributors',
+          '{Project Lockdown} is a Civic Tech initiative made possible by a number of dedicated individuals and organizations. View the list of contributors ',
         highlight: 'here',
       },
       dataPrivacity: {
@@ -103,7 +102,7 @@ export default {
           outdoorsShortVersion: 'Outdoors',
           shopping: 'Go shopping',
           shoppingShortVersion: 'Go shopping',
-          military: 'Military non-deployment',
+          military: 'No military reinforcements',
           militaryShortVersion: 'Military (Not)',
           religious: 'Religious sites',
           religiousShortVersion: 'Religious sites',

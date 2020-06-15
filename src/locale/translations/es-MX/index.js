@@ -1,31 +1,31 @@
 export default {
   translationBy: 'AherreDev',
-  languageId: 'es-MX', // ? ISO 639-1:2002
-  // ? Para más información consultar https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes y para ver las versiones consultar https://en.wikipedia.org/wiki/Language_localisation
+  languageId: 'es', // ? ISO 639-1:2002
+  // ? Para más información consulte https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes y para ver las versiones consulte https://en.wikipedia.org/wiki/Language_localisation
+  projectName: "Project Lockdown",
   header: {
-    version: 'BETA',
     totals: {
       territoriesLockdown: 'TERRITORIOS EN CUARENTENA',
       peopleAffected: 'PERSONAS AFECTADAS',
-      cases: 'CASOS REPORTADOS',
-      deaths: 'MUERTES REPORTADAS',
+      cases: 'CASOS DECLARADOS',
+      deaths: 'FALLECIMIENTOS DECLARADOS',
     },
   },
   menu: {
     informationSection: {
-      banner: 'Project lockdown esta actualmente en fase beta. No todos los datos se encuentran disponibles.',
+      banner: 'Project Lockdown se encuentra actualmente en fase BETA. No todos los datos se encuentran disponibles.',
       main: {
         name: 'Project Lockdown ',
         text:
-          'proove un mapeo de diferentes NPIs (No Intervenciones Farmaceuticas) aplicadas en todo el mundo en respuesta a la crisis COVID-19 para visualizar el éxito de diferentes medidas de respuesta ante una pandemia, monitorear los efectos sobre los Derechos Humanos y Digitales y aclarar las métricas de evaluación.',
+          '{Proyecto Lockdown} muestra un mapeo de las distintas NPIs (del ingles Non-Pharmaceutical Interventions o Intervenciones No Farmaceuticas) aplicadas en todo el mundo en respuesta a la crisis de la COVID-19. El objetivo es visualizar las medidas adoptadas en respuesta ante la pandemia y evaluar sus efectos sobre los Derechos Humanos y Digitales.',
       },
       about: {
-        title: 'Acerca',
+        title: 'Acerca de',
         text: {
           p1:
-            'Se han implementado medidas de bloqueo, cuarentena y aislamiento en todo el mundo para reducir la propagación de COVID-19 y reducir la presión sobre la infraestructura médica.',
+            'En un intento de reducir la propagación de la COVID-19 y reducir la presión sobre sus infraestructuras médicas, gobiernos de todo el mundo han implementado medidas de bloqueo, cuarentena y aislamiento.',
           p2:
-            'empodera a los ciudadanos, periodistas y defensores de los derechos humanos para analizar fácilmente los efectos sociales y políticos de estas medidas. Fundado en los valores de transparencia y rendición de cuentas.,',
+            'empodera a los ciudadanos, periodistas y defensores de los derechos humanos para analizar fácilmente los efectos sociales y políticos de estas medidas. Fundado en los valores de transparencia y responsabilidad,',
           p3:
             'se compromete a proporcionar a los ciudadanos del mundo las herramientas que necesitan para mantenerse seguros e informados.',
         },
@@ -33,11 +33,11 @@ export default {
       sources: {
         title: 'Recursos',
         subtitle:
-          'combina múltiples fuentes confiables para garantizar que los datos utilizados sean verificados y precisos. Puede encontrar la lista completa de fuentes utilizadas aquí:',
+          'combina múltiples fuentes y una solida metodologia para garantizar que los datos presentados sean precisos. Puede encontrar la lista completa de fuentes utilizadas aquí:',
         linksList: {
           first: {
             linkTitle: 'Base de datos de Project Lockdown',
-            text: '(Recolectada de un grupo de recursos de NPIs)',
+            text: '(Generada en base a varias fuentes.)',
           },
           second: {
             linkTitle: 'Coronavirus COVID19 API',
@@ -46,29 +46,29 @@ export default {
           },
         },
         issues: {
-          text: 'Si usted encuentra un error, porfavor ayudenos y reportelo',
-          highlight: 'creando un reporte aquí',
+          text: 'Si encuentra un error, por favor ',
+          highlight: 'informenos.',
         },
       },
       credits: {
         title: 'Creditos',
         text:
-          'es una iniciativa de Civic Tech hecha posible por varias personas y organizaciones dedicadas. Ver la lista de contribuyentes',
-        highlight: 'aquí',
+          'es una iniciativa Civic Tech hecha posible por una red internacional de voluntarios y organizaciones. Consultar aqui la lista de ',
+        highlight: 'miembros.',
       },
       dataPrivacity: {
-        title: 'Datos & Privacidad',
+        title: 'Politica de Datos & Privacidad',
         paragraphs: {
-          p1: 'Nosotros no recolectamos datos de nuestros visitantes.',
-          p2: 'Toda la información de los miembros del proyecto fue otorgada por ellos.',
+          p1: 'No recolectamos datos de nuestros visitantes.',
+          p2: 'Toda información disponible de nuestros miembros es publicada bajo su consentimiento.',
         },
       },
     },
     userPreferenceSection: {
       theme: {
         action: 'Cambiar a',
-        dark: 'Modo Obscuro',
-        light: 'Modo claro',
+        dark: 'Modo Oscuro',
+        light: 'Modo Claro',
       },
       geolocation: 'Permitir geolocaliización',
       app: {
@@ -80,67 +80,67 @@ export default {
   tdo: {
     tabs: {
       dailyLife: {
-        name: 'Vida diaria',
-        subtitle: 'Vida diaria (restricciones)',
+        name: 'Actividades Diarias',
+        subtitle: 'Actividades Diarias (restricciones)',
         noResults: 'N/A',
         stats: {
           population: 'Población',
           max_assembly: 'Max assembly',
           cases: 'Casos',
           recoveries: 'Recuperados',
-          deaths: 'Muertes',
+          deaths: 'Fallecimientos',
         },
         measureValues: {
-          '1': 'TOTAL',
-          '2': 'PACIAL',
-          '3': 'NINGUNO',
-          '4': 'INCIERTO',
+          '1': 'Sin restricciones',
+          '2': 'Restricciones parciales',
+          '3': 'Restricciones totales',
+          '4': 'Sin clarificar',
         },
         measures: {
-          home: 'Quedarse en casa',
-          homeShortVersion: 'Quedarse en casa',
-          shopping: 'Compras',
-          shoppingShortVersion: 'Compras',
-          outdoors: 'Al aire libre',
-          outdoorsShortVersion: 'Al aire libre',
-          military: 'Militares',
-          militaryShortVersion: 'Militares',
-          religious: 'Sitios religiosos',
-          religiousShortVersion: 'Sitios religiosos',
-          electricity: 'Electricidad',
-          electricityShortVersion: 'Electricidad',
-          work: 'Ir a trabajar',
-          workShortVersion: 'Ir a trabajar',
-          water: 'Agua',
-          waterShortVersion: 'Agua',
-          schools: 'Ir a la escuela',
-          schoolsShortVersion: 'Ir a la escuela',
-          internet: 'Telecomunicaciones',
-          internetShortVersion: 'Telecomunicaciones',
+          home: 'Cuarentena',
+          homeShortVersion: 'Cuarentena',
+          shopping: 'Salir de compras',
+          shoppingShortVersion: 'Salir de compras',
+          outdoors: 'Actividades al aire libre',
+          outdoorsShortVersion: 'Actividades al aire libre',
+          military: 'Incremento de presencia militar',
+          militaryShortVersion: 'Incremento de presencia militar',
+          religious: 'Acceso a centros religiosos',
+          religiousShortVersion: 'Acceso a centros religiosos',
+          electricity: 'Suministro energetico asegurado',
+          electricityShortVersion: 'Suministro energetico asegurado',
+          work: 'Acceso al centro de trabajo',
+          workShortVersion: 'Acceso al centro de trabajo',
+          water: 'Suministro de agua asegurado',
+          waterShortVersion: 'Suministro de agua asegurado',
+          schools: 'Acceso al sistema educativo',
+          schoolsShortVersion: 'Acceso al sistema educativo',
+          internet: 'Servicios de telecomunicaciones asegurados',
+          internetShortVersion: 'Servicios de telecomunicaciones asegurados',
         },
       },
       mobility: {
         name: 'Mobilidad',
         subtitle: 'Transporte (restricciones)',
         measureValues: {
-          '1': 'TOTAL',
-          '2': 'PACIAL',
-          '3': 'NINGUNO',
-          '4': 'INCIERTO',
+          '1': 'Sin restricciones',
+          '2': 'Restricciones parciales',
+          '3': 'Restricciones totales',
+          '4': 'Sin clarificar',
         },
         measures: {
           commerce: 'Comercio',
           commerceShortVersion: 'Comercio',
-          foreignersInbound: 'Extranjeros (entrar)',
-          foreignersInboundShortVersion: 'Extranjeros (entrar)',
-          foreignersOutbound: 'Extranjeros (salir)',
-          foreignersOutboundShortVersion: 'Extranjeros (salir)',
+          foreignersInbound: 'Extranjeros (Llegada)',
+          foreignersInboundShortVersion: 'Extranjeros (Llegada)',
+          foreignersOutbound: 'Extranjeros (Salida)',
+          foreignersOutboundShortVersion: 'Extranjeros (Salida)',
           local: 'Entre ciudades',
           localShortVersion: 'Entre ciudades',
-          nationalsInbound: 'Nacionales (entrar)',
-          nationalsInboundShortVersion: 'Nacionales (entrar)',
-          nationalsOutbound: 'Nacionales (salir)',
-          nationalsOutboundShortVersion: 'Nacionales (salir)',
+          nationalsInbound: 'Nacionales (Llegada)',
+          nationalsInboundShortVersion: 'Nacionales (Llegada)',
+          nationalsOutbound: 'Nacionales (Salida',
+          nationalsOutboundShortVersion: 'Nacionales (Salida',
           stopovers: 'Escalas',
           stopoversShortVersion: 'Escalas',
           crossBorderWorkers: 'Trabajadores transfronterizos',
@@ -148,16 +148,16 @@ export default {
         },
       },
       reports: {
-        name: 'Reportes',
-        subtitle: 'Próximamente',
+        name: 'Informes',
+        subtitle: 'Próximamente.',
       },
     },
   },
   mapLegend: {
-    no: 'Sin bloqueos',
-    partial: 'Bloqueos parciales',
-    full: 'Bloqueo total',
-    noData: 'Sin datos',
-    cases: 'COVID (Reportado)',
+    no: 'Sin prohibicion',
+    partial: 'Prohibicion parcial',
+    full: 'Prohibicion total',
+    noData: 'Datos no disponibles',
+    cases: 'COVID-19 (Casos declarados)',
   },
 };

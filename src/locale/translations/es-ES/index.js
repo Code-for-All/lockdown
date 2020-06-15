@@ -3,7 +3,6 @@ export default {
   languageId: 'es-ES', // ? ISO 639-1:2002
   // ? Para más información consulte https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes y para ver las versiones consulte https://en.wikipedia.org/wiki/Language_localisation
   header: {
-    version: 'BETA',
     totals: {
       territoriesLockdown: 'TERRITORIOS EN CUARENTENA',
       peopleAffected: 'PERSONAS AFECTADAS',
