@@ -107,10 +107,10 @@ class CountriesSearcher extends Component {
       this.onLanguageChange();
     }
   }
-  onLanguageChange(){
+  onLanguageChange() {
     const { i18n } = this.props;
     const { geocoder } = this.state;
-    geocoder.setLanguage( i18n.locale );
+    geocoder.setLanguage(i18n.locale);
   }
   onPressKey(e) {
     if (e.code === 'Enter' && this.state.showSearchInput) {
@@ -123,13 +123,13 @@ class CountriesSearcher extends Component {
   }
   onConfirm() {
     let { geoResult } = this.state;
-    if(geoResult.center){
+    if (geoResult.center) {
       this.openSearchInput();
       this.setState({
         results: '',
         geoResult: {},
         parsedText: '',
-      })
+      });
       this.props.map.flyTo({ center: geoResult.center, maxDuration: 500 });
       setTimeout(() => {
         router.setSearchParam('country', geoResult.place_name);
@@ -144,26 +144,25 @@ class CountriesSearcher extends Component {
     this.setState({ parsedText: searchInput.toUpperCase() });
   }
   openSearchInput() {
-    console.log('s')
+    console.log('s');
     this.setState({
       showSearchInput: !this.state.showSearchInput,
     });
   }
   onGetResult(results) {
     let { features } = results;
-    if(features[0]){
+    if (features[0]) {
       let countryName = features[0].text.toUpperCase();
       this.setState({
-        results: countryName,  
+        results: countryName,
         geoResult: features[0],
       });
-    }else{
+    } else {
       this.setState({
-        results: "",  
+        results: '',
         geoResult: {},
       });
     }
-    
   }
   onClick() {
     if (!this.state.showSearchInput) this.openSearchInput();

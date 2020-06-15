@@ -22,9 +22,9 @@ const selectStyles = css`
   }
 `;
 const blank = css`
-&{
-  display: none;
-}
+  & {
+    display: none;
+  }
 `;
 
 // Coordinates based on TLDs for a desktop
@@ -139,7 +139,7 @@ export class WorldMap extends Component {
       isMapReady: false,
       isLocationSet: isLocationSet,
       geocoder: {},
-      lastCountry: {}
+      lastCountry: {},
     };
   }
 
@@ -374,7 +374,7 @@ export class WorldMap extends Component {
 
     this.setState({
       map,
-      geocoder
+      geocoder,
     });
 
     return map;
@@ -402,7 +402,7 @@ export class WorldMap extends Component {
 
   updateMapLanguage(language) {
     let iso = language.locale;
-    this.state.geocoder.setLanguage( iso );
+    this.state.geocoder.setLanguage(iso);
     if (iso.includes('zh-')) {
       if (iso.includes('-CN')) {
         iso = 'zh-Hans';
@@ -481,19 +481,19 @@ export class WorldMap extends Component {
     }
   }
 
-  onMapClick(e){
+  onMapClick(e) {
     let { map, lookupTable } = this.state;
     const features = map.queryRenderedFeatures(e.point, {
       layers: ['admin-0-fill'],
     });
-    console.log("click")
+    console.log('click');
     this.state.geocoder.query(lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
     this.setState({
       lastCountry: {
         country: lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name,
-        iso2: features[0].properties.iso_3166_1
-      }
-    })
+        iso2: features[0].properties.iso_3166_1,
+      },
+    });
   }
 
   componentWillUnmount() {
@@ -523,11 +523,11 @@ export class WorldMap extends Component {
   onGetResult(results) {
     console.log(results);
     let { features } = results;
-    if(features[0]){
+    if (features[0]) {
       let countryName = features[0].text;
       router.setSearchParam('country', countryName);
       router.setSearchParam('iso2', this.state.lastCountry.iso2);
-    }else{
+    } else {
       router.setSearchParam('country', this.state.lastCountry.countryName);
       router.setSearchParam('iso2', this.state.lastCountry.iso2);
     }
@@ -544,7 +544,7 @@ export class WorldMap extends Component {
           <input type="submit" value="View country details"></input>
         </form>
       </div>
-      <${CountriesSearcher} i18n=${ currentLanguage } map=${this.state.map} />
+      <${CountriesSearcher} i18n=${currentLanguage} map=${this.state.map} />
       <div class="map-container" ref=${(ref) => (this.ref = ref)}></div>
       <span id="mapBlank" class="${blank}"></span>
     `;
