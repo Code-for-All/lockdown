@@ -204,8 +204,8 @@ a:visited {
 .ld-menu {
   font-size: 14px;
   stroke-width: var(--ld-icon-stroke-width);
-  background-color: var(--ld-bg);
-  opacity: 0.5;
+  /* background-color: var(--ld-bg); */
+  opacity: 0.2;
   --ld-text: #333333;
   color: var(--ld-text);
   z-index: 1100;
