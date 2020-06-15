@@ -31,7 +31,7 @@ export default {
       sources: {
         title: 'Fonti',
         subtitle:
-          'combina più fonti affidabili per garantire che i dati utilizzati siano verificati e accurati. L'elenco completo delle fonti utilizzate si trova qui:',
+          'combina più fonti affidabili per garantire che i dati utilizzati siano verificati e accurati. L`elenco completo delle fonti utilizzate si trova qui:',
         linksList: {
           first: {
             linkTitle: "Database di Project Lockdown ",
@@ -51,7 +51,7 @@ export default {
       credits: {
         title: 'Credits',
         text:
-          è un’iniziativa di Civic Tech resa possibile da una serie di persone e ed organizzazioni motivate. Visualizza l’elenco dei collaboratori',
+          'è un’iniziativa di Civic Tech resa possibile da una serie di persone e ed organizzazioni motivate. Visualizza l’elenco dei collaboratori',
         highlight: 'qui',
       },
       dataPrivacity: {
