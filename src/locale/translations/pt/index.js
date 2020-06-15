@@ -25,7 +25,8 @@ export default {
             'Lockdowns, quarentenas, e medidas de isolamento foram implementadas pelo globo para reduzir o avanço da COVID-19 e reduzir seu peso na infraestrutura médica.',
           p2:
             'O {Project Lockdown} empodera cidadãos, jornalistas, e atores de direitos humanos para que possam facilmente analisar os efeitos sociais e políticos dessas medidas. Com fundamento em valores de transparência e accountability,',
-          p3: 'O {Project Lockdown} é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para se manterem seguros e informados.',
+          p3:
+            'O {Project Lockdown} é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para se manterem seguros e informados.',
         },
       },
       sources: {

@@ -97,10 +97,7 @@ export class Totals extends Component {
   //   value: Number(totals.corona?.deaths || 0).toLocaleString(),
   //
   render({ selectedDate, i18n }, { totals, desktop }) {
-    const items = [
-      {
-},
-    ];
+    const items = [{}];
     return html`
       <div class=${styles}>
         ${SHOW_STATS
