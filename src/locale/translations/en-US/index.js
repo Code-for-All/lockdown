@@ -2,7 +2,6 @@ export default {
   translationBy: 'Project Lockdown team',
   languageId: 'en', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
-  projectName: "Project Lockdown",
   header: {
     totals: {
       territoriesLockdown: 'TERRITORIES IN LOCKDOWN',
@@ -15,6 +14,7 @@ export default {
     informationSection: {
       banner: 'Project Lockdown is currently in Beta. Not all data may be available yet.',
       main: {
+        name: 'Project Lockdown',
         text:
           '{Project Lockdown} provides a mapping of the different NPIs (Non-Pharmaceutical Interventions) enforced across the globe in response to the COVID-19 crisis, to visualize the success of different pandemic response measures, monitor effects on Human and Digital Rights, and clarify evaluation metrics.',
       },

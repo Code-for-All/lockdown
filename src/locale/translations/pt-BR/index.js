@@ -2,7 +2,6 @@ export default {
   translationBy: 'Mark W. Datysgeld',
   languageId: 'pt', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
-  projectName: "Project Lockdown",
   header: {
     totals: {
       territoriesLockdown: 'TERRITÓRIOS EM LOCKDOWN',
@@ -15,6 +14,7 @@ export default {
     informationSection: {
       banner: 'O Project Lockdown está atualmente em versão Beta. Nem todos os dados estão disponíveis no momento.',
       main: {
+        name: 'Project Lockdown',
         text:
           'O {Project Lockdown} fornece o mapeamento de diferentes NPIs (Intervenções Não Farmacêuticas) aplicadas por todo o mundo em resposta à crise da COVID-19, com o objetivo de visualizar o sucesso de diferentes medidas de resposta à pandemia, monitorar efeitos nos Direitos Humanos e Digitas, e clarificar métricas de avaliação.',
       },

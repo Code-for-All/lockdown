@@ -2,7 +2,6 @@ export default {
   translationBy: 'AherreDev',
   languageId: 'es', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
-  projectName: "Project Lockdown",
   header: {
     totals: {
       territoriesLockdown: 'TERRITORIOS EN CUARENTENA',
@@ -15,6 +14,7 @@ export default {
     informationSection: {
       banner: 'Project Lockdown se encuentra actualmente en fase BETA. No todos los datos se encuentran disponibles.',
       main: {
+        name: 'Project Lockdown',
         text:
           '{Project Lockdown} muestra un mapeo de las distintas NPIs (del ingles Non-Pharmaceutical Interventions o Intervenciones No Farmaceuticas) aplicadas en todo el mundo en respuesta a la crisis de la COVID-19. El objetivo es visualizar las medidas adoptadas en respuesta ante la pandemia y evaluar sus efectos sobre los Derechos Humanos y Digitales.',
       },
@@ -84,8 +84,8 @@ export default {
         noResults: 'N/A',
         stats: {
           population: 'Población',
-          max_assembly: 'Max. assembly',
-          max_assemblyShortVersion: 'Max. assembly',
+          max_assembly: 'Máxima congregación',
+          max_assemblyShortVersion: 'Max. congregación',
           cases: 'Casos',
           recoveries: 'Recuperados',
           deaths: 'Fallecimientos',
@@ -99,22 +99,22 @@ export default {
         measures: {
           home: 'Cuarentena',
           homeShortVersion: 'Cuarentena',
-          shopping: 'Salir de compras',
-          shoppingShortVersion: 'Salir de compras',
           outdoors: 'Actividades al aire libre',
           outdoorsShortVersion: 'Actividades al aire libre',
-          military: 'Incremento de presencia militar',
-          militaryShortVersion: 'Incremento de presencia militar',
+          shopping: 'Salir de compras',
+          shoppingShortVersion: 'Salir de compras',
+          military: 'Sin incremento militar',
+          militaryShortVersion: 'Más militares (No)',
           religious: 'Acceso a centros religiosos',
           religiousShortVersion: 'Acceso a centros religiosos',
-          electricity: 'Suministro energetico asegurado',
-          electricityShortVersion: 'Suministro energetico asegurado',
           work: 'Acceso al centro de trabajo',
           workShortVersion: 'Acceso al centro de trabajo',
-          water: 'Suministro de agua asegurado',
-          waterShortVersion: 'Suministro de agua asegurado',
           schools: 'Acceso al sistema educativo',
           schoolsShortVersion: 'Acceso al sistema educativo',
+          electricity: 'Suministro energetico asegurado',
+          electricityShortVersion: 'Suministro energetico asegurado',
+          water: 'Suministro de agua asegurado',
+          waterShortVersion: 'Suministro de agua asegurado',
           internet: 'Servicios de telecomunicaciones asegurados',
           internetShortVersion: 'Servicios de telecomunicaciones asegurados',
         },
@@ -129,8 +129,6 @@ export default {
           '4': 'Sin clarificar',
         },
         measures: {
-          commerce: 'Comercio',
-          commerceShortVersion: 'Comercio',
           foreignersInbound: 'Extranjeros (Llegada)',
           foreignersInboundShortVersion: 'Extranjeros (Llegada)',
           foreignersOutbound: 'Extranjeros (Salida)',
@@ -145,6 +143,8 @@ export default {
           stopoversShortVersion: 'Escalas',
           crossBorderWorkers: 'Trabajadores transfronterizos',
           crossBorderWorkersShortVersion: 'Trabajadores transfronterizos',
+          commerce: 'Comercio',
+          commerceShortVersion: 'Comercio',
         },
       },
       reports: {
