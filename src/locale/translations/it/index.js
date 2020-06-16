@@ -16,7 +16,7 @@ export default {
       main: {
         name: 'Project Lockdown',
         text:
-  'fornisce una mappatura delle diverse NPI (Non-Pharmaceutical Interventions) applicate in tutto il mondo in risposta alla crisi COVID-19, al fine di visualizzare il successo delle diverse misure di risposta alla pandemia, monitorare gli effetti sui diritti umani e digitali e chiarire le metriche di valutazione.',
+        '{Project Lockdown} fornisce una mappatura delle diverse NPI (Non-Pharmaceutical Interventions) applicate in tutto il mondo in risposta alla crisi COVID-19, al fine di visualizzare il successo delle diverse misure di risposta alla pandemia, monitorare gli effetti sui diritti umani e digitali e chiarire le metriche di valutazione.',
       },
       about: {
         title: 'About',
@@ -24,15 +24,15 @@ export default {
           p1:
             'Sono state attuate misure di lockdown, quarantena e isolamento in tutto il mondo per ridurre la diffusione di COVID-19 e ridurre la pressione sulle infrastrutture mediche ',
           p2:
-            'consente ai cittadini, ai giornalisti e ai attori dei diritti umani di analizzare facilmente gli effetti sociali e politici di queste misure. Fondato sui valori della trasparenza e della responsabilità, ',
+            '{Project Lockdown} consente ai cittadini, ai giornalisti e ai attori dei diritti umani di analizzare facilmente gli effetti sociali e politici di queste misure. Fondato sui valori della trasparenza e della responsabilità, ',
           p3:
-            'si impegna a fornire ai cittadini di tutto il mondo gli strumenti necessari per rimanere sicuri e informati.',
+            '{Project Lockdown} si impegna a fornire ai cittadini di tutto il mondo gli strumenti necessari per rimanere sicuri e informati.',
         },
       },
       sources: {
         title: 'Fonti',
         subtitle:
-          'combina più fonti affidabili per garantire che i dati utilizzati siano verificati e accurati. L`elenco completo delle fonti utilizzate si trova qui:',
+          '{Project Lockdown} combina più fonti affidabili per garantire che i dati utilizzati siano verificati e accurati. L`elenco completo delle fonti utilizzate si trova qui:',
         linksList: {
           first: {
             linkTitle: "Database di Project Lockdown ",
@@ -52,7 +52,7 @@ export default {
       credits: {
         title: 'Credits',
         text:
-          'è un’iniziativa di Civic Tech resa possibile da una serie di persone e ed organizzazioni motivate. Visualizza l’elenco dei collaboratori',
+          '{Project Lockdown} è un’iniziativa di Civic Tech resa possibile da una serie di persone e ed organizzazioni motivate. Visualizza l’elenco dei collaboratori',
         highlight: 'qui',
       },
       dataPrivacity: {
@@ -103,7 +103,7 @@ export default {
           outdoorsShortVersion: 'All’aperto',
           shopping: 'Fare la spesa',
           shoppingShortVersion: 'Fare la spesa',
-          military: 'Non-dispiegamento militare',
+          military: 'Nessun esercito aggiuntivo',
           militaryShortVersion: 'Non-dispiegamento',
           religious: 'Luoghi di culto',
           religiousShortVersion: 'Luoghi di culto',

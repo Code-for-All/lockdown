@@ -96,14 +96,14 @@ export default {
         },
         measures: {
           home: 'العزل المنزلي',
-          shopping: 'التسوق',
           outdoors: 'الأنشطة الخارجية',
+          shopping: 'التسوق',
           military: 'الوجود العسكري',
           religious: 'الشعائر الدينية',
-          electricity: 'الكهرباء',
           work: 'الذهاب للعمل',
-          water: 'الماء',
           schools: 'الحضور المدرسي',
+          electricity: 'الكهرباء',
+          water: 'الماء',
           internet: 'الاتصالات',
         },
       },
@@ -117,7 +117,6 @@ export default {
           '4': 'مبهم',
         },
         measures: {
-          commerce: 'التجارة',
           foreignersInbound: 'غير المواطنين (دخول)',
           foreignersOutbound: 'غير المواطنين (خروج)',
           local: 'بين المدن',
@@ -125,6 +124,7 @@ export default {
           nationalsOutbound: 'المواطنين (خروج)',
           stopovers: 'العبور',
           crossBorderWorkers: 'العاملين مابين الحدود',
+          commerce: 'التجارة',
         },
       },
       reports: {
