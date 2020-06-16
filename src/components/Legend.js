@@ -300,9 +300,9 @@ class Legend extends Component {
           <span>
             <div class="color covidstripes" />
           </span>
-          <span>
+          <!-- <span>
             ${i18n.t('mapLegend.cases')}
-          </span>
+          </span> -->
         </div>
       </div>
     </div>`;
