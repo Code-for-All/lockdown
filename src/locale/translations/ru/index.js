@@ -2,7 +2,6 @@ export default {
   translationBy: 'Svetlana Zens',
   languageId: 'ru', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
-  projectName: "Project Lockdown",
   header: {
     totals: {
       territoriesLockdown: 'ТЕРРИТОРИИ ПОД ИЗОЛЯЦИЕЙ ',
@@ -15,6 +14,7 @@ export default {
     informationSection: {
       banner: 'Проект Lockdown в настоящее время находится в бета-версии. Не все данные могут быть доступны.',
       main: {
+        name: 'Project Lockdown',
         text:
           'обеспечивает сопоставление различных НФВ (не фармацевтических вмешательств), применяемых в борьбе против COVID-19 во всем мире, а также для визуализации успеха различных мер реагирования на пандемию, мониторинга воздействия на права человека и цифровые права, и уточнения показателей оценки.',
       },

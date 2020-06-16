@@ -14,6 +14,7 @@ export default {
     informationSection: {
       banner: 'Project Lockdown è attualmente in beta. Non tutti i dati potrebbero essere disponibili.',
       main: {
+        name: 'Project Lockdown',
         text:
   'fornisce una mappatura delle diverse NPI (Non-Pharmaceutical Interventions) applicate in tutto il mondo in risposta alla crisi COVID-19, al fine di visualizzare il successo delle diverse misure di risposta alla pandemia, monitorare gli effetti sui diritti umani e digitali e chiarire le metriche di valutazione.',
       },
