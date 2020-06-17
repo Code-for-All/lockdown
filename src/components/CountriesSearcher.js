@@ -82,7 +82,7 @@ class CountriesSearcher extends Component {
       results: '',
       geoResult: {},
       parsedText: '',
-      mouseHover: false
+      mouseHover: false,
     };
     this.openSearchInput = this.openSearchInput.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -91,7 +91,7 @@ class CountriesSearcher extends Component {
     this.onConfirm = this.onConfirm.bind(this);
     this.onPressKey = this.onPressKey.bind(this);
     this.onLanguageChange = this.onLanguageChange.bind(this);
-    this.closeComponent = this. closeComponent.bind(this);
+    this.closeComponent = this.closeComponent.bind(this);
     this.onToogleMouseState = this.onToogleMouseState.bind(this);
   }
   componentWillMount() {
@@ -110,12 +110,12 @@ class CountriesSearcher extends Component {
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.onPressKey);
-    document.removeEventListener("click",this.closeComponent);
+    document.removeEventListener('click', this.closeComponent);
   }
   componentDidMount() {
     this.state.geocoder.addTo('#blank');
     window.addEventListener('keydown', this.onPressKey);
-    document.addEventListener("click",this.closeComponent);
+    document.addEventListener('click', this.closeComponent);
   }
   componentDidUpdate(previousProps, previousState, snapshot) {
     if (previousProps.i18n !== this.props.i18n) {
@@ -163,10 +163,10 @@ class CountriesSearcher extends Component {
       showSearchInput: !this.state.showSearchInput,
     });
   }
-  closeComponent(){
+  closeComponent() {
     let { mouseHover, showSearchInput } = this.state;
-    if(mouseHover || !showSearchInput){
-    }else if(showSearchInput){
+    if (mouseHover || !showSearchInput) {
+    } else if (showSearchInput) {
       this.openSearchInput();
     }
   }
@@ -188,13 +188,18 @@ class CountriesSearcher extends Component {
   onClick() {
     if (!this.state.showSearchInput) this.openSearchInput();
   }
-  onToogleMouseState(isHover){
+  onToogleMouseState(isHover) {
     this.setState({
-      mouseHover: isHover
-    })
+      mouseHover: isHover,
+    });
   }
   render(_, { showSearchInput, results, parsedText }) {
-    return html`<div onMouseOver=${()=>this.onToogleMouseState(true)} onMouseOut=${()=>this.onToogleMouseState(false)} onClick=${this.onClick} class="${countriesSearcher} ${showSearchInput ? 'show' : ''}">
+    return html`<div
+      onMouseOver=${() => this.onToogleMouseState(true)}
+      onMouseOut=${() => this.onToogleMouseState(false)}
+      onClick=${this.onClick}
+      class="${countriesSearcher} ${showSearchInput ? 'show' : ''}"
+    >
       <span class="icon-provider">
         ${magnify}
       </span>
