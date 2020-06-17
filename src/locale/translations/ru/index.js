@@ -78,6 +78,7 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Повседневная жизнь',
+        subtitle: 'Daily life (restrictions)',
         noResults: 'N/A',
         stats: {
           population: 'Население ',
@@ -94,15 +95,25 @@ export default {
         },
         measures: {
           home: 'Оставайся дома',
+          homeShortVersion: 'Leave home',
           shopping: 'Идти за покупками',
+          shoppingShortVersion: 'Go shopping',
           outdoors: 'Выходить на улицу',
+          outdoorsShortVersion: 'Outdoors',
           military: 'Военное присутствие',
+          militaryShortVersion: 'Military (Not)',
           religious: 'Религиозная служба',
+          religiousShortVersion: 'Religious sites',
           electricity: 'Электричество',
+          electricityShortVersion: 'Electricity',
           work: 'Иди на работу',
+          workShortVersion: 'Go to work',
           water: 'Вода',
+          waterShortVersion: 'Water',
           schools: 'Посещать занятия',
+          schoolsShortVersion: 'Classes',
           internet: 'Телеком',
+          internetShortVersion: 'Telecom'
         },
       },
       mobility: {
@@ -116,13 +127,21 @@ export default {
         },
         measures: {
           commerce: 'Торговля',
+          commerceShortVersion: 'Commerce',
           foreignersInbound: 'Въезд для иностранцев',
+          foreignersInboundShortVersion: 'Foreigners (in)',
           foreignersOutbound: 'Выезд для иностранцев',
+          foreignersOutboundShortVersion: 'Foreigners (out)',
           local: 'Транспорт между городами',
+          localShortVersion: 'In between cities',
           nationalsInbound: 'Въезд для граждан ',
+          nationalsInboundShortVersion: 'Nationals (in)',
           nationalsOutbound: 'Выезд для граждан',
+          nationalsOutboundShortVersion: 'Nationals (out)',
           stopovers: 'Остановка',
+          stopoversShortVersion: 'Stopovers',
           crossBorderWorkers: 'Трансграничные работники',
+          crossBorderWorkersShortVersion: 'Cross-border',
         },
       },
       reports: {
