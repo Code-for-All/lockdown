@@ -25,7 +25,8 @@ export default {
             'Во всем мире были приняты меры по локализации, карантину и изоляции, чтобы уменьшить распространение COVID-19 и снизить нагрузку на медицинский сектор. ',
           p2:
             '{Project Lockdown} Проект дает гражданам, журналистам и правозащитникам возможность легко анализировать социальные и политические последствия принятых мер. Проект основан на прозрачности и ответственности, ',
-          p3: '{Project Lockdown} стремится предоставить гражданам мира инструменты необходимые для обеспечения безопасности и информированности.',
+          p3:
+            '{Project Lockdown} стремится предоставить гражданам мира инструменты необходимые для обеспечения безопасности и информированности.',
         },
       },
       sources: {
@@ -50,7 +51,8 @@ export default {
       },
       credits: {
         title: 'Указатели ',
-        text: '{Project Lockdown} Инициатива Civic Tech стала возможной благодаря целому ряду преданных людей и организаций. Посмотреть список участников',
+        text:
+          '{Project Lockdown} Инициатива Civic Tech стала возможной благодаря целому ряду преданных людей и организаций. Посмотреть список участников',
         highlight: 'тут',
       },
       dataPrivacity: {
@@ -78,7 +80,7 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Повседневная жизнь',
-        subtitle:"Повседневная жизнь",
+        subtitle: 'Повседневная жизнь',
         noResults: 'N/A',
         stats: {
           population: 'Население ',
@@ -95,15 +97,25 @@ export default {
         },
         measures: {
           home: 'Оставайся дома',
-          outdoors: 'Выходить на улицу',
+          homeShortVersion: 'Leave home',
           shopping: 'Идти за покупками',
+          shoppingShortVersion: 'Go shopping',
+          outdoors: 'Выходить на улицу',
+          outdoorsShortVersion: 'Outdoors',
           military: 'Военное присутствие',
+          militaryShortVersion: 'Military (Not)',
           religious: 'Религиозная служба',
-          work: 'Иди на работу',
-          schools: 'Посещать занятия',
+          religiousShortVersion: 'Religious sites',
           electricity: 'Электричество',
+          electricityShortVersion: 'Electricity',
+          work: 'Иди на работу',
+          workShortVersion: 'Go to work',
           water: 'Вода',
+          waterShortVersion: 'Water',
+          schools: 'Посещать занятия',
+          schoolsShortVersion: 'Classes',
           internet: 'Телеком',
+          internetShortVersion: 'Telecom',
         },
       },
       mobility: {
@@ -116,14 +128,22 @@ export default {
           '4': 'НЕЯСНО',
         },
         measures: {
-          foreignersInbound: 'Въезд для иностранцев',
-          foreignersOutbound: 'Выезд для иностранцев',
-          local: 'Транспорт между городами',
-          nationalsInbound: 'Въезд для граждан ',
-          nationalsOutbound: 'Выезд для граждан',
-          stopovers: 'Остановка',
-          crossBorderWorkers: 'Трансграничные работники',
           commerce: 'Торговля',
+          commerceShortVersion: 'Commerce',
+          foreignersInbound: 'Въезд для иностранцев',
+          foreignersInboundShortVersion: 'Foreigners (in)',
+          foreignersOutbound: 'Выезд для иностранцев',
+          foreignersOutboundShortVersion: 'Foreigners (out)',
+          local: 'Транспорт между городами',
+          localShortVersion: 'In between cities',
+          nationalsInbound: 'Въезд для граждан ',
+          nationalsInboundShortVersion: 'Nationals (in)',
+          nationalsOutbound: 'Выезд для граждан',
+          nationalsOutboundShortVersion: 'Nationals (out)',
+          stopovers: 'Остановка',
+          stopoversShortVersion: 'Stopovers',
+          crossBorderWorkers: 'Трансграничные работники',
+          crossBorderWorkersShortVersion: 'Cross-border',
         },
       },
       reports: {

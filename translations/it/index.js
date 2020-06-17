@@ -16,7 +16,7 @@ export default {
       main: {
         name: 'Project Lockdown',
         text:
-        '{Project Lockdown} fornisce una mappatura delle diverse NPI (Non-Pharmaceutical Interventions) applicate in tutto il mondo in risposta alla crisi COVID-19, al fine di visualizzare il successo delle diverse misure di risposta alla pandemia, monitorare gli effetti sui diritti umani e digitali e chiarire le metriche di valutazione.',
+          '{Project Lockdown} fornisce una mappatura delle diverse NPI (Non-Pharmaceutical Interventions) applicate in tutto il mondo in risposta alla crisi COVID-19, al fine di visualizzare il successo delle diverse misure di risposta alla pandemia, monitorare gli effetti sui diritti umani e digitali e chiarire le metriche di valutazione.',
       },
       about: {
         title: 'About',
@@ -35,7 +35,7 @@ export default {
           '{Project Lockdown} combina più fonti affidabili per garantire che i dati utilizzati siano verificati e accurati. L`elenco completo delle fonti utilizzate si trova qui:',
         linksList: {
           first: {
-            linkTitle: "Database di Project Lockdown ",
+            linkTitle: 'Database di Project Lockdown ',
             text: '(Raccolto da diverse fonti di NPI)',
           },
           second: {
@@ -80,7 +80,7 @@ export default {
     tabs: {
       dailyLife: {
         name: 'Vita quotidiana',
-        subtitle:'Vita quotidiana',
+        subtitle: 'Vita quotidiana',
         noResults: 'N/A',
         stats: {
           population: 'Popolazione',
@@ -117,7 +117,6 @@ export default {
           waterShortVersion: 'Acqua',
           internet: 'Internet assicurato',
           internetShortVersion: 'Internet',
-
         },
       },
       mobility: {
@@ -145,7 +144,7 @@ export default {
           crossBorderWorkers: 'Lavoratori transfrontalieri',
           crossBorderWorkersShortVersion: 'transfrontalieri',
           commerce: 'Commercio',
-          commerceShortVersion: 'Commercio'
+          commerceShortVersion: 'Commercio',
         },
       },
       reports: {
