@@ -16,7 +16,7 @@ export const calendar = html`<svg
       fill: #ff5c00;
     }
     .st1 {
-      fill: #333333;
+      fill: currentColor;
     }
   </style>
   <path

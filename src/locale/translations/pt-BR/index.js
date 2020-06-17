@@ -1,6 +1,6 @@
 export default {
   translationBy: 'Mark W. Datysgeld',
-  languageId: 'pt', // ? ISO 639-1:2002
+  languageId: 'pt-BR', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
   header: {
     totals: {
@@ -25,7 +25,8 @@ export default {
             'Lockdowns, quarentenas, e medidas de isolamento foram implementadas pelo globo para reduzir o avanço da COVID-19 e reduzir seu peso na infraestrutura médica. ',
           p2:
             '{Project Lockdown} empodera cidadãos, jornalistas, e atores de direitos humanos para que possam facilmente analisar os efeitos sociais e políticos dessas medidas. Com fundamento em valores de transparência e accountability, ',
-          p3: '{Project Lockdown} é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para se manterem seguros e informados.',
+          p3:
+            '{Project Lockdown} é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para se manterem seguros e informados.',
         },
       },
       sources: {

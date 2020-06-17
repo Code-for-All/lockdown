@@ -91,18 +91,17 @@ export class Totals extends Component {
   // },
 
   render({ selectedDate, i18n }, { totals, desktop }) {
-      const items = [
-        {
-          description: i18n.t('header.totals.territoriesLockdown'),
-          value: Number(totals.territories?.lockdown || 0).toLocaleString(),
-        },
-        {
-          description: i18n.t('header.totals.peopleAffected'),
-          value: Number(totals.territories?.affected || 0).toLocaleString(),
-        },
-      ];
-      return html`
-
+    const items = [
+      {
+        description: i18n.t('header.totals.territoriesLockdown'),
+        value: Number(totals.territories?.lockdown || 0).toLocaleString(),
+      },
+      {
+        description: i18n.t('header.totals.peopleAffected'),
+        value: Number(totals.territories?.affected || 0).toLocaleString(),
+      },
+    ];
+    return html`
       <div class=${styles}>
         ${SHOW_STATS
           ? html`<dl>
