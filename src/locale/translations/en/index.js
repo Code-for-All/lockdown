@@ -74,19 +74,19 @@ export default {
         update: 'Update app',
       },
     },
-    contribution:{
-      contributionLinks:{
+    contribution: {
+      contributionLinks: {
         firstLink: 'Dataset of the project',
         secondLink: 'Contribute to the data of the project',
-        thirdLink: 'Request changes for the information of any territory'
+        thirdLink: 'Request changes for the information of any territory',
       },
-    }
+    },
   },
   tdo: {
-    contributionLinks:{
+    contributionLinks: {
       firstLink: 'Dataset of this territory',
       secondLink: 'Contribute to the data of the territory',
-      thirdLink: 'Request changes for the information of this territory'
+      thirdLink: 'Request changes for the information of this territory',
     },
     tabs: {
       dailyLife: {
