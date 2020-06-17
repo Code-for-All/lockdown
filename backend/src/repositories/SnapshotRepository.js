@@ -216,6 +216,32 @@ export default class SnapshotRepository {
     });
   }
 
+  /**
+   * Remove from db all docs with this ISO 2-letter country code or ISO 3-letter country code. 
+   * @param {string} iso2CountryCode
+   * @param {string} iso3CountryCode
+   * @returns {Promise<Array<Entry>>}
+   */
+  removeSnapshots(iso2CountryCode, iso3CountryCode) {
+    // TODO: insert some default values, instead of clear all.
+    // JFQueralt, "Clarification; Every territory tab in the Data Entry Interface (DEI) 
+    // has a first empty Data Entry Set (DES - the collection of columns we use to codify 
+    // a source). The rationale is that we are currently assuming that the starting point 
+    // everywhere in the world was "positive", which is not true. This assumption works 
+    // well in general due to the nature of the information we are collecting, for the 
+    // time being. That DES should eventually be filled up with an "initial state" for 
+    // each territory. You can safely ignore it for the time being." - 15 June 2020
+    return this.model.remove( { $or: [
+      { "iso2": iso2CountryCode } , 
+      { "iso3": iso3CountryCode } 
+    ]});
+  }
+
+  /**
+   *
+   * Clears the entire database of all values, we won't want to call this.
+   * @returns {Promise<Array<Entry>>}
+   */
   clear() {
     return this.model.remove();
   }

@@ -1,5 +1,5 @@
 export default {
-  translationBy: '抗疫封鎖監察團隊',
+  translationBy: 'DotAsia Foundation (Jennifer Chung)',
   languageId: 'zh-HK', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
   header: {
@@ -14,21 +14,21 @@ export default {
     informationSection: {
       banner: '試行階段，資料錯漏，敬請包涵。',
       main: {
-        name: 'Project Lockdown ',
+        name: 'Project Lockdown',
         text:
-          '提供針對新冠病毒（COVID-19）全球各地非藥物干預措施（NPI）的實施地圖，以展示應對措施的成效，以及造成的監控對人權和數字權利的影響，並評估衡量指標。',
+          '{Project Lockdown} 提供針對新冠病毒（COVID-19）全球各地非藥物干預措施（NPI）的實施地圖，以展示應對措施的成效，以及造成的監控對人權和數字權利的影響，並評估衡量指標。',
       },
       about: {
         title: '關於我們',
         text: {
-          p1: '全球各地均已實施了封鎖和隔離措施，以減少新冠病毒的傳播並減輕對醫療系統造成的壓力。',
-          p2: '為公民、記者和人權監察者，減輕分析這些措施對社會和政治造成的影響。基於透明度和問責制的價值觀',
-          p3: '致力為公民世界提供保持安全和知情所需的工具。',
+          p1: '全球各地均已實施了封鎖和隔離措施，以減少新冠病毒的傳播並減輕對醫療系統造成的壓力。 ',
+          p2: '{Project Lockdown} 為公民、記者和人權監察者，減輕分析這些措施對社會和政治造成的影響。基於透明度和問責制的價值觀 ',
+          p3: '{Project Lockdown} 致力為公民世界提供保持安全和知情所需的工具。',
         },
       },
       sources: {
         title: '資料來源',
-        subtitle: '揉合多個來源，以確保所數據準確。請參考資料來源列表：',
+        subtitle: '{Project Lockdown} 揉合多個來源，以確保所數據準確。請參考資料來源列表：',
         linksList: {
           first: {
             linkTitle: '抗疫封鎖監察數據庫',
@@ -60,7 +60,7 @@ export default {
     },
     userPreferenceSection: {
       theme: {
-        action: '切換',
+        action: '切換 ',
         dark: '深色',
         light: '淺色',
       },
@@ -75,11 +75,12 @@ export default {
     tabs: {
       dailyLife: {
         name: '日常生活',
-        subtitle: 'Daily life (restrictions)',
+        subtitle:"日常生活",
         noResults: '沒有提供',
         stats: {
           population: '人口',
           max_assembly: '聚眾人限',
+          max_assemblyShortVersion: '聚眾人限',
           cases: '個案',
           recoveries: '復原',
           deaths: '死亡',
@@ -91,24 +92,24 @@ export default {
           '4': '不詳',
         },
         measures: {
-          home: '留家',
-          homeShortVersion: '留家',
-          shopping: '購物',
-          shoppingShortVersion: '購物',
+          home: '離家',
+          homeShortVersion: '離家',
           outdoors: '戶外活動',
           outdoorsShortVersion: '戶外活動',
-          military: '軍事',
-          militaryShortVersion: '軍事',
+          shopping: '購物',
+          shoppingShortVersion: '購物',
+          military: '沒有加強軍事部署',
+          militaryShortVersion: '沒有加強軍事部署',
           religious: '宗教場所',
           religiousShortVersion: '宗教場所',
-          electricity: '電力供應',
-          electricityShortVersion: '電力供應',
           work: '上班',
           workShortVersion: '上班',
-          water: '水',
-          waterShortVersion: '水',
           schools: '上學',
           schoolsShortVersion: '上學',
+          electricity: '電力供應',
+          electricityShortVersion: '電力',
+          water: '水',
+          waterShortVersion: '水',
           internetShortVersion: '電訊',
           internetShortVersion: '電訊',
         },
@@ -123,22 +124,22 @@ export default {
           '4': '不詳',
         },
         measures: {
-          commerce: '商業旅客',
-          commerceShortVersion: '商業旅客',
-          foreignersInbound: '外籍人士（出境）',
-          foreignersInboundShortVersion: '外籍人士（出境）',
-          foreignersOutbound: '外籍人士（入境）',
-          foreignersOutboundShortVersion: '外籍人士（入境）',
+          foreignersInbound: '外籍人士（入境）',
+          foreignersInboundShortVersion: '外籍人士（入境）',
+          foreignersOutbound: '外籍人士（出境）',
+          foreignersOutboundShortVersion: '外籍人士（出境）',
           local: '境內跨區域流動',
           localShortVersion: '境內跨區域流動',
-          nationalsInbound: '當地人民（出境）',
-          nationalsInboundShortVersion: '當地人民（出境）',
-          nationalsOutbound: '當地人民（入境）',
-          nationalsOutboundShortVersion: '當地人民（入境）',
+          nationalsInbound: '當地人民（入境）',
+          nationalsInboundShortVersion: '當地人民（入境）',
+          nationalsOutbound: '當地人民（出境)',
+          nationalsOutboundShortVersion: '當地人民（出境)',
           stopovers: '跨境/轉機',
           stopoversShortVersion: '跨境/轉機',
           crossBorderWorkers: '跨境工作者',
           crossBorderWorkersShortVersion: '跨境工作者',
+          commerce: '商業貨運',
+          commerceShortVersion: '商業貨運',
         },
       },
       reports: {

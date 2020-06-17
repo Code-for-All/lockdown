@@ -8,7 +8,7 @@ const selectedLang = css`
   & {
     position: absolute;
     top: 25vh;
-    right: 5vw;
+    right: 2.5vw;
     height: 30px;
     min-width: 30px;
     padding: 0px;

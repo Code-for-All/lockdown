@@ -48,7 +48,7 @@ const styles = css`
   }
 `;
 
-const SHOW_STATS = false;
+const SHOW_STATS = true;
 
 export class Totals extends Component {
   constructor() {
@@ -81,13 +81,6 @@ export class Totals extends Component {
     });
   }
 
-  //   description: i18n.t('header.totals.territoriesLockdown'),
-  //   value: Number(totals.territories?.lockdown || 0).toLocaleString(),
-  // },
-  // {
-  //   description: i18n.t('header.totals.peopleAffected'),
-  //   value: Number(totals.territories?.affected || 0).toLocaleString(),
-  // },
   // {
   //   description: i18n.t('header.totals.cases'),
   //   value: Number(totals.corona?.confirmed || 0).toLocaleString(),
@@ -95,10 +88,21 @@ export class Totals extends Component {
   // {
   //   description: i18n.t('header.totals.deaths'),
   //   value: Number(totals.corona?.deaths || 0).toLocaleString(),
-  //
+  // },
+
   render({ selectedDate, i18n }, { totals, desktop }) {
-    const items = [{}];
-    return html`
+      const items = [
+        {
+          description: i18n.t('header.totals.territoriesLockdown'),
+          value: Number(totals.territories?.lockdown || 0).toLocaleString(),
+        },
+        {
+          description: i18n.t('header.totals.peopleAffected'),
+          value: Number(totals.territories?.affected || 0).toLocaleString(),
+        },
+      ];
+      return html`
+
       <div class=${styles}>
         ${SHOW_STATS
           ? html`<dl>

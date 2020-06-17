@@ -5,9 +5,9 @@ import css from 'csz';
 import { list, unlock, lock, virus, viruslock } from '../assets/icons/icons.js';
 
 const btnStyle = css`
-  & {
+& {
     position: absolute;
-    bottom: 150px;
+    bottom: 175px;
     left: 10px;
     width: 50px;
     height: 50px;
@@ -165,14 +165,11 @@ class Legend extends Component {
     // ? Mobile
     this.onTouch = this.onTouch.bind(this);
     this.onTouchEnd = this.onTouchEnd.bind(this);
-    // ? Desktop
-    this.onDrop = this.onDrop.bind(this);
   }
   initBtn(ref) {
     this.btn = ref;
     ref.addEventListener('touchmove', this.onTouch);
     ref.addEventListener('touchend', this.onTouchEnd);
-    ref.addEventListener('dragend', this.onDrop);
   }
   // Mobile
   onTouch(e) {
@@ -211,45 +208,7 @@ class Legend extends Component {
       y: vertical,
     });
   }
-  //////////
-  // Desktop
-  onDrop(e) {
-    let side = this.state.x;
-    let vertical = this.state.y;
-    let xx = window.innerWidth || window.clientWidth;
-    let yy = window.innerHeight || window.clientHeight;
-    let y = e.clientY;
-    let x = e.clientX;
-    if (y === 0 && x === 0) {
-      x = e.screenX;
-      y = e.screenY;
-    }
-    this.btn.style.top = y + 'px';
-    if (y > yy / 2) {
-      if (y >= yy - 150) {
-        this.btn.style.top = yy - 150 + 'px';
-      }
-      vertical = 'bottom';
-    } else {
-      if (y <= 60) {
-        this.btn.style.top = 70 + 'px';
-      }
-      vertical = 'top';
-    }
-    if (x > xx / 2) {
-      side = 'right';
-      this.btn.style.left = xx - 70 + 'px';
-    } else {
-      side = 'left';
-      this.btn.style.left = '10px';
-    }
-    this.setState({
-      x: side,
-      y: vertical,
-    });
-    // this.btn.style.left = x + 'px';
-  }
-  /////////
+
   onClick() {
     this.setState({
       showDialog: !this.state.showDialog,
@@ -296,14 +255,14 @@ class Legend extends Component {
           </span>
         </div>
         <!--Row-->
-        <div>
+        <!-- <div>
           <span>
             <div class="color covidstripes" />
           </span>
           <span>
             ${i18n.t('mapLegend.cases')}
           </span>
-        </div>
+        </div> -->
       </div>
     </div>`;
   }

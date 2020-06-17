@@ -440,37 +440,6 @@ export class WorldMap extends Component {
     });
 
     await this.initMap(mapData, lookupTable);
-
-    if (navigator.permissions) {
-      const geolocation = await navigator.permissions.query({ name: 'geolocation' });
-      // on pageload, check if there is permission for geolocation
-      if (geolocation.state === 'granted' && !this.state.isLocationSet) {
-        navigator.geolocation.getCurrentPosition((location) => {
-          const { latitude, longitude } = location.coords;
-
-          this.state.map.setCenter([longitude, latitude]);
-          this.setState({
-            isLocationSet: true,
-          });
-        });
-      }
-
-      // handle change when user toggles geolocation permission
-      geolocation.addEventListener('change', (e) => {
-        if (e.target.state === 'granted' && !this.state.isLocationSet) {
-          navigator.geolocation.getCurrentPosition((location) => {
-            localStorage.setItem('geolocation', 'true');
-            const { latitude, longitude } = location.coords;
-            this.state.map.setCenter([longitude, latitude]);
-            this.setState({
-              isLocationSet: true,
-            });
-          });
-        } else {
-          localStorage.removeItem('geolocation');
-        }
-      });
-    }
   }
 
   onMapClick(e) {

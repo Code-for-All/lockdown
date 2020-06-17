@@ -14,25 +14,24 @@ export default {
     informationSection: {
       banner: 'O Project Lockdown está atualmente em versão Beta. Nem todos os dados estão disponíveis no momento.',
       main: {
-        name: 'Project Lockdown ',
+        name: 'Project Lockdown',
         text:
-          'O {Project Lockdown} fornece o mapeamento de diferentes NPIs (Intervenções Não Farmacêuticas) aplicadas por todo o mundo em resposta à crise da COVID-19, com o objetivo de visualizar o sucesso de diferentes medidas de resposta à pandemia, monitorar efeitos nos Direitos Humanos e Digitas, e clarificar métricas de avaliação.',
+          '{Project Lockdown} fornece o mapeamento de diferentes NPIs (Intervenções Não Farmacêuticas) aplicadas por todo o mundo em resposta à crise da COVID-19, com o objetivo de visualizar o sucesso de diferentes medidas de resposta à pandemia, monitorar efeitos nos Direitos Humanos e Digitas, e clarificar métricas de avaliação.',
       },
       about: {
         title: 'Sobre',
         text: {
           p1:
-            'Lockdowns, quarentenas, e medidas de isolamento foram implementadas pelo globo para reduzir o avanço da COVID-19 e reduzir seu peso na infraestrutura médica.',
+            'Lockdowns, quarentenas, e medidas de isolamento foram implementadas pelo globo para reduzir o avanço da COVID-19 e reduzir seu peso na infraestrutura médica. ',
           p2:
-            'O {Project Lockdown} empodera cidadãos, jornalistas, e atores de direitos humanos para que possam facilmente analisar os efeitos sociais e políticos dessas medidas. Com fundamento em valores de transparência e accountability,',
-          p3:
-            'O {Project Lockdown} é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para se manterem seguros e informados.',
+            '{Project Lockdown} empodera cidadãos, jornalistas, e atores de direitos humanos para que possam facilmente analisar os efeitos sociais e políticos dessas medidas. Com fundamento em valores de transparência e accountability, ',
+          p3: '{Project Lockdown} é comprometido a prover os cidadãos do mundo com as ferramentas que precisam para se manterem seguros e informados.',
         },
       },
       sources: {
         title: 'Fontes',
         subtitle:
-          'O {Project Lockdown} combina mútliplas fontes confiáveis para garantir que os dados utilizados são verificáveis e corretos. Você pode checar nossa lista de fontes aqui:',
+          '{Project Lockdown} combina mútliplas fontes confiáveis para garantir que os dados utilizados são verificáveis e corretos. Você pode checar nossa lista de fontes aqui:',
         linksList: {
           first: {
             linkTitle: 'Banco de dados do Project Lockdown',
@@ -52,7 +51,7 @@ export default {
       credits: {
         title: 'Créditos',
         text:
-          'O {Project Lockdown} é uma iniciativa de Civic Tech tornada possível por uma série de indivíduos e organizações comprometidas com sua causa. Veja a lista de contribuidores',
+          '{Project Lockdown} é uma iniciativa de Civic Tech tornada possível por uma série de indivíduos e organizações comprometidas com sua causa. Veja a lista de contribuidores',
         highlight: 'aqui',
       },
       dataPrivacity: {
