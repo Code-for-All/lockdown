@@ -5,7 +5,7 @@ import css from 'csz';
 import { list, unlock, lock, virus, viruslock } from '../assets/icons/icons.js';
 
 const btnStyle = css`
-& {
+  & {
     position: absolute;
     bottom: 175px;
     left: 10px;

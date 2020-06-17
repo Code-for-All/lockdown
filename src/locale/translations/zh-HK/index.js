@@ -75,7 +75,7 @@ export default {
     tabs: {
       dailyLife: {
         name: '日常生活',
-        subtitle:"日常生活",
+        subtitle: '日常生活',
         noResults: '沒有提供',
         stats: {
           population: '人口',

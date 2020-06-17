@@ -690,9 +690,7 @@ export default class CountryInfo extends Component {
             value=${this.state.currentDateValue}
           />
           <span class="last ${popBtn}"></span>
-          <span title="Select End Date" class="last ${tooltipCss}">
-             ${this.state.lastDay}</span
-          >
+          <span title="Select End Date" class="last ${tooltipCss}"> ${this.state.lastDay}</span>
         </div>
       </div>
     `;

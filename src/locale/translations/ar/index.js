@@ -79,7 +79,7 @@ export default {
     tabs: {
       dailyLife: {
         name: 'الحياة اليومية',
-        subtitle:"الحياة اليومية",
+        subtitle: 'الحياة اليومية',
         noResults: 'لا ينطبق عليه',
         stats: {
           population: 'التعداد السكاني',
@@ -115,7 +115,7 @@ export default {
           schools: 'الحضور المدرسي',
           schoolsShortVersion: 'Classes',
           internet: 'الاتصالات',
-          internetShortVersion: 'Telecom'
+          internetShortVersion: 'Telecom',
         },
       },
       mobility: {
