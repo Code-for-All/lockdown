@@ -161,6 +161,11 @@ export class WorldMap extends Component {
       await pause();
       await this.initMap(mapData, lookupTable);
     }
+    mapboxgl.setRTLTextPlugin(
+      'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
+      null,
+      true // Lazy load the plugin
+    );
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
@@ -447,7 +452,6 @@ export class WorldMap extends Component {
     const features = map.queryRenderedFeatures(e.point, {
       layers: ['admin-0-fill'],
     });
-    console.log('click');
     this.state.geocoder.query(lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
     this.setState({
       lastCountry: {
@@ -482,7 +486,6 @@ export class WorldMap extends Component {
   }
 
   onGetResult(results) {
-    console.log(results);
     let { features } = results;
     if (features[0]) {
       let countryName = features[0].text;
