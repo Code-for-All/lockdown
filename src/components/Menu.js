@@ -501,20 +501,20 @@ export class Menu extends Component {
     this.onDropDown = this.onDropDown.bind(this);
   }
 
-  // componentDidMount() {
-  //   let i = 0;
-  //
-  //   installMediaQueryWatcher(`(min-width: 960px)`, (matches) => {
-  //     this.setState({
-  //       isMobile: !matches,
-  //     });
-  //     if (matches && i > 0) {
-  //       // This is super ugly, but this fires on pageload and causes the focus to be set on the menu :/
-  //       i++;
-  //       this.props.close();
-  //     }
-  //   });
-  // }
+  componentDidMount() {
+    let i = 0;
+
+    installMediaQueryWatcher(`(min-width: 960px)`, (matches) => {
+      this.setState({
+        isMobile: !matches,
+      });
+      if (matches && i > 0) {
+        // This is super ugly, but this fires on pageload and causes the focus to be set on the menu :/
+        i++;
+        this.props.close();
+      }
+    });
+  }
 
   showSideBar() {
     this.setState({
