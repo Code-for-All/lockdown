@@ -17,7 +17,7 @@ const countriesSearcher = css`
     justify-content: center;
     align-items: center;
     position: absolute;
-    bottom: 95px;
+    bottom: 120px;
     left: 10px;
     z-index: 1;
     background: #fff;
