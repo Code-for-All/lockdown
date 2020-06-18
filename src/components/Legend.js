@@ -7,7 +7,7 @@ import { list, unlock, lock, virus, viruslock } from '../assets/icons/icons.js';
 const btnStyle = css`
   & {
     position: absolute;
-    bottom: 175px;
+    bottom: 200px;
     left: 10px;
     width: 50px;
     height: 50px;
