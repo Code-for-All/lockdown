@@ -457,7 +457,7 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
           Submit data
         </a>
         <p>
-          Additionally, you can become part of the project by joining one of the following teams: 
+          Additionally, you can become part of the project by joining one of the following teams:
           <ul>
             <li>Editors</li>
             <li>Devs</li>
@@ -501,20 +501,21 @@ export class Menu extends Component {
     this.onDropDown = this.onDropDown.bind(this);
   }
 
-  componentDidMount() {
-    let i = 0;
+  // componentDidMount() {
+  //   let i = 0;
+  //
+  //   installMediaQueryWatcher(`(min-width: 960px)`, (matches) => {
+  //     this.setState({
+  //       isMobile: !matches,
+  //     });
+  //     if (matches && i > 0) {
+  //       // This is super ugly, but this fires on pageload and causes the focus to be set on the menu :/
+  //       i++;
+  //       this.props.close();
+  //     }
+  //   });
+  // }
 
-    installMediaQueryWatcher(`(min-width: 960px)`, (matches) => {
-      this.setState({
-        isMobile: !matches,
-      });
-      if (matches && i > 0) {
-        // This is super ugly, but this fires on pageload and causes the focus to be set on the menu :/
-        i++;
-        this.props.close();
-      }
-    });
-  }
   showSideBar() {
     this.setState({
       showLateralMenu: true,
