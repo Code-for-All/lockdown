@@ -76,6 +76,7 @@ const sliderWrapper = css`
       @media (max-width: 960px) {
         /*max-height: calc(100vh - 45px);*/
         max-height: 90%;
+        vertical-align: middle !important;
       }
     }
     /*padding: 0px 6%;*/
@@ -381,8 +382,10 @@ const sliderSelector = css`
   .dark & span {
     color: white;
     background: #333333;
+    vertical-align: middle !important;
     &::after {
       background-color: #333333;
+      vertical-align: middle !important;
     }
   }
   & {

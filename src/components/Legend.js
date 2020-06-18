@@ -8,7 +8,7 @@ const btnStyle = css`
   & {
     position: absolute;
     bottom: 200px;
-    left: 10px;
+    left: 2.5vw;
     width: 50px;
     height: 50px;
     border-radius: 50%;
