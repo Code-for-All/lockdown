@@ -98,7 +98,7 @@ export default {
         measures: {
           home: 'Leave home',
           homeShortVersion: 'Leave home',
-          outdoors: 'Outdoors activities',
+          outdoors: 'Outdoor activities',
           outdoorsShortVersion: 'Outdoors',
           shopping: 'Go shopping',
           shoppingShortVersion: 'Go shopping',
