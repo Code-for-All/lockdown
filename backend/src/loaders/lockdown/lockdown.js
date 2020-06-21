@@ -70,6 +70,14 @@ export async function batchGetTerritoriesEntryData(territories) {
 
           let snapshots = getSnapshots(entries);
 
+          // country sheet where entries are blank - we need to delete snapshots for the country in the db
+          // 21/6/2020 NPIs also have the same issue - delete country entries first before inserting.
+          var clearResult = await database.snapshotRepository.removeSnapshots(batch[i]['iso2'], batch[i]['iso3']);
+          logger.log(`clearResult: ${clearResult}`);
+          if (clearResult.result.n > 0 && clearResult.result.ok == 1) {
+            shouldResetApiCache = true;
+          }
+
           if (snapshots.length > 0) {
             snapshots.forEach(s => {
               s.iso3 = batch[i]['iso3'];
@@ -77,12 +85,6 @@ export async function batchGetTerritoriesEntryData(territories) {
             });
             var insertResult = await Promise.all(database.snapshotRepository.insertManyOrUpdate(snapshots));
             if (insertResult.find(r => r.result.nModified == 0 && r.result.ok == 1)) {
-              shouldResetApiCache = true;
-            }
-          } else {
-            // country sheet where entries are blank - we need to delete snapshots for the country in the db
-            var clearResult = await Promise.all(database.snapshotRepository.removeSnapshots(batch[i]['iso2'], batch[i]['iso3']));
-            if (clearResult.find(r => r.result.nRemoved > 0 && r.result.ok == 1)) {
               shouldResetApiCache = true;
             }
           }
