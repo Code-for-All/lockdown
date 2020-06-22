@@ -299,6 +299,11 @@ export class App extends Component {
   }
   __onLocateChange(newLocal) {
     // newLocal = getCurrentLanguage(newLocal);
+    if (newLocal.substring(0,2) === 'ar'){
+      document.getElementById('app').className = 'rtl';
+    }else{
+      document.getElementById('app').className = '';
+    }
     if (this.state.i18nLanguages[newLocal]) {
       this.setState({
         currentLanguage: this.state.i18nLanguages[newLocal],
