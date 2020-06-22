@@ -202,6 +202,7 @@ export default class SnapshotRepository {
     return this.model.insertMany(snaphots);
   }
 
+  // referenece: https://docs.mongodb.com/manual/reference/method/db.collection.updateMany/
   insertManyOrUpdate(snapshots) {
     return snapshots.map((s) => {
       return this.model.updateMany(
@@ -210,7 +211,7 @@ export default class SnapshotRepository {
           start_date: s.start_date,
           end_date: s.end_date,
         },
-        s,
+        { $set: s },
         { upsert: true }
       );
     });
@@ -239,7 +240,7 @@ export default class SnapshotRepository {
 
   /**
    *
-   * Clears the entire database of all values, we won't want to call this.
+   * Clears the entire database of all values, we won't want to call this unless we are sure.
    * @returns {Promise}
    */
   clear() {
