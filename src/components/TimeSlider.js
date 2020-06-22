@@ -18,6 +18,7 @@ function toSliderStringShort(date, currentLanguage) {
   let isoLanguage = currentLanguage;
   if (currentLanguage !== undefined) {
     isoLanguage = currentLanguage.replace('-', '');
+    if (isoLanguage === 'ar') isoLanguage = 'arSA';
     if (isoLanguage === 'zhHK') isoLanguage = 'zhTW';
     if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
       isoLanguage = currentLanguage.split('-')[0];
@@ -36,6 +37,8 @@ function toSliderString(date, currentLanguage) {
   let isoLanguage = currentLanguage;
   if (currentLanguage) {
     isoLanguage = currentLanguage.replace('-', '');
+    if (isoLanguage === 'ar') isoLanguage = 'arSA';
+    if (isoLanguage === 'zhHK') isoLanguage = 'zhTW';
     if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
       isoLanguage = currentLanguage.split('-')[0];
       if (languages[isoLanguage] === undefined || languages[isoLanguage] === null) {
