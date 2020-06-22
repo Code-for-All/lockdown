@@ -360,6 +360,9 @@ const tooltipCss = css`
     &:hover {
       cursor: pointer;
     }
+    &.last {
+        top: 17px !important 
+    }
     @media (max-width: 960px) {
       top: 12px;
       &.first {
@@ -367,6 +370,7 @@ const tooltipCss = css`
       }
       &.last {
         right: 17px !important;
+        top: 17px !important 
       }
     }
     &.first {
