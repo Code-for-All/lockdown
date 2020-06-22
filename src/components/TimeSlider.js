@@ -367,6 +367,7 @@ const tooltipCss = css`
       }
       &.last {
         right: 17px !important;
+        top: 17px !important 
       }
     }
     &.first {
