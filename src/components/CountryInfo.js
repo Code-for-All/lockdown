@@ -20,6 +20,8 @@ import { offline, loading, travelFlight, travelLand, travelSea } from '../assets
 import { offlineStyles, loadingStyles } from '../style/shared.styles.js';
 import { countryInfoStyles, tabStyles, reports } from './CountryInfo.styles.js';
 import './tool-tip.js';
+// TODO: Change the api to give us that data
+import CountriesDataList from '../../data/territoriesData';
 
 const TRAVEL = {
   '1': 'YES',
@@ -188,6 +190,7 @@ export default class CountryInfo extends Component {
 
   render(_, { coronaData, populationData, countryDetails }) {
     let { i18n } = this.props;
+    let territoryData = CountriesDataList[this.props.territory];
     /** If the user is offline, and theres no response, or the response has failed */
     if (!navigator.onLine) {
       if (coronaData?.status !== 'success' || populationData?.data?.status !== 'success' || countryDetails?.status !== 'success') {
@@ -234,6 +237,17 @@ export default class CountryInfo extends Component {
           : this.state.currentTab === 2
           ? html`<${TransportDetails} countryDetails=${countryDetails} i18n=${i18n} />`
           : html`<${Reports} i18n=${i18n} />`}
+          <div class="link-container">
+            <a class="ld-link" target="_blank" rel="noopener noreferrer" href=${territoryData ? `https://docs.google.com/a/theiofoundation.org/spreadsheets/d/1mVyQxxLxAF3E1dw870WHXTOLgYzmumojvzIekpgvLV0/edit#gid=${territoryData.id}` : 'tiof.click/LockdownData'} target="_blank">
+              ${_.i18n.t(`tdo.contributionLinks.firstLink`)}
+            </a>
+            <a class="ld-link" target="_blank" rel="noopener noreferrer" href=${`https://docs.google.com/forms/d/e/1FAIpQLSfDWe2qlzUnd3e-YYspMzT9adUswDEYIdJMb7jz7ule34-yiA/viewform?entry.333088473=${territoryData? territoryData.region : 'REGION'}&entry.1690056710=${this.props.territory}`} target="_blank">
+              ${_.i18n.t(`tdo.contributionLinks.secondLink`)}
+            </a>
+            <a class="ld-link" target="_blank" rel="noopener noreferrer" href="#" target="_blank">
+              ${_.i18n.t(`tdo.contributionLinks.thirdLink`)}
+            </a>
+          </div>
       </div>
     `;
   }

@@ -193,6 +193,7 @@ export class App extends Component {
                     props=${{
                       country: this.state.dialog.title,
                       iso2: this.state.dialog.iso2,
+                      territory: this.state.dialog.territory,
                       date: this.state.haveSelectedDate || new Date(),
                       i18n: this.state.currentLanguage,
                       startDate: this.state.startDate,
@@ -262,6 +263,8 @@ export class App extends Component {
   __onPathChanged() {
     const country = router.url.searchParams.get('country');
     const iso2 = router.url.searchParams.get('iso2');
+    const territory = router.url.searchParams.get('territory');
+    console.log(territory);
     const date = this.state.haveSelectedDate || new Date();
 
     if (country && iso2) {
@@ -269,13 +272,13 @@ export class App extends Component {
         {
           dialog: {
             opened: true,
-            template: html` <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2, date }} /> `,
+            template: html` <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2, date, territory }} /> `,
             title: country,
             iso2: iso2,
             date: date,
+            territory: territory
           },
-        },
-        () => console.log(this.state)
+        }
       );
     }
   }

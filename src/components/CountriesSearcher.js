@@ -98,7 +98,7 @@ class CountriesSearcher extends Component {
     const { i18n } = this.props;
     let geocoder = new window.MapboxGeocoder({
       accessToken: mapbox_token,
-      language: i18n ? i18n.locale : 'es',
+      language: i18n ? i18n.locale : 'en-US' + ', en-US',
       mapboxgl: window.mapboxgl,
       types: 'country',
     });
