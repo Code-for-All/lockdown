@@ -12,7 +12,7 @@ export default {
   },
   menu: {
     informationSection: {
-      banner: 'Project Lockdown is currently in Beta. Not all data may be available yet.',
+      banner: 'Disclaimer: Project Lockdown is a new platform and its components are currently being tested. Not all data may be available yet.',
       main: {
         name: 'Project Lockdown',
         text:
@@ -76,17 +76,17 @@ export default {
     },
     contribution: {
       contributionLinks: {
-        firstLink: 'Dataset of the project',
-        secondLink: 'Contribute to the data of the project',
-        thirdLink: 'Request changes for the information of any territory',
+        firstLink: 'Project dataset',
+        secondLink: 'Contribute data',
+        thirdLink: 'Propose corrections',
       },
     },
   },
   tdo: {
     contributionLinks: {
-      firstLink: 'Dataset of this territory',
-      secondLink: 'Contribute to the data of the territory',
-      thirdLink: 'Request changes for the information of this territory',
+      firstLink: 'Territory dataset',
+      secondLink: 'Contribute data',
+      thirdLink: 'Propose corrections',
     },
     tabs: {
       dailyLife: {
