@@ -1,6 +1,6 @@
 export default {
   translationBy: 'Project Lockdown team',
-  languageId: 'en-US', // ? ISO 639-1:2002
+  languageId: 'en', // ? ISO 639-1:2002
   // ? For reference please see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes and for localized versions see https://en.wikipedia.org/wiki/Language_localisation
   header: {
     totals: {
@@ -12,8 +12,7 @@ export default {
   },
   menu: {
     informationSection: {
-      banner:
-        'Disclaimer: Project Lockdown is a new platform and its components are currently being tested. Not all data may be available yet.',
+      banner: 'Disclaimer: Project Lockdown is a new platform and its components are currently being tested. Not all data may be available yet.',
       main: {
         name: 'Project Lockdown',
         text:
@@ -75,8 +74,20 @@ export default {
         update: 'Update app',
       },
     },
+    contribution: {
+      contributionLinks: {
+        firstLink: 'Project dataset',
+        secondLink: 'Contribute data',
+        thirdLink: 'Propose corrections',
+      },
+    },
   },
   tdo: {
+    contributionLinks: {
+      firstLink: 'Territory dataset',
+      secondLink: 'Contribute data',
+      thirdLink: 'Propose corrections',
+    },
     tabs: {
       dailyLife: {
         name: 'Daily Life',
