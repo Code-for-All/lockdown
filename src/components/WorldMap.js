@@ -453,6 +453,8 @@ export class WorldMap extends Component {
       layers: ['admin-0-fill'],
     });
     this.state.geocoder.query(lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
+    console.log(features[0]);
+    console.log(lookupTable.adm0.data.all[features[0].properties.iso_3166_1]);
     this.setState({
       lastCountry: {
         country: lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name,
@@ -489,10 +491,12 @@ export class WorldMap extends Component {
     let { features } = results;
     if (features[0]) {
       let countryName = features[0].text;
+      router.setSearchParam('territory', this.state.lastCountry.country);
       router.setSearchParam('country', countryName);
       router.setSearchParam('iso2', this.state.lastCountry.iso2);
     } else {
-      router.setSearchParam('country', this.state.lastCountry.countryName);
+      router.setSearchParam('territory', this.state.lastCountry.country);
+      router.setSearchParam('country', this.state.lastCountry.country);
       router.setSearchParam('iso2', this.state.lastCountry.iso2);
     }
   }

@@ -15,7 +15,6 @@ const styles = css`
     width: 100%;
     border-collapse: collapse;
   }
-
   th {
     border-top: transparent;
     padding: 12px;
@@ -170,6 +169,11 @@ const styles2 = css`
     z-index: 1100;
     .dark & {
       background-color: var(--ld-gray-2) !important;
+    }
+    & .link-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 0px;
     }
     & .ld-menu-nav {
       display: flex;
@@ -407,6 +411,17 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
               'menu.informationSection.sources.issues.highlight'
             )}</a>.
               </p>
+              <div class="link-container">
+                <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://tiof.click/LockdownData" target="_blank">
+                  ${locale.t(`menu.contribution.contributionLinks.firstLink`)}
+                </a>
+                <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://tiof.click/pldpsf" target="_blank">
+                  ${locale.t(`menu.contribution.contributionLinks.secondLink`)}
+                </a>
+                <a class="ld-link" target="_blank" rel="noopener noreferrer" href="#" target="_blank">
+                  ${locale.t(`menu.contribution.contributionLinks.thirdLink`)}
+                </a>
+              </div>
             `}
           />
           <${Expandable}

@@ -21,7 +21,9 @@
   --ld-icon-stroke-width: 1.5;
   --ld-button-text: black;
 }
-
+.rtl {
+  text-align: right;
+}
 .ld-font-light {
   font-size: 10px;
   font-weight: 300;

@@ -149,6 +149,11 @@ export const countryInfoStyles = css`
       border-radius: 7px;
       border: 4px solid white;
     }
+    & .link-container{
+      display: flex;
+      justify-content: space-between;
+      padding: 25px 0px;
+    }
     & .ld-font-subheader {
       display: flex;
       justify-content: space-between;
