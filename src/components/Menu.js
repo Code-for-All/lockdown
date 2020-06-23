@@ -170,7 +170,7 @@ const styles2 = css`
     .dark & {
       background-color: var(--ld-gray-2) !important;
     }
-    & .link-container{
+    & .link-container {
       display: flex;
       justify-content: space-between;
       padding: 25px 0px;

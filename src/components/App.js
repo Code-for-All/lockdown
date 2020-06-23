@@ -268,18 +268,18 @@ export class App extends Component {
     const date = this.state.haveSelectedDate || new Date();
 
     if (country && iso2) {
-      this.setState(
-        {
-          dialog: {
-            opened: true,
-            template: html` <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2, date, territory }} /> `,
-            title: country,
-            iso2: iso2,
-            date: date,
-            territory: territory
-          },
-        }
-      );
+      this.setState({
+        dialog: {
+          opened: true,
+          template: html`
+            <${Lazy} component=${() => import('../components/CountryInfo.js')} props=${{ country, iso2, date, territory }} />
+          `,
+          title: country,
+          iso2: iso2,
+          date: date,
+          territory: territory,
+        },
+      });
     }
   }
 
@@ -302,9 +302,9 @@ export class App extends Component {
   }
   __onLocateChange(newLocal) {
     // newLocal = getCurrentLanguage(newLocal);
-    if (newLocal.substring(0,2) === 'ar'){
+    if (newLocal.substring(0, 2) === 'ar') {
       document.getElementById('app').className = 'rtl';
-    }else{
+    } else {
       document.getElementById('app').className = '';
     }
     if (this.state.i18nLanguages[newLocal]) {
