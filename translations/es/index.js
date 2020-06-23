@@ -75,8 +75,20 @@ export default {
         update: 'Actualizar la aplicación',
       },
     },
+    contribution: {
+      contributionLinks: {
+        firstLink: 'Conjunto de datos del proyecto',
+        secondLink: 'Contribuir a los datos del proyecto',
+        thirdLink: 'Solicitar cambios sobre la información de un territorio',
+      },
+    },
   },
   tdo: {
+    contributionLinks: {
+      firstLink: 'Conjunto de datos del territorio',
+      secondLink: 'Contribuir a los datos del territorio',
+      thirdLink: 'Solicitar cambios sobre la información del territorio',
+    },
     tabs: {
       dailyLife: {
         name: 'Actividades Diarias',
