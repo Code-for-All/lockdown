@@ -202,15 +202,16 @@ export default class SnapshotRepository {
     return this.model.insertMany(snaphots);
   }
 
+  // referenece: https://docs.mongodb.com/manual/reference/method/db.collection.updateMany/
   insertManyOrUpdate(snapshots) {
     return snapshots.map((s) => {
-      return this.model.update(
+      return this.model.updateMany(
         {
           unique_id: s.unique_id,
           start_date: s.start_date,
           end_date: s.end_date,
         },
-        s,
+        { $set: s },
         { upsert: true }
       );
     });
@@ -220,7 +221,7 @@ export default class SnapshotRepository {
    * Remove from db all docs with this ISO 2-letter country code or ISO 3-letter country code. 
    * @param {string} iso2CountryCode
    * @param {string} iso3CountryCode
-   * @returns {Promise<Array<Entry>>}
+   * @returns {Promise}
    */
   removeSnapshots(iso2CountryCode, iso3CountryCode) {
     // TODO: insert some default values, instead of clear all.
@@ -231,7 +232,7 @@ export default class SnapshotRepository {
     // well in general due to the nature of the information we are collecting, for the 
     // time being. That DES should eventually be filled up with an "initial state" for 
     // each territory. You can safely ignore it for the time being." - 15 June 2020
-    return this.model.remove( { $or: [
+    return this.model.deleteMany( { $or: [
       { "iso2": iso2CountryCode } , 
       { "iso3": iso3CountryCode } 
     ]});
@@ -239,10 +240,10 @@ export default class SnapshotRepository {
 
   /**
    *
-   * Clears the entire database of all values, we won't want to call this.
-   * @returns {Promise<Array<Entry>>}
+   * Clears the entire database of all values, we won't want to call this unless we are sure.
+   * @returns {Promise}
    */
   clear() {
-    return this.model.remove();
+    return this.model.deleteMany({});
   }
 }

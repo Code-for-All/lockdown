@@ -70,20 +70,34 @@ export async function batchGetTerritoriesEntryData(territories) {
 
           let snapshots = getSnapshots(entries);
 
+          try {
+            // country sheet where entries are blank - we need to delete snapshots for the country in the db
+            // 21/6/2020 NPIs also have the same issue - delete country entries first before inserting.
+            let clearResult = await database.snapshotRepository.removeSnapshots(batch[i]['iso2'], batch[i]['iso3']);
+            // example of clearResult is {"result":{"n":0,"ok":1},"connection":{"id":1,"host":"***","port":111},"deletedCount":0,"n":0,"ok":1}
+            if (clearResult.result.n > 0 && clearResult.result.ok == 1) {
+              shouldResetApiCache = true;
+            }
+          } catch (error) {
+            logger.log(`Error removeSnapshots for country ${batch[i]['iso2']} ${batch[i]['iso3']}...`);
+            logger.error(error);
+          }
+
           if (snapshots.length > 0) {
             snapshots.forEach(s => {
               s.iso3 = batch[i]['iso3'];
               s.iso2 = batch[i]['iso2'];
             });
-            var insertResult = await Promise.all(database.snapshotRepository.insertManyOrUpdate(snapshots));
-            if (insertResult.find(r => r.result.nModified == 0 && r.result.ok == 1)) {
-              shouldResetApiCache = true;
-            }
-          } else {
-            // country sheet where entries are blank - we need to delete snapshots for the country in the db
-            var clearResult = await Promise.all(database.snapshotRepository.removeSnapshots(batch[i]['iso2'], batch[i]['iso3']));
-            if (clearResult.find(r => r.result.nRemoved > 0 && r.result.ok == 1)) {
-              shouldResetApiCache = true;
+
+            try {
+              let insertResult = await database.snapshotRepository.insertMany(snapshots);
+              // reference: http://mongodb.github.io/node-mongodb-native/3.5/api/Collection.html#~insertWriteOpResult
+              if (insertResult.result.n > 0 && insertResult.result.ok == 1) {
+                shouldResetApiCache = true;
+              }
+            } catch (error) {
+              logger.log(`Error insertMany for country ${batch[i]['iso2']} ${batch[i]['iso3']}...`);
+              logger.error(error);
             }
           }
 

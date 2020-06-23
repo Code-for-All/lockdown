@@ -12,7 +12,7 @@ export default {
   },
   menu: {
     informationSection: {
-      banner: 'Project Lockdown is currently in Beta. Not all data may be available yet.',
+      banner: 'Disclaimer: Project Lockdown is a new platform and its components are currently being tested. Not all data may be available yet.',
       main: {
         name: 'Project Lockdown',
         text:
@@ -98,7 +98,7 @@ export default {
         measures: {
           home: 'Leave home',
           homeShortVersion: 'Leave home',
-          outdoors: 'Outdoors activities',
+          outdoors: 'Outdoor activities',
           outdoorsShortVersion: 'Outdoors',
           shopping: 'Go shopping',
           shoppingShortVersion: 'Go shopping',
