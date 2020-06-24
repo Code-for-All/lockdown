@@ -196,7 +196,7 @@ export class WorldMap extends Component {
     map.on('style.load', () => {
       let hoveredStateId = null;
       let iso = this.props.currentLanguage.locale;
-      if(iso){
+      if (iso) {
         if (iso.includes('zh-')) {
           if (iso.includes('-CN')) {
             iso = 'zh-Hans';
