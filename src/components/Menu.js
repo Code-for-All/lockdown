@@ -355,7 +355,7 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
       return {
         title: 'info',
         template: html`
-          <h1>Lockdown</h1>
+          <h1>Project Lockdown</h1>
           <p class="ld-alpha">
             ${locale.t('menu.informationSection.banner')}
           </p>
