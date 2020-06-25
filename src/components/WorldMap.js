@@ -167,8 +167,8 @@ export class WorldMap extends Component {
         null,
         true // Lazy load the plugin
       );
-     }
-    
+    }
+
     let map = new window.mapboxgl.Map({
       accessToken: mapbox_token,
       container: this.ref,
@@ -497,7 +497,7 @@ export class WorldMap extends Component {
     if (features[0]) {
       let countryName = features[0].text;
       let wikidata = features[0].properties.wikidata;
-      router.setSearchParam("wikidata", wikidata);
+      router.setSearchParam('wikidata', wikidata);
       router.setSearchParam('country', countryName);
       router.setSearchParam('iso2', this.state.lastCountry.iso2);
     } else {
