@@ -190,7 +190,7 @@ export default class CountryInfo extends Component {
 
   render(_, { coronaData, populationData, countryDetails }) {
     let { i18n } = this.props;
-    let territoryData = CountriesDataList[this.props.territory];
+    let territoryData = CountriesDataList[this.props.wikidata];
     /** If the user is offline, and theres no response, or the response has failed */
     if (!navigator.onLine) {
       if (coronaData?.status !== 'success' || populationData?.data?.status !== 'success' || countryDetails?.status !== 'success') {
@@ -255,14 +255,14 @@ export default class CountryInfo extends Component {
             rel="noopener noreferrer"
             href=${`https://docs.google.com/forms/d/e/1FAIpQLSfDWe2qlzUnd3e-YYspMzT9adUswDEYIdJMb7jz7ule34-yiA/viewform?entry.333088473=${
               territoryData ? territoryData.region : 'REGION'
-            }&entry.1690056710=${this.props.territory}`}
+            }&entry.1690056710=${territoryData ? territoryData.territory : 'TERRITORY'}`}
             target="_blank"
           >
             ${_.i18n.t(`tdo.contributionLinks.secondLink`)}
           </a>
-          <a class="ld-link" target="_blank" rel="noopener noreferrer" href="#" target="_blank">
+          <!-- <a class="ld-link" target="_blank" rel="noopener noreferrer" href="#" target="_blank">
             ${_.i18n.t(`tdo.contributionLinks.thirdLink`)}
-          </a>
+          </a> -->
         </div>
       </div>
     `;

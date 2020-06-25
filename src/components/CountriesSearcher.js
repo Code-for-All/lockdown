@@ -149,6 +149,7 @@ class CountriesSearcher extends Component {
       setTimeout(() => {
         router.setSearchParam('country', geoResult.place_name);
         router.setSearchParam('iso2', geoResult.properties.short_code.toUpperCase());
+        router.setSearchParam("wikidata", geoResult.properties.wikidata);
       }, 501);
     }
   }

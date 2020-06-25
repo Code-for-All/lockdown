@@ -418,9 +418,9 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
                 <a class="ld-link" target="_blank" rel="noopener noreferrer" href="https://tiof.click/pldpsf" target="_blank">
                   ${locale.t(`menu.contribution.contributionLinks.secondLink`)}
                 </a>
-                <a class="ld-link" target="_blank" rel="noopener noreferrer" href="#" target="_blank">
+                <!-- <a class="ld-link" target="_blank" rel="noopener noreferrer" href="#" target="_blank">
                   ${locale.t(`menu.contribution.contributionLinks.thirdLink`)}
-                </a>
+                </a> -->
               </div>
             `}
           />
