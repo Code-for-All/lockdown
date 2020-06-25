@@ -290,6 +290,7 @@ export class App extends Component {
   __closeCountryInfo() {
     router.setSearchParam('country', undefined);
     router.setSearchParam('iso2', undefined);
+    router.setSearchParam('wikidata', undefined);
   }
 
   __closeDialog() {
