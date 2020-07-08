@@ -2,7 +2,6 @@ import { EventTargetShim } from '../utils/EventTargetShim.js';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
 
-
 const currentRange = 80;
 
 class CountryDetailService extends EventTargetShim {

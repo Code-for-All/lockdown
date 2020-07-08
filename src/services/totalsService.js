@@ -28,7 +28,9 @@ class TotalsService extends EventTargetShim {
     if (opts.forceRefresh || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
         // this.cache[cacheKey] = {};
-        const res = await (await fetch(`https://lockdownsnapshots-staging.azurewebsites.net/totals/lockdown/${startDate}/${endDate}`)).json();
+        const res = await (
+          await fetch(`https://lockdownsnapshots-staging.azurewebsites.net/totals/lockdown/${startDate}/${endDate}`)
+        ).json();
         this.cache[cacheKey] = res;
       } catch (_) {
         this.cache[cacheKey] = {
