@@ -19,6 +19,10 @@ import {
 import { offline, loading, travelFlight, travelLand, travelSea } from '../assets/icons/icons.js';
 import { offlineStyles, loadingStyles } from '../style/shared.styles.js';
 import { countryInfoStyles, tabStyles, reports } from './CountryInfo.styles.js';
+
+// ? Wrappers
+import withMobileDetection from './Wrappers/withMobileDetection';
+
 import './tool-tip.js';
 // TODO: Change the api to give us that data
 import CountriesDataList from '../../data/territoriesData';
@@ -156,7 +160,7 @@ function createMeasures(apiMeasures) {
   });
 }
 
-export default class CountryInfo extends Component {
+class CountryInfo extends Component {
   constructor(props) {
     super(props);
     this.changeTab = this.changeTab.bind(this);
@@ -166,19 +170,31 @@ export default class CountryInfo extends Component {
   }
   async componentDidUpdate(prevProps) {
     if (this.props.date !== prevProps.date) {
-      const { startDate, endDate } = this.props;
+      const { startDate, endDate, daysRange } = this.props;
       this.setState({
         coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
-        countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
+        countryDetails: await countryDetailService.getDetails({
+          iso2: this.props.iso2,
+          date: this.props.date,
+          startDate,
+          endDate,
+          daysRange,
+        }),
       });
     }
   }
   async componentWillMount() {
-    const { startDate, endDate } = this.props;
+    const { startDate, endDate, daysRange } = this.props;
     this.setState({
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
       populationData: await populationService.getPopulation(),
-      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
+      countryDetails: await countryDetailService.getDetails({
+        iso2: this.props.iso2,
+        date: this.props.date,
+        startDate,
+        endDate,
+        daysRange,
+      }),
     });
   }
 
@@ -426,3 +442,5 @@ class Reports extends Component {
     </div>`;
   }
 }
+
+export default withMobileDetection(CountryInfo);

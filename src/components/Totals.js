@@ -5,6 +5,9 @@ import { Component } from 'preact';
 import { totalsService } from '../services/totalsService.js';
 import { format } from 'date-fns/esm';
 
+// ? Wrappers
+import withMobileDetection from './Wrappers/withMobileDetection';
+
 const styles = css`
   dl {
     display: flex;
@@ -50,7 +53,7 @@ const styles = css`
 
 const SHOW_STATS = true;
 
-export class Totals extends Component {
+class Totals extends Component {
   constructor() {
     super();
 
@@ -59,9 +62,9 @@ export class Totals extends Component {
 
   async componentDidUpdate(prevProps) {
     if (this.props.selectedDate !== prevProps.selectedDate) {
-      const { startDate, endDate, selectedDate } = this.props;
+      const { startDate, endDate, selectedDate, daysRange } = this.props;
       this.setState({
-        totals: await totalsService.getTotals({ date: selectedDate, startDate, endDate }),
+        totals: await totalsService.getTotals({ date: selectedDate, startDate, endDate, daysRange }),
       });
     }
   }
@@ -70,10 +73,12 @@ export class Totals extends Component {
     installMediaQueryWatcher(`(min-width: 900px)`, (matches) => {
       this.setState({ desktop: matches });
     });
+    const { daysRange } = this.props;
     const totals = await totalsService.getTotals({
       date: this.props.selectedDate,
       startDate: this.props.startDate,
       endDate: this.props.endDate,
+      daysRange,
     });
 
     this.setState({
@@ -119,3 +124,5 @@ export class Totals extends Component {
     `;
   }
 }
+
+export default withMobileDetection(Totals);

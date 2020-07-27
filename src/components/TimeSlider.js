@@ -10,6 +10,9 @@ import { calendar } from '../assets/icons/icons.js';
 
 import { getAllFNSLanguages } from '../locale/i18nUtils';
 
+// ? Wrappers
+import withMobileDetection from './Wrappers/withMobileDetection';
+
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
 
 let languages = false;
@@ -488,7 +491,13 @@ const popBtn = css`
 
 const firstDayDefaultOffset = 7 * 5;
 
-export default class CountryInfo extends Component {
+// const CurrentRange = 80;
+
+const desktopRange = 80;
+
+const mobileRange = 70;
+
+class CountryInfo extends Component {
   constructor() {
     super();
     this.state = {
@@ -500,6 +509,7 @@ export default class CountryInfo extends Component {
       firstDay: '',
       lastDay: '',
       currentSliderRange: [],
+      CurrentRange: mobileRange,
     };
     this.dateRef = createRef();
     this.range = createRef();
@@ -517,10 +527,17 @@ export default class CountryInfo extends Component {
     languages = await getAllFNSLanguages();
   }
   componentDidMount() {
+    console.log(this.props);
+
+    const { isMobile } = this.props;
+    let { CurrentRange } = this.state;
+    CurrentRange = isMobile ? mobileRange : desktopRange;
+    console.log(CurrentRange);
+
     window.addEventListener('keydown', this.onPressKey);
     let days = [];
     let date = addDays(new Date(), -firstDayDefaultOffset);
-    let totalDays = 70;
+    let totalDays = CurrentRange;
 
     for (let i = 1; i <= totalDays; i++) {
       days.push(date);
@@ -532,7 +549,7 @@ export default class CountryInfo extends Component {
     const containerDOM = this.container.current;
     let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
     let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
-    let stepsWidth = rangeDOM.offsetWidth / 70;
+    let stepsWidth = rangeDOM.offsetWidth / CurrentRange;
     sliderDOM.style.left = `${finalWidth + stepsWidth * (firstDayDefaultOffset - 3)}px`;
 
     this.setState({
@@ -540,6 +557,7 @@ export default class CountryInfo extends Component {
       currentSelectedDay: toSliderString(new Date(), this.props.i18n.locale),
       firstDay: toSliderStringShort(days[0], this.props.i18n.locale),
       lastDay: toSliderStringShort(days[days.length - 1], this.props.i18n.locale),
+      CurrentRange,
     });
   }
   componentWillUnmount() {
@@ -552,6 +570,7 @@ export default class CountryInfo extends Component {
   }
   onPressKey(e) {
     let inputRange = this.range.current;
+    let { CurrentRange } = this.state;
     switch (e.code) {
       case 'ArrowLeft':
         e.preventDefault();
@@ -562,7 +581,7 @@ export default class CountryInfo extends Component {
         break;
       case 'ArrowRight':
         e.preventDefault();
-        if (this.range.current.value < 69) {
+        if (this.range.current.value < CurrentRange - 1) {
           this.range.current.value = Number(this.range.current.value) + 1;
           this.onSliderChange({ target: { value: this.range.current.value } });
         }
@@ -572,6 +591,7 @@ export default class CountryInfo extends Component {
     }
   }
   onSliderChange(e) {
+    let { CurrentRange } = this.state;
     const { currentDateValue, currentSliderRange } = this.state;
     const sliderDOM = this.dateRef.current;
     const rangeDOM = this.range.current;
@@ -579,7 +599,7 @@ export default class CountryInfo extends Component {
     let newValue = e.target.value;
     let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
     let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
-    let stepsWidth = rangeDOM.offsetWidth / 70;
+    let stepsWidth = rangeDOM.offsetWidth / CurrentRange;
     let newPosition = widthSpaces[newValue];
     sliderDOM.style.left = `${finalWidth + stepsWidth * newValue}px`;
     // sliderDOM.style.transform = `translate(-${finalWidth + stepsWidth * (newValue+1)}px, 0)`;
@@ -599,18 +619,19 @@ export default class CountryInfo extends Component {
     });
   }
   onChooseDate(date) {
+    let { CurrentRange } = this.state;
     const sliderDOM = this.dateRef.current;
     const rangeDOM = this.range.current;
     const containerDOM = this.container.current;
     let basicWidth = containerDOM.offsetWidth - rangeDOM.offsetWidth;
     let finalWidth = basicWidth / 2 - sliderDOM.offsetWidth / 4;
-    let stepsWidth = rangeDOM.offsetWidth / 70;
-    sliderDOM.style.left = `${finalWidth + stepsWidth * ((this.state.datePickerPosition === 'left' ? 0 : 69) + 0.5)}px`;
+    let stepsWidth = rangeDOM.offsetWidth / CurrentRange;
+    sliderDOM.style.left = `${finalWidth + stepsWidth * ((this.state.datePickerPosition === 'left' ? 0 : CurrentRange - 1) + 0.5)}px`;
     this.calendarWillClose();
     let days = [];
     if (this.state.datePickerPosition === 'left') {
       let plusDays = 1;
-      for (let i = 1; i <= 70; i++) {
+      for (let i = 1; i <= CurrentRange; i++) {
         if (i === 1) {
           days.push(date);
         } else {
@@ -619,9 +640,9 @@ export default class CountryInfo extends Component {
         }
       }
     } else {
-      let lessDays = 69;
-      for (let i = 1; i <= 70; i++) {
-        if (i === 70) {
+      let lessDays = CurrentRange - 1;
+      for (let i = 1; i <= CurrentRange; i++) {
+        if (i === CurrentRange) {
           days.push(date);
         } else {
           days.push(this.rangePreProcces(date, -1 * lessDays));
@@ -635,7 +656,7 @@ export default class CountryInfo extends Component {
         currentSelectedDay: toSliderString(date, this.props.i18n.locale),
         firstDay: toSliderStringShort(days[0], this.props.i18n.locale),
         lastDay: toSliderStringShort(days[days.length - 1], this.props.i18n.locale),
-        currentDateValue: this.state.datePickerPosition === 'left' ? 0 : 69,
+        currentDateValue: this.state.datePickerPosition === 'left' ? 0 : CurrentRange - 1,
         currentPosition: 24.5,
       },
       this.submitChanges
@@ -673,6 +694,7 @@ export default class CountryInfo extends Component {
     this.props.onChange(currentSliderRange[currentDateValue], currentSliderRange[0], currentSliderRange[currentSliderRange.length - 1]);
   }
   render(_) {
+    let { CurrentRange } = this.state;
     return html`
       <div class="sliderWrapper ${sliderWrapper} ${this.props.children !== '' ? 'open' : ''}" ref=${this.container}>
         ${this.props.children}
@@ -693,7 +715,7 @@ export default class CountryInfo extends Component {
             onInput=${this.onSliderChange}
             type="range"
             min="0"
-            max="69"
+            max="${CurrentRange - 1}"
             step="1"
             value=${this.state.currentDateValue}
           />
@@ -712,3 +734,5 @@ class IconBtn extends Component {
     </span>`;
   }
 }
+
+export default withMobileDetection(CountryInfo);

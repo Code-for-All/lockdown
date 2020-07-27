@@ -2,6 +2,8 @@ import { EventTargetShim } from '../utils/EventTargetShim.js';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
 
+const currentRange = 80;
+
 class CoronaTrackerService extends EventTargetShim {
   constructor() {
     super();
@@ -15,7 +17,7 @@ class CoronaTrackerService extends EventTargetShim {
     iso2 = encodeURI(iso2);
 
     startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
-    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
+    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), currentRange), 'yyyy-MM-dd');
 
     if (!/^[a-zA-Z]{2}$/.test(iso2)) {
       return;
