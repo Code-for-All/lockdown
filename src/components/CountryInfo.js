@@ -173,7 +173,13 @@ class CountryInfo extends Component {
       const { startDate, endDate, daysRange } = this.props;
       this.setState({
         coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
-        countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date, startDate, endDate, daysRange }),
+        countryDetails: await countryDetailService.getDetails({
+          iso2: this.props.iso2,
+          date: this.props.date,
+          startDate,
+          endDate,
+          daysRange,
+        }),
       });
     }
   }
@@ -182,7 +188,13 @@ class CountryInfo extends Component {
     this.setState({
       coronaData: await coronaTrackerService.getCountry({ iso2: this.props.iso2, date: this.props.date, startDate, endDate }),
       populationData: await populationService.getPopulation(),
-      countryDetails: await countryDetailService.getDetails({ iso2: this.props.iso2, date: this.props.date, startDate, endDate, daysRange }),
+      countryDetails: await countryDetailService.getDetails({
+        iso2: this.props.iso2,
+        date: this.props.date,
+        startDate,
+        endDate,
+        daysRange,
+      }),
     });
   }
 

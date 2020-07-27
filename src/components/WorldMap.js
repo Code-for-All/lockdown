@@ -396,11 +396,9 @@ class WorldMap extends Component {
     if (localData === undefined) {
       let { startDate, endDate } = this.props;
       startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
-      endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), daysRange-14), 'yyyy-MM-dd');
+      endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), daysRange - 14), 'yyyy-MM-dd');
       let [newMapData] = await Promise.all([
-        fetch(new URL(`${apiEndpoint}/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
-          r.json()
-        ),
+        fetch(new URL(`${apiEndpoint}/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) => r.json()),
       ]);
       localData = newMapData[selectedDate];
       mapData = newMapData;
@@ -435,12 +433,10 @@ class WorldMap extends Component {
 
     let { startDate, endDate } = this.props;
     startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
-    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), daysRange-14), 'yyyy-MM-dd');
+    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), daysRange - 14), 'yyyy-MM-dd');
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
-      fetch(new URL(`${apiEndpoint}/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
-        r.json()
-      ),
+      fetch(new URL(`${apiEndpoint}/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) => r.json()),
       fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
     ]);
 

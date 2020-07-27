@@ -64,7 +64,7 @@ class Totals extends Component {
     if (this.props.selectedDate !== prevProps.selectedDate) {
       const { startDate, endDate, selectedDate, daysRange } = this.props;
       this.setState({
-        totals: await totalsService.getTotals({ date: selectedDate, startDate, endDate,daysRange }),
+        totals: await totalsService.getTotals({ date: selectedDate, startDate, endDate, daysRange }),
       });
     }
   }
@@ -78,7 +78,7 @@ class Totals extends Component {
       date: this.props.selectedDate,
       startDate: this.props.startDate,
       endDate: this.props.endDate,
-      daysRange
+      daysRange,
     });
 
     this.setState({

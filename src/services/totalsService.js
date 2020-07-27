@@ -1,6 +1,7 @@
 import { EventTargetShim } from '../utils/EventTargetShim.js';
 import format from 'date-fns/format';
-import addDays from 'date-fns/addDays';import constats from './servicesConfiguration';
+import addDays from 'date-fns/addDays';
+import constats from './servicesConfiguration';
 
 const { apiEndpoint } = constats;
 
@@ -28,9 +29,7 @@ class TotalsService extends EventTargetShim {
     if (opts.forceRefresh || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
         // this.cache[cacheKey] = {};
-        const res = await (
-          await fetch(`${apiEndpoint}/totals/lockdown/${startDate}/${endDate}`)
-        ).json();
+        const res = await (await fetch(`${apiEndpoint}/totals/lockdown/${startDate}/${endDate}`)).json();
         this.cache[cacheKey] = res;
       } catch (_) {
         this.cache[cacheKey] = {

@@ -509,7 +509,7 @@ class CountryInfo extends Component {
       firstDay: '',
       lastDay: '',
       currentSliderRange: [],
-      CurrentRange: mobileRange
+      CurrentRange: mobileRange,
     };
     this.dateRef = createRef();
     this.range = createRef();
@@ -557,7 +557,7 @@ class CountryInfo extends Component {
       currentSelectedDay: toSliderString(new Date(), this.props.i18n.locale),
       firstDay: toSliderStringShort(days[0], this.props.i18n.locale),
       lastDay: toSliderStringShort(days[days.length - 1], this.props.i18n.locale),
-      CurrentRange
+      CurrentRange,
     });
   }
   componentWillUnmount() {
