@@ -190,7 +190,6 @@ class Dialog extends Component {
     window.removeEventListener('keydown', this.onPressKey);
   }
   onPressKey(e) {
-    console.log(e);
     if (e.code === 'Escape' && this.props.show) {
       this.props.close();
     }

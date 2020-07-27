@@ -6,6 +6,13 @@ import css from 'csz';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
 import CountriesSearcher from './CountriesSearcher.js';
+import constats from '../services/servicesConfiguration';
+
+// ? Wrappers
+import withMobileDetection from './Wrappers/withMobileDetection';
+import { da } from 'date-fns/locale';
+
+const { apiEndpoint } = constats;
 
 const mapbox_token = 'pk.eyJ1IjoiamZxdWVyYWx0IiwiYSI6ImNrODcwb29vajBjMDkzbWxqZHh6ZDU5aHUifQ.BjT63Mdh-P2myNvygIhSpw';
 
@@ -96,7 +103,7 @@ function filterLookupTable(lookupTable) {
   return lookupData;
 }
 
-export class WorldMap extends Component {
+class WorldMap extends Component {
   constructor() {
     super();
     this.__handleSelect = this.__handleSelect.bind(this);
@@ -383,14 +390,15 @@ export class WorldMap extends Component {
   }
 
   async updateMap(mapData, lookupTable, selectedDate) {
+    const { daysRange } = this.props;
     const lookupData = filterLookupTable(lookupTable);
     let localData = mapData[selectedDate];
     if (localData === undefined) {
       let { startDate, endDate } = this.props;
       startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
-      endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
+      endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), daysRange-14), 'yyyy-MM-dd');
       let [newMapData] = await Promise.all([
-        fetch(new URL(`https://lockdownsnapshots-apim.azure-api.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
+        fetch(new URL(`${apiEndpoint}/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
           r.json()
         ),
       ]);
@@ -418,6 +426,7 @@ export class WorldMap extends Component {
   }
 
   async componentDidMount() {
+    const { daysRange } = this.props;
     dialogService.addEventListener('close', (e) => {
       if (e.detail.countryDialogClosed) {
         form.focus();
@@ -426,10 +435,10 @@ export class WorldMap extends Component {
 
     let { startDate, endDate } = this.props;
     startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
-    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), 56), 'yyyy-MM-dd');
+    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), daysRange-14), 'yyyy-MM-dd');
     // the world map needs a large data source, lazily fetch them in parallel
     const [mapData, lookupTable] = await Promise.all([
-      fetch(new URL(`https://lockdownsnapshots-apim.azure-api.net/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
+      fetch(new URL(`${apiEndpoint}/status/world/${startDate}/${endDate}`, import.meta.url)).then((r) =>
         r.json()
       ),
       fetch(new URL('./../../data/boundaries-adm0-v3.json', import.meta.url)).then((r) => r.json()),
@@ -458,8 +467,6 @@ export class WorldMap extends Component {
       layers: ['admin-0-fill'],
     });
     this.state.geocoder.query(lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name);
-    console.log(features[0]);
-    console.log(lookupTable.adm0.data.all[features[0].properties.iso_3166_1]);
     this.setState({
       lastCountry: {
         country: lookupTable.adm0.data.all[features[0].properties.iso_3166_1].name,
@@ -523,3 +530,5 @@ export class WorldMap extends Component {
     `;
   }
 }
+
+export default withMobileDetection(WorldMap);

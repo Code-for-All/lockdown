@@ -10,6 +10,9 @@ import { calendar } from '../assets/icons/icons.js';
 
 import { getAllFNSLanguages } from '../locale/i18nUtils';
 
+// ? Wrappers
+import withMobileDetection from './Wrappers/withMobileDetection';
+
 const widthSpaces = [7.5, 16, 24.5, 33, 41.5, 50, 58.5, 67, 75.5, 84, 94];
 
 let languages = false;
@@ -488,9 +491,13 @@ const popBtn = css`
 
 const firstDayDefaultOffset = 7 * 5;
 
-const CurrentRange = 80;
+// const CurrentRange = 80;
 
-export default class CountryInfo extends Component {
+const desktopRange = 80;
+
+const mobileRange = 70;
+
+class CountryInfo extends Component {
   constructor() {
     super();
     this.state = {
@@ -502,6 +509,7 @@ export default class CountryInfo extends Component {
       firstDay: '',
       lastDay: '',
       currentSliderRange: [],
+      CurrentRange: mobileRange
     };
     this.dateRef = createRef();
     this.range = createRef();
@@ -519,6 +527,13 @@ export default class CountryInfo extends Component {
     languages = await getAllFNSLanguages();
   }
   componentDidMount() {
+    console.log(this.props);
+
+    const { isMobile } = this.props;
+    let { CurrentRange } = this.state;
+    CurrentRange = isMobile ? mobileRange : desktopRange;
+    console.log(CurrentRange);
+
     window.addEventListener('keydown', this.onPressKey);
     let days = [];
     let date = addDays(new Date(), -firstDayDefaultOffset);
@@ -542,6 +557,7 @@ export default class CountryInfo extends Component {
       currentSelectedDay: toSliderString(new Date(), this.props.i18n.locale),
       firstDay: toSliderStringShort(days[0], this.props.i18n.locale),
       lastDay: toSliderStringShort(days[days.length - 1], this.props.i18n.locale),
+      CurrentRange
     });
   }
   componentWillUnmount() {
@@ -554,6 +570,7 @@ export default class CountryInfo extends Component {
   }
   onPressKey(e) {
     let inputRange = this.range.current;
+    let { CurrentRange } = this.state;
     switch (e.code) {
       case 'ArrowLeft':
         e.preventDefault();
@@ -574,6 +591,7 @@ export default class CountryInfo extends Component {
     }
   }
   onSliderChange(e) {
+    let { CurrentRange } = this.state;
     const { currentDateValue, currentSliderRange } = this.state;
     const sliderDOM = this.dateRef.current;
     const rangeDOM = this.range.current;
@@ -601,6 +619,7 @@ export default class CountryInfo extends Component {
     });
   }
   onChooseDate(date) {
+    let { CurrentRange } = this.state;
     const sliderDOM = this.dateRef.current;
     const rangeDOM = this.range.current;
     const containerDOM = this.container.current;
@@ -675,6 +694,7 @@ export default class CountryInfo extends Component {
     this.props.onChange(currentSliderRange[currentDateValue], currentSliderRange[0], currentSliderRange[currentSliderRange.length - 1]);
   }
   render(_) {
+    let { CurrentRange } = this.state;
     return html`
       <div class="sliderWrapper ${sliderWrapper} ${this.props.children !== '' ? 'open' : ''}" ref=${this.container}>
         ${this.props.children}
@@ -714,3 +734,5 @@ class IconBtn extends Component {
     </span>`;
   }
 }
+
+export default withMobileDetection(CountryInfo);

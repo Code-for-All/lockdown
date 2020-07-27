@@ -1,8 +1,9 @@
 import { EventTargetShim } from '../utils/EventTargetShim.js';
 import format from 'date-fns/format';
 import addDays from 'date-fns/addDays';
+import constats from './servicesConfiguration';
 
-const currentRange = 80;
+const { apiEndpoint } = constats;
 
 class CountryDetailService extends EventTargetShim {
   constructor() {
@@ -11,14 +12,13 @@ class CountryDetailService extends EventTargetShim {
   }
 
   async getDetails(opts) {
-    console.log('---*****-----');
-    let { iso2, date } = opts;
+    let { iso2, date, daysRange } = opts;
     let startDate = opts.startDate;
     let endDate = opts.endDate;
     iso2 = encodeURI(iso2);
 
     startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
-    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), currentRange), 'yyyy-MM-dd');
+    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), daysRange), 'yyyy-MM-dd');
 
     if (!/^[a-zA-Z]{2}$/.test(iso2)) {
       return;
@@ -29,7 +29,7 @@ class CountryDetailService extends EventTargetShim {
     if (opts.forceRefresh || this._shouldInvalidate() || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
         this.cache[cacheKey] = {};
-        const res = await (await fetch(`https://lockdownsnapshots-apim.azure-api.net/status/${iso2}/${startDate}/${endDate}`)).json();
+        const res = await (await fetch(`${apiEndpoint}/status/${iso2}/${startDate}/${endDate}`)).json();
         this.cache[cacheKey] = res;
       } catch (_) {
         this.cache[cacheKey] = {

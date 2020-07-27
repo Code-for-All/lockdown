@@ -1,8 +1,8 @@
 import { EventTargetShim } from '../utils/EventTargetShim.js';
 import format from 'date-fns/format';
-import addDays from 'date-fns/addDays';
+import addDays from 'date-fns/addDays';import constats from './servicesConfiguration';
 
-const currentRange = 80;
+const { apiEndpoint } = constats;
 
 class TotalsService extends EventTargetShim {
   constructor() {
@@ -17,19 +17,19 @@ class TotalsService extends EventTargetShim {
   }
 
   async getTotals(opts) {
-    let { date } = opts;
+    let { date, daysRange } = opts;
     let startDate = opts.startDate;
     let endDate = opts.endDate;
 
     startDate = startDate ? format(startDate, 'yyyy-MM-dd') : format(addDays(new Date(), -14), 'yyyy-MM-dd');
-    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), currentRange), 'yyyy-MM-dd');
+    endDate = endDate ? format(endDate, 'yyyy-MM-dd') : format(addDays(new Date(), daysRange), 'yyyy-MM-dd');
     const cacheKey = `${startDate}${endDate}`;
 
     if (opts.forceRefresh || this.cache[cacheKey]?.status === 'failed' || !this.cache[cacheKey]) {
       try {
         // this.cache[cacheKey] = {};
         const res = await (
-          await fetch(`https://lockdownsnapshots-staging.azurewebsites.net/totals/lockdown/${startDate}/${endDate}`)
+          await fetch(`${apiEndpoint}/totals/lockdown/${startDate}/${endDate}`)
         ).json();
         this.cache[cacheKey] = res;
       } catch (_) {
