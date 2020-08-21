@@ -1,6 +1,6 @@
 import { html } from 'htm/preact';
 import css from 'csz';
-import { Totals } from './Totals.js';
+import Totals from './Totals.js';
 import { logo } from '../assets/icons/icons.js';
 
 const styles = css`
