@@ -491,8 +491,6 @@ const popBtn = css`
 
 const firstDayDefaultOffset = 7 * 5;
 
-// const CurrentRange = 80;
-
 const desktopRange = 80;
 
 const mobileRange = 70;
@@ -527,12 +525,9 @@ class CountryInfo extends Component {
     languages = await getAllFNSLanguages();
   }
   componentDidMount() {
-    console.log(this.props);
-
     const { isMobile } = this.props;
     let { CurrentRange } = this.state;
     CurrentRange = isMobile ? mobileRange : desktopRange;
-    console.log(CurrentRange);
 
     window.addEventListener('keydown', this.onPressKey);
     let days = [];
