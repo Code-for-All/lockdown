@@ -1,3 +1,3 @@
 export default {
-  apiEndpoint: 'https://lockdownsnapshots-apim.azure-api.net',
+  apiEndpoint: 'https://lockdownsnapshots.azurewebsites.net',
 };
