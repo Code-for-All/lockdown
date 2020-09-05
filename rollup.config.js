@@ -88,7 +88,7 @@ export default [
       }),
       copy({
         hook: 'buildStart',
-        targets: [{ src: 'i18n.min.js', dest: 'build/' }],
+        targets: [{ src: 'local_dependencies', dest: 'build/' }],
         flatten: true
       }),
       copy({
