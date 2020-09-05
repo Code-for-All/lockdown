@@ -271,17 +271,11 @@ class Dialog extends Component {
       <div class="overlay ${overlay} ${this.props.show ? 'show' : ''}" onClick=${this.props.close}></div>
       <div class="calendar ${styles} ${this.props.show ? 'show' : ''} ${this.props.customClass}">
         <div class="calendar actions">
-          <span onClick=${() => this.changeMonth(false)}>
-            ${arrowLeft}
-          </span>
+          <span onClick=${() => this.changeMonth(false)}> ${arrowLeft} </span>
           <h3>${monthsNames[this.state.currentMonth]} ${this.state.currentYear}</h3>
-          <span onClick=${() => this.changeMonth(true)}>
-            ${arrowRight}
-          </span>
+          <span onClick=${() => this.changeMonth(true)}> ${arrowRight} </span>
         </div>
-        <div class="calendar header">
-          ${daysOfTheWeek.map((dayL) => html`<div class="header item">${dayL}</div>`)}
-        </div>
+        <div class="calendar header">${daysOfTheWeek.map((dayL) => html`<div class="header item">${dayL}</div>`)}</div>
         <div class="calendar container">
           ${this.state.days.map(
             (week, i) => html`

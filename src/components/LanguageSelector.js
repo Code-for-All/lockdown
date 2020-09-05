@@ -128,9 +128,7 @@ class LanguageSelector extends Component {
     return html`
       <div class="${selectedLang}" onClick=${this.toggleLangOpts}>
         ${i18n.locale?.toUpperCase()}
-        <div class="circleBtn">
-          ${world}
-        </div>
+        <div class="circleBtn">${world}</div>
       </div>
       <div class=${`${langOptions} ${showLangOpt ? 'show' : ''}`}>
         ${languages.map((language) => {

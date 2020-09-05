@@ -201,9 +201,7 @@ class CountriesSearcher extends Component {
       onClick=${this.onClick}
       class="${countriesSearcher} ${showSearchInput ? 'show' : ''}"
     >
-      <span class="icon-provider">
-        ${magnify}
-      </span>
+      <span class="icon-provider"> ${magnify} </span>
       <div>
         <input class="placeholder" value="${results}" disabled />
         <input class="countryInput" onInput=${this.onSearch} value=${parsedText} />

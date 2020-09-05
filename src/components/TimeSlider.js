@@ -724,9 +724,7 @@ class CountryInfo extends Component {
 
 class IconBtn extends Component {
   render(_) {
-    return html`<span>
-      ${calendar}
-    </span>`;
+    return html`<span> ${calendar} </span>`;
   }
 }
 

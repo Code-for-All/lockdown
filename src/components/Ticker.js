@@ -36,11 +36,7 @@ export function Ticker() {
 
   /* Loading state */
   if (!updates && navigator.onLine) {
-    return html`
-      <div class="${loadingStyles}">
-        ${loading}
-      </div>
-    `;
+    return html` <div class="${loadingStyles}">${loading}</div> `;
   }
 
   /* Error state */
@@ -61,20 +57,14 @@ export function Ticker() {
                 <div class="ld-ticker--line"></div>
               </div>
               <div class="ld-ticker--content">
-                <div class="ld-ticker--title">
-                  ${update.title}
-                </div>
-                <div class="ld-ticker--content">
-                  ${update.content}
-                </div>
+                <div class="ld-ticker--title">${update.title}</div>
+                <div class="ld-ticker--content">${update.content}</div>
                 ${update.link
                   ? html`<div class="ld-ticker--link">
                       <a target="_blank" rel="noopener noreferer" href="${update.link}">Source</a>
                     </div>`
                   : ''}
-                <div class="ld-ticker--date">
-                  ${update.date}
-                </div>
+                <div class="ld-ticker--date">${update.date}</div>
               </div>
             </li>
           `

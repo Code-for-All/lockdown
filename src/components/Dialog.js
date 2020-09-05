@@ -142,9 +142,7 @@ export default class Dialog extends Component {
                 </button>
               </div>
             </div>
-            <div class="ld-dialog--content">
-              ${this.props.template}
-            </div>
+            <div class="ld-dialog--content">${this.props.template}</div>
           </focus-trap>
         </div>
       </div>
