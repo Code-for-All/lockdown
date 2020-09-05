@@ -91,10 +91,10 @@ export default {
           deaths: 'Morti',
         },
         measureValues: {
-          '1': 'TOTALE',
-          '2': 'PARZIALE',
-          '3': 'NESSUNO',
-          '4': 'NON CHIARO',
+          1: 'TOTALE',
+          2: 'PARZIALE',
+          3: 'NESSUNO',
+          4: 'NON CHIARO',
         },
         measures: {
           home: 'Uscire di casa',
@@ -123,10 +123,10 @@ export default {
         name: 'Mobilita’',
         subtitle: 'Trasporti (restrizioni)',
         measureValues: {
-          '1': 'TOTALE',
-          '2': 'PARZIALE',
-          '3': 'NESSUNO',
-          '4': 'NON CHIARO',
+          1: 'TOTALE',
+          2: 'PARZIALE',
+          3: 'NESSUNO',
+          4: 'NON CHIARO',
         },
         measures: {
           foreignersInbound: 'Stranieri in entrata',
