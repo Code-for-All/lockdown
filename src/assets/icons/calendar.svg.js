@@ -1,13 +1,6 @@
 import { html } from 'htm/preact';
 
-export const calendar = html`<svg
-  version="1.0"
-  id="Layer_1"
-  x="0px"
-  y="0px"
-  viewBox="0 0 32 32"
-  style="enable-background:new 0 0 32 32;"
->
+export const calendar = html`<svg version="1.0" id="Layer_1" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;">
   <style type="text/css">
     .st0 {
       fill: #ff5c00;
