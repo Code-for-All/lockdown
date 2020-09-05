@@ -223,36 +223,28 @@ class Legend extends Component {
           <span>
             <div class="color green" />
           </span>
-          <span>
-            ${i18n.t('mapLegend.no')}
-          </span>
+          <span> ${i18n.t('mapLegend.no')} </span>
         </div>
         <!--Row-->
         <div>
           <span>
             <div class="color orange" />
           </span>
-          <span>
-            ${i18n.t('mapLegend.partial')}
-          </span>
+          <span> ${i18n.t('mapLegend.partial')} </span>
         </div>
         <!--Row-->
         <div>
           <span>
             <div class="color red" />
           </span>
-          <span>
-            ${i18n.t('mapLegend.full')}
-          </span>
+          <span> ${i18n.t('mapLegend.full')} </span>
         </div>
         <!--Row-->
         <div>
           <span>
             <div class="color gray" />
           </span>
-          <span>
-            ${i18n.t('mapLegend.noData')}
-          </span>
+          <span> ${i18n.t('mapLegend.noData')} </span>
         </div>
         <!--Row-->
         <!-- <div>

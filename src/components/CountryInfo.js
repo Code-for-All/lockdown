@@ -28,18 +28,18 @@ import './tool-tip.js';
 import CountriesDataList from '../../data/territoriesData';
 
 const TRAVEL = {
-  '1': 'YES',
-  '2': 'PARTIALLY',
-  '3': 'NO',
-  '4': 'UNCLEAR',
-  '5': 'NA',
+  1: 'YES',
+  2: 'PARTIALLY',
+  3: 'NO',
+  4: 'UNCLEAR',
+  5: 'NA',
 };
 
 const MEASURE_VALUES = {
-  '1': 'YES',
-  '2': 'PARTIAL',
-  '3': 'NO',
-  '4': 'UNCLEAR',
+  1: 'YES',
+  2: 'PARTIAL',
+  3: 'NO',
+  4: 'UNCLEAR',
 };
 
 const TRAVELTYPE = ['Land', 'Flight', 'Sea'];
@@ -222,11 +222,7 @@ class CountryInfo extends Component {
 
     /** If there is no data available but the user is online, show loading state */
     if (!coronaData && !populationData && !countryDetails && navigator.onLine) {
-      return html`
-        <div class="countryInfo loader ${loadingStyles}">
-          ${loading}
-        </div>
-      `;
+      return html` <div class="countryInfo loader ${loadingStyles}">${loading}</div> `;
     }
 
     /** On error & on succes, continue to render */

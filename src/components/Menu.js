@@ -356,9 +356,7 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
         title: 'info',
         template: html`
           <h1>Project Lockdown</h1>
-          <p class="ld-alpha">
-            ${locale.t('menu.informationSection.banner')}
-          </p>
+          <p class="ld-alpha">${locale.t('menu.informationSection.banner')}</p>
           <p>
             <b>${locale.t('menu.informationSection.main.name')}</b>
             ${locale.t('menu.informationSection.main.text')}
@@ -446,12 +444,8 @@ const renderMenu = (menuItem, callback, currentDropdown, onDropDown, onLocateCha
             currentDropdown=${currentDropdown}
             onDropDown=${onDropDown}
             detail=${html`
-              <p>
-                ${locale.t('menu.informationSection.dataPrivacity.paragraphs.p1')}
-              </p>
-              <p>
-                ${locale.t('menu.informationSection.dataPrivacity.paragraphs.p2')}
-              </p>
+              <p>${locale.t('menu.informationSection.dataPrivacity.paragraphs.p1')}</p>
+              <p>${locale.t('menu.informationSection.dataPrivacity.paragraphs.p2')}</p>
             `}
           />
         `,
@@ -601,9 +595,7 @@ export class Menu extends Component {
                 ${renderMenu(activeItem, this.closeNavbar, currentDropdown, this.onDropDown, _.onLocateChange, _.locale).template}
               </div>
             </main>`
-        : html`<button onClick=${this.showSideBar} class="${sideBtn}">
-            ${burger}
-          </button>`}
+        : html`<button onClick=${this.showSideBar} class="${sideBtn}">${burger}</button>`}
     `;
   }
 }

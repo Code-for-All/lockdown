@@ -29,9 +29,7 @@ export function Expandable(props) {
           class="ld-expandable--toggle"
           aria-expanded="${expanded}"
         >
-          <div class="ld-expandable--icon">
-            ${expanded ? chevronDown : chevronRight}
-          </div>
+          <div class="ld-expandable--icon">${expanded ? chevronDown : chevronRight}</div>
           <div class="ld-expandable--toggle-content">
             <h2>${props.toggle}</h2>
           </div>

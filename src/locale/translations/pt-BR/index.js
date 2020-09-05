@@ -91,10 +91,10 @@ export default {
           deaths: 'Mortes',
         },
         measureValues: {
-          '1': 'TOTAL',
-          '2': 'PARCIAL',
-          '3': 'NENHUMA',
-          '4': 'NÃO ESTÁ CLARO',
+          1: 'TOTAL',
+          2: 'PARCIAL',
+          3: 'NENHUMA',
+          4: 'NÃO ESTÁ CLARO',
         },
         measures: {
           home: 'Sair de casa',
@@ -123,10 +123,10 @@ export default {
         name: 'Mobilidade',
         subtitle: 'Restrições de transporte',
         measureValues: {
-          '1': 'TOTAL',
-          '2': 'PARCIAL',
-          '3': 'NENHUMA',
-          '4': 'NÃO ESTÁ CLARO',
+          1: 'TOTAL',
+          2: 'PARCIAL',
+          3: 'NENHUMA',
+          4: 'NÃO ESTÁ CLARO',
         },
         measures: {
           foreignersInbound: 'Estrangeiros entrando',

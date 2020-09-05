@@ -103,10 +103,10 @@ export default {
           deaths: 'Deaths',
         },
         measureValues: {
-          '1': 'TOTAL',
-          '2': 'PARTIAL',
-          '3': 'NONE',
-          '4': 'UNCLEAR',
+          1: 'TOTAL',
+          2: 'PARTIAL',
+          3: 'NONE',
+          4: 'UNCLEAR',
         },
         measures: {
           home: 'Leave home',
@@ -135,10 +135,10 @@ export default {
         name: 'Mobility',
         subtitle: 'Transport restrictions',
         measureValues: {
-          '1': 'TOTAL',
-          '2': 'PARTIAL',
-          '3': 'NONE',
-          '4': 'UNCLEAR',
+          1: 'TOTAL',
+          2: 'PARTIAL',
+          3: 'NONE',
+          4: 'UNCLEAR',
         },
         measures: {
           foreignersInbound: 'Foreigners inbound',

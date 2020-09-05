@@ -86,10 +86,10 @@ export default {
           deaths: '死亡',
         },
         measureValues: {
-          '1': '全面',
-          '2': '部份',
-          '3': '沒有',
-          '4': '不詳',
+          1: '全面',
+          2: '部份',
+          3: '沒有',
+          4: '不詳',
         },
         measures: {
           home: '離家',
@@ -118,10 +118,10 @@ export default {
         name: '流動能力',
         subtitle: '交通（限制）',
         measureValues: {
-          '1': '全面',
-          '2': '部份',
-          '3': '沒有',
-          '4': '不詳',
+          1: '全面',
+          2: '部份',
+          3: '沒有',
+          4: '不詳',
         },
         measures: {
           foreignersInbound: '外籍人士（入境）',

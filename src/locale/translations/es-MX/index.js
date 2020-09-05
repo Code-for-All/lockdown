@@ -103,10 +103,10 @@ export default {
           deaths: 'Fallecimientos',
         },
         measureValues: {
-          '1': 'Sin restricciones',
-          '2': 'Restricciones parciales',
-          '3': 'Restricciones totales',
-          '4': 'Sin clarificar',
+          1: 'Sin restricciones',
+          2: 'Restricciones parciales',
+          3: 'Restricciones totales',
+          4: 'Sin clarificar',
         },
         measures: {
           home: 'Cuarentena',
@@ -135,10 +135,10 @@ export default {
         name: 'Mobilidad',
         subtitle: 'Transporte (restricciones)',
         measureValues: {
-          '1': 'Sin restricciones',
-          '2': 'Restricciones parciales',
-          '3': 'Restricciones totales',
-          '4': 'Sin clarificar',
+          1: 'Sin restricciones',
+          2: 'Restricciones parciales',
+          3: 'Restricciones totales',
+          4: 'Sin clarificar',
         },
         measures: {
           foreignersInbound: 'Extranjeros (Llegada)',

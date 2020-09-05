@@ -88,6 +88,11 @@ export default [
       }),
       copy({
         hook: 'buildStart',
+        targets: [{ src: 'i18n.min.js', dest: 'build/' }],
+        flatten: true
+      }),
+      copy({
+        hook: 'buildStart',
         targets: [
           { src: 'manifest.json', dest: 'build/' },
           { src: 'manifest-dark.json', dest: 'build/' }

@@ -86,10 +86,10 @@ export default {
           deaths: '死亡',
         },
         measureValues: {
-          '1': '全面',
-          '2': '部份',
-          '3': '没有',
-          '4': '不详',
+          1: '全面',
+          2: '部份',
+          3: '没有',
+          4: '不详',
         },
         measures: {
           home: '离家',
@@ -118,10 +118,10 @@ export default {
         name: '流动能力',
         subtitle: '交通（限制）',
         measureValues: {
-          '1': '全面',
-          '2': '部份',
-          '3': '没有',
-          '4': '不详',
+          1: '全面',
+          2: '部份',
+          3: '没有',
+          4: '不详',
         },
         measures: {
           foreignersInbound: '外籍人士（入境）',
