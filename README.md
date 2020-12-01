@@ -38,10 +38,6 @@ npm run start:build
 npm run format
 ```
 
-## Demo
-
-You can find a live demo of the master branch [here](https://zen-joliot-eeb856.netlify.com).
-
 ## Technologies used
 
 ### Frontend
