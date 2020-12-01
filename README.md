@@ -1,5 +1,11 @@
-## NOTE: This is the old reppository for Project Lockdown (v1.0). The information contained here is outdated and kept provisionally for reference purposes only. You can access the current active repository of Project Lockdown (v2.0) <a href="https://github.com/TheIOFoundation/ProjectLockdown">here</a>.
+<a id="top"></a>
+![logo](https://user-images.githubusercontent.com/9198668/85232285-68543380-b430-11ea-8353-1aafb79baf78.png)
+***
 
+
+## Please note that this repository has been transitioned to <a target='_blank' href="https://github.com/TheIOFoundation/ProjectLockdown">https://github.com/TheIOFoundation/ProjectLockdown</a>
+
+The information contained here is outdated and kept provisionally for reference purposes only.
 
 # Project Lockdown
 
