@@ -77,7 +77,7 @@ function getCurrentLanguage(browserLanguage, languagesList) {
       return baseLanguage;
     } else {
       if (browserLanguage.includes('-TW') || browserLanguage.includes('-tw')) return 'zh-HK';
-      let poorMatch = languagesList.filter((language) => language.split('-')[0].contains(baseLanguage));
+      let poorMatch = languagesList.filter((language) => language.split('-')[0].includes(baseLanguage));
       return poorMatch.length > 0 ? poorMatch[0] : FALLBACK_LANGUAGE;
     }
   }

@@ -131,7 +131,7 @@ export function Settings({ onClose, locale }) {
   const [darkMode, setDarkMode] = useState(false);
 
   function toggleDarkmode() {
-    if (document.getElementsByTagName('html')[0].classList.contains('dark')) {
+    if (document.getElementsByTagName('html')[0].classList.includes('dark')) {
       document.getElementsByTagName('html')[0].classList.remove('dark');
       localStorage.setItem('darkmode', 'false');
       setFavIcon(false);
