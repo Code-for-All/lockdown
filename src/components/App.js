@@ -4,7 +4,6 @@ import { Component } from 'preact';
 import format from 'date-fns/format';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import WorldMap from './WorldMap.js';
-import { Header } from './Header.js';
 import Totals from './Totals.js';
 import { Menu } from './Menu.js';
 import { Lazy } from './Lazy.js';
@@ -45,7 +44,7 @@ const styles = css`
   & {
     position: fixed;
     z-index: 1100;
-    top: 74px;
+    top: 24px;
     left: 50%;
     margin: 0 auto;
     background-color: var(--ld-bg);
@@ -53,12 +52,6 @@ const styles = css`
     transform: translateX(-50%);
     border-radius: 12px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
-  }
-
-  @media (min-width: 900px) {
-    & {
-      display: none;
-    }
   }
 `;
 
@@ -137,29 +130,15 @@ export class App extends Component {
   render() {
     const selectedDate = this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : toJsonString(new Date());
     return html`
-      ${this.state.showStatsbox
-        ? html`
-            <${Header}
-              selectedDate=${selectedDate}
-              showStatsbox=${this.state.showStatsbox}
-              startDate=${this.state.startDate}
-              endDate=${this.state.endDate}
-              show=${!this.state.dialog.opened}
-              i18n=${this.state.currentLanguage}
-            />
-            ${!this.state.dialog.opened
-              ? html`<div class=${styles}>
-                  <${Totals}
-                    selectedDate=${selectedDate}
-                    startDate=${this.state.startDate}
-                    endDate=${this.state.endDate}
-                    i18n=${this.state.currentLanguage}
-                    onLocateChange=${this.__onLocateChange}
-                  />
-                </div>`
-              : ''}
-          `
-        : ''}
+      <div class=${styles}>
+        <${Totals}
+          selectedDate=${selectedDate}
+          startDate=${this.state.startDate}
+          endDate=${this.state.endDate}
+          i18n=${this.state.currentLanguage}
+          onLocateChange=${this.__onLocateChange}
+          />
+      </div>
       ${this.state.showMenu
         ? html`<${Menu}
             opened=${this.state.dialog.opened}
