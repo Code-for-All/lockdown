@@ -4,6 +4,7 @@ import { Component } from 'preact';
 import format from 'date-fns/format';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import WorldMap from './WorldMap.js';
+import { Header } from './Header.js';
 import Totals from './Totals.js';
 import { Menu } from './Menu.js';
 import { Lazy } from './Lazy.js';
@@ -44,7 +45,7 @@ const styles = css`
   & {
     position: fixed;
     z-index: 1100;
-    top: 24px;
+    top: 74px;
     left: 50%;
     margin: 0 auto;
     background-color: var(--ld-bg);
@@ -130,15 +131,26 @@ export class App extends Component {
   render() {
     const selectedDate = this.state.haveSelectedDate ? toJsonString(this.state.haveSelectedDate) : toJsonString(new Date());
     return html`
-      <div class=${styles}>
-        <${Totals}
-          selectedDate=${selectedDate}
-          startDate=${this.state.startDate}
-          endDate=${this.state.endDate}
-          i18n=${this.state.currentLanguage}
-          onLocateChange=${this.__onLocateChange}
-          />
-      </div>
+      ${this.state.showStatsbox
+        ? html`
+            <${Header}
+              showStatsbox=${this.state.showStatsbox}
+              show=${!this.state.dialog.opened}
+              i18n=${this.state.currentLanguage}
+            />
+            ${!this.state.dialog.opened
+            ? html`<div class=${styles}>
+                  <${Totals}
+                    selectedDate=${selectedDate}
+                    startDate=${this.state.startDate}
+                    endDate=${this.state.endDate}
+                    i18n=${this.state.currentLanguage}
+                    onLocateChange=${this.__onLocateChange}
+                  />
+                </div>`
+            : ''}
+          `
+        : ''}
       ${this.state.showMenu
         ? html`<${Menu}
             opened=${this.state.dialog.opened}
