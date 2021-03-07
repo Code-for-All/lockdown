@@ -45,19 +45,28 @@ const styles = css`
   & {
     position: fixed;
     z-index: 1100;
-    top: 74px;
+    top: 30px;
     left: 50%;
     margin: 0 auto;
     background-color: var(--ld-bg);
     color: var(--ld-text);
     transform: translateX(-50%);
-    border-radius: 12px;
+    border-radius: 15px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
+    width:400px;
   }
 
   @media (min-width: 900px) {
     & {
-      display: none;
+      display: inherit;
+    }
+  }
+
+  @media (max-width: 440px) {
+    & {
+      top:0px;
+      border-radius:0px;
+      width:100%;
     }
   }
 `;
