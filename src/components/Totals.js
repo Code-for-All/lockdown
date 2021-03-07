@@ -17,7 +17,7 @@ const styles = css`
     text-align: center;
     text-transform: uppercase;
     width:400px;
-    @media (max-width: 440px) {
+    @media (max-width: 590px) {
       width:100%;
     }
   }
@@ -32,7 +32,7 @@ const styles = css`
       width: 50%;
     }
     padding: 5px 16px;
-    @media (max-width: 440px) {
+    @media (max-width: 590px) {
       padding: 2px 6px;
     }
     margin: 5px 0;
