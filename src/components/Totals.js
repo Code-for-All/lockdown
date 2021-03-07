@@ -16,6 +16,10 @@ const styles = css`
     margin: 0;
     text-align: center;
     text-transform: uppercase;
+    width:400px;
+    @media (max-width: 440px) {
+      width:100%;
+    }
   }
 
   dl div {
