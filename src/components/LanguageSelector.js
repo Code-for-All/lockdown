@@ -11,6 +11,9 @@ const selectedLang = css`
     @media (max-width: 590px) {
        top: 65px;
     }
+    @media (max-width: 330px) {
+       top: 75px;
+    }
     right: 2.5vw;
     height: 30px;
     min-width: 30px;
@@ -60,6 +63,9 @@ const langOptions = css`
     align-items: center;
     position: absolute;
     top: 100px;
+    @media (max-width: 330px) {
+       top: 110px;
+    }
     right: 2.5vw;
     max-width: 0px;
     overflow: hidden;
