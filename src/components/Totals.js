@@ -28,6 +28,9 @@ const styles = css`
       width: 50%;
     }
     padding: 5px 16px;
+    @media (max-width: 440px) {
+      padding: 2px 6px;
+    }
     margin: 5px 0;
   }
 
