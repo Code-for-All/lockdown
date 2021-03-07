@@ -16,6 +16,10 @@ const styles = css`
     margin: 0;
     text-align: center;
     text-transform: uppercase;
+    width:400px;
+    @media (max-width: 590px) {
+      width:100%;
+    }
   }
 
   dl div {
@@ -23,11 +27,14 @@ const styles = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 150px;
+    width: 50%;
     @media (max-width: 899px) {
-      width: 144px;
+      width: 50%;
     }
-    padding: 0 16px;
+    padding: 5px 16px;
+    @media (max-width: 590px) {
+      padding: 2px 6px;
+    }
     margin: 5px 0;
   }
 
@@ -38,6 +45,7 @@ const styles = css`
   dd {
     margin-left: 0px;
     display: block;
+    margin-top:5px;
   }
 
   div:not(:last-of-type)::after {

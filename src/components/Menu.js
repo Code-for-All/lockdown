@@ -291,7 +291,7 @@ const closeBtn = css`
     color: white;
     background-color: transparent;
     padding: 0px !important;
-    top: 90px;
+    top: 20px;
     width: 39px !important;
     height: 39px !important;
     right: 0;
@@ -317,7 +317,7 @@ const closeBtn = css`
     color: white;
     background-color: transparent;
     padding: 0px;
-    top: 10%;
+    top: 20px;
     width: 39px;
     right: 0;
     left: 0;

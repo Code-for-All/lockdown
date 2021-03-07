@@ -7,7 +7,13 @@ import { world } from '../assets/icons/icons.js';
 const selectedLang = css`
   & {
     position: absolute;
-    top: 25vh;
+    top: 60px;
+    @media (max-width: 590px) {
+       top: 65px;
+    }
+    @media (max-width: 330px) {
+       top: 75px;
+    }
     right: 2.5vw;
     height: 30px;
     min-width: 30px;
@@ -56,8 +62,11 @@ const langOptions = css`
     display: flex;
     align-items: center;
     position: absolute;
-    top: calc(25vh + 37px);
-    right: 5vw;
+    top: 100px;
+    @media (max-width: 330px) {
+       top: 110px;
+    }
+    right: 2.5vw;
     max-width: 0px;
     overflow: hidden;
     transition: 0.5s;
