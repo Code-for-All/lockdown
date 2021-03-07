@@ -7,7 +7,10 @@ import { world } from '../assets/icons/icons.js';
 const selectedLang = css`
   & {
     position: absolute;
-    top: 25vh;
+    top: 30px;
+    @media (max-width: 590px) {
+       top: 65px;
+    }
     right: 2.5vw;
     height: 30px;
     min-width: 30px;
