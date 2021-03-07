@@ -62,7 +62,7 @@ const styles = css`
     }
   }
 
-  @media (max-width: 440px) {
+  @media (max-width: 590px) {
     & {
       top:0px;
       border-radius:0px;
