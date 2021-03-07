@@ -41,6 +41,7 @@ const styles = css`
     height: 55px;
     width: 100%;
     animation: 1s fadeInDown forwards;
+    display:none;
     @media (max-width: 899px) {
       &.hide{
         animation: 1s fadeOutUp forwards;
