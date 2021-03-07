@@ -7,7 +7,7 @@ import { world } from '../assets/icons/icons.js';
 const selectedLang = css`
   & {
     position: absolute;
-    top: 30px;
+    top: 60px;
     @media (max-width: 590px) {
        top: 65px;
     }
@@ -59,8 +59,8 @@ const langOptions = css`
     display: flex;
     align-items: center;
     position: absolute;
-    top: calc(25vh + 37px);
-    right: 5vw;
+    top: 100px;
+    right: 2.5vw;
     max-width: 0px;
     overflow: hidden;
     transition: 0.5s;
